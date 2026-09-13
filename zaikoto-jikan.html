@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在校等時間と持ち帰り業務</title>
+<style>
+  :root{
+    --ink:#1f2a33; --sub:#56636e; --line:#d5dbe0; --bg:#fbfaf7; --paper:#fff;
+    --accent:#1f5f8b; --accent-soft:#e8f1f7; --warn:#a4452c; --warn-soft:#fbeee9;
+    --ok:#2e7d4f; --ok-soft:#e9f5ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"BIZ UDPGothic","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif;
+    font-size:15px;line-height:1.8}
+  main{max-width:820px;margin:0 auto;padding:40px 28px 64px;background:var(--paper)}
+  header{border-bottom:3px solid var(--accent);padding-bottom:14px;margin-bottom:28px}
+  .kicker{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em}
+  h1{font-size:26px;line-height:1.4;margin:6px 0 8px}
+  .lead{color:var(--sub);margin:0}
+  h2{font-size:19px;margin:40px 0 14px;padding:4px 0 4px 12px;border-left:6px solid var(--accent);
+    break-after:avoid}
+  h3{font-size:16px;margin:24px 0 8px;color:var(--accent);break-after:avoid}
+  p{margin:8px 0}
+  a{color:var(--accent);word-break:break-all}
+  table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:14px;break-inside:avoid}
+  th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+  th{background:var(--accent-soft);white-space:nowrap}
+  td.c{text-align:center;font-weight:700;white-space:nowrap}
+  .yes{color:var(--ok)} .no{color:var(--warn)}
+  blockquote{margin:12px 0;padding:10px 14px;background:#f4f6f8;border-left:4px solid #9aa9b5;break-inside:avoid}
+  blockquote p{margin:0}
+  blockquote .src{display:block;margin-top:6px;font-size:12px;color:var(--sub)}
+  ul{margin:6px 0;padding-left:1.4em}
+  .box{border:1.5px solid var(--accent);background:var(--accent-soft);border-radius:6px;
+    padding:12px 16px;margin:16px 0;break-inside:avoid}
+  .box.warn{border-color:var(--warn);background:var(--warn-soft)}
+  .box h4{margin:0 0 6px;font-size:15px}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+  .flow span{background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 10px;font-weight:700}
+  .flow i{font-style:normal;color:var(--sub)}
+  .stage{border:1px solid var(--line);border-radius:6px;padding:10px 16px;margin:10px 0;break-inside:avoid}
+  .stage b.n{color:var(--accent)}
+  .big{font-size:20px;font-weight:700;color:var(--warn)}
+  .note{font-size:12.5px;color:var(--sub)}
+  .refs li{margin:6px 0}
+  .refs .u{font-size:12.5px}
+  footer{margin-top:40px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--sub)}
+  .keep{break-inside:avoid}
+  @page{size:A4;margin:13mm 13mm}
+  @media print{
+    body{background:#fff;font-size:10pt;line-height:1.7}
+    main{max-width:none;padding:0}
+    h1{font-size:17pt}
+    h2{font-size:13pt;margin:26px 0 10px}
+    h3{margin:16px 0 6px}
+    table{font-size:9.3pt;margin:8px 0 12px}
+    th,td{padding:5px 9px}
+    a{color:var(--accent);text-decoration:none}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="kicker">令和7年 指針・Q&amp;A改訂のポイント</div>
+  <h1>時間外在校等時間とは？<br>「持ち帰り業務」と「テレワーク」の区別</h1>
+  <p class="lead">各市町の「業務量管理・健康確保措置実施計画」を読み比べるための基礎整理</p>
+</header>
+
+<h2>用語の整理</h2>
+<table>
+  <tr><th>在校等時間</th><td>学校や校外（テレワークを含む）で職務として従事した時間。時間外在校等時間の基礎となる。</td></tr>
+  <tr><th>時間外在校等時間</th><td>在校等時間から所定の勤務時間を除いた時間。月45時間・年360時間などの上限管理の対象。</td></tr>
+  <tr><th>持ち帰り業務<br>（持ち帰り仕事）</th><td>自宅等で行う授業準備、採点、成績処理、教材研究、校務分掌など。原則として行わないことが求められるが、現実には多くの教員が行っている。文科省Q&amp;Aでは、<strong>在校等時間には含めない</strong>としている。</td></tr>
+  <tr><th>テレワーク・<br>在宅勤務</th><td>教育委員会等の制度に基づき実施する在宅勤務。<strong>在校等時間に含まれる</strong>。</td></tr>
+</table>
+
+<h2>令和7年のQ&amp;A改訂で整理が変わった点</h2>
+<p>以前は、指針の説明から「校外で職務として従事した時間」を広く含むと受け取れる部分がありました。現在の文部科学省Q&amp;Aでは、<strong>「持ち帰り」と「テレワーク」を明確に区別</strong>しています。</p>
+<p class="note">出典：文部科学省「学校における働き方改革について」<br>
+<a href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/index.htm">https://www.mext.go.jp/a_menu/shotou/hatarakikata/index.htm</a></p>
+
+<h3>根拠①　「持ち帰り業務」は在校等時間に含まれるのか</h3>
+<p>令和7年11月版Q&amp;A 問13（【更新】）は、次のとおり明記しています。</p>
+<blockquote>
+  <p>「いわゆる『持ち帰り』の時間については『在校等時間』には含まれません。」</p>
+  <span class="src">指針に係るQ&amp;A（令和7年11月時点）問13<br>
+  <a href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf</a></span>
+</blockquote>
+<p>つまり、次のような<strong>いわゆる「持ち帰り仕事」は在校等時間に算入しない</strong>というのが、現在の文科省の公式見解です。</p>
+<ul>
+  <li>自宅での授業準備</li>
+  <li>自宅でのテスト採点</li>
+  <li>自宅での成績処理</li>
+  <li>自宅での校務分掌資料の作成</li>
+</ul>
+
+<h3>根拠②　ただし、テレワークは別</h3>
+<p>同じQ&amp;Aは、続けて次のように述べています。</p>
+<blockquote>
+  <p>「自宅等で行う業務であっても、各地方公共団体で定める方法によるテレワーク、在宅勤務等によるものについては、『在校等時間』に含まれます。」</p>
+  <span class="src">同 問13</span>
+</blockquote>
+<table>
+  <tr><th>自宅での業務</th><th style="width:40%">在校等時間</th></tr>
+  <tr><td>持ち帰り仕事</td><td class="c no">× 含まれない</td></tr>
+  <tr><td>正式なテレワーク・在宅勤務</td><td class="c yes">○ 含まれる</td></tr>
+</table>
+
+<h3>根拠③　持ち帰り仕事は原則として行わない</h3>
+<blockquote>
+  <p>「本来、業務の持ち帰りは行わないことが原則であり、上限時間を守るためだけに自宅等に持ち帰って業務を行う時間が増加してしまうことは、厳に避けなければなりません。」</p>
+  <span class="src">同 問13</span>
+</blockquote>
+<p>さらに、持ち帰り業務の実態がある場合、校長と教育委員会は次のことを求められています（問13の要旨）。</p>
+<ul>
+  <li>実態把握に努めること</li>
+  <li>適切な業務量の設定と校務分掌の分担を図ること</li>
+  <li>管理監督上の責任を果たすこと</li>
+</ul>
+
+<div class="box warn">
+  <h4>各市町の計画を読むうえで重要な「二段構え」</h4>
+  <ul>
+    <li>時間外在校等時間には、持ち帰り仕事は<strong>含まれない</strong>。</li>
+    <li>しかし持ち帰り仕事そのものは「あってはならないもの」と位置付けられており、教育委員会は<strong>実態を把握し、縮減する責任</strong>がある。</li>
+  </ul>
+  <p>各市町の計画を比較する際は、<strong>「持ち帰り業務の実態把握」や「縮減策」まで盛り込んでいるか</strong>が、実効性を評価する重要な視点になります。</p>
+</div>
+
+<h2>１　なぜ「業務量管理・健康確保措置実施計画」が必要になったのか</h2>
+
+<div class="stage">
+  <p><b class="n">第１段階　教員の長時間勤務が社会問題化</b></p>
+  <p>平成後半から、次の問題が全国的に表面化しました。</p>
+  <ul>
+    <li>教員の長時間勤務</li>
+    <li>精神疾患による休職者の増加</li>
+    <li>教員不足</li>
+    <li>教員志望者の減少</li>
+  </ul>
+  <p>文部科学省の勤務実態調査でも、小学校・中学校ともに非常に長い勤務時間が明らかになりました。これを受けて、平成31年1月に「公立学校の教師の勤務時間の上限に関するガイドライン」が策定され、令和元年（2019年）12月には給特法が改正されました。この改正により、文部科学大臣が<strong>教育職員の業務量の適切な管理等に関する指針</strong>を定めることになりました（現行の給特法 第7条）。</p>
+</div>
+
+<div class="stage">
+  <p><b class="n">第２段階　各教育委員会が「上限方針」を規則化</b></p>
+  <p>文部科学省の指針により、各教育委員会は在校等時間の上限を<strong>教育委員会規則</strong>で定めることとされました。</p>
+  <div class="flow"><span>国（指針）</span><i>→</i><span>都道府県・市町村教育委員会</span><i>→</i><span>教育委員会規則</span></div>
+</div>
+
+<div class="stage">
+  <p><b class="n">第３段階　令和7年の給特法改正</b></p>
+  <p>令和7年の改正では、さらに一歩進み、教育委員会が<strong>「業務量管理・健康確保措置実施計画」</strong>を策定することが法律で義務付けられました。給特法第8条は、教育委員会が<strong>指針に即して実施計画を定めるもの</strong>と規定しています。</p>
+  <p class="note">e-Gov法令検索「公立の義務教育諸学校等の教育職員の給与等に関する特別措置法」<br>
+  <a href="https://laws.e-gov.go.jp/law/346AC0000000077">https://laws.e-gov.go.jp/law/346AC0000000077</a></p>
+</div>
+
+<div class="keep">
+<h2>２　国が定めている時間外在校等時間の上限</h2>
+<p>文部科学省の指針では、教育職員の時間外在校等時間の上限を次のように定めています。</p>
+<table>
+  <tr><th style="width:40%">区分</th><th>上限</th></tr>
+  <tr><td rowspan="2"><strong>原則</strong></td><td>1か月　<strong>45時間</strong>以内</td></tr>
+  <tr><td>1年間　<strong>360時間</strong>以内</td></tr>
+  <tr><td rowspan="4"><strong>特別な事情がある場合</strong><br><span class="note">（児童生徒等に係る臨時的な特別の事情）</span></td><td>1か月　<strong>100時間未満</strong>（休日を含む）</td></tr>
+  <tr><td>連続する2〜6か月の平均　<strong>80時間</strong>以内</td></tr>
+  <tr><td>1年間　<strong>720時間</strong>以内</td></tr>
+  <tr><td>45時間を超える月は　<strong>年6か月まで</strong></td></tr>
+</table>
+</div>
+<p>これは、一般企業の時間外労働の上限（36協定）の考え方を参考にした基準です。</p>
+<p class="note">指針（令和7年文部科学省告示第114号）<br>
+<a href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf</a></p>
+
+<h2>３　山口県はどう定めているか</h2>
+<p>山口県では、教育委員会規則として<strong>「教育職員の業務量の適切な管理等に関する規則」</strong>を制定し、国の指針と同じ上限を定めています。</p>
+<table>
+  <tr><th>項目</th><th style="width:30%">山口県</th></tr>
+  <tr><td>月45時間以内</td><td class="c yes">○</td></tr>
+  <tr><td>年360時間以内</td><td class="c yes">○</td></tr>
+  <tr><td>特例：月100時間未満</td><td class="c yes">○</td></tr>
+  <tr><td>特例：複数月平均80時間以内</td><td class="c yes">○</td></tr>
+  <tr><td>特例：年720時間以内</td><td class="c yes">○</td></tr>
+  <tr><td>特例：45時間超は年6か月まで</td><td class="c yes">○</td></tr>
+</table>
+
+<h2>４　令和7年改正で追加された考え方</h2>
+<p>今回の改正では、単に「45時間以内にしましょう」ではなく、教育委員会が次のサイクルを回すことが求められています。</p>
+<div class="flow"><span>計画（Plan）</span><i>→</i><span>実施（Do）</span><i>→</i><span>点検（Check）</span><i>→</i><span>改善（Action）</span></div>
+<p>実施計画には、少なくとも次の内容を盛り込む必要があります。</p>
+<ol>
+  <li>達成目標</li>
+  <li>具体的な取組</li>
+  <li>進行管理</li>
+</ol>
+<p class="note">給特法第8条では、計画に「目標」「措置の内容」などを記載し、策定時と毎年度の実施状況を公表することとされています。</p>
+
+<h2>５　令和11年度までの新たな国の目標</h2>
+<p>令和7年に改正された指針（令和7年9月25日改正、令和8年4月1日から適用）では、国の新たな目標が示されました。</p>
+<div class="box">
+  <p>令和11年度までに、教育職員の1か月の時間外在校等時間を<br>
+  <span class="big">平均 約30時間</span> まで削減する</p>
+  <p>1か月の時間外在校等時間が<strong>80時間を超える教育職員を早急になくす</strong></p>
+</div>
+
+<h2>参考資料（リンク）</h2>
+<ol class="refs">
+  <li>文部科学省「学校における働き方改革について」（指針・Q&amp;A掲載ページ）<br>
+    <a class="u" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/index.htm">https://www.mext.go.jp/a_menu/shotou/hatarakikata/index.htm</a></li>
+  <li>公立学校の教育職員の業務量の適切な管理その他教育職員の服務を監督する教育委員会が教育職員の健康及び福祉の確保を図るために講ずべき措置に関する指針（令和7年文部科学省告示第114号）<br>
+    <a class="u" href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf</a></li>
+  <li>同 指針に係るQ&amp;A（令和7年11月時点）※問13「持ち帰り」<br>
+    <a class="u" href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf</a></li>
+  <li>指針に係るQ&amp;Aの更新について（事務連絡）<br>
+    <a class="u" href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_3.pdf">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_3.pdf</a></li>
+  <li>公立の義務教育諸学校等の教育職員の給与等に関する特別措置法等の一部を改正する法律の公布について（通知）<br>
+    <a class="u" href="https://www.mext.go.jp/content/20250618-mxt_syoto01-000042920_8.pdf">https://www.mext.go.jp/content/20250618-mxt_syoto01-000042920_8.pdf</a></li>
+  <li>e-Gov法令検索「公立の義務教育諸学校等の教育職員の給与等に関する特別措置法」（昭和46年法律第77号）第7条（指針）・第8条（実施計画）<br>
+    <a class="u" href="https://laws.e-gov.go.jp/law/346AC0000000077">https://laws.e-gov.go.jp/law/346AC0000000077</a></li>
+  <li>山口県教育委員会<br>
+    <a class="u" href="https://www.pref.yamaguchi.lg.jp/site/kyouiku/">https://www.pref.yamaguchi.lg.jp/site/kyouiku/</a></li>
+</ol>
+
+<footer>参照資料は2026年9月12日時点のものです。引用は文部科学省の公表資料によります。</footer>
+</main>
+</body>
+</html>

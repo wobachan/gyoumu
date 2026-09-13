@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小規模校・複式学級の業務構造から考える学校の働き方改革</title>
+<style>
+  :root{
+    --ink:#1f2a33;
+    --sub:#56636e;
+    --line:#cfd8df;
+    --accent:#2f5d50;
+    --accent-soft:#e8f0ec;
+    --warm:#8a5a2b;
+    --warm-soft:#f6efe6;
+    --paper:#ffffff;
+    --ground:#eef1f3;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+    font-weight:500;line-height:1.68;font-size:10.3pt;
+  }
+  .sheet{
+    max-width:210mm;margin:24px auto;background:var(--paper);
+    padding:16mm 17mm 15mm;box-shadow:0 2px 14px rgba(0,0,0,.08);
+  }
+  .mincho{font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","MS PMincho",serif}
+
+  /* 表題 */
+  header.title{border-top:4px solid var(--accent);border-bottom:1px solid var(--line);padding:10px 0 10px;margin-bottom:12px}
+  header.title .kicker{font-size:9pt;color:var(--accent);letter-spacing:.12em;font-weight:700}
+  header.title h1{margin:4px 0 6px;font-size:18pt;line-height:1.45;font-weight:700;letter-spacing:.02em}
+  header.title .subtitle{margin:0;font-size:11pt;color:var(--sub)}
+
+  h2{
+    font-size:12.5pt;margin:14px 0 7px;padding:3px 0 3px 10px;
+    border-left:5px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),transparent 70%);
+    break-after:avoid;
+  }
+  h2 .no{color:var(--accent);margin-right:.5em}
+  p{margin:0 0 .5em;text-indent:1em;text-align:justify}
+  p.noindent{text-indent:0}
+
+  /* 7つの負荷 */
+  .burdens{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;margin-top:6px}
+  .burden{border:1px solid var(--line);border-radius:6px;padding:7px 10px 8px;break-inside:avoid;background:#fff}
+  .burden h3{margin:0 0 2px;font-size:10.5pt;display:flex;align-items:center;gap:7px}
+  .burden h3 .n{
+    flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;
+    font-size:9pt;display:inline-flex;align-items:center;justify-content:center;
+  }
+  .burden p{text-indent:0;font-size:9.5pt;line-height:1.65;margin:0;color:#2c3740}
+  .burden.wide{grid-column:1 / -1}
+
+  /* 提言 */
+  .proposal{border:1px solid var(--line);border-radius:6px;margin:6px 0;break-inside:avoid;overflow:hidden}
+  .proposal h3{margin:0;padding:4px 12px;font-size:10.8pt;background:var(--accent-soft);color:#1d3d34;border-bottom:1px solid var(--line)}
+  .proposal .body{padding:5px 12px 6px}
+  .proposal .body p{text-indent:0;margin:0}
+  .examples{display:flex;flex-wrap:wrap;gap:5px 6px;margin-top:6px;align-items:center}
+  .examples .lbl{font-size:8.5pt;font-weight:700;color:var(--warm);border:1px solid var(--warm);border-radius:3px;padding:0 5px;line-height:1.6}
+  .examples span.chip{font-size:9pt;background:var(--warm-soft);border-radius:3px;padding:1px 8px;line-height:1.6}
+
+  /* 役割 */
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px;break-inside:avoid}
+  .role{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .role h3{margin:0;text-align:center;font-size:12pt;padding:4px 0;color:#fff;background:var(--accent);letter-spacing:.3em;text-indent:.3em}
+  .role:nth-child(2) h3{background:#3f7466}
+  .role:nth-child(3) h3{background:#5a8b7d}
+  .role ul{margin:0;padding:7px 10px 8px 1.6em;font-size:9.8pt;line-height:1.7}
+
+  /* おわりに */
+  .closing p{margin-bottom:.45em}
+  .keyline{
+    margin:10px 0 8px;padding:7px 14px;text-align:center;
+    border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);
+    font-size:14pt;font-weight:700;letter-spacing:.06em;color:#1d3d34;background:var(--accent-soft);
+    break-inside:avoid;
+  }
+  .axis{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px;padding-left:1em}
+  .axis span{font-size:8.8pt;border:1px solid var(--accent);color:var(--accent);border-radius:10px;padding:0 8px;line-height:1.6}
+
+  @page{size:A4;margin:13mm 16mm}
+  @media print{
+    body{background:#fff}
+    .sheet{margin:0;box-shadow:none;max-width:none;padding:0}
+  }
+  @media (max-width:640px){
+    .sheet{padding:18px 16px;margin:0}
+    .burdens,.roles{grid-template-columns:1fr}
+    header.title h1{font-size:15pt}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="title">
+    <div class="kicker">政策提言（概要版）</div>
+    <h1 class="mincho">小規模校・複式学級の業務構造から考える<br>学校の働き方改革</h1>
+    <p class="subtitle noindent">― 学校規模に応じた業務基準の導入に向けた政策提言（概要版） ―</p>
+  </header>
+
+  <section>
+    <h2><span class="no">１</span>提言の背景</h2>
+    <p>少子化や過疎化の進行に伴い、小規模校・複式学級は今後も増加すると考えられる。一方で、教員不足は深刻化しており、特に地方では教員の確保が大きな課題となっている。</p>
+    <p>現在の働き方改革は、「時間外在校等時間」の縮減やICT活用、支援員配置などを中心に進められている。しかし、小規模校・複式学級では、勤務時間だけでは把握できない負担が多く存在する。</p>
+    <p>本提言は、「業務量」ではなく「業務の質・構造」という視点から、小規模校・複式学級の実態を整理し、国・県・市町が連携して制度改善を進めることを提案するものである。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">２</span>小規模校・複式学級の７つの業務負荷</h2>
+    <div class="burdens">
+      <div class="burden">
+        <h3><span class="n">1</span>授業の認知的負荷</h3>
+        <p>複式授業では、二学年を同時に指導するため、教材研究や授業中の判断・切り替えなど、高度なマルチタスクが求められる。</p>
+      </div>
+      <div class="burden">
+        <h3><span class="n">2</span>連携コスト</h3>
+        <p>支援員、地域、他校、教育委員会などとの連携には、打合せや日程調整、情報共有など、多くの調整業務が発生する。</p>
+      </div>
+      <div class="burden">
+        <h3><span class="n">3</span>研究コスト</h3>
+        <p>小規模校では全担任が公開授業や総案作成を担うことも多く、一人当たりの研究負担が大きい。</p>
+      </div>
+      <div class="burden">
+        <h3><span class="n">4</span>教育充実コスト</h3>
+        <p>少人数だからこそ、一人一人への丁寧な指導や通知表所見、特色ある教育活動が行われ、そのことが業務増加につながる場合がある。</p>
+      </div>
+      <div class="burden">
+        <h3><span class="n">5</span>複式運営コスト</h3>
+        <p>小小連携や行事では、自習計画や授業進度の調整、引継ぎなど、複式学級特有の運営業務が発生する。</p>
+      </div>
+      <div class="burden">
+        <h3><span class="n">6</span>固定業務コスト</h3>
+        <p>学校評価、校内研究、年間計画など、学校規模に関係なく必要な業務を少人数で担うため、一人当たりの負担が大きくなる。</p>
+      </div>
+      <div class="burden wide">
+        <h3><span class="n">7</span>移行コスト</h3>
+        <p>児童数の増減により複式学級の有無や組み合わせが変わることで、教育課程や時間割、年間計画などを毎年度見直す必要が生じる。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">３</span>政策提言</h2>
+
+    <div class="proposal">
+      <h3>（１）学校規模に応じた業務基準・業務免除基準を整備する</h3>
+      <div class="body">
+        <p>学校裁量だけに委ねるのではなく、県・市教育委員会が標準的な業務基準を示し、学校規模に応じた柔軟な運用を可能とする。</p>
+        <div class="examples">
+          <span class="lbl">例</span>
+          <span class="chip">通知表所見の実施方法</span>
+          <span class="chip">校内研究の実施方法</span>
+          <span class="chip">各種提出書類・調査の簡素化</span>
+          <span class="chip">体力向上レポート等の免除・代替</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proposal">
+      <h3>（２）勤務時間内の空き時間を保障する</h3>
+      <div class="body">
+        <p>教材研究や授業準備、校務、保護者対応を勤務時間内に行えるよう、加配教員や専科教員等の活用を進める。</p>
+      </div>
+    </div>
+
+    <div class="proposal">
+      <h3>（３）複式学級の負担を制度上評価する</h3>
+      <div class="body">
+        <p>時間外勤務だけでなく、授業の認知的負荷や複式運営コストなども把握・評価し、人的配置や支援策へ反映する。</p>
+      </div>
+    </div>
+
+    <div class="proposal">
+      <h3>（４）業務改善と予算措置を一体的に進める</h3>
+      <div class="body">
+        <p>業務基準の整備に加え、人的配置、ICT環境整備、教材・計画作成支援など、必要な予算措置を講じる。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">４</span>国・県・市町の役割</h2>
+    <div class="roles">
+      <div class="role">
+        <h3>国</h3>
+        <ul>
+          <li>制度改正</li>
+          <li>教員定数改善</li>
+          <li>財政措置</li>
+          <li>全国的な実態調査</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h3>県</h3>
+        <ul>
+          <li>学校規模に応じた業務基準・免除基準の策定</li>
+          <li>提出書類・研究指定等の見直し</li>
+          <li>複式学級への支援体制整備</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h3>市町</h3>
+        <ul>
+          <li>校務改善</li>
+          <li>空き時間の確保</li>
+          <li>支援員の効果的な配置</li>
+          <li>地域連携の改善</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2><span class="no">５</span>おわりに</h2>
+    <p>小規模校・複式学級の課題は、「仕事が多いこと」ではなく、学校規模に起因する業務構造にある。</p>
+    <p>この課題を解決しなければ、過疎地域や中山間地域では教員確保がさらに困難となり、地域間の教育格差が拡大するおそれがある。</p>
+    <p>本提言は、授業の認知的負荷、連携コスト、研究コスト、教育充実コスト、複式運営コスト、固定業務コスト、移行コストを新たな分析軸として示し、国・県・市町がそれぞれの役割を分担しながら、制度・運用・予算を一体的に改善していくことを提案するものである。</p>
+    <div class="keyline mincho">学校規模が違えば、必要な働き方改革も違う。</div>
+    <p>小規模校・複式学級の実態に応じた業務基準を整備し、現場の努力だけに頼らない制度改革を進めることが、教員の働きやすさを高め、教員確保につながり、地域の学校と子どもたちの未来を守ることにつながる。</p>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>報告さん — 単組報告 共有台帳</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --bg:#f4f6f9;--card:#fff;--ink:#1e2430;--sub:#6b7482;--line:#e2e6ee;
+ --acc:#2f5d9e;--acc-bg:#e9f0fa;--ok:#1d7a4c;--ok-bg:#e6f4ec;
+ --warn:#a86a00;--warn-bg:#fdf3e0;--bad:#b23a30;--bad-bg:#fbeceb;
+ --r:10px;
+}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.7;
+ font-family:"Yu Gothic UI","Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif}
+h2{font-size:17px;margin:0 0 4px}
+h3{font-size:14px;margin:18px 0 8px;color:var(--acc)}
+p.lead{color:var(--sub);margin:0 0 16px;font-size:13px}
+a{color:var(--acc)}
+
+/* header */
+.hdr{background:#fff;border-bottom:1px solid var(--line);padding:10px 18px;
+ display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand .lg{font-size:26px}
+.brand .t{font-weight:700;font-size:17px;letter-spacing:.04em}
+.brand .s{font-size:11px;color:var(--sub);margin-top:-3px}
+.hdr label{font-size:12px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.hdr select{font-size:13px}
+
+/* nav */
+.tabs{display:flex;gap:2px;padding:0 14px;background:#fff;border-bottom:1px solid var(--line);
+ overflow-x:auto;position:sticky;top:53px;z-index:19}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;
+ font-size:13.5px;color:var(--sub);cursor:pointer;white-space:nowrap;font-family:inherit}
+.tabs button.on{color:var(--acc);border-bottom-color:var(--acc);font-weight:700}
+.tabs .cnt{display:inline-block;background:var(--bad);color:#fff;border-radius:9px;
+ font-size:10.5px;padding:0 6px;margin-left:5px;vertical-align:1px}
+
+main{max-width:1180px;margin:0 auto;padding:18px 16px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
+.card.tight{padding:12px 14px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row>*{flex:1;min-width:180px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+
+/* controls */
+input[type=text],input[type=date],input[type=number],select,textarea{
+ width:100%;padding:7px 9px;border:1px solid #ccd2dd;border-radius:6px;font-size:13.5px;
+ font-family:inherit;background:#fff;color:var(--ink)}
+textarea{line-height:1.75;resize:vertical}
+textarea.mail{min-height:300px;font-family:"Consolas","Yu Gothic",monospace;font-size:13px}
+label.fld{display:block;margin-bottom:10px}
+label.fld>span{display:block;font-size:12px;color:var(--sub);margin-bottom:3px}
+label.fld>span .req{color:var(--bad);margin-left:3px}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:7px;padding:8px 16px;
+ font-size:13.5px;cursor:pointer;font-family:inherit;display:inline-block;
+ text-decoration:none;line-height:1.35;vertical-align:middle}
+a.btn{padding:9px 16px}
+a.btn.sm{padding:5px 10px}
+.btn:hover{filter:brightness(1.08)}
+.btn.sub{background:#fff;color:var(--acc);border:1px solid #b9c8de}
+.btn.gray{background:#eef1f6;color:var(--sub);border:1px solid var(--line)}
+.btn.ok{background:var(--ok)}
+.btn.bad{background:var(--bad)}
+.btn.sm{padding:4px 10px;font-size:12px}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{background:#f8fafc;color:var(--sub);font-weight:600;font-size:12px;white-space:nowrap}
+tr.clk{cursor:pointer}
+tr.clk:hover td{background:#f7faff}
+.tw{overflow-x:auto}
+.nowrap{white-space:nowrap}
+td.mono,.mono{font-family:"Consolas",monospace;font-size:12.5px}
+
+/* badge */
+.bd{display:inline-block;border-radius:999px;padding:1px 9px;font-size:11.5px;
+ font-weight:700;white-space:nowrap;border:1px solid transparent}
+.st-recv{background:var(--acc-bg);color:var(--acc);border-color:#c5d7ef}
+.st-chk{background:var(--warn-bg);color:var(--warn);border-color:#eddcbb}
+.st-ok{background:var(--ok-bg);color:var(--ok);border-color:#bfe0cd}
+.st-back{background:var(--bad-bg);color:var(--bad);border-color:#eec9c6}
+.st-none{background:#f1f3f7;color:#98a1ae;border-color:#e2e6ee}
+
+.note{border-left:3px solid var(--acc);background:var(--acc-bg);padding:9px 12px;
+ border-radius:0 6px 6px 0;font-size:12.5px;margin:10px 0}
+.note.w{border-color:var(--warn);background:var(--warn-bg)}
+.note.b{border-color:var(--bad);background:var(--bad-bg)}
+.note ul{margin:4px 0 0;padding-left:18px}
+
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{color:var(--sub);font-size:12.5px;padding-top:2px}
+.kv dd{margin:0;white-space:pre-wrap}
+.empty{color:var(--sub);text-align:center;padding:34px 10px;font-size:13px}
+
+/* matrix */
+.mx{border-collapse:separate;border-spacing:0;font-size:12px}
+.mx th,.mx td{border:1px solid var(--line);padding:5px 6px;text-align:center}
+.mx th.rh{text-align:left;background:#f8fafc;position:sticky;left:0;z-index:2;min-width:190px}
+.mx td.cell{cursor:pointer;font-size:15px;line-height:1.2}
+.mx td.cell:hover{background:#f0f6ff}
+.mx .rate{font-size:11px;color:var(--sub)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(24,30,40,.5);display:flex;align-items:flex-start;
+ justify-content:center;padding:40px 14px;z-index:60;overflow:auto}
+.modal.hidden{display:none}
+.mbox{background:#fff;border-radius:12px;max-width:760px;width:100%;padding:20px 22px;position:relative}
+#modalClose{position:absolute;top:8px;right:12px;background:none;border:0;font-size:24px;
+ color:var(--sub);cursor:pointer;line-height:1}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#22303f;color:#fff;
+ padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+#toast.on{opacity:1}
+.hide{display:none!important}
+.pill{display:inline-block;background:#f1f3f7;border-radius:5px;padding:1px 7px;font-size:11.5px;color:var(--sub);margin-right:4px}
+.stat{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.stat div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:10px 16px;min-width:104px}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:11.5px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="brand"><span class="lg">📋</span>
+    <div><div class="t">報告さん</div><div class="s">単組報告 共有台帳（プロトタイプ）</div></div></div>
+  <label>年度 <select id="yearSel"></select></label>
+  <label>利用者 <select id="modeSel"></select></label>
+</div>
+<nav class="tabs" id="tabs"></nav>
+<main id="main"></main>
+<div class="modal hidden" id="modal"><div class="mbox"><button id="modalClose">×</button><div id="modalBody"></div></div></div>
+<div id="toast"></div>
+<script>
+/* ============================================================
+   報告さん — 単組報告 共有台帳（プロトタイプ）
+   山口県教職員団体連合会：県教連補助金制度にもとづく単組報告の受付・承認・集計
+   本番は Gmail + GAS + スプレッドシート。ここは仕様を詰めるためのシミュレータ。
+   ============================================================ */
+const LS_KEY = 'houkoku-san-v3';
+const STATUS = ['受付','確認中','承認','差戻し'];
+const ST_CLS = {'受付':'st-recv','確認中':'st-chk','承認':'st-ok','差戻し':'st-back'};
+const ST_MARK = {'受付':'○','確認中':'◎','承認':'●','差戻し':'↩'};
+
+/* ---------- 令和8年度 県教連補助金制度（1. 単組への補助金） ----------
+   unit    … 1人あたりの単価（円）／ flat … 1回あたりの定額（円）
+   unitNon … 未加入者の単価（②のみ）
+   cap     … 1回あたりの上限額
+   times   … 年間の回数上限（null＝制限なし）
+   due     … 提出期限（'MM-DD'＝年度内のその日／'当日'）
+   docs    … 提出物
+   pre     … 事前に必要な提出物                                        */
+function seedSubsidies(){
+  return [
+    {id:'s1', no:'①', cat:'単組', payee:'単組口座', name:'単組総会補助', unit:1000, cap:50000, times:1,
+     due:'08-31', dueLabel:'８月末', pay:'９月',
+     docs:['議案書','決算予算','参加名簿','写真'], note:''},
+    {id:'s2', no:'②', cat:'単組', payee:'単組口座', name:'複数単組共催行事補助', unit:1000, unitNon:500, cap:50000, times:1,
+     due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], pre:'全県にちらし（開催２ヶ月前）', note:'加入者1000円／未加入者500円'},
+    {id:'s3', no:'③', cat:'単組', payee:'単組口座', name:'組織対策補助', unit:1000, cap:50000, times:1,
+     due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], needNon:1, note:'未加入者勧誘を目的。未加入者1名以上'},
+    {id:'s4', no:'④', cat:'単組', payee:'単組口座', name:'単組会議補助', unit:500, cap:50000, times:2,
+     due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], note:'代議員会・人事対策委員会 等'},
+    {id:'s5', no:'⑤', cat:'単組', payee:'単組口座', name:'単組研修会補助', unit:500, cap:50000, times:2,
+     due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], note:''},
+    {id:'s6', no:'⑥', cat:'単組', payee:'単組口座', name:'対話集会補助', unit:500, cap:50000, times:1,
+     due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], note:''},
+    {id:'s7', no:'⑦', cat:'単組', payee:'単組口座', name:'球技大会補助', unit:500, cap:50000, times:1,
+     due:'当日', dueLabel:'大会当日', pay:'３月',
+     docs:['参加名簿（参加申込書）'], note:''},
+    {id:'s8', no:'⑧', cat:'単組', payee:'単組口座', name:'情宣紙補助', flat:5000, times:6,
+     due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['情宣紙（PDF可）'], noPeople:true, note:'1回につき5000円。PDFの添付で可'},
+    /* ---- ２．個人（開催者）への補助金。報告者は現場の教職員。条件は未設定 ---- */
+    {id:'p1', no:'⑨', cat:'個人', payee:'開催者の会費口座', name:'分会学習会補助',
+     unit:500, cap:null, times:null, due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], note:'学校単位の開催。1人500円・上限なし。開催者の会費引き落とし口座へ振込'},
+    {id:'p2', no:'⑩', cat:'個人', payee:'開催者の会費口座', name:'合同学習会補助',
+     unit:500, cap:null, times:null, due:'02-28', dueLabel:'２月末', pay:'３月',
+     docs:['参加名簿','写真'], note:'複数校の合同開催。1人500円・上限なし。開催者の会費引き落とし口座へ振込'},
+  ];
+}
+/* 補助金額の条件が設定済みか */
+function isSet(s){ return !!(s && (s.flat || s.unit)); }
+
+/* ---------- 報告書の項目定義 ---------- */
+const F = {
+  branch  :{label:'単組名',  type:'line', req:true, alias:['単組','単組名称','分会名','市町']},
+  sub     :{label:'事業名',  type:'line', req:true, alias:['補助金事業','事業','補助金の種類','事業区分','補助金名']},
+  subject :{label:'行事名',  type:'line', req:true, alias:['件名','会議名','研修会名','大会名','名称','タイトル']},
+  date    :{label:'開催日',  type:'date', req:true, alias:['実施日','日付','開催年月日','実施年月日','発行日']},
+  time    :{label:'開催時刻',type:'line', alias:['時刻','時間','開催時間']},
+  place   :{label:'会場',    type:'line', alias:['場所','開催場所','実施場所']},
+  num     :{label:'参加人数',type:'num',  req:true, alias:['教職員参加人数','参加者数','出席者数','人数','参加数']},
+  numNon  :{label:'未加入者参加人数',type:'num', alias:['未加入者数','未加入者','未加入']},
+  writer  :{label:'報告者',  type:'line', req:true, alias:['記録者','担当者','作成者','報告者名']},
+  applicant:{label:'申請者（開催者）',type:'line', alias:['申請者','開催者','主催者','振込先氏名']},
+  school  :{label:'学校名',  type:'line', alias:['勤務校','所属校','分会名']},
+  docs    :{label:'添付書類',type:'line', req:true, alias:['添付','提出物','添付ファイル','同封']},
+  attendees:{label:'出席者名簿',type:'block', alias:['出席者','参加者名簿','名簿','参加者','出席簿']},
+  body    :{label:'内容',    type:'block',alias:['協議内容','学習内容','議題','行事内容','研修内容','概要']},
+  note    :{label:'備考',    type:'block',alias:['その他','連絡事項','特記事項']}
+};
+const F_ORDER = Object.keys(F);
+/* 事業ごとに使う項目（⑧情宣紙は人数を使わない） */
+function fieldsOf(sub){
+  const base = ['branch','sub','applicant','school','subject','date','time','place',
+                'num','numNon','writer','docs','attendees','body','note'];
+  return base.filter(function(k){
+    if(sub && sub.noPeople && (k==='num'||k==='numNon'||k==='time'||k==='place')) return false;
+    if(k==='numNon' && !(sub && (sub.unitNon || sub.needNon))) return false;
+    if((k==='applicant'||k==='school') && !(sub && sub.cat==='個人')) return false;
+    if(k==='attendees' && sub && sub.noPeople) return false;   /* ⑧情宣紙は名簿不要 */
+    return true;
+  });
+}
+function isReq(sub, k){
+  if(k==='num') return !(sub && sub.noPeople);
+  if(k==='numNon') return !!(sub && sub.needNon);
+  if(k==='applicant'||k==='school') return !!(sub && sub.cat==='個人');
+  return !!F[k].req;
+}
+
+/* ---------- 単組マスタ（R8 単組報告様式より） ---------- */
+function seedBranches(){
+  const L = [
+    ['岩国市教職員連盟'], ['岩国市和木町教職員連盟', true], ['和木町教職員団体'],
+    ['柳井市教職員団体'], ['周防大島町教職員団体'], ['上関町教職員団体'],
+    ['熊毛教職員団体連絡協議会', true], ['平生町教職員組合'], ['田布施町教職員団体'],
+    ['下松市教職員団体'], ['光市教職員団体'], ['周南市教職員連合会'],
+    ['山口市教職員団体'], ['防府市教職員団体'], ['宇部市教職員連盟'],
+    ['美祢市教職員連盟'], ['山陽小野田市教職員連盟'], ['下関市教職員連合会'],
+    ['萩市教職員団体'], ['教職員団体萩阿武協議会', true], ['阿武町教職員団体'],
+    ['長門市教職員連盟'], ['山口県立学校教職員連盟']
+  ];
+  return L.map(function(x,i){
+    return {id:'b'+(i+1), name:x[0], code:'T'+String(i+1).padStart(2,'0'), grp:!!x[1]};
+  });
+}
+function shortName(n){
+  const t = String(n).replace(/教職員(連盟|団体|組合|連合会)/g,'')
+                     .replace(/(連絡)?協議会/g,'').replace(/[\s　]/g,'');
+  return t || n;
+}
+
+function seedDB(){
+  const y = fiscalYearOf(new Date());
+  return {
+    v:3, year:y, mode:'pref', role:'事務局', branchId:'b1', seq:{},
+    org:{ prefName:'山口県教職員団体連合会', mailAddr:'houkoku@example-kyoren.jp' },
+    branches: seedBranches(),
+    subsidies: seedSubsidies(),
+    reports: [],
+    settings:{ maskPhone:true, maskMail:true,
+      gmailUser:0,         /* Gmailのアカウント番号（/mail/u/0/ の 0） */
+      shareMatrix:true,    /* 単組役員が他単組の申請状況を見られる */
+      shareAmount:true,    /* 他単組の補助金額も見せる */
+      sharePersonal:true,  /* ⑨⑩（個人開催）の申請も他単組に見せる */
+      docRoles:['事務局','委員長']  /* 参加名簿を開ける本部の役職 */
+    }
+  };
+}
+
+/* ---------- 保存 ---------- */
+let DB;
+function load(){
+  try{ const s=localStorage.getItem(LS_KEY); if(s){ const d=JSON.parse(s); if(d&&d.v) return d; } }catch(e){}
+  return null;
+}
+function save(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(DB)); }
+  catch(e){ toast('保存に失敗しました（容量超過の可能性）'); }
+}
+
+/* ---------- 小道具 ---------- */
+const $ = s=>document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function pad2(n){ return String(n).padStart(2,'0'); }
+function isoOf(y,m,d){ return y+'-'+pad2(m)+'-'+pad2(d); }
+function fiscalYearOf(d){
+  const dt=(d instanceof Date)?d:new Date(d);
+  return (dt.getMonth()+1)>=4 ? dt.getFullYear() : dt.getFullYear()-1;
+}
+function reiwa(y){ return y-2018; }
+function yearLabel(y){ return '令和'+reiwa(y)+'年度'; }
+function todayISO(){ const d=new Date(); return isoOf(d.getFullYear(), d.getMonth()+1, d.getDate()); }
+function nowStamp(){ const d=new Date(); return todayISO()+' '+pad2(d.getHours())+':'+pad2(d.getMinutes()); }
+function uid(p){ return p+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function yen(n){ return '¥'+Number(n||0).toLocaleString('ja-JP'); }
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('on'),2200);
+}
+function copyText(s){
+  const ta=document.createElement('textarea'); ta.value=s;
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); toast('コピーしました'); }
+  catch(e){ toast('コピーできませんでした'); }
+  document.body.removeChild(ta);
+}
+function branchOf(id){ return DB.branches.find(b=>b.id===id)||null; }
+/* ---------- Excel用のCSV書き出し（BOM付きUTF-8） ---------- */
+function toCSV(rows){
+  return rows.map(function(r){
+    return r.map(function(c){
+      const v = String(c==null?'':c);
+      return /[",\r\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v;
+    }).join(',');
+  }).join('\r\n');
+}
+function downloadCSV(name, rows){
+  try{
+    const blob = new Blob(['\ufeff'+toCSV(rows)], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name+'.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast('Excel用のCSVを書き出しました');
+  }catch(e){
+    copyText(toCSV(rows));
+    toast('書き出せないため、クリップボードにコピーしました');
+  }
+}
+function downloadText(name, text){
+  try{
+    const blob = new Blob(['\ufeff'+text], {type:'text/plain;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name+'.txt';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast('テキストを書き出しました');
+  }catch(e){ copyText(text); toast('書き出せないため、クリップボードにコピーしました'); }
+}
+function xlsBtn(id, label){
+  return '<button class="btn sub sm" id="'+id+'">'+(label||'Excelに出力')+'</button>';
+}
+function subOf(id){ return DB.subsidies.find(s=>s.id===id)||null; }
+const ZEN='０１２３４５６７８９';
+function toHalf(s){ return String(s||'').replace(/[０-９]/g, c=>String(ZEN.indexOf(c))); }
+
+/* 提出期限を年度内の実日付に */
+function dueISO(sub, year){
+  if(!sub || sub.due==='当日') return '';
+  const m = +sub.due.slice(0,2), d = +sub.due.slice(3,5);
+  const y = m>=4 ? year : year+1;
+  if(m===2){ const last = new Date(y,2,0).getDate(); return isoOf(y,2,Math.min(d,last)); }
+  return isoOf(y,m,d);
+}
+
+/* ---------- 補助金額の計算 ---------- */
+function calcAmount(sub, num, numNon){
+  if(!sub || !isSet(sub)) return 0;
+  if(sub.flat) return sub.flat;
+  let a = (sub.unit||0) * (Number(num)||0);
+  if(sub.unitNon) a += sub.unitNon * (Number(numNon)||0);
+  return Math.min(a, sub.cap || a);
+}
+function amountFormula(sub){
+  if(!sub) return '';
+  if(!isSet(sub)) return '補助金額の条件が未設定';
+  if(sub.flat) return '1回につき '+yen(sub.flat);
+  let s = yen(sub.unit)+' × 参加人数';
+  if(sub.unitNon) s += '（未加入者は '+yen(sub.unitNon)+'）';
+  s += sub.cap ? '（上限 '+yen(sub.cap)+'）' : '（上限なし）';
+  return s;
+}
+/* 同じ単組・同じ開催日に出ている、ほかの申請（重複申請の疑い）
+   例：単組研修会（⑤）と、個人主催の合同学習会（⑩）が同じ行事で二重に申請される */
+function dupOf(rep){
+  if(!rep || !rep.dateISO || !rep.branchId) return [];
+  return DB.reports.filter(function(r){
+    return r.id!==rep.id && r.year===rep.year && r.branchId===rep.branchId
+        && r.status!=='差戻し' && r.dateISO===rep.dateISO;
+  });
+}
+function dupGroups(year){
+  const map = {};
+  DB.reports.filter(function(r){
+    return r.year===year && r.status!=='差戻し' && r.dateISO && r.branchId;
+  }).forEach(function(r){
+    const k = r.branchId+'|'+r.dateISO;
+    (map[k] = map[k] || []).push(r);
+  });
+  return Object.keys(map).map(function(k){ return map[k]; })
+    .filter(function(g){ return g.length>1; })
+    .sort(function(a,b){
+      const r = dupRisk(b)-dupRisk(a);
+      return r!==0 ? r : (a[0].dateISO<b[0].dateISO?-1:1);
+    });
+}
+/* 重なりの危なさ。単組枠と個人枠の重なりが最も疑わしく、次いで会場も同じもの */
+function dupRisk(g){
+  const cats = g.map(function(r){ const x=subOf(r.subId); return x?x.cat:''; });
+  const mixed = cats.indexOf('単組')>=0 && cats.indexOf('個人')>=0;
+  const places = g.map(function(r){ return normKey(r.vals.place||''); }).filter(Boolean);
+  const samePlace = places.length>1 && places.every(function(p){ return p===places[0]; });
+  const sameSub = new Set(g.map(function(r){ return r.subId; })).size===1;
+  let n = 0;
+  if(mixed) n += 4;
+  if(samePlace) n += 2;
+  if(sameSub) n += 1;
+  return n;
+}
+/* 同一年度・同一単組・同一事業で、差戻し以外の件数 */
+function usedTimes(year, branchId, subId, exceptId){
+  return DB.reports.filter(function(r){
+    return r.year===year && r.branchId===branchId && r.subId===subId
+        && r.status!=='差戻し' && r.id!==exceptId;
+  }).length;
+}
+
+/* ---------- 日付・数値の正規化 ---------- */
+function normDate(s){
+  if(!s) return '';
+  const t = toHalf(s).trim();
+  let m;
+  if((m = t.match(/令和\s*(\d{1,2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/)))
+    return isoOf(2018 + (+m[1]), +m[2], +m[3]);
+  if((m = t.match(/(\d{4})\s*[-\/年.]\s*(\d{1,2})\s*[-\/月.]\s*(\d{1,2})/)))
+    return isoOf(+m[1], +m[2], +m[3]);
+  if((m = t.match(/^(\d{1,2})\s*[\/月]\s*(\d{1,2})/))){
+    const mo = +m[1], y = mo>=4 ? DB.year : DB.year+1;
+    return isoOf(y, mo, +m[2]);
+  }
+  return '';
+}
+function normNum(s){ const m = toHalf(s).match(/\d+/); return m ? +m[0] : ''; }
+function normKey(s){ return String(s).replace(/[\s　【】\[\]（）()＜＞<>■●◆◇○・*＊]/g,''); }
+
+/* ---------- 個人情報の自動マスキング ---------- */
+function maskText(s){
+  if(typeof s!=='string' || !s) return {text:s||'', n:0};
+  let n=0, t=s;
+  if(DB.settings.maskMail){
+    t = t.replace(/[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/g, function(){ n++; return '【メールアドレス（非表示）】'; });
+  }
+  if(DB.settings.maskPhone){
+    t = t.replace(/[0-9０-９][0-9０-９\-－ー‐()（）\s]{7,15}[0-9０-９]/g, function(hit){
+      const digits = hit.replace(/[^0-9０-９]/g,'').length;
+      if(digits>=10 && digits<=11){ n++; return '【電話番号（非表示）】'; }
+      return hit;
+    });
+  }
+  return {text:t, n:n};
+}
+
+/* ---------- 単組名の照合 ---------- */
+function matchBranch(raw){
+  const v = normKey(raw||'');
+  if(!v) return {id:null, cands:[]};
+  let hits = DB.branches.filter(function(b){ return normKey(b.name)===v; });
+  if(hits.length===1) return {id:hits[0].id, cands:hits};
+  hits = DB.branches.filter(function(b){
+    const n = normKey(b.name);
+    return n.indexOf(v)>=0 || v.indexOf(n)>=0;
+  });
+  if(hits.length===1) return {id:hits[0].id, cands:hits};
+  if(hits.length>1){
+    const s2 = hits.filter(function(b){ return normKey(shortName(b.name))===v; });
+    if(s2.length===1) return {id:s2[0].id, cands:hits};
+  }
+  return {id:null, cands:hits};
+}
+/* ---------- 補助金事業の照合（①〜⑧の番号・名称・キーワード） ---------- */
+const SUB_HINT = [
+  [/総会/, 's1'], [/共催|複数単組|合同/, 's2'], [/組織対策|勧誘|未加入/, 's3'],
+  [/代議員|人事対策|会議/, 's4'], [/研修/, 's5'], [/対話集会|対話/, 's6'],
+  [/球技|大会/, 's7'], [/情宣|機関紙|ニュース/, 's8'],
+  [/分会学習会|分会/, 'p1'], [/合同学習会|合同/, 'p2']
+];
+function matchSubsidy(raw, subject){
+  const v = normKey(raw||'');
+  if(v){
+    let hit = DB.subsidies.find(function(s){ return s.no===v || normKey(s.name)===v; });
+    if(hit) return {id:hit.id, cands:[hit]};
+    const num = v.match(/^[1-8１-８]$/) ? +toHalf(v) : null;
+    if(num) return {id:'s'+num, cands:[]};
+    const hits = DB.subsidies.filter(function(s){
+      const n = normKey(s.name);
+      return v.indexOf(s.no)>=0 || n.indexOf(v)>=0 || v.indexOf(n)>=0;
+    });
+    if(hits.length===1) return {id:hits[0].id, cands:hits};
+    if(hits.length>1) return {id:null, cands:hits};
+  }
+  const hay = (raw||'')+' '+(subject||'');
+  for(const h of SUB_HINT){ if(h[0].test(hay)) return {id:h[1], cands:[], guess:true}; }
+  return {id:null, cands:[]};
+}
+/* ---------- 添付書類の照合 ----------
+   名簿は「写真・Excel・PDF・本文へのベタ打ち」のいずれでも可とするため、
+   呼び名の揺れを別名で吸収し、本文に名簿があれば満たしたものとみなす。 */
+const DOC_ALIAS = {
+  '参加名簿'            : ['名簿','参加者','出席者','出席','申込'],
+  '参加名簿（参加申込書）': ['名簿','申込','参加者','出席'],
+  '写真'                : ['写真','画像','スナップ'],
+  '議案書'              : ['議案'],
+  '決算予算'            : ['決算','予算'],
+  '情宣紙（PDF可）'      : ['情宣','機関紙','ニュース','紙面']
+};
+const DOC_ROSTER = ['参加名簿','参加名簿（参加申込書）'];
+function splitDocs(s){
+  return String(s||'').split(/[、,／\/・\s　]+/).map(function(x){ return x.trim(); }).filter(Boolean);
+}
+function checkDocs(sub, declared, attendees){
+  const raw = splitDocs(declared);
+  const got = raw.map(normKey);
+  const used = got.map(function(){ return false; });
+  const need = (sub && sub.docs) || [];
+  const inBody = String(attendees||'').trim().length > 0;
+  /* 1つの添付が2つの提出物を兼ねないよう、提出物と添付は1対1で対応させる。
+     例）「参加名簿の写真」だけでは、名簿は満たすが行事の写真は不足とみなす。 */
+  const missing = need.filter(function(d){
+    if(inBody && DOC_ROSTER.indexOf(d)>=0) return false;      /* 名簿を本文に書いた */
+    const keys = DOC_ALIAS[d] || [normKey(d).replace(/（.*?）/g,'')];
+    for(let i=0;i<got.length;i++){
+      if(used[i]) continue;
+      const g = got[i];
+      if(keys.some(function(k){ return g.indexOf(k)>=0 || k.indexOf(g)>=0; })){ used[i]=true; return false; }
+    }
+    return true;
+  });
+  return {need:need, got:raw, missing:missing, inBody:inBody};
+}
+
+/* ---------- 見出し・区切り線・定型あいさつ ---------- */
+function isDecoration(line){
+  return /^[-=＝─━☆★*＊\s]+$/.test(line)
+      || /^[【〔\[（(].{0,20}[】〕\]）)]$/.test(line)
+      || /^(報告書|以上|よろしくお願いします。?|よろしくお願いいたします。?|お世話になっております。?|お疲れ様です。?)$/.test(line);
+}
+/* ---------- メール本文パーサ ---------- */
+let _keyMapCache = null;
+function keyMap(){
+  if(_keyMapCache) return _keyMapCache;
+  const m={};
+  for(const k of F_ORDER){
+    m[normKey(F[k].label)] = k;
+    (F[k].alias||[]).forEach(function(a){ if(!m[normKey(a)]) m[normKey(a)]=k; });
+  }
+  _keyMapCache = m; return m;
+}
+function parseMail(text){
+  const km = keyMap();
+  const lines = String(text||'').replace(/\r/g,'').split('\n');
+  const vals = {}, unknown = [];
+  let cur = null;
+  for(const raw of lines){
+    const line = raw.replace(/^[\s　]+/,'').replace(/[\s　]+$/,'');
+    if(!line){ if(cur && F[cur].type==='block' && vals[cur]) vals[cur] += '\n'; continue; }
+    /* ①「項目名：値」 */
+    const m = line.match(/^[■●◆◇○※\-]?[\s　]*([^:：]{1,16})[:：][\s　]*(.*)$/);
+    if(m){
+      const k = km[normKey(m[1])];
+      if(k){ cur = k; vals[k] = (m[2]||'').trim(); continue; }
+    }
+    /* ②「項目名␣値」— コロンの打ち忘れを1行項目に限って救う */
+    const m2 = line.match(/^([^\s　:：]{1,10})[　\t ]+(\S.{0,58})$/);
+    if(m2){
+      const k2 = km[normKey(m2[1])];
+      if(k2 && F[k2].type!=='block' && normKey(m2[1])===m2[1]){
+        cur = k2; vals[k2] = m2[2].trim(); continue;
+      }
+    }
+    if(cur && F[cur].type==='block'){ vals[cur] = (vals[cur] ? vals[cur]+'\n' : '') + line; }
+    else if(!isDecoration(line)) unknown.push(line);
+  }
+  for(const k in vals){
+    if(typeof vals[k]!=='string') continue;
+    vals[k] = vals[k].replace(/\n{3,}/g,'\n\n').trim();
+    if(F[k] && F[k].type==='block'){
+      const ls = vals[k].split('\n');
+      while(ls.length && isDecoration(ls[ls.length-1].trim())) ls.pop();
+      vals[k] = ls.join('\n').trim();
+    }
+  }
+
+  const bm = matchBranch(vals.branch);
+  const sm = matchSubsidy(vals.sub, vals.subject);
+  const branchId = bm.id;
+  const sub = subOf(sm.id);
+  const subId = sub ? sub.id : null;
+
+  if(vals.date) vals.date = normDate(vals.date) || vals.date;
+  ['num','numNon'].forEach(function(k){
+    if(vals[k]!==undefined && vals[k]!=='') vals[k] = normNum(vals[k]);
+  });
+
+  let masked=0;
+  for(const k in vals){
+    if(F[k] && F[k].type!=='date' && F[k].type!=='num' && typeof vals[k]==='string'){
+      const r = maskText(vals[k]); vals[k]=r.text; masked += r.n;
+    }
+  }
+  const rawM = maskText(String(text||''));
+  masked = Math.max(masked, rawM.n);
+
+  /* ---- 点検 ---- */
+  const warn = [];
+  if(!branchId){
+    if(!vals.branch) warn.push('単組名の記載がありません');
+    else if(bm.cands.length>1)
+      warn.push('単組名が絞り込めません（「'+vals.branch+'」→ 候補：'
+        + bm.cands.map(function(b){ return b.name; }).join('／')+'）');
+    else warn.push('単組名が単組マスタと一致しません（「'+vals.branch+'」）');
+  }
+  if(!subId) warn.push('補助金事業を特定できません（「'+(vals.sub||'記載なし')+'」）');
+  else if(sm.guess) warn.push('事業名の記載がないため、件名から「'+sub.no+' '+sub.name+'」と推定しました');
+
+  if(sub){
+    fieldsOf(sub).forEach(function(k){
+      if(isReq(sub,k) && !String(vals[k]==null?'':vals[k]).trim())
+        warn.push('必須項目「'+F[k].label+'」が空です');
+    });
+    if(sub.needNon && !(Number(vals.numNon)>=sub.needNon))
+      warn.push(sub.no+'は未加入者'+sub.needNon+'名以上が条件です（未加入者参加人数：'+(vals.numNon||0)+'）');
+    const dc = checkDocs(sub, vals.docs, vals.attendees);
+    if(dc.missing.length) warn.push('提出物が不足しています（不足：'+dc.missing.join('、')+'）');
+    if(dc.inBody) warn.push('出席者名簿が本文に記入されています（添付ファイルの代わりとして受け付けます）');
+    if(sub.pre) warn.push('この事業は事前提出物があります：'+sub.pre);
+    if(!isSet(sub)) warn.push('「'+sub.name+'」の補助金額の条件が未設定です（設定タブで単価・上限・回数を登録してください）');
+    const dISO = /^\d{4}-\d{2}-\d{2}$/.test(vals.date||'') ? vals.date : '';
+    const yy = dISO ? fiscalYearOf(dISO) : DB.year;
+    if(branchId && sub.times!=null){
+      const used = usedTimes(yy, branchId, sub.id);
+      if(used >= sub.times)
+        warn.push('回数の上限を超えています（'+sub.name+'は年'+sub.times+'回まで／受付済み '+used+'件）');
+    }
+    const due = dueISO(sub, yy);
+    if(due && dISO && todayISO() > due)
+      warn.push('提出期限（'+due+'）を過ぎています');
+    if(branchId && dISO){
+      const dup = dupOf({id:null, year:yy, branchId:branchId, dateISO:dISO});
+      if(dup.length) warn.push('同じ開催日に、この単組の別の申請があります（'
+        + dup.map(function(r){ return r.no+' '+subLabel(subOf(r.subId)); }).join('／')
+        + '）。同じ行事を二重に申請していないか確認してください');
+    }
+  }
+  if(vals.date && !/^\d{4}-\d{2}-\d{2}$/.test(vals.date)) warn.push('開催日を日付として読み取れません（「'+vals.date+'」）');
+  if(unknown.length) warn.push('項目名のない行が '+unknown.length+' 行あります');
+
+  const amount = calcAmount(sub, vals.num, vals.numNon);
+  return {vals:vals, branchId:branchId, subId:subId, warn:warn, unknown:unknown,
+          masked:masked, rawMasked:rawM.text, amount:amount};
+}
+
+/* ---------- 受付番号・登録 ---------- */
+function nextNo(y){
+  DB.seq = DB.seq||{};
+  DB.seq[y] = (DB.seq[y]||0)+1;
+  return 'R'+reiwa(y)+'-'+String(DB.seq[y]).padStart(4,'0');
+}
+function registerReport(P, opt){
+  opt = opt||{};
+  const dateISO = /^\d{4}-\d{2}-\d{2}$/.test(P.vals.date||'') ? P.vals.date : '';
+  const year = dateISO ? fiscalYearOf(dateISO) : DB.year;
+  const branchId = (opt.branchId!==undefined ? opt.branchId : P.branchId);
+  const subId = opt.subId || P.subId;
+  const sub = subOf(subId);
+  const rep = {
+    id: uid('r'), no: nextNo(year), year: year,
+    branchId: branchId, subId: subId,
+    vals: P.vals, dateISO: dateISO,
+    amount: calcAmount(sub, P.vals.num, P.vals.numNon),
+    docsOk: false,
+    receivedAt: nowStamp(), status:'受付',
+    masked: P.masked, unknown: P.unknown||[],
+    rawMasked: P.rawMasked, comment:'',
+    history: [{at:nowStamp(), by:'システム', act:'メール受信 → 台帳へ自動記録'}]
+  };
+  DB.reports.unshift(rep); save();
+  return rep;
+}
+function setStatus(rep, st, comment){
+  rep.status = st;
+  if(comment!==undefined) rep.comment = comment;
+  rep.history.push({at:nowStamp(), by:'連合会本部',
+    act:'状態を「'+st+'」に変更' + (comment ? '／コメント: '+comment : '')});
+  save();
+}
+
+/* ============================================================
+   画面
+   ============================================================ */
+let VIEW = 'intake';
+const TABS_PREF = [
+  ['intake','受付（メール取込）'],
+  ['ledger','共有台帳'],
+  ['matrix','申請状況'],
+  ['dup','重複チェック'],
+  ['sum','補助金集計'],
+  ['settings','設定'],
+  ['spec','GAS設計書']
+];
+const TABS_BRANCH = [
+  ['compose','報告書を書く'],
+  ['mine','自単組の申請状況']
+];
+function currentTabs(){
+  if(DB.mode==='pref') return TABS_PREF;
+  const t = TABS_BRANCH.slice();
+  if(DB.settings.shareMatrix) t.push(['matrix','ほかの単組の状況']);
+  return t;
+}
+/* 参加名簿（氏名そのもの）を開けるか。
+   本部は事務局・委員長のみ。単組は、自分の単組が提出したものに限り開ける。 */
+function canOpenRoster(rep){
+  if(DB.mode==='pref') return (DB.settings.docRoles||[]).indexOf(DB.role)>=0;
+  return !!(rep && rep.branchId===DB.branchId);
+}
+
+function renderHeader(){
+  const years = [];
+  for(let y=DB.year-3; y<=DB.year+1; y++) years.push(y);
+  $('#yearSel').innerHTML = years.map(function(y){
+    return '<option value="'+y+'"'+(y===DB.year?' selected':'')+'>'+yearLabel(y)+'</option>';
+  }).join('');
+  const roles = ['事務局','委員長','その他の役員'];
+  const opts = roles.map(function(rl){
+      const on = (DB.mode==='pref' && DB.role===rl);
+      return '<option value="pf:'+rl+'"'+(on?' selected':'')+'>連合会本部　'+rl+'</option>';
+    }).concat(DB.branches.map(function(b){
+      const on = (DB.mode==='branch' && DB.branchId===b.id);
+      return '<option value="br:'+b.id+'"'+(on?' selected':'')+'>'+esc(b.name)+'（単組役員）</option>';
+    }));
+  $('#modeSel').innerHTML = opts.join('');
+}
+function renderTabs(){
+  const pending = DB.reports.filter(function(r){ return r.year===DB.year && (r.status==='受付'||r.status==='確認中'); }).length;
+  $('#tabs').innerHTML = currentTabs().map(function(t){
+      let badge = (t[0]==='ledger' && pending) ? '<span class="cnt">'+pending+'</span>' : '';
+    if(t[0]==='dup'){
+      const d = dupGroups(DB.year).filter(function(g){ return dupRisk(g)>=2; }).length;
+      badge = d ? '<span class="cnt">'+d+'</span>' : '';
+    }
+    return '<button data-v="'+t[0]+'" class="'+(VIEW===t[0]?'on':'')+'">'+t[1]+badge+'</button>';
+  }).join('');
+}
+function showView(v){
+  const ok = currentTabs().some(function(t){ return t[0]===v; });
+  VIEW = ok ? v : currentTabs()[0][0];
+  renderTabs();
+  ({intake:viewIntake, ledger:viewLedger, matrix:viewMatrix, dup:viewDup, sum:viewSum,
+    compose:viewCompose, mine:viewMine, settings:viewSettings, spec:viewSpec})[VIEW]();
+  window.scrollTo(0,0);
+}
+function badge(st){ return '<span class="bd '+(ST_CLS[st]||'st-none')+'">'+esc(st)+'</span>'; }
+function repsOfYear(y){ return DB.reports.filter(function(r){ return r.year===y; }); }
+function openModal(html){ $('#modalBody').innerHTML = html; $('#modal').classList.remove('hidden'); }
+function closeModal(){ $('#modal').classList.add('hidden'); }
+function subLabel(s){ return s ? s.no+' '+s.name : '—'; }
+const ROSTER_NOTE = '【参加名簿は本部の事務局・委員長と、提出した単組のみ閲覧できます】';
+/* 本文から出席者名簿の中身だけを伏せる（項目名の次の見出しまで） */
+function hideRoster(text){
+  const km = keyMap();
+  const out = []; let skipping = false;
+  String(text||'').split('\n').forEach(function(line){
+    const m = line.match(/^[\s　]*([^:：]{1,16})[:：]/);
+    const k = m ? km[normKey(m[1])] : null;
+    if(k==='attendees'){ out.push(F.attendees.label+'：'+ROSTER_NOTE); skipping = true; return; }
+    if(k) skipping = false;
+    if(!skipping) out.push(line);
+  });
+  return out.join('\n');
+}
+
+/* ============================================================
+   1) 受付
+   ============================================================ */
+function viewIntake(){
+  $('#main').innerHTML =
+   '<div class="card"><h2>受付（メール取込）</h2>'
+  +'<p class="lead">本番では GAS が '+esc(DB.org.mailAddr)+' の受信を毎時チェックし、この処理を自動で行います。'
+  +'ここでは単組から届いたメール本文を貼り付けて、読み取りと補助金額の計算を確かめます。</p>'
+  +'<div class="btns" style="margin-bottom:8px">'
+  +'<button class="btn sub sm" id="btnSample">サンプル（単組総会）</button>'
+  +'<button class="btn sub sm" id="btnSample2">サンプル（研修会・書式崩れ）</button>'
+  +'<button class="btn gray sm" id="btnClear">クリア</button></div>'
+  +'<textarea class="mail" id="mailBody" placeholder="単組から届いたメールの本文をここに貼り付け"></textarea>'
+  +'<div class="btns" style="margin-top:10px"><button class="btn" id="btnParse">解析する</button></div>'
+  +'</div><div id="parseOut"></div>';
+  $('#btnSample').onclick  = function(){ $('#mailBody').value = sampleMail(0); $('#btnParse').click(); };
+  $('#btnSample2').onclick = function(){ $('#mailBody').value = sampleMail(1); $('#btnParse').click(); };
+  $('#btnClear').onclick   = function(){ $('#mailBody').value=''; $('#parseOut').innerHTML=''; };
+  $('#btnParse').onclick   = function(){
+    const txt = $('#mailBody').value;
+    if(!txt.trim()){ toast('本文が空です'); return; }
+    renderParse(parseMail(txt));
+  };
+}
+function sampleMail(i){
+  if(i===1){
+    return '報告書を送ります。\n'
+      +'単組　宇部市\n'
+      +'事業　⑤\n'
+      +'研修会名：２学期の教育課程にかかる研修会\n'
+      +'日付　令和8年9月2日\n'
+      +'場所：宇部市生涯学習センター 第２研修室\n'
+      +'人数：14\n'
+      +'報告者：山田\n'
+      +'添付：参加名簿\n'
+      +'研修内容：\n'
+      +'・学習指導要領の改訂点について確認\n'
+      +'・２学期の行事精選について意見交換\n'
+      +'よろしくお願いします。\n'
+      +'連絡先 083-123-4567 / ube@example.jp\n';
+  }
+  return '【報告書】\n'
+    +'単組名：山陽小野田市教職員連盟\n'
+    +'事業名：① 単組総会補助\n'
+    +'件名：令和８年度 定期総会\n'
+    +'開催日：2026-08-05\n'
+    +'開催時刻：18:30〜20:00\n'
+    +'会場：厚狭小学校 体育館\n'
+    +'参加人数：62\n'
+    +'報告者：田中\n'
+    +'添付書類：議案書、決算予算、参加名簿、写真\n'
+    +'内容：\n'
+    +'・令和７年度 活動報告および決算の承認\n'
+    +'・令和８年度 活動方針および予算の承認\n'
+    +'・役員改選\n'
+    +'備考：欠席５名（委任状提出済み）\n';
+}
+function renderParse(P){
+  const sub = subOf(P.subId);
+  const b = branchOf(P.branchId);
+  const warnHtml = P.warn.length
+    ? '<div class="note w"><b>要確認 '+P.warn.length+'件</b><ul>'
+      + P.warn.map(function(w){ return '<li>'+esc(w)+'</li>'; }).join('') + '</ul></div>'
+    : '<div class="note"><b>すべての必須項目・提出物がそろっています。</b></div>';
+
+  const flds = fieldsOf(sub).filter(function(k){ return k!=='branch' && k!=='sub'; });
+  const rows = flds.map(function(k){
+    const v = P.vals[k]==null ? '' : P.vals[k];
+    return '<dt>'+esc(F[k].label)+(isReq(sub,k)?'<span style="color:#b23a30">*</span>':'')+'</dt>'
+         + '<dd>'+(String(v).trim()? esc(v) : '<span style="color:#b23a30">（空）</span>')+'</dd>';
+  }).join('');
+
+  const brOpts = ['<option value="">— 未特定 —</option>'].concat(DB.branches.map(function(x){
+    return '<option value="'+x.id+'"'+(x.id===P.branchId?' selected':'')+'>'+esc(x.name)+'</option>'; })).join('');
+  const sbOpts = ['<option value="">— 未特定 —</option>'].concat(DB.subsidies.map(function(x){
+    return '<option value="'+x.id+'"'+(x.id===P.subId?' selected':'')+'>'+esc(subLabel(x))+'</option>'; })).join('');
+
+  let money = '';
+  if(sub){
+    const used = (b && sub.times!=null) ? usedTimes(DB.year, b.id, sub.id) : null;
+    money = '<div class="card tight" style="background:#f3f8f4;border-color:#bfe0cd">'
+      +'<div style="display:flex;gap:22px;flex-wrap:wrap;align-items:baseline">'
+      +'<div><span style="font-size:12px;color:#6b7482">補助金額（自動計算）</span>'
+      +'<div style="font-size:26px;font-weight:700;color:#1d7a4c">'+yen(P.amount)+'</div></div>'
+      +'<div style="font-size:12.5px;color:#6b7482">'+esc(amountFormula(sub))
+      + (sub.flat?'':'<br>参加人数 '+(P.vals.num||0)+'人'
+          + (sub.unitNon?'／未加入者 '+(P.vals.numNon||0)+'人':'')) +'</div>'
+      +'<div style="font-size:12.5px;color:#6b7482">提出期限：'+esc(sub.dueLabel)
+      + (dueISO(sub,DB.year)?'（'+dueISO(sub,DB.year)+'）':'')+'<br>支給：'+esc(sub.pay)+'</div>'
+      + (used!=null ? '<div style="font-size:12.5px;color:#6b7482">回数：'+used+' / '+sub.times+' 回'
+          +(used>=sub.times?'　<b style="color:#b23a30">上限超過</b>':'')+'</div>' : '')
+      +'</div></div>';
+  }
+
+  $('#parseOut').innerHTML =
+   '<div class="card"><h2>解析結果</h2>'
+  + warnHtml + money
+  + '<div class="row" style="margin:12px 0">'
+  + '<label class="fld"><span>単組（自動判別 → 修正可）</span><select id="pBranch">'+brOpts+'</select></label>'
+  + '<label class="fld"><span>補助金事業（自動判別 → 修正可）</span><select id="pSub">'+sbOpts+'</select></label>'
+  + '</div>'
+  + (sub ? '<div class="note"><b>この事業の提出物</b>：'+esc(sub.docs.join('、'))
+      + (sub.pre?'　／　事前：'+esc(sub.pre):'')+'</div>' : '')
+  + '<dl class="kv">'+rows+'</dl>'
+  + '<div class="note" style="margin-top:14px">個人情報の自動マスキング：<b>'+P.masked+'件</b>'
+  + (P.masked? '（電話番号・メールアドレス）。原文はGmailに残り、本部担当のみ確認できます。' : '。')+'</div>'
+  + (P.unknown.length ? '<div class="note b"><b>項目名のない行（台帳に載りません）</b><ul>'
+      + P.unknown.map(function(u){ return '<li>'+esc(u)+'</li>'; }).join('')+'</ul></div>' : '')
+  + '<div class="btns" style="margin-top:14px"><button class="btn" id="btnReg">この内容で台帳に登録</button>'
+  + '<button class="btn gray" id="btnCancel">取消</button></div></div>';
+
+  function refresh(){
+    const p2 = Object.assign({}, P, {branchId: $('#pBranch').value||null, subId: $('#pSub').value||null});
+    p2.amount = calcAmount(subOf(p2.subId), P.vals.num, P.vals.numNon);
+    renderParse(p2);
+  }
+  $('#pBranch').onchange = refresh;
+  $('#pSub').onchange = refresh;
+  $('#btnCancel').onclick = function(){ $('#parseOut').innerHTML=''; };
+  $('#btnReg').onclick = function(){
+    const rep = registerReport(P, {branchId: $('#pBranch').value||null, subId: $('#pSub').value||null});
+    toast('受付番号 '+rep.no+'　'+yen(rep.amount)+' で登録しました');
+    $('#mailBody').value=''; $('#parseOut').innerHTML='';
+    showView('ledger');
+  };
+}
+
+/* ============================================================
+   2) 共有台帳
+   ============================================================ */
+let LF = {branch:'', sub:'', st:'', q:''};
+function viewLedger(){
+  $('#main').innerHTML =
+   '<div class="card tight"><div class="row">'
+  +'<label class="fld"><span>単組</span><select id="fBranch"></select></label>'
+  +'<label class="fld"><span>補助金事業</span><select id="fSub"></select></label>'
+  +'<label class="fld"><span>状態</span><select id="fSt"></select></label>'
+  +'<label class="fld"><span>キーワード</span><input type="text" id="fQ" placeholder="件名・内容・受付番号"></label>'
+  +'</div></div><div id="ledgerBody"></div>';
+  $('#fBranch').innerHTML = '<option value="">すべて</option>'
+    + DB.branches.map(function(b){ return '<option value="'+b.id+'"'+(LF.branch===b.id?' selected':'')+'>'+esc(b.name)+'</option>'; }).join('');
+  $('#fSub').innerHTML = '<option value="">すべて</option>'
+    + DB.subsidies.map(function(s){ return '<option value="'+s.id+'"'+(LF.sub===s.id?' selected':'')+'>'+esc(subLabel(s))+'</option>'; }).join('');
+  $('#fSt').innerHTML = '<option value="">すべて</option>'
+    + STATUS.map(function(s){ return '<option value="'+s+'"'+(LF.st===s?' selected':'')+'>'+s+'</option>'; }).join('');
+  $('#fQ').value = LF.q;
+  ['fBranch','fSub','fSt'].forEach(function(id){
+    $('#'+id).onchange = function(){ LF[{fBranch:'branch',fSub:'sub',fSt:'st'}[id]] = this.value; drawLedger(); };
+  });
+  $('#fQ').oninput = function(){ LF.q = this.value; drawLedger(); };
+  drawLedger();
+}
+function filteredReports(){
+  const q = LF.q.trim();
+  return repsOfYear(DB.year).filter(function(r){
+    if(LF.branch && r.branchId!==LF.branch) return false;
+    if(LF.sub && r.subId!==LF.sub) return false;
+    if(LF.st && r.status!==LF.st) return false;
+    if(q){
+      const hay = [r.no, (r.vals.subject||''), (r.vals.body||''), (r.vals.writer||'')].join(' ');
+      if(hay.indexOf(q)<0) return false;
+    }
+    return true;
+  });
+}
+function drawLedger(){
+  const all = repsOfYear(DB.year), list = filteredReports();
+  const cnt = {};
+  STATUS.forEach(function(s){ cnt[s] = all.filter(function(r){ return r.status===s; }).length; });
+  const total = all.filter(function(r){ return r.status==='承認'; })
+                   .reduce(function(a,r){ return a + (r.amount||0); }, 0);
+  let html = '<div class="stat">'
+    + '<div><b>'+all.length+'</b><span>今年度の受付件数</span></div>'
+    + STATUS.map(function(s){ return '<div><b>'+cnt[s]+'</b><span>'+s+'</span></div>'; }).join('')
+    + '<div><b style="color:#1d7a4c">'+yen(total)+'</b><span>承認済み補助金額</span></div>'
+    + '</div>';
+  if(!list.length){
+    html += '<div class="card"><div class="empty">該当する報告がありません。<br>「受付」タブからメール本文を取り込んでください。</div></div>';
+    $('#ledgerBody').innerHTML = html; return;
+  }
+  html += '<div class="card tight">'
+    +'<div class="btns" style="margin-bottom:8px">'+xlsBtn('lgXls','この一覧をExcelに出力')
+    +'<span style="font-size:12px;color:#6b7482">絞り込んだ '+list.length+' 件を書き出します</span></div>'
+    +'<div class="tw"><table><thead><tr>'
+    +'<th>受付番号</th><th>受付日時</th><th>単組</th><th>事業</th><th>件名</th><th>開催日</th>'
+    +'<th style="text-align:right">人数</th><th style="text-align:right">補助金額</th><th>状態</th></tr></thead><tbody>'
+    + list.map(function(r){
+        const b = branchOf(r.branchId), s = subOf(r.subId);
+        return '<tr class="clk" data-id="'+r.id+'">'
+          +'<td class="mono nowrap">'+esc(r.no)+'</td>'
+          +'<td class="mono nowrap">'+esc(r.receivedAt)+'</td>'
+          +'<td class="nowrap">'+(b?esc(shortName(b.name)):'<span style="color:#b23a30">未特定</span>')+'</td>'
+          +'<td class="nowrap">'+(s?esc(s.no+' '+s.name):'<span style="color:#b23a30">未特定</span>')+'</td>'
+          +'<td>'+esc(r.vals.subject||'（件名なし）')+'</td>'
+          +'<td class="mono nowrap">'+esc(r.dateISO||'—')+'</td>'
+          +'<td class="mono nowrap" style="text-align:right">'+(r.vals.num||'—')+'</td>'
+          +'<td class="mono nowrap" style="text-align:right">'+yen(r.amount)+'</td>'
+          +'<td class="nowrap">'+badge(r.status)+'</td></tr>';
+      }).join('')
+    + '</tbody></table></div></div>';
+  $('#ledgerBody').innerHTML = html;
+  $('#lgXls').onclick = function(){
+    const rows = [['受付番号','受付日時','単組','事業№','事業名','件名','開催日','会場',
+                   '参加人数','未加入者数','報告者','申請者','学校名','補助金額','支給月',
+                   '添付書類','状態','本部コメント']];
+    list.forEach(function(r){
+      const b = branchOf(r.branchId), x = subOf(r.subId);
+      rows.push([r.no, r.receivedAt, b?b.name:'', x?x.no:'', x?x.name:'',
+                 r.vals.subject||'', r.dateISO||'', r.vals.place||'',
+                 r.vals.num||'', r.vals.numNon||'', r.vals.writer||'',
+                 r.vals.applicant||'', r.vals.school||'', r.amount||0, x?x.pay:'',
+                 r.vals.docs||'', r.status, r.comment||'']);
+    });
+    downloadCSV('共有台帳_'+yearLabel(DB.year), rows);
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('#ledgerBody tr.clk'), function(tr){
+    tr.onclick = function(){ openReport(tr.dataset.id); };
+  });
+}
+
+/* ---------- 報告の詳細 ---------- */
+function openReport(id){
+  const r = DB.reports.find(function(x){ return x.id===id; });
+  if(!r) return;
+  const sub = subOf(r.subId), b = branchOf(r.branchId);
+  const openRoster = canOpenRoster(r);
+  const rows = fieldsOf(sub).filter(function(k){ return k!=='branch' && k!=='sub'; }).map(function(k){
+    let v = r.vals[k]==null?'':r.vals[k];
+    if(k==='attendees' && String(v).trim() && !openRoster)
+      return '<dt>'+esc(F[k].label)+'</dt><dd style="color:#a86a00">'+ROSTER_NOTE+'</dd>';
+    return '<dt>'+esc(F[k].label)+'</dt><dd>'+(String(v).trim()?esc(v):'—')+'</dd>';
+  }).join('');
+  const dc = checkDocs(sub, r.vals.docs, r.vals.attendees);
+  const docsHtml = sub ? dc.need.map(function(d){
+      const ok = dc.missing.indexOf(d)<0;
+      return '<span class="bd '+(ok?'st-ok':'st-back')+'">'+(ok?'✓':'×')+' '+esc(d)+'</span>';
+    }).join(' ') : '';
+  const hist = r.history.map(function(h){
+    return '<li><span class="mono" style="color:#6b7482">'+esc(h.at)+'</span> '+esc(h.by)+'：'+esc(h.act)+'</li>';
+  }).join('');
+  const isPref = DB.mode==='pref';
+  const subOpts = ['<option value="">— 未特定 —</option>'].concat(DB.subsidies.map(function(x){
+    return '<option value="'+x.id+'"'+(x.id===r.subId?' selected':'')+'>'+esc(subLabel(x))+'</option>'; })).join('');
+
+  openModal(
+    '<h2>'+esc(r.no)+'　'+esc(r.vals.subject||'（件名なし）')+'</h2>'
+   +'<p class="lead">'+(b?esc(b.name):'単組未特定')+'　／　'+esc(subLabel(sub))+'　／　受付 '+esc(r.receivedAt)+'　'+badge(r.status)+'</p>'
+   +'<div class="card tight" style="background:#f3f8f4;border-color:#bfe0cd;margin:0 0 12px">'
+   +'<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:baseline">'
+   +'<div><span style="font-size:12px;color:#6b7482">補助金額</span>'
+   +'<div style="font-size:24px;font-weight:700;color:#1d7a4c">'+yen(r.amount)+'</div></div>'
+   +'<div style="font-size:12.5px;color:#6b7482">'+esc(amountFormula(sub))
+   +(sub&&sub.pay?'<br>支給：'+esc(sub.pay):'')+'</div></div></div>'
+   +(docsHtml ? '<div class="note"><b>提出物</b><br>'+docsHtml
+      +(openRoster?'':'<br><span style="color:#a86a00">参加名簿の中身（氏名）は、本部の事務局・委員長と、提出した単組のみ閲覧できます。</span>')
+      +'</div>' : '')
+   +(r.masked ? '<div class="note">個人情報 '+r.masked+'件をマスキング済み（原文はGmail側のみ）</div>' : '')
+   +(r.comment ? '<div class="note '+(r.status==='差戻し'?'b':'')+'"><b>本部コメント</b><br>'+esc(r.comment)+'</div>' : '')
+   +'<dl class="kv" style="margin-top:12px">'+rows+'</dl>'
+   +(isPref ?
+      '<h3>補助金事業の付け替え</h3><select id="mSub">'+subOpts+'</select>'
+     +'<h3>状態の更新</h3>'
+     +'<label class="fld"><span>コメント（差戻し理由・確認事項）</span>'
+     +'<textarea id="mCmt" rows="2">'+esc(r.comment||'')+'</textarea></label>'
+     +'<div class="btns">'
+     + STATUS.map(function(s){
+         const cls = s==='承認'?'ok':(s==='差戻し'?'bad':(s==='受付'?'gray':'sub'));
+         return '<button class="btn '+cls+' sm" data-st="'+s+'">'+s+'にする</button>'; }).join('')
+     +'</div>'
+     +'<div class="btns" style="margin-top:14px">'
+     +'<button class="btn sub sm" id="mReply">単組への返信メール文面をコピー</button>'
+     +'<button class="btn gray sm" id="mRaw">受信原文（マスク後）を表示</button>'
+     +'<button class="btn sub sm" id="mBody">本文をコピー（引継ぎ文書用）</button>'
+     +'<button class="btn gray sm" id="mDel">この受付を削除</button></div>'
+    : '<div class="btns"><button class="btn sub sm" id="mRaw">送信内容（マスク後）を表示</button>'
+     +'<button class="btn sub sm" id="mBody">本文をコピー（引継ぎ文書用）</button></div>')
+   +'<h3>履歴</h3><ul style="font-size:12.5px;padding-left:18px;margin:0">'+hist+'</ul>'
+  );
+  if(isPref){
+    $('#mSub').onchange = function(){
+      r.subId = this.value||null;
+      r.amount = calcAmount(subOf(r.subId), r.vals.num, r.vals.numNon);
+      save(); openReport(r.id); drawLedger(); toast('事業を変更し、補助金額を再計算しました');
+    };
+    Array.prototype.forEach.call(document.querySelectorAll('#modalBody [data-st]'), function(btn){
+      btn.onclick = function(){
+        setStatus(r, btn.dataset.st, $('#mCmt').value.trim());
+        closeModal(); drawLedger(); renderTabs(); toast('状態を「'+btn.dataset.st+'」にしました');
+      };
+    });
+    $('#mReply').onclick = function(){ copyText(replyMail(r)); };
+    $('#mDel').onclick = function(){
+      if(!confirm(r.no+' を台帳から削除します。よろしいですか？')) return;
+      DB.reports = DB.reports.filter(function(x){ return x.id!==r.id; });
+      save(); closeModal(); drawLedger(); renderTabs(); toast('削除しました');
+    };
+  }
+  $('#mBody').onclick = function(){
+    const body = r.rawMasked||'';
+    copyText('--- '+r.no+'　'+subLabel(sub)+'　'+(r.vals.subject||'')+' ---\n'
+      + (canOpenRoster(r) ? body : hideRoster(body)));
+  };
+  $('#mRaw').onclick = function(){
+    openModal('<h2>受信原文（マスキング後）</h2>'
+      +'<p class="lead">個人情報を伏字にした状態です。原文そのものは Gmail に残ります。</p>'
+      +'<textarea class="mail" readonly>'
+      +esc(canOpenRoster(r) ? (r.rawMasked||'') : hideRoster(r.rawMasked||''))+'</textarea>');
+  };
+}
+function replyMail(r){
+  const b = branchOf(r.branchId), sub = subOf(r.subId);
+  const head = (b?b.name:'各位')+' ご担当者様\n\n'+DB.org.prefName+'です。\n補助金の報告を受け付けました。\n\n';
+  const info = '受付番号：'+r.no+'\n事業：'+subLabel(sub)+'\n件名：'+(r.vals.subject||'')+'\n開催日：'+(r.dateISO||'')
+             + '\n補助金額：'+yen(r.amount)+'\n現在の状態：'+r.status+'\n';
+  let tail = '\n';
+  if(r.status==='承認') tail += '内容を確認し、承認しました。'+(sub?sub.pay+'に単組口座へ入金します。':'')+'\n';
+  else if(r.status==='差戻し') tail += '下記の点について、修正のうえ再提出をお願いします。\n【修正依頼】\n'+(r.comment||'')+'\n';
+  else if(r.status==='確認中') tail += '内容を確認しています。追ってご連絡します。\n';
+  else tail += '受け付けました。確認後、あらためてご連絡します。\n';
+  return head+info+tail+'\n'+DB.org.prefName+'\n'+DB.org.mailAddr+'\n';
+}
+
+/* ============================================================
+   3) 申請状況（事業 × 単組）
+   ============================================================ */
+function repsFor(year, branchId, subId){
+  return DB.reports.filter(function(r){
+    return r.year===year && r.branchId===branchId && r.subId===subId;
+  });
+}
+function viewMatrix(){
+  const pref = DB.mode==='pref';
+  const me   = pref ? null : (branchOf(DB.branchId) || DB.branches[0]);
+  const money = pref || DB.settings.shareAmount;          /* 金額を出すか */
+  const bs = DB.branches;
+  const subs = DB.subsidies.filter(function(x){
+    if(pref || DB.settings.sharePersonal) return true;
+    return x.cat!=='個人';                                 /* 個人開催は他単組に見せない設定 */
+  });
+  const head = '<tr><th class="rh">補助金事業（期限・支給）</th>'
+    + bs.map(function(b){
+        const mine = me && b.id===me.id;
+        return '<th title="'+esc(b.name)+'"'+(mine?' style="background:#e9f0fa;color:#2f5d9e"':'')+'>'
+             + esc(shortName(b.name))+'</th>'; }).join('')
+    + '<th>申請</th>'+(money?'<th>金額</th>':'')+'</tr>';
+  const body = subs.map(function(x){
+    let n=0, amt=0;
+    const tds = bs.map(function(b){
+      const all  = repsFor(DB.year, b.id, x.id);
+      const rs   = all.filter(function(r){ return r.status!=='差戻し'; });
+      const back = all.filter(function(r){ return r.status==='差戻し'; });
+      n += rs.length;
+      amt += rs.filter(function(r){ return r.status==='承認'; }).reduce(function(a,r){ return a+(r.amount||0); },0);
+      let mark = '－', cls='st-none';
+      if(rs.length){
+        const okAll = rs.every(function(r){ return r.status==='承認'; });
+        mark = (x.times!=null && x.times>1) ? (rs.length+'/'+x.times) : ST_MARK[rs[0].status];
+        cls = okAll ? 'st-ok' : 'st-chk';
+      } else if(back.length){ mark='↩'; cls='st-back'; }
+      const mine = me && b.id===me.id;
+      return '<td class="cell '+cls+'" data-s="'+x.id+'" data-b="'+b.id+'"'
+           + (mine?' style="outline:2px solid #2f5d9e;outline-offset:-2px"':'')+'>'+mark+'</td>';
+    }).join('');
+    return '<tr><th class="rh">'+esc(x.no+' '+x.name)
+      +'<div class="rate">'+esc(sub_times(x))+'／期限 '+esc(x.dueLabel)+'／'+esc(x.payee)
+      +(isSet(x)?'':'　<b style="color:#b23a30">条件未設定</b>')+'</div></th>'
+      + tds + '<td class="rate">'+n+'</td>'+(money?'<td class="rate mono">'+yen(amt)+'</td>':'')+'</tr>';
+  }).join('');
+  const foot = '<tr><th class="rh">単組ごとの申請件数'+(money?'／承認額':'')+'</th>'
+    + bs.map(function(b){
+        const rs = repsOfYear(DB.year).filter(function(r){
+          if(r.branchId!==b.id || r.status==='差戻し') return false;
+          const x = subOf(r.subId);
+          return (pref || DB.settings.sharePersonal || !x || x.cat!=='個人');
+        });
+        const a = rs.filter(function(r){ return r.status==='承認'; }).reduce(function(y,r){ return y+(r.amount||0); },0);
+        return '<td class="rate">'+rs.length+(money?'<br>'+(a?Math.round(a/1000)+'k':'—'):'')+'</td>';
+      }).join('') + '<td></td>'+(money?'<td></td>':'')+'</tr>';
+
+  $('#main').innerHTML =
+   '<div class="card"><h2>'+(pref?'申請状況':'ほかの単組の状況')+'（'+yearLabel(DB.year)+'）</h2>'
+  +'<p class="lead">行＝補助金事業、列＝単組。回数上限のある事業は「使った回数／上限」を表示します。'
+  +(pref ? 'セルをクリックすると、その単組・その事業の申請が開きます。'
+         : '自分の単組の列は青枠で示しています。ほかの単組のセルは、件名と状態までの表示です。')+'</p>'
+  +'<div class="btns" style="margin-bottom:10px">'
+  +'<span class="bd st-ok">● すべて承認</span><span class="bd st-chk">◎ 確認中・受付あり</span>'
+  +'<span class="bd st-back">↩ 差戻しのみ</span><span class="bd st-none">－ 申請なし</span>'
+  + xlsBtn('mxXls') + '</div>'
+  +'<div class="tw"><table class="mx"><thead>'+head+'</thead><tbody>'+body+foot+'</tbody></table></div></div>';
+
+  $('#mxXls').onclick = function(){
+    const rows = [['補助金事業','回数','期限','振込先'].concat(bs.map(function(b){ return b.name; }))
+                  .concat(money?['申請件数','承認額']:['申請件数'])];
+    subs.forEach(function(x){
+      let n=0, amt=0;
+      const line = [x.no+' '+x.name, sub_times(x), x.dueLabel, x.payee];
+      bs.forEach(function(b){
+        const rs = repsFor(DB.year, b.id, x.id).filter(function(r){ return r.status!=='差戻し'; });
+        n += rs.length;
+        amt += rs.filter(function(r){ return r.status==='承認'; }).reduce(function(a,r){ return a+(r.amount||0); },0);
+        line.push(rs.length ? (x.times!=null && x.times>1 ? rs.length+'/'+x.times : rs[0].status) : '');
+      });
+      line.push(n); if(money) line.push(amt);
+      rows.push(line);
+    });
+    downloadCSV('申請状況_'+yearLabel(DB.year), rows);
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('.mx td.cell'), function(td){
+    td.onclick = function(){
+      const rs = repsFor(DB.year, td.dataset.b, td.dataset.s);
+      const x = subOf(td.dataset.s), b = branchOf(td.dataset.b);
+      const own = pref || (me && b.id===me.id);
+      if(!rs.length){
+        if(!pref){ toast('この単組・この事業の申請はまだありません'); return; }
+        openModal('<h2>申請なし</h2><p class="lead">'+esc(b.name)+' ／ '+esc(subLabel(x))+'</p>'
+          +'<div class="note w">期限 '+esc(x.dueLabel)+(dueISO(x,DB.year)?'（'+dueISO(x,DB.year)+'）':'')+'。督促メールの文面を用意しました。</div>'
+          +'<textarea class="mail" id="urgeTx" style="min-height:200px">'+esc(urgeMail(x,b))+'</textarea>'
+          +'<div class="btns" style="margin-top:10px"><button class="btn sm" id="urgeCopy">コピー</button></div>');
+        $('#urgeCopy').onclick = function(){ copyText($('#urgeTx').value); };
+        return;
+      }
+      if(own && rs.length===1){ openReport(rs[0].id); return; }
+      openModal('<h2>'+esc(b.name)+'</h2><p class="lead">'+esc(subLabel(x))+'　'+rs.length+'件'
+        +(own?'':'　（ほかの単組のため、件名と状態までの表示です）')+'</p>'
+        +'<div class="tw"><table><thead><tr><th>受付番号</th><th>件名</th><th>開催日</th>'
+        +(money?'<th>金額</th>':'')+'<th>状態</th></tr></thead><tbody>'
+        + rs.map(function(r){
+            return '<tr'+(own?' class="clk" data-id="'+r.id+'"':'')+'><td class="mono">'+esc(r.no)+'</td><td>'
+              +esc(r.vals.subject||'')+'</td><td class="mono">'+esc(r.dateISO||'')+'</td>'
+              +(money?'<td class="mono">'+yen(r.amount)+'</td>':'')
+              +'<td>'+badge(r.status)+'</td></tr>'; }).join('')
+        +'</tbody></table></div>');
+      Array.prototype.forEach.call(document.querySelectorAll('#modalBody tr.clk'), function(tr){
+        tr.onclick = function(){ openReport(tr.dataset.id); };
+      });
+    };
+  });
+}
+function sub_times(s){ return s.times==null ? '回数制限なし' : '年'+s.times+'回まで'; }
+function urgeMail(s,b){
+  return b.name+' ご担当者様\n\n'+DB.org.prefName+'です。\n'
+    +'下記の補助金について、報告がまだ届いていません。ご確認をお願いします。\n\n'
+    +'事業：'+s.no+' '+s.name+'\n'
+    +'補助金：'+amountFormula(s).replace(/¥/g,'')+'\n'
+    +'提出物：'+s.docs.join('、')+(s.pre?'（事前：'+s.pre+'）':'')+'\n'
+    +'提出期限：'+s.dueLabel+(dueISO(s,DB.year)?'（'+dueISO(s,DB.year)+'）':'')+'\n'
+    +'提出先：'+DB.org.mailAddr+'\n\n'
+    +'報告はメール本文に直接ご記入のうえ、提出物を添付してください。\n\n'
+    +DB.org.prefName+'\n';
+}
+
+/* ============================================================
+   3-2) 重複チェック
+   ============================================================ */
+function dupCard(groups, forBranch){
+  if(!groups.length)
+    return '<div class="card"><div class="empty">同じ日に重なっている申請はありません。</div></div>';
+  return groups.map(function(g){
+    const b = branchOf(g[0].branchId);
+    const cats = g.map(function(r){ const x=subOf(r.subId); return x?x.cat:''; });
+    const mixed = cats.indexOf('単組')>=0 && cats.indexOf('個人')>=0;
+    const sameSub = new Set(g.map(function(r){ return r.subId; })).size===1;
+    let why = '同じ開催日に'+g.length+'件の申請があります。';
+    if(mixed) why = '<b>単組への補助金と、個人（開催者）への補助金が同じ日に申請されています。</b>'
+                  + '同じ行事を二重に申請していないか確認してください。';
+    else if(sameSub) why = '同じ事業を同じ日に'+g.length+'件申請しています。回数の数え方を確認してください。';
+    return '<div class="card"><h2>'+(forBranch?'':esc(b?b.name:'')+'　')+esc(g[0].dateISO)+'</h2>'
+      +'<div class="note '+(mixed?'b':'w')+'">'+why+'</div>'
+      +'<div class="tw"><table><thead><tr><th>受付番号</th><th>事業</th><th>区分</th><th>件名</th>'
+      +'<th>会場</th><th>申請者</th><th style="text-align:right">金額</th><th>状態</th></tr></thead><tbody>'
+      + g.map(function(r){
+          const x = subOf(r.subId);
+          return '<tr class="clk" data-id="'+r.id+'"><td class="mono">'+esc(r.no)+'</td>'
+            +'<td class="nowrap">'+esc(subLabel(x))+'</td>'
+            +'<td class="nowrap" style="font-size:12px">'+esc(x?x.payee:'—')+'</td>'
+            +'<td>'+esc(r.vals.subject||'')+'</td>'
+            +'<td>'+esc(r.vals.place||'—')+'</td>'
+            +'<td>'+esc(r.vals.applicant||r.vals.writer||'—')+'</td>'
+            +'<td class="mono" style="text-align:right">'+yen(r.amount)+'</td>'
+            +'<td>'+badge(r.status)+'</td></tr>';
+        }).join('')
+      +'</tbody></table></div></div>';
+  }).join('');
+}
+let DUP_ONLY = true;
+function viewDup(){
+  const all = dupGroups(DB.year);
+  const risky = all.filter(function(g){ return dupRisk(g)>=2; });
+  if(!risky.length) DUP_ONLY = false;
+  const groups = DUP_ONLY ? risky : all;
+  $('#main').innerHTML =
+   '<div class="card"><h2>重複チェック（'+yearLabel(DB.year)+'）</h2>'
+  +'<p class="lead">同じ単組・同じ開催日に出ている申請を並べます。'
+  +'単組研修会（⑤）と個人主催の合同学習会（⑩）のように、'
+  +'ひとつの行事が別々の補助金で二重に申請されていないかを、ここで確かめられます。</p>'
+  +'<div class="stat" style="margin:0 0 10px"><div><b>'+all.length+'</b><span>重なっている日</span></div>'
+  +'<div><b style="color:#b23a30">'+all.filter(function(g){
+      const c=g.map(function(r){ const x=subOf(r.subId); return x?x.cat:''; });
+      return c.indexOf('単組')>=0 && c.indexOf('個人')>=0; }).length
+  +'</b><span>単組枠と個人枠の重なり</span></div>'
+  +'<div><b>'+risky.length+'</b><span>要確認（枠ちがい・同じ会場）</span></div></div>'
+  +'<label style="font-size:13px"><input type="checkbox" id="dupOnly"'+(DUP_ONLY?' checked':'')+'> '
+  +'要確認のものだけ表示する（同じ日というだけの重なりを隠す）</label>'
+  +'<div class="btns" style="margin-top:10px">'+xlsBtn('dupXls','この一覧をExcelに出力')+'</div></div>'
+  + dupCard(groups, false);
+  const cb = $('#dupOnly');
+  if(cb) cb.onchange = function(){ DUP_ONLY = this.checked; viewDup(); };
+  const dX = $('#dupXls');
+  if(dX) dX.onclick = function(){
+    const rows = [['開催日','単組','受付番号','事業№','事業名','振込先','件名','会場','申請者','金額','状態']];
+    groups.forEach(function(g){
+      g.forEach(function(r){
+        const b = branchOf(r.branchId), x = subOf(r.subId);
+        rows.push([r.dateISO, b?b.name:'', r.no, x?x.no:'', x?x.name:'', x?x.payee:'',
+                   r.vals.subject||'', r.vals.place||'', r.vals.applicant||r.vals.writer||'',
+                   r.amount||0, r.status]);
+      });
+      rows.push(['','','','','','','','','','','']);
+    });
+    downloadCSV('重複チェック_'+yearLabel(DB.year), rows);
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('#main tr.clk'), function(tr){
+    tr.onclick = function(){ openReport(tr.dataset.id); };
+  });
+}
+
+/* ============================================================
+   4) 補助金集計
+   ============================================================ */
+function viewSum(){
+  const reps = repsOfYear(DB.year);
+  const ok = reps.filter(function(r){ return r.status==='承認'; });
+  const pend = reps.filter(function(r){ return r.status==='受付'||r.status==='確認中'; });
+  const sumOf = function(list){ return list.reduce(function(a,r){ return a+(r.amount||0); },0); };
+
+  const bySub = DB.subsidies.map(function(s){
+    const a = ok.filter(function(r){ return r.subId===s.id; });
+    const p = pend.filter(function(r){ return r.subId===s.id; });
+    return '<tr><td class="nowrap">'+esc(s.no+' '+s.name)+'</td>'
+      +'<td class="nowrap" style="font-size:12px;color:#6b7482">'+esc(amountFormula(s))+'</td>'
+      +'<td class="mono" style="text-align:right">'+a.length+'</td>'
+      +'<td class="mono" style="text-align:right">'+yen(sumOf(a))+'</td>'
+      +'<td class="mono" style="text-align:right;color:#a86a00">'+(p.length?p.length+'件 '+yen(sumOf(p)):'—')+'</td>'
+      +'<td class="nowrap">'+esc(s.pay)+'</td></tr>';
+  }).join('');
+
+  const payGroups = [
+    {key:'単組口座', title:'単組口座への振込一覧', lead:'単組への補助金（①〜⑧）。単組の口座へ入金します。'},
+    {key:'開催者の会費口座', title:'個人への振込一覧', lead:'分会学習会・合同学習会。開催者の会費引き落とし口座へ入金します。'}
+  ];
+  const byBranch = DB.branches.map(function(b){
+    const a = ok.filter(function(r){ return r.branchId===b.id; });
+    const p = pend.filter(function(r){ return r.branchId===b.id; });
+    return '<tr><td class="nowrap">'+esc(b.name)+'</td>'
+      +'<td class="mono" style="text-align:right">'+a.length+'</td>'
+      +'<td class="mono" style="text-align:right">'+yen(sumOf(a))+'</td>'
+      +'<td class="mono" style="text-align:right;color:#a86a00">'+(p.length?p.length+'件':'—')+'</td></tr>';
+  }).join('');
+
+  const pay9 = ok.filter(function(r){ const s=subOf(r.subId); return s && s.pay==='９月'; });
+  const pay3 = ok.filter(function(r){ const s=subOf(r.subId); return s && s.pay==='３月'; });
+
+  $('#main').innerHTML =
+   '<div class="stat">'
+  +'<div><b>'+ok.length+'</b><span>承認済み件数</span></div>'
+  +'<div><b style="color:#1d7a4c">'+yen(sumOf(ok))+'</b><span>承認済み総額</span></div>'
+  +'<div><b style="color:#a86a00">'+yen(sumOf(pend))+'</b><span>未確定（受付・確認中）</span></div>'
+  +'<div><b>'+yen(sumOf(pay9))+'</b><span>９月支給分</span></div>'
+  +'<div><b>'+yen(sumOf(pay3))+'</b><span>３月支給分</span></div></div>'
+  +'<div class="card"><h2>事業ごとの補助金額（'+yearLabel(DB.year)+'）</h2>'
+  +'<div class="btns" style="margin-bottom:8px">'+xlsBtn('sumXlsA')+'</div>'
+  +'<div class="tw"><table><thead><tr><th>事業</th><th>補助金</th>'
+  +'<th style="text-align:right">承認件数</th><th style="text-align:right">承認額</th>'
+  +'<th style="text-align:right">未確定</th><th>支給</th></tr></thead><tbody>'+bySub+'</tbody></table></div></div>'
+  +'<div class="card"><h2>単組ごとの補助金額（単組口座分）</h2>'
+  +'<p class="lead">この表がそのまま振込一覧の元になります。</p>'
+  +'<div class="tw"><table><thead><tr><th>単組</th>'
+  +'<th style="text-align:right">承認件数</th><th style="text-align:right">承認額</th>'
+  +'<th style="text-align:right">未確定</th></tr></thead><tbody>'+byBranch+'</tbody></table></div>'
+  +'<div class="btns" style="margin-top:12px">'+xlsBtn('sumCopy','振込一覧をExcelに出力')+'</div></div>'
+  +(DB.subsidies.some(function(x){ return x.cat==='個人'; }) ? ''
+   +'<div class="card"><h2>個人への振込一覧</h2>'
+  +'<div class="btns" style="margin-bottom:8px">'+xlsBtn('sumXlsC','個人への振込一覧をExcelに出力')+'</div>'
+  +'<p class="lead">分会学習会・合同学習会は開催者（申請者）へ支給します。'
+  +'振込先は<b>会費の引き落とし口座</b>を用いるため、口座情報を報告に書いてもらう必要はありません。'
+  +'本部は申請者名を組合員名簿と照合するだけで振り込めます。</p>'
+  +(function(){
+      const list = ok.filter(function(r){ const s2=subOf(r.subId); return s2 && s2.cat==='個人'; });
+      if(!list.length) return '<div class="empty">個人口座への支給対象はまだありません。</div>';
+      return '<div class="tw"><table><thead><tr><th>受付番号</th><th>申請者（開催者）</th><th>学校</th>'
+        +'<th>単組</th><th>事業</th><th style="text-align:right">承認額</th></tr></thead><tbody>'
+        + list.map(function(r){
+            const b2=branchOf(r.branchId), s2=subOf(r.subId);
+            return '<tr><td class="mono">'+esc(r.no)+'</td><td>'+esc(r.vals.applicant||'—')+'</td>'
+              +'<td>'+esc(r.vals.school||'—')+'</td><td>'+esc(b2?shortName(b2.name):'—')+'</td>'
+              +'<td class="nowrap">'+esc(subLabel(s2))+'</td>'
+              +'<td class="mono" style="text-align:right">'+yen(r.amount)+'</td></tr>';
+          }).join('')
+        +'</tbody></table></div>';
+    })()
+  +'</div>' : '');
+
+  $('#sumXlsA').onclick = function(){
+    const rows = [['№','事業名','補助金','回数','承認件数','承認額','未確定件数','未確定額','支給月','振込先']];
+    DB.subsidies.forEach(function(x){
+      const a = ok.filter(function(r){ return r.subId===x.id; });
+      const p = pend.filter(function(r){ return r.subId===x.id; });
+      rows.push([x.no, x.name, amountFormula(x).replace(/¥/g,''), sub_times(x),
+                 a.length, sumOf(a), p.length, sumOf(p), x.pay, x.payee]);
+    });
+    rows.push(['','合計','','', ok.length, sumOf(ok), pend.length, sumOf(pend), '', '']);
+    downloadCSV('補助金集計_事業別_'+yearLabel(DB.year), rows);
+  };
+  $('#sumCopy').onclick = function(){
+    const rows = [['単組','承認件数','承認額','未確定件数','未確定額']];
+    DB.branches.forEach(function(b){
+      const a = ok.filter(function(r){ return r.branchId===b.id; });
+      const p = pend.filter(function(r){ return r.branchId===b.id; });
+      rows.push([b.name, a.length, sumOf(a), p.length, sumOf(p)]);
+    });
+    rows.push(['合計', ok.length, sumOf(ok), pend.length, sumOf(pend)]);
+    downloadCSV('振込一覧_単組口座_'+yearLabel(DB.year), rows);
+  };
+  const cX = $('#sumXlsC');
+  if(cX) cX.onclick = function(){
+    const list = ok.filter(function(r){ const x=subOf(r.subId); return x && x.cat==='個人'; });
+    const rows = [['受付番号','申請者（開催者）','学校名','単組','事業№','事業名','開催日','参加人数','承認額']];
+    list.forEach(function(r){
+      const b = branchOf(r.branchId), x = subOf(r.subId);
+      rows.push([r.no, r.vals.applicant||'', r.vals.school||'', b?b.name:'',
+                 x?x.no:'', x?x.name:'', r.dateISO||'', r.vals.num||'', r.amount||0]);
+    });
+    downloadCSV('振込一覧_個人_'+yearLabel(DB.year), rows);
+  };
+}
+
+/* ============================================================
+   5) 単組モード — 報告書を書く
+   ============================================================ */
+/* メールの件名は固定。単組名も事業名も本文に入っているため、件名で区別する必要がない。 */
+const MAIL_SUBJECT = '補助金申請';
+
+let CS = null;
+function viewCompose(){
+  const b = branchOf(DB.branchId) || DB.branches[0];
+  CS = CS || DB.subsidies[0].id;
+  const sub = subOf(CS);
+  const used = sub.times!=null ? usedTimes(DB.year, b.id, sub.id) : null;
+  const prev = lastYearReport(b.id, sub.id, DB.year);
+
+  $('#main').innerHTML =
+   '<div class="card"><h2>報告書を書く（'+esc(b.name)+'）</h2>'
+  +'<label class="fld" style="max-width:420px"><span>補助金事業</span><select id="cSub">'
+  + DB.subsidies.map(function(x){ return '<option value="'+x.id+'"'+(x.id===CS?' selected':'')+'>'+esc(subLabel(x))+'</option>'; }).join('')
+  +'</select></label>'
+  +'<div class="note"><b>'+esc(amountFormula(sub))+'</b>　／　提出物：'+esc(sub.docs.join('、'))
+  + (sub.pre?'　／　<span style="color:#b23a30">事前：'+esc(sub.pre)+'</span>':'')
+  + '<br>提出期限：'+esc(sub.dueLabel)+(dueISO(sub,DB.year)?'（'+dueISO(sub,DB.year)+'）':'')+'　／　支給：'+esc(sub.pay)
+  + (used!=null ? '　／　今年度の申請 '+used+'/'+sub.times+' 回'+(used>=sub.times?'　<b style="color:#b23a30">上限に達しています</b>':'') : '')
+  + (sub.note?'<br><span style="color:#6b7482">'+esc(sub.note)+'</span>':'')
+  + (sub.cat==='個人'?'<br><b>口座情報の記入は不要です。</b>会費の引き落とし口座へ振り込みます。':'')+'</div>'
+  +'<div class="note w"><b>メールの送り方</b><br>'
+  +'宛先：<b class="mono">'+esc(DB.org.mailAddr)+'</b>　／　件名：<b>'+esc(MAIL_SUBJECT)+'</b>（これだけで結構です）<br>'
+  +'下の様式をコピーして本文に貼り付け、「：」の右側に書き込んで、提出物を添付して送ってください。'
+  +'単組名も事業名も本文に入っているので、件名で区別する必要はありません。</div>'
+  +'</div>'
+
+  +'<div class="card"><h2>報告の内容</h2>'
+  +'<div class="btns" style="margin-bottom:8px">'
+  + (prev ? '<button class="btn sub sm" id="cPrev">昨年度の内容を読み込む（'+esc(prev.no)+'）</button>'
+          : '<span style="font-size:12px;color:#6b7482">昨年度に同じ事業の申請はありません</span>')
+  + '<button class="btn gray sm" id="cReset">様式に戻す</button></div>'
+  +'<textarea class="mail" id="cBody" style="min-height:330px">'
+  + esc(buildMail(sub, {branch:b.name, sub:sub.no+' '+sub.name}))+'</textarea>'
+  +'<div id="cLive"></div>'
+  +'<div class="btns" style="margin-top:12px">'
+  +'<button class="btn" id="cCopy">この内容をコピーする（メールに貼り付け）</button>'
+  +'<button class="btn sub" id="cCopyHo">この内容をコピーする（単組引継ぎ文書用）</button>'
+  +'<button class="btn gray" id="cSim">この場で本部へ送信（動作確認用）</button></div>'
+  +'</div>';
+
+  $('#cSub').onchange = function(){ CS = this.value; viewCompose(); };
+  $('#cReset').onclick = function(){
+    $('#cBody').value = buildMail(sub, {branch:b.name, sub:sub.no+' '+sub.name});
+    live();
+  };
+  if(prev) $('#cPrev').onclick = function(){
+    $('#cBody').value = reuseBody(prev, sub, b);
+    live();
+    toast('昨年度（'+prev.no+'）の内容を読み込みました。開催日と参加人数は空にしてあります');
+  };
+  $('#cCopy').onclick = function(){ copyText($('#cBody').value); };
+  $('#cCopyHo').onclick = function(){
+    copyText('--- '+yearLabel(DB.year)+'　'+b.name+'　'+sub.no+' '+sub.name+' ---\n'+$('#cBody').value);
+    toast('引継ぎ文書用にコピーしました（見出しを付けています）');
+  };
+  $('#cSim').onclick = function(){
+    const rep = registerReport(parseMail($('#cBody').value), {});
+    toast('本部の台帳に登録されました（'+rep.no+'　'+yen(rep.amount)+'）');
+    showView('mine');
+  };
+
+  function live(){
+    const P = parseMail($('#cBody').value);
+    const x = subOf(P.subId) || sub;
+    $('#cLive').innerHTML =
+      '<div class="card tight" style="margin:12px 0 0;background:#f3f8f4;border-color:#bfe0cd">'
+      +'<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:baseline">'
+      +'<div><span style="font-size:12px;color:#6b7482">補助金額の目安</span>'
+      +'<div style="font-size:24px;font-weight:700;color:#1d7a4c">'+yen(P.amount)+'</div></div>'
+      +'<div style="font-size:12.5px;color:#6b7482">'+esc(amountFormula(x))+'</div></div></div>'
+      + (P.warn.length
+          ? '<div class="note w"><b>送る前に確認してください</b><ul>'
+            + P.warn.map(function(w){ return '<li>'+esc(w)+'</li>'; }).join('')+'</ul></div>'
+          : '<div class="note">必要な項目と提出物はそろっています。</div>');
+  }
+  $('#cBody').oninput = live;
+  live();
+}
+/* 昨年度の同じ事業の申請（いちばん新しいもの） */
+function lastYearReport(branchId, subId, year){
+  const rs = DB.reports.filter(function(r){
+    return r.year===year-1 && r.branchId===branchId && r.subId===subId;
+  }).sort(function(p,q){ return (p.dateISO||'')<(q.dateISO||'')?1:-1; });
+  return rs[0] || null;
+}
+/* 昨年度の内容を今年度の下書きにする。毎年変わる項目は空にしておく */
+function reuseBody(prev, sub, b){
+  const v = {};
+  fieldsOf(sub).forEach(function(k){ v[k] = prev.vals[k]==null ? '' : prev.vals[k]; });
+  v.branch = b.name;
+  v.sub = sub.no+' '+sub.name;
+  v.date = ''; v.num = ''; v.numNon = '';
+  return buildMail(sub, v);
+}
+function buildMail(sub, vals){
+  let s = '【補助金報告】\n';
+  fieldsOf(sub).forEach(function(k){
+    const v = vals[k]==null ? '' : String(vals[k]);
+    if(F[k].type==='block') s += F[k].label+'：\n'+v+'\n';
+    else s += F[k].label+'：'+v+'\n';
+  });
+  return s;
+}
+
+/* ============================================================
+   引継ぎ文書（次年度の担当者に渡す申し送り）
+   ============================================================ */
+function handoverText(branchId, year){
+  const b = branchOf(branchId);
+  const L = [];
+  const push = function(t){ L.push(t==null?'':t); };
+  push('＝＝ '+yearLabel(year)+'　'+(b?b.name:'')+'　県教連補助金 申請記録 ＝＝');
+  push('作成日：'+todayISO()+'　／　'+DB.org.prefName+' 共有台帳より');
+  push('');
+  push('■ 今年度の申請');
+  const unused = [], backs = [];
+  let total = 0, cnt = 0;
+  DB.subsidies.forEach(function(x){
+    const rs = repsFor(year, branchId, x.id)
+      .slice().sort(function(p,q){ return (p.dateISO||'')<(q.dateISO||'')?-1:1; });
+    push('');
+    push('【'+x.no+' '+x.name+'】　'+sub_times(x)+'／'+amountFormula(x).replace(/¥/g,'')
+         +'／期限 '+x.dueLabel+'／支給 '+x.pay);
+    if(!rs.length){ push('　　申請なし'); unused.push(x.no+' '+x.name); return; }
+    rs.forEach(function(r){
+      if(r.status==='承認'){ total += (r.amount||0); cnt++; }
+      if(r.status==='差戻し') backs.push(r);
+      push('　　'+r.no+'　'+(r.vals.subject||'（件名なし）')
+        +'　'+(r.dateISO||'')
+        +(r.vals.place?'　'+r.vals.place:'')
+        +(r.vals.num?'　'+r.vals.num+'人':'')
+        +'　'+r.status+'　'+yen(r.amount));
+      if(r.comment) push('　　　└ 本部コメント：'+r.comment);
+    });
+  });
+  push('');
+  push('■ 承認済みの合計　'+yen(total)+'（'+cnt+'件）');
+  push('');
+  push('■ 次年度への申し送り');
+  push(unused.length ? '・今年度、申請しなかった補助金：'+unused.join('、') : '・すべての補助金を申請しました');
+  if(backs.length){
+    push('・差し戻された申請（同じことを繰り返さないように）');
+    backs.forEach(function(r){
+      push('　　'+r.no+'　'+subLabel(subOf(r.subId))+'　'+(r.comment||'理由の記載なし'));
+    });
+  } else push('・差し戻された申請はありませんでした');
+  push('・提出先：'+DB.org.mailAddr+'（メール本文に記入し、提出物を添付）');
+  push('・参加名簿は 写真・Excel・PDF・本文への記入 のいずれでもかまいません');
+  push('');
+  push('■ 送信した報告の本文（次年度の記入例として）');
+  DB.subsidies.forEach(function(x){
+    repsFor(year, branchId, x.id).forEach(function(r){
+      push('');
+      push('--- '+r.no+'　'+x.no+' '+x.name+'　'+(r.vals.subject||'')+' ---');
+      const body = r.rawMasked || '';
+      push(canOpenRoster(r) ? body : hideRoster(body));
+    });
+  });
+  return L.join('\n');
+}
+function openHandover(branchId, year){
+  const b = branchOf(branchId);
+  const txt = handoverText(branchId, year);
+  openModal('<h2>引継ぎ文書</h2>'
+    +'<p class="lead">'+esc(b?b.name:'')+'　'+yearLabel(year)+'。'
+    +'次年度の担当者に渡す申し送りです。コピーして単組の引継ぎ文書に貼り付けてください。</p>'
+    +'<div class="btns" style="margin-bottom:10px">'
+    +'<button class="btn sm" id="hoCopy">全文をコピー</button>'
+    +'<button class="btn sub sm" id="hoDl">テキストで保存</button></div>'
+    +'<textarea class="mail" id="hoTx" style="min-height:420px" readonly>'+esc(txt)+'</textarea>');
+  $('#hoCopy').onclick = function(){ copyText(txt); };
+  $('#hoDl').onclick = function(){
+    downloadText((b?shortName(b.name):'')+'_引継ぎ_'+yearLabel(year), txt);
+  };
+}
+
+/* ============================================================
+   6) 単組モード — 自単組の申請状況
+   ============================================================ */
+function viewMine(){
+  const b = branchOf(DB.branchId) || DB.branches[0];
+  const mine = repsOfYear(DB.year).filter(function(r){ return r.branchId===b.id; });
+  const ok = mine.filter(function(r){ return r.status==='承認'; });
+  const back = mine.filter(function(r){ return r.status==='差戻し'; });
+  const total = ok.reduce(function(a,r){ return a+(r.amount||0); },0);
+
+  const rows = DB.subsidies.map(function(s){
+    const rs = repsFor(DB.year, b.id, s.id);
+    const alive = rs.filter(function(r){ return r.status!=='差戻し'; });
+    const amt = rs.filter(function(r){ return r.status==='承認'; }).reduce(function(a,r){ return a+(r.amount||0); },0);
+    const due = dueISO(s, DB.year);
+    const late = !alive.length && due && due < todayISO();
+    const stCell = rs.length
+      ? rs.map(function(r){ return '<a href="#" data-id="'+r.id+'" class="mono" style="text-decoration:none">'
+          + badge(r.status)+' '+esc(r.no)+'</a>'; }).join('<br>')
+      : '<span class="bd st-none">未申請</span>';
+    return '<tr><td class="nowrap">'+esc(s.no+' '+s.name)+'</td>'
+      +'<td class="nowrap" style="font-size:12px;color:#6b7482">'+esc(sub_times(s))+'</td>'
+      +'<td class="mono nowrap">'+esc(s.dueLabel)+(late?' <span style="color:#b23a30">超過</span>':'')+'</td>'
+      +'<td>'+stCell+'</td>'
+      +'<td class="mono nowrap" style="text-align:right">'+(amt?yen(amt):'—')+'</td>'
+      +'<td style="font-size:12.5px">'+esc(rs.map(function(r){ return r.comment; }).filter(Boolean).join(' / '))+'</td></tr>';
+  }).join('');
+
+  $('#main').innerHTML =
+   '<div class="stat">'
+  +'<div><b>'+mine.length+'</b><span>申請した報告</span></div>'
+  +'<div><b>'+ok.length+'</b><span>承認済み</span></div>'
+  +'<div><b style="color:#1d7a4c">'+yen(total)+'</b><span>承認済み補助金額</span></div>'
+  +'<div><b>'+back.length+'</b><span>差戻し</span></div></div>'
+  +(back.length ? '<div class="note b"><b>差戻しがあります。</b>下の表のコメントを確認し、修正して再送してください。</div>' : '')
+  +(function(){
+      const g = dupGroups(DB.year).filter(function(x){ return x[0].branchId===b.id && dupRisk(x)>=2; });
+      if(!g.length) return '';
+      return '<div class="note w"><b>確認したい重なりが'+g.length+'件あります。</b>'
+           + 'ひとつの行事を、単組の補助金と個人の補助金で二重に申請していないか確認してください。</div>'
+           + dupCard(g, true);
+    })()
+  +'<div class="card"><h2>'+esc(b.name)+'　'+yearLabel(DB.year)+' の申請状況</h2>'
+  +'<p class="lead">本部が承認したかどうか、いくら支給されるかを、問い合わせずにここで確認できます。</p>'
+  +'<div class="btns" style="margin-bottom:10px">'+xlsBtn('mineXls')
+  +'<button class="btn sub sm" id="mineHo">引継書を見る</button>'
+  +'<button class="btn sub sm" id="mineHoDl">引継書をまとめてダウンロード</button></div>'
+  +'<div class="tw"><table><thead><tr><th>補助金事業</th><th>回数</th><th>期限</th>'
+  +'<th>申請・状態</th><th style="text-align:right">承認額</th><th>本部からのコメント</th></tr></thead>'
+  +'<tbody>'+rows+'</tbody></table></div></div>';
+
+  const hB = $('#mineHo');
+  if(hB) hB.onclick = function(){ openHandover(b.id, DB.year); };
+  const hD = $('#mineHoDl');
+  if(hD) hD.onclick = function(){
+    downloadText(shortName(b.name)+'_引継書_'+yearLabel(DB.year), handoverText(b.id, DB.year));
+  };
+  const mX = $('#mineXls');
+  if(mX) mX.onclick = function(){
+    const rows = [['事業№','事業名','回数','期限','受付番号','件名','開催日','参加人数',
+                   '補助金額','支給月','状態','本部コメント']];
+    DB.subsidies.forEach(function(x){
+      const rs = repsFor(DB.year, b.id, x.id);
+      if(!rs.length){ rows.push([x.no, x.name, sub_times(x), x.dueLabel, '', '', '', '', '', x.pay, '未申請', '']); return; }
+      rs.forEach(function(r){
+        rows.push([x.no, x.name, sub_times(x), x.dueLabel, r.no, r.vals.subject||'',
+                   r.dateISO||'', r.vals.num||'', r.amount||0, x.pay, r.status, r.comment||'']);
+      });
+    });
+    downloadCSV(shortName(b.name)+'_申請状況_'+yearLabel(DB.year), rows);
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('#main a[data-id]'), function(a){
+    a.onclick = function(e){ e.preventDefault(); openReport(a.dataset.id); };
+  });
+}
+
+/* ============================================================
+   7) 設定
+   ============================================================ */
+function viewSettings(){
+  $('#main').innerHTML =
+   '<div class="card"><h2>組織・受付アドレス</h2>'
+  +'<div class="row">'
+  +'<label class="fld"><span>団体名</span><input type="text" id="sName" value="'+esc(DB.org.prefName)+'"></label>'
+  +'<label class="fld"><span>受付用メールアドレス</span><input type="text" id="sMail" value="'+esc(DB.org.mailAddr)+'"></label>'
+  +'</div>'
+  +'<label class="fld"><span>個人情報の自動マスキング</span>'
+  +'<span><label style="font-size:13px"><input type="checkbox" id="sPh"'+(DB.settings.maskPhone?' checked':'')+'> 電話番号</label>'
+  +' 　<label style="font-size:13px"><input type="checkbox" id="sMl"'+(DB.settings.maskMail?' checked':'')+'> メールアドレス</label></span></label>'
+  +'<div class="btns"><button class="btn sm" id="sSave">保存</button></div></div>'
+
+  +'<div class="card"><h2>公開設定</h2>'
+  +'<p class="lead">単組役員に、どこまで見せるかを本部で切り替えます。変更はすぐに反映されます。</p>'
+  +'<label class="fld"><span>単組役員の画面</span><span>'
+  +'<label style="display:block"><input type="checkbox" id="cfMatrix"'+(DB.settings.shareMatrix?' checked':'')+'> '
+  +'ほかの単組の申請状況も見られるようにする</label>'
+  +'<label style="display:block"><input type="checkbox" id="cfAmount"'+(DB.settings.shareAmount?' checked':'')+'> '
+  +'ほかの単組の補助金額も表示する</label>'
+  +'<label style="display:block"><input type="checkbox" id="cfPersonal"'+(DB.settings.sharePersonal?' checked':'')+'> '
+  +'⑨⑩（個人開催）の申請も、ほかの単組に見せる</label>'
+  +'</span></label>'
+  +'<label class="fld"><span>参加名簿（氏名）を開ける本部の役職'
+  +'<br><span style="color:#6b7482">※ 提出した単組は、自分が出した名簿をいつでも見られます</span></span><span>'
+  + ['事務局','委員長','書記長','その他の役員'].map(function(rl){
+      return '<label style="margin-right:16px"><input type="checkbox" data-role="'+rl+'"'
+        +((DB.settings.docRoles||[]).indexOf(rl)>=0?' checked':'')+'> '+rl+'</label>'; }).join('')
+  +'</span></label>'
+  +'<div class="btns"><button class="btn sm" id="cfSave">公開設定を保存</button></div></div>'
+
+  +'<div class="card"><h2>補助金事業マスタ</h2>'
+  +'<p class="lead">県教連補助金制度。単価・上限・回数を変えると、金額の計算・回数チェック・督促が'
+  +'すべて追随します。<b>黄色の行は補助金額の条件が未設定</b>で、金額を計算しません。</p>'
+  +'<div class="tw"><table><thead><tr><th>№</th><th>区分</th><th>事業名</th><th>単価</th><th>上限</th>'
+  +'<th>回数</th><th>期限</th><th>支給</th><th>振込先</th><th>提出物</th></tr></thead><tbody>'
+  + DB.subsidies.map(function(s){
+      const n = function(v){ return (v==null||v==='') ? '' : v; };
+      return '<tr'+(isSet(s)?'':' style="background:#fdf3e0"')+'><td class="nowrap">'+esc(s.no)+'</td>'
+        +'<td class="nowrap" style="font-size:12px">'+esc(s.cat)+'</td>'
+        +'<td class="nowrap"><input type="text" data-sf="name" data-sid="'+s.id+'" value="'+esc(s.name)+'" style="min-width:160px"></td>'
+        +'<td class="nowrap">'+(s.flat
+            ? '<input type="number" data-sf="flat" data-sid="'+s.id+'" value="'+n(s.flat)+'" style="width:88px">円/回'
+            : '<input type="number" data-sf="unit" data-sid="'+s.id+'" value="'+n(s.unit)+'" style="width:78px" placeholder="未設定">円/人'
+              +(s.unitNon?'<br>未加入 <input type="number" data-sf="unitNon" data-sid="'+s.id+'" value="'+n(s.unitNon)+'" style="width:70px">':''))+'</td>'
+        +'<td class="nowrap"><input type="number" data-sf="cap" data-sid="'+s.id+'" value="'+n(s.cap)+'" style="width:88px" placeholder="なし"></td>'
+        +'<td class="nowrap"><input type="number" data-sf="times" data-sid="'+s.id+'" value="'+n(s.times)+'" style="width:56px" placeholder="無制限"></td>'
+        +'<td class="nowrap">'+esc(s.dueLabel)+'</td><td class="nowrap">'+esc(s.pay)+'</td>'
+        +'<td class="nowrap" style="font-size:12px">'+esc(s.payee)+'</td>'
+        +'<td style="font-size:12px">'+esc(s.docs.join('、'))+(s.pre?'<br><span style="color:#b23a30">事前：'+esc(s.pre)+'</span>':'')+'</td></tr>';
+    }).join('')
+  +'</tbody></table></div>'
+  +'<div class="btns" style="margin-top:10px"><button class="btn sm" id="subSave">補助金事業を保存</button></div></div>'
+
+  +'<div class="card"><h2>単組マスタ</h2>'
+  +'<p class="lead">1行に1単組。ここに載っている名前とメール本文の「単組名：」が照合されます。</p>'
+  +'<textarea id="sBranches" rows="'+Math.max(6,DB.branches.length+1)+'">'
+  + esc(DB.branches.map(function(b){ return b.name; }).join('\n'))+'</textarea>'
+  +'<div class="btns" style="margin-top:8px"><button class="btn sm" id="sBrSave">単組を更新</button></div></div>'
+
+  +'<div class="card"><h2>データ</h2>'
+  +'<div class="btns"><button class="btn sub sm" id="dExp">JSONで書き出す</button>'
+  +'<button class="btn sub sm" id="dImp">JSONを読み込む</button>'
+  +'<button class="btn gray sm" id="dDemo">デモ用の報告を投入</button>'
+  +'<button class="btn bad sm" id="dReset">全消去して初期化</button></div>'
+  +'<p class="lead" style="margin-top:10px">このプロトタイプの保存先はこのブラウザだけです。'
+  +'本番はGoogleスプレッドシートに置き換わります。</p></div>';
+
+  $('#cfSave').onclick = function(){
+    DB.settings.shareMatrix   = $('#cfMatrix').checked;
+    DB.settings.shareAmount   = $('#cfAmount').checked;
+    DB.settings.sharePersonal = $('#cfPersonal').checked;
+    DB.settings.docRoles = Array.prototype.filter
+      .call(document.querySelectorAll('[data-role]'), function(el){ return el.checked; })
+      .map(function(el){ return el.dataset.role; });
+    save(); renderTabs(); toast('公開設定を保存しました');
+  };
+  $('#sSave').onclick = function(){
+    DB.org.prefName = $('#sName').value.trim() || DB.org.prefName;
+    DB.org.mailAddr = $('#sMail').value.trim() || DB.org.mailAddr;
+    DB.settings.maskPhone = $('#sPh').checked;
+    DB.settings.maskMail  = $('#sMl').checked;
+    save(); toast('保存しました');
+  };
+  $('#subSave').onclick = function(){
+    Array.prototype.forEach.call(document.querySelectorAll('[data-sf]'), function(el){
+      const s = subOf(el.dataset.sid); if(!s) return;
+      const f = el.dataset.sf, v = el.value.trim();
+      if(f==='name') s.name = v || s.name;
+      else if(f==='times') s.times = (v==='') ? null : Math.max(0, +v);
+      else s[f] = (v==='') ? null : (+v || 0);
+    });
+    DB.reports.forEach(function(r){ r.amount = calcAmount(subOf(r.subId), r.vals.num, r.vals.numNon); });
+    _keyMapCache = null; save(); viewSettings(); toast('保存し、既存の報告の金額を再計算しました');
+  };
+  $('#sBrSave').onclick = function(){
+    const names = $('#sBranches').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+    if(!names.length){ toast('単組が空です'); return; }
+    const old = DB.branches.slice();
+    DB.branches = names.map(function(n,i){
+      const ex = old.find(function(b){ return b.name===n; });
+      return ex || {id:uid('b'), name:n, code:'T'+String(i+1).padStart(2,'0'), grp:false};
+    });
+    save(); toast('単組を更新しました'); renderHeader(); viewSettings();
+  };
+  $('#dExp').onclick = function(){ copyText(JSON.stringify(DB, null, 1)); };
+  $('#dImp').onclick = function(){
+    openModal('<h2>JSONを読み込む</h2><p class="lead">書き出したJSONを貼り付けてください。現在のデータは置き換わります。</p>'
+      +'<textarea class="mail" id="impTx"></textarea>'
+      +'<div class="btns" style="margin-top:10px"><button class="btn bad sm" id="impGo">読み込む</button></div>');
+    $('#impGo').onclick = function(){
+      try{
+        const d = JSON.parse($('#impTx').value);
+        if(!d || !d.v) throw 0;
+        DB = d; _keyMapCache=null; save(); closeModal(); renderHeader(); showView('settings'); toast('読み込みました');
+      }catch(e){ toast('JSONを読み取れませんでした'); }
+    };
+  };
+  $('#dDemo').onclick = function(){ makeDemo(); toast('デモデータを投入しました'); showView('matrix'); };
+  $('#dReset').onclick = function(){
+    if(!confirm('すべてのデータを消して初期状態に戻します。よろしいですか？')) return;
+    DB = seedDB(); _keyMapCache=null; save(); renderHeader(); showView('intake'); toast('初期化しました');
+  };
+}
+
+/* ---------- デモデータ ---------- */
+function makeDemo(){
+  makeDemoYear(DB.year-1, 4);          /* 前年度は少なめに */
+  return makeDemoYear(DB.year, 9);
+}
+function makeDemoYear(y, skipMod){
+  const titles = {
+    s1:'令和８年度 定期総会', s2:'２市合同 教育講演会', s3:'未加入者説明会',
+    s4:'代議員会', s5:'教育課程研修会', s6:'対話集会', s7:'球技大会', s8:'情宣紙',
+    p1:'分会学習会', p2:'合同学習会'
+  };
+  const bodies = {
+    s1:'・前年度 活動報告および決算の承認\n・本年度 活動方針および予算の承認\n・役員改選',
+    s2:'・記念講演「これからの学校づくり」\n・単組間の情報交換',
+    s3:'・単組の活動紹介\n・加入案内の説明',
+    s4:'・人事対策の進め方について\n・県教連への要求事項の集約',
+    s5:'・学習指導要領の改訂点の確認\n・行事精選の事例交流',
+    s6:'・勤務時間の実態について意見交換',
+    s7:'・ソフトバレーボール（８チーム）',
+    s8:'・単組情宣紙の発行',
+    p1:'・授業づくりについての学習', p2:'・複数校合同での授業研究'
+  };
+  let n = 0;
+  DB.branches.forEach(function(b, bi){
+    DB.subsidies.forEach(function(s, si){
+      if(!isSet(s)) return;                                   /* 条件未設定の事業は作らない */
+      const times = (s.times==null) ? (s.cat==='個人' ? 2 : 1) : s.times;
+      for(let k=0; k<times; k++){
+        if((bi + si*3 + k*5) % skipMod === 0) continue;        /* 一部を未申請に */
+        const due = dueISO(s, y) || isoOf(y,11,10);
+        const day = new Date(new Date(due).getTime() - (5 + ((bi*7 + si*23 + k*53) % 150))*86400000);
+        const dISO = isoOf(day.getFullYear(), day.getMonth()+1, day.getDate());
+        const num = s.noPeople ? '' : (s.id==='s1' ? 30+((bi*7)%60) : 8+((bi*3+si*5+k)%22));
+        const numNon = (s.unitNon || s.needNon) ? 1+((bi+si)%4) : '';
+        const vals = {
+          branch:b.name, sub:s.no+' '+s.name,
+          subject:titles[s.id] + (times>1 ? '（第'+(k+1)+'回）' : ''),
+          date:dISO, time:'18:30〜20:00', place:shortName(b.name)+' 教育会館',
+          num:num, numNon:numNon, writer:['田中','山田','佐藤','井上','中村'][(bi+si)%5],
+          docs:s.docs.join('、'), body:bodies[s.id]||'・学習会を実施した', note:'',
+          applicant: s.cat==='個人' ? ['田中','山田','佐藤','井上','中村'][(bi+si+k)%5] : '',
+          school:    s.cat==='個人' ? '○○小学校' : ''
+        };
+        const rep = registerReport({vals:vals, branchId:b.id, subId:s.id,
+          warn:[], unknown:[], masked:0, rawMasked:buildMail(s, vals)}, {});
+        rep.receivedAt = dISO+' 21:0'+((bi+si)%6);
+        const roll = (bi*5 + si*3 + k) % 10;
+        if(roll<6) setStatus(rep,'承認');
+        else if(roll<8) setStatus(rep,'確認中');
+        else if(roll<9) setStatus(rep,'差戻し','写真が添付されていません。追送してください。');
+        n++;
+      }
+    });
+  });
+  /* 重複チェックの見本：単組研修会（⑤）と同じ日に、個人主催の合同学習会（⑩）が申請された例 */
+  const p2 = (y===DB.year) ? subOf('p2') : null;
+  if(p2){
+    [0,1].forEach(function(k){
+      const b = DB.branches[k===0?14:11];
+      const base = DB.reports.find(function(r){
+        return r.year===y && r.branchId===b.id && r.subId==='s5' && r.dateISO;
+      });
+      if(!base) return;
+      const vals = {
+        branch:b.name, sub:p2.no+' '+p2.name, applicant:['中村','井上'][k],
+        school:shortName(b.name)+'立○○小学校', subject:'合同学習会',
+        date:base.dateISO, time:'16:30〜18:00', place:base.vals.place,
+        num:base.vals.num, writer:['中村','井上'][k],
+        docs:'参加名簿、写真', attendees:'', body:'・授業づくりについての学習', note:''
+      };
+      const rep2 = registerReport({vals:vals, branchId:b.id, subId:'p2',
+        warn:[], unknown:[], masked:0, rawMasked:buildMail(p2, vals)}, {});
+      rep2.receivedAt = base.dateISO+' 22:10';
+    });
+  }
+  save();
+  return n;
+}
+
+/* ============================================================
+   8) GAS設計書
+   ============================================================ */
+const LEDGER_COLS = [
+  ['A','受付番号','R8-0001（年度＋連番。GASが採番）'],
+  ['B','受付日時','GASがメール受信日時を記録'],
+  ['C','年度','開催日から算出（4月始まり）'],
+  ['D','単組','本文の「単組名：」を単組マスタと照合。曖昧なら空欄＋要確認'],
+  ['E','事業№','①〜⑧。本文の「事業名：」から判定'],
+  ['F','事業名',''],
+  ['G','行事名','メールの件名ではなく、行事そのものの名称'],
+  ['H','開催日','和暦・スラッシュ表記も yyyy-mm-dd に正規化'],
+  ['I','開催時刻',''],
+  ['J','会場',''],
+  ['K','参加人数','全角数字も半角化。補助金額の計算に使う'],
+  ['L','未加入者参加人数','②の単価差・③の要件判定に使う'],
+  ['M','報告者',''],
+  ['N','補助金額','＝計算式（単価×人数、上限あり）。GASが自動算出'],
+  ['O','添付書類（申告）','本文の「添付書類：」の記載'],
+  ['P','添付ファイル','Googleドライブへ自動保存したファイルのリンク'],
+  ['Q','提出物チェック','事業ごとの必要提出物に対する過不足'],
+  ['R','内容','複数行。次の項目名の行まで'],
+  ['S','備考',''],
+  ['T','状態','プルダウン：受付／確認中／承認／差戻し'],
+  ['U','本部コメント','差戻し理由など。単組にも見える'],
+  ['V','支給月','事業マスタから転記（９月／３月）'],
+  ['W','マスキング件数','伏字にした個人情報の数'],
+  ['X','GmailスレッドID','原文へのリンク。本部のみ'],
+  ['Y','要確認','必須項目の欠落・単組未特定・回数超過・提出物不足があれば TRUE']
+];
+function specText(){
+  let s = '＝＝ 報告さん（単組報告 共有台帳）GAS設計書 ＝＝\n';
+  s += '団体：'+DB.org.prefName+'　受付アドレス：'+DB.org.mailAddr+'\n';
+  s += '対象：'+yearLabel(DB.year)+' 県教連補助金制度 １．単組への補助金（①〜⑧）\n\n';
+  s += '■ 1. 全体の流れ\n'
+     + '  単組役員 → メール本文にベタ打ち＋提出物を添付 → 受付用Gmail\n'
+     + '  → GAS（時間主導トリガー：1時間おき）が未処理ラベルを検索\n'
+     + '  → 本文をパース → 個人情報をマスキング → 添付をドライブへ保存\n'
+     + '  → 補助金額を自動計算 → 台帳シートへ1行追加 → 処理済ラベルを付与\n'
+     + '  → 本部が T列「状態」を更新 → onEdit で単組へ自動返信\n'
+     + '  → 支給月に、承認済みの金額を単組ごとに集計して振込一覧を出力\n\n';
+  s += '■ 2. 補助金事業マスタ\n';
+  DB.subsidies.forEach(function(x){
+    s += '  '+x.no+' '+x.name+'\n'
+       + '      補助金：'+amountFormula(x).replace(/¥/g,'')+'\n'
+       + '      回数：'+sub_times(x)+'　期限：'+x.dueLabel
+       + (dueISO(x,DB.year)?'（'+dueISO(x,DB.year)+'）':'')+'　支給：'+x.pay+'\n'
+       + '      提出物：'+x.docs.join('、')+(x.pre?'　事前：'+x.pre:'')+'\n'
+       + (x.note?'      備考：'+x.note+'\n':'');
+  });
+  s += '\n■ 2-2. 振込先\n'
+     + '  ・①〜⑧（単組への補助金）… 単組口座へ入金。振込先は単組マスタで管理する。\n'
+     + '  ・⑨⑩（個人への補助金）… 開催者の会費の引き落とし口座へ入金する。\n'
+     + '    口座は組合員名簿に登録済みのものを用いるため、報告に口座情報を書かせない。\n'
+     + '    台帳にも口座情報は持たない。本部は「申請者（開催者）」を組合員名簿と照合して振り込む。\n'
+     + '  ・個人枠の報告には「申請者（開催者）」「学校名」を必須項目とする。\n\n';
+  s += '\n■ 3. 台帳シートの列\n';
+  LEDGER_COLS.forEach(function(c){ s += '  '+c[0]+'列　'+c[1]+(c[2]?'　… '+c[2]:'')+'\n'; });
+  s += '\n■ 4. 本文のパース規則\n'
+     + '  ・行頭から「項目名：」（全角・半角コロン可）を検出して値を取る\n'
+     + '  ・複数行項目（内容・備考）は、次の項目名の行が来るまで連結\n'
+     + '  ・項目名の別名を許容する（例：「参加人数」＝教職員参加人数／参加者数／人数）\n'
+     + '  ・コロンを打ち忘れた「項目名␣値」も、1行項目に限って読み取る\n'
+     + '  ・どの項目名にも一致しない行は「要確認」として本部に通知\n\n';
+  s += '■ 5. 単組名・事業名の照合\n'
+     + '  ・単組名：完全一致 → 一意な部分一致 → 短縮名の一致、の順で判定\n'
+     + '  ・「萩市教職員団体」と「教職員団体萩阿武協議会」のように候補が複数残る場合は\n'
+     + '    単組を特定せず、候補を添えて要確認とする（誤った単組に記録しない）\n'
+     + '  ・事業名：①〜⑧の番号、正式名称、キーワード（総会／研修／球技 等）の順で判定\n\n';
+  s += '■ 6. 補助金額の自動計算\n'
+     + '  金額 ＝ MIN( 単価 × 参加人数 ( ＋ 未加入者単価 × 未加入者数 ) , 上限額 )\n'
+     + '  ⑧情宣紙補助は 1回につき定額。⑧は参加人数を使わない。\n'
+     + '  ③は未加入者1名以上を条件とし、満たさない場合は要確認とする。\n'
+     + '  同一年度・同一単組・同一事業の受付件数が回数上限を超える場合も要確認とする。\n\n';
+  s += '■ 7. 提出物の確認\n'
+     + '  ・事業ごとの必要提出物を事業マスタに持ち、本文の「添付書類：」と突き合わせる\n'
+     + '  ・添付ファイルはドライブの「年度／単組／事業」フォルダへ自動保存しリンクを台帳へ\n'
+     + '  ・⑧の情宣紙実物、②の全県ちらし（開催2ヶ月前）は運用上の扱いを別途決める\n\n';
+  s += '■ 8. 状態と自動返信\n'
+     + '  受付／確認中／承認／差戻し の4段階。承認・差戻しに変わった時点で単組へ自動返信。\n'
+     + '  承認メールには補助金額と支給月を記載する。\n\n';
+  s += '■ 9. 閲覧範囲\n'
+     + '  ・本部（事務局・委員長・その他の役員）… 台帳の全件。状態の更新は本部担当が行う。\n'
+     + '  ・単組役員 … 自単組の申請すべて。加えて、ほかの単組の申請状況（件名と状態まで）。\n'
+     + '  ・単組役員はGmailの原文を見ない。台帳は単組別ビュー（QUERY関数）または\n'
+     + '    GASウェブアプリ（doGet）で、自単組の行と全単組の状況表だけを返す。\n'
+     + '  ・⑨⑩の開催者本人向けの画面は設けない。単組役員が代わりに確認する。\n\n';
+  s += '■ 9-2. 公開範囲の設定（本部が切り替える）\n'
+     + '  設定シートに次の3つのスイッチを置き、本部が運用しながら変えられるようにする。\n'
+     + '  ・ほかの単組の申請状況を単組役員に見せるか（既定：見せる）\n'
+     + '  ・ほかの単組の補助金額を見せるか（既定：見せる）\n'
+     + '  ・⑨⑩（個人開催）の申請をほかの単組に見せるか（既定：見せる）\n\n';
+  s += '■ 9-3. 参加名簿（氏名）の閲覧\n'
+     + '  ・参加名簿そのもの（氏名の一覧）を開けるのは、本部の事務局・委員長と、\n'
+     + '    その名簿を提出した単組の役員に限る。ほかの単組の名簿は開けない。\n'
+     + '  ・添付ファイルは権限を限定したドライブフォルダに置き、台帳からはリンクのみ。\n'
+     + '  ・本文の「出席者名簿：」に記入された氏名も、上記以外には伏せて表示する。\n'
+     + '  ・「提出物がそろっているか」の○×は、全員が見てよい（氏名を含まないため）。\n\n';
+  s += '■ 9-4. メールの送り方（単組に周知する規則）\n'
+     + '  ・宛先：' + DB.org.mailAddr + '\n'
+     + '  ・件名：「補助金申請」とだけ書く。単組名も事業名も本文に入っているため、\n'
+     + '    件名で区別する必要がない。件名の書き方が人によって違うと、かえって探しにくくなる。\n'
+     + '  ・本文：単組別ビューの「この内容をコピーする」で様式を写し、そのまま貼り付ける。\n'
+     + '  ・添付：その事業に必要な提出物。参加名簿は写真・Excel・PDF・本文への記入のいずれでも可。\n'
+     + '  ※ メールを開くリンク（Gmailの作成画面など）は用意しない。複数のGoogleアカウントを\n'
+     + '    使い分けている利用者が多く、目的のアカウントを自分で開くほうが速いため。\n\n';
+  s += '■ 9-4-2. 前年度の内容の読み込み\n'
+     + '  単組別ビューに「昨年度の内容を読み込む」ボタンを置く。前年度の同じ事業の申請から\n'
+     + '  本文を写し、開催日・参加人数・未加入者参加人数だけを空にして下書きにする。\n'
+     + '  会場や行事名が例年同じ単組では記入がほぼ済み、前年度の内容や反省も参照できる。\n\n';
+  s += '■ 9-5. 引継ぎ文書の自動作成\n'
+     + '  単組別ビューに「引継ぎ文書をつくる」ボタンを置く。次を1つのテキストにまとめて出す。\n'
+     + '  ・事業ごとの申請一覧（受付番号・件名・開催日・会場・人数・状態・補助金額）\n'
+     + '  ・承認済みの合計額と件数\n'
+     + '  ・今年度に申請しなかった補助金（使い残しの申し送り）\n'
+     + '  ・差し戻された申請とその理由（同じ誤りを繰り返さないため）\n'
+     + '  ・送信した報告の本文そのもの（次年度の記入例として）\n'
+     + '  参加名簿の氏名は、閲覧できない者が出力した場合は伏せる（9-3と同じ規則）。\n\n';
+  s += '■ 9-6. Excel（CSV）への書き出し\n'
+     + '  次の一覧はBOM付きUTF-8のCSVで書き出し、Excelでそのまま開けるようにする。\n'
+     + '  ・共有台帳（絞り込んだ結果）  ・申請状況（事業×単組）  ・重複チェック\n'
+     + '  ・補助金集計（事業別）  ・振込一覧（単組口座）  ・振込一覧（個人）\n'
+     + '  ・単組ごとの申請状況（単組役員が自分の分を書き出す）\n\n';
+  s += '■ 10. 年度の集計と引継ぎ\n'
+     + '  ・事業別・単組別の承認額を集計し、支給月ごとの振込一覧を出力\n'
+     + '  ・年度ごとにシートを分け、翌年度に未申請だった単組・事業を申し送る\n\n';
+  s += '■ 11. 単組に配る報告書テンプレート\n\n';
+  DB.subsidies.forEach(function(x){
+    s += '--- '+x.no+' '+x.name+'（提出物：'+x.docs.join('、')+'） ---\n'
+       + buildMail(x, {branch:'（単組名）', sub:x.no+' '+x.name}) + '\n';
+  });
+  return s;
+}
+function viewSpec(){
+  $('#main').innerHTML =
+   '<div class="card"><h2>GAS設計書</h2>'
+  +'<p class="lead">このプロトタイプで確定した仕様を、そのまま実装の発注書として出力します。'
+  +'設定タブで単組・補助金事業を変えると、この内容も追随します。</p>'
+  +'<div class="btns" style="margin-bottom:10px"><button class="btn sm" id="spCopy">全文をコピー</button></div>'
+  +'<textarea class="mail" id="spTx" style="min-height:520px" readonly>'+esc(specText())+'</textarea></div>'
+  +'<div class="card"><h2>台帳シートの列（一覧）</h2><div class="tw"><table><thead><tr>'
+  +'<th>列</th><th>見出し</th><th>備考</th></tr></thead><tbody>'
+  + LEDGER_COLS.map(function(c){ return '<tr><td class="mono">'+c[0]+'</td><td class="nowrap">'+esc(c[1])+'</td><td style="font-size:12.5px">'+esc(c[2])+'</td></tr>'; }).join('')
+  +'</tbody></table></div></div>';
+  $('#spCopy').onclick = function(){ copyText($('#spTx').value); };
+}
+
+/* ============================================================
+   起動
+   ============================================================ */
+function boot(){
+  DB = load() || seedDB();
+  if(!DB.org) DB.org = {prefName:'山口県教職員団体連合会', mailAddr:'houkoku@example-kyoren.jp'};
+  if(!DB.settings) DB.settings = {maskPhone:true, maskMail:true};
+  const SD = seedDB().settings;
+  for(const k in SD){ if(DB.settings[k]===undefined) DB.settings[k] = SD[k]; }
+  if(!DB.role) DB.role = '事務局';
+  if(!DB.subsidies || !DB.subsidies.length) DB.subsidies = seedSubsidies();
+  /* 以前の保存データに⑨⑩が無ければ足す */
+  if(!DB.subsidies.some(function(x){ return x.cat==='個人'; }))
+    DB.subsidies = DB.subsidies.concat(seedSubsidies().filter(function(x){ return x.cat==='個人'; }));
+  /* ⑨⑩の単価が未設定のまま保存されていれば補う（1人500円・回数の上限なし） */
+  DB.subsidies.forEach(function(x){ if(x.cat==='個人' && !isSet(x)){ x.unit=500; x.cap=null; x.times=null; } });
+  renderHeader();
+  $('#yearSel').onchange = function(){ DB.year = +this.value; save(); showView(VIEW); };
+  $('#modeSel').onchange = function(){
+    const v = this.value;
+    if(v.slice(0,3)==='pf:'){ DB.mode='pref'; DB.role = v.slice(3); }
+    else { DB.mode='branch'; DB.branchId = v.slice(3); }
+    renderHeader();
+    save(); showView(currentTabs()[0][0]);
+  };
+  $('#tabs').onclick = function(e){
+    const b = e.target.closest('button[data-v]');
+    if(b) showView(b.dataset.v);
+  };
+  $('#modalClose').onclick = closeModal;
+  $('#modal').onclick = function(e){ if(e.target === $('#modal')) closeModal(); };
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+  showView(DB.mode==='pref' ? 'intake' : 'compose');
+}
+boot();
+</script>
+</body>
+</html>
