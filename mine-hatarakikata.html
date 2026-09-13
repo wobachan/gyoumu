@@ -1,0 +1,435 @@
+<title>美祢 働き方改革 公表調べ</title>
+<meta name="description" content="美祢市立小中学校14校のホームページにおける「働き方改革」の公表状況を調べ、比較した調査メモ（2026年9月13日時点）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#F3F5F6; --surface:#FFFFFF; --ink:#1C2733; --muted:#5A6878; --rule:#D3DAE0; --rule-soft:#E5EAEE;
+  --accent:#2E5470; --accent-soft:#E0E9F0; --amber:#A36A10; --amber-soft:#F5EAD5; --grey:#7A8591; --grey-soft:#E8ECEF;
+  --red:#A5443A; --red-soft:#F5E3E0; --bar:#2E5470; --bar-j:#5F86A3;
+  --serif:"BIZ UDPMincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  --mono:"BIZ UDGothic","Hiragino Kaku Gothic ProN","Yu Gothic",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#121820; --surface:#1A222C; --ink:#E2E8EE; --muted:#9AA8B6; --rule:#333F4B; --rule-soft:#25303B;
+    --accent:#8DB8D8; --accent-soft:#1F3342; --amber:#E0AE58; --amber-soft:#3A2F1B; --grey:#9AA5B0; --grey-soft:#28313A;
+    --red:#E58A7E; --red-soft:#3D2522; --bar:#8DB8D8; --bar-j:#4F7C9E;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121820; --surface:#1A222C; --ink:#E2E8EE; --muted:#9AA8B6; --rule:#333F4B; --rule-soft:#25303B;
+  --accent:#8DB8D8; --accent-soft:#1F3342; --amber:#E0AE58; --amber-soft:#3A2F1B; --grey:#9AA5B0; --grey-soft:#28313A;
+  --red:#E58A7E; --red-soft:#3D2522; --bar:#8DB8D8; --bar-j:#4F7C9E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px;word-break:break-all}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:40px 24px 80px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;text-wrap:balance;line-height:1.4;margin:0}
+h1{font-size:clamp(26px,3.6vw,36px);letter-spacing:.02em}
+h2{font-size:23px;margin-bottom:6px}
+h3{font-size:17px}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.lede{max-width:44em;margin-top:14px}
+.section{margin-top:56px;display:flex;flex-direction:column;gap:18px}
+.section > .intro{max-width:46em;color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header.top{display:flex;flex-direction:column;gap:6px;border-bottom:2px solid var(--ink);padding-bottom:22px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px;color:var(--muted);margin-top:10px}
+.meta b{color:var(--ink)}
+/* status strip */
+.strip{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:4px}
+.sq{aspect-ratio:1/1.3;border-radius:3px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-size:11px;line-height:1.1;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.05em;font-weight:700}
+.st-ok{background:var(--accent);color:var(--surface)}
+.st-img{background:var(--accent-soft);color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.st-locked{background:var(--amber-soft);color:var(--amber);box-shadow:inset 0 0 0 1.5px var(--amber)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.keypoints{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));border-top:1px solid var(--rule);margin-top:6px}
+.keypoints div{padding:14px 18px 14px 0;border-bottom:1px solid var(--rule)}
+.keypoints b{display:block;font-family:var(--serif);font-size:16px;margin-bottom:2px}
+.keypoints p{font-size:14px;color:var(--muted)}
+/* table */
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:1100px;font-size:13px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+thead th{background:var(--surface);font-size:12px;color:var(--muted);font-weight:700;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+th.c,td.c{text-align:center}
+td.r{text-align:right;white-space:nowrap}
+tr.grp td{background:var(--ground);font-family:var(--serif);font-weight:700;font-size:13px;letter-spacing:.1em;padding:6px 10px}
+td.name{font-weight:700;white-space:nowrap}
+.dot{font-size:14px;color:var(--accent)}
+.dash{color:var(--rule)}
+.q{color:var(--amber);font-weight:700}
+.na{color:var(--muted);font-size:11px}
+.chip{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;white-space:nowrap;line-height:1.7}
+.chip.st-ok{background:var(--accent-soft);color:var(--accent)}
+.chip.st-img{background:var(--accent-soft);color:var(--accent);box-shadow:none}
+.chip.st-locked{background:var(--amber-soft);color:var(--amber);box-shadow:none}
+.approx{color:var(--muted)}
+.small{font-size:11px;color:var(--muted);display:block;font-weight:400}
+.tnote{font-size:12px;color:var(--muted)}
+/* chart */
+.chart{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:20px 22px 16px}
+.chart-grid{display:grid;grid-template-columns:150px 1fr 150px;column-gap:14px;row-gap:7px;align-items:center}
+.lbl{font-size:13px;font-weight:700;text-align:right;white-space:nowrap}
+.lbl small{font-weight:400;color:var(--muted)}
+.lbl.city{font-weight:400;color:var(--muted)}
+.track{position:relative;height:22px}
+.bar{position:absolute;left:0;top:3px;height:16px;border-radius:0 4px 4px 0}
+.bar.e{background:var(--bar)} .bar.j{background:var(--bar-j)}
+.bar.est{background:repeating-linear-gradient(135deg,var(--bar) 0 3px,transparent 3px 7px);box-shadow:inset 0 0 0 1.5px var(--bar)}
+.bar.est.j{background:repeating-linear-gradient(135deg,var(--bar-j) 0 3px,transparent 3px 7px);box-shadow:inset 0 0 0 1.5px var(--bar-j)}
+.tick{position:absolute;top:1px;width:0;height:20px;border-left:3px solid var(--muted)}
+.val{font-size:12px;color:var(--muted);white-space:nowrap}
+.val b{color:var(--ink);font-size:13px}
+.gline{position:absolute;top:-4px;bottom:-4px;width:0;border-left:1px solid var(--rule-soft)}
+.gline.l30{border-left:1.5px dashed var(--amber)}
+.gline.l45{border-left:1.5px dashed var(--red)}
+.axis{position:relative;height:18px;font-size:11px;color:var(--muted)}
+.axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.axis .l30{color:var(--amber);font-weight:700}
+.axis .l45{color:var(--red);font-weight:700}
+.gsep{grid-column:1/-1;font-family:var(--serif);font-weight:700;font-size:13px;letter-spacing:.1em;color:var(--muted);border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:4px}
+.chart .cap{font-size:12px;color:var(--muted);margin-top:12px;max-width:64em}
+.trend td.num,.trend th.num{text-align:right}
+.trend tr.pref td{color:var(--muted)}
+/* school cards */
+.schools{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.school{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.school .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.school .sum{font-size:14px}
+.school .figs{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:12px;color:var(--muted);border-top:1px solid var(--rule-soft);padding-top:8px}
+.school .figs b{font-size:15px;color:var(--ink);font-family:var(--mono)}
+.school ul{margin:0;padding-left:1.1em;font-size:13px}
+.school li+li{margin-top:2px}
+.tag{display:inline-block;font-size:11px;color:var(--muted);border:1px solid var(--rule);border-radius:3px;padding:0 6px;margin:0 4px 4px 0}
+/* findings */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:28px}
+.findings{display:flex;flex-direction:column;border-top:2px solid var(--ink)}
+.findings .f{padding:14px 0;border-bottom:1px solid var(--rule)}
+.findings .f h3{font-size:16px;margin-bottom:4px}
+.findings .f p{font-size:14px}
+.findings.gap{border-top-color:var(--red)}
+.findings.gap h3{color:var(--red)}
+.findings.good h3{color:var(--accent)}
+/* city plan vs schools */
+.city{background:var(--accent-soft);border-radius:6px;padding:18px 22px;display:flex;flex-direction:column;gap:10px}
+.city ul{margin:0;padding-left:1.2em;font-size:14px}
+.city li+li{margin-top:6px}
+.plan td:first-child{font-weight:700;white-space:nowrap}
+.plan table{min-width:760px}
+.method{font-size:13px;color:var(--muted);columns:2 320px;column-gap:32px}
+.method p{break-inside:avoid;margin-bottom:10px}
+/* jump nav */
+.jump{position:sticky;top:0;z-index:5;margin:0 -24px;padding:10px 24px;background:var(--ground);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.jump .jl{font-size:12px;color:var(--muted);letter-spacing:.08em;margin-right:4px}
+.jump a{display:inline-block;font-size:13px;font-weight:700;text-decoration:none;color:var(--accent);background:var(--surface);border:1px solid var(--rule);border-radius:999px;padding:3px 13px;line-height:1.6;white-space:nowrap;word-break:normal}
+.jump a:hover{background:var(--accent-soft);border-color:var(--accent)}
+.jump a.key{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+.jump a.key:hover{opacity:.88}
+.section,.findings .f{scroll-margin-top:64px}
+.findings .f:target{background:var(--amber-soft);box-shadow:-10px 0 0 var(--amber-soft),10px 0 0 var(--amber-soft)}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}
+@media (max-width:640px){
+  .wrap{padding:28px 16px 60px}
+  .jump{margin:0 -16px;padding:8px 16px}
+  .strip{grid-template-columns:repeat(7,1fr)}
+  .chart-grid{grid-template-columns:86px 1fr 92px;column-gap:8px}
+  .two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){ .bar{transition:width .5s ease} }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">調査メモ ・ 学校ホームページの公表情報</p>
+  <h1>美祢市立小中学校の「働き方改革」公表状況</h1>
+  <p class="lede">市内の小学校9校と中学校5校の公式サイトをすべて見て、働き方改革について何を公表しているかを調べました。学校ごとにリンク・要約・比較表をまとめ、全体の特徴と不足している点を、市教育委員会の実施計画（令和8年2月）と照らし合わせて整理しています。</p>
+  <div class="meta">
+    <span>調査日 <b class="num">2026年9月13日</b>（令和8年度）</span>
+    <span>対象 <b>14校・14サイト</b>（小9・中5）</span>
+    <span>出典 <a href="https://www2.city.mine.lg.jp/kosodate_kyoiku/gakko/12579.html">市「美祢市立小中学校一覧」</a></span>
+  </div>
+</header>
+
+<nav class="jump" aria-label="ページ内の移動">
+  <span class="jl">移動</span>
+  <a href="#s-chart">グラフ</a>
+  <a href="#s-schools">各学校の要約</a>
+  <a href="#s-find">全体の特徴</a>
+  <a href="#f-mochi" class="key">持ち帰り把握</a>
+</nav>
+
+<section class="section" aria-labelledby="s-overview">
+  <h2 id="s-overview">14校の公表状況</h2>
+  <div class="strip" id="strip" role="list"></div>
+  <div class="legend">
+    <span><i class="st-ok"></i>自校の取組を公表・本文を確認（PDF・ページ本文）</span>
+    <span><i class="st-img"></i>公表あり・画像のみ（文字として読み取れない）</span>
+    <span><i class="st-locked"></i>掲載はあるが閲覧できない</span>
+  </div>
+  <div class="keypoints">
+    <div><b>14校すべてに掲載がある</b><p>13校は本文まで読めます。10校はトップページの主メニューに専用ページ（「働き方改革」など）があり、すぐにたどれます。大嶺中・秋芳中・秋芳桂花小は、別ページの中まで入らないと見つかりません。</p></div>
+    <div><b>大嶺中だけ開けない</b><p>「働き方改革重点目標」のリンク先が教職員個人のOneDriveで、Microsoftのログインを求められます。</p></div>
+    <div><b>数値を載せたのは9校、指標はばらばら</b><p>月平均時間外、45時間超の割合、30時間超の割合、年360時間超の割合と、学校ごとに載せる指標が違います。4校は数値を載せていません。</p></div>
+    <div><b>5校が自校の目標を掲げている</b><p>於福小（月25時間）、秋吉小・秋芳桂花小・秋芳中（45時間超の月を年6か月まで）、伊佐中（前年度より減少）。山陽小野田市の調査では0校でした。</p></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="s-table">
+  <h2 id="s-table">比較表</h2>
+  <p class="intro">● は公表文書に記載あり、－ は記載なし、<span class="q">?</span> は文書を開けず確認できないことを表します。時間外在校等時間は各校が載せている最新の年間値です。<span class="approx">「約」</span>はグラフから読み取った概算、<span class="approx">「計」</span>は月別の値から当方で平均を計算した値です。</p>
+  <div class="tablebox">
+    <table id="cmp">
+      <thead><tr>
+        <th>学校</th><th>公表状況</th><th>掲載場所</th><th>版</th>
+        <th class="c">月平均<br>時間外</th><th>載せている割合</th><th>自校の目標</th>
+        <th class="c">学校<br>閉庁日</th><th class="c">時差<br>出勤</th><th class="c">ノー<br>残業デー</th><th class="c">文書・会議の<br>デジタル化</th><th class="c">欠席連絡<br>デジタル化</th><th class="c">業務支援員<br>との連携</th><th class="c">部活動の<br>縮減・地域化</th><th class="c">持ち帰り<br>業務への言及</th>
+        <th>その学校ならではの取組</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="tnote">部活動の列は中学校のみ対象です。「文書・会議のデジタル化」には、会議のペーパーレス化、学校だよりのメール配信、学校評価アンケートのWeb化を含めています。「持ち帰り業務への言及」は、家庭や自宅に仕事を持ち帰っている実態や、その対策に触れているかどうかです。時間外在校等時間はICカードで記録した在校時間をもとにしていて、持ち帰りの時間は含まれません。</p>
+</section>
+
+<section class="section" aria-labelledby="s-chart">
+  <h2 id="s-chart">教員1人あたりの月平均時間外在校等時間（各校の最新公表値）</h2>
+  <div class="chart">
+    <div class="chart-grid" id="chart"></div>
+    <p class="cap">黄色の破線は市・県の推進指標（月平均30時間以内）、赤の破線は国の指針の上限（月45時間）です。斜線のバーはグラフからの読み取りによる概算です。灰色の縦線は、市の実施計画にある市全体の令和6年度平均（小学校26.9時間・中学校42.3時間）です。数値の時点や集計の範囲（管理職を除くかどうか、2月まで・3月までなど）は学校ごとに違うため、並べて比べるときは目安として見てください。</p>
+  </div>
+
+  <h3 style="margin-top:10px">年度ごとの推移（公表されている値）</h3>
+  <div class="tablebox">
+    <table class="trend" id="trend" style="min-width:820px">
+      <thead><tr><th>学校</th><th class="num">令和4年度</th><th class="num">令和5年度</th><th class="num">令和6年度</th><th class="num">令和7年度</th><th class="num">令和8年度（途中）</th><th>傾向・学校の説明</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="tnote">各セルは月平均の時間外在校等時間（時間）で、割合が載っている場合は種類とともに添えています。空欄は公表されていない年度です。厚保中は割合のみ表で公表しているため省いています（令和7年度の30時間超の割合は月75〜87.5%）。</p>
+</section>
+
+<section class="section" aria-labelledby="s-schools">
+  <h2 id="s-schools">学校ごとの要約とリンク</h2>
+  <p class="intro">リンク先はすべて各校の公式サイト、または各校がサイトに置いている公表文書です。</p>
+  <div class="schools" id="schools"></div>
+</section>
+
+<section class="section" aria-labelledby="s-find">
+  <h2 id="s-find">全体の特徴と不足</h2>
+  <div class="two">
+    <div class="findings good">
+      <div class="f"><h3>公表そのものはほぼ全校でそろっている</h3><p>14校すべてのサイトに働き方改革の掲載があり、12校はメニューに専用ページを置いています。市の実施計画が求める「各学校のWebページ等での公表」は、形の上では達成されています。デジタル化（会議資料、学校だより、学校評価アンケート）はどの学校にも載っている共通項目です。</p></div>
+      <div class="f"><h3>月ごとの数値を載せる学校が多い</h3><p>伊佐小・厚保小・於福小・美東小・伊佐中・厚保中は月別の表やグラフを載せています。年度末の1つの値だけより、4〜6月や学期末に増える傾向が読み取れます。厚保小（令和8年7月末）と伊佐中（令和8年8月1日現在）は、今年度の途中経過まで更新しています。</p></div>
+      <div class="f"><h3>自校の目標を掲げる学校がある</h3><p><b>於福小</b>は月25時間（8月は10時間）の目標値を月別に示し、実績と並べています。<b>秋吉小・秋芳桂花小・秋芳中</b>は共通のデザインで「45時間を超える月を年6か月まで（未満）」を学校の目標にしています。<b>伊佐中</b>は「月平均と30時間超の割合を前年度より減らす」ことを目標にしています。</p></div>
+      <div class="f"><h3>増えた理由を自分の言葉で説明している</h3><p>伊佐小と於福小は、教員業務支援員の勤務日数の増減が時間外の増減に表れたと書いています（伊佐小は週2→3日で減少、於福小は週2回→月1回で増加）。美東小は統合初年度の負担と、持ち帰り仕事が多いことを率直に書いています。</p></div>
+      <div class="f"><h3>教職員の声を載せる学校がある</h3><p><b>伊佐中</b>は「もっと時間をかけたい業務（授業準備・学習指導）」「改善が必要な業務（学校行事・会議・打合せ）」の教職員アンケートを、<b>美東中</b>は年度末の振り返りアンケートと学校評価の業務改善項目の結果を公表しています。</p></div>
+    </div>
+    <div class="findings gap">
+      <div class="f"><h3>開けない掲載がある</h3><p>大嶺中の「働き方改革重点目標」は、教職員個人のOneDriveのファイルにリンクしていて、Microsoftのログインを求められます。保護者や地域の人は読めません。学校のサイト上に直接置く必要があります。</p></div>
+      <div class="f" id="f-reach"><h3>トップページに表示がなく、たどりつきにくい学校がある</h3><p>10校はトップページの主メニューに「働き方改革」の専用ページを置いていて、1回のクリックで開けます。一方、次の3校はトップページに表示がなく、別のページの中まで入らないと見つかりません。</p><ul style="margin:6px 0 0;padding-left:1.2em;font-size:14px"><li><b>大嶺中：</b>トップページには働き方改革の文字がありません。「学校情報」ページを開くと「働き方改革重点目標」のボタンがあります。そのリンク先もログインが必要です。</li><li><b>秋芳中：</b>トップページには表示がありません。「学校紹介」ページの文書一覧の中に「働き方改革について」のPDFがあり、学校要覧やいじめ防止基本方針と並んでいます。</li><li><b>秋芳桂花小：</b>主メニューには出ていません。「学校紹介」の下のサブメニュー「働き方改革推進プラン」まで進む必要があります。</li></ul><p style="margin-top:8px">伊佐中もメニューでは「ホーム＞学校概要＞働き方改革」と3階層目にありますが、トップページの本文にリンクを置いているため、たどりやすくなっています。市の計画は、保護者や地域住民の理解を図るために取組を公表するとしています。保護者が探さなくても目に入るよう、トップページのメニューかお知らせ欄にリンクを置くことが望まれます。</p></div>
+      <div class="f"><h3>画像だけの公表は読み上げ・検索ができない</h3><p>秋吉小・秋芳桂花小・美東小は、取組を画像で載せています。スマートフォンでは文字が小さく、音声読み上げやサイト内検索にも引っかかりません。豊田前小はグラフの目盛りだけで、数値の表がありません。</p></div>
+      <div class="f"><h3>更新が止まっている学校がある</h3><p>豊田前小と美東小は令和7年度版のまま（令和8年3月の掲載）で、県教委のリーフレットも令和7年度版です。大嶺小は県の加速化プラン第3期を「令和6年4月」と記載していて、令和8年4月の改訂版に差し替わっていません。</p></div>
+      <div class="f"><h3>指標がそろわず、市全体と比べられない</h3><p>45時間超の割合を載せたのは厚保小と大嶺小だけで、伊佐小・伊佐中・厚保中は30時間超の割合、麦川小・於福小・美東小は平均だけです。秋吉小・秋芳桂花小・美東中・秋芳中は数値を載せていません。市の目標（45時間超を0%に近づける、平均30時間以内）に対してどこまで来ているかを、共通の物差しで確かめられる学校は少数です。麦川小の「県平均（小学校）」は令和5年度39.1時間・令和6年度38.4時間となっていて、大嶺小の文書にある県平均（37.0・35.0時間）と合いません。</p></div>
+      <div class="f" id="f-format"><h3>近隣の山陽小野田市と比べて、様式がそろっていない</h3><p>同じ日に調べた隣の山陽小野田市では、本文を確認できた13校のほぼすべてが県教委の様式「本校における働き方改革の取組」をそのまま使っていました。どの学校も月平均時間外と45時間超の割合を年度ごとに県平均と並べているため、学校どうしを同じ物差しで比べられます。</p><p style="margin-top:8px">美祢市では、本文を確認できた13校の中に少なくとも4つの型が混在しています。</p><ul style="margin:6px 0 0;padding-left:1.2em;font-size:14px"><li><b>県様式に近い構成（8校）：</b>削減状況の表、本校の主な取組、県教委の取組が並ぶ。ただし表の中身は年度別・月別、45時間超・30時間超・平均のみとまちまち。</li><li><b>秋芳地区3校の共通ポスター型：</b>目標と取組のみで、数値なし。</li><li><b>伊佐中：</b>県の「現状分析シート」を使用。</li><li><b>美東中：</b>独自のデザイン。</li></ul><p style="margin-top:8px">公表の形式も、PDF9校・画像3校・ページ本文1校に分かれています。各校の工夫は見えますが、市全体の状況を読み取ることや、市の目標（45時間超0%・平均30時間以内）への到達度を学校間で比べることが難しくなっています。市教委が数値欄の様式（年度別の月平均、45時間超の割合、県と市の平均）だけでも共通にすれば、取組欄の独自性を残したまま比べやすくなります。</p></div>
+      <div class="f"><h3>増えても説明がない学校がある</h3><p>厚保中は令和7年度の30時間超の割合が月75〜87.5%で、12月以降は前年度を上回りますが、理由の説明はありません。グラフから読むと月平均は40時間台で、市の中学校平均（42.3時間）と同じ水準です。麦川小も20.9→25.1→25.5時間と増えていますが、説明はありません。</p></div>
+      <div class="f"><h3>市計画にある保護者向けの項目が載っていない</h3><p>市の実施計画は、勤務時間外の留守番電話の全校設置と、「勤務時間外の連絡は緊急時を除いて控えてほしい」という保護者向け文書の配付を定めています。自校のページでこれに触れた学校はありませんでした。最終退校時刻を示した学校もありません（麦川小は「各自で退庁時刻の目標を設定」）。</p></div>
+      <div class="f" id="f-mochi"><h3>持ち帰り業務にはほとんど触れていない</h3><p>持ち帰り業務に触れたのは美東小だけで、「家庭に持ち帰って仕事をしている教職員が多い」と課題として書いています（令和7年度版・画像）。ほかの12校は触れておらず、大嶺中は閲覧できず確認できません。時間外在校等時間はICカードで記録した在校時間をもとにしているため、持ち帰りが増えると数値は下がって見えます。市の実施計画は「業務の持ち帰りや休憩時間の確保が課題となっている学校」を個別の支援・指導の対象としていますが、学校の公表からはその実態が見えません。月平均が低い学校ほど、持ち帰りの有無を併せて示すことで数値の信頼性が増します。</p></div>
+      <div class="f"><h3>健康面とワーク・ライフ・バランスの指標がない</h3><p>市の計画はストレスチェックの高ストレス者の割合（令和6年度9.5%→令和7年度11.0%）を0%に近づけることを目標にしています。年休の取得に触れたのは秋吉小と秋芳中だけで、健康面の指標を載せた学校はありません。</p></div>
+      <div class="f"><h3>部活動の地域展開が見えにくい</h3><p>市は令和8年度中に学校部活動を地域クラブへ展開するとしています。秋芳中は「平日週2回の部活動（地域クラブ）」と明記しています。一方で、美東中は「部活動時間の縮減が効果」、厚保中は「ノー部活デー」にとどまり、伊佐中の資料には部活動の記載がありません。大嶺中は閲覧できず確認できません。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="s-city">
+  <h2 id="s-city">比べるときの基準：市教育委員会の実施計画</h2>
+  <div class="city">
+    <ul>
+      <li><a href="https://www2.city.mine.lg.jp/kosodate_kyoiku/gakko/torikumi/13234.html">美祢市立学校の教育職員に関する業務量管理・健康確保措置実施計画</a>（令和8年2月、<a href="https://www2.city.mine.lg.jp/material/files/group/29/R8_2gyoumuryoukanri.pdf">PDF</a>）。期間は令和8年4月〜令和11年3月です。給特法第8条に基づき策定され、市のサイトで公表されています。</li>
+      <li>令和6年度の市全体の状況は、小学校が月平均26.9時間・45時間超15.8%・80時間超0.3%、中学校が月平均42.3時間・45時間超43.4%・80時間超7.2%です。</li>
+      <li>目標は「月45時間・年360時間を超える教員の割合を0%に近づける」、推進指標は「月平均30時間以内」です。ワーク・ライフ・バランスの目標として「ストレスチェックの高ストレス者の割合を0%に近づける」を掲げています。</li>
+      <li>進行管理として「市内各学校の在校等時間の状況を毎年度、市のHPで公表する」としています。<b>調査時点では、市サイト上に学校別の在校等時間は見つかりませんでした</b>（計画本文にある市全体の令和6年度の値のみ）。</li>
+    </ul>
+  </div>
+  <div class="tablebox plan">
+    <table>
+      <thead><tr><th>市計画が学校に求めること（抜粋）</th><th>学校サイトで確認できた状況</th></tr></thead>
+      <tbody>
+        <tr><td>取組を各学校のWebページ等で公表</td><td>14校すべてに掲載あり。ただし大嶺中は閲覧不可、3校は画像のみ。大嶺中・秋芳中・秋芳桂花小はトップページに表示がなく、別ページの中にある。</td></tr>
+        <tr><td>学校閉庁日（全市）</td><td>10校が記載。美東小・秋吉小・伊佐中は記載なし（大嶺中は不明）。</td></tr>
+        <tr><td>長期休業中の時差出勤（全市）</td><td>7校が記載（厚保小・麦川小・豊田前小・秋芳桂花小・厚保中・美東中など）。</td></tr>
+        <tr><td>ノー残業デーの設定（推奨）</td><td>5校が記載（豊田前小 月1回、秋芳桂花小 月1回水曜、秋芳中 月2日、美東小「一斉退庁日」、伊佐中）。</td></tr>
+        <tr><td>最終退校時刻の設定（推奨）</td><td>記載なし（麦川小は個人ごとの退庁目標）。</td></tr>
+        <tr><td>勤務時間外の留守番電話・保護者への連絡控えの依頼</td><td>記載なし。</td></tr>
+        <tr><td>学校運営協議会の基本方針に業務量管理を含める</td><td>サイト上では確認できず（伊佐小は「学校運営協議会等やPTAを通じた理解促進」を記載）。</td></tr>
+        <tr><td>教員業務支援員を全小中学校に配置</td><td>8校が連携を記載。伊佐小・於福小・美東中は勤務日数の増減が時間外に影響したと書いている。</td></tr>
+        <tr><td>部活動を令和8年度中に地域展開</td><td>秋芳中のみ地域クラブ化を明記。</td></tr>
+        <tr><td>業務の持ち帰り・休憩時間の確保が課題の学校に個別の支援・指導（進行管理）</td><td>持ち帰りに触れたのは美東小だけ（「家庭に持ち帰って仕事をしている教職員が多い」）。休憩時間の確保に触れた学校はない。</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="s-method">
+  <h2 id="s-method">調べ方と限界</h2>
+  <div class="method">
+    <p>市の「美祢市立小中学校一覧」ページにある14校のURLを出発点に、各サイトのトップページとメニューを取得し、「働き方」「業務改善」「閉庁」「留守番」「時間外」「部活動」などの語で本文とリンクを検索しました。見つかった働き方改革のページはすべて開き、添付のPDFと画像を読みました。</p>
+    <p>秋芳中と市の実施計画のPDFは文字情報が埋め込まれていないため、ページの画像から読み取りました。豊田前小と厚保中の月平均は、公表されたグラフから当方で読み取った概算です。美東小の年間値は、公表された4〜2月の月別値から当方で平均を計算しました。</p>
+    <p>学校だより、日々の活動記録、学校評価書、部活動方針は網羅していないため、そこにだけ書かれた情報は見落としている可能性があります。「記載なし」は、公表文書で確認できなかったという意味で、その取組を実施していないという意味ではありません。</p>
+    <p>要約は公表文書を読み取ってまとめたものです。外部に示す資料に使う場合は、リンク先の原本で確認してください。</p>
+  </div>
+</section>
+
+<footer>2026年9月13日調べ。各校サイト・美祢市ホームページの公開情報に基づきます。掲載内容はその後変わっている可能性があります。</footer>
+</div>
+
+<script>
+// it: [閉庁日, 時差出勤, ノー残業デー, デジタル化, 欠席連絡, 業務支援員, 部活動]  1=記載あり 0=なし null=確認不可 'na'=対象外
+const schools = [
+ {g:'小学校', n:'伊佐小', st:'ok', place:'専用ページ', ver:'R8', h:32.3, hq:'', ratio:'30h超 52.6%', goal:'—', it:[1,0,0,1,0,1,'na'],
+  own:'業務支援員の増員（週2→3日）の効果を分析、校時表の見直し',
+  sum:'専用ページ「働き方改革」にR8版PDFがあります。令和6・7年度の月別の平均と30時間超の割合を並べ、増減まで計算しています。年度初めと学期の始め・終わりに時間外が増えること、令和7年12月から業務支援員が週3日になり時間外が減ったことを、自校の言葉で説明しています。',
+  links:[['専用ページ','https://isa-shou.jimdoweb.com/働き方改革/'],['取組PDF（R8）','https://isa-shou.jimdoweb.com/app/download/8007361211/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E7%BE%8E%E7%A5%A2%E5%B8%82%E7%AB%8B%E4%BC%8A%E4%BD%90%E5%B0%8F%E5%AD%A6%E6%A0%A1%E3%80%8C%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%80%8D%E3%81%AB%E4%BF%82%E3%82%8B%E5%8F%96%E7%B5%84.pdf?t=1787813467']], tags:['月別の増減を分析','30時間超で集計']},
+ {g:'小学校', n:'厚保小', st:'ok', place:'専用ページ', ver:'R8（7月末）', h:21.7, hq:'', ratio:'45h超 8.3%', goal:'県の推進指標（30h）を引用', it:[1,1,0,1,0,1,'na'],
+  own:'令和8年7月末まで月別に更新、学校評価のデジタル化',
+  sum:'専用ページに「HP掲載用（働き方改革）7月末」と、県の加速化プラン（R8.4）・リーフレット（R8）を並べています。令和7年度は月平均21時間40分・45時間超8.3%で、「30時間以内を達成」と明記しています。令和8年度も4〜7月の値を載せていて、市内で最も新しい内容の一つです（6月は31時間56分）。',
+  links:[['専用ページ','https://atsu-e.jimdofree.com/働き方改革/'],['取組PDF（R8・7月末）','https://atsu-e.jimdofree.com/app/download/16907550622/HP%E6%8E%B2%E8%BC%89%E7%94%A8%EF%BC%88%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%EF%BC%897%E6%9C%88%E6%9C%AB.pdf?t=1786073512']], tags:['年度途中も更新','45時間超を公表']},
+ {g:'小学校', n:'大嶺小', st:'ok', place:'専用ページ', ver:'R8', h:22.9, hq:'', ratio:'45h超 12.0%／年360h超 29.6%', goal:'—', it:[1,0,0,1,1,1,'na'],
+  own:'メールでの欠席連絡・ボランティア募集、学級支援補助員・図書館職員の活用',
+  sum:'専用ページにR8版PDFがあります。令和5〜7年度の月平均（37.9→30.5→22.9時間）と、45時間超・年360時間超の割合を、県平均と並べて示しています。3年間で大きく減らし、県平均を下回っています。メールによる欠席連絡や情報発信、学校ボランティアの募集まで具体的に挙げています。',
+  links:[['専用ページ','https://oomine-shou.jimdofree.com/大嶺小学校働き方改革に係る取組/'],['取組PDF（R8）','https://oomine-shou.jimdofree.com/app/download/12457844194/R8_%E5%A4%A7%E5%B6%BA%E5%B0%8F%E5%AD%A6%E6%A0%A1%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%81%AB%E4%BF%82%E3%82%8B%E5%8F%96%E7%B5%84.pdf?t=1787803083']], tags:['県平均と比較','年360時間超も公表','大きく減少']},
+ {g:'小学校', n:'麦川小', st:'ok', place:'専用ページ', ver:'R8', h:25.5, hq:'2月現在', ratio:'—', goal:'個人ごとの退庁時刻目標', it:[1,1,0,1,0,0,'na'],
+  own:'清掃を週3→2日に、行事の同日開催、老人クラブ・JA・郵便局など地域の支援',
+  sum:'専用ページに取組を本文（テキスト）で載せていて、読みやすい形です。月平均は令和5年度20.9時間、6年度25.1時間、7年度25.5時間（2月現在）と少しずつ増えていますが、理由の説明はありません。清掃の回数を減らして下校を早めるなど、子どもと教職員の双方の負担を減らす工夫を挙げています。',
+  links:[['専用ページ（本文）','https://mugigawa-shou.jimdofree.com/働き方改革に係る本校の取組/']], tags:['本文がテキスト','県平均の値が合わない']},
+ {g:'小学校', n:'於福小', st:'ok', place:'専用ページ', ver:'R8', h:22.9, hq:'', ratio:'—', goal:'月25時間（8月10時間）', it:[1,0,0,1,0,1,'na'],
+  own:'月別の目標値を設定、管理職による補教体制',
+  sum:'専用ページにR8版PDFがあります。令和4〜7年度の月別の平均と、自校の目標値（月25時間）を表とグラフで並べています。令和6年度16.0時間から7年度22.9時間に増えた理由として、職員の異動が多かったことと、業務支援員が週2回から月1回に減ったことを挙げています。',
+  links:[['専用ページ','https://ohuku-shou.jimdofree.com/於福小-働き方改革-に係わる取組/'],['取組PDF（R8）','https://ohuku-shou.jimdofree.com/app/download/11345510152/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E6%96%BC%E7%A6%8F%E5%B0%8F%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6.pdf?t=1782363796']], tags:['自校の目標値','増加の理由を説明']},
+ {g:'小学校', n:'豊田前小', st:'ok', place:'専用ページ', ver:'R7のまま', h:24.9, hq:'約', ratio:'—', goal:'—', it:[1,1,1,1,0,0,'na'],
+  own:'ノー残業デー（月1回）、長期休業中の朝型・夕型勤務、前小ネットワーク協議会',
+  sum:'専用ページに「R7 働き方改革の取組」（令和8年3月更新）があります。令和4〜7年度の月別推移をグラフで示していますが、数値の表はありません（令和7年度は4〜2月）。グラフからは月平均およそ25時間と読めます。地域団体（豊友会・女性部・JA）の農業体験支援など、地域の力を具体的に挙げています。',
+  links:[['専用ページ','https://toyotamae-shou.jimdofree.com/働き方改革/'],['取組PDF（R7）','https://toyotamae-shou.jimdofree.com/app/download/13470859849/R7+%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%81%AE%E5%8F%96%E7%B5%84.pdf?t=1773706330']], tags:['R8版が未掲載','グラフのみ']},
+ {g:'小学校', n:'美東小', st:'img', place:'専用ページ', ver:'R7のまま', h:25.9, hq:'計', ratio:'—', goal:'—', it:[0,0,1,1,1,0,'na'],
+  own:'マチコミメールでの文書配信と「お休み連絡」、一斉退庁日',
+  sum:'専用ページ「働き方改革について」に、令和7年度版の取組を画像で載せています。4〜2月の月別平均（4〜6月は35〜38時間、7月以降は30時間以内）を示し、「統合による対応で年度当初は難しかった」「45時間を超える教職員がいる」「家庭に持ち帰って仕事をしている教職員が多い」と課題を率直に書いています。',
+  links:[['専用ページ','https://mitosho.jimdofree.com/働き方改革について/'],['取組（画像・R7）','https://image.jimcdn.com/app/cms/image/transf/dimension=940x10000:format=jpg/path/sf09632887ac767a5/image/i10b7db6f23bd5ef5/version/1772589591/image.jpg']], tags:['持ち帰り仕事に言及','画像のみ','R8版が未掲載']},
+ {g:'小学校', n:'秋吉小', st:'img', place:'専用ページ', ver:'R8', h:null, ratio:'—', goal:'45h超の月を年6か月まで・年休取得', it:[0,0,0,1,0,0,'na'],
+  own:'放課後1時間の確保、委員会活動の精選、物品・データの整頓、個人目標と自己評価',
+  sum:'専用ページ「働き方改革推進中」に、令和8年度のポスターを画像で載せています。学校の目標（45時間を超える月を年6か月まで、年休の取得推進）と4つの具体的取組を示していますが、時間外の実績値はありません。職員会議・健康観察・衛生検査・アンケートなど、ペーパーレス化の対象を具体的に挙げています。',
+  links:[['専用ページ','https://akiyoshi-shou.jimdofree.com/働き方改革推進中/']], tags:['自校の目標','秋芳地区共通デザイン','数値なし','画像のみ']},
+ {g:'小学校', n:'秋芳桂花小', st:'img', place:'学校紹介の下（サブメニュー）', ver:'R8', h:null, ratio:'—', goal:'45h超の月を6か月未満', it:[1,1,1,1,0,1,'na'],
+  own:'月曜の授業時数削減（1年4時間・2〜6年5時間）、掃除日の削減、クラブ活動の地域化（秋芳桂花道場）',
+  sum:'「学校紹介」の下に「働き方改革推進プラン」のページがあり、令和8年度のプランを画像で載せています。県の目標に加えて、学校の目標（45時間を超える月を6か月未満）を掲げています。ノー残業デー「Refresh Wednesday」（毎月1回水曜）、学校閉庁日（8月10〜14日）など、日付や回数まで書いているのが特徴です。',
+  links:[['働き方改革推進プラン','https://keika-shou.jimdofree.com/学校紹介/働き方改革推進プラン/']], tags:['自校の目標','日課表の見直し','数値なし','画像のみ']},
+ {g:'中学校', n:'伊佐中', st:'ok', place:'学校概要の下（トップ本文にリンク）', ver:'R8（8月1日）', h:30.2, hq:'', ratio:'30h超 50%（管理職除く）', goal:'平均・30h超割合を前年度より減少', it:[0,0,1,1,0,0,0],
+  own:'県の「現状分析シート」を使った教職員アンケートの公表',
+  sum:'「学校概要」の下の「働き方改革」ページに、県教委の現状分析ツールでまとめた資料（R8.8.1現在）を載せています。令和7年度の月平均は30.2時間・30時間超50%、令和8年度4〜7月は28.2時間・44%で、前年同月より改善した月を色分けしています。教職員が「もっと時間をかけたい業務」「改善が必要な業務」の調査結果まで公表しているのは伊佐中だけです。',
+  links:[['働き方改革ページ','https://isa-j.jimdofree.com/ホーム/学校概要/働き方改革/'],['業務改善分析PDF（R8.7）','https://isa-j.jimdofree.com/app/download/19944627725/%E6%A5%AD%E5%8B%99%E6%94%B9%E5%96%84%E5%88%86%E6%9E%90%EF%BC%88%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E7%94%A8R8.7%EF%BC%89.pdf?t=1787720310']], tags:['教職員アンケート','年度途中も更新','自校の目標']},
+ {g:'中学校', n:'厚保中', st:'ok', place:'専用ページ', ver:'R8（4月1日）', h:43.7, hq:'約', ratio:'30h超 月75〜87.5%（R7）', goal:'—', it:[1,1,0,1,0,1,1],
+  own:'ノー部活デー、各種調査でのWebアンケート活用',
+  sum:'専用ページにR8版PDF（2026年4月1日現在）があります。令和5〜7年度の30時間超の割合を月別に示し、前年度からの増減を色分けしています。月平均はグラフのみで、令和7年度はおよそ40〜57時間（年平均は約44時間）と読めます。12月以降は令和6年度を上回っていますが、その説明はありません。',
+  links:[['専用ページ','https://atsu-j.jimdofree.com/働き方改革に係る取組/'],['取組PDF（R8）','https://atsu-j.jimdofree.com/app/download/12129924872/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E3%80%80%E3%80%8C%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%80%8D%E3%81%AB%E4%BF%82%E3%82%8B%E5%8F%96%E7%B5%84.pdf?t=1776659138']], tags:['増加の説明なし','平均はグラフのみ']},
+ {g:'中学校', n:'大嶺中', st:'locked', place:'学校情報ページ内のボタン', ver:'—', h:null, ratio:'—', goal:'—', it:[null,null,null,null,null,null,null],
+  own:'—',
+  sum:'「学校情報」ページに「働き方改革重点目標」のボタンがあります。ただしリンク先は教職員個人のOneDrive（Microsoft 365）のPDFで、ログインを求められるため一般の閲覧者は読めません。同じページの学校評価書なども同じ仕組みでリンクされています。',
+  links:[['学校情報','https://oomine-j.jimdofree.com/ホーム/学校情報/']], tags:['共有設定の確認が必要']},
+ {g:'中学校', n:'美東中', st:'ok', place:'専用ページ', ver:'R8', h:null, ratio:'—', goal:'—', it:[1,1,0,1,0,1,1],
+  own:'Teamsによる会議資料の完全ペーパーレス化、Formsでの集計自動化、年度末の振り返りアンケート',
+  sum:'専用ページにR8版PDF（2ページ）があります。取組を「Time・Digital・System・Community」の4つに分けて示し、令和7年度末の教職員アンケート（分掌の業務量・負担感・協力体制）と、学校評価の業務改善項目の結果を載せています。「時間外は全体として減少し、部活動時間の縮減が効果を上げている」一方、「一部教員は大きく超過」「業務支援員が小中で1名になり頼みにくい」と書いていますが、時間外の数値はありません。',
+  links:[['専用ページ','https://mito-jh.jimdofree.com/働き方改革について/'],['取組PDF（R8）','https://mito-jh.jimdofree.com/app/download/13545091449/R8%E3%80%80%E7%BE%8E%E6%9D%B1%E4%B8%AD+%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%81%AE%E6%8E%A8%E9%80%B2.pdf?t=1787739358']], tags:['教職員アンケート','学校評価と連動','数値なし']},
+ {g:'中学校', n:'秋芳中', st:'ok', place:'学校紹介ページ内のPDF', ver:'R8', h:null, ratio:'—', goal:'45h超の月を6か月まで・年休取得', it:[1,0,1,1,1,1,1],
+  own:'月曜5時間授業、平日週2回の部活動（地域クラブ）、月1回のカリキュラム検討会、学年会計業務の支援',
+  sum:'「学校紹介」ページの文書一覧に「働き方改革について」のPDF（R8）があります。秋吉小・秋芳桂花小と共通のデザインで、学校の目標（45時間を超える月を6か月まで、平均30時間以内に努める、年休取得）と具体的取組を示しています。部活動の地域クラブ化を明記しているのは、中学校で秋芳中だけです。時間外の実績値はありません。',
+  links:[['学校紹介','http://www.c-able.ne.jp/~shuho-j/school.html'],['取組PDF（R8）','http://www.c-able.ne.jp/~shuho-j/school/r8hatarakikata.pdf']], tags:['自校の目標','部活動の地域化を明記','数値なし']},
+];
+const stLabel = {ok:'公表・本文確認', img:'公表・画像のみ', locked:'掲載あり・閲覧不可'};
+// 持ち帰り業務（家庭・自宅での仕事）への言及  1=あり null=確認不可  記載のない学校は0
+const mochi = {'美東小':1, '大嶺中':null};
+
+const strip=document.getElementById('strip');
+schools.forEach(s=>{
+  const d=document.createElement('div'); d.className='sq st-'+s.st; d.setAttribute('role','listitem');
+  d.textContent=s.n; d.title=`${s.n}：${stLabel[s.st]}`; strip.appendChild(d);
+});
+
+const tb=document.querySelector('#cmp tbody'); let grp='';
+const mark=v=> v==='na'?'<span class="na">対象外</span>': v===null?'<span class="q">?</span>': v?'<span class="dot" aria-label="記載あり">●</span>':'<span class="dash" aria-label="記載なし">－</span>';
+const hcell=s=> s.h===null?'—': s.hq==='約'?`<span class="approx">約${Math.round(s.h)}h</span>`: s.hq==='計'?`${s.h.toFixed(1)}h<span class="small">計（4〜2月）</span>`: s.hq?`${s.h.toFixed(1)}h<span class="small">${s.hq}</span>`:`${s.h.toFixed(1)}h`;
+schools.forEach(s=>{
+  if(s.g!==grp){grp=s.g; tb.insertAdjacentHTML('beforeend',`<tr class="grp"><td colspan="16">${grp}</td></tr>`);}
+  tb.insertAdjacentHTML('beforeend',`<tr>
+    <td class="name">${s.n}</td>
+    <td><span class="chip st-${s.st}">${stLabel[s.st]}</span></td>
+    <td style="white-space:nowrap">${s.place}</td><td class="num" style="white-space:nowrap">${s.ver}</td>
+    <td class="r num">${hcell(s)}</td>
+    <td style="min-width:120px">${s.ratio}</td>
+    <td style="min-width:130px">${s.goal}</td>
+    ${s.it.map(v=>`<td class="c">${mark(v)}</td>`).join('')}
+    <td class="c">${mark(s.n in mochi ? mochi[s.n] : 0)}</td>
+    <td style="min-width:220px">${s.own}</td></tr>`);
+});
+
+// bar chart
+const MAX=60, pct=v=>(v/MAX*100)+'%';
+const bars=[
+ ['小学校',26.9,[['厚保小',21.7,'R7',''],['大嶺小',22.9,'R7',''],['於福小',22.9,'R7',''],['豊田前小',24.9,'R7・4〜2月','est'],['麦川小',25.5,'R7・2月現在',''],['美東小',25.9,'R7・4〜2月',''],['伊佐小',32.3,'R7','']],'e'],
+ ['中学校',42.3,[['伊佐中',30.2,'R7・管理職除く',''],['厚保中',43.7,'R7','est']],'j'],
+];
+const ch=document.getElementById('chart');
+const grid=()=>[0,15,30,45,60].map(t=>`<span class="gline ${t===30?'l30':t===45?'l45':''}" style="left:${pct(t)}"></span>`).join('');
+bars.forEach(([label,city,rows,c])=>{
+  ch.insertAdjacentHTML('beforeend',`<div class="gsep">${label}</div>`);
+  rows.forEach(([n,h,y,est])=>{
+    const v = est?`約${Math.round(h)}`:h.toFixed(1);
+    ch.insertAdjacentHTML('beforeend',`<div class="lbl">${n} <small>${y}</small></div>
+      <div class="track" title="${n}（${y}）：${v}時間${est?'（グラフから読み取り）':''}">${grid()}<span class="bar ${c} ${est?'est':''}" style="width:${pct(h)}"></span></div>
+      <div class="val num"><b>${v}</b> 時間${est?' <span class="small" style="display:inline">概算</span>':''}</div>`);
+  });
+  ch.insertAdjacentHTML('beforeend',`<div class="lbl city">市全体 <small>R6</small></div>
+    <div class="track" title="市全体の${label}（令和6年度）：${city}時間">${grid()}<span class="tick" style="left:${pct(city)}"></span></div>
+    <div class="val num">${city} 時間</div>`);
+});
+ch.insertAdjacentHTML('beforeend',`<div></div><div class="axis num">${[0,15,30,45,60].map(t=>`<span class="${t===30?'l30':t===45?'l45':''}" style="left:${pct(t)}">${t}${t===30?'h 指標':t===45?'h 上限':''}</span>`).join('')}</div><div></div>`);
+
+// trend table
+const trend=[
+ ['伊佐小',[null,null,[32.6,'30h超 58.1%'],[32.3,'30h超 52.6%'],null],'横ばい。業務支援員の増員（R7.12〜）で減少と説明'],
+ ['厚保小',[null,null,null,[21.7,'45h超 8.3%'],[27.2,'4〜7月・計']],'30時間以内を達成と記載'],
+ ['大嶺小',[null,[37.9,'45h超 37.7%'],[30.5,'45h超 21.5%'],[22.9,'45h超 12.0%'],null],'大きく減少'],
+ ['麦川小',[null,[20.9,''],[25.1,''],[25.5,'2月現在'],null],'やや増加（説明なし）'],
+ ['於福小',[[32.9,''],[16.9,''],[16.0,''],[22.9,''],null],'R7に増加。異動と業務支援員の減少を理由に挙げる'],
+ ['美東小',[null,null,null,[25.9,'4〜2月・計'],null],'統合初年度。7月以降は30時間以内'],
+ ['伊佐中',[null,null,null,[30.2,'30h超 50%'],[28.2,'4〜7月・30h超 44%']],'改善傾向'],
+ ['県平均（小）',[null,[37.0,''],[35.0,''],[33.5,''],null],'大嶺小の文書の記載値','pref'],
+ ['市全体（小）',[null,null,[26.9,'45h超 15.8%'],null,null],'市の実施計画','pref'],
+ ['市全体（中）',[null,null,[42.3,'45h超 43.4%'],null,null],'市の実施計画','pref'],
+];
+const tt=document.querySelector('#trend tbody');
+trend.forEach(([n,ys,t,cls])=>{
+  tt.insertAdjacentHTML('beforeend',`<tr class="${cls||''}"><td class="name">${n}</td>${ys.map(v=>`<td class="num">${v?`${v[0].toFixed(1)}${v[1]?`<span class="small">${v[1]}</span>`:''}`:''}</td>`).join('')}<td style="font-size:12px">${t}</td></tr>`);
+});
+
+// school cards
+const box=document.getElementById('schools');
+schools.forEach(s=>{
+  const hv = s.h===null?null: s.hq==='約'?`約${Math.round(s.h)}`: s.h.toFixed(1);
+  const figs = hv!==null ? `<div class="figs"><span>月平均時間外 <b>${hv}</b> 時間</span>${s.ratio!=='—'?`<span>${s.ratio}</span>`:''}<span>${s.ver}</span></div>`
+    : `<div class="figs"><span>時間外の数値は未公表${s.st==='locked'?'（閲覧不可）':''}</span>${s.goal!=='—'?`<span>目標：${s.goal}</span>`:''}</div>`;
+  box.insertAdjacentHTML('beforeend',`<article class="school">
+    <div class="hd"><h3>${s.n}</h3><span class="chip st-${s.st}">${stLabel[s.st]}</span></div>
+    <p class="sum">${s.sum}</p>
+    ${figs}
+    <ul>${s.links.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${t}</a></li>`).join('')}${s.n==='大嶺中'?'<li><span class="q">重点目標（ログイン要のため未リンク）</span></li>':''}</ul>
+    ${s.tags.length?`<div>${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`:''}
+  </article>`);
+});
+</script>
