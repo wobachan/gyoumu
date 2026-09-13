@@ -1,0 +1,854 @@
+<title>業務量管理計画 11市町比較（スマホ版）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Zen+Old+Mincho:wght@600;700&display=swap">
+<style>
+:root{
+  --ground:#F4F6F3; --paper:#FFFFFF; --ink:#1C2826; --muted:#56635F; --rule:#D6DDD8; --rule-strong:#AEB9B4;
+  --accent:#1F6552; --accent-soft:#E2EEE9; --ochre:#A5660F; --ochre-soft:#FBF0DC; --none:#8E9A96;
+  --serif:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  --bar-h:108px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141A19; --paper:#1B2321; --ink:#E4EAE7; --muted:#A3B0AC; --rule:#2C3735; --rule-strong:#46544F;
+    --accent:#6FC2A6; --accent-soft:#1F332D; --ochre:#E3A64F; --ochre-soft:#33291A; --none:#6E7B77;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141A19; --paper:#1B2321; --ink:#E4EAE7; --muted:#A3B0AC; --rule:#2C3735; --rule-strong:#46544F;
+  --accent:#6FC2A6; --accent-soft:#1F332D; --ochre:#E3A64F; --ochre-soft:#33291A; --none:#6E7B77;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.8;margin:0;font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:620px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;text-wrap:balance;line-height:1.4;margin:0}
+
+header.top{background:var(--paper);border-bottom:1px solid var(--rule)}
+header.top .wrap{padding-top:22px;padding-bottom:18px;display:grid;gap:10px}
+.eyebrow{font-size:13px;letter-spacing:.06em;color:var(--muted);line-height:1.6}
+h1{font-size:25px}
+.lede{margin:0;font-size:16px;color:var(--muted)}
+
+.topbar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--rule);box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);max-width:620px;margin:0 auto}
+.tabs a{display:flex;align-items:center;justify-content:center;min-height:48px;font-size:15px;font-weight:700;text-decoration:none;color:var(--ink);border-bottom:3px solid transparent}
+.tabs a:hover,.tabs a:active{color:var(--accent);border-bottom-color:var(--accent)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 10px;max-width:620px;margin:0 auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-size:15px;text-decoration:none;color:var(--ink);border:1px solid var(--rule-strong);border-radius:999px;padding:5px 14px;background:var(--paper)}
+.chips a.f{border-color:var(--ochre);color:var(--ochre);font-weight:700}
+.chips .sep{flex:none;width:1px;background:var(--rule-strong);margin:4px 2px}
+
+section.part{padding:28px 0 6px;scroll-margin-top:var(--bar-h)}
+.part-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+.part-head .no{font-family:var(--serif);font-size:18px;color:var(--accent)}
+.part-head h2{font-size:23px}
+.part-head p{margin:0;font-size:14px;color:var(--muted);flex-basis:100%}
+
+.common{background:var(--accent-soft);border-radius:8px;padding:16px 18px;margin-bottom:18px}
+.common h3{font-size:18px;color:var(--accent);margin-bottom:6px}
+.common ul{margin:0;padding-left:1.15em}
+.common li{margin:6px 0;font-size:16px}
+
+.tools{display:flex;justify-content:flex-end;margin:0 0 10px}
+.btn{font:inherit;font-size:15px;font-weight:700;min-height:44px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:var(--paper);color:var(--accent);cursor:pointer;line-height:1.4}
+.btn[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+
+details.city{background:var(--paper);border:1px solid var(--rule);border-radius:10px;margin-bottom:12px;scroll-margin-top:var(--bar-h)}
+summary.city-head{list-style:none;cursor:pointer;padding:16px 50px 14px 18px;display:grid;gap:4px;position:relative}
+summary.city-head::-webkit-details-marker{display:none}
+summary.city-head::after{content:"＋";position:absolute;right:16px;top:14px;font-size:22px;line-height:1;color:var(--accent);font-weight:700}
+details[open] > summary.city-head::after{content:"－"}
+details[open] > summary.city-head{border-bottom:1px solid var(--rule)}
+.city-head h3{font-size:22px}
+.meta{display:flex;flex-wrap:wrap;gap:0 14px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--ink)}
+.city-body{padding:2px 18px 18px}
+.city-body > div + div{border-top:1px dashed var(--rule-strong);margin-top:16px}
+.blk{margin-top:16px}
+.blk h4{font-size:15px;letter-spacing:.06em;color:var(--accent);margin:0 0 4px;font-weight:700}
+.blk ul{margin:0;padding-left:1.1em}
+.blk li{margin:6px 0}
+.blk li::marker{color:var(--rule-strong)}
+.stat{display:grid;grid-template-columns:auto repeat(3,auto);gap:2px 18px;font-size:16px;margin:10px 0 4px;width:max-content;max-width:100%;background:var(--ground);padding:8px 12px;border-radius:6px}
+.stat span{color:var(--muted)}
+.stat .h{font-size:13px}
+.note{font-size:14px;color:var(--muted);margin:4px 0 0}
+
+.feat-grid{display:grid;gap:12px}
+.feat{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}
+.feat h3{font-size:21px;display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.feat h3 small{font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted)}
+.feat .tag{display:inline-block;font-size:14px;background:var(--ochre-soft);color:var(--ochre);border-radius:4px;padding:1px 10px;margin-bottom:6px;font-weight:700}
+.feat ul{margin:0;padding-left:1.1em}
+.feat li{margin:6px 0}
+.feat li::marker{color:var(--ochre)}
+
+.charts{display:grid;gap:14px;margin-bottom:22px}
+.chart{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:16px 14px 14px}
+.chart h3{font-size:19px;margin-bottom:4px}
+.chart .sub{font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.65}
+.legend{display:flex;gap:4px 14px;font-size:13px;color:var(--muted);margin-bottom:10px;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.gridwrap{position:relative}
+.gridwrap.has-target{padding-top:24px}
+.bars{display:grid;grid-template-columns:5.6em 1fr;row-gap:10px;column-gap:10px;align-items:center}
+.bars .name{font-size:14px;text-align:right;line-height:1.3}
+.bars .name.pref{color:var(--muted)}
+.bars .split{grid-column:1/-1;border-top:1px dashed var(--rule-strong);height:0}
+.track{position:relative;display:grid;gap:3px}
+.bar{height:13px;border-radius:0 2px 2px 0;position:relative}
+.bar.e{background:var(--accent)}
+.bar.j{background:var(--ochre)}
+.bar.pref{opacity:.45}
+.bar b{position:absolute;left:calc(100% + 5px);top:50%;transform:translateY(-50%);font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap}
+.target{position:absolute;top:18px;bottom:0;width:0;border-left:2px dashed var(--ink);opacity:.55;pointer-events:none}
+.target span{position:absolute;top:-19px;left:0;transform:translateX(-50%);font-size:12px;white-space:nowrap;color:var(--ink);font-weight:700}
+.axis{display:grid;grid-template-columns:5.6em 1fr;column-gap:10px;margin-top:6px}
+.axis .ticks{position:relative;height:20px;border-top:1px solid var(--rule-strong);font-size:12px;color:var(--muted)}
+.axis .ticks span{position:absolute;top:2px;transform:translateX(-50%)}
+
+.grp-title{font-size:20px;color:var(--accent);margin:26px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--accent)}
+.item{background:var(--paper);border:1px solid var(--rule);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.item h4{margin:0;padding:10px 16px;font-size:17px;background:var(--accent-soft)}
+.item dl{margin:0}
+.row{display:grid;grid-template-columns:5.8em 1fr;gap:10px;padding:9px 16px;border-top:1px solid var(--rule)}
+.row.first-rest{border-top:2px solid var(--rule-strong)}
+.row dt{font-weight:700;font-size:15px;line-height:1.7}
+.row.focus dt{color:var(--ochre)}
+.row dd{margin:0;font-size:16px;line-height:1.7}
+.row dd .n{display:block;font-size:14px;color:var(--muted)}
+.row.hi{background:var(--ochre-soft)}
+.row.no dd{color:var(--none)}
+body.only4 .row.rest{display:none}
+.tbl-legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:14px 0 0;line-height:1.7}
+.tbl-legend i{display:inline-block;width:16px;height:13px;background:var(--ochre-soft);border:1px solid var(--rule-strong);vertical-align:middle;margin-right:6px}
+footer{padding:28px 0 44px;font-size:14px;color:var(--muted)}
+footer p{margin:6px 0}
+.src{margin:0;padding:12px 18px 0;font-size:14px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+footer ul.srcs{margin:8px 0 12px;padding-left:1.2em}
+footer ul.srcs li{margin:6px 0;overflow-wrap:anywhere}
+
+/* 印刷・PDF（スマホ画面サイズ） */
+@page{size:105mm 228mm;margin:6mm 5mm 7mm}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --ground:#F4F6F3; --paper:#FFFFFF; --ink:#1C2826; --muted:#56635F; --rule:#D6DDD8; --rule-strong:#AEB9B4;
+    --accent:#1F6552; --accent-soft:#E2EEE9; --ochre:#A5660F; --ochre-soft:#FBF0DC; --none:#8E9A96; --bar-h:0px;
+  }
+  html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#FFFFFF}
+  .wrap{max-width:none;padding:0}
+  .topbar,.tools{display:none}
+  header.top{border-bottom:2px solid var(--ink)}
+  header.top .wrap{padding:0 0 14px}
+  #tokucho,#hikaku{break-before:page}
+  section.part{padding-top:0}
+  details.city{margin-bottom:14px}
+  .part-head p{display:none}
+  summary.city-head::after{display:none}
+  .blk h4,.grp-title,.part-head{break-after:avoid}
+  .stat,.chart,.row,.feat h3{break-inside:avoid}
+  .feat h3,.feat .tag,.item h4,summary.city-head{break-after:avoid}
+  footer{padding-top:18px}
+}
+
+/* v2-emphasis */
+:root{--bar-h:130px}
+.tabs{grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px 6px}
+.tabs a{min-height:46px;gap:2px;padding:0 4px;font-size:14px;white-space:nowrap;border:1.5px solid var(--accent);border-radius:10px;background:var(--accent-soft);color:var(--accent);box-shadow:0 3px 0 var(--accent);transition:transform .08s}
+.tabs a:hover,.tabs a:active{color:var(--accent);border-color:var(--accent)}
+.tabs a:active{transform:translateY(3px);box-shadow:none}
+.tabs a .tap{font-size:13px;line-height:1}
+.tabs a.tab-hot,.tabs a.tab-hot:hover,.tabs a.tab-hot:active{background:var(--ochre);border-color:var(--ochre);color:var(--paper)}
+.tabs a.tab-hot{box-shadow:0 3px 0 rgba(0,0,0,.28)}
+.chips{padding-top:6px}
+.item.hot{border:2px solid var(--ochre);box-shadow:0 0 0 4px var(--ochre-soft);scroll-margin-top:var(--bar-h)}
+.item.hot h4{background:var(--ochre);color:var(--paper)}
+.hot-note{margin:0;padding:12px 16px;border-top:1.5px solid var(--ochre);background:var(--ochre-soft);font-size:15px;line-height:1.75;color:var(--ink)}
+@media print{.item.hot{box-shadow:none}}
+@media (prefers-reduced-motion: reduce){.tabs a{transition:none}}
+/* v2-freeze */
+.item{overflow:visible}
+.item h4{position:sticky;top:var(--bar-h);z-index:3;border-radius:9px 9px 0 0;box-shadow:0 2px 4px rgba(0,0,0,.08)}
+@media print{.item h4{position:static;box-shadow:none}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="eyebrow">給特法第8条に基づく「教育職員の業務量管理・健康確保措置実施計画」山口県内11市町</div>
+  <h1>業務量管理・健康確保措置実施計画　11市町の比較</h1>
+  <p class="lede">美祢市・長門市・萩市・山陽小野田市・下関市・宇部市・山口市・周防大島町・柳井市・光市・周南市の11計画（令和8年2〜4月策定）のまとめです。数値は各計画に記載された令和6年度実績です。</p>
+</div></header>
+
+<nav class="topbar" aria-label="ページ内移動">
+  <div class="tabs"><a href="#naiyou"><span class="tap" aria-hidden="true">👆</span>① 内容</a><a href="#tokucho"><span class="tap" aria-hidden="true">👆</span>② 特徴</a><a href="#hikaku"><span class="tap" aria-hidden="true">👆</span>③ 比較</a><a href="#mochikaeri" class="tab-hot"><span class="tap" aria-hidden="true">👆</span>持ち帰り</a></div>
+  <div class="chips"><a href="#c-mine">美祢</a><a href="#c-nagato">長門</a><a href="#c-hagi">萩</a><a href="#c-sanyoonoda">山陽小野田</a><a href="#c-shimonoseki">下関</a><a href="#c-ube">宇部</a><a href="#c-yamaguchi">山口</a><a href="#c-suooshima">周防大島</a><a href="#c-yanai">柳井</a><a href="#c-hikari">光</a><a href="#c-shunan">周南</a></div>
+</nav>
+
+<main class="wrap">
+<section class="part" id="naiyou">
+  <div class="part-head"><span class="no">①</span><h2>各計画の内容</h2><p>市町名をタップすると開きます</p></div>
+  <div class="common">
+    <h3>11計画に共通する骨格</h3>
+    <ul>
+      <li>構成は文科省指針どおり「趣旨・現状 → 目標 → 期間 → 措置の内容 → フォローアップ」（山陽小野田・美祢・光は一部独自構成）</li>
+      <li>時間外在校等時間の目標は「月45時間以下の割合100%（または100%に近づける）」「月平均30時間程度」がほぼ共通</li>
+      <li>措置は文科省「学校と教師の業務の3分類」に沿って、学校以外／教師以外／負担軽減の3区分で整理</li>
+      <li>授業時数の見直し（標準時数を大幅に超える場合、小4以上は年1086単位時間以上が目安）と日課表の工夫</li>
+      <li>月80時間超の教員への面接指導、ストレスチェックの集団分析の活用</li>
+      <li>在校等時間を毎年HPで公表し、教育委員会会議・総合教育会議に報告。課題校には個別に支援・指導</li>
+    </ul>
+  </div>
+  <div class="tools"><button class="btn" id="openall" type="button" aria-pressed="false">すべて開く</button></div>
+  <details class="city" id="c-mine">
+    <summary class="city-head"><h3>美祢市</h3>
+      <div class="meta"><span>策定 <b>令和8年2月</b></span><span>期間 <b>R8.4〜R11.3（3年、随時見直し）</b></span><span>対象 <b>小・中</b></span><span>全10頁</span></div></summary>
+    <p class="src">出典：<a href="https://www2.city.mine.lg.jp/soshiki/kyoiku/gakko/13195.html" target="_blank" rel="noopener">美祢市ホームページの計画掲載ページ</a>（2026年3月26日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>ウェルビーイングを実現し、「誰一人取り残さない」など4つの魅力ある学校像につなげる</li>
+          <li>H29からICカードで在校等時間を管理、R4から部活動の地域移行に着手</li>
+          <li>小は成果が見られるが、中は半数近くが45時間超。高ストレス者は R6 9.5% → R7 11.0% と増加</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>26.9h</b><b>15.8%</b><b>0.3%</b><span>中</span><b>42.3h</b><b>43.4%</b><b>7.2%</b></div></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間・年360時間を超える教員の割合を0%に近づける（推進指標：月平均30時間以内）</li>
+          <li>高ストレス者の割合を0%に近づける</li>
+          <li>年休の数値目標はなし</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>登校時間を適正化し、学校運営協議会・見守り隊で見守る。見回りは警察等に任せる</li>
+          <li>給食費は教育総務課学校給食室が徴収。苦情は直接対応する相談窓口の設置を検討し、弁護士も活用</li>
+          <li>学校事務共同実施会と連携。運動場・体育館の開放施設は公民館が管理</li>
+          <li>R8年度中に部活動を地域クラブへ展開</li>
+          <li>教員業務支援員を全小中学校に、学級支援補助員も学校の状況に応じて配置</li>
+        </ul></div>
+        <div class="blk"><h4>3分類以外の取組（独立した章）</h4><ul>
+          <li>市教委の会議・調査・書類を廃止・統合。校長研修で働き方改革を扱う</li>
+          <li>Teams・Formsの活用、学校図書館管理ソフトの更新</li>
+          <li>サポート人材10種：教員業務支援員、公設塾minetoスタッフ・教育魅力化推進員、学校図書館担当職員、SC、SSW、「心の広場」指導員、部活動指導員、特別支援教育連携推進員、少年安全サポーター、ICT支援員</li>
+          <li>市施設の活用：温水プールでの水泳指導、スクールバス、市立図書館・フラワーセンター職員の派遣、雑草抑制シート</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>学校運営の「基本的な方針」に措置の内容を入れる。留守番電話・録音機能を全校に設置</li>
+          <li>閉庁日（窓口対応者なし）、長期休業中の時差出勤、修了式を2日早めて学年末休業を延長、夏季休業短縮で生まれる3日分を繁忙期に回す</li>
+          <li>最終退校時刻・ノー残業デー。80h超は医師の面接指導、ラインケア</li>
+          <li>全校にCSコーディネーターを配置。保護者に「時間外の連絡は緊急時以外控えて」と依頼する文書を配布</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-nagato">
+    <summary class="city-head"><h3>長門市</h3>
+      <div class="meta"><span>策定 <b>令和8年4月</b></span><span>期間 <b>R8〜R11年度（4年）</b></span><span>対象 <b>小・中</b></span><span>全7頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.nagato.yamaguchi.jp/site/kyouiku/67735.html" target="_blank" rel="noopener">長門市ホームページの計画掲載ページ</a>（2026年4月30日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>教育振興基本計画の基本理念「『知』をはぐくむ」の実現が趣旨。教員の「働きがい」とウェルビーイングを守ることを喫緊の課題とする</li>
+          <li>校務の情報化や中学校部活動の地域展開で時間外は減少傾向だが、月45時間超の教員は依然として一定数いる</li>
+          <li>負担感が大きい業務：学年・学級事務、校務分掌、中学校の部活動</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>37.6h</b><b>36.3%</b><b>1.9%</b><span>中</span><b>45.3h</b><b>45.3%</b><b>8.5%</b></div></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%、月平均30時間程度</li>
+          <li>年休の平均取得 13.5日以上（R6 約11.5日）</li>
+          <li>高ストレス者の割合を0%に近づける（R6 7.2%）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>通学路の見守りは保護者・学校運営協議会・地域住民で行う。補導時の引取りは保護者が第一義的に責任を負う</li>
+          <li>過剰な苦情・不当な要求：弁護士等を活用し、行政の責任で対応できる体制をつくる</li>
+          <li>市からの調査は校務支援システムで回答負担を軽減。体育館等の開放施設は地域交流プラザ等が管理</li>
+          <li>部活動の地域展開（R7年8月から実施中）を継続</li>
+          <li>教員業務・地域連携アシスタントを全校に配置。自動採点等も活用</li>
+          <li>SC・SSWの生徒指導会議への参加を促す。関係機関との連携研修を年3回以上。医ケア看護職員・特別支援教育支援員等を派遣</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>授業時数の見直し、日課表の工夫、会議資料のペーパーレス化</li>
+          <li>80h超は医師による面接指導。勤務間インターバル11時間。50人未満の学校もストレスチェック実施率100%</li>
+          <li>相談窓口を設置、SCとの面談でストレスの緩和を学ぶ機会をつくる</li>
+          <li>R8年度中に定時退校日を月1回以上、長期休業中に一斉閉庁</li>
+          <li>オンライン研修は、校長が承認すれば在宅で受講できる（在宅勤務）</li>
+        </ul></div>
+        <div class="blk"><h4>フォローアップ</h4><ul>
+          <li>出退勤管理システムとストレスチェックで達成状況を把握。HPで公表。ラインケアで働きがいのある環境をつくる</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-hagi">
+    <summary class="city-head"><h3>萩市</h3>
+      <div class="meta"><span>策定 <b>令和8年2月</b></span><span>期間 <b>R8〜R11年度（4年、随時見直し）</b></span><span>対象 <b>小・中</b></span><span>全10頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.hagi.lg.jp/soshiki/87/h69379.html" target="_blank" rel="noopener">萩市ホームページの計画掲載ページ</a>（2026年2月28日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>長時間勤務を是正して健康とウェルビーイングを守り、教員が自ら学べる環境を目指す</li>
+          <li>R4〜R6の推移を県平均と比べて示す。減少傾向だが、特に中学校の長時間勤務の割合が県より高い</li>
+          <li>校務分掌と学年・学級業務に時間がかかっている</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">年360h超</span>
+            <span>小</span><b>35.1h</b><b>33.2%</b><b>63.3%</b><span>中</span><b>47.0h</b><b>46.5%</b><b>69.8%</b></div>
+          <p class="note">R4からの推移：中の45h超 52.4% → 50.8% → 46.5%（県 41.4%）。80h超の割合は記載なし</p></div>
+        <div class="blk"><h4>目標（R11年度まで）</h4><ul>
+          <li>月45時間以下の割合を100%、月平均30時間程度</li>
+          <li>年休 14日以上（R6 12.9日）</li>
+          <li>ストレスチェックの「働きがい」が「良い」の割合を50%以上に（R6 32.1%）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>登校時間を見直し、見守りは保護者・地域で行う。見回りは警察等に任せる</li>
+          <li>地域行事の連絡調整は地域学校協働活動推進員等が中心</li>
+          <li>学校に送る文書を減らし、調査・アンケートは原則電子化</li>
+          <li>水泳指導の外部委託化でプール管理の負担を減らす。清掃は地域の支援も得て合理化</li>
+          <li>R8年9月から平日・休日の全部活動を地域展開</li>
+          <li>長時間労働の学校に教員業務支援員を配置。生成AI・デジタルコンテンツを活用し、ICT授業改善支援員を増員</li>
+          <li>教育支援センターの機能強化、「家庭教育支援チーム」との連携</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>校務DXチェックリスト（全33項目を掲載）の達成率をR7の41.7%からR11に80%へ</li>
+          <li>80h超は医師による面接指導、勤務間インターバル11時間、ストレスチェック実施率100%、要精密検査者の受診率100%</li>
+          <li>相談窓口の一覧を別紙で周知</li>
+          <li>R8年度中に定時退校日を月2回以上、市内一斉の閉庁日。早出遅出勤務とテレワークをR8年度中に検討</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-sanyoonoda">
+    <summary class="city-head"><h3>山陽小野田市</h3>
+      <div class="meta"><span>策定 <b>令和8年4月</b></span><span>期間 <b>R8〜R11年度（4年）</b></span><span>対象 <b>小・中</b></span><span>全7頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.sanyo-onoda.lg.jp/soshiki/38/gyoumukanri-gakko.html" target="_blank" rel="noopener">山陽小野田市ホームページの計画掲載ページ</a>（2026年8月17日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>働き方改革の加速と長時間勤務の是正により「教職員の命と健康を守る」</li>
+          <li>時間外は県平均より低いが、45時間超は小で2割強、中で4割程度</li>
+          <li>45時間超の主な理由：小は学年・学級業務と教材研究、中は学年・学級業務と校務分掌</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>30.7h</b><b>21.2%</b><b>0.2%</b><span>中</span><b>40.0h</b><b>40.2%</b><b>3.9%</b></div>
+          <p class="note">県平均　小 35.0h／30.8%／2.4%　中 41.7h／41.4%／8.2%</p></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%に近づける、月平均30時間程度</li>
+          <li>年休の取得率を上げる（数値なし）。健康診断・精密検査の受診率を100%に近づける</li>
+          <li>ノー残業デーを設定。生成AI・ICTで校務を効率化し、子どもに向き合う時間と心のゆとりをつくる</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>上限方針（県条例等）の明記</h4><ul>
+          <li>上限は月45時間・年360時間。臨時的な場合でも月100時間未満・年720時間、45時間超は年6か月以内、2〜6か月平均80時間以内</li>
+        </ul></div>
+        <div class="blk"><h4>措置の内容（独自の6項目）</h4><ul>
+          <li>(1) 教職員一人ひとりが自分の時間外の推移を把握し、意識を変える</li>
+          <li>(2) 職員会議のペーパーレス化、家庭配布文書・アンケートの電子化</li>
+          <li>(3) 見守りや行事運営を地域人材の協力で行う。学校運営協議会・PTAで役割分担を検討</li>
+          <li>(4) 最終退庁時刻・ノー残業デーの設定、学校閉庁日</li>
+          <li>(5) 標準時数の適切な運用、校時表（時程）の工夫</li>
+          <li>(6) 80h超はまず校長が面接。疲労の蓄積や100時間以上などの要件に当たれば、県要領に基づき医師が面接指導</li>
+        </ul></div>
+        <div class="blk"><h4>その他</h4><ul>
+          <li>各学校と市のHPで公表</li>
+          <li>二期制、学校規模に応じたチーム担任制、長期休業の始期・終期を検討</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-shimonoseki">
+    <summary class="city-head"><h3>下関市</h3>
+      <div class="meta"><span>策定 <b>令和8年4月</b></span><span>期間 <b>R8〜R10年度（3年）</b></span><span>対象 <b>小・中・高</b></span><span>全7頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.shimonoseki.lg.jp/soshiki/99/154105.html" target="_blank" rel="noopener">下関市ホームページの計画掲載ページ</a>（2026年4月1日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>「学びの専門職としての『働きやすさ』と『働きがい』の両立」を掲げる</li>
+          <li>市立高校も対象（県立高校の例による）。ICT活用・意識改革・柔軟な勤務体制・閉庁日などで縮減してきた</li>
+          <li>負担感：学年・学級業務、校務分掌。役割分担と分掌配置の見直しが必要</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>33.6h</b><b>26.7%</b><b>1.8%</b><span>中</span><b>39.7h</b><b>36.8%</b><b>5.9%</b><span>高</span><b>47.1h</b><b>42.5%</b><b>7.5%</b></div></div>
+        <div class="blk"><h4>目標（R10年度末）</h4><ul>
+          <li>月45時間以下を100%（地域クラブ活動の指導者は月平均80時間以下）、月平均30時間程度</li>
+          <li>年休 15日以上（R6 小中13.8日／高15.0日）</li>
+          <li>高ストレス者 11%以下（R6 小中13.5%／高11.5%）</li>
+          <li>ワークエンゲイジメント：「仕事に誇り」90%以上（84.7%）、「活力がみなぎる」60%以上（57.8%）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>登校時間の見直しを進め、見守りは保護者・地域住民で行う</li>
+          <li>校外の見回りは青少年補導委員に任せ、学校独自の見回りは原則行わない</li>
+          <li>市の調査は校務支援システムで軽減。学校プールは可能な学校から民間委託を検討</li>
+          <li>部活動：R9年度から休日の全部活を原則地域展開、平日は活動時間を適正化。高校は外部指導者を導入</li>
+          <li>教員業務支援員を拡充。授業支援ツール・自動採点を活用</li>
+          <li>特別支援教育支援員・医療的ケア支援員・こころのアシスタント（不登校対策支援員）を拡充。高校には相談員を配置</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>授業時数の見直し、日課表の工夫</li>
+          <li>80h超は医師による面接指導、勤務間インターバル11時間、ストレスチェック実施率100%</li>
+          <li>R8年度中に定時退校日を月1回以上。夏季休業中に4日間（週休日等を含め9日連続）閉庁</li>
+        </ul></div>
+        <div class="blk"><h4>フォローアップ</h4><ul>
+          <li>各校の出退勤管理システムとストレスチェックで把握。3分類の一覧表を掲載し、自治会等へ周知</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-ube">
+    <summary class="city-head"><h3>宇部市</h3>
+      <div class="meta"><span>策定 <b>記載なし（R8.4.1開始）</b></span><span>期間 <b>R8.4.1〜R13.3.31（5年）</b></span><span>対象 <b>小・中</b></span><span>全3頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.ube.yamaguchi.jp/shisei/kouhou/kishahappyou/1008059/1028265/1028795.html" target="_blank" rel="noopener">宇部市ホームページの記者発表（計画PDFを掲載）</a>（2026年3月23日掲載）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>児童生徒の学習環境と教職員の教育環境づくりのため、業務量の管理と健康確保の計画を立てる（趣旨は簡潔）</li>
+          <li>R6の月45時間超の割合は前年度より小△3.3ポイント、中△0.3ポイント</li>
+          <li>中学校は部活動の負担感が大きく、地域クラブへの移行・展開が必要</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>32.0h</b><b>24.5%</b><b>1.8%</b><span>中</span><b>36.6h</b><b>36.1%</b><b>2.2%</b></div></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間超の割合をゼロに近づける、月平均30時間程度</li>
+          <li>年休 小・中とも15日以上（R6 小14.3日／中11.5日）</li>
+          <li>働きがいを実感できることを目指す（高ストレス者の数値目標はなし）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>見守りは保護者・地域住民で行う。放課後以降の見回りは原則警察に任せる（宇部市花火大会を除く）</li>
+          <li>苦情窓口として市教委がメール・電話・来庁に対応。困難な事案は県ガイドライン（仮称）を踏まえ、弁護士・指導主事が学校とともに対応</li>
+          <li>R8年度から学校の電話機に通話録音機能を順次設置</li>
+          <li>市教委からの調査は校務支援システム・LoGoフォームで軽減</li>
+          <li>中学校はR11年度で部活動を終え、R12年度から地域移行・展開</li>
+          <li>学校支援員を全小中学校に配置。SSW・民生委員の中学校区会議への参加を目標80%に。関係機関との連携研修を年6回以上</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>授業時数の見直し、日課表の工夫。校務DXチェックリストの達成状況を33%から50%に</li>
+          <li>80h超は医師による面接指導、勤務間インターバル11時間、相談窓口を設置</li>
+          <li>努力目標として19時までに退庁。夏季・冬季休業中に土日祝を除いて10日以上一斉閉庁。長期休業中は早出遅出勤務</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-yamaguchi">
+    <summary class="city-head"><h3>山口市</h3>
+      <div class="meta"><span>策定 <b>令和8年4月</b></span><span>期間 <b>R8〜R11年度（4年）</b></span><span>対象 <b>小・中</b></span><span>全11頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.yamaguchi.lg.jp/soshiki/108/194176.html" target="_blank" rel="noopener">山口市ホームページの計画掲載ページ</a>（2026年4月1日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>国・県の方針を踏まえ、市の実情に合った取組を体系的に整理して進める</li>
+          <li>H30〜R6の年間平均の推移をグラフで示す（小 43→36.4h、中 53.4→40.9h）</li>
+          <li>縮減が進まない要因として「時間をかけて仕事をする習慣が変わらない」「業務内容や行事の精選が進まない」を挙げる</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>約36.4h</b><b>34.4%</b><span>—</span><span>中</span><b>40.9h</b><b>41.0%</b><span>—</span></div>
+          <p class="note">年平均はグラフからの読み取り。80h超の割合は記載なし</p></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%に近づける、月平均30時間程度</li>
+          <li>高ストレス者を5%に（R7 8.6%）</li>
+          <li>ウェルビーイングの向上を重視（年休の数値目標はなし）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>見守りは地域住民・ボランティア・関係団体と連携し、学校外の体制で行う</li>
+          <li>地域学校協働活動の連絡調整は、地域学校協働本部・コーディネーター等が担う体制に切り替える</li>
+          <li>調査・照会そのものを減らし、Webフォーム等で集計を自動化</li>
+          <li>情報教育支援員によるICT保守の支援体制を充実</li>
+          <li>統合型校務支援システム・生成AIで教材づくりや評価文作成を効率化</li>
+          <li>SC・特別支援専門員・SSWによるチーム支援で、一人で抱え込まない体制に</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>教育課程全体の点検・見直し、行事の精選（統合・簡素化、地域・保護者との役割分担）</li>
+          <li>3か月連続で80h超の職員は管理職との面談が必須。市教委の指導主事も同席し、働き方改革チェックシートで伴走支援</li>
+          <li>100h超は医師の面接指導が行われたかを学校に確認</li>
+          <li>ストレスチェック実施率100%。教育相談員の窓口を常設し、夏季に「相談ウィーク」</li>
+        </ul></div>
+        <div class="blk"><h4>フォローアップ</h4><ul>
+          <li>市教委が月ごとに把握し、校長会・総合教育会議で報告。各校HPで取組を公表。大規模校を中心に教員業務支援員を配置</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-suooshima">
+    <summary class="city-head"><h3>周防大島町</h3>
+      <div class="meta"><span>策定 <b>令和8年3月</b></span><span>期間 <b>R8〜R11年度（4年）</b></span><span>対象 <b>小・中</b></span><span>全6頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.town.suo-oshima.lg.jp/soshiki/26/14941.html" target="_blank" rel="noopener">周防大島町ホームページ「学校における働き方改革」（計画PDFを掲載）</a>（2026年4月1日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>町の教育方針「自立・協働・創造 〜ふるさとに誇りがもてる人づくり・地域づくり〜」の実現を目指す</li>
+          <li>働き方改革は時間の削減だけでなく「限られた時間の中で最大の成果を出す」意識を育て、業務の精選・効率化を徹底すること</li>
+          <li>町規則で在校等時間の上限を定め、管理・縮減に取り組んできた</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>32.5h</b><b>27.6%</b><b>2.6%</b><span>中</span><b>37.1h</b><b>34.5%</b><b>4.5%</b></div></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%、月平均30時間程度</li>
+          <li>年休 15日以上（R6 13日）</li>
+          <li>高ストレス者を5%に（R6 8.3%）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>見守りは保護者・地域住民で行う。見回りは警察に任せ、学校独自の見回りは原則行わない</li>
+          <li>調査の内容や回答方法を精査。ICT保守は事務職員とICT支援員が中心</li>
+          <li>学校プールは近隣校との共同使用や民間委託を検討。校内清掃は回数・範囲を減らし、輪番で分担</li>
+          <li>R8年度中に休日の部活動を原則地域展開。平日は部活動指導員の配置を続ける</li>
+          <li>給食時の食に関する指導は栄養教諭または学級担任等。教員業務支援員を積極的に配置、ICTヘルプデスクも活用</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>授業時数の見直し、日課表の工夫</li>
+          <li>2〜6か月平均80時間超などの長時間勤務者に、医師の面接指導を強く勧める</li>
+          <li>管理職向けのメンタルヘルス研修、長期休業中の閉庁日、最終退校時刻の設定を推奨</li>
+          <li>町内小中学校の留守番電話を活用し、緊急時以外の時間外電話対応をなくす</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-yanai">
+    <summary class="city-head"><h3>柳井市</h3>
+      <div class="meta"><span>策定 <b>令和8年2月</b></span><span>期間 <b>R8〜R9年度（2年）</b></span><span>対象 <b>小・中</b></span><span>全7頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city-yanai.jp/soshiki/26/jisshikeikaku.html" target="_blank" rel="noopener">柳井市ホームページの計画掲載ページ</a>（2026年3月3日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>業務量の適切な管理と健康の確保で、市がめざす「愛、夢、志をはぐくむ教育」の基盤をつくる</li>
+          <li>令和2年4月に市の規則を改正して在校等時間の上限を定め、管理・縮減に取り組んできた</li>
+          <li>中学校は平均でも45時間を超える。負担感が大きいのは生徒指導対応と部活動で、地域人材の活用で時間的余裕をつくる</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>35.5h</b><b>30.6%</b><b>1.0%</b><span>中</span><b>48.4h</b><b>45.0%</b><b>10.9%</b></div></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%、月平均30時間程度</li>
+          <li>年休 15日以上（R6 12日）</li>
+          <li>高ストレス者 5%以下（R6 7.5%）</li>
+          <li>ストレスチェックの「健康リスク」の値を5%以下に（R6 7.9%）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）</h4><ul>
+          <li>登校時刻の見直しを進め、見守りは保護者・地域住民で行う。見回りは青少年育成センターに任せ、学校独自の見回りは原則行わない</li>
+          <li>給食費はR7年度から小学校も無償化し、小・中とも公会計化済み。その他の学校徴収金も予算に組み入れられる範囲を精査</li>
+          <li>困難な事案は県のスクールロイヤー（R7配置）と連携し、市の顧問弁護士にも相談できる体制</li>
+          <li>統合型校務支援システムで学校から市への報告の負担を軽減。学校事務の共同実施協議会・共同実施会を設置</li>
+          <li>学校プールの管理は、学校外の屋内プールを使うことで段階的に廃止。R8年度に全小学校と中学校2校で実施</li>
+          <li>部活動：R9年度までに原則すべての部に部活動指導員か外部指導者を配置し、可能な部から休日の地域展開</li>
+          <li>業務支援員を児童生徒数の多い学校に配置。自動採点ツールを活用し、学校と連携して通知表を見直す</li>
+          <li>SC・SSWの活用日数・時間を増やす。関係機関と連携できる体制づくり、医療・福祉人材の派遣拡充</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>授業時数の見直し、日課表の工夫。クラウドを使った校務DXを積極的に進める学校を100%に</li>
+          <li>時間外の留守番電話・通話録音を、児童生徒数の多い学校に設置</li>
+          <li>80h超で「希望する」職員に医師の面接指導。勤務間インターバル11時間、全校でストレスチェック実施率100%</li>
+          <li>市教委に相談窓口を設置。長期休業中に学校閉庁日</li>
+        </ul></div>
+        <div class="blk"><h4>フォローアップ</h4><ul>
+          <li>学期ごとに学校から出る報告で時間外を把握。市教委HPと各学校HPで公表</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-hikari">
+    <summary class="city-head"><h3>光市</h3>
+      <div class="meta"><span>策定 <b>令和8年3月</b></span><span>期間 <b>R8〜R11年度（4年、随時見直し）</b></span><span>対象 <b>小・中</b></span><span>全8頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.hikari.lg.jp/soshiki/9/gakkokyoiku/7394.html" target="_blank" rel="noopener">光市ホームページ「教育委員会 学校教育課について」（計画PDFを掲載）</a>（2026年8月18日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>働き方改革は労働時間の削減だけでなく、管理職や専門職を含む全教職員の働き方を見直し、健康とウェルビーイングを守ること</li>
+          <li>市教委が「学校における働き方改革推進会議」（教育長・校長ら）で取組を進め、指導主事・CSアドバイザー・小中一貫教育企画員が伴走支援</li>
+          <li>R2〜R6の推移をグラフで示す（45h超 小44.9→34.5%、中37.7→26.5%）。改善は見られるが、多くの教員が上限を超えている</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>36.6h</b><b>34.5%</b><span>—</span><span>中</span><b>33.4h</b><b>26.5%</b><span>—</span></div>
+          <p class="note">グラフ中に記された値。80h超の割合は記載なし。中学校の方が小学校より少ない</p></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%、月平均30時間程度</li>
+          <li>高ストレス者の割合を0%に近づける</li>
+          <li>年休の数値目標はなし</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>取組（4本柱・13の取組）</h4><ul>
+          <li>柱1 業務の見直し：市教委の会議・調査・書類を廃止・統合・簡素化。勤怠管理システムで出退勤を管理。文科省の事例集や県の現状分析ツールで意識改革の研修</li>
+          <li>柱2 校務の効率化：アンケート集計の電子化、統合型校務支援システムの活用</li>
+          <li>柱3 勤務体制の改善：学年末休業日の拡大、長期休業中の閉庁日（窓口対応者なし）、時程の工夫、最終退校時刻・ノー残業デーの推奨、全校の留守番電話</li>
+          <li>部活動：学校部活動はR7年度末で原則終了（R8年度に中3になる生徒の所属を除く）。地域クラブ団体の試行運用はR6年4月から、情報サイトで発信</li>
+          <li>サポート人材：光っ子サポーター（全小中学校）、教員業務支援員、スクールライフ支援員、学校司書、SC（中学校区ごと）、SSW</li>
+          <li>柱4 連携・協働：コミュニティ・スクール、地域連携教育アドバイザー、小中一貫教育（乗り入れ授業、高学年の一部教科担任制）で負担を軽減</li>
+        </ul></div>
+        <div class="blk"><h4>健康確保</h4><ul>
+          <li>医師の面接指導、勤務間インターバル、ストレスチェックの実施など、健康確保措置の項目は計画にない</li>
+        </ul></div>
+        <div class="blk"><h4>フォローアップ</h4><ul>
+          <li>出退勤管理システムとストレスチェックで把握。市HPで公表し、総合教育会議に報告。各校のWebページで取組を公表</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+<details class="city" id="c-shunan">
+    <summary class="city-head"><h3>周南市</h3>
+      <div class="meta"><span>策定 <b>令和8年3月</b></span><span>期間 <b>R8〜R11年度（4年、毎年度見直し）</b></span><span>対象 <b>小・中</b></span><span>全14頁</span></div></summary>
+    <p class="src">出典：<a href="https://www.city.shunan.lg.jp/soshiki/58/145047.html" target="_blank" rel="noopener">周南市ホームページの計画掲載ページ</a>（2026年3月31日更新）</p>
+    <div class="city-body">
+      <div>
+        <div class="blk"><h4>趣旨・現状</h4><ul>
+          <li>長時間労働が常態化し、志願倍率の低下、教員不足、精神疾患による休職の増加にもつながっていると分析。「未来につながる学びがあふれる学校」を目指す</li>
+          <li>事務職員を含むすべての職員にとって働きやすい職場づくりが必要と明記</li>
+          <li>H28からの推移を示す（年平均 小48.3→41.6h、中65.7→45.1h）。負担が大きいのは学年・学級事務、校務分掌、教材研究、部活動</li>
+        </ul>
+          <div class="stat"><span class="h">R6</span><span class="h">年平均</span><span class="h">45h超</span><span class="h">80h超</span>
+            <span>小</span><b>41.6h</b><b>42.6%</b><span>—</span><span>中</span><b>45.1h</b><b>44.4%</b><span>—</span></div>
+          <p class="note">80h超の割合は記載なし</p></div>
+        <div class="blk"><h4>目標</h4><ul>
+          <li>月45時間以下の割合を100%、月平均30時間以内（年360時間以下）</li>
+          <li>年休 15日以上（R6 13.5日）</li>
+          <li>高ストレス者の割合を減らす（R6 15.1%、数値目標なし）</li>
+          <li>「活力がみなぎる」「仕事に誇り」「お互いの理解」の点数を上げる（R6 2.5／3.1／3.0点、4点満点）</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>業務の見直し（3分類）　取組ごとに継続・新規・検討を明示、★はR8重点</h4><ul>
+          <li>見守り・見回りは学校運営協議会や地域協育ネット、青少年育成センターを中心に。地域学校協働活動推進員を中学校区に1名配置</li>
+          <li>学校徴収金は、公会計化や直接購入など教員が関わらない方法を検討</li>
+          <li>カスハラ対応ガイドラインをR8年度中に作成し研修★。市長部局と苦情の相談窓口を設ける★</li>
+          <li>調査はWEB化し、市教委で答えられるものは学校に依頼しない。専門性に関わらない調査は事務職員等も回答</li>
+          <li>プールはR6〜R8に民間施設・インストラクターによる水泳授業を実証研究。体育館開放に予約システム、機械警備、清掃の点検</li>
+          <li>部活動はR8年6月以降廃止し、平日・休日すべて地域展開</li>
+          <li>教員業務支援員（R7 33校29名）、学校図書館司書・指導員、介助員・生活指導員（140名）、SC・SSW（各1名）。自動採点システム★</li>
+        </ul></div>
+        <div class="blk"><h4>学校の措置・健康確保</h4><ul>
+          <li>標準授業時数を大幅に上回る編成はしない。日課表の見直し、80h超に管理職が面談、勤務時間外は留守番電話</li>
+          <li>学校のグランド・デザインと教員の自己目標シートに業務改善を位置付け★。学校評価に働き方改革の項目、チーム担任制を検討</li>
+          <li>100h超で医師の面接指導を促進。勤務間インターバル11時間、市教委に相談窓口、長期休業中に7日間程度の一斉閉庁、定時退校日を月1回以上★</li>
+          <li>早出遅出勤務の拡大をR9年度までに検討。持ち帰り残業時間の適切な把握と、持ち帰りを生まない環境づくりを研究</li>
+        </ul></div>
+        <div class="blk"><h4>フォローアップ</h4><ul>
+          <li>時間外を役職ごとに把握しHPで公表★。T-netとストレスチェックで把握。「周南市働き方改革推進委員会」（仮称）を設置★。年度末・年度始めの休業期間の延長を規則改正に向け調整</li>
+        </ul></div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="part" id="tokucho">
+  <div class="part-head"><span class="no">②</span><h2>市町ごとの特徴</h2><p>他の計画と比べて目立つ点</p></div>
+  <div class="feat-grid">
+<div class="feat"><h3>美祢市 <small>小中</small></h3><span class="tag">支援人材・市の資源を総動員</span><ul>
+      <li>「3分類以外の取組」を独立した章にし、サポート人材を10種挙げる</li>
+      <li>温水プール、図書館職員、フラワーセンター、雑草抑制シートなど市の施設・人員を活用</li>
+      <li>学年末休業の延長、夏季短縮分3日の振り替えなど、学校暦にも手を入れる</li>
+      <li>保護者へ時間外連絡を控えるよう依頼文書を配布</li>
+      <li>小学校の数値は11市町中最良（45h超15.8%）。中は43.4%で差が大きい</li>
+    </ul></div>
+<div class="feat"><h3>長門市 <small>小中</small></h3><span class="tag">部活は先行・在宅研修</span><ul>
+      <li>部活動の地域展開はR7年8月から実施済み（光市と並んで早い）</li>
+      <li>オンライン研修の在宅受講を認める、在宅勤務の規定がある</li>
+      <li>中学校の45時間超が45.3%で11市町中最も高い（80時間超は8.5%で柳井市に次ぐ）</li>
+      <li>年休目標13.5日は控えめ、高ストレス者は「0%に近づける」</li>
+      <li>「教員業務・地域連携アシスタント」を全校に</li>
+    </ul></div>
+<div class="feat"><h3>萩市 <small>小中</small></h3><span class="tag">部活を全面展開・DX目標が高い</span><ul>
+      <li>R8年9月から平日も含めた全部活動を地域展開と、踏み込んだ内容</li>
+      <li>定時退校日は月2回以上で11市町中最多</li>
+      <li>校務DXチェックリストの達成率80%目標、33項目を全て掲載</li>
+      <li>R4〜R6の推移と県比較、年360時間超の割合まで示す</li>
+      <li>相談窓口一覧を別紙に。テレワークの検討を明記</li>
+    </ul></div>
+<div class="feat"><h3>山陽小野田市 <small>小中</small></h3><span class="tag">独自構成・制度改革を検討</span><ul>
+      <li>3分類ではなく独自の6項目で措置を整理</li>
+      <li>県条例・規則の上限（45/360時間、臨時100/720時間など）を詳しく載せる</li>
+      <li>80時間超はまず校長が面接し、要件に当たれば医師へ（二段階）</li>
+      <li>二期制・チーム担任制・長期休業期間の見直しなど、制度そのものを検討</li>
+      <li>小学校の数値は県平均より低い。年休は数値目標なし</li>
+    </ul></div>
+<div class="feat"><h3>下関市 <small>小中高</small></h3><span class="tag">高校を含む・指標が多い</span><ul>
+      <li>唯一、市立高校を対象に含む（高校の45時間超は42.5%）</li>
+      <li>計画期間はR10までの3年（県プランの終期に合わせたとみられる）</li>
+      <li>数値目標が最も多く、ワークエンゲイジメント（誇り・活力）まで数値化</li>
+      <li>見回りを青少年補導委員に任せる、プールの民間委託を検討</li>
+      <li>夏季に9日連続の閉庁</li>
+    </ul></div>
+<div class="feat"><h3>宇部市 <small>小中</small></h3><span class="tag">簡潔・保護者対応が具体的</span><ul>
+      <li>全3頁で最も簡潔。期間は5年（R13.3まで）で最長</li>
+      <li>部活動はR11で終了しR12から地域移行。11市町で最も遅い</li>
+      <li>市教委の苦情窓口、弁護士・指導主事の同行、通話録音の導入と、保護者対応策が具体的</li>
+      <li>「19時退庁」「土日祝を除き10日以上の閉庁」と時間を数字で示す</li>
+      <li>関係機関との研修年6回、会議参加率80%など数値化された措置が多い</li>
+    </ul></div>
+<div class="feat"><h3>山口市 <small>小中</small></h3><span class="tag">伴走型の面談・意識面の課題分析</span><ul>
+      <li>「時間をかけて働く習慣」「行事の精選不足」を要因に挙げ、意識面にも踏み込む</li>
+      <li>3か月連続80時間超で管理職面談を必須に、指導主事が同席して伴走支援</li>
+      <li>医師の面接指導は「100時間超で実施を確認」と基準が高い（周南市も100時間）</li>
+      <li>教育課程の見直し・行事の精選を独立項目に。夏季の「相談ウィーク」</li>
+      <li>部活動・年休・勤務間インターバルの記載はない</li>
+    </ul></div>
+<div class="feat"><h3>周防大島町 <small>小中</small></h3><span class="tag">唯一の町・現場の細かな業務</span><ul>
+      <li>11市町で唯一の町。町規則で上限を定める</li>
+      <li>校内清掃・給食指導・プール管理まで3分類で細かく整理</li>
+      <li>留守番電話で時間外の電話対応をなくすと明記</li>
+      <li>管理職向けメンタルヘルス研修。医師面接は「推奨」の表現</li>
+      <li>フォローアップは4項目と簡素</li>
+    </ul></div>
+<div class="feat"><h3>柳井市 <small>小中</small></h3><span class="tag">期間2年・プールと徴収金に踏み込む</span><ul>
+      <li>計画期間はR8〜R9の2年で、11市町で最も短い</li>
+      <li>中学校は年平均48.4時間、80時間超10.9%で、ともに11市町で最も高い</li>
+      <li>学校プールの管理を段階的に廃止し、R8年度に全小学校と中学校2校で学校外の屋内プールを使う</li>
+      <li>給食費の無償化・公会計化を済ませ、その他の学校徴収金も予算化を検討</li>
+      <li>ストレスチェックの「健康リスク」5%以下を目標に。医師の面接指導は80時間超で「希望する職員」が対象</li>
+    </ul></div>
+<div class="feat"><h3>光市 <small>小中</small></h3><span class="tag">部活動を終了・小中一貫で負担軽減</span><ul>
+      <li>学校部活動はR7年度末で原則終了（R8年度の中3を除く）。地域クラブの試行はR6年4月から</li>
+      <li>11市町で唯一、中学校の時間外が小学校より少ない（月平均 小36.6h／中33.4h）</li>
+      <li>「4本柱・13の取組」の独自構成で、3分類での整理はない。美祢市と共通する表現が多い</li>
+      <li>小中一貫教育（乗り入れ授業・一部教科担任制）を負担軽減策に位置付ける</li>
+      <li>医師の面接指導・勤務間インターバルなど健康確保措置の記載がなく、年休目標もない</li>
+    </ul></div>
+<div class="feat"><h3>周南市 <small>小中</small></h3><span class="tag">継続・新規・検討を明示、重点に★</span><ul>
+      <li>取組ごとに「継続・新規・検討」を示し、R8年度の重点に★を付ける。全14頁で最も分量が多い</li>
+      <li>小学校の時間外が11市町で最も多い（年平均41.6h、45h超42.6%）。H28からの減少（中65.7h→45.1h）も示す</li>
+      <li>カスハラ対応ガイドラインをR8年度中に作り、市長部局と相談窓口を設ける</li>
+      <li>唯一「持ち帰り残業時間の適切な把握」に触れる（研究・検討の段階）</li>
+      <li>「周南市働き方改革推進委員会」（仮称）の設置、チーム担任制、年度末・年度始めの休業延長を検討</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="part" id="hikaku">
+  <div class="part-head"><span class="no">③</span><h2>内容比較</h2><p>項目ごとに11市町を並べています</p></div>
+  <div class="charts">
+  <div class="chart">
+    <h3>R6年度　時間外在校等時間の月平均</h3>
+    <p class="sub">1か月あたりの時間外在校等時間の年間平均。点線は11市町共通の目標「30時間程度」。山口市の小学校はグラフから読み取った値、光市はグラフ中に記された値、下関市の高校は47.1時間（グラフには載せていません）</p>
+    <div class="legend"><span><i style="background:var(--accent)"></i>小学校</span><span><i style="background:var(--ochre)"></i>中学校</span><span><i style="background:var(--ochre);opacity:.45"></i>山口県平均</span></div>
+    <div class="gridwrap has-target" id="wrap-hours">
+      <div class="bars" id="bars-hours"></div>
+    </div>
+    <div class="axis"><span></span><div class="ticks" id="ticks-hours"></div></div>
+  </div>
+
+  <div class="chart">
+    <h3>R6年度　月45時間を超えた教員の割合</h3>
+    <p class="sub">各計画の記載値。下関市の高校は42.5%（グラフには載せていません）</p>
+    <div class="legend"><span><i style="background:var(--accent)"></i>小学校</span><span><i style="background:var(--ochre)"></i>中学校</span><span><i style="background:var(--ochre);opacity:.45"></i>山口県平均</span></div>
+    <div class="gridwrap">
+      <div class="bars" id="bars-rate"></div>
+    </div>
+    <div class="axis"><span></span><div class="ticks" id="ticks-rate"></div></div>
+  </div>
+  </div>
+  <h3 class="grp-title">基本情報</h3>
+<section class="item"><h4>策定時期</h4><dl><div class="row"><dt>美祢市</dt><dd>R8.2</dd></div><div class="row"><dt>長門市</dt><dd>R8.4</dd></div><div class="row"><dt>萩市</dt><dd>R8.2</dd></div><div class="row"><dt>山陽小野田市</dt><dd>R8.4</dd></div><div class="row"><dt>下関市</dt><dd>R8.4</dd></div><div class="row"><dt>宇部市</dt><dd>記載なし</dd></div><div class="row"><dt>山口市</dt><dd>R8.4</dd></div><div class="row"><dt>周防大島町</dt><dd>R8.3</dd></div><div class="row"><dt>柳井市</dt><dd>R8.2</dd></div><div class="row"><dt>光市</dt><dd>R8.3</dd></div><div class="row"><dt>周南市</dt><dd>R8.3</dd></div></dl></section>
+<section class="item"><h4>計画期間</h4><dl><div class="row"><dt>美祢市</dt><dd>R8〜R10<span class="n">3年（R11.3まで）・随時見直し</span></dd></div><div class="row"><dt>長門市</dt><dd>R8〜R11<span class="n">4年</span></dd></div><div class="row"><dt>萩市</dt><dd>R8〜R11<span class="n">4年・随時見直し</span></dd></div><div class="row"><dt>山陽小野田市</dt><dd>R8〜R11<span class="n">4年</span></dd></div><div class="row hi"><dt>下関市</dt><dd>R8〜R10<span class="n">3年</span></dd></div><div class="row hi"><dt>宇部市</dt><dd>R8〜R12<span class="n">5年（R13.3まで）</span></dd></div><div class="row"><dt>山口市</dt><dd>R8〜R11<span class="n">4年</span></dd></div><div class="row"><dt>周防大島町</dt><dd>R8〜R11<span class="n">4年</span></dd></div><div class="row hi"><dt>柳井市</dt><dd>R8〜R9<span class="n">2年</span></dd></div><div class="row"><dt>光市</dt><dd>R8〜R11<span class="n">4年・随時見直し</span></dd></div><div class="row"><dt>周南市</dt><dd>R8〜R11<span class="n">4年・毎年度見直し</span></dd></div></dl></section>
+<section class="item"><h4>対象校種</h4><dl><div class="row"><dt>美祢市</dt><dd>小・中</dd></div><div class="row"><dt>長門市</dt><dd>小・中</dd></div><div class="row"><dt>萩市</dt><dd>小・中</dd></div><div class="row"><dt>山陽小野田市</dt><dd>小・中</dd></div><div class="row hi"><dt>下関市</dt><dd>小・中・高</dd></div><div class="row"><dt>宇部市</dt><dd>小・中</dd></div><div class="row"><dt>山口市</dt><dd>小・中</dd></div><div class="row"><dt>周防大島町</dt><dd>小・中</dd></div><div class="row"><dt>柳井市</dt><dd>小・中</dd></div><div class="row"><dt>光市</dt><dd>小・中</dd></div><div class="row"><dt>周南市</dt><dd>小・中</dd></div></dl></section>
+<section class="item"><h4>分量</h4><dl><div class="row"><dt>美祢市</dt><dd>10頁</dd></div><div class="row"><dt>長門市</dt><dd>7頁</dd></div><div class="row"><dt>萩市</dt><dd>10頁</dd></div><div class="row"><dt>山陽小野田市</dt><dd>7頁</dd></div><div class="row"><dt>下関市</dt><dd>7頁</dd></div><div class="row"><dt>宇部市</dt><dd>3頁</dd></div><div class="row"><dt>山口市</dt><dd>11頁</dd></div><div class="row"><dt>周防大島町</dt><dd>6頁</dd></div><div class="row"><dt>柳井市</dt><dd>7頁</dd></div><div class="row"><dt>光市</dt><dd>8頁</dd></div><div class="row"><dt>周南市</dt><dd>14頁</dd></div></dl></section>
+<h3 class="grp-title">R6実績</h3>
+<section class="item"><h4>年平均（小／中）</h4><dl><div class="row"><dt>美祢市</dt><dd>26.9h／42.3h</dd></div><div class="row"><dt>長門市</dt><dd>37.6h／45.3h</dd></div><div class="row"><dt>萩市</dt><dd>35.1h／47.0h</dd></div><div class="row"><dt>山陽小野田市</dt><dd>30.7h／40.0h</dd></div><div class="row"><dt>下関市</dt><dd>33.6h／39.7h<span class="n">高 47.1h</span></dd></div><div class="row"><dt>宇部市</dt><dd>32.0h／36.6h</dd></div><div class="row"><dt>山口市</dt><dd>約36.4h／40.9h<span class="n">グラフ読取</span></dd></div><div class="row"><dt>周防大島町</dt><dd>32.5h／37.1h</dd></div><div class="row"><dt>柳井市</dt><dd>35.5h／48.4h</dd></div><div class="row hi"><dt>光市</dt><dd>36.6h／33.4h<span class="n">グラフ中の値・中学校の方が少ない</span></dd></div><div class="row"><dt>周南市</dt><dd>41.6h／45.1h<span class="n">H28 48.3h／65.7h</span></dd></div></dl></section>
+<section class="item"><h4>45h超（小／中）</h4><dl><div class="row"><dt>美祢市</dt><dd>15.8%／43.4%</dd></div><div class="row"><dt>長門市</dt><dd>36.3%／45.3%</dd></div><div class="row"><dt>萩市</dt><dd>33.2%／46.5%</dd></div><div class="row"><dt>山陽小野田市</dt><dd>21.2%／40.2%</dd></div><div class="row"><dt>下関市</dt><dd>26.7%／36.8%<span class="n">高 42.5%</span></dd></div><div class="row"><dt>宇部市</dt><dd>24.5%／36.1%</dd></div><div class="row"><dt>山口市</dt><dd>34.4%／41.0%</dd></div><div class="row"><dt>周防大島町</dt><dd>27.6%／34.5%</dd></div><div class="row"><dt>柳井市</dt><dd>30.6%／45.0%</dd></div><div class="row hi"><dt>光市</dt><dd>34.5%／26.5%<span class="n">グラフ中の値</span></dd></div><div class="row"><dt>周南市</dt><dd>42.6%／44.4%</dd></div></dl></section>
+<section class="item"><h4>80h超（小／中）</h4><dl><div class="row"><dt>美祢市</dt><dd>0.3%／7.2%</dd></div><div class="row"><dt>長門市</dt><dd>1.9%／8.5%</dd></div><div class="row no"><dt>萩市</dt><dd>記載なし<span class="n">年360h超 63.3%／69.8%</span></dd></div><div class="row"><dt>山陽小野田市</dt><dd>0.2%／3.9%</dd></div><div class="row"><dt>下関市</dt><dd>1.8%／5.9%<span class="n">高 7.5%</span></dd></div><div class="row"><dt>宇部市</dt><dd>1.8%／2.2%</dd></div><div class="row no"><dt>山口市</dt><dd>記載なし</dd></div><div class="row"><dt>周防大島町</dt><dd>2.6%／4.5%</dd></div><div class="row"><dt>柳井市</dt><dd>1.0%／10.9%</dd></div><div class="row no"><dt>光市</dt><dd>記載なし</dd></div><div class="row no"><dt>周南市</dt><dd>記載なし</dd></div></dl></section>
+<h3 class="grp-title">目標</h3>
+<section class="item"><h4>45h以下の割合</h4><dl><div class="row"><dt>美祢市</dt><dd>45h・360h超を0%に近づける</dd></div><div class="row"><dt>長門市</dt><dd>100%</dd></div><div class="row"><dt>萩市</dt><dd>R11までに100%</dd></div><div class="row"><dt>山陽小野田市</dt><dd>100%に近づける</dd></div><div class="row"><dt>下関市</dt><dd>100%<span class="n">地域クラブ指導者は月平均80h以下</span></dd></div><div class="row"><dt>宇部市</dt><dd>45h超をゼロに近づける</dd></div><div class="row"><dt>山口市</dt><dd>100%に近づける</dd></div><div class="row"><dt>周防大島町</dt><dd>100%</dd></div><div class="row"><dt>柳井市</dt><dd>100%</dd></div><div class="row"><dt>光市</dt><dd>100%</dd></div><div class="row"><dt>周南市</dt><dd>100%</dd></div></dl></section>
+<section class="item"><h4>月平均</h4><dl><div class="row"><dt>美祢市</dt><dd>30h以内<span class="n">推進指標</span></dd></div><div class="row"><dt>長門市</dt><dd>30h程度</dd></div><div class="row"><dt>萩市</dt><dd>30h程度</dd></div><div class="row"><dt>山陽小野田市</dt><dd>30h程度</dd></div><div class="row"><dt>下関市</dt><dd>30h程度</dd></div><div class="row"><dt>宇部市</dt><dd>30h程度</dd></div><div class="row"><dt>山口市</dt><dd>30h程度</dd></div><div class="row"><dt>周防大島町</dt><dd>30h程度</dd></div><div class="row"><dt>柳井市</dt><dd>30h程度</dd></div><div class="row"><dt>光市</dt><dd>30h程度</dd></div><div class="row"><dt>周南市</dt><dd>30h以内<span class="n">年360h以下</span></dd></div></dl></section>
+<section class="item"><h4>年休の平均取得</h4><dl><div class="row no"><dt>美祢市</dt><dd>なし</dd></div><div class="row"><dt>長門市</dt><dd>13.5日以上<span class="n">R6 約11.5日</span></dd></div><div class="row"><dt>萩市</dt><dd>14日以上<span class="n">R6 12.9日</span></dd></div><div class="row"><dt>山陽小野田市</dt><dd>取得率向上<span class="n">数値なし</span></dd></div><div class="row"><dt>下関市</dt><dd>15日以上<span class="n">R6 13.8日</span></dd></div><div class="row"><dt>宇部市</dt><dd>15日以上<span class="n">R6 小14.3／中11.5日</span></dd></div><div class="row no"><dt>山口市</dt><dd>なし</dd></div><div class="row"><dt>周防大島町</dt><dd>15日以上<span class="n">R6 13日</span></dd></div><div class="row"><dt>柳井市</dt><dd>15日以上<span class="n">R6 12日</span></dd></div><div class="row no"><dt>光市</dt><dd>なし</dd></div><div class="row"><dt>周南市</dt><dd>15日以上<span class="n">R6 13.5日</span></dd></div></dl></section>
+<section class="item"><h4>高ストレス者</h4><dl><div class="row"><dt>美祢市</dt><dd>0%に近づける<span class="n">R7 11.0%</span></dd></div><div class="row"><dt>長門市</dt><dd>0%に近づける<span class="n">R6 7.2%</span></dd></div><div class="row no"><dt>萩市</dt><dd>なし</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>なし</dd></div><div class="row"><dt>下関市</dt><dd>11%以下<span class="n">R6 13.5%</span></dd></div><div class="row no"><dt>宇部市</dt><dd>なし</dd></div><div class="row"><dt>山口市</dt><dd>5%<span class="n">R7 8.6%</span></dd></div><div class="row"><dt>周防大島町</dt><dd>5%<span class="n">R6 8.3%</span></dd></div><div class="row"><dt>柳井市</dt><dd>5%以下<span class="n">R6 7.5%</span></dd></div><div class="row"><dt>光市</dt><dd>0%に近づける<span class="n">R6の値は記載なし</span></dd></div><div class="row"><dt>周南市</dt><dd>減少させる<span class="n">R6 15.1%・数値目標なし</span></dd></div></dl></section>
+<section class="item"><h4>その他の指標</h4><dl><div class="row no"><dt>美祢市</dt><dd>—</dd></div><div class="row no"><dt>長門市</dt><dd>—</dd></div><div class="row hi"><dt>萩市</dt><dd>「働きがい」良い 50%以上<br>校務DX 41.7→80%</dd></div><div class="row"><dt>山陽小野田市</dt><dd>健診・精密検査受診率100%に近づける</dd></div><div class="row hi"><dt>下関市</dt><dd>「仕事に誇り」90%以上<br>「活力」60%以上</dd></div><div class="row"><dt>宇部市</dt><dd>校務DX 33→50%</dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row no"><dt>周防大島町</dt><dd>—</dd></div><div class="row hi"><dt>柳井市</dt><dd>「健康リスク」5%以下<br>校務DX推進校100%</dd></div><div class="row no"><dt>光市</dt><dd>—</dd></div><div class="row hi"><dt>周南市</dt><dd>「活力」「誇り」「お互いの理解」の点数を上げる<span class="n">R6 2.5／3.1／3.0点（4点満点）</span></dd></div></dl></section>
+<h3 class="grp-title">業務の見直し</h3>
+<section class="item"><h4>部活動の地域展開</h4><dl><div class="row"><dt>美祢市</dt><dd>R8中に地域クラブへ展開</dd></div><div class="row hi"><dt>長門市</dt><dd>R7.8から実施中・継続</dd></div><div class="row hi"><dt>萩市</dt><dd>R8.9から平日・休日の全部活</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>記載なし</dd></div><div class="row"><dt>下関市</dt><dd>R9から休日は原則全部<span class="n">高校は外部指導者</span></dd></div><div class="row hi"><dt>宇部市</dt><dd>R11で終了<br>R12から地域移行</dd></div><div class="row no"><dt>山口市</dt><dd>記載なし</dd></div><div class="row"><dt>周防大島町</dt><dd>R8中に休日を原則展開</dd></div><div class="row"><dt>柳井市</dt><dd>R9までに全部活に指導員・外部指導者、可能な部から休日展開</dd></div><div class="row hi"><dt>光市</dt><dd>学校部活動はR7年度末で原則終了（R8の中3を除く）、地域クラブ試行R6.4〜</dd></div><div class="row hi"><dt>周南市</dt><dd>R8年6月以降は部活動を廃止し、平日・休日すべて地域展開</dd></div></dl></section>
+<section class="item"><h4>校外の見回り</h4><dl><div class="row"><dt>美祢市</dt><dd>警察等に任せる</dd></div><div class="row"><dt>長門市</dt><dd>補導時の引取りは保護者</dd></div><div class="row"><dt>萩市</dt><dd>警察等に任せる</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>—</dd></div><div class="row"><dt>下関市</dt><dd>青少年補導委員に任せる</dd></div><div class="row"><dt>宇部市</dt><dd>原則警察に任せる<span class="n">花火大会を除く</span></dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row"><dt>周防大島町</dt><dd>警察に任せる</dd></div><div class="row"><dt>柳井市</dt><dd>青少年育成センターに任せる</dd></div><div class="row no"><dt>光市</dt><dd>—</dd></div><div class="row"><dt>周南市</dt><dd>青少年育成センター中心</dd></div></dl></section>
+<section class="item"><h4>保護者対応・電話</h4><dl><div class="row hi"><dt>美祢市</dt><dd>相談窓口を検討・弁護士、留守電・録音を全校に、保護者へ依頼文書</dd></div><div class="row"><dt>長門市</dt><dd>弁護士等を活用する体制</dd></div><div class="row no"><dt>萩市</dt><dd>—</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>—</dd></div><div class="row no"><dt>下関市</dt><dd>—</dd></div><div class="row hi"><dt>宇部市</dt><dd>市教委の苦情窓口、弁護士・指導主事が同行、通話録音をR8から</dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row"><dt>周防大島町</dt><dd>留守番電話で時間外対応をなくす</dd></div><div class="row"><dt>柳井市</dt><dd>県スクールロイヤーと連携・市の顧問弁護士、留守電・録音を大規模校に</dd></div><div class="row"><dt>光市</dt><dd>留守番電話で時間外の電話対応を軽減</dd></div><div class="row hi"><dt>周南市</dt><dd>カスハラ対応ガイドラインをR8中に作成・研修、市長部局と相談窓口、留守電</dd></div></dl></section>
+<section class="item"><h4>プール・施設</h4><dl><div class="row"><dt>美祢市</dt><dd>体育館等は公民館、温水プールを活用</dd></div><div class="row"><dt>長門市</dt><dd>体育館は地域交流プラザ</dd></div><div class="row"><dt>萩市</dt><dd>水泳指導を外部委託</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>—</dd></div><div class="row"><dt>下関市</dt><dd>プールの民間委託を検討</dd></div><div class="row no"><dt>宇部市</dt><dd>—</dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row"><dt>周防大島町</dt><dd>共同使用・民間委託を検討</dd></div><div class="row hi"><dt>柳井市</dt><dd>学校外の屋内プール活用で管理を段階的に廃止（R8に全小と中2校）</dd></div><div class="row no"><dt>光市</dt><dd>—</dd></div><div class="row"><dt>周南市</dt><dd>民間施設・インストラクターの水泳授業を実証研究（R6〜R8）、体育館開放に予約システム</dd></div></dl></section>
+<section class="item"><h4>支援人材</h4><dl><div class="row hi"><dt>美祢市</dt><dd>教員業務支援員を全校＋学級支援補助員ほか10種</dd></div><div class="row"><dt>長門市</dt><dd>教員業務・地域連携アシスタントを全校、医ケア看護職員等</dd></div><div class="row"><dt>萩市</dt><dd>長時間勤務校に教員業務支援員、ICT授業改善支援員を増員</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>地域人材の協力（具体策は少ない）</dd></div><div class="row"><dt>下関市</dt><dd>教員業務支援員を拡充、こころのアシスタント、高校相談員</dd></div><div class="row"><dt>宇部市</dt><dd>学校支援員を全小中</dd></div><div class="row"><dt>山口市</dt><dd>大規模校中心に教員業務支援員、情報教育支援員</dd></div><div class="row"><dt>周防大島町</dt><dd>教員業務支援員を積極配置、ICT支援員</dd></div><div class="row"><dt>柳井市</dt><dd>業務支援員を大規模校に、SC・SSWの日数増、部活動指導員・外部指導者</dd></div><div class="row"><dt>光市</dt><dd>光っ子サポーター全校、教員業務支援員、スクールライフ支援員、学校司書、SC、SSW</dd></div><div class="row"><dt>周南市</dt><dd>教員業務支援員（33校29名）、図書館司書・指導員、介助員・生活指導員140名、SC・SSW各1名</dd></div></dl></section>
+<section class="item"><h4>ICT・生成AI</h4><dl><div class="row"><dt>美祢市</dt><dd>Teams・Forms、AIドリル</dd></div><div class="row"><dt>長門市</dt><dd>校務支援、自動採点、ペーパーレス</dd></div><div class="row"><dt>萩市</dt><dd>生成AI、調査の原則電子化、校務DX</dd></div><div class="row"><dt>山陽小野田市</dt><dd>ペーパーレス、文書電子化、生成AI</dd></div><div class="row"><dt>下関市</dt><dd>授業支援ツール、自動採点</dd></div><div class="row"><dt>宇部市</dt><dd>LoGoフォーム、自動採点、校務DX</dd></div><div class="row"><dt>山口市</dt><dd>Webフォーム、生成AI</dd></div><div class="row"><dt>周防大島町</dt><dd>ICTヘルプデスク</dd></div><div class="row"><dt>柳井市</dt><dd>統合型校務支援、自動採点、クラウド校務DX</dd></div><div class="row"><dt>光市</dt><dd>統合型校務支援、アンケート集計の電子化</dd></div><div class="row"><dt>周南市</dt><dd>統合型校務支援、ICT教育アドバイザー、自動採点、WEB調査</dd></div></dl></section>
+<h3 class="grp-title">健康確保・勤務</h3>
+<section class="item"><h4>長時間勤務者への面接</h4><dl><div class="row"><dt>美祢市</dt><dd>80h超 医師</dd></div><div class="row"><dt>長門市</dt><dd>80h超 医師</dd></div><div class="row"><dt>萩市</dt><dd>80h超 医師</dd></div><div class="row hi"><dt>山陽小野田市</dt><dd>80h超 校長面接<span class="n">要件で医師（県要領）</span></dd></div><div class="row"><dt>下関市</dt><dd>80h超 医師</dd></div><div class="row"><dt>宇部市</dt><dd>80h超 医師</dd></div><div class="row hi"><dt>山口市</dt><dd>3か月連続80h超 管理職面談＋指導主事同席<span class="n">100h超 医師の実施を確認</span></dd></div><div class="row"><dt>周防大島町</dt><dd>2〜6か月平均80h超等 医師を推奨</dd></div><div class="row hi"><dt>柳井市</dt><dd>80h超で希望者に医師</dd></div><div class="row no"><dt>光市</dt><dd>記載なし<span class="n">健康確保措置の項目なし</span></dd></div><div class="row"><dt>周南市</dt><dd>80h超 管理職面談<span class="n">100h超 医師の面接指導を促進</span></dd></div></dl></section>
+<section class="item"><h4>勤務間インターバル11h</h4><dl><div class="row no"><dt>美祢市</dt><dd>—</dd></div><div class="row"><dt>長門市</dt><dd>○</dd></div><div class="row"><dt>萩市</dt><dd>○</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>—</dd></div><div class="row"><dt>下関市</dt><dd>○</dd></div><div class="row"><dt>宇部市</dt><dd>○</dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row no"><dt>周防大島町</dt><dd>—</dd></div><div class="row"><dt>柳井市</dt><dd>○</dd></div><div class="row no"><dt>光市</dt><dd>—</dd></div><div class="row"><dt>周南市</dt><dd>○</dd></div></dl></section>
+<section class="item"><h4>定時退校・退庁時刻</h4><dl><div class="row"><dt>美祢市</dt><dd>最終退校時刻・ノー残業デー</dd></div><div class="row"><dt>長門市</dt><dd>定時退校日 月1回以上</dd></div><div class="row hi"><dt>萩市</dt><dd>定時退校日 月2回以上</dd></div><div class="row"><dt>山陽小野田市</dt><dd>最終退庁時刻・ノー残業デー</dd></div><div class="row"><dt>下関市</dt><dd>定時退校日 月1回以上</dd></div><div class="row"><dt>宇部市</dt><dd>19時までに退庁<span class="n">努力目標</span></dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row"><dt>周防大島町</dt><dd>最終退校時刻を推奨</dd></div><div class="row no"><dt>柳井市</dt><dd>—</dd></div><div class="row"><dt>光市</dt><dd>最終退校時刻・ノー残業デー（推奨）</dd></div><div class="row"><dt>周南市</dt><dd>定時退校日 月1回以上（R8中）</dd></div></dl></section>
+<section class="item"><h4>学校閉庁日</h4><dl><div class="row"><dt>美祢市</dt><dd>実施（窓口対応者なし）</dd></div><div class="row"><dt>長門市</dt><dd>長期休業中に一斉閉庁</dd></div><div class="row"><dt>萩市</dt><dd>市内一斉</dd></div><div class="row"><dt>山陽小野田市</dt><dd>適切に設定</dd></div><div class="row"><dt>下関市</dt><dd>夏季4日<span class="n">9日連続</span></dd></div><div class="row hi"><dt>宇部市</dt><dd>夏・冬に土日祝を除き10日以上</dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row"><dt>周防大島町</dt><dd>長期休業中</dd></div><div class="row"><dt>柳井市</dt><dd>長期休業中</dd></div><div class="row"><dt>光市</dt><dd>長期休業中（窓口対応者なし）</dd></div><div class="row"><dt>周南市</dt><dd>長期休業中に7日間程度</dd></div></dl></section>
+<section class="item"><h4>柔軟な勤務・学校暦</h4><dl><div class="row hi"><dt>美祢市</dt><dd>時差出勤、学年末休業の延長、夏季短縮分の振替</dd></div><div class="row"><dt>長門市</dt><dd>研修の在宅受講</dd></div><div class="row"><dt>萩市</dt><dd>早出遅出・テレワークを検討</dd></div><div class="row"><dt>山陽小野田市</dt><dd>二期制・チーム担任制・休業期間を検討</dd></div><div class="row no"><dt>下関市</dt><dd>—</dd></div><div class="row"><dt>宇部市</dt><dd>長期休業中の早出遅出</dd></div><div class="row no"><dt>山口市</dt><dd>—</dd></div><div class="row no"><dt>周防大島町</dt><dd>—</dd></div><div class="row no"><dt>柳井市</dt><dd>—</dd></div><div class="row hi"><dt>光市</dt><dd>学年末休業日の拡大、時程の工夫、小中一貫での運営効率化</dd></div><div class="row hi"><dt>周南市</dt><dd>早出遅出の拡大を検討、年度末・始めの休業延長を調整、チーム担任制を検討</dd></div></dl></section>
+<section class="item"><h4>相談体制</h4><dl><div class="row"><dt>美祢市</dt><dd>管理職面談・ラインケア</dd></div><div class="row"><dt>長門市</dt><dd>相談窓口、SCとの面談</dd></div><div class="row"><dt>萩市</dt><dd>窓口一覧を別紙で周知</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>—</dd></div><div class="row no"><dt>下関市</dt><dd>—</dd></div><div class="row"><dt>宇部市</dt><dd>相談窓口</dd></div><div class="row"><dt>山口市</dt><dd>相談窓口を常設、夏季「相談ウィーク」</dd></div><div class="row"><dt>周防大島町</dt><dd>管理職メンタル研修</dd></div><div class="row"><dt>柳井市</dt><dd>市教委に相談窓口</dd></div><div class="row no"><dt>光市</dt><dd>—</dd></div><div class="row"><dt>周南市</dt><dd>市教委に相談窓口</dd></div></dl></section>
+<section class="item hot" id="mochikaeri"><h4>★ 持ち帰り仕事の扱い</h4><dl><div class="row"><dt>美祢市</dt><dd>持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row"><dt>長門市</dt><dd>持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row"><dt>萩市</dt><dd>持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row"><dt>山陽小野田市</dt><dd>持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row"><dt>下関市</dt><dd>持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row"><dt>宇部市</dt><dd>持ち帰りや休憩時間の確保ができていない場合に、個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row no"><dt>山口市</dt><dd>記載なし<span class="n">重点支援の対象は時間外が長い学校のみ</span></dd></div><div class="row no"><dt>周防大島町</dt><dd>記載なし<span class="n">課題校への聞き取り・指導のみ</span></dd></div><div class="row"><dt>柳井市</dt><dd>持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導<span class="n">把握方法の記載なし</span></dd></div><div class="row no"><dt>光市</dt><dd>記載なし</dd></div><div class="row hi"><dt>周南市</dt><dd>課題校に個別支援。加えて「持ち帰り残業時間の適切な把握」と持ち帰りを生まない環境づくりを研究<span class="n">検討段階・方法は未定</span></dd></div></dl><p class="hot-note">★ 持ち帰り仕事について：8市町はいずれも「フォローアップ」の章で、ほぼ同じ文言で触れています。周南市はさらに、健康確保の取組の中で「持ち帰り残業時間の適切な把握」と持ち帰りを生まない環境づくりの研究を「検討」事項に挙げています。ただし、把握の方法（申告・調査など）まで定めた計画はありません。出退勤管理システムやICカードで把握されるのは学校にいる時間なので、持ち帰り分はその数値に含まれない点に注意が必要です。</p></section>
+<h3 class="grp-title">フォローアップ</h3>
+<section class="item"><h4>把握方法</h4><dl><div class="row"><dt>美祢市</dt><dd>ICカード（H29〜）</dd></div><div class="row"><dt>長門市</dt><dd>出退勤管理システム</dd></div><div class="row"><dt>萩市</dt><dd>毎月の学校調査</dd></div><div class="row no"><dt>山陽小野田市</dt><dd>記載なし</dd></div><div class="row"><dt>下関市</dt><dd>出退勤管理システム</dd></div><div class="row no"><dt>宇部市</dt><dd>記載なし</dd></div><div class="row"><dt>山口市</dt><dd>出退勤管理システム（月ごとに確認）</dd></div><div class="row no"><dt>周防大島町</dt><dd>記載なし</dd></div><div class="row"><dt>柳井市</dt><dd>学期ごとの学校報告</dd></div><div class="row"><dt>光市</dt><dd>出退勤管理システム</dd></div><div class="row"><dt>周南市</dt><dd>T-net（役職ごとに把握）</dd></div></dl></section>
+<section class="item"><h4>公表・報告</h4><dl><div class="row"><dt>美祢市</dt><dd>市HP・各校Web、教委・総合教育会議</dd></div><div class="row"><dt>長門市</dt><dd>市HP、教委・総合教育会議</dd></div><div class="row"><dt>萩市</dt><dd>市HP、教委・総合教育会議</dd></div><div class="row"><dt>山陽小野田市</dt><dd>各校・市HP、教委・総合教育会議</dd></div><div class="row"><dt>下関市</dt><dd>市HP、教委・総合教育会議</dd></div><div class="row"><dt>宇部市</dt><dd>市HP、教委・総合教育会議</dd></div><div class="row"><dt>山口市</dt><dd>校長会・総合教育会議、各校HP</dd></div><div class="row"><dt>周防大島町</dt><dd>町HP、教委・総合教育会議</dd></div><div class="row"><dt>柳井市</dt><dd>市教委HP・各校HP</dd></div><div class="row"><dt>光市</dt><dd>市HP、総合教育会議、各校Web</dd></div><div class="row"><dt>周南市</dt><dd>市HP、教委・総合教育会議</dd></div></dl></section>
+  <div class="tbl-legend"><span><i></i>他の市町と比べて目立つ・踏み込んだ内容</span><span>「—」「なし」は計画に記載がないもの</span></div>
+</section>
+
+<footer>
+  <p>出典：各市町教育委員会「〇〇立学校の教育職員に関する業務量管理・健康確保措置実施計画」（令和8年2〜4月）。数値は各計画の記載に基づき、山口市の年平均はグラフからの読み取りです。</p>
+  <ul class="srcs"><li>美祢市：<a href="https://www2.city.mine.lg.jp/soshiki/kyoiku/gakko/13195.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年3月26日更新）</li><li>長門市：<a href="https://www.city.nagato.yamaguchi.jp/site/kyouiku/67735.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年4月30日更新）</li><li>萩市：<a href="https://www.city.hagi.lg.jp/soshiki/87/h69379.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年2月28日更新）</li><li>山陽小野田市：<a href="https://www.city.sanyo-onoda.lg.jp/soshiki/38/gyoumukanri-gakko.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年8月17日更新）</li><li>下関市：<a href="https://www.city.shimonoseki.lg.jp/soshiki/99/154105.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年4月1日更新）</li><li>宇部市：<a href="https://www.city.ube.yamaguchi.jp/shisei/kouhou/kishahappyou/1008059/1028265/1028795.html" target="_blank" rel="noopener">記者発表「令和8年度より小・中学校教職員の働き方改革を一層推進」（計画PDFを掲載）</a>（2026年3月23日掲載）</li><li>山口市：<a href="https://www.city.yamaguchi.lg.jp/soshiki/108/194176.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年4月1日更新）</li><li>周防大島町：<a href="https://www.town.suo-oshima.lg.jp/soshiki/26/14941.html" target="_blank" rel="noopener">「学校における働き方改革」（計画PDFを掲載）</a>（2026年4月1日更新）</li><li>柳井市：<a href="https://www.city-yanai.jp/soshiki/26/jisshikeikaku.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年3月3日更新）</li><li>光市：<a href="https://www.city.hikari.lg.jp/soshiki/9/gakkokyoiku/7394.html" target="_blank" rel="noopener">「教育委員会 学校教育課について」（計画PDFを掲載）</a>（2026年8月18日更新）</li><li>周南市：<a href="https://www.city.shunan.lg.jp/soshiki/58/145047.html" target="_blank" rel="noopener">計画掲載ページ</a>（2026年3月31日更新）</li></ul>
+  <p>要約のため表現を簡略化しています。正確な内容は原本で確認してください。</p>
+</footer>
+</main>
+
+<script>
+(function(){
+  var max=56;
+  function render(key,data,unit,target){
+    var bars=document.getElementById("bars-"+key), ticks=document.getElementById("ticks-"+key);
+    data.forEach(function(r,i){
+      var pref=r[0]==="山口県平均";
+      var n=document.createElement("div"); n.className="name"+(pref?" pref":""); n.textContent=r[0];
+      var t=document.createElement("div"); t.className="track";
+      [["e",r[1]],["j",r[2]]].forEach(function(b){
+        var el=document.createElement("div"); el.className="bar "+b[0]+(pref?" pref":"");
+        el.style.width=(b[1]/max*100)+"%";
+        var lab=document.createElement("b"); lab.textContent=b[1].toFixed(1)+unit; el.appendChild(lab);
+        t.appendChild(el);
+      });
+      bars.appendChild(n); bars.appendChild(t);
+    });
+    [0,10,20,30,40,50].forEach(function(v){
+      var s=document.createElement("span"); s.style.left=(v/max*100)+"%"; s.textContent=v+unit; ticks.appendChild(s);
+    });
+    if(target){
+      var line=document.createElement("div"); line.className="target";
+      line.style.left="calc(5.6em + 10px + (100% - 5.6em - 10px) * "+(target/max)+")";
+      var tl=document.createElement("span"); tl.textContent="目標 "+target+unit; line.appendChild(tl);
+      document.getElementById("wrap-"+key).appendChild(line);
+    }
+  }
+  render("hours",[["美祢市",26.9,42.3],["長門市",37.6,45.3],["萩市",35.1,47.0],["山陽小野田市",30.7,40.0],["下関市",33.6,39.7],["宇部市",32.0,36.6],["山口市",36.4,40.9],["周防大島町",32.5,37.1],["柳井市",35.5,48.4],["光市",36.6,33.4],["周南市",41.6,45.1],["山口県平均",35.0,41.7]],"h",30);
+  render("rate",[["美祢市",15.8,43.4],["長門市",36.3,45.3],["萩市",33.2,46.5],["山陽小野田市",21.2,40.2],["下関市",26.7,36.8],["宇部市",24.5,36.1],["山口市",34.4,41.0],["周防大島町",27.6,34.5],["柳井市",30.6,45.0],["光市",34.5,26.5],["周南市",42.6,44.4],["山口県平均",30.8,41.4]],"%");
+})();
+</script>
+<script>
+(function(){
+  function openFromHash(){
+    var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el&&el.tagName==="DETAILS"){el.open=true;}
+  }
+  window.addEventListener("hashchange",openFromHash); openFromHash();
+  var all=document.getElementById("openall");
+  all.addEventListener("click",function(){
+    var on=all.getAttribute("aria-pressed")!=="true";
+    document.querySelectorAll("details.city").forEach(function(d){d.open=on;});
+    all.setAttribute("aria-pressed",on); all.textContent=on?"すべて閉じる":"すべて開く";
+  });
+})();
+</script>
+
+<script>
+/* v2-freeze：固定バーの実際の高さに合わせる */
+(function(){
+  var bar=document.querySelector(".topbar");
+  function setBar(){ if(bar) document.documentElement.style.setProperty("--bar-h",bar.offsetHeight+"px"); }
+  setBar(); window.addEventListener("resize",setBar); window.addEventListener("load",setBar);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setBar);
+})();
+</script>
