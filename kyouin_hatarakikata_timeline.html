@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>教員の働き方改革の流れ</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2433;
+      --muted: #5d687c;
+      --paper: #fffdf7;
+      --line: #d9e1ef;
+      --blue: #2f6fed;
+      --mint: #1fa97a;
+      --coral: #ff6f61;
+      --yellow: #ffd166;
+      --violet: #7965d8;
+      --sky: #dff3ff;
+      --peach: #ffe5dc;
+      --green: #ddf6e9;
+      --lav: #ece8ff;
+      --shadow: 0 12px 28px rgba(29, 36, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255, 209, 102, 0.34), transparent 34rem),
+        linear-gradient(180deg, #f6fbff 0%, var(--paper) 42%, #f7fbf5 100%);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: #164bb8;
+      font-weight: 800;
+      text-decoration-thickness: 0.12em;
+      text-underline-offset: 0.18em;
+    }
+
+    .page {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 18px 16px 42px;
+    }
+
+    .hero {
+      padding: 28px 0 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      padding: 6px 12px;
+      border: 2px solid rgba(47, 111, 237, 0.2);
+      border-radius: 999px;
+      background: #ffffffcc;
+      color: var(--blue);
+      font-size: 0.95rem;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 10vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.28rem;
+      font-weight: 700;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 22px 0 16px;
+    }
+
+    .summary-item {
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px 16px;
+      box-shadow: 0 5px 14px rgba(29, 36, 51, 0.06);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .summary-item strong {
+      color: var(--coral);
+      font-size: 1.35rem;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 28px 0 0;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 18px;
+      bottom: 18px;
+      width: 5px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--blue), var(--mint), var(--coral), var(--violet));
+    }
+
+    .card {
+      position: relative;
+      margin: 0 0 22px;
+      padding: 0 0 0 56px;
+    }
+
+    .dot {
+      position: absolute;
+      left: 7px;
+      top: 18px;
+      width: 34px;
+      height: 34px;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 2px rgba(29, 36, 51, 0.08), var(--shadow);
+    }
+
+    .card:nth-child(2n) .dot { background: var(--mint); }
+    .card:nth-child(3n) .dot { background: var(--coral); }
+    .card:nth-child(4n) .dot { background: var(--violet); }
+
+    .panel {
+      border: 2px solid rgba(29, 36, 51, 0.08);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card:nth-child(1) .panel,
+    .card:nth-child(5) .panel,
+    .card:nth-child(9) .panel {
+      background: linear-gradient(180deg, #fff 0%, var(--sky) 100%);
+    }
+
+    .card:nth-child(2) .panel,
+    .card:nth-child(6) .panel {
+      background: linear-gradient(180deg, #fff 0%, var(--green) 100%);
+    }
+
+    .card:nth-child(3) .panel,
+    .card:nth-child(7) .panel {
+      background: linear-gradient(180deg, #fff 0%, var(--peach) 100%);
+    }
+
+    .card:nth-child(4) .panel,
+    .card:nth-child(8) .panel {
+      background: linear-gradient(180deg, #fff 0%, var(--lav) 100%);
+    }
+
+    .panel-head {
+      padding: 18px 18px 10px;
+      border-bottom: 2px dashed rgba(29, 36, 51, 0.12);
+    }
+
+    .date {
+      display: inline-block;
+      margin: 0 0 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: #3d2a00;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 6.7vw, 2.4rem);
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .formal {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .panel-body {
+      padding: 16px 18px 20px;
+    }
+
+    .block {
+      margin: 0 0 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(29, 36, 51, 0.08);
+    }
+
+    .block:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 6px;
+      color: #2c3550;
+      font-size: 1.05rem;
+      font-weight: 950;
+    }
+
+    .label span {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1d2433;
+      color: #fff;
+      font-size: 0.92rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    ul {
+      margin: 7px 0 0;
+      padding-left: 1.1em;
+      font-size: 1.12rem;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .links {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .link-button {
+      display: block;
+      padding: 12px 14px;
+      border: 2px solid rgba(47, 111, 237, 0.22);
+      border-radius: 8px;
+      background: #fff;
+      font-size: 1.05rem;
+      word-break: break-word;
+    }
+
+    .note {
+      margin: 24px 0 0;
+      padding: 16px;
+      border: 2px solid rgba(255, 111, 97, 0.25);
+      border-radius: 8px;
+      background: #fff7ef;
+      color: #62402a;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      text-align: center;
+    }
+
+    @media (min-width: 700px) {
+      .page {
+        padding: 28px 28px 58px;
+      }
+
+      .summary {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .timeline::before {
+        left: 28px;
+      }
+
+      .card {
+        padding-left: 72px;
+      }
+
+      .dot {
+        left: 10px;
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">スマホ向け・大きめ文字の流れ図</p>
+      <h1>教員の長時間勤務から<br>実施計画へ</h1>
+      <p class="lead">
+        「社会問題化」から、月45時間・年360時間の上限、給特法改正、教育委員会の計画づくりまでを、1段ずつつなげて整理します。
+      </p>
+
+      <div class="summary" aria-label="要点">
+        <div class="summary-item"><strong>問題</strong><br>長時間勤務・休職者増・教員不足</div>
+        <div class="summary-item"><strong>基準</strong><br>在校等時間を月45時間・年360時間へ</div>
+        <div class="summary-item"><strong>実行</strong><br>教育委員会が計画を作り、公表・改善</div>
+      </div>
+    </section>
+
+    <section class="timeline" aria-label="教員の働き方改革の年表">
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">出発点：平成28年度調査以降</p>
+            <h2>長時間勤務が社会問題化</h2>
+            <p class="formal">勤務実態調査・精神疾患による休職者増加・教員不足</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>授業準備、部活動、保護者対応、校務分掌、会議、調査回答などが積み重なり、教員の仕事量が勤務時間の枠を大きく超える状態が続きました。長時間勤務は、心身の不調や休職、教職志望者の減少、採用難とも結びついて受け止められるようになります。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が課題になったか</p>
+              <ul>
+                <li>勤務時間を客観的に把握できていない学校・教育委員会があること。</li>
+                <li>教員が担う業務の範囲が広く、学校だけでは削減しにくい仕事も多いこと。</li>
+                <li>子どもに向き合う時間を確保するためにも、業務の整理と人員・環境整備が必要なこと。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>この問題意識を受けて、中央教育審議会で「学校における働き方改革」を総合的に議論する流れが始まりました。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/mext_00349.html" target="_blank" rel="noopener">文科省：中央教育審議会での審議</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">平成29年8月・12月</p>
+            <h2>中教審の緊急提言と中間まとめ</h2>
+            <p class="formal">「学校における働き方改革に係る緊急提言」／中間まとめ／文科省の緊急対策</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>学校現場の負担が限界に近づいているという認識から、答申を待たずに早く取り組むべき事項が示されました。文科省ページでは、平成29年8月29日の緊急提言、同年12月22日の中間まとめ、12月26日の緊急対策が一連の流れとして整理されています。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が示されたか</p>
+              <ul>
+                <li>学校・教師が担う業務を見直し、役割分担を進めること。</li>
+                <li>勤務時間管理を徹底し、ICTやタイムカード等で実態を把握する方向性。</li>
+                <li>部活動、調査・照会、学校徴収金、地域・保護者対応など、学校だけではなく教育委員会や国も関わって見直すこと。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>「とにかく勤務時間を見えるようにする」「学校が抱え込む仕事を分ける」という方向が固まり、次に、上限時間をどのように示すかが大きな論点になりました。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/079/sonota/1399944.htm" target="_blank" rel="noopener">文科省：学校における働き方改革に係る緊急提言</a>
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/mext_00349.html" target="_blank" rel="noopener">文科省：平成29年から平成31年答申までの審議一覧</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">平成30年度から平成31年1月</p>
+            <h2>上限ガイドラインへ</h2>
+            <p class="formal">「公立学校の教師の勤務時間の上限に関するガイドライン」</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>民間労働者には働き方改革関連法で時間外労働の上限規制が整備され、地方公務員にも月45時間・年360時間という考え方が広がりました。教員についても、超勤4項目以外の業務を含めて、実態として業務をしている時間をどう管理するかが問題になりました。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が定められたか</p>
+              <ul>
+                <li>「在校等時間」という考え方を使い、校内にいる時間を基本に、校外での職務時間なども含めて把握すること。</li>
+                <li>時間外在校等時間の目安を、原則として月45時間以内・年360時間以内とすること。</li>
+                <li>臨時的な特別の事情がある場合でも、月100時間未満・年720時間以内などの上限を置くこと。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>ガイドラインは重要な基準でしたが、当初は「ガイドライン」であり、法令上の根拠を強めて学校現場で確実に守らせる必要があるとされました。そのため、次の中教審答申では法令上の位置付けが論点になります。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/1412983.htm" target="_blank" rel="noopener">文科省：公立学校の教師の勤務時間の上限に関するガイドライン</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">平成31年1月25日</p>
+            <h2>中央教育審議会答申</h2>
+            <p class="formal">「新しい時代の教育に向けた持続可能な学校指導・運営体制の構築のための学校における働き方改革に関する総合的な方策について」</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>緊急提言・中間まとめ・ガイドラインの議論を受け、学校の働き方改革を一時的な改善ではなく、制度・組織・業務の見直しとして進める必要が整理されました。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が答申されたか</p>
+              <ul>
+                <li>勤務時間管理の徹底。</li>
+                <li>学校・教師が担う業務の明確化と適正化。</li>
+                <li>教育委員会、学校、地域、保護者、国が役割を分担して、学校現場の業務を縮減すること。</li>
+                <li>上限ガイドラインの実効性を高めるため、法令上の根拠を持たせる方向。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>答申を受けて、ガイドラインを「お願い」にとどめず、法律上の指針として位置付けるための給特法改正につながりました。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/079/sonota/1412985.htm" target="_blank" rel="noopener">文科省：中央教育審議会答申</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">令和元年</p>
+            <h2>給特法改正</h2>
+            <p class="formal">公立の義務教育諸学校等の教育職員の給与等に関する特別措置法 第7条</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>上限ガイドラインを学校現場で確実に運用するためには、文科省が法令に基づく「指針」を定め、教育委員会がそれに沿って管理する仕組みが必要だと考えられました。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が定められたか</p>
+              <ul>
+                <li>文部科学大臣が、教育職員の業務量の適切な管理と健康・福祉確保のための指針を定めること。</li>
+                <li>この指針を通じて、在校等時間の把握や上限時間の考え方を、より明確に教育委員会へ示すこと。</li>
+                <li>長期休業期間等における一年単位の変形労働時間制の仕組みも関連して整理されたこと。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>法律に第7条の根拠ができたことで、令和2年に文科省告示として正式な指針が出されました。</p>
+              <div class="links">
+                <a class="link-button" href="https://laws.e-gov.go.jp/law/346AC0000000077" target="_blank" rel="noopener">e-Gov：公立の義務教育諸学校等の教育職員の給与等に関する特別措置法</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">令和2年1月17日</p>
+            <h2>文科省指針</h2>
+            <p class="formal">「公立学校の教育職員の業務量の適切な管理その他教育職員の服務を監督する教育委員会が教育職員の健康及び福祉の確保を図るために講ずべき措置に関する指針」</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>給特法第7条に基づき、ガイドラインの内容を法令上の根拠を持つ指針として整理し直す段階です。ここで「在校等時間」「時間外在校等時間」の考え方が、教育委員会の管理対象としてはっきり示されました。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が定められたか</p>
+              <ul>
+                <li>在校等時間は、学校教育活動に関する業務を行っている時間として外形的に把握できる時間とすること。</li>
+                <li>1か月時間外在校等時間は45時間、1年間時間外在校等時間は360時間を原則上限とすること。</li>
+                <li>教育委員会は、ICTやタイムカード等で客観的に時間を把握し、記録を適切に管理すること。</li>
+                <li>上限は「そこまで働いてよい」という意味ではなく、長時間化を防ぐ取組と一体で使うこと。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>この指針を受け、都道府県・市町村の教育委員会は、自分たちの規則や方針に上限時間や勤務時間管理の仕組みを落とし込むことになりました。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/shotou/uneishien/detail/1407520_00004.htm" target="_blank" rel="noopener">文科省：令和2年1月17日 指針の告示等について</a>
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/" target="_blank" rel="noopener">文科省：学校における働き方改革について</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">令和2年度以降</p>
+            <h2>教育委員会規則へ</h2>
+            <p class="formal">各都道府県・市町教育委員会「教育職員の業務量の適切な管理等に関する規則」など</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>国の指針だけでは、各学校の日々の勤務管理は動きません。実際に教員を服務監督する教育委員会が、規則・方針・要綱として、自分たちの学校に適用するルールを整える必要がありました。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が規定されたか</p>
+              <ul>
+                <li>時間外在校等時間の上限を、月45時間・年360時間を基本に定めること。</li>
+                <li>校長が在校等時間を把握し、教育委員会が状況を確認する流れ。</li>
+                <li>長時間勤務が続く教員への面接指導、業務分担の見直し、勤務時間管理の改善。</li>
+                <li>部活動、会議、調査回答、校務分掌などの業務改善を組み合わせること。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>規則は整っても、自治体ごとの取組状況には差が残りました。そこで令和7年改正では、より具体的な「実施計画」を作り、公表し、毎年度点検する仕組みへ進みます。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/" target="_blank" rel="noopener">文科省：学校における働き方改革について</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">令和7年6月18日公布</p>
+            <h2>給特法等改正法</h2>
+            <p class="formal">公立の義務教育諸学校等の教育職員の給与等に関する特別措置法等の一部を改正する法律（令和7年法律第68号）</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>令和2年指針の後も、長時間勤務は減少傾向が見られる一方で、依然として長時間に及ぶ教員が多く、教育委員会や学校による取組状況にも差があるとされました。そこで、単なる上限管理から、計画・実行・公表・改善のサイクルを強める方向に進みました。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何が定められたか</p>
+              <ul>
+                <li>教育委員会に、業務量管理・健康確保措置実施計画の策定を義務付けること。</li>
+                <li>計画には、目標、具体的な措置、実施に必要な事項を定めること。</li>
+                <li>計画を公表し、毎年度、実施状況を把握・公表し、改善すること。</li>
+                <li>給特法上、第8条として実施計画の仕組みが位置付けられたこと。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>次</span>次へのつながり</p>
+              <p>これにより、各市町教育委員会は「うちは何をして、どの数値をどう改善するのか」を計画として示し、毎年ふり返ることが求められる段階に入りました。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/a_menu/01_q.htm" target="_blank" rel="noopener">文科省：令和7年通常国会における法改正について</a>
+                <a class="link-button" href="https://laws.e-gov.go.jp/law/346AC0000000077?occasion_date=20260901" target="_blank" rel="noopener">e-Gov：給特法 第7条・第8条を含む現行法令</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="date">令和7年度以降</p>
+            <h2>各市町教育委員会の実施計画へ</h2>
+            <p class="formal">「教育職員に関する業務量管理・健康確保措置実施計画」</p>
+          </div>
+          <div class="panel-body">
+            <div class="block">
+              <p class="label"><span>背</span>背景</p>
+              <p>上限時間を規則に書くだけでは、学校の仕事量そのものは減りません。そこで、教育委員会が具体的な目標と取組を示し、学校、首長部局、地域、保護者とも課題を共有しながら改善を続ける仕組みが求められます。</p>
+            </div>
+            <div class="block">
+              <p class="label"><span>定</span>何を計画に書くか</p>
+              <ul>
+                <li>時間外在校等時間に関する目標。例：月45時間以下の教員割合、年間360時間以下、月平均30時間程度など。</li>
+                <li>業務量管理・健康確保措置。例：校務DX、会議削減、部活動改革、支援スタッフ活用、調査照会の削減、面接指導体制。</li>
+                <li>毎年度の実施状況、目標達成状況、改善内容の公表。</li>
+                <li>総合教育会議への報告など、地方公共団体全体で共有する仕組み。</li>
+              </ul>
+            </div>
+            <div class="block">
+              <p class="label"><span>意</span>この段階の意味</p>
+              <p>「長時間勤務をなくしましょう」という呼びかけから、「誰が、いつまでに、何を減らし、どの数字で確認するか」を見える化する段階です。教育委員会の計画は、学校現場の働き方改革を毎年度アップデートする土台になります。</p>
+              <div class="links">
+                <a class="link-button" href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf" target="_blank" rel="noopener">文科省：業務量管理・健康確保措置に関する指針（改正後）</a>
+                <a class="link-button" href="https://www.mext.go.jp/b_menu/hakusho/mext_00026.html" target="_blank" rel="noopener">文科省：令和7年改正に伴う政令・指針・計画例</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <aside class="note">
+      日付メモ：ユーザー提示の流れでは「平成30年2月 上限ガイドライン」とありましたが、文科省ページに掲載されている確定版の「公立学校の教師の勤務時間の上限に関するガイドライン」は平成31年1月25日付です。このHTMLでは、平成30年度の検討を経て平成31年1月に確定した流れとして整理しています。
+    </aside>
+
+    <p class="footer">作成日：2026年9月23日 ／ 参照先は文部科学省・e-Gov等の公式ページを中心に整理</p>
+  </main>
+</body>
+</html>
