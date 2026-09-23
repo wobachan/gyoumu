@@ -1,0 +1,418 @@
+<title>山口県19市町 出退勤管理白書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --okbg:#e5f3ea; --mid:#9a5a00; --midbg:#fbf0dd; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --mid:#f0b35c; --midbg:#3a2e1a; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+  --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+  --ok:#6fd09a; --okbg:#1c3327; --mid:#f0b35c; --midbg:#3a2e1a; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+  --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+h1,h2{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.75rem;line-height:1.35;margin:0 0 6px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+h2{font-size:1.25rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+h3{font-size:1rem;margin:0 0 6px}
+a{color:var(--link)}
+p{max-width:68ch}
+.lead{max-width:72ch;margin:18px 0 0}
+.small{font-size:.85rem;color:var(--sub)}
+.num{font-variant-numeric:tabular-nums}
+
+/* 要点 */
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:8px}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pt b.big{display:block;font-size:1.6rem;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pt.key{border:2px solid var(--neoline);background:var(--neo)}
+.pt.key b.big{color:var(--neoink)}
+.pt p{margin:4px 0 0;font-size:.92rem}
+
+/* 分布 */
+.dist{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px}
+.bar{display:grid;grid-template-columns:11em 1fr 2.5em;gap:10px;align-items:center;margin:6px 0}
+.bar .lab{font-size:.9rem}
+.bar .track{background:var(--soft);border-radius:3px;height:18px;position:relative}
+.bar .fill{height:100%;border-radius:3px;background:var(--accent)}
+.bar .fill.pc{background:#6a7fb5}
+.bar .fill.un{background:var(--unk);opacity:.55}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.bar .who{grid-column:2 / 4;font-size:.8rem;color:var(--sub);margin-top:-4px}
+@media (max-width:560px){ .bar{grid-template-columns:1fr 2.5em} .bar .lab{grid-column:1 / 3} .bar .who{grid-column:1 / 3} }
+
+/* 表 */
+.tbl{overflow:auto;max-height:82vh;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:separate;border-spacing:0;width:100%}
+table.main{min-width:1560px}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left;font-size:.88rem}
+th{background:var(--head);color:var(--headink);font-weight:700;white-space:nowrap;position:sticky;top:0;z-index:2}
+td:first-child,th:first-child{position:sticky;left:0;z-index:1;background:var(--card);font-weight:700;white-space:nowrap;border-right:1px solid var(--line)}
+th:first-child{z-index:3;background:var(--head)}
+tr.grp td{background:var(--soft);font-size:.8rem;color:var(--sub);font-weight:700;letter-spacing:.05em;padding:4px 10px}
+tr.grp td:first-child{background:var(--soft)}
+tr.neo td{background:var(--neo);border-top:3px solid var(--neoline)}
+tr.neo td:first-child{color:var(--neoink);background:var(--neo)}
+.s{display:inline-block;min-width:1.7em;text-align:center;font-weight:700;border-radius:4px;padding:0 5px}
+.s.ok{color:var(--ok);background:var(--okbg)} .s.mid{color:var(--mid);background:var(--midbg)}
+.s.ng{color:var(--ng);background:var(--ngbg)} .s.unk{color:var(--unk);background:var(--unkbg)}
+.c{display:inline-block;font-size:.7rem;font-weight:700;border:1px solid;border-radius:3px;padding:0 4px;margin-left:3px;vertical-align:1px;white-space:nowrap}
+.c.k{color:var(--ok)} .c.y{color:var(--mid)} .c.g{color:var(--neoink)}
+td .n2{display:block;font-size:.8rem;color:var(--sub);margin-top:2px}
+
+/* 凡例 */
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.85rem;color:var(--sub);margin:0 0 10px}
+
+/* 根拠 */
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:8px 0}
+summary{cursor:pointer;padding:10px 14px;font-weight:700}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+details .body{padding:0 16px 12px}
+details ul{margin:4px 0;padding-left:1.2em}
+details li{margin:3px 0;font-size:.92rem}
+.src{font-size:.82rem;word-break:break-all}
+
+.jump{margin:8px 0 0!important;font-weight:700}
+.jump a{color:var(--neoink)}
+.jump a:focus-visible{outline:2px solid var(--neoline);outline-offset:2px}
+h2{scroll-margin-top:16px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.cmp .pt b.big{font-size:1.4rem}
+.note{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.note ul{margin:6px 0;padding-left:1.3em}
+.note li{margin:4px 0}
+@media (max-width:600px){ h1{font-size:1.35rem} body{font-size:14px} }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">第1段階　実態調査</p>
+  <h1>山口県19市町 教職員出退勤管理システム調査</h1>
+  <p class="date">2026年9月23日調べ　公開資料（市町の実施計画・議会会議録・文部科学省調査・県教委資料）による</p>
+  <p class="lead">調べたかったのは、どのメーカーを使っているかではありません。<strong>「勤務時間の管理」で止まっているのか、「勤務の実態の把握」（昼休憩・持ち帰り業務など）まで届いているのか</strong>です。費用（初期費用・年間保守料・更新時期）は第2段階で調べます。</p>
+</header>
+
+<h2 id="points">要点</h2>
+<div class="points">
+  <div class="pt"><b class="big num">19 / 19</b><p>令和6年度から、すべての市町が「全校で客観的な方法により在校等時間を把握」と回答（文科省調査）。</p></div>
+  <div class="pt"><b class="big num">11市町</b><p>ICカードを使っていることが公的資料で確認できる（防府は有力）。職員室のPCで名前をクリックする方式は周南・光の2市。</p></div>
+  <div class="pt"><b class="big num">1市のみ</b><p>製品名が公開資料でわかるのは周南市（市の独自開発「T-Net」）だけ。美祢市は現場で確認した名前のみ。</p></div>
+  <div class="pt key"><b class="big num">0市町</b><p><strong>「昼休憩が取れたかを把握している」</strong>と公開資料で確認できた市町はなし。教委が知っているのは、多くても学校ごとの休憩の<em>決まり</em>（いつ取ることにしているか）まで。</p><p class="jump"><a href="#kyukei">「休憩の決まりを把握」とは ↓</a></p></div>
+  <div class="pt key"><b class="big num">3 / 19</b><p>「学校で持ち帰り業務が行われているかを把握している」と答えたのは防府・岩国・阿武だけ（令和7年度文科省調査。全国平均43.0%）。</p><p class="jump"><a href="#mochikaeri">3市町はどう把握しているのか ↓</a></p></div>
+  <div class="pt"><b class="big num">全19市町</b><p>統合型校務支援システムは県の共同調達（システムディ社「School Engine」、令和6年4月から）。勤務管理はオプション機能で、出退勤に使われている記述はない。</p></div>
+</div>
+
+<h2 id="dist">打刻方法の分布</h2>
+<div class="dist">
+  <div class="bar"><span class="lab">ICカード</span><span class="track"><span class="fill" style="width:31.6%;display:block"></span></span><span class="n">6</span><span class="who">宇部・山口・美祢・下松・和木・田布施</span></div>
+  <div class="bar"><span class="lab">ICカード＋タイムカード</span><span class="track"><span class="fill" style="width:10.5%;display:block"></span></span><span class="n">2</span><span class="who">柳井・平生</span></div>
+  <div class="bar"><span class="lab">ICカード＋PC</span><span class="track"><span class="fill" style="width:10.5%;display:block"></span></span><span class="n">2</span><span class="who">下関（ICカード＋PC集計ソフト）・長門（ICカードやPCによる記録表）</span></div>
+  <div class="bar"><span class="lab">ICカード（有力）</span><span class="track"><span class="fill" style="width:5.3%;display:block;opacity:.6"></span></span><span class="n">1</span><span class="who">防府（以前はPCのボタン、R8計画で「ICカードを利用した勤務時間管理システム」）</span></div>
+  <div class="bar"><span class="lab">PC（名前をクリック）</span><span class="track"><span class="fill pc" style="width:10.5%;display:block"></span></span><span class="n">2</span><span class="who">周南・光</span></div>
+  <div class="bar"><span class="lab">現在の方式が不明</span><span class="track"><span class="fill un" style="width:31.6%;display:block"></span></span><span class="n">6</span><span class="who">岩国・山陽小野田・萩・阿武・周防大島・上関</span></div>
+  <p class="small" style="margin:10px 0 0">システム構成は、周南市（市教委サーバー・校務支援一体）と美祢市（スタンドアロン、現場確認）以外は公開資料で確認できませんでした。</p>
+</div>
+
+<h2 id="table">調査票</h2>
+<div class="legend">
+  <span><span class="s ok">○</span> あり</span><span><span class="s mid">△</span> 一部・別管理</span><span><span class="s ng">×</span> なし</span><span><span class="s unk">？</span> 公開資料で確認できず</span>
+  <span><span class="c k">確定</span> 公的資料に明記</span><span><span class="c y">有力</span> 間接的な記述</span><span><span class="c g">現場</span> 現場で確認</span>
+</div>
+<div class="tbl" tabindex="0" aria-label="19市町の調査票（横にスクロールできます）">
+<table class="main">
+<thead><tr>
+<th>市町</th><th>システム名</th><th>メーカー</th><th>導入年度</th><th>打刻方法</th><th>システム構成</th><th>校務支援との連携</th><th>昼休憩記録</th><th>持ち帰り業務記録</th><th>出張管理</th><th>勤務実態把握</th><th>備考</th><th>情報源</th>
+</tr></thead>
+<tbody>
+<tr class="grp"><td>西部</td><td colspan="12"></td></tr>
+<tr><td>下関市</td><td>不明（「各校の出退勤管理システム」）</td><td>不明</td><td>H29〜30頃<span class="c y">有力</span></td><td>ICカード＋PC集計ソフト<span class="c k">確定</span></td><td>不明（学校ごとの可能性）</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>H30.3「ほとんどの学校で導入」。R7.12委員会で「事前にタイムカードを打つ」との指摘</td><td>R8.4計画、議会答弁</td></tr>
+<tr><td>宇部市</td><td>不明</td><td>不明</td><td>H27.9 全校<span class="c k">確定</span></td><td>ICカード<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>県内で最も早い部類の全校導入</td><td>H30.3・R1.12答弁、R8計画</td></tr>
+<tr><td>山陽小野田市</td><td>不明</td><td>不明</td><td>不明</td><td>H30時点：PCソフトに本人が入力（自主申告）<span class="c k">確定</span><span class="n2">現在の方式は不明</span></td><td>H30時点：各自PCのソフト</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>文科省R5「一部の学校」→R6「全校」で客観的把握</td><td>H30.6答弁、R8.4計画</td></tr>
+<tr><td>美祢市</td><td>出退勤管理システム for IC<span class="c g">現場</span></td><td>不明</td><td>H29 全小中<span class="c k">確定</span></td><td>ICカード（FeliCa）<span class="c k">確定</span></td><td>スタンドアロン（Win7ノートPC）<span class="c g">現場</span></td><td><span class="s ng">×</span><span class="c g">現場</span></td><td><span class="s ng">×</span><span class="c g">現場</span></td><td><span class="s ng">×</span><span class="c g">現場</span></td><td><span class="s mid">△</span> Excel<span class="c g">現場</span></td><td><span class="s ng">×</span><span class="c g">現場</span></td><td>校務PCとは独立。CSV出力あり。H29は国の業務改善加速事業に関連</td><td>R8.2計画、H29.6答弁、現場確認</td></tr>
+<tr class="grp"><td>北部</td><td colspan="12"></td></tr>
+<tr><td>長門市</td><td>不明（「本市で導入している出退勤管理システム」）</td><td>不明</td><td>H30.6以前<span class="c y">有力</span></td><td>ICカードやPCによる勤務時間記録表<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>文科省R4では「R5.4以降に客観的把握を開始予定」とも回答</td><td>R8.4計画、H30.6・R7.3答弁</td></tr>
+<tr><td>萩市</td><td>公開資料で確認できず</td><td>不明</td><td>R5〜6頃か<span class="c y">有力</span></td><td>R2.3時点：自己申告が中心<span class="c k">確定</span><span class="n2">現在の方式は不明</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>R8計画に「出退勤管理システム」「ICカード」の語なし（毎月の学校調査で把握）。文科省R5「一部の学校」→R6「全校」</td><td>R8.2計画、R2.3・R4.6答弁</td></tr>
+<tr><td>阿武町</td><td>不明（「出退勤管理システム」）</td><td>不明</td><td>不明</td><td>不明</td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>持ち帰り業務の有無を教委として把握（文科省R7）。計画は教委ブログのみに掲載</td><td>R8.4計画、町議会会議録181件</td></tr>
+<tr class="grp"><td>中部</td><td colspan="12"></td></tr>
+<tr><td>山口市</td><td>不明</td><td>不明</td><td>H29<span class="c k">確定</span></td><td>ICカードリーダー<span class="c k">確定</span></td><td>市で一元把握（方式は不明）</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>H29に自己申告制を廃止してICカードへ</td><td>H29.6・H30.6答弁、R8.4計画</td></tr>
+<tr><td>防府市</td><td>不明</td><td>不明</td><td>PC方式はH30末に運用中<span class="c k">確定</span><span class="n2">ICカード化の時期は不明</span></td><td>以前：校務PCで出勤ボタン<span class="c k">確定</span><span class="n2">現在：ICカード<span class="c y">有力</span></span></td><td>以前：市のグループウェア上</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>持ち帰り業務の有無を教委として把握（文科省R7）</td><td>R5.6答弁、R8.3計画、点検評価</td></tr>
+<tr class="grp"><td>東部</td><td colspan="12"></td></tr>
+<tr><td>周南市</td><td>T-Net（タイムレコーダー機能）</td><td>市独自開発</td><td>H27（独自ソフト＋専用PC）<span class="c k">確定</span><span class="n2">T-NetはR5</span></td><td>PC（共用PCで名前をクリック）<span class="c k">確定</span></td><td>サーバー（市教委）・学校事務系校務支援と一体<span class="c k">確定</span></td><td><span class="s mid">△</span><span class="n2">学校事務系は一体、県の統合型とは別</span></td><td><span class="s unk">？</span></td><td><span class="s ng">×</span><span class="c k">確定</span><span class="n2">計画で「検討」</span></td><td><span class="s ok">○</span> 同一システム<span class="c k">確定</span></td><td><span class="s mid">△</span><span class="n2">月45h超で理由①〜⑨を選択</span></td><td>早出・遅出・育児短時間を反映して自動計算。市教委が毎月回収</td><td>公開マニュアル（R8.4版）、H29.6・R5.9答弁、R8.3計画</td></tr>
+<tr><td>下松市</td><td>不明</td><td>不明</td><td>タイムカードはR2.3時点で導入済み<span class="c k">確定</span></td><td>ICカード<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>R8.8資料「各学校へのICカードの整備」。周南のT-Netは使っていない（有力）</td><td>R8.4計画、R8.8取組資料、R2.3答弁</td></tr>
+<tr><td>光市</td><td>「勤怠管理システム」（製品名不明）</td><td>不明</td><td>H31（R1）<span class="c k">確定</span></td><td>PC（名前をクリック）<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s mid">△</span><span class="n2">月45h超の主な理由を集計</span><span class="c y">有力</span></td><td>H29.9には「タイムカードもない」と議員発言。実施計画は市HPで見当たらず</td><td>H31.3・R4.12・R5.9答弁</td></tr>
+<tr><td>岩国市</td><td>不明</td><td>不明</td><td>不明</td><td>H30：タイムレコーダー＋申告<span class="c k">確定</span><span class="n2">現在：「出退勤時刻のデジタル管理」（方式不明）</span></td><td>不明（校務端末1台化・ゼロトラスト環境）</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s mid">△</span><span class="n2">時間外の主な理由を把握</span><span class="c y">有力</span></td><td>持ち帰り業務の有無を教委として把握（文科省R7）。国の校務DX実証フィールド</td><td>R8.4計画、H30.12答弁、学校公開資料</td></tr>
+<tr class="grp"><td>柳井地区・和木</td><td colspan="12"></td></tr>
+<tr><td>柳井市</td><td>不明</td><td>不明</td><td>H30以前<span class="c y">有力</span></td><td>ICカードリーダー＋タイムカード<span class="c k">確定</span></td><td>学校ごとに集計し学期ごとに報告（スタンドアロンの可能性）<span class="c y">有力</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td></td><td>R1.6・R7.6答弁、R8.2計画</td></tr>
+<tr><td>周防大島町</td><td>不明</td><td>不明</td><td>不明</td><td>不明</td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>客観的把握は文科省調査の回答のみで確認。会議録147件・点検評価7年分に記述なし</td><td>R8.3計画、文科省調査</td></tr>
+<tr><td>和木町</td><td>不明（「本町で導入している出退勤システム」）</td><td>不明</td><td>不明</td><td>ICカード<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>議会に出るQRコードの出退勤管理はこども園のもの</td><td>R8.3計画、R8.3取組資料</td></tr>
+<tr><td>田布施町</td><td>不明（「出退勤管理システム」）</td><td>不明</td><td>R1 全小中<span class="c k">確定</span></td><td>ICカード等<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>H30は麻郷小のみICカード、他校は記録表</td><td>R4.3・H30.3答弁、R8.3計画</td></tr>
+<tr><td>平生町</td><td>不明</td><td>不明</td><td>在校等時間の管理はH28から<span class="c k">確定</span><span class="n2">ICカードの時期は不明</span></td><td>ICカード＋タイムカード<span class="c k">確定</span></td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>学校から月報、学期ごとに県へ報告</td><td>R5.6・R2.3答弁、R8計画</td></tr>
+<tr><td>上関町</td><td>不明</td><td>不明</td><td>不明</td><td>不明</td><td>不明</td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td><span class="s unk">？</span></td><td>R8プランは「客観的な記録・把握が出来る環境を整備します」と今後の形。文科省調査の「全校で客観的把握」と食い違い</td><td>R8働き方改革プラン、文科省調査</td></tr>
+<tr class="neo"><td>参考</td><td>タイムカードNEO「把握できるちゃん」</td><td>個人開発（本市教職員）</td><td>—</td><td>PC（名前タッチ）／ICカード版あり</td><td>スタンドアロン（Windows・HTA）</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td>出退勤と同時に、昼休憩・持ち帰りを数秒で記録。インターネット不要、既存PCで動く</td><td>開発者</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">「昼休憩記録」「持ち帰り業務記録」は、出退勤の仕組みそのものに記録する機能があるかを示します。教育委員会が別の調査で把握しているかどうかは、次の表で示します。</p>
+
+<h2 id="mext">文部科学省調査の回答との照合</h2>
+<p>「持ち帰り」「休憩の決まり」「公表」は令和7年度調査（令和7年9月1日時点）の回答、「客観的把握」は令和4〜6年度調査の回答です。「休憩の決まりを把握」は、各学校が休憩時間を<em>いつ・どう取ることにしているか</em>を教育委員会が知っているかどうかで、先生が実際に休憩を取れたかではありません（<a href="#kyukei">詳しく</a>）。</p>
+<div class="tbl" tabindex="0" aria-label="文部科学省調査との照合表">
+<table style="min-width:760px">
+<thead><tr><th>市町</th><th>客観的把握 R4→R5→R6</th><th>持ち帰りの有無を把握</th><th>休憩の決まりを把握</th><th>在校等時間を公表</th></tr></thead>
+<tbody>
+<tr><td>下関市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>宇部市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>山陽小野田市</td><td>○→<strong>一部</strong>→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>美祢市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>長門市</td><td>○（R5.4開始予定とも）→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>萩市</td><td>○（R5.4開始予定とも）→<strong>一部</strong>→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>阿武町</td><td>○→全校→全校</td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>山口市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>防府市</td><td>○→全校→全校</td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>周南市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>下松市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>光市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>岩国市</td><td>○→全校→全校</td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>柳井市</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>周防大島町</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>和木町</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>田布施町</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s mid">△</span> 通知のみ</td><td><span class="s ng">×</span></td></tr>
+<tr><td>平生町</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ng">×</span></td><td><span class="s ok">○</span></td></tr>
+<tr><td>上関町</td><td>○→全校→全校</td><td><span class="s ng">×</span></td><td><span class="s ng">×</span></td><td><span class="s ng">×</span></td></tr>
+<tr><td>計</td><td class="num">R6：19／19が全校</td><td class="num">3／19（全国43.0%）</td><td class="num">16／19（全国66.5%）</td><td class="num">11／19</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">令和元〜4年度の「把握の方法」の選択肢は「ICカード・タイムカード・PC使用時間の記録等」がひとまとめなので、文科省調査から市町ごとの具体的な方式はわかりません。令和5年度以降は、客観的な方法で把握しているかどうかだけを聞いています。</p>
+
+<h2 id="kyukei">「休憩の決まりを把握」とは</h2>
+<p>先生の勤務時間は1日7時間45分で、その途中に45分の休憩時間を置くことになっています。ただ、学校では昼休みも子どもと一緒にいるため、多くの学校は休憩を<strong>「いつ取ることにするか」を決まりとして割り振って</strong>います。</p>
+<p>文科省の調査が聞いているのは、この<strong>決まり（休憩時間の割り振り方）を、教育委員会が学校ごとに知っているか</strong>です。</p>
+<div class="cmp">
+  <div class="pt"><b class="big">聞いていること</b><p>「A小学校は授業後の15:45〜16:30を休憩にしている」のような、<strong>学校の決まり</strong>を教委が知っているか</p></div>
+  <div class="pt key"><b class="big">聞いていないこと</b><p>その日、先生一人ひとりが<strong>実際に休憩を取れたか</strong>。決まりがあっても、授業準備や子どもの対応で取れないことは多い</p></div>
+</div>
+
+<h3>県内の回答（令和7年9月1日時点）</h3>
+<div class="tbl" tabindex="0" aria-label="休憩の決まりの把握状況">
+<table style="min-width:640px">
+<thead><tr><th>回答</th><th>市町</th><th>数</th></tr></thead>
+<tbody>
+<tr><td>決まりを把握している</td><td>下関・宇部・山口・萩・防府・下松・岩国・光・長門・柳井・美祢・周南・山陽小野田・周防大島・和木・阿武</td><td class="num">16</td></tr>
+<tr><td>休憩を取るよう通知はしたが、決まりは把握していない</td><td>田布施</td><td class="num">1</td></tr>
+<tr><td>通知もしておらず、決まりも把握していない</td><td>上関・平生</td><td class="num">2</td></tr>
+</tbody></table></div>
+<p class="small">把握している16市町のうち、宇部・柳井・周南は「一部の学校」について把握、ほかは「全ての学校」。</p>
+
+<h3>学校はどんな決まりにしているか（把握している市町の回答、複数回答）</h3>
+<div class="tbl" tabindex="0" aria-label="休憩時間の決め方">
+<table style="min-width:680px">
+<thead><tr><th>決め方</th><th>例</th><th>回答した市町</th><th>全国</th></tr></thead>
+<tbody>
+<tr><td>授業後にまとめて</td><td>子どもが下校した後に45分</td><td>長門・柳井・美祢・和木・阿武</td><td class="num">55.5%</td></tr>
+<tr><td>一人ひとり分けて</td><td>先生ごとに15分×3回など</td><td>下関・萩・防府・下松・山陽小野田・阿武</td><td class="num">32.0%</td></tr>
+<tr><td>交代で</td><td>昼の見守りを交代し、空いた人から休む</td><td>下関・山口・萩・防府・岩国・光・美祢・周南・山陽小野田・周防大島・和木・阿武</td><td class="num">26.2%</td></tr>
+<tr><td>その他</td><td></td><td>宇部</td><td class="num">17.2%</td></tr>
+</tbody></table></div>
+<p>つまり「16市町が把握」とは、<strong>学校の休憩の決まりを教委が知っている</strong>ということです。その決まりどおりに休めたかどうかは、どの市町も記録していません。出退勤の打刻は「来た時刻」と「帰った時刻」だけなので、その間に休憩が取れたかは残らないからです。</p>
+<p class="small">「例」の欄はわかりやすくするための説明で、調査票の文言ではありません。出典：文部科学省 令和7年度「見える化」調査 山口県（p.8〜9）https://www.mext.go.jp/content/20260325-mxt_kyoikujinzai01-000048417_35.pdf</p>
+
+<h2 id="mochikaeri">持ち帰り業務を「把握している」3市町</h2>
+<p>令和7年度の文科省「見える化」調査（令和7年9月1日時点）は、「所管する学校において業務の持ち帰りが行われているかどうかを把握しているか」を、<strong>「把握している」「把握していない」の二択</strong>で聞いています。どうやって把握しているかを聞く設問はありません。</p>
+<div class="cmp">
+  <div class="pt"><b class="big num">20.0%</b><p>山口県内で「把握している」と答えた割合（県教委・防府市・岩国市・阿武町の4団体／県教委を含む20団体）</p></div>
+  <div class="pt"><b class="big num">43.0%</b><p>全国平均。山口県内は全国の半分に届いていない</p></div>
+  <div class="pt"><b class="big num">0市町</b><p>持ち帰りの時間や割合を数値で公表している市町（3市町を含む）</p></div>
+</div>
+
+<h3>把握の方法は、3市町とも公開資料で確認できず</h3>
+<div class="tbl" tabindex="0" aria-label="3市町の持ち帰り把握の比較">
+<table style="min-width:820px">
+<thead><tr><th>市町</th><th>把握の方法</th><th>手がかりになる記述</th><th>公表されている数値</th></tr></thead>
+<tbody>
+<tr><td>防府市</td><td><span class="s unk">？</span> 公開資料で確認できず</td><td>
+  <ul style="margin:0;padding-left:1.1em">
+  <li>R1.12 教育長：市の時間外業務の実態調査に「持ち帰り残業時間は含まれておりません」。持ち帰らざるを得ない教員がいることは「管理職のほうからも聞いております」<span class="c k">確定</span></li>
+  <li>R8.3計画：年3回、校長・教頭と面談し、時間外在校等時間や取組状況を聞き取る<span class="c k">確定</span>（持ち帰りの把握とは書かれていない）</li>
+  </ul></td><td>なし</td></tr>
+<tr><td>岩国市</td><td><span class="s unk">？</span> 公開資料で確認できず</td><td>
+  <ul style="margin:0;padding-left:1.1em">
+  <li>R2.3 議員：「持ち帰り残業が多いことなどの実態を正確につかむ必要」。答弁は持ち帰りに触れず</li>
+  <li>R8.6 教育次長：計画づくりの際、学校訪問などで各校の管理職から勤務状況や課題を聞き取った<span class="c y">有力</span></li>
+  <li>R8.4計画の把握手段は「学校からの報告」とストレスチェック</li>
+  </ul></td><td>なし</td></tr>
+<tr><td>阿武町</td><td><span class="s unk">？</span> 公開資料で確認できず</td><td>
+  <ul style="margin:0;padding-left:1.1em">
+  <li>R8.4計画：目標の達成状況は「管理職による教職員面談や出退勤管理システムに基づく各学校からの報告、ストレスチェック等の結果から把握」<span class="c k">確定</span></li>
+  <li>R8年度、夏休み中に3日程度の「在宅ワーク」を試行（計画・教委ブログ）</li>
+  </ul></td><td>なし（月45h超の割合のみ公表）</td></tr>
+</tbody>
+</table>
+</div>
+<p>3市町とも、計画には「業務の持ち帰りや休憩時間の確保が課題となっている学校に対しては…個別の支援・指導」という一文があります。ただしこれは県内の多くの市町の計画に共通する書き方で、この3市町だけのものではありません。公開資料から読めるのは、<strong>「把握している」の中身が管理職との面談や聞き取りである可能性</strong>までです。先生一人ひとりの持ち帰りを日ごとや時間で記録している市町は、3市町を含めて確認できませんでした。</p>
+
+<h3>持ち帰りを減らすための支援（同じ調査、複数回答）</h3>
+<div class="tbl" tabindex="0" aria-label="持ち帰りを減らすための支援">
+<table style="min-width:720px">
+<thead><tr><th>支援の内容</th><th>防府</th><th>岩国</th><th>阿武</th><th>県内（19市町中）</th><th>全国平均</th></tr></thead>
+<tbody>
+<tr><td>①教員の追加配置</td><td></td><td></td><td><span class="s ok">○</span></td><td class="num">4</td><td class="num">24.5%</td></tr>
+<tr><td>②教員以外の職員・スタッフの配置拡充</td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td class="num">18</td><td class="num">72.8%</td></tr>
+<tr><td>③保護者・地域との連携による業務の適正化</td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td class="num">14</td><td class="num">36.9%</td></tr>
+<tr><td>④首長部局との連携による業務の適正化</td><td><span class="s ok">○</span></td><td></td><td><span class="s ok">○</span></td><td class="num">10</td><td class="num">26.5%</td></tr>
+<tr><td>⑤校務分掌の見直し・業務の精選・校務DX</td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td class="num">17</td><td class="num">76.0%</td></tr>
+<tr><td>⑥教育課程の見直し</td><td></td><td><span class="s ok">○</span></td><td><span class="s ok">○</span></td><td class="num">7</td><td class="num">39.3%</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">「特段支援を行っていない」と答えた市町は県内になし。阿武町は6項目すべてを選んだ唯一の市町。</p>
+
+<h3>ほかに見つかった数値</h3>
+<ul>
+<li>R1.12の防府市議会で、議員が山口県教職員組合のアンケート（県内266名）を紹介し、持ち帰りは<strong>週平均4.5時間</strong>とした。市町の調査ではない</li>
+<li>下関市はH29.6に「自宅への持ち帰り業務時間は調査に含めておりません」と答弁。周南市はR8.3計画で「持ち帰り残業時間の適切な把握」を「検討」としている</li>
+<li>県教委の「働き方改革現状分析ツール」（教職員意識調査）には、持ち帰りの有無・時間・時期を聞く項目は<strong>ない</strong>（2026-09-23、公開パッケージの設問一覧で確認）。聞くのは属性6問（氏名必須）と「もっと時間をかけたい業務」「改善が必要な業務」（17業務から各3つまで）、自由記述のみ。各学校が任意に実施するひな形で、全県の集計は公表されていない</li>
+</ul>
+
+<h3>確かめ方</h3>
+<ul>
+<li>3市町の教育委員会に「何をもって把握していると回答したか」（面談・アンケート・報告様式）を問い合わせる</li>
+<li>防府市が年3回行う校長・教頭面談の聞き取り様式を問い合わせる</li>
+</ul>
+<p class="small">出典：文部科学省 令和7年度「見える化」調査 山口県（p.7）https://www.mext.go.jp/content/20260325-mxt_kyoikujinzai01-000048417_35.pdf ／ 防府市議会 R1.12.6会議録 ／ 岩国市議会 R2.3・R8.6会議録 ／ 各市町の実施計画（R8）／ 阿武町教委ブログ https://abutown-edu.blogspot.com/2026/04/blog-post_59.html ／ 県教委「働き方改革 現状分析ツール」パッケージ https://www.pref.yamaguchi.lg.jp/uploaded/attachment/171921.zip（掲載元 https://www.pref.yamaguchi.lg.jp/soshiki/178/290392.html）</p>
+
+<h2 id="basis">市町別の根拠</h2>
+<details><summary>下関市</summary><div class="body"><ul>
+<li>H27.6 教育長：タイムカードや自己申告、パソコン入力等で管理職が確認 → H30.3 教育長「ＩＣカードの活用を進めており、ほとんどの学校で導入」</li>
+<li>点検評価（R5〜R7の委員会で引用）：「ＩＣカードやパソコンの集計ソフト等を活用して、時間外在校等時間の把握」</li>
+<li>R8.4計画：「各校の出退勤管理システムで把握」／R6実績 小33.6h・中39.7h（月平均）を市HPで公表</li>
+</ul><p class="src">計画 https://www.city.shimonoseki.lg.jp/soshiki/99/154105.html ／ 会議録 https://ssp.kaigiroku.net/tenant/shimonoseki/pg/index.html</p></div></details>
+<details><summary>宇部市</summary><div class="body"><ul>
+<li>H30.3 教育長：「平成２７年９月に、全ての学校において、ＩＣカードによって…出勤時刻と退勤時刻を記録するためのシステムを導入」</li>
+<li>R1.12 教育長：業務時間を管理職が100％把握するのは難しいとも答弁</li>
+<li>R8計画：持ち帰り・休憩は「確保ができていない場合には、個別の支援・指導」</li>
+</ul><p class="src">計画 https://www.city.ube.yamaguchi.jp/shisei/kouhou/kishahappyou/1008059/1028265/1028795.html ／ 会議録 https://ssp.kaigiroku.net/tenant/ube/MinuteSearch.html</p></div></details>
+<details><summary>山陽小野田市</summary><div class="body"><ul>
+<li>H30.6 教育長：「今現在は自主申告、各学校に記入するソフトがありまして…自分で…入力したら…自動的に集計」</li>
+<li>その後の切り替えを示す記述は、会議録・R8.4計画とも見当たらない</li>
+</ul><p class="src">計画 https://www.city.sanyo-onoda.lg.jp/soshiki/38/gyoumukanri-gakko.html ／ 会議録 https://ssp.kaigiroku.net/tenant/sanyoonoda/MinuteSearch.html</p></div></details>
+<details><summary>美祢市</summary><div class="body"><ul>
+<li>R8.2計画：「平成２９年度に全ての小中学校に導入したICカードによる出退勤時刻を把握するシステム」</li>
+<li>H29.6 教育長：自己申告制から「非接触型ＩＣカードを活用した管理システムを導入」</li>
+<li>現場確認（2026-09-15）：「出退勤管理システム for IC」、Win7の富士通ノート、FeliCa、期間検索とCSV保存</li>
+</ul><p class="src">計画 https://www2.city.mine.lg.jp/soshiki/kyoiku/gakko/13195.html ／ H29.6会議録 https://www2.city.mine.lg.jp/material/files/group/24/honkaigi20170613.pdf</p></div></details>
+<details><summary>長門市</summary><div class="body"><ul>
+<li>H30.6 学校教育課長：「ＩＣカードやパソコンを使用した勤務時間記録表により、適正に勤務時間を管理」</li>
+<li>R7.3 教育長：出退勤管理システムで管理職が状況を把握し個別指導。統合型校務支援システムとは別の取組として説明</li>
+<li>R8.4計画：「本市で導入している出退勤管理システムで把握」</li>
+</ul><p class="src">計画 https://www.city.nagato.yamaguchi.jp/site/kyouiku/67735.html ／ 会議録 https://ssp.kaigiroku.net/tenant/nagato/</p></div></details>
+<details><summary>萩市</summary><div class="body"><ul>
+<li>R2.3 教育長：「教員の自己申告により勤務時間を記録している学校が多いのが実情」「カードリーダーなどを使って客観的な把握ができるよう…整備を進めていきたい」</li>
+<li>R8.2計画：「各学校からの毎月の調査で把握」。システム名の記述なし</li>
+</ul><p class="src">計画 https://www.city.hagi.lg.jp/soshiki/87/h69379.html ／ 会議録 https://ssp.kaigiroku.net/tenant/hagi/</p></div></details>
+<details><summary>阿武町</summary><div class="body"><ul>
+<li>R8.4計画：「出退勤管理システムに基づく各学校からの報告」。中身の記述なし</li>
+<li>町議会会議録181件に教職員の出退勤システムの記述なし</li>
+</ul><p class="src">計画（教委ブログ） https://abutown-edu.blogspot.com/2026/04/blog-post_28.html</p></div></details>
+<details><summary>山口市</summary><div class="body"><ul>
+<li>H30.6 教育長：「平成２９年度からは時間外業務時間の各教員による自己申告制を廃止し、出勤及び退勤時間をＩＣカードリーダーで一元的に把握するシステムを導入」</li>
+<li>R8.4計画：目標の達成状況は「出退勤管理システムにより把握」</li>
+</ul><p class="src">計画 https://www.city.yamaguchi.lg.jp/soshiki/108/194176.html ／ 会議録 https://www.city.yamaguchi.yamaguchi.dbsr.jp/</p></div></details>
+<details><summary>防府市</summary><div class="body"><ul>
+<li>R5.6 教育長：学校に来たらパソコンを開け、掲示板のようなところで「出勤のボタンを押した時点でその時間が自動的に記録」</li>
+<li>R8.3計画：「ＩＣカードを利用した勤務時間管理システムの活用」。点検評価R8版にも「ＩＣカード等を活用」</li>
+</ul><p class="src">計画 https://www.city.hofu.yamaguchi.jp/soshiki/38/gyoumuryou.html ／ 会議録 https://ssp.kaigiroku.net/tenant/hofu/MinuteSearch.html</p></div></details>
+<details><summary>周南市</summary><div class="body"><ul>
+<li>H29.6 教育長：一昨年度（H27）「本市が独自に開発したタイムレコーダーソフトを専用パソコンとともに全小中学校へ配付」、職員室の入り口で「自分の名前を探してクリック」</li>
+<li>R5.9 教育長：今年度から学校事務系の支援システムで在校等時間の管理、出張や休暇の申請・承認をペーパーレス化</li>
+<li>マニュアル：共用校務PCで「タイムレコーダー」モードを起動。出張は在校等時間の記録表に自動表示。月45時間超は理由を選択</li>
+<li>R8.3計画：「持ち帰り残業時間の適切な把握」は「検討」</li>
+</ul><p class="src">計画 https://www.city.shunan.lg.jp/soshiki/58/145047.html ／ 教頭先生のためのT-Net https://fa.fureai-cloud.jp/_view/shunan-erc/attach/get2/1331/12</p></div></details>
+<details><summary>下松市</summary><div class="body"><ul>
+<li>R2.3 教育長：「小中学校では、教員の勤務実態をタイムカードにより把握」</li>
+<li>R8.8「働き方改革に係る取組」：「勤務時間管理の適正化（各学校へのIC カードの整備）」</li>
+</ul><p class="src">https://www.city.kudamatsu.lg.jp/gakkou/kyouiku/gakkyou/hatarakikatakaikaku.html</p></div></details>
+<details><summary>光市</summary><div class="body"><ul>
+<li>H31.3 教育長：新年度に勤務管理システムを導入、「出退勤時にパソコンにおいてみずからの名前をクリック」</li>
+<li>R4.12：「全ての小中学校に導入している勤怠管理システム」。R5.9：月45時間超の主な理由（部活動の割合 R2 29.9%→R4 7.9%）</li>
+</ul><p class="src">会議録 https://www.city.hikari.yamaguchi.dbsr.jp/</p></div></details>
+<details><summary>岩国市</summary><div class="body"><ul>
+<li>H30.12 教育長：「タイムレコーダーや教員の申告をもとに管理職が現認」</li>
+<li>文科省R2・R3：客観的方法＋庶務事務システムやExcel等への本人入力を併用</li>
+<li>学校の公開資料（河内小など）：「出退勤時刻のデジタル管理」</li>
+</ul><p class="src">計画 https://www.city.iwakuni.lg.jp/soshiki/52/115826.html</p></div></details>
+<details><summary>柳井市</summary><div class="body"><ul>
+<li>R1.6 教育長：「市内の全小中学校では、カードリーダーやタイムカードを導入」</li>
+<li>R7.6 教育長：「ＩＣカードリーダーやタイムカードを活用し…学校で学期ごとに取りまとめて報告」</li>
+</ul><p class="src">計画 https://www.city-yanai.jp/uploaded/life/66867_122420_misc.pdf ／ 会議録 https://ssp.kaigiroku.net/tenant/yanai/pg/index.html</p></div></details>
+<details><summary>周防大島町</summary><div class="body"><ul>
+<li>R8.3計画・会議録147件・点検評価（R1〜R7）に打刻方法の記述なし。文科省調査の回答でのみ客観的把握を確認</li>
+</ul><p class="src">https://www.town.suo-oshima.lg.jp/soshiki/26/14941.html</p></div></details>
+<details><summary>和木町</summary><div class="body"><ul>
+<li>R8.3計画：「IC カードを活用した客観的な勤務時間の管理」「本町で導入している出退勤システムで把握」</li>
+</ul><p class="src">https://www.town.waki.lg.jp/uploaded/life/9226_38235_misc.pdf</p></div></details>
+<details><summary>田布施町</summary><div class="body"><ul>
+<li>R4.3 教育長：「令和元年度からは全ての小中学校に出退勤管理システムを導入し、ＩＣカード等で…客観的に把握・集計」</li>
+<li>H30.3：「業務時間記録表等に退勤時間を記録」、麻郷小のみIC打刻</li>
+</ul><p class="src">https://www.town.tabuse.lg.jp/uploaded/attachment/1302.pdf</p></div></details>
+<details><summary>平生町</summary><div class="body"><ul>
+<li>R5.6：「ＩＣカードやタイムカードによる時間管理」「平成２８年度から在校等時間の管理を始め」</li>
+</ul><p class="src">https://www.town.hirao.lg.jp/material/files/group/2/20230619kaigiroku.pdf</p></div></details>
+<details><summary>上関町</summary><div class="body"><ul>
+<li>R8「学校における働き方改革プラン」⑫：「勤務時間の客観的な記録・把握が出来る環境を整備します」（今後の取組の形）</li>
+<li>会議録（R6〜R8）・議会だより（2018〜2026）に記述なし</li>
+</ul><p class="src">https://www.town.kaminoseki.lg.jp/wp-content/uploads/2026/04/kaminoseki_school_hatarakikata_kaikaku.docx</p></div></details>
+
+<h2 id="criteria">判定基準</h2>
+<div class="tbl"><table style="min-width:560px">
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>打刻方法</td><td>ICカード・PC・スマホ・校務支援・タイムカード（紙）・自己申告・その他</td></tr>
+<tr><td>システム構成</td><td>スタンドアロン・クラウド・サーバー・校務支援一体型</td></tr>
+<tr><td>校務支援との連携</td><td>○（一体・連携）・△（一部）・×（独立）</td></tr>
+<tr><td>昼休憩記録</td><td>○・×（出退勤の仕組みで、休憩が取れたかを記録するか）</td></tr>
+<tr><td>持ち帰り業務記録</td><td>○・×（出退勤の仕組みで、持ち帰り業務を記録するか）</td></tr>
+<tr><td>出張管理</td><td>○（同一システム）・△（Excel等で別管理）・×</td></tr>
+<tr><td>勤務実態把握</td><td>○（業務内容を日常的に記録）・△（時間外の理由を月単位などで把握）・×</td></tr>
+<tr><td>？</td><td>公開資料で確認できず（「ない」という意味ではない）</td></tr>
+</tbody></table></div>
+
+<h2 id="next">わかっていないことと、確かめ方</h2>
+<div class="note"><ul>
+<li><strong>製品名・メーカー（18市町）</strong>：予算書・決算書・入札結果の「ICカードリーダー」「タイムレコーダー」「勤怠管理」の品目。確実なのは市町教委への問い合わせか情報公開請求（出退勤管理システムの契約書・仕様書）</li>
+<li><strong>School Engineの勤務管理オプション</strong>：県の共同調達の仕様書（令和5年の公募資料）に含まれるかを県教委に確認</li>
+<li><strong>現在の方式が不明な6市町</strong>（岩国・山陽小野田・萩・阿武・周防大島・上関）：各校の「本校における働き方改革の取組」の公表様式、または学校の先生への聞き取り</li>
+<li><strong>昼休憩・持ち帰り・出張の記録</strong>：どの市町も公開資料では仕組みの説明がない。組合の実態調査や現場の聞き取りで補うのが現実的</li>
+<li><strong>第2段階（費用）</strong>：初期費用・年間保守料・ライセンス料・更新時期。入札公告、契約結果、当初・補正予算、議会資料を読む</li>
+</ul></div>
+
+<h2 id="sources">主な横断資料</h2>
+<div class="note src"><ul>
+<li>文部科学省 教育委員会における学校の働き方改革のための取組状況調査 山口県・市町村別（H30〜R6）例：R6 https://www.mext.go.jp/content/20250221-mxt_zaimu-000039509-35.pdf</li>
+<li>文部科学省 令和7年度「見える化」調査 山口県（R7.9.1時点） https://www.mext.go.jp/content/20260325-mxt_kyoikujinzai01-000048417_35.pdf</li>
+<li>山口県教育委員会 学校における働き方改革加速化プラン【第3期】（R6.4） https://www.pref.yamaguchi.lg.jp/uploaded/attachment/178202.pdf</li>
+<li>文部科学省 次世代の校務デジタル化推進実証事業 R5成果報告（全19市町の共同調達・School Engine） https://www.mext.go.jp/content/20240326-mxt_jogai01-000033447_1.pdf</li>
+<li>文部科学省 令和6年度 学校における教育の情報化の実態等に関する調査 山口県 https://www.mext.go.jp/content/20251031-mxt_shuukyo01-000044325_035.pdf</li>
+</ul></div>
+</div>
