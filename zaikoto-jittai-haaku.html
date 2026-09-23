@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>持ち帰りと休憩の実態把握</title>
+<style>
+  :root{
+    --ink:#1f2a33; --sub:#56636e; --line:#d5dbe0; --bg:#fbfaf7; --paper:#fff;
+    --accent:#1f5f8b; --accent-soft:#e8f1f7; --warn:#a4452c; --warn-soft:#fbeee9;
+    --ok:#2e7d4f; --ok-soft:#e9f5ee; --gen:#7a6a3d; --gen-soft:#faf5e6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"BIZ UDPGothic","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif;
+    font-size:15px;line-height:1.8}
+  main{max-width:840px;margin:0 auto;padding:40px 28px 64px;background:var(--paper)}
+  header{border-bottom:3px solid var(--accent);padding-bottom:14px;margin-bottom:24px}
+  .kicker{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em}
+  h1{font-size:25px;line-height:1.4;margin:6px 0 8px}
+  .lead{color:var(--sub);margin:0}
+  h2{font-size:19px;margin:36px 0 14px;padding:4px 0 4px 12px;border-left:6px solid var(--accent);break-after:avoid}
+  h3{font-size:16px;margin:22px 0 8px;color:var(--accent);break-after:avoid}
+  h4{font-size:14.5px;margin:16px 0 6px}
+  p{margin:8px 0}
+  a{color:var(--accent);word-break:break-all}
+  table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:14px;break-inside:avoid}
+  th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+  th{background:var(--accent-soft)}
+  td.c{text-align:center;font-weight:700;white-space:nowrap}
+  .yes{color:var(--ok)} .no{color:var(--warn)}
+  blockquote{margin:12px 0;padding:10px 14px;background:#f4f6f8;border-left:4px solid #9aa9b5;break-inside:avoid}
+  blockquote p{margin:0 0 6px}
+  blockquote p:last-of-type{margin-bottom:0}
+  .src{display:block;margin-top:8px;font-size:12px;color:var(--sub);border-top:1px dotted #b9c3cb;padding-top:5px}
+  ul,ol{margin:6px 0;padding-left:1.5em}
+  li{margin:3px 0}
+  .box{border:1.5px solid var(--accent);background:var(--accent-soft);border-radius:6px;padding:12px 16px;margin:16px 0;break-inside:avoid}
+  .box.warn{border-color:var(--warn);background:var(--warn-soft)}
+  .box.note-gen{border-color:var(--gen);background:var(--gen-soft)}
+  .box.important{border:2px solid #9e2b2b;background:#fbeee9}
+  .box.important h4{color:#9e2b2b;font-size:16px;letter-spacing:.02em}
+  h3#s43{color:#9e2b2b;border-left:6px solid #9e2b2b;padding-left:10px}
+  .box.check{border:2px solid #9e2b2b;background:#fff;padding:0;margin:20px 0}
+  .box.check h4{background:#9e2b2b;color:#fff;margin:0;padding:9px 16px;font-size:15.5px;letter-spacing:.03em}
+  .box.check ul{margin:12px 20px 14px;padding-left:1.2em}
+  .box.check li{margin:5px 0}
+  .jumpbar{margin:16px 0 4px;text-align:center}
+  .jumpbar a{display:inline-block;border:1.5px dashed #9e2b2b;border-radius:6px;
+    padding:8px 20px;color:#9e2b2b;font-weight:700;text-decoration:none;background:#fbeee9}
+  .jumpbar a:hover{background:#9e2b2b;color:#fff}
+  table.mini{margin:8px 0 4px;font-size:13px}
+  table.mini th{width:22%;background:#d7e6f1;white-space:nowrap;font-weight:700}
+  table.mini td{background:#fff}
+  table.mini .sub{font-weight:400;font-size:11.5px;color:var(--sub)}
+  .box h4{margin:0 0 6px;font-size:15px}
+  .box p:last-child{margin-bottom:0}
+  .formula{background:#f4f6f8;border:1px solid var(--line);border-radius:6px;padding:12px 16px;margin:12px 0;break-inside:avoid}
+  .formula .row{margin:4px 0}
+  .formula b{color:var(--accent)}
+  .plus{color:var(--ok);font-weight:700}
+  .minus{color:var(--warn);font-weight:700}
+  .who{font-weight:700;white-space:nowrap}
+  .em{color:#9e2b2b;font-weight:700}
+  .qabox{border:1.5px solid #9e2b2b;border-radius:6px;margin:16px 0;overflow:hidden}
+  .qabox .q{background:rgba(158,43,43,.10);padding:10px 16px;font-weight:700;color:#9e2b2b;
+    border-bottom:1px solid rgba(158,43,43,.35);break-after:avoid}
+  .qabox .a{padding:12px 16px}
+  .qabox .a > p:first-child{margin-top:0}
+  .qabox .a > p:last-child{margin-bottom:0}
+  .badge{display:inline-block;background:#9e2b2b;color:#fff;border-radius:3px;
+    padding:0 7px;margin-right:8px;font-size:12.5px;font-weight:700;vertical-align:2px}
+  .box ol li a.jump{color:inherit;text-decoration:none;display:block}
+  .box ol li a.jump:hover{color:var(--accent);text-decoration:underline}
+  .box ol li a.jump::after{content:"　▸ 該当箇所へ";color:var(--accent);font-size:12px;white-space:nowrap}
+  .caution{border-left:4px solid #9e2b2b;background:#fbeee9;padding:8px 14px;margin:12px 0;break-inside:avoid}
+  .caution p{margin:4px 0}
+  blockquote .em{background:linear-gradient(transparent 62%,rgba(158,43,43,.14) 62%)}
+  .note{font-size:12.5px;color:var(--sub)}
+  .refs li{margin:6px 0}
+  .refs .u{font-size:12.5px}
+  .keep{break-inside:avoid}
+  footer{margin-top:36px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--sub)}
+  @page{size:A4;margin:13mm 13mm}
+  @media print{
+    body{background:#fff;font-size:10pt;line-height:1.7}
+    main{max-width:none;padding:0}
+    h1{font-size:17pt}
+    h2{font-size:13pt;margin:24px 0 10px}
+    h3{margin:15px 0 6px}
+    table{font-size:9.3pt;margin:8px 0 12px}
+    th,td{padding:5px 9px}
+    blockquote{font-size:9.6pt}
+    a{text-decoration:none}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="kicker">学校における働き方改革　令和7年改正 指針（文部科学省告示第114号）・Q&amp;A（令和7年11月時点）準拠</div>
+  <h1>時間外在校等時間／「持ち帰り業務」と「休憩」の扱い<br>実態把握の方法と、実態があったときの対応</h1>
+  <p class="lead">法令・指針・Q&amp;Aの原文とリンクを示しながら整理</p>
+</header>
+
+<div class="box">
+  <h4>この資料の要点</h4>
+  <ol>
+    <li><a class="jump" href="#s2"><strong>持ち帰り</strong>は在校等時間に含まない。ただし「原則行わない」ものであり、実態があれば把握と縮減が求められる。<span class="note">（指針 第2章第4節(2)、Q&amp;A問13）</span></a></li>
+    <li><a class="jump" href="#s3"><strong>休憩</strong>は在校等時間から除く。ただし除けるのは「実際に休憩した分」だけで、働いた時間を休憩として処理することはできない。<span class="note">（指針 第1章第3節(1)ニ・第2章第1節(3)、Q&amp;A問15・問16）</span></a></li>
+    <li><a class="jump" href="#s4"><strong>在校等時間の把握方法</strong>は、ICT・タイムカード等により客観的に計測すると明記されている。分単位で記録し、公文書として保存する。<span class="note">（指針 第2章第1節(2)、Q&amp;A問17）</span></a></li>
+    <li><a class="jump" href="#s5"><strong>対応の責任者</strong>は校長と服務監督教育委員会。上限超過時は教育委員会が校長との面談等で事後検証を行う。<span class="note">（指針 第2章第3節(1)＝告示PDF 7ページ、Q&amp;A問19＝Q&amp;A PDF 16〜17ページ）</span></a>
+      <table class="mini">
+        <tr>
+          <th>校長<br><span class="sub">（校務をつかさどる）</span></th>
+          <td>勤務時間の割振りと休憩時間の付与を適正に行う。休憩時間に勤務を命じた場合は勤務時間として扱い、別途休憩を与える。校務分掌の適正化。持ち帰りの実態把握と縮減。適正な記録を残すよう指導。</td>
+        </tr>
+        <tr>
+          <th>服務監督<br>教育委員会</th>
+          <td>上限方針を教育委員会規則等で定める。業務量管理・健康確保措置実施計画の策定・公表・総合教育会議への報告。上限を超えた場合の事後検証と改善支援。持ち帰りの実態把握と縮減。面接指導等の健康確保措置。</td>
+        </tr>
+      </table>
+    </li>
+    <li><a class="jump" href="#s43"><span class="em">持ち帰り業務・休憩の実態把握の方法は、法令・指針・Q&amp;Aに定めがない。</span>持ち帰り業務について指針が定めているのは「その実態把握に努める」という努力義務までで、休憩についても取得実態の把握手法の定めはない。<span class="note">（指針 第2章第4節(2)、第2章第1節(3)）</span></a></li>
+  </ol>
+  <p class="note" style="margin-top:8px">各項目をクリックすると、その内容を述べた章に移動します（PDFでも同じように移動できます）。</p>
+</div>
+
+<p class="jumpbar"><a href="#check">▶　各市町の実施計画を点検する視点（6項目のチェックリスト）へ</a></p>
+
+<h2>１　時間外在校等時間とは</h2>
+
+<h3>(1) 在校等時間の定義</h3>
+<p>指針は、在校等時間を次のように定めています。</p>
+<blockquote>
+  <p>このため、教育職員が学校教育活動に関する業務を行っている時間として外形的に把握することができる時間を当該教育職員の「在校等時間」とし、服務監督教育委員会が管理すべき対象とする。</p>
+  <p>具体的には、正規の勤務時間外において超勤４項目以外の業務を行う時間も含めて教育職員が在校している時間を基本とし、当該時間に、次に掲げるイ及びロの時間を加え、ハ及びニの時間を除いた時間を在校等時間とする。ただし、ハについては、当該教育職員の申告に基づくものとする。</p>
+  <p>イ　校外において職務として行う研修への参加や児童生徒等の引率等の職務に従事している時間として服務監督教育委員会が外形的に把握する時間<br>
+  ロ　各地方公共団体が定める方法によるテレワーク（情報通信技術を利用して行う事業場外勤務）等の時間<br>
+  ハ　正規の勤務時間外に自らの判断に基づいて自らの力量を高めるために行う自己研鑽の時間その他業務外の時間<br>
+  ニ　休憩時間</p>
+  <span class="src">指針 第1章第3節(1)（令和7年文部科学省告示第114号）<br>
+  <a href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf</a></span>
+</blockquote>
+
+<div class="formula">
+  <div class="row"><b>在校等時間</b> ＝ 在校している時間（超勤4項目以外の業務を含む）</div>
+  <div class="row">　　　<span class="plus">＋</span> イ 校外での研修参加・引率等　<span class="plus">＋</span> ロ テレワーク等</div>
+  <div class="row">　　　<span class="minus">−</span> ハ 自己研鑽その他業務外の時間（本人の申告による）　<span class="minus">−</span> ニ 休憩時間</div>
+  <div class="row" style="margin-top:8px"><b>時間外在校等時間</b> ＝ 在校等時間 <span class="minus">−</span> 所定の勤務時間</div>
+</div>
+
+<h3>(2) 上限</h3>
+<div class="keep">
+<table>
+  <tr><th style="width:40%">区分</th><th>上限</th></tr>
+  <tr><td rowspan="2"><strong>原則</strong>（第1章第3節(2)）</td><td>1箇月時間外在校等時間　<strong>45時間</strong></td></tr>
+  <tr><td>1年間時間外在校等時間　<strong>360時間</strong></td></tr>
+  <tr><td rowspan="4"><strong>児童生徒等に係る臨時的な特別の事情がある場合</strong>（同(3)）</td><td>1箇月時間外在校等時間　<strong>100時間未満</strong></td></tr>
+  <tr><td>1年間時間外在校等時間　<strong>720時間</strong></td></tr>
+  <tr><td>1箇月45時間を超える月数　<strong>6月</strong></td></tr>
+  <tr><td>連続する2〜6箇月のそれぞれの平均　<strong>80時間</strong></td></tr>
+</table>
+</div>
+
+<h3>(3) 注意：「在校等時間」と労働基準法上の「労働時間」は別</h3>
+<p>ここは実務で混乱しやすい点です。Q&amp;A問5は、労働安全衛生法上の「労働時間の状況」について次のように述べています。</p>
+<blockquote>
+  <p>安衛法上の「労働時間の状況」とは、労働者がいかなる時間帯にどの程度の時間、労務を提供し得る状態にあったかを把握するものでありますが、問４で述べた通り、教師については、使用者に該当する校長や教育委員会等の指揮命令下に置かれている時間、具体的には、所定の勤務時間及び超過勤務命令に基づき「超勤４項目」の業務に従事した時間が「労働時間」に当たると考えられ、これをもって「労働時間の状況」に代えることができます。</p>
+  <p>したがって、安衛法第66条の８第１項に定める面接指導の実施義務は、この安衛法上の労働時間の状況として把握した時間に基づくこととなります。</p>
+  <span class="src">Q&amp;A 問5（令和7年11月時点）<br>
+  <a href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf</a></span>
+</blockquote>
+<p>ただしQ&amp;Aは、これに続けて「在校等時間」も踏まえた対応を求めています。</p>
+<blockquote>
+  <p>なお、安衛法第66条の９及び労働安全衛生規則第52条の８において、各事業場において定められた基準に基づき、健康への配慮が必要な者に対しても安衛法第66条の８の面接指導の実施又はそれに準ずる措置を取るよう努めることとされていることを踏まえ、各教育委員会においては、より一層、教師の健康を確保する観点から、「在校等時間」も踏まえ、面接指導の実施又は面接指導に準ずる措置を講じるよう努めていただきますようお願いします。</p>
+  <span class="src">Q&amp;A 問5</span>
+</blockquote>
+
+<h2 id="s2">２　「持ち帰り業務」の扱い</h2>
+
+<h3>(1) 在校等時間には含まれない</h3>
+<blockquote>
+  <p>いわゆる「持ち帰り」の時間については「在校等時間」には含まれません。ただし、自宅等で行う業務であっても、各地方公共団体で定める方法によるテレワーク、在宅勤務等によるものについては、「在校等時間」に含まれます。</p>
+  <span class="src">Q&amp;A 問13【更新】（自宅等に持ち帰って業務を行った場合、その時間は「在校等時間」に含まれるのか。）</span>
+</blockquote>
+<div class="keep">
+<table>
+  <tr><th>自宅等で行う業務</th><th style="width:34%">在校等時間</th></tr>
+  <tr><td>持ち帰り仕事（授業準備、採点、成績処理、教材研究、校務分掌等）</td><td class="c no">× 含まれない</td></tr>
+  <tr><td>各地方公共団体が定める方法によるテレワーク・在宅勤務</td><td class="c yes">○ 含まれる（指針 ロ）</td></tr>
+</table>
+</div>
+
+<h3>(2) しかし「原則として行わない」もの</h3>
+<blockquote>
+  <p>本来、<span class="em">業務の持ち帰りは行わないことが原則</span>であり、上限時間を遵守することや実施計画に定める目標を達成することのみを目的として自宅等に持ち帰って業務を行う時間が増加することは、厳に避けなければならない。仮に業務の持ち帰りが行われている実態がある場合には、<span class="em">その実態把握に努める</span>とともに、<span class="em">業務の持ち帰りの縮減に向けた取組を進める</span>ものとする。</p>
+  <span class="src">指針 第2章第4節「第1節から第3節に記載の措置等を講ずるに当たっての留意事項」(2)</span>
+</blockquote>
+<p>Q&amp;A問13は、この指針の規定を引きながら、校長と教育委員会が果たすべき責任をより具体的に述べています。</p>
+<blockquote>
+  <p>仮に業務の持ち帰りが行われている実態がある場合には、校務をつかさどる校長とその上司に当たる教育委員会は、<span class="em">その実態把握に努める</span>とともに、<span class="em">業務の持ち帰りの縮減</span>に向け、<span class="em">限られた時間の中でどの教育活動を優先するかを見定め、それを踏まえた適切な業務量の設定と校務分掌の分担を図る</span>とともに、<span class="em">本指針の趣旨や学校における働き方改革の考え方を校内において十分に共有するといった管理監督上の責任を果たす</span>ことが求められます。</p>
+  <span class="src">Q&amp;A 問13【更新】</span>
+</blockquote>
+
+<h2 id="s3">３　「休憩」の扱い</h2>
+
+<h3>(1) 在校等時間から除かれるのは「実際に休憩した分」</h3>
+<p>指針は、在校等時間から「ニ　休憩時間」を除くと定めています（第1章第3節(1)）。あわせて、服務監督教育委員会が講ずべき措置として次を定めています。</p>
+<blockquote>
+  <p>休憩時間や休日の確保等に関する労働基準法等の規定を遵守すること。</p>
+  <span class="src">指針 第2章第1節(3)</span>
+</blockquote>
+<p>Q&amp;A問15は、除いてよい「休憩時間」の意味を詳しく説明しています。</p>
+<blockquote>
+  <p>公立学校の教職員の一日の所定勤務時間は条例（県費負担教職員の場合は都道府県の条例）で通常は７時間45分と定められていますが、労働基準法第34条においては、使用者は、労働時間が６時間を超える場合においては少なくとも45分、８時間を超える場合においては少なくとも１時間の休憩時間を労働時間の途中に与えなければならないとされています。休憩時間とは、労働者が権利として労働から離れることを保障されている時間を指し、労働者に自由に利用させることが必要です。そのため、労働者が現実に作業をしていないとしても、使用者からいつ就労の要求があるかもしれない状態で待機している、いわゆる「手待時間」は、休憩時間には該当しません。また、休憩時間とされている時間であっても、使用者からの職務命令により、例えば来客対応などで労働者が実際に労働した場合には、その時間を休憩時間として取り扱うことはできません。</p>
+  <p>よって、校長等は、勤務時間の割振りや休憩時間の付与を適正に行うとともに、休憩時間とされている時間に教師にやむを得ず勤務を命じる場合には、その時間は勤務時間（労働基準法上の「労働時間」）として取り扱うとともに、別途その時間に相当する休憩時間を与え、労働基準法等を遵守することが必要です。</p>
+  <p>各学校においては、労働基準法に定められた少なくとも45分又は１時間の休憩時間を確実に確保した上で、「在校等時間」には、実際に休憩した分の時間を含まないこととなります。</p>
+  <span class="src">Q&amp;A 問15【更新】（「在校等時間」には含まれない「休憩時間」とは、具体的に何を指すのか。）</span>
+</blockquote>
+
+<div class="box warn">
+  <h4>実務上のポイント</h4>
+  <ul>
+    <li>「休憩45分」を一律に差し引く運用は、実際には休憩が取れていない場合、<strong>在校等時間を実際より短く記録すること</strong>になる。</li>
+    <li>来客対応・電話対応・子どもの対応など、職務命令で働いた時間は<strong>休憩として扱えない</strong>。</li>
+    <li>その場合、校長等は<strong>別途その時間に相当する休憩時間を与える</strong>必要がある。</li>
+    <li>いつ呼ばれるか分からない状態での待機（手待時間）は休憩ではない。</li>
+  </ul>
+</div>
+
+<h3>(2) 休憩の根拠条文（労働基準法第34条）</h3>
+<blockquote>
+  <p>第三十四条　使用者は、労働時間が六時間を超える場合においては少くとも四十五分、八時間を超える場合においては少くとも一時間の休憩時間を労働時間の途中に与えなければならない。</p>
+  <p>２　前項の休憩時間は、一斉に与えなければならない。ただし、当該事業場に、労働者の過半数で組織する労働組合がある場合においてはその労働組合、労働者の過半数で組織する労働組合がない場合においては労働者の過半数を代表する者との書面による協定があるときは、この限りでない。</p>
+  <p>３　使用者は、第一項の休憩時間を自由に利用させなければならない。</p>
+  <span class="src">労働基準法（昭和22年法律第49号）第34条<br>
+  <a href="https://laws.e-gov.go.jp/law/322AC0000000049">https://laws.e-gov.go.jp/law/322AC0000000049</a></span>
+</blockquote>
+<p class="note">Q&amp;A問15は「労働基準法の規定は、一部を除いて公立学校の教師を含む地方公務員にも適用され、公立学校の教師も、労働基準法上の『労働者』に含まれます」と明記しています。</p>
+
+<h3>(3) 在校等時間が8時間を超えても、直ちに1時間ではない</h3>
+<blockquote>
+  <p>所定の勤務時間と超過勤務命令に基づき勤務を行った時間の合計が８時間を超える場合には、労働基準法上、最低１時間の休憩時間を与えなければなりません。</p>
+  <p>上記の場合以外で、「在校等時間」が８時間を超える場合に、休憩時間を直ちに１時間与えなければならないことにはなりません。</p>
+  <span class="src">Q&amp;A 問16（「在校等時間」が８時間を超える場合、労働基準法上与えなければならないとされる休憩時間は１時間となるのか。）</span>
+</blockquote>
+<p>つまり、休憩を1時間にしなければならない基準は「在校等時間」ではなく、<strong>所定の勤務時間＋超勤4項目の時間</strong>（労基法上の労働時間）です。</p>
+
+<h3>(4) よくある疑問</h3>
+<div class="qabox">
+  <div class="q"><span class="badge">Q</span>自主的に行った宿題やテストの添削は、「休憩」と「業務」のどちらに含むのか。</div>
+  <div class="a">
+    <p><span class="badge">A</span><span class="em">業務です。在校等時間に含まれ、その時間を休憩として差し引くことはできません。</span><span class="note">（※文科省の見解としては明記されていない内容です。）</span></p>
+    <p>この設問そのものに答えたQ&amp;Aはありません。以下は、指針とQ&amp;Aの規定から導かれる整理です。</p>
+    <ol>
+      <li><strong>添削は「業務」であり、在校等時間から除ける時間に当たらない。</strong>　在校等時間から除けるのは「ハ　自己研鑽その他業務外の時間」と「ニ　休憩時間」だけです（指針 第1章第3節(1)）。</li>
+      <li><strong>除けるのは「実際に休憩した分」だけ。</strong>　添削をしていた時間は、実際には休憩していません。</li>
+      <li><strong>「自主的かどうか」は判定基準ではない。</strong>　在校等時間は、そもそも超勤4項目<em>以外</em>の業務を行う時間も含めて、在校している時間を外形的に把握するものです（指針 第1章第3節(1)）。自主的だから除く、という扱いは指針にありません。</li>
+    </ol>
+    <p>「自己研鑽」「その他業務外の時間」の意味は、Q&amp;Aが次のように説明しています。添削のような日々の業務は、いずれにも当たりません。</p>
+    <blockquote>
+      <p>ここでいう「正規の勤務時間外に自らの判断に基づいて自らの力量を高めるために行う自己研鑽の時間」とは、上司からの指示や児童生徒・保護者等からの直接的な要請等によるものではなく、<span class="em">日々の業務とは直接的に関連しない、業務外と整理すべきと考えられる自己研鑽の時間</span>を指しています。</p>
+      <p>具体的には、例えば、所定の勤務時間外に、教師が幅広くその専門性や教養を高めるために学術書や専門書を読んだり、教科に関する論文を執筆したり、教科指導や生徒指導に係る自主的な研究会に参加したり、自らの資質を高めるために資格試験のための勉強を行ったりする時間のようなものを想定しています。</p>
+      <span class="src">Q&amp;A 問11（自己申告により「在校等時間」には含まれない「正規の勤務時間外に自らの判断に基づいて自らの力量を高めるために行う自己研鑽の時間」とは、具体的に何を指すのか。）</span>
+    </blockquote>
+    <blockquote>
+      <p>ここでいう「その他業務外の時間」とは、所定の勤務時間の前後における時間のうち、<span class="em">業務とはみなされない活動を行った時間</span>のことを指しています。</p>
+      <p>例えば、問11で示した時間のほか、<span class="em">朝早めに出勤して新聞を読んだり読書をしたりする時間や、所定の勤務時間終了後の夕食の時間、学校内で実施されるＰＴＡ活動に校務としてではなく参加している時間、地域住民等としての立場で学校で行われる地域活動に参加している時間等</span>が考えられます。</p>
+      <span class="src">Q&amp;A 問12（自己申告により「在校等時間」には含まれない「その他業務外の時間」とは、具体的に何を指すのか。）</span>
+    </blockquote>
+    <p>あわせて、休憩時間について問15は次のように述べています。</p>
+    <blockquote>
+      <p>各学校においては、労働基準法に定められた少なくとも45分又は１時間の休憩時間を確実に確保した上で、「在校等時間」には、<span class="em">実際に休憩した分の時間</span>を含まないこととなります。</p>
+      <span class="src">Q&amp;A 問15【更新】</span>
+    </blockquote>
+    <div class="caution">
+      <p><strong>注意1　労働基準法上の「労働時間」に当たるかは別の問題です。</strong>　安衛法上の「労働時間の状況」は所定の勤務時間＋超勤4項目で把握され、面接指導の実施義務はそちらで判断されます（Q&amp;A問4・問5）。在校等時間に含まれることと、労働時間として扱われることは同じではありません。</p>
+      <p><strong>注意2　休憩45分を一律に差し引く運用は危険です。</strong>　実際には添削をしていたのに休憩として差し引けば、指針が禁じる「実際の時間より短い虚偽の時間を記録し、又は記録させること」（第2章第4節(1)）に近づきます。また労働基準法第34条は休憩を「与えなければならない」と定めた義務規定であり、自主的な作業であっても休憩が取れない実態が続くのであれば、休憩を取れる業務量と体制にすることが校長・教育委員会の責任になります。</p>
+    </div>
+    <p class="note">※休憩中の自発的な業務を管理職が知りながら放置した場合、黙示の指示があったものとして労働時間と評価され得る、という労働法一般の考え方もあります。ただしこれは文部科学省のQ&amp;Aに明記された説明ではありません。</p>
+  </div>
+</div>
+
+<h2 id="s4">４　実態把握の方法</h2>
+
+<h3>(1) 在校等時間の把握 ― 客観的な計測が求められる</h3>
+<blockquote>
+  <p>労働安全衛生法等において、タイムカードによる記録、電子計算機の使用時間の記録等の客観的な方法その他の適切な方法による勤務時間の把握が事業者の義務として明確化されたことを踏まえ、教育職員が在校している時間は、<span class="em">ICTの活用やタイムカード等により客観的に計測すること</span>。また、<span class="em">校外において職務に従事している時間についても、できる限り客観的な方法により計測すること</span>。また、当該計測の結果は公務災害が生じた場合等において重要な記録となることから、公文書としてその管理及び保存を適切に行うこと。</p>
+  <span class="src">指針 第2章第1節 上限方針の策定等 (2)</span>
+</blockquote>
+<blockquote>
+  <p>「在校等時間」とは、教育職員が校務として学校教育に必要な業務を行っている時間として外形的に把握することができる時間であり、その時間を算定するに当たり必要な時間（…）を分単位で記録する必要があると考えられます。また、それら時間の計測に当たっては、本指針の「第２章第１節 上限方針の策定等(2)」に規定するとおり、できる限り客観的な方法により計測することが必要です。</p>
+  <span class="src">Q&amp;A 問17【更新】（「在校等時間」の管理・計測に当たっては、具体的にどのような事項について記録をするべきなのか。）</span>
+</blockquote>
+
+<h4>根拠となる労働安全衛生法の条文</h4>
+<blockquote>
+  <p>第六十六条の八の三　事業者は、第六十六条の八第一項又は前条第一項の規定による面接指導を実施するため、厚生労働省令で定める方法により、労働者（次条第一項に規定する者を除く。）の労働時間の状況を把握しなければならない。</p>
+  <span class="src">労働安全衛生法（昭和47年法律第57号）第66条の8の3<br>
+  <a href="https://laws.e-gov.go.jp/law/347AC0000000057">https://laws.e-gov.go.jp/law/347AC0000000057</a><br>
+  ※Q&amp;A問5は「安衛法第66条の８の３の規定は、公立学校の教師を含む地方公務員にも適用されます」としています。「厚生労働省令で定める方法」はタイムカード、パソコンの使用時間の記録等の客観的な方法（労働安全衛生規則第52条の7の3）。</span>
+</blockquote>
+
+<h3>(2) 虚偽の記録は禁止</h3>
+<blockquote>
+  <p>教育職員の在校等時間について形式的に上限時間の範囲内とすることや実施計画に定める目標を達成することが目的化し、授業など教育課程内の学校教育活動であって真に必要な活動であるものをおろそかにすることや、実際の時間より短い虚偽の時間を記録し、又は記録させることがあってはならない。</p>
+  <span class="src">指針 第2章第4節(1)</span>
+</blockquote>
+
+<h3 id="s43">(3) 持ち帰り業務・休憩の実態把握の方法</h3>
+<div class="box important">
+  <h4>重要：具体的な手法は法令・指針・Q&amp;Aに定めがありません</h4>
+  <p>持ち帰り業務について指針が定めているのは「<strong>その実態把握に努める</strong>」という努力義務までで、どのような方法で把握するかは書かれていません。休憩についても、「労働基準法等の規定を遵守すること」とあるのみで、取得実態の把握手法の定めはありません。</p>
+  <p>したがって、方法は各教育委員会・各学校が定めることになります。下の表の右欄は、根拠規定から導かれる<strong>実務上の選択肢の例</strong>であり、指針等に明記されたものではありません。</p>
+</div>
+<div class="keep">
+<table>
+  <tr><th style="width:20%">対象</th><th style="width:32%">根拠上、明記されていること</th><th>実務上の把握方法の例（明文の定めなし）</th></tr>
+  <tr>
+    <td><strong>在校等時間</strong></td>
+    <td>ICT・タイムカード等による客観的計測。校外分もできる限り客観的に。分単位で記録。公文書として保存。</td>
+    <td>ICカード・勤怠システム、校務用パソコンのログ。出張・引率は出張命令や復命書と突合。</td>
+  </tr>
+  <tr>
+    <td><strong>持ち帰り業務</strong></td>
+    <td>実態がある場合、実態把握に努める（校長・教育委員会）。縮減の取組を進める。</td>
+    <td>記名または無記名のアンケート調査（時間数・頻度・内容）、勤務実態調査への項目追加、校務支援システムの自宅からのアクセス記録、面談・ヒアリング。</td>
+  </tr>
+  <tr>
+    <td><strong>休憩</strong></td>
+    <td>労基法等の遵守。実際に休憩した分だけを在校等時間から除く。勤務を命じたら勤務時間として扱い、別途休憩を与える。</td>
+    <td>休憩を一律控除せず実績で記録する運用、休憩の割振りと実際の記録の突合、給食指導・昼休みの分担表の確認、アンケートや申告。</td>
+  </tr>
+</table>
+</div>
+<p class="note">※右欄は、この資料での整理です。実施に当たっては、各市町の実施計画や服務関係規程を確認してください。</p>
+
+<h2 id="s5">５　実態があった場合、だれが、どのようにするのか</h2>
+
+<h3>(1) 役割の整理</h3>
+<div class="keep">
+<table>
+  <tr><th style="width:24%">主体</th><th>求められる対応</th></tr>
+  <tr>
+    <td class="who">校長<br>（校務をつかさどる）</td>
+    <td>勤務時間の割振りと休憩時間の付与を適正に行う。休憩時間に勤務を命じた場合は勤務時間として扱い、別途休憩を与える。校務分掌の適正化。持ち帰りの実態把握と縮減。適正な記録を残すよう指導。</td>
+  </tr>
+  <tr>
+    <td class="who">服務監督<br>教育委員会</td>
+    <td>上限方針を教育委員会規則等で定める。業務量管理・健康確保措置実施計画の策定・公表・総合教育会議への報告。上限を超えた場合の事後検証と改善支援。持ち帰りの実態把握と縮減。面接指導等の健康確保措置。</td>
+  </tr>
+  <tr>
+    <td class="who">人事委員会</td>
+    <td>上限方針・実施計画について認識を共有し、専門的な助言を行う（教育委員会は報告し、連携を図る）。</td>
+  </tr>
+  <tr>
+    <td class="who">総合教育会議<br>（首長と教育委員会）</td>
+    <td>実施計画の策定・変更の報告先。毎年度の実施状況の報告先。関係部局との連携。</td>
+  </tr>
+</table>
+</div>
+
+<div class="caution">
+  <p><strong>「校長」と「服務監督教育委員会」の法令上の根拠</strong></p>
+  <p>学校教育法第37条第4項「校長は、校務をつかさどり、所属職員を監督する。」（<a href="https://laws.e-gov.go.jp/law/322AC0000000026">https://laws.e-gov.go.jp/law/322AC0000000026</a>）</p>
+  <p>地方教育行政の組織及び運営に関する法律第43条第1項「市町村委員会は、県費負担教職員の服務を監督する。」（<a href="https://laws.e-gov.go.jp/law/331AC0000000162">https://laws.e-gov.go.jp/law/331AC0000000162</a>）</p>
+  <p class="note">Q&amp;A問13が「校務をつかさどる校長とその上司に当たる教育委員会」と述べているのは、この2つの規定を指しています。</p>
+</div>
+
+<h3>(2) 上限を超えている実態がある場合</h3>
+<blockquote>
+  <p>特に、服務監督教育委員会及び校長等の学校の管理職は、教育職員が業務の遂行に伴い心身の健康を損なうことがないように配慮し、教育職員の在校等時間が上限方針で定める上限時間の範囲を超えた場合には、服務監督教育委員会は校長等の学校の管理職との面談等を通じ、各学校における業務や環境整備等の状況について事後的に検証を行い、当該学校における教育職員の勤務状況を速やかに改善させるための方策の検討及び実施の支援その他の取組を実施すること。</p>
+  <span class="src">指針 第2章第3節 服務監督教育委員会が講ずべき業務量管理・健康確保措置 (1)</span>
+</blockquote>
+<p>Q&amp;A問19は、校長・教育委員会の責任をさらに踏み込んで説明しています。</p>
+<blockquote>
+  <p>この場合、まずは各学校において、校長・教育委員会が、児童生徒等の資質・能力を育む上で、限られた時間の中でどの教育活動を優先するかを見定め、それを踏まえた適正な業務量の設定と校務分掌の分担を図るとともに、このような本指針の趣旨や計画、学校における働き方改革の考え方を校内において十分に共有し、「在校等時間」の縮減に向けた取組を進めることが必要になると考えられます。こうした中で、<span class="em">縮減に向けた努力を行わないまま、引き続き「在校等時間」が上限時間を大幅に超えるような場合には、校長・教育委員会は、こうした学校の管理運営に係る責任を果たしているとは言えないと考えられます。また、教育委員会には自ら定めた計画を着実に実施し、学校における働き方改革の実効性を高めていく責務があります。</span></p>
+  <p>学校の管理運営に係る責任を果たす上では、例えば、社会通念上明らかに特定の教師に校務分掌が集中して過重負担となっている場合には、校長は校務分掌の適正化を図ることが必要です。また、学校内の多くの教師が「在校等時間」の上限を超えている場合には、校長・教育委員会は業務削減等の取組を積極的に進めることが求められ、このように働き方改革に粘り強く取り組んでいるにもかかわらず教師の「在校等時間」が減少しない、又は増加するような場合には、校長・教育委員会は、その背景や構造を分析の上明らかにし、それを踏まえた改善方策を策定し、改善に向けて更に取り組むことが必要です。その際、教育委員会は、各学校の在校等時間の現状を把握した上で、時間外在校等時間が特に長時間となっている教師が在籍する特定の学校へのヒアリングの実施等の個別のアプローチを図っていくこと等を通じて、校長等の管理職による働き方改革の取組の着実な実施につなげていくことも重要です。</p>
+  <p>なお、あってはならず、また、容易には想像し難い事態ではありますが、<span class="em">仮に教職員が虚偽の記録を残している場合には、校長等はこうした管理運営に係る責任から適正な記録を残すように指導する必要があり、また、万が一校長等が虚偽の記録を残させるようなことがあった場合には、求められている責任を果たしているとは言えない上、状況によっては信用失墜行為として懲戒処分等の対象ともなり得るものと考えられます。</span></p>
+  <span class="src">Q&amp;A 問19【更新】（「在校等時間」に関する上限時間について、校長や服務監督権者である教育委員会の責任はどのようなものになるのか。）</span>
+</blockquote>
+
+<h3>(3) 持ち帰りの実態がある場合</h3>
+<ol>
+  <li><strong>校長と教育委員会</strong>が実態把握に努める。</li>
+  <li>限られた時間の中で<strong>どの教育活動を優先するかを見定める</strong>。</li>
+  <li>それを踏まえた<strong>適切な業務量の設定と校務分掌の分担</strong>を図る。</li>
+  <li>指針の趣旨や働き方改革の考え方を<strong>校内で十分に共有</strong>する。</li>
+  <li>持ち帰りの縮減に向けた取組を進める。</li>
+</ol>
+<p class="note">出典：Q&amp;A問13、指針 第2章第4節(2)</p>
+
+<h3>(4) 休憩が取れていない実態がある場合</h3>
+<ol>
+  <li><strong>校長等</strong>が勤務時間の割振りと休憩時間の付与を適正に行う。</li>
+  <li>やむを得ず休憩時間に勤務を命じる場合は、その時間を<strong>勤務時間（労基法上の労働時間）として取り扱う</strong>。</li>
+  <li>あわせて<strong>別途その時間に相当する休憩時間を与える</strong>。</li>
+  <li>在校等時間からは、<strong>実際に休憩した分だけ</strong>を除く（働いた時間を休憩として差し引かない）。</li>
+  <li><strong>教育委員会</strong>は、休憩時間や休日の確保等に関する労働基準法等の規定の遵守を図る。</li>
+</ol>
+<p class="note">出典：Q&amp;A問15、指針 第2章第1節(3)</p>
+
+<h3>(5) 健康確保の措置</h3>
+<div class="keep">
+<table>
+  <tr><th style="width:34%">措置</th><th>内容（指針 第2章第3節）</th></tr>
+  <tr><td>医師による面接指導</td><td>在校等時間が一定時間を超えた教育職員に実施。<strong>1箇月時間外在校等時間80時間を目安</strong>（(6)）</td></tr>
+  <tr><td>勤務間インターバル</td><td>終業から始業までに継続した休息時間を確保。<strong>11時間を目安</strong>（(7)）</td></tr>
+  <tr><td>健康診断・ストレスチェック</td><td>勤務状況と健康状態に応じて実施（(8)）</td></tr>
+  <tr><td>相談窓口</td><td>心身の健康問題についての相談窓口を設置。産業医等による助言・指導・保健指導（(9)）</td></tr>
+  <tr><td>年次有給休暇</td><td>まとまった日数の連続取得を含め取得を促進（(10)）</td></tr>
+</table>
+</div>
+
+<h3>(6) 計画によるPDCA（教育委員会）</h3>
+<blockquote>
+  <p>服務監督教育委員会は、実施計画に定める目標の達成状況及び業務量管理・健康確保措置の実施状況について、毎年度、その状況を把握すること。</p>
+  <p>また、服務監督教育委員会は、把握した状況を踏まえ、業務量管理・健康確保措置などの取組を改善するとともに、必要に応じて、実施計画の変更その他の必要な措置を講ずること。</p>
+  <span class="src">指針 第2章第2節(4)。あわせて(5)で毎年度の実施状況の公表（給特法第8条第4項）、(6)で総合教育会議への報告を規定。</span>
+</blockquote>
+<p>給特法は、第7条で指針を、第8条で実施計画を定めています。<br>
+<a href="https://laws.e-gov.go.jp/law/346AC0000000077">https://laws.e-gov.go.jp/law/346AC0000000077</a></p>
+
+<div class="box check" id="check">
+  <h4>各市町の実施計画を点検する視点</h4>
+  <ul>
+    <li>在校等時間の計測方法（ICT・タイムカード等）が具体的に書かれているか。</li>
+    <li><strong>持ち帰り業務の実態把握</strong>と縮減策が盛り込まれているか。</li>
+    <li><strong>休憩の確保</strong>について具体的な取組があるか（一律控除になっていないか）。</li>
+    <li>上限超過時の事後検証（教育委員会と校長の面談等）の手順があるか。</li>
+    <li>面接指導（80時間目安）、勤務間インターバル（11時間目安）が書かれているか。</li>
+    <li>目標の達成状況を毎年度公表しているか。</li>
+  </ul>
+</div>
+
+<h2>参考資料（リンク）</h2>
+<ol class="refs">
+  <li>文部科学省「学校における働き方改革について」<br>
+    <a class="u" href="https://www.mext.go.jp/a_menu/shotou/hatarakikata/index.htm">https://www.mext.go.jp/a_menu/shotou/hatarakikata/index.htm</a></li>
+  <li>公立学校の教育職員の業務量の適切な管理その他教育職員の服務を監督する教育委員会が教育職員の健康及び福祉の確保を図るために講ずべき措置に関する指針（令和7年文部科学省告示第114号／令和7年9月25日改正、令和8年4月1日適用）<br>
+    <a class="u" href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf</a></li>
+  <li>同 指針に係るQ&amp;A（令和7年11月時点）※問4・問5・問13・問15・問16・問17・問19<br>
+    <a class="u" href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf</a></li>
+  <li>指針に係るQ&amp;Aの更新について（事務連絡）<br>
+    <a class="u" href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_3.pdf">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_3.pdf</a></li>
+  <li>公立の義務教育諸学校等の教育職員の給与等に関する特別措置法（昭和46年法律第77号）第7条（指針）・第8条（実施計画）<br>
+    <a class="u" href="https://laws.e-gov.go.jp/law/346AC0000000077">https://laws.e-gov.go.jp/law/346AC0000000077</a></li>
+  <li>労働基準法（昭和22年法律第49号）第32条（労働時間）・第34条（休憩）<br>
+    <a class="u" href="https://laws.e-gov.go.jp/law/322AC0000000049">https://laws.e-gov.go.jp/law/322AC0000000049</a></li>
+  <li>労働安全衛生法（昭和47年法律第57号）第66条の8（面接指導）・第66条の8の3（労働時間の状況の把握）・第66条の9<br>
+    <a class="u" href="https://laws.e-gov.go.jp/law/347AC0000000057">https://laws.e-gov.go.jp/law/347AC0000000057</a></li>
+  <li>学校教育法（昭和22年法律第26号）第37条第4項（校長は校務をつかさどり、所属職員を監督する）<br>
+    <a class="u" href="https://laws.e-gov.go.jp/law/322AC0000000026">https://laws.e-gov.go.jp/law/322AC0000000026</a></li>
+  <li>地方教育行政の組織及び運営に関する法律（昭和31年法律第162号）第43条第1項（市町村委員会は県費負担教職員の服務を監督する）<br>
+    <a class="u" href="https://laws.e-gov.go.jp/law/331AC0000000162">https://laws.e-gov.go.jp/law/331AC0000000162</a></li>
+</ol>
+
+<footer>指針・Q&amp;Aの引用は原文のままです（告示・通達等は著作権法第13条により著作権の対象外）。参照資料は2026年9月23日時点のものです。</footer>
+</main>
+</body>
+</html>
