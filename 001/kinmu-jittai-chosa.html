@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国の教員勤務実態調査</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --ng:#b3261e; --unk:#6b7280; --mid:#9a5a00;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4; --me:#fff6d6;
+  --e1:#e9edf5; --e2:#d9e1f0; --e3:#c4d1ea; --e4:#a9bde3; --fu:#fbe3ee;
+  --zk:#2f4f8f; --mk:#d0608f; --d1:#c4d1ea; --d2:#7e98c8; --d3:#b3261e;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --ng:#ff8f86; --unk:#a4aab6; --mid:#f0b35c;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --e1:#1f2430; --e2:#26304a; --e3:#2e3c5e; --e4:#3a4d78; --fu:#3a2230;
+    --zk:#7f9fe0; --mk:#e47aa6; --d1:#3a4d78; --d2:#6f8cc8; --d3:#ff8f86;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --ng:#ff8f86; --unk:#a4aab6; --mid:#f0b35c;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --e1:#1f2430; --e2:#26304a; --e3:#2e3c5e; --e4:#3a4d78; --fu:#3a2230;
+    --zk:#7f9fe0; --mk:#e47aa6; --d1:#3a4d78; --d2:#6f8cc8; --d3:#ff8f86;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h1,h2,h3{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.8rem;line-height:1.35;margin:0 0 8px}
+h2{font-size:1.25rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+h3{font-size:1.06rem;margin:26px 0 8px}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em}
+.hn3{display:inline-block;margin-right:8px;padding:0 6px;border-radius:4px;background:var(--soft);color:var(--accent);font-family:"BIZ UDPGothic",sans-serif;font-size:.85em}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+p{max-width:72ch}
+a{color:var(--link)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small{font-size:.85rem;color:var(--sub)}
+.srcref{font-size:.75em;white-space:nowrap;margin-left:2px}
+.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}
+.series .sl{font-weight:700;color:var(--sub);margin-right:4px}
+.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}
+.series b{background:var(--head);color:var(--headink);border-color:var(--head)}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;margin:10px 0}
+table{border-collapse:collapse;width:100%;min-width:640px}
+table.wide{min-width:900px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;font-size:.88rem}
+th{background:var(--head);color:var(--headink)}
+td.pn{font-weight:700;white-space:nowrap}
+.c{text-align:center}
+table.num td{font-variant-numeric:tabular-nums}
+td.hi{color:var(--ng);font-weight:700} td.mid{color:var(--accent)}
+tr.grp td{background:var(--soft);font-weight:700;color:var(--accent)}
+.na{color:var(--unk);font-size:.85em}
+.kk{display:inline-block;padding:0 6px;border-radius:4px;background:var(--soft);color:var(--unk);font-size:.8em;white-space:nowrap}
+@media (max-width:600px){h1{font-size:1.4rem} body{font-size:14px}}
+
+/* 要点 */
+.pts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:12px 0}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pt .pl{margin:0 0 4px;font-size:.8rem;color:var(--sub);font-weight:700;letter-spacing:.05em}
+.pt .pv{margin:0 0 6px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.08rem;line-height:1.45}
+.pt .pv b{color:var(--accent)}
+.pt.key .pv b{color:var(--neoink)}
+.pt p{margin:0;font-size:.88rem;max-width:none}
+
+/* 注意・メモ */
+.note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:12px 0}
+.note.warn{border-left-color:var(--neoline)}
+.note .mh{margin:0 0 4px;font-weight:700;color:var(--accent)}
+.note.warn .mh{color:var(--neoink)}
+.note ul{margin:4px 0 0;padding-left:1.3em}
+.note li{margin:3px 0}
+ul.dots{padding-left:1.3em} ul.dots li{margin:4px 0}
+
+/* グラフ */
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:12px;margin:12px 0}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.chart .ct{margin:0 0 6px;font-weight:700;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.02rem;max-width:none}
+.chart .lg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0 0 8px;font-size:.78rem;color:var(--sub);max-width:none}
+.chart .lg span{display:inline-flex;align-items:center;gap:5px}
+.sw{display:inline-block;width:14px;height:10px;border-radius:2px}
+.sw.zk,.seg.zk{background:var(--zk)}
+.sw.mk,.seg.mk{background:var(--mk)}
+.sw.d1,.seg.d1{background:var(--d1)} .sw.d2,.seg.d2{background:var(--d2)} .sw.d3,.seg.d3{background:var(--d3)}
+.ln{display:inline-block;width:0;height:12px;border-left:2px dashed var(--ink)}
+.grp{margin:8px 0 4px}
+.gn{margin:0 0 2px;font-weight:700;font-size:.88rem;color:var(--accent)}
+.row{display:grid;grid-template-columns:2.6em 1fr 11.5em;align-items:center;gap:8px;margin:3px 0}
+.row .yr{font-size:.8rem;color:var(--sub);font-weight:700}
+.track{position:relative;display:flex;height:20px;background:var(--soft);border-radius:4px;overflow:visible}
+.track .seg{height:100%}
+.track .seg:first-child{border-radius:4px 0 0 4px}
+.track.ax{background:none;height:16px;font-size:.7rem;color:var(--sub)}
+.track.ax span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.lv{position:absolute;top:-3px;bottom:-3px;border-left:2px dashed var(--ink);opacity:.75}
+.row .val{font-size:.8rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row.r4 .yr{color:var(--ink)}
+.track.d{overflow:hidden;border-radius:4px}
+.track.d .seg{display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:.72rem;color:#fff}
+.track.none{align-items:center;padding-left:8px;font-size:.75rem;color:var(--unk);background:repeating-linear-gradient(135deg,var(--soft),var(--soft) 6px,transparent 6px,transparent 12px)}
+@media (max-width:600px){.row{grid-template-columns:2.4em 1fr;}.row .val{grid-column:2;margin-top:-2px}}
+
+/* 比較（2列） */
+.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;margin:12px 0}
+.vs .side{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.vs .side h3{margin:0 0 6px;font-size:1.02rem}
+.vs .side .big{font-size:1.6rem;font-weight:700;color:var(--accent);font-family:"BIZ UDPGothic",sans-serif;line-height:1.2}
+.vs .side.b .big{color:var(--neoink)}
+.vs .side p{margin:4px 0;font-size:.88rem}
+.why{counter-reset:w;list-style:none;padding:0;margin:10px 0;display:grid;gap:8px}
+.why li{counter-increment:w;position:relative;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px 10px 46px;font-size:.9rem}
+.why li::before{content:counter(w);position:absolute;left:12px;top:10px;width:24px;height:24px;border-radius:50%;background:var(--head);color:var(--headink);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.why li b.d{color:var(--accent)}
+
+/* 年表 */
+.tl{border-left:3px solid var(--line);margin:10px 0 10px 6px;padding-left:16px}
+.ti{position:relative;margin:0 0 12px}
+.ti::before{content:"";position:absolute;left:-23px;top:.55em;width:11px;height:11px;border-radius:50%;background:var(--head);border:2px solid var(--card)}
+.ti.key::before{background:var(--neoline)}
+.ti .td{display:inline-block;min-width:6.5em;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.ti p{margin:2px 0 0;font-size:.9rem}
+blockquote{margin:6px 0;padding:6px 12px;border-left:3px solid var(--e4);background:var(--soft);border-radius:0 6px 6px 0;font-size:.88rem}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none;font-size:.85rem}
+.toc a{display:inline-block;padding:3px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}
+.toc a .n{font-weight:700;color:var(--accent);margin-right:4px}
+</style>
+
+<style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
+/* ===== 持ち帰り・休憩の調べ　共通テーマ ===== */
+:root{--r:12px;--sh:0 1px 2px rgba(20,30,55,.05),0 6px 18px rgba(20,30,55,.06);--band:#1b2744;--band2:#2b3c66;--rose:#c2185b;--paper:#f2f4f8;--glow:rgba(47,79,143,.10)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}}
+:root[data-theme="dark"]{--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}
+body{background:radial-gradient(1200px 420px at 50% -120px,var(--glow),transparent 70%),var(--paper) !important}
+.wrap{padding-top:0 !important}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* 上の帯（シリーズの案内） */
+nav.series{margin:0 -16px 26px !important;padding:12px 16px !important;background:linear-gradient(100deg,var(--band),var(--band2));border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);gap:6px 8px !important;font-size:.8rem !important}
+nav.series .sl{color:#fff !important;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:.98rem;letter-spacing:.06em;margin-right:10px !important;padding-right:12px;border-right:1px solid rgba(255,255,255,.25)}
+nav.series a,nav.series b{border:1px solid rgba(255,255,255,.28) !important;background:transparent !important;color:#e8edf8 !important;border-radius:999px !important;padding:3px 12px !important;transition:background .15s,border-color .15s}
+nav.series a:hover{background:rgba(255,255,255,.12) !important;border-color:rgba(255,255,255,.55) !important}
+nav.series b{background:#fff !important;color:var(--band) !important;border-color:#fff !important;box-shadow:inset 0 -3px 0 var(--rose)}
+@media (min-width:1212px){nav.series{margin:0 0 26px !important}}
+
+/* 冒頭 */
+.wrap>header{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px 20px;margin-bottom:6px;overflow:hidden}
+.wrap>header::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--accent),var(--rose))}
+.wrap>header .eyebrow{display:inline-block;background:var(--soft);color:var(--accent);border-radius:999px;padding:1px 12px;letter-spacing:.14em}
+.wrap>header h1{letter-spacing:.03em;line-height:1.4}
+.wrap>header .lead{margin-top:12px !important;color:var(--ink)}
+
+/* 見出し */
+.wrap>h2{border-bottom:0 !important;padding-bottom:10px !important;background:linear-gradient(var(--paper),var(--paper)) padding-box !important;box-shadow:none !important}
+.wrap>h2::after{content:"";display:block;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--head) 0,var(--head) 72px,var(--line) 72px)}
+.hn{border-radius:6px !important;background:linear-gradient(135deg,var(--head),var(--band2)) !important;box-shadow:0 2px 6px rgba(20,30,55,.18)}
+.hn3{border-radius:5px !important}
+h3.kh,.wrap h3{letter-spacing:.02em}
+
+/* カード類 */
+.pt,.kc,.case,.q,.set,.pg,.note,.munote,.mokuji,.tbl,.gchart,.dist,.chart,.tchart,.euler,.band,.toc a,.flow .box,details,.chu,.cmp .pt{border-radius:var(--r) !important;box-shadow:var(--sh);border-color:var(--line) !important}
+.flow .q{box-shadow:none !important;border-radius:0 !important}
+.pt.key{border-color:var(--neoline,var(--rose)) !important;box-shadow:0 1px 2px rgba(194,24,91,.10),0 6px 18px rgba(194,24,91,.10)}
+.pt b.big{letter-spacing:.01em}
+.pg,.toc a,.kc{transition:transform .15s,box-shadow .15s}
+.pg:hover,.toc a:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,30,55,.06),0 10px 24px rgba(20,30,55,.10)}
+.munote{border-left-width:4px !important}
+.mokuji{padding:16px 22px !important}
+.mokuji .mk-h{display:flex;align-items:center;gap:8px}
+.mokuji .mk-h::before{content:"";width:18px;height:2px;background:var(--rose)}
+
+/* 表 */
+.tbl{background:var(--card)}
+th{letter-spacing:.03em}
+tbody tr:hover td{background-image:linear-gradient(var(--glow),var(--glow))}
+tr.grp td{letter-spacing:.08em}
+
+/* ページの終わりの案内 */
+.site-foot{margin:56px 0 0;padding:18px 20px;border-radius:var(--r);background:linear-gradient(100deg,var(--band),var(--band2));color:#e8edf8;box-shadow:var(--sh)}
+.site-foot p{margin:0 0 8px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1rem;letter-spacing:.06em;color:#fff;max-width:none}
+.site-foot .sf{display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.82rem}
+.site-foot a,.site-foot b{display:inline-block;padding:3px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#e8edf8;text-decoration:none}
+.site-foot a:hover{background:rgba(255,255,255,.12)}
+.site-foot b{background:#fff;color:var(--band);border-color:#fff}
+.site-foot a:focus-visible,nav.series a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.pg,.toc a,.kc,nav.series a{transition:none}.pg:hover,.toc a:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<nav class="series" aria-label="働き方改革の調べ"><span class="sl">働き方改革の調べ</span><a href="index.html">目次</a><a href="zikangai-zaikoto.html">「時間外在校等時間」まとめ</a><b aria-current="page">国の勤務実態調査</b><a href="mochikaeri-00-top.html">持ち帰り・休憩の調べ</a><a href="mochikaeri-04-kekka.html">持ち帰り・休憩 調査結果</a></nav>
+<header>
+  <p class="eyebrow">国の調査</p>
+  <h1 class="h1i"><span class="ticon"><svg viewBox="0 0 48 48" width="50" height="50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="6" width="26" height="34" rx="2.5" fill="currentColor" fill-opacity=".12"/><path d="M15 15h14M15 21h14M15 27h8"/><circle cx="34" cy="34" r="9" fill="#fff"/><path d="M34 29v5l3 2"/></svg></span><span>国の「教員勤務実態調査」は、何をどう測ったか</span></h1>
+  <p class="date">2026年10月調べ　文部科学省の報告書・集計（平成18年度・平成28年度・令和4年度）、「見える化」調査（令和7年度）、国会会議録、e-Gov法令検索による</p>
+  <p class="lead">教員勤務実態調査は、抽出した学校の先生に、1週間（平成18年度は4週間）の仕事を<b>30分ごとに本人が記入</b>してもらう国の調査です。昭和41年度から数えて4回行われ、ここでは比べられる3回（平成18・28年度、令和4年度）の調べ方と結果をまとめました。毎年の「見える化」調査とは、測り方も数字の意味も違います。</p>
+  <ul class="toc">
+    <li><a href="#youten"><span class="n">1</span>要点</a></li>
+    <li><a href="#hoho"><span class="n">2</span>調べ方</a></li>
+    <li><a href="#kekka"><span class="n">3</span>在校等時間と持ち帰り</a></li>
+    <li><a href="#kyukei"><span class="n">4</span>休憩</a></li>
+    <li><a href="#bunpu"><span class="n">5</span>時間外の分布</a></li>
+    <li><a href="#mieruka"><span class="n">6</span>「見える化」調査との違い</a></li>
+    <li><a href="#kongo"><span class="n">7</span>令和4年度より後</a></li>
+    <li><a href="#shutten"><span class="n">8</span>出典</a></li>
+  </ul>
+</header>
+
+<h2 id="youten"><span class="hn">1</span>要点</h2>
+<div class="pts">
+  <div class="pt"><p class="pl">平日の在校等時間（教諭）</p><p class="pv">小 <b>10:32 → 11:15 → 10:45</b><br>中 <b>11:00 → 11:32 → 11:01</b></p><p>H18→H28で小43分・中32分増え、R4で約30分減って、H18に近い水準にもどった。正規の勤務時間（7:45）より約3時間長い。</p></div>
+  <div class="pt"><p class="pl">平日の持ち帰り（教諭）</p><p class="pv">小 <b>38分 → 29分 → 37分</b><br>中 <b>22分 → 20分 → 32分</b></p><p>R4は在校等時間が減った一方、平日の持ち帰りはH28より増えた。土日の持ち帰りは3回とも減っている。</p></div>
+  <div class="pt key"><p class="pl">休憩（R4・平日・教諭）</p><p class="pv">所定の休憩時間内に取れた休憩<br>小 <b>5分</b>・中 <b>7分</b></p><p>出勤から退勤までの間に取れた休憩でも小・中とも23分。決まりの45分には遠い。</p></div>
+  <div class="pt key"><p class="pl">週60時間以上（月80h超の目安）</p><p class="pv">小 <b>33.4% → 14.2%</b><br>中 <b>57.7% → 36.5%</b>（H28→R4）</p><p>週50時間以上（月45h超の目安）は、R4でも小64.5%・中77.0%。</p></div>
+  <div class="pt"><p class="pl">「見える化」調査との違い</p><p class="pv">R4の推計 月 小約<b>41h</b>・中約<b>58h</b><br>見える化（R6年度） 小<b>30.6h</b>・中<b>40.4h</b></p><p>時期（繁忙期の1週間か、夏休みを含む1年か）、測り方、集計に入る教委がちがうので、差がそのまま「記録漏れ」ではない（<a href="#mieruka">6章</a>）。</p></div>
+  <div class="pt"><p class="pl">次回の調査</p><p class="pv">国は<b>抽出調査を続けない</b>方針</p><p>R7.4.10の答弁で「今後は、基本的に、毎年度、教育委員会に対して実施する調査」で把握するとした。給特法改正の附則6条は、R8.1.1から2年を目途に「勤務の状況」を調査すると定めるが、方法は書いていない（<a href="#kongo">7章</a>）。</p></div>
+</div>
+<p class="small">年は調査を行った年度。H18＝平成18年度、H28＝平成28年度、R4＝令和4年度。「教諭」には主幹教諭・指導教諭を含む（H18は主幹教諭・指導教諭の制度がない）。時間は「時間:分」、1分未満は切り捨て。</p>
+
+<h2 id="hoho"><span class="hn">2</span>3回の調べ方</h2>
+<p>3回とも、抽出した学校の先生が、決められた業務の分類に沿って、24時間を30分のますに区切った用紙に自分で記入する方式です。同じ30分に2つ以上の仕事をしたときは、中心になる1つだけを書きます。悉皆（全員）ではなく<b>抽出</b>の調査なので、都道府県別・市町村別の数字はありません。</p>
+<div class="tbl"><table>
+<thead><tr><th style="width:9em"></th><th>平成18年度</th><th>平成28年度</th><th>令和4年度</th></tr></thead>
+<tbody>
+<tr><td class="pn">実施者</td><td>東京大学（文科省の委託）。実務はベネッセに再委託<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td><td>文科省の「教育政策に関する実証研究」。委託先 リベルタス・コンサルティング<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>文科省。委託先 リベルタス・コンサルティング<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">きっかけ</td><td>行革推進法による教員給与の見直し<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_9.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td><td>経済・財政一体改革のWGの指摘（TALISを待たず実態を検証）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_8.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td><td>H31.1中教審答申、R1給特法改正の附帯決議「三年後を目途に…勤務実態調査」<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">抽出か悉皆か</td><td>抽出（集落抽出）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td><td>抽出（確率比例抽出）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>抽出<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">対象校</td><td>小180校・中180校を<b>6期</b>、計2,160校<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td><td>小400校・中400校<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>小1,200校・中1,200校・高300校（8月・10月・11月に各400校、高は各100校）<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">対象者</td><td>校長、教頭・副校長、教諭、栄養教諭、養護教諭、常勤講師（約5万人）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td><td>対象校のフルタイム勤務の教員全員<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>対象校のフルタイムの常勤教員<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">時期</td><td>H18.7.3〜12.17。<b>1期4週間×6期</b>。比較には第5期（10.23〜11.19）を使う<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_8.pdf#page=4" target="_blank" rel="noopener">〈参照〉</a></td><td>H28.10〜11月のうち連続する<b>7日間</b>（10.17〜11.20の間）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_8.pdf#page=4" target="_blank" rel="noopener">〈参照〉</a></td><td>R4.8月・10月・11月のうち連続する<b>7日間</b>。H28と比べるのは10・11月分<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">回答（集計対象）</td><td>第5期：小171校・3,715人、中172校・4,372人（回収率 小86.2%・中89.0%）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=4" target="_blank" rel="noopener">〈参照〉</a></td><td>小397校・8,951人、中399校・10,687人（回答数）。うち分析対象 小7,036人・中8,049人<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a></td><td>10・11月：小793校・11,569人、中789校・11,675人（8月を含む合計 小17,762人・中17,475人）<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">記入方式</td><td>本人が記入。24時間を<b>30分単位</b>（48ます）、21の業務分類＋「休憩・休息」<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a></td><td>本人が記入。<b>30分単位</b>の業務記録<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>本人が記入。<b>30分単位</b>の業務記録（24時間）。休憩は別に<b>1分単位</b><a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">集計に入れる人</td><td>勤務日のうち、出退勤時刻があり5時間以上記入のある日<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=7" target="_blank" rel="noopener">〈参照〉</a></td><td>平日5日すべてが勤務日で、勤務日の記入が5時間以上の人<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_005_1.pdf#page=29" target="_blank" rel="noopener">〈参照〉</a></td><td>H28と同じ（10・11月）<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">持ち帰りの測り方</td><td>出勤前（5時〜）と退勤後（〜翌5時）に業務を記入した時間。休日は、出退勤時刻の記入がなければ全部を持ち帰りとする<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=6" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=7" target="_blank" rel="noopener">〈参照〉</a></td><td>同じ考え方。出退勤時刻の前後の業務を持ち帰り（学校外）として集計<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_005_1.pdf#page=29" target="_blank" rel="noopener">〈参照〉</a></td><td>「出勤時刻以前、もしくは退勤時刻後に業務に従事している時間（土日は、出退勤時刻の記録がない場合、業務に従事した時間全て）」<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=42" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">休憩の測り方</td><td>業務記録の「休憩・休息」に加え、毎日「所定の休憩時間内に実際にとれた休憩時間」を<b>分単位</b>で記入<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_11.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a></td><td>業務記録（30分単位）の分類の1つ「休憩」<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_004_3.pdf#page=6" target="_blank" rel="noopener">〈参照〉</a></td><td>「出勤から退勤までにとった休憩」と「所定の休憩時間内にとった休憩」を<b>1分単位</b>で別に把握<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=44" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">時間の名前</td><td>「学内勤務時間」（残業時間・持帰り時間）</td><td>「学内勤務時間」。調査の回答にかかった時間（週 小64分・中66分）を一律に差し引く<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_002_4.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>「在校等時間」（指針の定義：校外の職務を加え、自己研鑽と休憩を除く）。回答時間を一律に差し引く<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=42" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">ほかの調査票</td><td>学校調査票、教員質問票（属性・意識など）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a></td><td>学校調査票、教員個人調査票（ストレスチェックを含む）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a></td><td>学校調査、教員調査（アンケート：働き方改革の取組、メンタルヘルス）<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+</tbody></table></div>
+<div class="note"><p class="mh">3回を並べるときの注意</p><ul>
+<li><b>H18は4週間、H28・R4は7日間</b>。H28は、H18の結果から「通常期の平均に最も近い」10〜11月を選び、H18の第5期（10.23〜11.19）と比べています<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_8.pdf#page=4" target="_blank" rel="noopener">〈参照〉</a>。H18の数字は、文科省がH28の資料で教諭について集計し直した値を使いました（H18報告書の第5期の値は全教員の平均で、少し違います）。</li>
+<li><b>R4の「在校等時間」とH28以前の「学内勤務時間」は名前がちがいます</b>。R4の報告書は、H28には在校等時間の考え方がなく、テレワークと自己研鑽の扱いが違う可能性があるとしています（校外の職務と休憩の扱いは同じ）<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=42" target="_blank" rel="noopener">〈参照〉</a>。</li>
+<li>H18は始業・終業を全校一律に8:00〜17:00とみなして集計しています<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=7" target="_blank" rel="noopener">〈参照〉</a>。</li>
+<li>令和7年11月26日の衆議院文部科学委員会で初中局長は、R4の調査を「十五分単位で…記録」と説明しましたが、R4の報告書では業務記録は30分単位です<a class="srcref" href="https://kokkai.ndl.go.jp/txt/121905124X00320251126/93" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a>。</li>
+</ul></div>
+
+<h2 id="kekka"><span class="hn">3</span>在校等時間と持ち帰り時間の推移</h2>
+<p>教諭の1日あたりの時間です。棒の濃い部分が学校にいた時間（在校等時間）、ピンクの部分が家などでの持ち帰り時間です。</p>
+<div class="charts">
+<div class="chart"><p class="ct">平日1日あたり（教諭・10〜11月）</p>
+<p class="lg"><span><i class="sw zk"></i>在校等時間（H18は「学内勤務時間」）</span><span><i class="sw mk"></i>持ち帰り時間</span><span><i class="ln"></i>正規の勤務時間 7:45</span></p>
+<div class="row axis"><span></span><span class="track ax"><span style="left:0.00%">0h</span><span style="left:23.08%">3h</span><span style="left:46.15%">6h</span><span style="left:69.23%">9h</span><span style="left:92.31%">12h</span></span><span></span></div>
+<div class="grp"><p class="gn">小学校</p>
+<div class="row h18"><span class="yr">H18</span><span class="track"><span class="seg zk" style="width:81.03%"></span><span class="seg mk" style="width:4.87%"></span><span class="lv" style="left:59.62%"></span></span><span class="val"><b>10:32</b> ＋ 0:38 ＝ 11:10<sup>＊</sup></span></div>
+<div class="row h28"><span class="yr">H28</span><span class="track"><span class="seg zk" style="width:86.54%"></span><span class="seg mk" style="width:3.72%"></span><span class="lv" style="left:59.62%"></span></span><span class="val"><b>11:15</b> ＋ 0:29 ＝ 11:45</span></div>
+<div class="row r4"><span class="yr">R4</span><span class="track"><span class="seg zk" style="width:82.69%"></span><span class="seg mk" style="width:4.74%"></span><span class="lv" style="left:59.62%"></span></span><span class="val"><b>10:45</b> ＋ 0:37 ＝ 11:23</span></div>
+</div>
+<div class="grp"><p class="gn">中学校</p>
+<div class="row h18"><span class="yr">H18</span><span class="track"><span class="seg zk" style="width:84.62%"></span><span class="seg mk" style="width:2.82%"></span><span class="lv" style="left:59.62%"></span></span><span class="val"><b>11:00</b> ＋ 0:22 ＝ 11:22<sup>＊</sup></span></div>
+<div class="row h28"><span class="yr">H28</span><span class="track"><span class="seg zk" style="width:88.72%"></span><span class="seg mk" style="width:2.56%"></span><span class="lv" style="left:59.62%"></span></span><span class="val"><b>11:32</b> ＋ 0:20 ＝ 11:52</span></div>
+<div class="row r4"><span class="yr">R4</span><span class="track"><span class="seg zk" style="width:84.74%"></span><span class="seg mk" style="width:4.10%"></span><span class="lv" style="left:59.62%"></span></span><span class="val"><b>11:01</b> ＋ 0:32 ＝ 11:33</span></div>
+</div>
+</div>
+<div class="chart"><p class="ct">土日1日あたり（教諭・10〜11月）</p>
+<p class="lg"><span><i class="sw zk"></i>在校等時間（H18は「学内勤務時間」）</span><span><i class="sw mk"></i>持ち帰り時間</span></p>
+<div class="row axis"><span></span><span class="track ax"><span style="left:0.00%">0h</span><span style="left:20.00%">1h</span><span style="left:40.00%">2h</span><span style="left:60.00%">3h</span><span style="left:80.00%">4h</span><span style="left:100.00%">5h</span></span><span></span></div>
+<div class="grp"><p class="gn">小学校</p>
+<div class="row h18"><span class="yr">H18</span><span class="track"><span class="seg zk" style="width:6.00%"></span><span class="seg mk" style="width:28.67%"></span></span><span class="val"><b>0:18</b> ＋ 1:26 ＝ 1:44<sup>＊</sup></span></div>
+<div class="row h28"><span class="yr">H28</span><span class="track"><span class="seg zk" style="width:22.33%"></span><span class="seg mk" style="width:22.67%"></span></span><span class="val"><b>1:07</b> ＋ 1:08 ＝ 2:15</span></div>
+<div class="row r4"><span class="yr">R4</span><span class="track"><span class="seg zk" style="width:12.00%"></span><span class="seg mk" style="width:12.00%"></span></span><span class="val"><b>0:36</b> ＋ 0:36 ＝ 1:12</span></div>
+</div>
+<div class="grp"><p class="gn">中学校</p>
+<div class="row h18"><span class="yr">H18</span><span class="track"><span class="seg zk" style="width:31.00%"></span><span class="seg mk" style="width:33.00%"></span></span><span class="val"><b>1:33</b> ＋ 1:39 ＝ 3:12<sup>＊</sup></span></div>
+<div class="row h28"><span class="yr">H28</span><span class="track"><span class="seg zk" style="width:67.33%"></span><span class="seg mk" style="width:23.33%"></span></span><span class="val"><b>3:22</b> ＋ 1:10 ＝ 4:33</span></div>
+<div class="row r4"><span class="yr">R4</span><span class="track"><span class="seg zk" style="width:46.00%"></span><span class="seg mk" style="width:16.33%"></span></span><span class="val"><b>2:18</b> ＋ 0:49 ＝ 3:07</span></div>
+</div>
+</div>
+</div>
+<p class="small">＊H18の合計は、在校等時間と持ち帰り時間を足して計算した値（文科省は合計を出していない）。H28・R4の合計は文科省の値（R4確定値 本体 p.16。1分未満を切り捨てているため、足し算と1分ずれることがある）。土日の値は、土日に勤務日がある人を含む平均。</p>
+
+<h3>数値の表（教諭・10〜11月・1日あたり）</h3>
+<div class="tbl"><table class="num">
+<thead><tr><th></th><th class="c">H18</th><th class="c">H28</th><th class="c">R4</th><th class="c">H28→R4</th><th>出典</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="6">小学校</td></tr>
+<tr><td class="pn">平日 在校等時間</td><td class="c">10:32</td><td class="c">11:15</td><td class="c"><b>10:45</b></td><td class="c">−0:30</td><td class="small"><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=2" target="_blank" rel="noopener">H28速報 p.2</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=1" target="_blank" rel="noopener">R4確定 概要 p.1</a></td></tr>
+<tr><td class="pn">平日 持ち帰り</td><td class="c">0:38</td><td class="c">0:29</td><td class="c"><b>0:37</b></td><td class="c">＋0:08</td><td class="small"><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=4" target="_blank" rel="noopener">H28速報 p.4</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=16" target="_blank" rel="noopener">R4確定 本体 p.16</a></td></tr>
+<tr><td class="pn">平日 合計</td><td class="c"><span class="na">11:10（計算）</span></td><td class="c">11:45</td><td class="c"><b>11:23</b></td><td class="c">−0:22</td><td class="small"><a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=16" target="_blank" rel="noopener">R4確定 本体 p.16</a></td></tr>
+<tr><td class="pn">土日 在校等時間</td><td class="c">0:18</td><td class="c">1:07</td><td class="c"><b>0:36</b></td><td class="c">−0:31</td><td class="small">同上</td></tr>
+<tr><td class="pn">土日 持ち帰り</td><td class="c">1:26</td><td class="c">1:08</td><td class="c"><b>0:36</b></td><td class="c">−0:32</td><td class="small">同上</td></tr>
+<tr><td class="pn">土日 合計</td><td class="c"><span class="na">1:44（計算）</span></td><td class="c">2:15</td><td class="c"><b>1:12</b></td><td class="c">−1:03</td><td class="small">同上</td></tr>
+<tr><td class="pn">1週間の在校等時間</td><td class="c">53:16</td><td class="c">57:29</td><td class="c"><b>52:47</b></td><td class="c">−4:42</td><td class="small"><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_002_4.pdf#page=1" target="_blank" rel="noopener">H28確定 p.1</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=14" target="_blank" rel="noopener">R4確定 本体 p.14</a></td></tr>
+<tr class="grp"><td colspan="6">中学校</td></tr>
+<tr><td class="pn">平日 在校等時間</td><td class="c">11:00</td><td class="c">11:32</td><td class="c"><b>11:01</b></td><td class="c">−0:31</td><td class="small"><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=2" target="_blank" rel="noopener">H28速報 p.2</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=1" target="_blank" rel="noopener">R4確定 概要 p.1</a></td></tr>
+<tr><td class="pn">平日 持ち帰り</td><td class="c">0:22</td><td class="c">0:20</td><td class="c"><b>0:32</b></td><td class="c">＋0:12</td><td class="small"><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=4" target="_blank" rel="noopener">H28速報 p.4</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=16" target="_blank" rel="noopener">R4確定 本体 p.16</a></td></tr>
+<tr><td class="pn">平日 合計</td><td class="c"><span class="na">11:22（計算）</span></td><td class="c">11:52</td><td class="c"><b>11:33</b></td><td class="c">−0:19</td><td class="small"><a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=16" target="_blank" rel="noopener">R4確定 本体 p.16</a></td></tr>
+<tr><td class="pn">土日 在校等時間</td><td class="c">1:33</td><td class="c">3:22</td><td class="c"><b>2:18</b></td><td class="c">−1:04</td><td class="small">同上</td></tr>
+<tr><td class="pn">土日 持ち帰り</td><td class="c">1:39</td><td class="c">1:10</td><td class="c"><b>0:49</b></td><td class="c">−0:21</td><td class="small">同上</td></tr>
+<tr><td class="pn">土日 合計</td><td class="c"><span class="na">3:12（計算）</span></td><td class="c">4:33</td><td class="c"><b>3:07</b></td><td class="c">−1:26</td><td class="small">同上</td></tr>
+<tr><td class="pn">1週間の在校等時間</td><td class="c">58:06</td><td class="c">63:20</td><td class="c"><b>57:24</b></td><td class="c">−5:56</td><td class="small"><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_002_4.pdf#page=1" target="_blank" rel="noopener">H28確定 p.1</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=14" target="_blank" rel="noopener">R4確定 本体 p.14</a></td></tr>
+</tbody></table></div>
+<p class="small">H18・H28の在校等時間は「学内勤務時間」。H28の1週間の値は確定値（速報値は小57:25・中63:18）。1週間の正規の勤務時間は38時間45分。</p>
+
+<div class="note"><p class="mh">読み取れること</p><ul>
+<li>H18→H28で、平日の在校時間は小43分・中32分、土日は小49分・中1時間49分増えました（中学校の土日は部活動が1時間4分増）<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a>。</li>
+<li>R4では、すべての職種で在校等時間が減りました。それでも平日は正規の勤務時間より約3時間長いままです<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a>。</li>
+<li>R4の報告書は「平日は在校等時間は減少している一方、持ち帰り時間は若干増加している」と書いています<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=16" target="_blank" rel="noopener">〈参照〉</a>。</li>
+</ul></div>
+
+<h2 id="kyukei"><span class="hn">4</span>休憩時間</h2>
+<p>休憩は、正規の勤務時間（7時間45分）の途中に45分と決められていますが、実際に取れた時間を調べたのはH18とR4です。H28は30分単位の業務記録の分類の1つとして数えただけです。</p>
+<div class="tbl"><table class="num">
+<thead><tr><th>平日・教諭</th><th class="c">H18</th><th class="c">H28</th><th class="c">R4 10・11月</th><th class="c">R4 8月</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td class="pn">出勤から退勤までにとった休憩</td><td class="c" rowspan="2"><span class="kk">確認できず</span></td><td class="c" rowspan="2"><span class="na">全体の平均は確認できず</span><br>週60h以上 小1分・中2分<br>週60h未満 小3分・中6分</td><td class="c">小 <b>0:23</b><br>中 <b>0:23</b></td><td class="c">小 0:45<br>中 0:41</td><td class="small" rowspan="2"><a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=44" target="_blank" rel="noopener">R4確定 本体 p.44</a>、H28は<a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_004_3.pdf#page=6" target="_blank" rel="noopener">H28分析結果 p.6</a></td></tr>
+<tr><td class="pn">所定の休憩時間内にとった休憩</td><td class="c">小 <b>0:05</b><br>中 <b>0:07</b></td><td class="c">小 0:38<br>中 0:33</td></tr>
+</tbody></table></div>
+<div class="note warn"><p class="mh">休憩についての注意</p><ul>
+<li><b>H18</b>：毎日「所定の休憩時間内に実際にとれた休憩」を分単位で書く欄がありました<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_11.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a>。報告書には「休憩時間の調査結果が45分を下回る結果になっている」とありますが<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf#page=8" target="_blank" rel="noopener">〈参照〉</a>、教諭の平均の値は、今回読んだ報告書・集計表の文字からは<b>確認できず</b>。</li>
+<li><b>H28</b>：休憩は30分のますで記録するため、短い休憩は記録に残りにくい測り方です。教諭全体の平均は公表資料から確認できず、週60時間以上・未満に分けた表にだけ数字があります<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_004_3.pdf#page=6" target="_blank" rel="noopener">〈参照〉</a>。</li>
+<li><b>R4</b>：「所定の休憩時間内」は学校が決めた休憩の時間帯に取れた分、「出勤から退勤まで」はそれ以外の時間帯も含みます。10・11月は所定の時間帯にほとんど取れていません。</li>
+</ul></div>
+
+<h2 id="bunpu"><span class="hn">5</span>時間外の分布（月45h・80h相当）</h2>
+<p>勤務実態調査は1週間の調査なので、月の時間外は直接は出ません。<b>1週間の在校等時間が50時間以上</b>なら時間外はおよそ週11時間超（月45h超）、<b>60時間以上</b>ならおよそ週21時間超（月80h超）にあたるので、これを目安にしました（週の正規の勤務時間 38時間45分、月を4週として計算）。</p>
+<div class="chart"><p class="ct">1週間の在校等時間の分布（教諭・10・11月）</p>
+<p class="lg"><span><i class="sw d1"></i>週50時間未満</span><span><i class="sw d2"></i>週50〜60時間（月45h超の目安）</span><span><i class="sw d3"></i>週60時間以上（月80h超の目安）</span></p>
+<div class="grp"><p class="gn">小学校</p>
+<div class="row h18"><span class="yr">H18</span><span class="track d none">同じ形の公表なし（確認できず）</span><span class="val"></span></div>
+<div class="row h28"><span class="yr">H28</span><span class="track d"><span class="seg d1" style="width:18.1%"></span><span class="seg d2" style="width:48.4%"></span><span class="seg d3" style="width:33.4%"><b>33.4%</b></span></span><span class="val">50h以上 <b>81.8%</b></span></div>
+<div class="row r4"><span class="yr">R4</span><span class="track d"><span class="seg d1" style="width:35.6%"></span><span class="seg d2" style="width:50.3%"></span><span class="seg d3" style="width:14.2%"><b>14.2%</b></span></span><span class="val">50h以上 <b>64.5%</b></span></div>
+</div>
+<div class="grp"><p class="gn">中学校</p>
+<div class="row h18"><span class="yr">H18</span><span class="track d none">同じ形の公表なし（確認できず）</span><span class="val"></span></div>
+<div class="row h28"><span class="yr">H28</span><span class="track d"><span class="seg d1" style="width:11.1%"></span><span class="seg d2" style="width:31.3%"></span><span class="seg d3" style="width:57.7%"><b>57.7%</b></span></span><span class="val">50h以上 <b>89.0%</b></span></div>
+<div class="row r4"><span class="yr">R4</span><span class="track d"><span class="seg d1" style="width:22.8%"></span><span class="seg d2" style="width:40.5%"></span><span class="seg d3" style="width:36.5%"><b>36.5%</b></span></span><span class="val">50h以上 <b>77.0%</b></span></div>
+</div>
+</div>
+<details><summary>14区分すべての数字を見る</summary>
+<div class="tbl"><table class="num wide"><thead><tr><th>教諭（%）</th><th class="c">40h未満</th><th class="c">40〜45</th><th class="c">45〜50</th><th class="c">50〜55</th><th class="c">55〜60</th><th class="c">60〜65</th><th class="c">65〜70</th><th class="c">70〜75</th><th class="c">75〜80</th><th class="c">80〜85</th><th class="c">85〜90</th><th class="c">90〜95</th><th class="c">95〜100</th><th class="c">100h以上</th></tr></thead><tbody><tr><td class="pn">小学校 H28</td><td class="c">0.8</td><td class="c">3.9</td><td class="c">13.4</td><td class="c mid">24.0</td><td class="c mid">24.4</td><td class="c hi">16.3</td><td class="c hi">9.9</td><td class="c hi">4.5</td><td class="c hi">1.7</td><td class="c hi">0.7</td><td class="c hi">0.2</td><td class="c hi">0.1</td><td class="c hi">0.0</td><td class="c hi">0.0</td></tr><tr><td class="pn">小学校 R4</td><td class="c">2.6</td><td class="c">9.0</td><td class="c">24.0</td><td class="c mid">30.3</td><td class="c mid">20.0</td><td class="c hi">8.8</td><td class="c hi">3.6</td><td class="c hi">1.1</td><td class="c hi">0.5</td><td class="c hi">0.2</td><td class="c hi">0.0</td><td class="c hi">0.0</td><td class="c hi">0.0</td><td class="c hi">0.0</td></tr><tr><td class="pn">中学校 H28</td><td class="c">0.7</td><td class="c">2.4</td><td class="c">8.0</td><td class="c mid">14.8</td><td class="c mid">16.5</td><td class="c hi">17.0</td><td class="c hi">14.0</td><td class="c hi">10.9</td><td class="c hi">7.3</td><td class="c hi">4.6</td><td class="c hi">2.2</td><td class="c hi">1.1</td><td class="c hi">0.4</td><td class="c hi">0.2</td></tr><tr><td class="pn">中学校 R4</td><td class="c">2.5</td><td class="c">6.4</td><td class="c">13.9</td><td class="c mid">20.2</td><td class="c mid">20.3</td><td class="c hi">15.8</td><td class="c hi">10.0</td><td class="c hi">5.7</td><td class="c hi">3.1</td><td class="c hi">1.2</td><td class="c hi">0.5</td><td class="c hi">0.2</td><td class="c hi">0.0</td><td class="c hi">0.0</td></tr></tbody></table></div>
+<p class="small">赤字＝週60時間以上、青字＝週50〜60時間。出典：<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=3" target="_blank" rel="noopener">R4確定値 概要 p.3</a>（H28は同じ図に並べた確定値。<a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_002_4.pdf#page=2" target="_blank" rel="noopener">H28確定値 p.2</a>と同じ値）。在校等時間から調査の回答時間を一律に差し引いた値。</p>
+</details>
+
+<h3>年間を通した時間外の推計（文科省）</h3>
+<div class="tbl"><table class="num">
+<thead><tr><th>教諭・月あたり</th><th class="c">H18</th><th class="c">H28</th><th class="c">R4</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td class="pn">小学校</td><td class="c"><span class="kk">確認できず</span></td><td class="c">約59時間</td><td class="c"><b>約41時間</b></td><td class="small" rowspan="2"><a href="https://www.mext.go.jp/content/20231107-mxt_zaimu-000032590_003.pdf#page=1" target="_blank" rel="noopener">中教審 特別部会資料（R5.11.7）p.1</a>（「勤務実態調査等を踏まえ推計」）</td></tr>
+<tr><td class="pn">中学校</td><td class="c"><span class="kk">確認できず</span></td><td class="c">約81時間</td><td class="c"><b>約58時間</b></td></tr>
+</tbody></table></div>
+<p class="small">H18の週の分布は、H28・R4と同じ区分の公表を見つけられなかったため「確認できず」としました（H18は始業・終業を一律にみなすなど集計の方法も違います）。</p>
+
+<h2 id="mieruka"><span class="hn">6</span>毎年の「見える化」調査との違い</h2>
+<p>文科省は毎年、すべての教育委員会に「教育委員会における学校の働き方改革のための取組状況調査」（令和7年度から「見える化」調査）を行っています<a class="srcref" href="https://www.mext.go.jp/a_menu/shotou/uneishien/detail/1407520_00025.htm" target="_blank" rel="noopener">〈参照〉</a>。こちらは<b>教育委員会が、ICカードやタイムカードなどの記録を集計して答える</b>調査です。</p>
+<div class="tbl"><table>
+<thead><tr><th style="width:9em"></th><th>教員勤務実態調査（R4）</th><th>「見える化」調査（R7年度調査＝R6年度の実績）</th></tr></thead>
+<tbody>
+<tr><td class="pn">だれが答える</td><td>抽出した学校の先生本人</td><td>すべての教育委員会（回答率100%）<a class="srcref" href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=3" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">抽出か悉皆か</td><td>抽出（小・中各1,200校、高300校）</td><td>悉皆（すべての教育委員会）</td></tr>
+<tr><td class="pn">期間</td><td>8・10・11月のうち連続する7日間（比べるのは10・11月）</td><td>1年間（R6.4〜R7.3、夏休みを含む）<a class="srcref" href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=9" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">もとになる記録</td><td>本人が30分単位で業務を記入した用紙</td><td>ICT・タイムカード・パソコンの使用記録など「客観的な方法」の記録<a class="srcref" href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=4" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">持ち帰り</td><td><b>測る</b>（出勤前・退勤後・休日の業務）</td><td><b>含まない</b>。指針の在校等時間には入らず<a class="srcref" href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf" target="_blank" rel="noopener">〈参照〉</a>、国も「持ち帰り時間の把握は行っておりません」（R7.4.23 初中局長）<a class="srcref" href="https://kokkai.ndl.go.jp/txt/121705124X01020250423/206" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+<tr><td class="pn">休憩</td><td>実際に取れた分を1分単位で把握</td><td>指針では実際に休憩した分だけを除く。実際には、決まりの休憩を一律に差し引く教委があるという指摘もあり、運用は教委による</td></tr>
+<tr><td class="pn">わかること</td><td>何の仕事に何分かかっているか、持ち帰り、休憩、心の健康</td><td>教委ごとの月平均時間外在校等時間、月45h以下・80h超、年360h以下の割合</td></tr>
+<tr><td class="pn">わからないこと</td><td>都道府県・市町村ごとの数字（抽出のため）</td><td>仕事の中身、持ち帰り、記録が実態どおりか</td></tr>
+<tr><td class="pn">集計に入る範囲</td><td>平日5日すべて勤務した人</td><td>R6年度に客観的に把握し、教諭だけの値を出せ、月平均を回答できた教委だけ<a class="srcref" href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=9" target="_blank" rel="noopener">〈参照〉</a></td></tr>
+</tbody></table></div>
+
+<h3>数字を並べると</h3>
+<div class="vs">
+  <div class="side"><h3>勤務実態調査（R4・10〜11月）</h3><p>年間を通した時間外の推計（文科省）</p><p class="big">小 約41h ／ 中 約58h</p><p>週50時間以上（月45h超の目安）：小64.5%・中77.0%<br>週60時間以上（月80h超の目安）：小14.2%・中36.5%</p><p class="small"><a href="https://www.mext.go.jp/content/20231107-mxt_zaimu-000032590_003.pdf#page=1" target="_blank" rel="noopener">特別部会資料 p.1</a>、<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=3" target="_blank" rel="noopener">R4確定 概要 p.3</a></p></div>
+  <div class="side b"><h3>「見える化」調査（R6年度の実績）</h3><p>教諭の月平均の時間外在校等時間</p><p class="big">小 30.6h ／ 中 40.4h</p><p>月45h超：小22.2%・中39.5%<br>月80h超：小1.3%・中7.4%</p><p class="small"><a href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=9" target="_blank" rel="noopener">見える化 結果概要 p.9・10</a>（45h超は、45h以下 小77.8%・中60.5%から計算）</p></div>
+</div>
+
+<h3>数字がちがう理由</h3>
+<ol class="why">
+<li><b class="d">時期がちがう</b>：勤務実態調査は授業のある10・11月の1週間。見える化は夏休みなど短い月を含む1年の平均です。R4の調査でも、8月の平日の在校等時間は小8:04・中8:26で、10・11月より大きく短くなっています<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf#page=4" target="_blank" rel="noopener">〈参照〉</a>。</li>
+<li><b class="d">「月45h・80h」の意味がちがう</b>：勤務実態調査の分布は1週間の長さからの目安。見える化は1か月ごとの実績です。繁忙期の1週間が長い人でも、1年のすべての月が長いとは限りません。</li>
+<li><b class="d">記録のしかたがちがう</b>：勤務実態調査は本人が仕事の中身まで書く。見える化は打刻などの記録で、打刻のあとの仕事や、休日に打刻しない出勤は入りません。本人や管理職による短い記録の問題も指摘されています（<a href="zikangai-zaikoto.html">「時間外在校等時間」まとめ</a>6章）。</li>
+<li><b class="d">持ち帰りがちがう</b>：勤務実態調査は持ち帰りを別に測ります（R4平日 小37分・中32分）。見える化には入りません。</li>
+<li><b class="d">集計に入る教委がちがう</b>：見える化は、教諭だけの値を出せない教委などを除いて集計しています。勤務実態調査は抽出した学校の全国推計です。</li>
+<li><b class="d">年がちがう</b>：R4（2022年秋）とR6年度（2024年度）で、2年のずれがあります。</li>
+</ol>
+<p class="small">文科省も、2つは「対象職種や調査の時期、方法などについて差異がある」ので「単純にこれを比較することは難しい」としています（R7.4.25 衆議院文部科学委員会、初中局長）<a class="srcref" href="https://kokkai.ndl.go.jp/txt/121705124X01120250425/172" target="_blank" rel="noopener">〈参照〉</a>。だから差が、そのまま「記録漏れ」の大きさを示すわけではありません。</p>
+
+<h2 id="kongo"><span class="hn">7</span>令和4年度より後（次回の調査）</h2>
+<div class="tl">
+<div class="ti"><span class="td">H29.4</span><p>H28の速報のときの文科省の補足説明では、「今後、教員勤務実態調査については、５年おきに実施することを予定」としていました<a class="srcref" href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_8.pdf#page=6" target="_blank" rel="noopener">〈参照〉</a>。R4は、その後のR1給特法改正の附帯決議（三年後を目途）を受けて行われました<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=2" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+<div class="ti"><span class="td">R6.4.4</span><p>R4調査の確定値を公表（速報値はR5.4.28）<a class="srcref" href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a><a class="srcref" href="https://www.mext.go.jp/content/20230428-mxt_zaimu01-100003067-1.pdf" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+<div class="ti key"><span class="td">R7.4.10</span><p><b>衆議院本会議　文部科学大臣の答弁</b><a class="srcref" href="https://kokkai.ndl.go.jp/txt/121705254X01820250410/31" target="_blank" rel="noopener">〈参照〉</a></p><blockquote>教員勤務実態調査は、抽出された学校の教師が特定の月において一週間の全ての業務内容を記録するなど、学校現場への負担も大きい調査です。（中略）今後は、基本的に、毎年度、教育委員会に対して実施する調査を通じて、全国の教師の時間外在校等時間の状況を適切に把握してまいります。</blockquote><p>同じ答弁で、実施回数は計4回（S41・H18・H28・R4）と説明しています。</p></div>
+<div class="ti"><span class="td">R7.4.23</span><p><b>衆議院文部科学委員会</b>　初中局長「取組状況調査の方においては、現状、持ち帰り時間の把握は行っておりません」<a class="srcref" href="https://kokkai.ndl.go.jp/txt/121705124X01020250423/206" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+<div class="ti"><span class="td">R7.6.5</span><p><b>参議院文教科学委員会</b>　文部科学大臣「学校現場の追加の調査負担を…生じさせることがないように、毎年度、教育委員会が一年を通じて把握している時間外在校等時間の状況を調査する」「従前の調査にも留意をさせていただきながら、適切な内容、方法を検討しています」<a class="srcref" href="https://kokkai.ndl.go.jp/txt/121715104X01220250605/57" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+<div class="ti key"><span class="td">R7.6.18</span><p><b>改正給特法（令和7年法律第68号）附則6条</b>：政府は、第二号施行日（R8.1.1）以後<b>2年を目途</b>として、教育職員の「勤務の状況について調査を行い」、その結果に基づき、教職調整額の率の変更を含めて必要な措置を講ずる<a class="srcref" href="https://laws.e-gov.go.jp/law/346AC0000000077" target="_blank" rel="noopener">〈参照〉</a>。<b>調査の方法は書かれていません</b>。附則3条は、R11年度までに月の時間外在校等時間を平均30時間程度に減らす目標を定めています。</p></div>
+<div class="ti"><span class="td">R7.6.10</span><p><b>参議院文教科学委員会の附帯決議 第二項</b>：附則6条の調査は「これまで教育職員に対して行われた勤務実態調査にも留意し、その方法について十分に検討すること」<a class="srcref" href="https://www.sangiin.go.jp/japanese/gianjoho/ketsugi/217/f068_061001.pdf" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+<div class="ti"><span class="td">R7.11.26</span><p><b>衆議院文部科学委員会</b>　初中局長：客観的な把握がR6時点で99.8%まで進んだので、「学校現場に追加の調査負担を生じさせることなく、毎年度、全国の教育委員会が年間を通じて把握する在校等時間の状況を調査をしたい」<a class="srcref" href="https://kokkai.ndl.go.jp/txt/121905124X00320251126/93" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+<div class="ti"><span class="td">R8.3〜4</span><p>R7年度「見える化」調査の結果概要を公表（R6年度の実績）<a class="srcref" href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=1" target="_blank" rel="noopener">〈参照〉</a>。</p></div>
+</div>
+<div class="note warn"><p class="mh">いまの状況（2026年10月時点）</p><ul>
+<li>新しい抽出の教員勤務実態調査を行うという文科省の発表や予算は、<b>確認できず</b>。</li>
+<li>附則6条の「勤務の状況」の調査をどんな方法で行うか（見える化調査を使うのか、別の調査をするのか）を示した文科省の文書も<b>確認できず</b>。答弁からは教育委員会への調査が中心になるとみられますが、これは推測です。</li>
+<li>抽出調査がなくなると、<b>仕事の中身・持ち帰り・実際の休憩</b>を全国で同じ物差しで測るものがなくなり、H18→H28→R4のような長い期間の比較もできなくなります。</li>
+</ul></div>
+
+<h2 id="shutten"><span class="hn">8</span>出典</h2>
+<p class="small">ページ番号はPDFのページ（リンクはそのページを開きます）。数値はすべて下の一次資料で確かめました（2026年10月20日）。一覧ページ：<a href="https://www.mext.go.jp/a_menu/shotou/kyoshi-kankyo/1297093_00006.htm" target="_blank" rel="noopener">文部科学省「教員勤務実態調査」</a>。</p>
+<div class="tbl"><table>
+<thead><tr><th>資料</th><th>使ったところ</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="2">令和4年度</td></tr>
+<tr><td><a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-1.pdf" target="_blank" rel="noopener">教員勤務実態調査（令和4年度）の集計【確定値】について（概要）</a>（R6.4.4）</td><td>p.1 在校等時間・調査対象と日程、p.3 週の分布（H28と比較）、p.4 8月の勤務</td></tr>
+<tr><td><a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf" target="_blank" rel="noopener">教員勤務実態調査（令和4年度）の集計【確定値】</a>（R6.4.4）</td><td>p.2 目的・委託先・対象、p.3 調査項目（30分単位・1分単位の休憩）、p.5 回収結果・集計対象、p.14 1週間の在校等時間、p.16 持ち帰り時間、p.42 用語の定義、p.44 休憩時間</td></tr>
+<tr><td><a href="https://www.mext.go.jp/content/20230428-mxt_zaimu01-100003067-1.pdf" target="_blank" rel="noopener">同【速報値】について（概要）</a>（R5.4.28）、<a href="https://www.mext.go.jp/content/20240701-mxt_zaimu01-100003067-3.pdf" target="_blank" rel="noopener">報告書</a>（R6.7）</td><td>公表の経過</td></tr>
+<tr class="grp"><td colspan="2">平成28年度</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_5.pdf" target="_blank" rel="noopener">教員勤務実態調査（平成28年度）の集計（速報値）について（概要）</a>（H29.4.28）</td><td>p.1 実施方法・回答数、p.2 学内勤務時間（H18と比較）、p.4 持ち帰り（H18と比較）、p.5 土日の業務</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/08/03/1297093_8.pdf" target="_blank" rel="noopener">教員勤務実態調査の実施方法等に関する補足説明</a>（H29.4）</td><td>p.2 実施の理由、p.4 調査時期とH18第5期、p.5 サンプル数、p.6 回答時間・「５年おきに実施することを予定」</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_002_4.pdf" target="_blank" rel="noopener">教員勤務実態調査（平成28年度）集計【確定値】</a>（H30.9）</td><td>p.1 1週間の学内勤務時間、p.2 週の分布</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_004_3.pdf" target="_blank" rel="noopener">教員勤務実態調査（平成28年度）の分析結果及び確定値の公表について（概要）</a>（H30.9）</td><td>p.6 週60時間以上・未満別の業務内訳（休憩）</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2018/09/27/1409224_005_1.pdf" target="_blank" rel="noopener">「公立小学校・中学校等教員勤務実態調査研究」報告書（第1章〜第10章）</a></td><td>p.29 集計方法（データの扱い・分析対象）</td></tr>
+<tr class="grp"><td colspan="2">平成18年度</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_9.pdf" target="_blank" rel="noopener">平成18年度教員勤務実態調査報告書（第1部）</a>（東京大学、H19.3）</td><td>p.2 はじめに（目的・実施体制）</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_10.pdf" target="_blank" rel="noopener">同（第2部）</a></td><td>p.2〜4 調査対象・時期・方法・回収結果、p.6〜7 時間帯の定義（持帰り）・30分単位の理由、p.8 休憩時間の注意</td></tr>
+<tr><td><a href="https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2017/11/30/1297093_11.pdf" target="_blank" rel="noopener">同（第3部 資料）</a></td><td>p.5 調査票見本（休憩を分単位で記入）</td></tr>
+<tr class="grp"><td colspan="2">「見える化」調査・法令・国会</td></tr>
+<tr><td><a href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf" target="_blank" rel="noopener">令和7年度 教育委員会における学校の働き方改革のための「見える化」調査【結果概要】</a>（R8.3）</td><td>p.3 調査概要、p.4 調査項目、p.9 小学校、p.10 中学校</td></tr>
+<tr><td><a href="https://www.mext.go.jp/content/20231107-mxt_zaimu-000032590_003.pdf" target="_blank" rel="noopener">中教審 質の高い教師の確保特別部会 資料（R5.11.7）</a></td><td>p.1 年間の時間外の推計（H28・R4）</td></tr>
+<tr><td><a href="https://laws.e-gov.go.jp/law/346AC0000000077" target="_blank" rel="noopener">給特法（e-Gov）</a></td><td>令和7年6月18日法律第68号の附則1条・3条・6条</td></tr>
+<tr><td><a href="https://www.sangiin.go.jp/japanese/gianjoho/ketsugi/217/f068_061001.pdf" target="_blank" rel="noopener">参議院文教科学委員会 附帯決議（R7.6.10）</a></td><td>第二項</td></tr>
+<tr><td><a href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf" target="_blank" rel="noopener">指針（令和7年文科省告示第114号）</a></td><td>在校等時間の定義（持ち帰りを含まない）</td></tr>
+<tr><td>国会会議録：<a href="https://kokkai.ndl.go.jp/txt/121705254X01820250410/31" target="_blank" rel="noopener">衆・本会議 R7.4.10</a>、<a href="https://kokkai.ndl.go.jp/txt/121705124X01020250423/206" target="_blank" rel="noopener">衆・文部科学委 R7.4.23</a>、<a href="https://kokkai.ndl.go.jp/txt/121715104X01220250605/57" target="_blank" rel="noopener">参・文教科学委 R7.6.5</a>、<a href="https://kokkai.ndl.go.jp/txt/121705124X01120250425/172" target="_blank" rel="noopener">衆・文部科学委 R7.4.25</a>、<a href="https://kokkai.ndl.go.jp/txt/121905124X00320251126/93" target="_blank" rel="noopener">衆・文部科学委 R7.11.26</a></td><td>今後の調査の方針、持ち帰りの把握</td></tr>
+</tbody></table></div>
+<p class="small">確認できなかったもの：H18の教諭の休憩時間の平均、H28の教諭全体の休憩時間の平均、H18の週の在校時間の分布（H28・R4と同じ区分）、H18の年間の時間外の推計、新しい抽出調査の計画。</p>
+
+<footer class="site-foot"><p>働き方改革の調べ</p><div class="sf"><a href="index.html">目次</a><a href="zikangai-zaikoto.html">「時間外在校等時間」まとめ</a><b>国の勤務実態調査</b><a href="mochikaeri-00-top.html">持ち帰り・休憩の調べ</a><a href="mochikaeri-04-kekka.html">持ち帰り・休憩 調査結果</a></div></footer>
+</div>
+
+</body>
+</html>
