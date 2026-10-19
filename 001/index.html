@@ -62,6 +62,40 @@
     border-top: 1px solid #ddd;
     margin-top: 40px;
   }
+  /* 全体の図（持ち帰り・休憩の調べ 00 から） */
+  .euler{--card:#fff;--ink:#1d2433;--sub:#5a6272;--line:#d9dce3;--soft:#eceef3;--accent:#2f4f8f;--neo:#fdf1f6;--neoline:#c2185b;--neoink:#8c2350;
+    --e1:#e9edf5;--e2:#d9e1f0;--e3:#c4d1ea;--e4:#a9bde3;--fu:#fbe3ee;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px}
+  .euler svg{width:100%;height:auto;display:block}
+  .euler text{font-family:"BIZ UDPGothic","Yu Gothic UI",sans-serif;fill:var(--ink)}
+  .euler .lbl{font-size:17px;font-weight:700}
+  .euler .cnt{font-size:26px;font-weight:700;fill:var(--accent)}
+  .euler .sm{font-size:14px;fill:var(--sub)}
+  .euler .dot{fill:var(--ink)}
+  .euler .dot.me{fill:var(--neoline)}
+  .euler .nm{font-size:15px;font-weight:700}
+  .euler .nm.me{fill:var(--neoink)}
+  .euler a .nm{text-decoration:underline}
+  .euler a:focus-visible{outline:2px solid var(--accent)}
+  .euler .fu{fill:var(--fu);fill-opacity:.75;stroke:var(--neoline);stroke-width:3;stroke-dasharray:8 5}
+  .euler .fl{font-size:16px;font-weight:700;fill:var(--neoink)}
+  .euler a.reg{cursor:pointer}
+  .euler a.reg:hover ellipse,.euler a.reg:hover rect{stroke-width:4;filter:brightness(.96)}
+  .euler a.reg:hover .lbl,.euler a.reg:hover .fl{text-decoration:underline}
+  .euler .eu-tall{display:none}
+  @media (max-width:640px){
+    .euler{padding:6px}
+    .euler .eu-wide{display:none}
+    .euler .eu-tall{display:block}
+    .euler .eu-tall .lbl{font-size:16px}
+    .euler .eu-tall .cnt{font-size:23px}
+    .euler .eu-tall .nm{font-size:15.5px}
+    .euler .eu-tall .sm{font-size:12.5px}
+    .euler .eu-tall .fl{font-size:14px}
+  }
+  .eu-lead{font-size:.95rem;margin:0 0 8px}
+  ul.eu-go{list-style:none;padding:0;margin:10px 0 0;font-size:.9rem}
+  ul.eu-go li{margin:3px 0}
+  ul.eu-go .ch{display:inline-block;min-width:7.5em;color:#777}
 </style>
 </head>
 <body>
@@ -78,6 +112,91 @@
 </header>
 
 <main>
+  <h2>全体の図　持ち帰りを「把握している」教育委員会は？</h2>
+  <p class="eu-lead">全国1,804の教育委員会を、入れ子の円で表しました。円や自治体名を押すと、関係する章のページへ移ります。</p>
+  <div class="euler">
+<svg class="eu-wide" viewBox="0 0 1000 720" role="img" aria-labelledby="eu-t-top eu-d-top">
+<title id="eu-t-top">持ち帰りの把握をめぐる教育委員会の入れ子の図</title>
+<desc id="eu-d-top">全国1,804の教育委員会のうち、持ち帰りを把握していると答えたのは776。そのうち方法を調べた都道府県教委・政令市は39、方法がわかったのは23、数字を公表している調査があるのは16。持ち帰りを時間外在校等時間に含めるのは大阪市と久留米市。広島市と川崎市は調査をしているが把握していないと回答。山口県教委は方法はわかるが数字は公表していない23の中にある。</desc>
+<a class="reg" href="mochikaeri-00-top.html#euler"><title>第3章（１）入口へ</title><rect x="6" y="6" width="988" height="708" rx="18" fill="var(--soft)" stroke="var(--line)" stroke-width="2"/></a>
+<a class="reg" href="mochikaeri-00-top.html#euler"><title>第3章（１）入口へ</title><text x="28" y="40" class="lbl">全国の教育委員会</text><text x="28" y="72" class="cnt">1,804</text>
+<text x="28" y="94" class="sm">「把握していない」1,028</text></a>
+
+<a class="reg" href="mochikaeri-02-47.html#list"><title>第3章（３）47都道府県一覧へ</title><ellipse cx="590" cy="400" rx="390" ry="250" fill="var(--e1)" stroke="var(--accent)" stroke-width="2"/>
+<text x="330" y="235" class="lbl">「把握している」と答えた</text><text x="330" y="266" class="cnt">776</text><text x="400" y="266" class="sm">（43.0%）</text></a>
+
+<a class="reg" href="mochikaeri-02-47.html#shurui"><title>第3章（３）種類別の数へ</title><ellipse cx="660" cy="435" rx="275" ry="185" fill="var(--e2)" stroke="var(--accent)" stroke-width="2"/>
+<text x="520" y="295" class="lbl">方法を調べた 都道府県教委・政令市</text><text x="520" y="324" class="cnt">39</text></a>
+
+<a class="reg" href="mochikaeri-03-zenkoku.html#hikaku"><title>第3章（２）全国編 比較へ</title><ellipse cx="700" cy="465" rx="205" ry="140" fill="var(--e3)" stroke="var(--accent)" stroke-width="2"/>
+<text x="570" y="380" class="lbl">方法がわかった</text><text x="690" y="380" class="cnt">23</text></a>
+
+<a class="reg" href="mochikaeri-04-kekka.html#pref"><title>第4章 調査結果へ</title><ellipse cx="760" cy="500" rx="115" ry="85" fill="var(--e4)" stroke="var(--accent)" stroke-width="2.5"/>
+<text x="690" y="458" class="lbl">数字を公表している</text><text x="745" y="490" class="cnt">16</text></a>
+
+<!-- 時間外に含める -->
+<a class="reg" href="mochikaeri-04-kekka.html#sannyu"><title>第4章 持ち帰りを時間外に含めるかへ</title><ellipse cx="530" cy="570" rx="215" ry="50" class="fu"/>
+<text x="420" y="553" class="fl">持ち帰りを時間外に含める</text></a>
+
+<!-- 点 -->
+<a href="mochikaeri-03-zenkoku.html#osaka"><circle cx="715" cy="565" r="7" class="dot"/><text x="727" y="571" class="nm">大阪市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kurume"><circle cx="370" cy="575" r="7" class="dot"/><text x="382" y="581" class="nm">久留米市</text></a>
+<a href="mochikaeri-04-kekka.html#h-nagano"><circle cx="790" cy="540" r="7" class="dot"/><text x="802" y="546" class="nm">長野県</text></a>
+<a href="mochikaeri-04-kekka.html#h-shimane"><circle cx="700" cy="515" r="7" class="dot"/><text x="712" y="521" class="nm">島根県</text></a>
+<a href="mochikaeri-02-47.html#m-35"><circle cx="530" cy="430" r="8" class="dot me"/><text x="542" y="436" class="nm me">山口県教委</text></a><text x="542" y="456" class="sm">（聞き取り）</text>
+<a href="mochikaeri-02-47.html#m-31"><circle cx="540" cy="495" r="6" class="dot"/><text x="552" y="501" class="nm">鳥取県</text></a>
+<a href="mochikaeri-02-47.html#m-13"><circle cx="440" cy="400" r="6" class="dot"/><text x="452" y="406" class="nm">東京都</text></a>
+<a href="mochikaeri-01-yamaguchi.html#mochikaeri"><circle cx="240" cy="420" r="8" class="dot me"/><text x="252" y="426" class="nm me">防府・岩国・阿武</text></a>
+<text x="252" y="446" class="sm">（方法は未調査）</text>
+<a href="mochikaeri-03-zenkoku.html#hiroshima"><circle cx="70" cy="630" r="7" class="dot"/><text x="82" y="636" class="nm">広島市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kawasaki"><circle cx="70" cy="662" r="7" class="dot"/><text x="82" y="668" class="nm">川崎市</text></a>
+<text x="40" y="704" class="sm">↑ 調査はしているが「把握していない」と回答</text>
+<text x="40" y="250" class="sm">山口県内の</text><text x="40" y="270" class="sm">ほか16市町</text><circle cx="58" cy="290" r="7" class="dot me"/>
+</svg>
+<svg class="eu-tall" viewBox="0 0 380 1080" role="img" aria-labelledby="eu-t2-top eu-d-top">
+<title id="eu-t2-top">持ち帰りの把握をめぐる教育委員会の入れ子の図（縦向き）</title>
+<a class="reg" href="mochikaeri-00-top.html#euler"><title>第3章（１）入口へ</title><rect x="4" y="4" width="372" height="1072" rx="16" fill="var(--soft)" stroke="var(--line)" stroke-width="2"/></a>
+<a class="reg" href="mochikaeri-00-top.html#euler"><title>第3章（１）入口へ</title><text x="18" y="32" class="lbl">全国の教育委員会</text><text x="18" y="60" class="cnt">1,804</text></a>
+
+<a class="reg" href="mochikaeri-02-47.html#list"><title>第3章（３）47都道府県一覧へ</title><rect x="14" y="76" width="352" height="664" rx="40" fill="var(--e1)" stroke="var(--accent)" stroke-width="2"/>
+<text x="32" y="104" class="lbl">「把握している」と答えた</text><text x="32" y="132" class="cnt">776</text><text x="88" y="130" class="sm">（43.0%）</text></a>
+<a href="mochikaeri-01-yamaguchi.html#mochikaeri"><circle cx="40" cy="166" r="7" class="dot me"/><text x="54" y="171" class="nm me">防府・岩国・阿武</text></a>
+<text x="54" y="190" class="sm">（山口県内の市町。方法は未調査）</text>
+
+<a class="reg" href="mochikaeri-02-47.html#shurui"><title>第3章（３）種類別の数へ</title><rect x="28" y="210" width="324" height="436" rx="34" fill="var(--e2)" stroke="var(--accent)" stroke-width="2"/>
+<text x="44" y="238" class="lbl">方法を調べた</text><text x="44" y="258" class="sm">都道府県教委31・政令市8</text><text x="290" y="240" class="cnt">39</text></a>
+<a href="mochikaeri-02-47.html#m-13"><circle cx="52" cy="286" r="6" class="dot"/><text x="64" y="291" class="nm">東京都など16</text></a><text x="172" y="291" class="sm">（方法を確認できず）</text>
+
+<a class="reg" href="mochikaeri-03-zenkoku.html#hikaku"><title>第3章（２）全国編 比較へ</title><rect x="42" y="310" width="296" height="320" rx="30" fill="var(--e3)" stroke="var(--accent)" stroke-width="2"/>
+<text x="58" y="338" class="lbl">方法がわかった</text><text x="282" y="340" class="cnt">23</text></a>
+<a href="mochikaeri-02-47.html#m-35"><circle cx="66" cy="368" r="7" class="dot me"/><text x="80" y="373" class="nm me">山口県教委（聞き取り）</text></a>
+<a href="mochikaeri-02-47.html#m-31"><circle cx="66" cy="396" r="6" class="dot"/><text x="80" y="401" class="nm">鳥取県・香川県など7</text></a>
+
+<a class="reg" href="mochikaeri-04-kekka.html#pref"><title>第4章 調査結果へ</title><rect x="56" y="420" width="268" height="196" rx="26" fill="var(--e4)" stroke="var(--accent)" stroke-width="2.5"/>
+<text x="72" y="448" class="lbl">数字を公表している</text><text x="270" y="450" class="cnt">16</text></a>
+<a href="mochikaeri-04-kekka.html#h-shimane"><circle cx="80" cy="480" r="6" class="dot"/><text x="92" y="485" class="nm">島根県</text></a>
+<a href="mochikaeri-04-kekka.html#h-nagano"><circle cx="170" cy="480" r="6" class="dot"/><text x="182" y="485" class="nm">長野県</text></a>
+<text x="80" y="510" class="sm">北海道・福島・栃木・埼玉など</text>
+
+<a class="reg" href="mochikaeri-04-kekka.html#sannyu"><title>第4章 持ち帰りを時間外に含めるかへ</title><rect x="70" y="552" width="236" height="166" rx="20" class="fu"/>
+<text x="84" y="574" class="fl">持ち帰りを時間外に含める</text></a>
+<a href="mochikaeri-03-zenkoku.html#osaka"><circle cx="90" cy="598" r="7" class="dot"/><text x="104" y="603" class="nm">大阪市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kurume"><circle cx="90" cy="690" r="7" class="dot"/><text x="104" y="695" class="nm">久留米市</text></a>
+
+<a href="mochikaeri-03-zenkoku.html#hiroshima"><circle cx="26" cy="900" r="7" class="dot"/><text x="40" y="905" class="nm">広島市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kawasaki"><circle cx="120" cy="900" r="7" class="dot"/><text x="134" y="905" class="nm">川崎市</text></a>
+<text x="18" y="800" class="lbl">「把握していない」と答えた</text><text x="18" y="832" class="cnt">1,028</text><text x="92" y="830" class="sm">（57.0%）</text>
+<text x="20" y="928" class="sm">↑ 調査はしているが「把握していない」と回答</text>
+<circle cx="26" cy="970" r="6" class="dot me"/><text x="38" y="974" class="sm">山口県内のほか16市町（把握していない）</text>
+</svg>
+  </div>
+  <ul class="eu-go">
+    <li><span class="ch">第3章（１）</span><a href="mochikaeri-00-top.html#euler">全国の教育委員会 1,804（図のくわしい説明）</a></li>
+    <li><span class="ch">第3章（３）</span><a href="mochikaeri-02-47.html#list">「把握している」と答えた 776</a>・<a href="mochikaeri-02-47.html#shurui">方法を調べた 39</a></li>
+    <li><span class="ch">第3章（２）</span><a href="mochikaeri-03-zenkoku.html#hikaku">方法がわかった 23</a></li>
+    <li><span class="ch">第4章</span><a href="mochikaeri-04-kekka.html#pref">数字を公表している 16</a>・<a href="mochikaeri-04-kekka.html#sannyu">持ち帰りを時間外に含める</a></li>
+  </ul>
+
   <h2>第１章　学校の働き方改革の流れ（要点）</h2>
   <ol class="info">
     <li><a href="zikangai-zaikoto.html#keii">決まりと目標の移り変わり</a><span class="sub">「時間外在校等時間」まとめ 2章</span></li>
