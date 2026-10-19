@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>加速化プランの変遷</title>
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --okbg:#e5f3ea; --mid:#9a5a00; --midbg:#fbf0dd; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4;
+  --c1:#2f4f8f; --c2:#6a7fb5; --c3:#a9b6d6;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --mid:#f0b35c; --midbg:#3a2e1a; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8;
+    --c1:#8fb0f0; --c2:#6a7fb5; --c3:#46557a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+  --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+  --ok:#6fd09a; --okbg:#1c3327; --mid:#f0b35c; --midbg:#3a2e1a; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+  --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8;
+  --c1:#8fb0f0; --c2:#6a7fb5; --c3:#46557a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+h1,h2{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.75rem;line-height:1.35;margin:0 0 6px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+h2{font-size:1.25rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+h3{font-size:1rem;margin:22px 0 8px}
+a{color:var(--link)}
+p{max-width:72ch}
+.lead{max-width:72ch;margin:18px 0 0}
+.small{font-size:.85rem;color:var(--sub)}
+.num{font-variant-numeric:tabular-nums}
+nav.toc{margin:20px 0 0;display:flex;flex-wrap:wrap;gap:6px 8px}
+nav.toc a{font-size:.85rem;text-decoration:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:2px 12px;color:var(--ink)}
+nav.toc a:hover{border-color:var(--accent)}
+
+/* 要点 */
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:8px}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pt b.big{display:block;font-size:1.45rem;line-height:1.25;color:var(--accent);font-variant-numeric:tabular-nums}
+.pt.key{border:2px solid var(--neoline);background:var(--neo)}
+.pt.key b.big{color:var(--neoink)}
+.pt p{margin:4px 0 0;font-size:.92rem}
+
+/* 表 */
+.tbl{overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:separate;border-spacing:0;width:100%}
+table.wide{min-width:980px}
+.tbl.fix{max-height:78vh}
+.tbl.fix tbody th{min-width:7.5em;white-space:normal}
+.tbl.fix thead th{box-shadow:0 1px 0 var(--line)}
+.tbl.fix tbody th{box-shadow:1px 0 0 var(--line)}
+.tbl.toponly thead th:first-child{position:sticky;left:auto}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left;font-size:.88rem}
+thead th{background:var(--head);color:var(--headink);font-weight:700;white-space:nowrap;position:sticky;top:0;z-index:2}
+tbody th{background:var(--soft);font-weight:700;white-space:nowrap;position:sticky;left:0;z-index:1;border-right:1px solid var(--line)}
+thead th:first-child{position:sticky;left:0;z-index:3}
+tr:last-child td,tr:last-child th{border-bottom:0}
+td.neo{background:var(--neo)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;border:1px solid;border-radius:3px;padding:0 5px;margin-right:3px;vertical-align:1px;white-space:nowrap}
+.tag.new{color:var(--neoink)} .tag.move{color:var(--mid)} .tag.gone{color:var(--unk)}
+ol.tori{margin:0;padding-left:0;list-style:none}
+ol.tori li{margin:2px 0}
+
+/* 推移グラフ */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.85rem;color:var(--sub);margin:0 0 12px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+.grp{margin:10px 0 16px}
+.grp h4{margin:0 0 4px;font-size:.92rem}
+.row{display:grid;grid-template-columns:6.5em 1fr 4.2em;gap:10px;align-items:center;margin:3px 0}
+.row .lab{font-size:.82rem;color:var(--sub);white-space:nowrap}
+.row .track{position:relative;height:16px;background:var(--soft);border-radius:3px}
+.row .fill{height:100%;border-radius:3px}
+.row .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;font-size:.88rem}
+.track .goal{position:absolute;top:-3px;bottom:-3px;border-left:2px dashed var(--neoline)}
+.track .lim{position:absolute;top:-3px;bottom:-3px;border-left:2px dotted var(--ng)}
+.f1{background:var(--c3)} .f2{background:var(--c2)} .f3{background:var(--c1)}
+
+/* カード・注記 */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.box h3{margin-top:0}
+.box ul{margin:6px 0 0;padding-left:1.2em}
+.box li{margin:3px 0}
+.warn{border-left:4px solid var(--mid);background:var(--midbg);border-radius:6px;padding:10px 14px;margin:12px 0}
+.crit{border:2px solid var(--neoline);background:var(--neo)}
+.crit h3{color:var(--neoink)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;counter-reset:f}
+.flow div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.88rem;position:relative}
+.flow div b{display:block;color:var(--accent)}
+/* 伊佐中 R7/R8 比較 */
+.pair{display:grid;grid-template-columns:9.5em 1fr;gap:8px;align-items:center;padding:3px 0;border-bottom:1px dashed var(--line)}
+.pair:last-child{border-bottom:0}
+.pair .lab{font-size:.8rem;white-space:nowrap}
+.row2{display:grid;grid-template-columns:1fr 1.6em;gap:6px;align-items:center;margin:1px 0}
+.row2 .track{height:9px;background:var(--soft);border-radius:2px}
+.row2 .fill{height:100%;border-radius:2px}
+.row2 .v{text-align:right;font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums}
+/* 設問（フォーム風） */
+.form{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--accent);border-radius:8px;padding:6px 18px 14px}
+.form .sec{font-weight:700;font-family:"BIZ UDPMincho","Yu Mincho",serif;margin:16px 0 4px;padding:4px 10px;background:var(--soft);border-radius:4px}
+.form .req{font-size:.72rem;font-weight:700;color:var(--ng);border:1px solid var(--ng);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:1px;font-family:"BIZ UDPGothic","Yu Gothic UI",sans-serif}
+.qq{display:grid;grid-template-columns:3.2em 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.qq:last-child{border-bottom:0}
+.qq .no{display:inline-block;align-self:start;text-align:center;font-weight:700;font-size:.8rem;color:var(--headink);background:var(--head);border-radius:4px;padding:2px 0;font-variant-numeric:tabular-nums}
+.qq .qt{margin:0;font-weight:700;display:inline}
+.qq .ex{font-weight:400;font-size:.85rem;color:var(--sub)}
+.qq .type{display:inline-block;margin-left:8px;font-size:.72rem;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 8px;vertical-align:2px;white-space:nowrap}
+.opts{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 8px}
+.opts li{font-size:.86rem;border:1px solid var(--line);border-radius:6px;padding:2px 10px 2px 8px;background:var(--bg)}
+.opts.radio li::before{content:"";display:inline-block;width:.8em;height:.8em;border:1.5px solid var(--sub);border-radius:50%;margin-right:6px;vertical-align:-1px}
+.opts.check li::before{content:"";display:inline-block;width:.8em;height:.8em;border:1.5px solid var(--sub);border-radius:2px;margin-right:6px;vertical-align:-1px}
+.ans{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ans .blank{font-size:.82rem;color:var(--sub);border-bottom:1.5px solid var(--line);padding:2px 4px;min-width:12em}
+.ans .blank.big{min-width:100%;min-height:3.2em;border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.qq .note{margin:6px 0 0;font-size:.8rem;color:var(--sub)}
+details.box summary{cursor:pointer}
+.src{font-size:.82rem;color:var(--sub);word-break:break-all}
+.src li{margin:4px 0}
+footer{margin-top:40px;font-size:.8rem;color:var(--sub)}
+@media (max-width:560px){
+  h1{font-size:1.4rem}
+  .row{grid-template-columns:5.2em 1fr 3.8em;gap:6px}
+}
+@media print{
+  body{background:#fff}
+  .tbl{overflow:visible} .tbl.fix{max-height:none} table.wide{min-width:0}
+  nav.toc{display:none}
+  h2{break-after:avoid} .box,.chart,.pt{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="eyebrow">山口県 学校における働き方改革</p>
+<h1>「加速化プラン」の変遷と、県教委「現状分析ツール」</h1>
+<p class="date">2026年10月4日まとめ（県教委の公表資料・教育委員会会議資料・ツールのパッケージをもとに作成）</p>
+
+<p class="lead">山口県教育委員会の「学校における働き方改革加速化プラン」は、平成30年3月の策定から、第2期（令和3年7月）、第3期（令和6年4月）、第3期の一部改訂（令和8年4月）と4段階を経ています。あわせて、プランの中で「意識改革を図る研修」の道具として位置づけられている「働き方改革 現状分析ツール」（教職員意識調査）の中身と、その限界をまとめました。</p>
+
+<nav class="toc">
+  <a href="#points">要点</a>
+  <a href="#history">変遷の一覧</a>
+  <a href="#pillars">柱の組み替え</a>
+  <a href="#r8">令和8年改訂</a>
+  <a href="#data">数値の推移</a>
+  <a href="#tool">現状分析ツール</a>
+  <a href="#isa">伊佐中の結果</a>
+  <a href="#limits">ツールの限界</a>
+  <a href="#unknown">未確認のこと</a>
+  <a href="#sources">出典</a>
+</nav>
+
+<h2 id="points">要点</h2>
+<div class="points">
+  <div class="pt"><b class="big">4段階</b><p>H30.3 第1期 → R3.7 第2期 → R6.4 第3期 → R8.4 第3期一部改訂。現行の期間は令和10年3月まで。</p></div>
+  <div class="pt"><b class="big">30%削減 → 0%に近づける</b><p>第1期は「時間外を3年で30%削減」。第2期から「月45時間・年360時間を超える教員の割合を0%に近づける」に変わった。</p></div>
+  <div class="pt"><b class="big">30時間以内</b><p>第3期で推進指標を新設。月平均の時間外を30時間以内に。R6は小35.0h・中41.7h・県立32.1hで、まだ届いていない。</p></div>
+  <div class="pt key"><b class="big">持ち帰りは測らない</b><p>現状分析ツールは「時間をかけたい業務」「改善したい業務」を聞く意識調査。誰が・いつ・何時間持ち帰ったかは分からない。</p></div>
+</div>
+
+<h2 id="history">1. 変遷の一覧</h2>
+<div class="tbl fix">
+<table class="wide">
+<thead><tr><th></th><th>第1期</th><th>第2期（改訂版）</th><th>第3期</th><th>第3期 一部改訂</th></tr></thead>
+<tbody>
+<tr><th>策定</th><td>平成30年（2018年）3月</td><td>令和3年（2021年）7月</td><td>令和6年（2024年）4月</td><td class="neo">令和8年（2026年）4月</td></tr>
+<tr><th>決まるまでの流れ</th><td>前年のH29.3に業務改善目標を設定</td><td>R3.6.18 教育委員会会議に報告</td><td>R6.1.25 教育委員会会議で協議</td><td class="neo">R8.1 教育委員会会議で協議 → R8.2 総合教育会議に報告 → R8.3 文教警察委員会に報告 → R8.3.19 教育委員会会議に最終案を報告</td></tr>
+<tr><th>きっかけ</th><td>文科省 教員勤務実態調査（H28）</td><td>「時間外在校等時間の上限に関する方針」（R2.3）、休日のまとめ取りの変形労働時間制の条例整備（R3.3）</td><td>中教審 質の高い教師の確保特別部会の緊急提言（R5.8）。教師のウェルビーイングを掲げる</td><td class="neo">給特法の一部改正（R7.6）で「業務量管理・健康確保措置実施計画」の策定が求められた</td></tr>
+<tr><th>期間</th><td>H29〜H31年度の3年間（目標の期間）</td><td>「当面」R6.3まで</td><td>R6.4〜R10.3</td><td class="neo">同じ（R10.3まで）</td></tr>
+<tr><th>目標</th><td>教員の時間外業務時間を<b>30%削減</b>（H31年度をH28年度比で）</td><td>上限方針の遵守：「月45時間、年360時間を超える教員の割合を<b>0%に近づける</b>」</td><td>第2期の目標を継承</td><td class="neo">継承＋<b>健康診断受診の推進</b>：「定期健康診断及び精密検査の受診率を100%に近づける」（R6：定期98.0%、精密84.1%）</td></tr>
+<tr><th>推進指標</th><td>なし</td><td>なし</td><td><span class="tag new">新設</span>①月平均の時間外を<b>30時間以内</b> ②取組状況をWebページ等で公表する学校を<b>100%</b></td><td class="neo">同じ（基準値をR4からR6に更新）</td></tr>
+<tr><th>柱・取組</th><td>3本柱（取組の数は未確認）</td><td>3本柱・<b>13取組</b></td><td><b>4本柱・12取組</b></td><td class="neo">4本柱・<b>13取組</b>（⑦教職員の健康の確保を追加）</td></tr>
+<tr><th>共通する視点</th><td>―</td><td>「ICTの活用」「コミュニティ・スクールの仕組みの活用」</td><td>「ICT環境」「コミュニティ・スクールの連携・協働体制」</td><td class="neo">同じ</td></tr>
+<tr><th>市町教委への言及</th><td>―</td><td>県教委の取組等を参考に、主体的な取組を推進</td><td>同じ</td><td class="neo"><span class="tag new">追加</span>各市町教委も<b>プランを策定</b>し、主体的な取組を展開</td></tr>
+<tr><th>県教委の役割</th><td>―</td><td>「学校における働き方改革推進室」を中心に検証・改善</td><td>同じ。Webページ等で取組状況を公表</td><td class="neo"><span class="tag new">追加</span>総合教育会議で取組状況を報告</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">第1期の目標は、R3.6教育委員会会議資料とプラン第3期p.2の「参考」による。第1期の原本PDFは見つかっていない。</p>
+
+<h2 id="pillars">2. 柱と取組の組み替え（第2期 → 第3期）</h2>
+<div class="tbl fix toponly">
+<table class="wide">
+<thead><tr><th>第2期 R3.7（3本柱・13取組）</th><th>第3期 R6.4 → R8.4改訂（4本柱・12 → 13取組）</th></tr></thead>
+<tbody>
+<tr>
+<td><b>柱1 業務の見直し・効率化</b>
+<ol class="tori"><li>① 事業・校務等の総点検と精選</li><li>② 統合型校務支援システムの導入と運用</li><li>③ 校務におけるICTの活用促進</li><li>④ 学校・教師が担う業務の在り方の整理と保護者・地域への理解促進</li></ol></td>
+<td><b>柱1 業務の見直し・適正化</b>
+<ol class="tori"><li>① 適正な勤務時間管理と継続的な状況把握 <span class="tag move">柱2から</span></li><li>② 事業・校務等の精選</li><li>③ 意識改革や業務の効率化を図る研修の充実 <span class="tag move">柱2から</span>（現状分析ツールはここ）</li></ol>
+<b>柱2 校務の効率化</b> <span class="tag new">新しい柱</span>
+<ol class="tori"><li>④ 統合型校務支援システムの効率的な運用</li><li>⑤ 校務におけるICT活用促進</li></ol></td>
+</tr>
+<tr>
+<td><b>柱2 勤務体制等の改善</b>
+<ol class="tori"><li>⑤ 勤務時間管理の適正化と継続的な状況把握</li><li>⑥ 意識改革を図る研修の充実</li><li>⑦ 部活動の適正化</li><li>⑧ 留守番電話の活用</li><li>⑨ メリハリのある働き方のルール化</li></ol></td>
+<td><b>柱3 勤務体制等の改善</b>
+<ol class="tori"><li>⑥ メリハリのある働き方のルール化</li><li>⑦ 教職員の健康の確保 <span class="tag new">R8追加</span></li><li>⑧ 教員業務支援員の配置 <span class="tag move">人材の柱から</span></li><li>⑨ 部活動指導員の配置と部活動の適正化 <span class="tag move">統合</span></li><li>⑩ ICT支援員の配置 <span class="tag move">人材の柱から</span></li></ol>
+<span class="tag gone">独立項目から外れた</span> 留守番電話の活用</td>
+</tr>
+<tr>
+<td><b>柱3 学校支援人材の活用</b>
+<ol class="tori"><li>⑩ コミュニティ・スクールの仕組みの活用</li><li>⑪ 学校業務支援員の配置</li><li>⑫ 部活動指導員の配置</li><li>⑬ ICT支援員の配置</li></ol></td>
+<td><b>柱4 学校・家庭・地域の連携・協働</b> <span class="tag new">新しい柱</span>
+<ol class="tori"><li>⑪ 学校・教員が担う業務の在り方の整理と保護者・地域への理解促進</li><li>⑫ 部活動改革の推進</li><li>⑬ コミュニティ・スクールの連携・協働体制を生かした、地域のネットワークの強化</li></ol></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="small">番号は令和8年改訂版のもの。令和6年当初版では⑦がなく、⑧以降が1つずつ前にずれる（12取組）。</p>
+
+<h2 id="r8">3. 令和8年4月の一部改訂で変わったこと</h2>
+<div class="cols">
+  <div class="box">
+    <h3>目標と取組</h3>
+    <ul>
+      <li>目標に<b>健康診断・精密検査の受診率100%</b>を追加</li>
+      <li>柱3に<b>⑦教職員の健康の確保</b>を新設：月80時間超の申出者への医師の面接指導（100時間超は所属長判断で勧奨）、各種健康診断、全所属でのストレスチェック、メンタルヘルス事業、管理職のラインケア</li>
+      <li>推進指標の基準値をR4からR6に更新</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>業務の3分類</h3>
+    <ul>
+      <li>根拠をR2.7の文科省通知（8業務）から<b>R7.9の指針（19業務）</b>に差し替え</li>
+      <li>「学校以外が担うべき業務」に<b>保護者等からの過剰な苦情や不当な要求への対応</b>が加わった</li>
+      <li>「教師以外が積極的に参画すべき業務」に広報・ウェブサイト、ICT機器の保守、施設管理、開錠・施錠など</li>
+      <li>「教師の業務だが負担軽減を促進すべき業務」に給食、授業準備、学校評価・成績処理、行事、進路指導、支援が必要な家庭への対応</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>位置づけ</h3>
+    <ul>
+      <li>給特法第8条の「業務量管理・健康確保措置実施計画」を<b>別に作らず</b>、既存のプランを改訂してその役目を持たせた</li>
+      <li>教育委員会会議（R8.3.19）での説明は「大きな改定は健康確保の追加。あとは番号がずれた」</li>
+      <li>市町教委にもプラン策定を求め、県は総合教育会議に報告する</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="data">4. 数値の推移</h2>
+<div class="chart">
+  <p style="margin:0 0 6px"><b>教員1人あたり 1か月の時間外在校等時間</b></p>
+  <div class="legend">
+    <span><i class="f1"></i>小学校</span><span><i class="f2"></i>中学校</span><span><i class="f3"></i>県立学校</span>
+    <span><i style="border-left:2px dashed var(--neoline);width:0;height:12px;border-radius:0"></i>推進指標 30時間</span>
+    <span><i style="border-left:2px dotted var(--ng);width:0;height:12px;border-radius:0"></i>上限 45時間</span>
+  </div>
+  <div id="bars"></div>
+  <p class="small" style="margin:6px 0 0">H28・R1・R2はR3.6教育委員会会議資料、R4は第3期当初版、R6はR8改訂版による。R2はコロナによる臨時休業（R2.3〜5月）を含む。グラフの目盛りは60時間まで。</p>
+</div>
+
+<div class="tbl" style="margin-top:12px">
+<table>
+<thead><tr><th>年度</th><th>小学校</th><th>中学校</th><th>県立学校</th><th>メモ</th></tr></thead>
+<tbody>
+<tr><th>H28</th><td class="num">40.8h</td><td class="num">56.7h</td><td class="num">43.6h</td><td>第1期の基準年</td></tr>
+<tr><th>R1</th><td class="num">39.0h（△4.4%）</td><td class="num">50.5h（△10.9%）</td><td class="num">36.4h（△16.5%）</td><td>30%削減の目標年。<b>どの校種も未達成</b></td></tr>
+<tr><th>R2</th><td class="num">37.6h（△7.8%）</td><td class="num">45.9h（△19.0%）</td><td class="num">29.8h（△31.7%）</td><td>臨時休業を含む。県立のみ30%を超えた</td></tr>
+<tr><th>R4</th><td class="num">38.4h</td><td class="num">47.0h</td><td class="num">33.0h</td><td>第3期当初版の基準値</td></tr>
+<tr><th>R6</th><td class="num">35.0h</td><td class="num">41.7h</td><td class="num">32.1h</td><td>R8改訂版の基準値。30時間以内はまだ</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>R2年度 月の時間外が一定時間を超えた教員</h3>
+<div class="tbl">
+<table>
+<thead><tr><th>区分</th><th>小学校</th><th>中学校</th><th>県立学校</th></tr></thead>
+<tbody>
+<tr><th>45時間超</th><td class="num">1,451人（34.5%）</td><td class="num">1,148人（46.4%）</td><td class="num">753人（22.1%）</td></tr>
+<tr><th>80時間超</th><td class="num">147人（3.5%）</td><td class="num">285人（11.5%）</td><td class="num">192人（5.6%）</td></tr>
+<tr><th>100時間以上</th><td class="num">18人（0.4%）</td><td class="num">96人（3.9%）</td><td class="num">82人（2.4%）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>取組状況をWebページ等で公表している学校の割合（推進指標②）</h3>
+<div class="tbl">
+<table>
+<thead><tr><th>年度</th><th>小学校</th><th>中学校</th><th>県立学校</th></tr></thead>
+<tbody>
+<tr><th>R4</th><td class="num">11.0%</td><td class="num">16.3%</td><td class="num">6.6%</td></tr>
+<tr><th>R6</th><td class="num">55.0%</td><td class="num">54.0%</td><td class="num">73.8%</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="tool">5. 「働き方改革 現状分析ツール」（教職員意識調査）</h2>
+<p>県教育庁教職員課学校管理班が作成し、県のページ「山口県 学校における働き方改革」の末尾（各学校での取組を進めるために）で配布しています。<b>県が一斉に行う調査ではなく、各学校が自分で実施するためのひな形</b>です。プランでは第2期の「⑥意識改革を図る研修の充実」、第3期の「③意識改革や業務の効率化を図る研修の充実」に位置づけられています。</p>
+
+<div class="cols">
+  <div class="box">
+    <h3>配布形態</h3>
+    <ul>
+      <li>Microsoft Forms版（zip 2.01MB）</li>
+      <li>Google Forms版（zip 2.25MB、後から追加）</li>
+      <li>Excelの最終保存は2022年5月。令和4年頃の作成とみられる</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>パッケージの中身（9ファイル）</h3>
+    <ul>
+      <li>00 説明書／01 活用の流れ／02 簡易マニュアル</li>
+      <li>03 教職員への依頼文（Word。学校名・URL・QR・期限を差し替え）</li>
+      <li>04 17業務の内容例</li>
+      <li>05 現状分析シート（回答を貼るとグラフ化）</li>
+      <li>06 取組参照シート（文科省「改訂版 全国の学校における働き方改革事例集」の該当ページ）</li>
+      <li>07 業務改善実行計画（目標・取組①〜③・12か月の予定）</li>
+      <li>08 設問一覧</li>
+    </ul>
+  </div>
+</div>
+
+<h3>活用の流れ</h3>
+<div class="flow">
+  <div><b>① 現状把握</b>県のフォームを複製して自校用の調査を作り、回答を集める</div>
+  <div><b>② 課題の特定</b>現状分析シートを職員会議・校内研修で協議</div>
+  <div><b>③ 取組の焦点化</b>取組参照シートで文科省事例集を見て、業務改善実行計画を作る</div>
+  <div><b>④ 取組の検証</b>年度末などに同じ調査をもう一度行う</div>
+</div>
+
+<h3>設問（全10問、回答3〜5分）</h3>
+<p class="small" style="margin-top:0">設問文と選択肢は、パッケージの「08_【参考】働き方改革『教職員意識調査』アンケート項目」のとおり。フォームのタイトルは「◆働き方改革『教職員意識調査』（〇〇学校）」。</p>
+
+<div class="form">
+  <div class="sec">Ⅰ　回答者基本情報 <span class="req">必須</span></div>
+
+  <div class="qq"><span class="no">Ⅰ-1</span><div class="body">
+    <p class="qt">氏名</p><span class="type">記述</span>
+    <div class="ans"><span class="blank">（氏名を入力）</span></div>
+    <p class="note">記名式。必須を任意に変えることはできる。</p>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅰ-2</span><div class="body">
+    <p class="qt">年齢</p><span class="type">1つ選択</span>
+    <ul class="opts radio"><li>① 30歳以下</li><li>② 31～40歳</li><li>③ 41～50歳</li><li>④ 51～60歳</li><li>⑤ 61歳以上</li></ul>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅰ-3</span><div class="body">
+    <p class="qt">職名</p><span class="type">1つ選択</span>
+    <ul class="opts radio"><li>① 部主事</li><li>② 教諭・助教諭</li><li>③ 養護教諭・養護助教諭</li><li>④ 栄養教諭</li><li>⑤ 講師</li><li>⑥ 実習助手</li><li>⑦ 寄宿舎指導員</li><li>⑧ 事務職員</li></ul>
+    <p class="note">校長・教頭・主幹教諭・指導教諭の選択肢はない（県立学校向けの作り）。</p>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅰ-4</span><div class="body">
+    <p class="qt">あなたは学級担任ですか。</p><span class="type">1つ選択</span>
+    <ul class="opts radio"><li>① 担任である</li><li>② 副担任である</li><li>③ 担任・副担任ではない</li></ul>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅰ-5</span><div class="body">
+    <p class="qt">あなたは部活動顧問（主顧問・副顧問）ですか。</p><span class="type">1つ選択</span>
+    <ul class="opts radio"><li>① 運動部顧問</li><li>② 運動部副顧問</li><li>③ 文化部顧問</li><li>④ 文化部副顧問</li><li>⑤ 顧問・副顧問ではない</li></ul>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅰ-6</span><div class="body">
+    <p class="qt">あなたは校務分掌において「主任」等の役割を担っていますか。<br><span class="ex">＜例＞ 教務主任、生徒指導主任、学年主任、教科主任 等</span></p><span class="type">1つ選択</span>
+    <ul class="opts radio"><li>① 主任をしている</li><li>② 主任をしていない</li></ul>
+  </div></div>
+
+  <div class="sec">Ⅱ　業務改善の取組について</div>
+
+  <div class="qq"><span class="no">Ⅱ-1</span><div class="body">
+    <p class="qt">あなたが、もっと時間をかけたいと思う業務は、どの業務ですか。３つまで選んでください。「その他」を選んだ場合は具体的な業務を記載してください。</p><span class="type">3つまで選択</span>
+    <ul class="opts check"><li>① 授業準備</li><li>② 学習指導</li><li>③ 成績処理</li><li>④ 生徒指導</li><li>⑤ 進路指導</li><li>⑥ 部活動</li><li>⑦ 児童・生徒会活動</li><li>⑧ 学校行事</li><li>⑨ 学年・学級経営</li><li>⑩ 学校運営</li><li>⑪ 会議・打合せ</li><li>⑫ 事務・調査回答</li><li>⑬ 校内研修</li><li>⑭ 保護者対応</li><li>⑮ 地域対応</li><li>⑯ 行政・関係団体対応</li><li>⑰ その他</li></ul>
+    <div class="ans"><span class="blank">⑰その他の具体を記述（　　　　　　）</span></div>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅱ-2</span><div class="body">
+    <p class="qt">あなたが、本校において、改善（精選・効率化・平準化等）が必要であると思う業務は、どの業務ですか。３つまで選んでください。「その他」を選んだ場合は具体的な業務を記載してください。</p><span class="type">3つまで選択</span>
+    <p class="note" style="margin-top:6px">選択肢はⅡ-1と同じ17業務。⑰その他の具体を記述する欄つき。</p>
+  </div></div>
+
+  <div class="qq"><span class="no">Ⅱ-3</span><div class="body">
+    <p class="qt">２で選んだ業務について、なぜ改善が必要だと思うか、改善するためにどのような工夫が考えられるか、具体的に記述してください。</p><span class="type">自由記述</span>
+    <div class="ans"><span class="blank">「①授業準備」の欄</span><span class="blank">「②学習指導」の欄</span><span class="blank">…</span><span class="blank">「⑰その他」の欄</span></div>
+    <p class="note">フォームでは業務ごとに記述欄が分かれていて（17欄）、集計シートでも業務別に一覧になる。</p>
+  </div></div>
+
+  <div class="sec">Ⅲ　最後に</div>
+
+  <div class="qq"><span class="no">Ⅲ-1</span><div class="body">
+    <p class="qt">学校における働き方改革について感じていることを自由に記述してください。</p><span class="type">自由記述</span>
+    <div class="ans"><span class="blank big">（自由記述）</span></div>
+  </div></div>
+</div>
+
+<p class="small">ないもの：勤務時間・在校等時間、持ち帰りの有無・時間・時期、休憩の取得、健康状態・ストレス、満足度などを数値で聞く設問。設問は学校ごとに追加・変更できる。</p>
+
+<details class="box" style="margin-top:12px">
+  <summary><b>17業務の内容例</b>（教職員配布用「業務内容について（参考）」）</summary>
+  <div class="tbl" style="margin-top:10px">
+  <table>
+  <thead><tr><th>業務</th><th>業務内容例</th></tr></thead>
+  <tbody>
+  <tr><th>① 授業準備</th><td>指導案作成、教材研究・教材作成、授業打合せ、総合的な学習の時間・体験学習の準備など</td></tr>
+  <tr><th>② 学習指導</th><td>正規の授業時間以外に行われる学習指導（補習指導・個別指導など）、質問・宿題への対応など</td></tr>
+  <tr><th>③ 成績処理</th><td>成績処理にかかわる事務、試験問題作成、採点・評価、通知表作成など</td></tr>
+  <tr><th>④ 生徒指導</th><td>個別面談、カウンセリング、課題を抱えた生徒への支援など</td></tr>
+  <tr><th>⑤ 進路指導</th><td>進路指導・相談、調査書作成、指導要録作成など</td></tr>
+  <tr><th>⑥ 部活動</th><td>部活動の指導、対外試合引率など</td></tr>
+  <tr><th>⑦ 生徒・児童会活動</th><td>生徒・児童会指導、委員会活動の指導など</td></tr>
+  <tr><th>⑧ 学校行事</th><td>修学旅行、体育祭、文化祭、発表会などの行事、学校行事の準備など</td></tr>
+  <tr><th>⑨ 学年・学級経営</th><td>学級活動の企画・運営、連絡帳の記入、学級通信作成、掲示物作成、教室環境整理など</td></tr>
+  <tr><th>⑩ 学校運営</th><td>校務分掌業務、初任者・教育実習生などの指導、安全点検・校内巡視、校舎環境整理など</td></tr>
+  <tr><th>⑪ 会議・打合せ</th><td>職員会議・学年会・教科部会など校内の会議、個別の打合せ・情報交換など</td></tr>
+  <tr><th>⑫ 事務・調査回答</th><td>業務日誌作成、資料・文書（校長・教育委員会等への報告書、調査・統計回答など）作成など</td></tr>
+  <tr><th>⑬ 校内研修</th><td>校内研修、勉強会・研究会など</td></tr>
+  <tr><th>⑭ 保護者対応</th><td>保護者会、保護者との面談や電話連絡、家庭訪問、PTA関連活動など</td></tr>
+  <tr><th>⑮ 地域対応</th><td>町内会・地域住民への対応・会議、地域安全活動、地域行事への協力など</td></tr>
+  <tr><th>⑯ 行政・関係団体対応</th><td>行政・関係団体、保護者・地域住民以外の学校関係者、来校者の対応など</td></tr>
+  <tr><th>⑰ その他</th><td>（例示なし）</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <p class="small">内容例は各校の実情に応じて変更できる。</p>
+</details>
+
+<h3>集計で出てくるもの</h3>
+<ul>
+  <li>「時間をかけたい業務」の選ばれた数の棒グラフ</li>
+  <li>「改善が必要な業務」の選ばれた数の棒グラフ</li>
+  <li>自由記述を業務ごとに「/」でつないだ一覧（ExcelのTEXTJOIN関数を使うため、Excel 2019以降が必要）</li>
+  <li>1校100人分まで。県に報告する欄はない</li>
+</ul>
+
+<h3>使われている例</h3>
+<div class="cols">
+  <div class="box"><h3>プランの好事例（第3期 p.18・p.20）</h3><ul><li>定期的に全教職員に調査し、意見を業務改善に反映。「自分たちの提案で働きやすくなった」と実感</li><li>結果をもとに年度ごとの業務改善実行計画を作成</li><li>アイデアを集約した資料で校内研修の熟議を行い、行事の精選などを実現</li></ul></div>
+  <div class="box"><h3>市町立学校・市町</h3><ul><li><b>美祢市立伊佐中学校</b>：学校サイトに、ツールでまとめた分析資料（R8.9.1現在）を公表。「時間をかけたい業務」「改善が必要な業務」の結果まで公表しているのは市内14校で伊佐中だけ（下に詳細）</li><li><b>光市</b>：業務量管理計画の柱1で、文科省事例集と並べて県の現状分析ツールを意識改革の研修に使うとしている</li></ul></div>
+</div>
+
+<h3 id="isa">公表されている調査結果：美祢市立伊佐中学校</h3>
+<p>このツールによる調査結果は、<b>県全体では公表されていません</b>。学校単位で公表が確認できたのは伊佐中学校だけです（県立の大津緑洋・防府・徳山の各高校のページには、時間外の状況と取組のみで意識調査の結果はない）。伊佐中の資料「令和８年度『業務改善状況・計画等（現状分析シートより）』」（R8.9.1現在）は、ツールの「業務改善実行計画」の形をそのまま公表に使っています。</p>
+
+<div class="cols">
+  <div class="box">
+    <h3>資料に載っているもの</h3>
+    <ul>
+      <li><b>目標</b>：一人当たりの時間外在校等時間の月平均と、月30時間超の人数割合を前年度より減らす</li>
+      <li><b>具体的取組</b>：①業務や配布物のデータ化などDXで業務時間を短縮 ②ノー残業デーの順守 ③業務内容の見直しでスリム化 ④教育活動を目的や趣旨に照らして精選・再構築</li>
+      <li><b>時間外（管理職除く）</b>：R7年平均 30.2h・30h超50%／R8 4〜7月 24.5h・33%（前年同月より改善・悪化を色分け）</li>
+      <li><b>意識調査</b>：R8年5月実施。R7の結果と並べた棒グラフ</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>読み取れること</h3>
+    <ul>
+      <li>時間をかけたいのは<b>授業準備・学習指導</b>（R8で計11）</li>
+      <li>改善が必要なのは<b>学校行事・会議・打合せ</b>（2年続けて各3）</li>
+      <li>「事務・調査回答」の改善要望は3→1に減った</li>
+      <li>回答者は管理職を除く<b>8〜9人程度</b>（30時間超の割合 56%＝5/9 などから推定）。1人の回答で順位が変わる規模</li>
+      <li>自由記述（改善の理由・工夫）は公表されていない</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cols" style="margin-top:12px">
+  <div class="chart">
+    <p style="margin:0 0 6px"><b>もっと時間をかけたいと思う業務</b>（選ばれた数）</p>
+    <div class="legend"><span><i class="f1"></i>R7</span><span><i class="f3"></i>R8（R8.5実施）</span></div>
+    <div id="isa-want"></div>
+  </div>
+  <div class="chart">
+    <p style="margin:0 0 6px"><b>改善（精選・効率化・平準化等）が必要な業務</b>（選ばれた数）</p>
+    <div class="legend"><span><i class="f1"></i>R7</span><span><i class="f3"></i>R8（R8.5実施）</span></div>
+    <div id="isa-imp"></div>
+  </div>
+</div>
+<p class="small">伊佐中学校の公表PDFのグラフから数値を読み取って作図。1人3つまで選べるため、合計は回答者数と一致しない。</p>
+
+<h2 id="limits">6. ツールの限界</h2>
+<div class="cols">
+  <div class="box crit">
+    <h3>時間は測らない。持ち帰りは分からない</h3>
+    <ul>
+      <li>聞いているのは希望や優先順位だけ。持ち帰りの有無・時間・時期の設問はない</li>
+      <li>持ち帰りは在校等時間に含まれない（文科省Q&amp;A 問13）。指針は「原則行わず、実態把握に努める」（第2章第4節(2)）とするが、把握の方法は定めていない</li>
+      <li>ICカードにも、この調査にも記録されず、<b>どこにも数字が残らない</b></li>
+      <li>設問を足しても、年2回の思い出しでは正確にならない。「誰が・いつ・何時間」は、その日のうちに記録する仕組みでないと分からない</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>調査そのものが「新たな業務」</h3>
+    <ul>
+      <li>回答は1回3〜5分でも、年2回まわせば行事が1つ増える</li>
+      <li>重いのは実施側：フォーム複製、依頼文・QR作成、データ貼り付け、分析、会議、実行計画</li>
+      <li>業務を減らすための調査が業務を増やすという矛盾</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>作りの問題</h3>
+    <ul>
+      <li><b>記名式</b>（氏名が必須）で、本音が出にくい</li>
+      <li>属性を6問聞くのに、<b>属性別のクロス集計がない</b></li>
+      <li>職名に部主事・実習助手・寄宿舎指導員があり、校長・教頭・主幹教諭はない。<b>県立学校向け</b>の作りで、小中で使うには手直しが要る</li>
+      <li>見出しの誤字（「公務分掌」）、ファイル名と表題の不一致（学校業務改善取組計画／業務改善実行計画）</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="unknown">7. 未確認のこと</h2>
+<div class="warn">
+  <ul style="margin:0;padding-left:1.2em">
+    <li>第1期（H30.3）の原本と、取組の数</li>
+    <li>現状分析ツールを使った学校の数、回答者の数（県全体の集計は公表されていない。学校単位の公表は伊佐中のみ確認）</li>
+    <li>市町立学校での活用の広がり（伊佐中と光市以外）</li>
+  </ul>
+  <p class="small" style="margin:8px 0 0">確かめ先：県教育庁教職員課学校管理班（083-933-4555）、各市町教委。公式の数字が必要なら情報公開請求。</p>
+</div>
+
+<h2 id="sources">出典</h2>
+<ul class="src">
+  <li>山口県「山口県 学校における働き方改革」 https://www.pref.yamaguchi.lg.jp/soshiki/178/290392.html</li>
+  <li>加速化プラン【第3期】令和8年4月改訂版 https://www.pref.yamaguchi.lg.jp/uploaded/attachment/235441.pdf</li>
+  <li>加速化プラン【第3期】令和6年4月当初版 https://www.pref.yamaguchi.lg.jp/uploaded/attachment/178202.pdf</li>
+  <li>令和3年6月定例 教育委員会会議 議案（p.4「学校における働き方改革の推進について」、p.5「改訂の概要」） https://www.pref.yamaguchi.lg.jp/uploaded/attachment/106801.pdf ／ 開催ページ https://www.pref.yamaguchi.lg.jp/site/kyouiku/102671.html</li>
+  <li>令和6年1月定例 教育委員会会議 https://www.pref.yamaguchi.lg.jp/site/kyouiku/242700.html</li>
+  <li>令和8年3月定例 教育委員会会議 https://www.pref.yamaguchi.lg.jp/site/kyouiku/339561.html ／ 会議録 https://www.pref.yamaguchi.lg.jp/uploaded/attachment/246596.pdf</li>
+  <li>働き方改革 現状分析ツール Microsoft Forms版 https://www.pref.yamaguchi.lg.jp/uploaded/attachment/171921.zip ／ Google Forms版 https://www.pref.yamaguchi.lg.jp/uploaded/attachment/191908.zip</li>
+  <li>美祢市立伊佐中学校「働き方改革」 https://isa-j.jimdofree.com/ホーム/学校概要/働き方改革/ （「業務改善分析（ホームページ用R8.7）」PDF、R8.9.1現在）</li>
+  <li>県立高校の働き方改革ページ（意識調査の結果の掲載なし）：大津緑洋 https://www.ohtsuryokuyou-h.ysn21.jp/働き方改革 ／ 防府 https://www.hofu-h.ysn21.jp/学校案内/働き方改革 ／ 徳山 https://tokuyama-h.ed.jp/school-guide/働き方改革/</li>
+  <li>文部科学省 指針に係るQ&amp;A（令和7年11月時点） https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf</li>
+</ul>
+
+<footer>2026年10月4日作成。数値・記述は各資料の公表時点のもの。</footer>
+</div>
+
+<script>
+(function(){
+  var data=[
+    ['H28',40.8,56.7,43.6],['R1',39.0,50.5,36.4],['R2',37.6,45.9,29.8],['R4',38.4,47.0,33.0],['R6',35.0,41.7,32.1]
+  ];
+  var names=['小学校','中学校','県立学校'], cls=['f1','f2','f3'], max=60, html='';
+  for(var s=0;s<3;s++){
+    html+='<div class="grp"><h4>'+names[s]+'</h4>';
+    for(var i=0;i<data.length;i++){
+      var v=data[i][s+1];
+      html+='<div class="row"><span class="lab">'+data[i][0]+'年度</span><div class="track">'+
+        '<div class="fill '+cls[s]+'" style="width:'+(v/max*100)+'%"></div>'+
+        '<span class="goal" style="left:'+(30/max*100)+'%"></span>'+
+        '<span class="lim" style="left:'+(45/max*100)+'%"></span></div>'+
+        '<span class="v">'+v.toFixed(1)+'h</span></div>';
+    }
+    html+='</div>';
+  }
+  document.getElementById('bars').innerHTML=html;
+})();
+(function(){
+  var jobs=['授業準備','学習指導','成績処理','生徒指導','進路指導','部活動','生徒・児童会活動','学校行事','学年・学級経営','学校運営','会議・打合せ','事務・調査回答','校内研修','保護者対応','地域対応','行政・関係団体対応','その他'];
+  var mk=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬','⑭','⑮','⑯','⑰'];
+  function draw(id,r7,r8){
+    var max=6,h='';
+    for(var i=0;i<17;i++){
+      h+='<div class="pair"><span class="lab">'+mk[i]+' '+jobs[i]+'</span><div>'+
+        '<div class="row2"><div class="track"><div class="fill f1" style="width:'+(r7[i]/max*100)+'%"></div></div><span class="v">'+r7[i]+'</span></div>'+
+        '<div class="row2"><div class="track"><div class="fill f3" style="width:'+(r8[i]/max*100)+'%"></div></div><span class="v">'+r8[i]+'</span></div>'+
+        '</div></div>';
+    }
+    document.getElementById(id).innerHTML=h;
+  }
+  draw('isa-want',[6,3,0,2,1,0,1,2,1,1,0,1,1,0,2,0,1],[5,6,1,1,0,0,2,1,1,1,0,2,1,0,0,0,0]);
+  draw('isa-imp',[0,0,2,0,0,1,0,3,0,1,3,3,0,0,0,1,2],[0,0,1,0,0,0,0,3,0,1,3,1,0,1,1,0,0]);
+})();
+</script>
+</body>
+</html>

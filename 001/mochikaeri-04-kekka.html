@@ -1,0 +1,651 @@
+<title>04 持ち帰り・休憩 調査結果</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --okbg:#e5f3ea; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4; --me:#fff6d6;
+  --tA:#1d7a46; --tB:#2f7a8f; --tC:#2f4f8f; --tD:#6a4fa0; --tE:#9a5a00; --tF:#8c2350; --tG:#6b7280;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --tA:#6fd09a; --tB:#6cc3d6; --tC:#8fb0f0; --tD:#b9a2ea; --tE:#f0b35c; --tF:#f4a6c8; --tG:#a4aab6;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --tA:#6fd09a; --tB:#6cc3d6; --tC:#8fb0f0; --tD:#b9a2ea; --tE:#f0b35c; --tF:#f4a6c8; --tG:#a4aab6;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+h1,h2{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.75rem;line-height:1.35;margin:0 0 6px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+h2{font-size:1.25rem;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+.wrap>h2{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-top:10px;box-shadow:0 6px 8px -8px rgba(0,0,0,.25)}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em}
+.totop{float:right;font-family:"BIZ UDPGothic",sans-serif;font-size:.78rem;font-weight:400;text-decoration:none;margin-top:.4em}
+a{color:var(--link)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+p{max-width:72ch}
+.lead{margin:18px 0 0}
+.small{font-size:.85rem;color:var(--sub)}
+.num{font-variant-numeric:tabular-nums}
+.mokuji{margin:22px 0 0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 20px}
+.mk-h{margin:0 0 6px;font-weight:700;letter-spacing:.12em;font-size:.85rem;color:var(--accent)}
+.mokuji ul{list-style:none;padding:0;margin:0}
+.mokuji li{margin:5px 0;font-weight:700}
+.mokuji a{text-decoration:none}
+.mokuji .n{display:inline-block;min-width:2em;color:var(--accent)}
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pt b.big{display:block;font-size:1.6rem;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pt.key{border:2px solid var(--neoline);background:var(--neo)}
+.pt.key b.big{color:var(--neoink)}
+.pt p{margin:4px 0 0;font-size:.92rem}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;columns:2 360px;column-gap:28px}
+.bar{display:grid;grid-template-columns:5.2em 1fr 3em 4.2em;gap:8px;align-items:center;font-size:.85rem;break-inside:avoid;padding:1px 4px;border-radius:4px}
+.bar.me{background:var(--me)}
+.bar .lab{text-decoration:none;color:var(--ink)}
+.bar .track{background:var(--soft);height:12px;border-radius:3px;overflow:hidden}
+.bar .fill{display:block;height:100%;background:var(--accent);border-radius:3px}
+.bar .n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.bar .cnt{color:var(--sub);font-variant-numeric:tabular-nums;font-size:.8rem}
+.tbl{overflow:auto;max-height:none;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left;font-size:.88rem}
+th{background:var(--head);color:var(--headink);white-space:nowrap}
+td.c{text-align:center;white-space:nowrap}
+td.pn{font-weight:700;white-space:nowrap}
+tr.grp td{background:var(--soft);color:var(--sub);font-weight:700;font-size:.8rem;letter-spacing:.05em;padding:4px 10px}
+tr.me td{background:var(--me)}
+tr[id]{scroll-margin-top:64px}
+.pp{display:block;font-weight:700;font-size:.95rem}
+.names{line-height:1.8}
+.names details{margin-top:6px}
+.names summary{cursor:pointer;color:var(--sub);font-size:.82rem}
+.names details p{margin:4px 0 0;color:var(--sub);font-size:.84rem}
+b.sr{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+td.src{font-size:.8rem;white-space:nowrap}
+td.src a{word-break:break-all;white-space:normal}
+.s{display:inline-block;min-width:1.7em;text-align:center;font-weight:700;border-radius:4px;padding:0 5px}
+.s.ok{color:var(--ok);background:var(--okbg)} .s.ng{color:var(--ng);background:var(--ngbg)}
+.mlink{display:block;font-size:.75rem;margin-top:3px}
+.tc{display:inline-block;min-width:1.5em;text-align:center;font-weight:700;font-size:.78rem;border:1.5px solid;border-radius:4px;margin:1px;padding:0 3px}
+.tA{color:var(--tA)} .tB{color:var(--tB)} .tC{color:var(--tC)} .tD{color:var(--tD)} .tE{color:var(--tE)} .tF{color:var(--tF)} .tG{color:var(--tG)}
+.tlegend{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 16px;font-size:.88rem}
+.mokuji ul.sub{display:flex;flex-wrap:wrap;gap:2px 16px;padding-left:2em;margin:2px 0 4px;font-weight:400;font-size:.9rem}
+.mokuji ul.sub li{margin:0}
+.hn3{display:inline-block;min-width:2.4em;margin-right:8px;padding:0 6px;border-radius:4px;background:var(--accent);color:var(--headink);font-size:.78rem;text-align:center;letter-spacing:0}
+tr.grp[id]{scroll-margin-top:64px}
+.sec4{position:relative}
+.legstick{position:sticky;top:calc(env(safe-area-inset-top,0px) + 50px);z-index:4;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;background:var(--bg);padding:6px 2px 8px;font-size:.8rem;border-bottom:1px solid var(--line)}
+.legstick .lm{white-space:nowrap}
+.sec4 tr[id]{scroll-margin-top:110px}
+.tbl.vis{overflow:visible}
+.t3 thead th{position:sticky;top:calc(env(safe-area-inset-top,0px) + 50px);z-index:4}
+.t3 td.names{min-width:14em}
+.t3 tr[id]{scroll-margin-top:104px}
+@media (max-width:700px){.t3 th,.t3 td{padding:7px 6px;font-size:.82rem} .t3 td.src{white-space:normal} .t3 thead th{white-space:normal}}
+.tchart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 18px;display:grid;gap:4px}
+.tb{padding:8px 0;border-bottom:1px solid var(--line)}
+.tb:last-child{border-bottom:0}
+.tbh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.tbh b{font-size:.95rem}
+.tbd{font-size:.8rem;color:var(--sub)}
+.tbr{display:grid;grid-template-columns:1fr 8.5em;gap:12px;align-items:center;margin-top:4px}
+.tbr .track{background:var(--soft);height:16px;border-radius:3px;overflow:hidden}
+.tbr .fill{display:block;height:100%;border-radius:3px}
+.fA{background:var(--tA)} .fB{background:var(--tB)} .fC{background:var(--tC)} .fD{background:var(--tD)} .fE{background:var(--tE)} .fF{background:var(--tF)} .fG{background:var(--tG)}
+.tn{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tn b{font-size:1.15rem}
+.tp{display:inline-block;margin-left:8px;font-weight:700;color:var(--sub)}
+.tw{margin:4px 0 0;font-size:.8rem;color:var(--sub);max-width:none}
+h3.kh{font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.08rem;margin:26px 0 8px;scroll-margin-top:64px}
+.lead2b{font-size:1rem}
+.fq{display:inline-block;font-size:.8rem;font-weight:700;border-radius:4px;padding:0 6px;white-space:nowrap}
+.fq.y{background:var(--okbg);color:var(--ok)} .fq.n{background:var(--soft);color:var(--sub)}
+.kbtn{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.kbtn a{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;font-size:.82rem}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.kc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;scroll-margin-top:64px}
+.kc h4{margin:0 0 4px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.08rem;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.kc .ks{margin:0 0 8px;font-size:.85rem}
+.kc dl{margin:0;display:grid;grid-template-columns:5.6em 1fr;gap:4px 10px;font-size:.86rem}
+.kc dt{color:var(--sub);font-weight:700}
+.kc dd{margin:0}
+.kc .kw{background:var(--neo);padding:4px 6px;border-radius:4px}
+.kc dt.kw{color:var(--neoink)}
+.kmatome li{margin:6px 0}
+@media (max-width:420px){.kgrid{grid-template-columns:1fr} .kc dl{grid-template-columns:1fr}}
+.note{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.note li{margin:4px 0}
+@media (max-width:600px){h1{font-size:1.35rem} body{font-size:14px} .bar{grid-template-columns:4.6em 1fr 2.6em 3.8em}}
+:root{--hlc:#ffe066;--s1:#8fa9dc;--s2:#4a6db3;--s3:#1f3a78}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--hlc:#7a6410;--s1:#3f5a8f;--s2:#6f93d8;--s3:#b5cbf5}}
+:root[data-theme="dark"]{--hlc:#7a6410;--s1:#3f5a8f;--s2:#6f93d8;--s3:#b5cbf5}
+.note a,.wrap>p a{word-break:break-all}
+.gchart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 16px}
+.gr{display:grid;grid-template-columns:8em 1fr 5.2em;gap:4px 10px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--line)}
+.gr:last-child{border-bottom:0}
+.gr .gn{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px}
+.gr .gl{font-weight:700;white-space:nowrap}
+.gr .kchip .tc,.munote .kchip .tc{font-size:.7rem;min-width:1.3em;margin:0}
+.munote .kchip{margin-left:2px}
+.lm{white-space:nowrap}
+a.gl{text-decoration:underline;text-underline-offset:3px}
+.gr .track.stack{display:flex}
+.gr .fill.seg{border-radius:0}
+.gr .fill.s1,i.sw.s1{background:var(--s1)} .gr .fill.s2,i.sw.s2{background:var(--s2)} .gr .fill.s3,i.sw.s3{background:var(--s3)}
+i.sw{display:inline-block;width:.9em;height:.9em;border-radius:2px;margin-right:4px;vertical-align:-.1em}
+.gr .fill.zk,i.sw.zk{background:var(--accent)} .gr .fill.mk,i.sw.mk{background:var(--neoline)}
+.gr.ref .fill.zk{background:var(--tG)} .gr.ref .fill.mk{background:var(--neoline)}
+.axis{display:flex;justify-content:space-between;margin:2px 0 0 calc(8em + 10px);margin-right:calc(4.4em + 14px);font-size:.72rem;color:var(--sub)}
+.hl{background:linear-gradient(transparent 55%,var(--hlc) 55%);color:inherit;padding:0 1px}
+.gr.axrow{padding:6px 4px 2px}
+.ticks{position:relative;height:1.3em;font-size:.72rem;color:var(--sub)}
+.ticks span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.ticks span:first-child{transform:none}
+.ticks span:last-child{transform:translateX(-100%)}
+.gchart:has(.axrow) .gr:not(.axrow) .track{background-image:linear-gradient(90deg,transparent calc(25% - 1px),var(--line) calc(25% - 1px),var(--line) 25%,transparent 25%,transparent calc(50% - 1px),var(--line) calc(50% - 1px),var(--line) 50%,transparent 50%,transparent calc(75% - 1px),var(--line) calc(75% - 1px),var(--line) 75%,transparent 75%)}
+.gr .track.dual{background:none;height:auto;display:grid;gap:3px;overflow:visible}
+.track.dual .tl{display:block;background:var(--soft);border-radius:3px;overflow:hidden}
+.track.dual .tl:first-child{height:14px} .track.dual .tl:last-child{height:9px}
+.gr .fill.fa,i.sw.fa{background:var(--accent)} .gr .fill.fs,i.sw.fs{background:var(--tD)}
+.gr.ref .fill.fa{background:var(--tG)}
+.track.dual .tl.none{background:none}
+.gy{display:inline-block;font-size:.72rem;font-weight:700;color:var(--headink);background:var(--head);border-radius:3px;padding:0 5px;margin-right:6px}
+.gr .gv small{display:block;font-size:.75rem;font-weight:400;color:var(--sub);line-height:1.1}
+.jb{display:inline-block;font-size:.72rem;font-weight:700;border-radius:4px;padding:0 6px;white-space:nowrap}
+.jb.ok{color:var(--ok);background:var(--okbg)} .jb.ng{color:var(--ng);background:var(--ngbg)} .jb.mx{color:var(--tE);background:var(--soft)} .jb.na{color:var(--sub);background:var(--soft)}
+ul.kl{list-style:none;margin:0;padding:0} ul.kl li{margin:2px 0}
+.t4 tr.ref td{background:var(--soft)}
+.gr .gd .lm{white-space:normal}
+.rl{display:inline-block;margin-top:4px;font-size:.7rem;font-weight:700;border:1.5px solid;border-radius:4px;padding:0 5px;white-space:nowrap}
+.rl.r高{color:var(--ok)} .rl.r中{color:var(--tE)} .rl.r低{color:var(--ng)}
+.t4 td.pn .rl{display:block;width:fit-content}
+.hist{display:block;font-size:.72rem;color:var(--sub);white-space:normal;text-align:left;min-width:7em;margin-top:2px}
+.gr.me{background:var(--me);border-radius:4px}
+.gr .gv.nd{color:var(--sub)}
+details.ymd{margin:8px 0 4px}
+details.ymd>summary{cursor:pointer;font-weight:700;color:var(--link);padding:6px 2px}
+details.ymd .gchart{margin-top:4px}
+.gr .gl small{font-weight:400;font-size:.72rem}
+.t5 q{quotes:"「" "」"}
+.t5 .sb{display:block;font-size:.78rem;color:var(--sub);margin-top:2px}
+.t5 td.src{white-space:normal;min-width:9em}
+.band{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px 10px;margin-bottom:12px}
+.band .bh{margin:0 0 6px;font-size:.9rem;max-width:none}
+.band .bh b{font-size:1.4rem;color:var(--accent);margin-right:6px}
+.band{position:relative}
+.bpwrap{position:relative}
+.bbar{display:flex;height:34px;border-radius:5px;overflow:hidden;border:1px solid var(--line);background:var(--card);gap:3px}
+.bpin{position:relative;width:max-content;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;margin-top:4px}
+.bpin .stem{width:3px;height:14px;background:var(--neoline)}
+.bpin .ar{color:var(--neoline);font-size:1.1rem;line-height:.8;margin-bottom:-2px}
+.bs{display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem}
+.b1,i.sw.b1{background:var(--accent)} .b2,i.sw.b2{background:var(--tB)} .b3,i.sw.b3{background:var(--tG)}
+.bs.b2{outline:3px solid var(--neoline);outline-offset:-3px}
+.bbrace{margin-top:4px;border:2px solid var(--accent);border-top:0;height:12px;border-radius:0 0 6px 6px;position:relative}
+.bbl{margin:2px 0 0;font-size:.82rem;max-width:none}
+.bbl b{color:var(--accent);font-size:1.05rem;margin-right:4px}
+.bpin .al{font-weight:700;color:var(--neoink);background:var(--neo);border:1.5px solid var(--neoline);border-radius:4px;padding:0 8px;font-size:.88rem;white-space:nowrap}
+ul.bleg{list-style:none;padding:0;margin:10px 0 0;font-size:.86rem}
+ul.bleg li{margin:3px 0}
+ul.bleg b{display:inline-block;min-width:1.8em;text-align:right;margin-right:4px}
+
+.gr.ref{background:var(--soft);border-radius:4px}
+.gr.ref .fill{background:var(--tG)}
+.gr .track{background:var(--soft);height:16px;border-radius:3px;overflow:hidden}
+.gr .fill{display:block;height:100%;background:var(--accent);border-radius:3px}
+.gr .gv{text-align:right;font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.gr .gd{grid-column:2 / 4;font-size:.82rem;font-variant-numeric:tabular-nums}
+.gr .gb{display:block;color:var(--sub);font-size:.76rem}
+.kc:target{outline:3px solid var(--accent);outline-offset:2px}
+.kgrid .kc{scroll-margin-top:64px}
+@media (min-width:421px){.kc dl{grid-template-columns:6.6em 1fr}}
+.munote{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--tG);border-radius:8px;padding:10px 16px;margin:12px 0}
+.munote .mh{margin:0 0 4px;font-weight:700}
+.munote p,.munote ul{margin:4px 0}
+.kc .knote{display:inline-block;margin:0 0 8px;font-size:.78rem;font-weight:700;color:var(--ng);background:var(--ngbg);border-radius:4px;padding:1px 8px}
+
+/* 4章 A〜E の見出し行を大きく */
+.t5 tr.g5 td{padding:14px 12px 10px !important;font-size:1.5rem !important;color:var(--ink) !important;letter-spacing:.02em !important;border-top:3px solid var(--line)}
+.t5 tr.g5 .jb{font-size:2.6rem;line-height:1.1;padding:2px 18px;border-radius:8px;margin-right:12px;vertical-align:middle;font-family:"BIZ UDPGothic",sans-serif}
+.t5 tr.g5 .g5t{font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;vertical-align:middle}
+@media (max-width:600px){.t5 tr.g5 td{font-size:1.05rem !important}.t5 tr.g5 .jb{font-size:2rem;margin-right:8px}}
+/* 5章 点と矢印のグラフ */
+.dmb .track.dt{position:relative;background:var(--soft);height:18px;border-radius:9px;overflow:visible}
+.dmb .dt .ln{position:absolute;top:7px;height:4px;border-radius:2px}
+.dmb .dt.dn .ln{background:var(--ok)} .dmb .dt.up .ln{background:var(--ng)} .dmb .dt.eq .ln{background:var(--sub)}
+.dmb .dt .p0,.dmb .dt .p1{position:absolute;top:2px;width:14px;height:14px;border-radius:50%;transform:translateX(-50%)}
+.dmb .dt .p0{background:var(--card);border:2.5px solid var(--sub)}
+.dmb .dt.dn .p1{background:var(--ok)} .dmb .dt.up .p1{background:var(--ng)} .dmb .dt.eq .p1{background:var(--sub)}
+.dmb .gv.dn{color:var(--ok)} .dmb .gv.up{color:var(--ng)} .dmb .gv.eq{color:var(--sub)}
+.dmb .gv{font-size:.92rem !important}
+.dmb .gchart:has(.axrow) .gr:not(.axrow) .track,.gchart.dmb .gr:not(.axrow) .track{background-image:none}
+</style>
+<style>.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}.series .sl{font-weight:700;color:var(--sub);margin-right:4px}.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}.series b{background:var(--head);color:var(--headink);border-color:var(--head)}.series a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}</style>
+<style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
+/* ===== 持ち帰り・休憩の調べ　共通テーマ ===== */
+:root{--r:12px;--sh:0 1px 2px rgba(20,30,55,.05),0 6px 18px rgba(20,30,55,.06);--band:#1b2744;--band2:#2b3c66;--rose:#c2185b;--paper:#f2f4f8;--glow:rgba(47,79,143,.10)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}}
+:root[data-theme="dark"]{--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}
+body{background:radial-gradient(1200px 420px at 50% -120px,var(--glow),transparent 70%),var(--paper) !important}
+.wrap{padding-top:0 !important}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* 上の帯（シリーズの案内） */
+nav.series{margin:0 -16px 26px !important;padding:12px 16px !important;background:linear-gradient(100deg,var(--band),var(--band2));border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);gap:6px 8px !important;font-size:.8rem !important}
+nav.series .sl{color:#fff !important;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:.98rem;letter-spacing:.06em;margin-right:10px !important;padding-right:12px;border-right:1px solid rgba(255,255,255,.25)}
+nav.series a,nav.series b{border:1px solid rgba(255,255,255,.28) !important;background:transparent !important;color:#e8edf8 !important;border-radius:999px !important;padding:3px 12px !important;transition:background .15s,border-color .15s}
+nav.series a:hover{background:rgba(255,255,255,.12) !important;border-color:rgba(255,255,255,.55) !important}
+nav.series b{background:#fff !important;color:var(--band) !important;border-color:#fff !important;box-shadow:inset 0 -3px 0 var(--rose)}
+@media (min-width:1212px){nav.series{margin:0 0 26px !important}}
+
+/* 冒頭 */
+.wrap>header{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px 20px;margin-bottom:6px;overflow:hidden}
+.wrap>header::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--accent),var(--rose))}
+.wrap>header .eyebrow{display:inline-block;background:var(--soft);color:var(--accent);border-radius:999px;padding:1px 12px;letter-spacing:.14em}
+.wrap>header h1{letter-spacing:.03em;line-height:1.4}
+.wrap>header .lead{margin-top:12px !important;color:var(--ink)}
+
+/* 見出し */
+.wrap>h2{border-bottom:0 !important;padding-bottom:10px !important;background:linear-gradient(var(--paper),var(--paper)) padding-box !important;box-shadow:none !important}
+.wrap>h2::after{content:"";display:block;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--head) 0,var(--head) 72px,var(--line) 72px)}
+.hn{border-radius:6px !important;background:linear-gradient(135deg,var(--head),var(--band2)) !important;box-shadow:0 2px 6px rgba(20,30,55,.18)}
+.hn3{border-radius:5px !important}
+h3.kh,.wrap h3{letter-spacing:.02em}
+
+/* カード類 */
+.pt,.kc,.case,.q,.set,.pg,.note,.munote,.mokuji,.tbl,.gchart,.dist,.chart,.tchart,.euler,.band,.toc a,.flow .box,details,.chu,.cmp .pt{border-radius:var(--r) !important;box-shadow:var(--sh);border-color:var(--line) !important}
+.flow .q{box-shadow:none !important;border-radius:0 !important}
+.pt.key{border-color:var(--neoline,var(--rose)) !important;box-shadow:0 1px 2px rgba(194,24,91,.10),0 6px 18px rgba(194,24,91,.10)}
+.pt b.big{letter-spacing:.01em}
+.pg,.toc a,.kc{transition:transform .15s,box-shadow .15s}
+.pg:hover,.toc a:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,30,55,.06),0 10px 24px rgba(20,30,55,.10)}
+.munote{border-left-width:4px !important}
+.mokuji{padding:16px 22px !important}
+.mokuji .mk-h{display:flex;align-items:center;gap:8px}
+.mokuji .mk-h::before{content:"";width:18px;height:2px;background:var(--rose)}
+
+/* 表 */
+.tbl{background:var(--card)}
+th{letter-spacing:.03em}
+tbody tr:hover td{background-image:linear-gradient(var(--glow),var(--glow))}
+tr.grp td{letter-spacing:.08em}
+
+/* ページの終わりの案内 */
+.site-foot{margin:56px 0 0;padding:18px 20px;border-radius:var(--r);background:linear-gradient(100deg,var(--band),var(--band2));color:#e8edf8;box-shadow:var(--sh)}
+.site-foot p{margin:0 0 8px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1rem;letter-spacing:.06em;color:#fff;max-width:none}
+.site-foot .sf{display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.82rem}
+.site-foot a,.site-foot b{display:inline-block;padding:3px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#e8edf8;text-decoration:none}
+.site-foot a:hover{background:rgba(255,255,255,.12)}
+.site-foot b{background:#fff;color:var(--band);border-color:#fff}
+.site-foot a:focus-visible,nav.series a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.pg,.toc a,.kc,nav.series a{transition:none}.pg:hover,.toc a:hover{transform:none}}
+</style>
+
+
+
+
+
+<div class="wrap">
+<nav class="series" aria-label="持ち帰り・休憩の調べ（シリーズ）"><span class="sl">持ち帰り・休憩の調べ</span><a href="mochikaeri-00-top.html">00 入口</a><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><a href="mochikaeri-03-zenkoku.html">03 全国の実例</a><b aria-current="page">04 調査結果</b></nav>
+
+<header><p class="eyebrow">全国の実例　別冊</p><h1 class="h1i"><span class="ticon"><svg viewBox="0 0 48 48" width="50" height="50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 42h36"/><rect x="10" y="24" width="7" height="18" fill="currentColor" fill-opacity=".25"/><rect x="21" y="14" width="7" height="28" fill="currentColor" fill-opacity=".25"/><rect x="32" y="30" width="7" height="12" fill="currentColor" fill-opacity=".25"/><path d="M8 18l10-6 9 4 13-9"/></svg></span><span>「把握している」全国の自治体の調査結果　持ち帰り・休憩</span></h1><p class="date">文部科学省 令和7年度「見える化」調査で持ち帰りを「把握している」と答えた教育委員会のうち、数字を公表している調査があるところの結果をまとめたもの（2026年10月4日作成）</p>
+<p class="lead">「把握している」と答えた教育委員会は、実際にどんな調査をして、何がわかっているのか。都道府県教委と政令市について、公開資料から結果を集めました。関連ページ：<a href="mochikaeri-02-47.html" target="_blank" rel="noopener">47都道府県一覧</a>／<a href="mochikaeri-03-zenkoku.html" target="_blank" rel="noopener">全国の実例</a>／<a href="mochikaeri-01-yamaguchi.html" target="_blank" rel="noopener">山口県19市町の調査</a></p>
+</header>
+
+<nav class="mokuji" id="toc" aria-label="目次"><p class="mk-h">目次</p><ul>
+<li><a href="#youten"><span class="n">1</span>要点</a></li>
+<li><a href="#graph"><span class="n">2</span>持ち帰り時間の比べ方　長い順</a><ul class="sub"><li><a href="#graph-1"><span class="n">2-1</span>全員の平均と、持ち帰った人だけの平均</a></li><li><a href="#graph-2"><span class="n">2-2</span>持ち帰りをしている人の割合</a></li><li><a href="#graph-3"><span class="n">2-3</span>1日1時間以上の割合</a></li><li><a href="#graph-4"><span class="n">2-4</span>大阪市　記録と実態</a></li></ul></li>
+<li><a href="#stack"><span class="n">3</span>時間外在校等時間と持ち帰りを合わせると</a><ul class="sub"><li><a href="#stack-1"><span class="n">3-1</span>小学校</a></li><li><a href="#stack-2"><span class="n">3-2</span>中学校</a></li><li><a href="#stack-3"><span class="n">3-3</span>高等学校</a></li><li><a href="#stack-4"><span class="n">3-4</span>特別支援学校</a></li><li><a href="#stack-5"><span class="n">3-5</span>山梨県</a></li></ul></li>
+<li><a href="#sannyu"><span class="n">4</span>持ち帰りを時間外に含めるか</a></li>
+<li><a href="#keinen"><span class="n">5</span>前回の調査と比べると</a><ul class="sub"><li><a href="#keinen-1"><span class="n">5-1</span>持ち帰りの時間</a></li><li><a href="#keinen-2"><span class="n">5-2</span>持ち帰りをしている割合</a></li><li><a href="#keinen-3"><span class="n">5-3</span>休憩が取れていない割合</a></li><li><a href="#keinen-4"><span class="n">5-4</span>自治体ごとの表</a></li></ul></li>
+<li><a href="#pref"><span class="n">6</span>都道府県（12）</a></li>
+<li><a href="#city"><span class="n">7</span>市（6）</a></li>
+<li><a href="#matome"><span class="n">8</span>全体から言えること</a></li>
+<li><a href="#sanko"><span class="n">9</span>参考　国の調査と山口県</a><ul class="sub"><li><a href="#sanko-1"><span class="n">9-1</span>国の調査</a></li><li><a href="#sanko-2"><span class="n">9-2</span>山口県　これまでの調査</a></li><li><a href="#sanko-3"><span class="n">9-3</span>組合の調査</a></li></ul></li>
+<li><a href="#chui"><span class="n">10</span>読むときの注意と出典</a></li>
+</ul></nav>
+
+<h2 id="youten"><span class="hn">1</span>要点<a class="totop" href="#toc">目次へ ↑</a></h2>
+<div class="band" role="img" aria-label="全国の都道府県教委・政令市67のうち、把握していると答えたのは39、そのうち数字を公表している調査があるのは16。山口県は、把握していると答えたが数字は公表していない23に入る">
+<p class="bh"><b>67</b> 全国の都道府県教委47・政令市20</p>
+<div class="bpin" style="left:41.04%"><span class="al">山口県はここ</span><span class="stem"></span><span class="ar">▼</span></div>
+<div class="bbar">
+<span class="bs b1" style="width:23.88%"><b>16</b></span><span class="bs b2" style="width:34.33%"><b>23</b></span><span class="bs b3" style="width:41.79%"><b>28</b></span>
+</div>
+<div class="bbrace" style="width:58.21%"></div><p class="bbl"><b>39</b>「把握している」と答えた（都道府県31・政令市8、58%）</p>
+<ul class="bleg">
+<li><i class="sw b1"></i><b>16</b> 持ち帰りの<mark class="hl">数字を公表している調査がある</mark>（都道府県12・政令市4）→ 2章以降</li>
+<li><i class="sw b2"></i><b>23</b> 「把握している」が、数字は公表していない（山口県教委はここ。「何時間という把握はしていない」と答弁）</li>
+<li><i class="sw b3"></i><b>28</b> 「把握していない」と答えた（都道府県16・政令市12）</li>
+</ul></div>
+<div class="points">
+  <div class="pt"><b class="big">3〜7割</b><p>持ち帰りをしている先生の割合。<mark class="hl">どの調査でもこの範囲</mark>。</p></div>
+  <div class="pt"><b class="big">約1時間</b><p>全員で割ると1日20分前後。<mark class="hl">持ち帰る人に限ると約1時間。休日はさらに長い</mark>。</p></div>
+  <div class="pt key"><b class="big">毎日の調査の数字はない</b><p><mark class="hl">どれも年に一度か数年に一度の調査</mark>。休憩を調べた調査は、どれも<mark class="hl">「ほとんど取れていない」</mark>。</p></div>
+</div>
+<div class="munote"><p class="mh">このページで取り上げた18自治体</p>
+<ul><li>「把握している」と答えた39教委（<a href="mochikaeri-02-47.html#method" target="_blank" rel="noopener">47都道府県一覧の4</a>）から、持ち帰りの数字を公表している調査がある<strong>16</strong>（都道府県12・政令市4）。</li>
+<li>残る23は、方法を確認できなかったところ（16）と、方法はわかるが数字が公表されていないところ（鳥取県・香川県・山口県・徳島県・鹿児島県・茨城県・大阪府の7）です。</li>
+<li>このほか、文科省には「把握していない」と答えたものの、実態調査で持ち帰りや休憩を調べている<strong>広島市・川崎市</strong>も参考に加えました。</li></ul></div>
+<p>調査名から元の資料へ移れます。記号は47都道府県一覧の「4 把握のしかた」の種類です（A 日常の記録／B 定期的な集計／C 期間を決めた実態調査／D アンケート／E 聞き取り）。<strong>調査ごとに聞き方・対象・時期が違うので、数字どうしを単純に比べることはできません。</strong></p>
+<nav class="kbtn" aria-label="自治体へ移動"><a href="#h-hokkaido">北海道</a><a href="#h-fukushima">福島県</a><a href="#h-tochigi">栃木県</a><a href="#h-saitama">埼玉県</a><a href="#h-kanagawa">神奈川県</a><a href="#h-ishikawa">石川県</a><a href="#h-yamanashi">山梨県</a><a href="#h-nagano">長野県</a><a href="#h-kyoto">京都府</a><a href="#h-nara">奈良県</a><a href="#h-shimane">島根県</a><a href="#h-oita">大分県</a><a href="#h-niigatashi">新潟市</a><a href="#h-osakashi">大阪市</a><a href="#h-hiroshimashi">広島市</a><a href="#h-kitakyushu">北九州市</a><a href="#h-kumamotoshi">熊本市</a><a href="#h-kawasakishi">川崎市</a></nav>
+
+<h2 id="graph"><span class="hn">2</span>持ち帰り時間の比べ方　長い順<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>持ち帰りの時間を数字で公表している自治体を、長い順に並べました。<strong>自治体名を押すと、その自治体の詳しいカードへ移ります。</strong>平均の出し方が2通りあるので、時間は2-1に2通りの平均を並べ、割合で公表しているところは別のグラフ（2-2・2-3）にしました。校種別の数字があるところは、棒は小学校（ないところは全体）の値で、ほかの校種は右に書きました。</p>
+<p class="small">名前の横の記号は把握のしかた：<span class="lm"><span class="tc tA">A</span> 日常の記録</span>　<span class="lm"><span class="tc tB">B</span> 定期的な集計</span>　<span class="lm"><span class="tc tC">C</span> 期間を決めた実態調査</span>　<span class="lm"><span class="tc tD">D</span> アンケート</span>　<span class="lm"><span class="tc tE">E</span> 聞き取り</span></p>
+<h3 class="kh" id="graph-1"><span class="hn3">2-1</span>1日あたりの持ち帰り時間　全員の平均と、持ち帰った人だけの平均</h3>
+<p class="small">平均の出し方が2通りあります。<b>青い太い棒＝全員で平均</b>（持ち帰らなかった人も0分として入れる）、<b>紫の細い棒＝持ち帰った人だけで平均</b>です。持ち帰った人だけの平均は0分の人を入れないので大きくなります。たとえば北海道（勤務日）は、全員で平均すると9分、持ち帰った人だけでは34分で約4倍です。並びは全員の平均の長い順で、紫の棒がないところは「持ち帰った人だけの平均」を公表していません。</p>
+<div class="gchart">
+<div class="gr ref"><span class="gn"><span class="gl">国（参考）</span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:41.1%"></span></span><span class="tl none"></span></span><span class="gv">37分</span><span class="gd"><span class="gy">R4</span><span class="lm"><i class="sw fa"></i>全員で平均 小37分・中32分</span><span class="gb">教員勤務実態調査、教諭、平日</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-hiroshimashi">広島市</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:30.0%"></span></span><span class="tl"><span class="fill fs" style="width:95.6%"></span></span></span><span class="gv">27分<small>86分</small></span><span class="gd"><span class="gy">R7.1〜2月</span><span class="lm"><i class="sw fa"></i>全員で平均 小27分・中14分</span>　<span class="lm"><i class="sw fs"></i>持ち帰った人だけ 1時間26分（1回あたり、全体）</span><span class="gb">全員の平均は国と同じ計算（市議会での課長答弁）</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-oita">大分県</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:26.7%"></span></span><span class="tl none"></span></span><span class="gv">24分</span><span class="gd"><span class="gy">R6</span><span class="lm"><i class="sw fa"></i>全員で平均 小24分・中18分／県立 高校等18分・特支14分</span><span class="gb">小中は前回H28の調査（R7.6.20教育長答弁）、県立は毎年の調査</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-shimane">島根県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:26.6%"></span></span><span class="tl"><span class="fill fs" style="width:91.4%"></span></span></span><span class="gv">23.9分<small>82.3分</small></span><span class="gd"><span class="gy">R6</span><span class="lm"><i class="sw fa"></i>全員で平均 小23.9分・中20.2分・高18.3分・特支18.5分（全校種20.5分）</span>　<span class="lm"><i class="sw fs"></i>持ち帰った人だけ 82.3分（1回あたり、全校種）</span><span class="gb">教職員全員、週休日を含む7日間の1日平均</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:23.3%"></span></span><span class="tl none"></span></span><span class="gv">21分</span><span class="gd"><span class="gy">R5</span><span class="lm"><i class="sw fa"></i>全員で平均 小21分・中20分・高21分・特支15分</span><span class="gb">教諭、平日</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-saitama">埼玉県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:18.9%"></span></span><span class="tl none"></span></span><span class="gv">17分</span><span class="gd"><span class="gy">R6</span><span class="lm"><i class="sw fa"></i>全員で平均 県立高校・中学校 約17分</span><span class="gb">教諭等。1週間の合計1時間58分を7日で割った値</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:16.7%"></span></span><span class="tl"><span class="fill fs" style="width:37.8%"></span></span></span><span class="gv">15分<small>34分</small></span><span class="gd"><span class="gy">R4</span><span class="lm"><i class="sw fa"></i>全員で平均 小15分・中10分・高5分・特支7分（全体9分）</span>　<span class="lm"><i class="sw fs"></i>持ち帰った人だけ 34分（全体）</span><span class="gb">主幹教諭・教諭、勤務日</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kanagawa">神奈川県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:15.6%"></span></span><span class="tl none"></span></span><span class="gv">14分</span><span class="gd"><span class="gy">R4</span><span class="lm"><i class="sw fa"></i>全員で平均 小14分・中16分・高14分・特支9分</span><span class="gb">総括教諭・教諭、勤務日</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-yamanashi">山梨県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:10.0%"></span></span><span class="tl"><span class="fill fs" style="width:65.6%"></span></span></span><span class="gv">9分<small>59分</small></span><span class="gd"><span class="gy">R6</span><span class="lm"><i class="sw fa"></i>全員で平均 ※約9分（県全体）</span>　<span class="lm"><i class="sw fs"></i>持ち帰った人だけ 59分（県全体。小54分・中1時間04分・全日制高1時間08分）</span><span class="gb">教育職員、平日。59分は持ち帰った日1日あたりと読める（同じ表の時間外2:13が1日あたりのため）。全員の平均は、割合と日数から直した試算</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-fukushima">福島県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dual"><span class="tl"><span class="fill fa" style="width:5.6%"></span></span><span class="tl"><span class="fill fs" style="width:12.2%"></span></span></span><span class="gv">5分<small>11分</small></span><span class="gd"><span class="gy">R8</span><span class="lm"><i class="sw fa"></i>全員で平均 ※約5分（小）</span>　<span class="lm"><i class="sw fs"></i>持ち帰った人だけ 小11分（平日5日間の合計は56分）</span><span class="gb">全職種、平日。持ち帰った人は小48.1%。全員の平均は11分×48.1%の試算</span></span></div>
+</div>
+<h3 class="kh" id="graph-2"><span class="hn3">2-2</span>持ち帰りをしている人の割合</h3>
+<p class="small">時間ではなく割合で公表している自治体です。「していない」と答えた人の割合を100%から引いた値です。聞き方（ふだんの頻度か、1週間か、平日か）は自治体ごとに違います。</p>
+<div class="gchart">
+<div class="gr"><span class="gn"><a class="gl" href="#h-nara">奈良県</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track"><span class="fill" style="width:74.3%"></span></span><span class="gv">74.3%</span><span class="gd">「ない」25.7%以外<span class="gb">持ち帰りの頻度を聞くアンケート（R7）</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kawasakishi">川崎市</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track"><span class="fill" style="width:66.0%"></span></span><span class="gv">約66%</span><span class="gd">小 約70%・中 約62%<span class="gb">R5 抽出28校のWeb調査</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kumamotoshi">熊本市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track"><span class="fill" style="width:64.9%"></span></span><span class="gv">64.9%</span><span class="gd">「0分」35.1%以外<span class="gb">直近1週間の平日1日平均を聞くアンケート（R8.2）</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-ishikawa">石川県</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track"><span class="fill" style="width:53.8%"></span></span><span class="gv">53.8%</span><span class="gd">「ほとんどない」46.2%以外<span class="gb">持ち帰りの頻度を聞く意識調査（R6）</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-niigatashi">新潟市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track"><span class="fill" style="width:44.8%"></span></span><span class="gv">44.8%</span><span class="gd">平日の持ち帰り「いいえ」55.2%以外<span class="gb">R7、公表グラフからの読み取り</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kitakyushu">北九州市</a><span class="kchip"><span class="tc tD">D</span><span class="tc tE">E</span></span></span><span class="track"><span class="fill" style="width:41.7%"></span></span><span class="gv">41.7%</span><span class="gd">「持ち帰り仕事を行わない」58.3%以外<span class="gb">R6、市の目標は「行わない」80%</span></span></div>
+</div>
+<h3 class="kh" id="graph-3"><span class="hn3">2-3</span>1日1時間以上持ち帰っている人の割合</h3>
+<p class="small">時間の区切りで答える設問がある自治体です。</p>
+<div class="gchart">
+<div class="gr"><span class="gn"><a class="gl" href="#h-kumamotoshi">熊本市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track stack"><span class="fill seg s3" style="width:18.3%" title="1時間半以上 18.3%"></span><span class="fill seg s1" style="width:21.7%" title="1時間 21.7%"></span></span><span class="gv">40%</span><span class="gd"><span class="lm"><i class="sw s3"></i>1時間半以上 18.3%</span>　<span class="lm"><i class="sw s1"></i>1時間 21.7%</span><span class="gb">直近1週間の平日1日平均（R8.2）</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kawasakishi">川崎市</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track"><span class="fill" style="width:34.4%"></span></span><span class="gv">34.4%</span><span class="gd">1時間以上（内訳の公表なし）<span class="gb">R5 抽出28校のWeb調査</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-tochigi">栃木県</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span></span><span class="track stack"><span class="fill seg s3" style="width:2.5%" title="3時間以上（354人） 2.5%"></span><span class="fill seg s2" style="width:4.8%" title="2〜3時間 4.8%"></span><span class="fill seg s1" style="width:19.7%" title="1〜2時間 19.7%"></span></span><span class="gv">27%</span><span class="gd"><span class="lm"><i class="sw s3"></i>3時間以上（354人） 2.5%</span>　<span class="lm"><i class="sw s2"></i>2〜3時間 4.8%</span>　<span class="lm"><i class="sw s1"></i>1〜2時間 19.7%</span><span class="gb">7月1〜22日の平日、帰宅後に仕事をした時間の平均（R7、全体）</span></span></div>
+</div>
+<h3 class="kh" id="graph-4"><span class="hn3">2-4</span>大阪市　記録と実態の開き</h3>
+<p class="small">大阪市は、持ち帰りを「時間外勤務記録簿」に本人が入力・申請するしくみ（A 日常の記録）があります。R5包括外部監査が、その記録と、監査人のアンケートを並べています。</p>
+<div class="gchart">
+<div class="gr"><span class="gn"><a href="#h-osakashi">アンケート</a><span class="kchip"><span class="tc tA">A</span></span></span><span class="track"><span class="fill" style="width:63.6%"></span></span><span class="gv">63.6%</span><span class="gd">「持ち帰ることがある」と答えた教職員（66人中42人）。月60時間くらいの回答も複数<span class="gb">監査人アンケート</span></span></div>
+<div class="gr"><span class="gn"><a href="#h-osakashi">記録簿</a><span class="kchip"><span class="tc tA">A</span></span></span><span class="track"><span class="fill" style="width:3.5%"></span></span><span class="gv">3.5%未満</span><span class="gd">記録簿に持ち帰りを入力した教職員（14,262人のうち、多くとも3.5%未満）。R4年度で493件・延べ2,685時間47分<span class="gb">時間外勤務記録簿の実績</span></span></div>
+</div>
+<p class="small">記録のしくみがあっても、ほとんど使われていません。延べ2,685時間を教職員14,262人で割ると、1人あたり年に約11分です。</p>
+<div class="munote"><p class="mh">グラフに入れていない自治体</p>
+<ul><li>月平均で公表：<a href="#h-nagano">長野県</a><span class="kchip"><span class="tc tB">B</span></span>（1人あたり月1時間14分。県教委自身が記録漏れの可能性を認めている）</li>
+</ul>
+<p class="small">調査ごとに対象・時期・聞き方が違います。並べたのは傾向をつかむためで、順位そのものに大きな意味はありません。</p></div>
+
+<h2 id="stack"><span class="hn">3</span>時間外在校等時間と持ち帰りを合わせると<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>1日の<strong>時間外在校等時間</strong>（正規の勤務時間7時間45分を超えて学校にいた時間）と持ち帰りを、校種ごとに積み上げました（長い順）。自治体名を押すと詳しいカードへ移ります。棒の目盛りは0〜4時間で、右の数字は合計（時間:分）です。</p>
+<p class="small">時間外在校等時間をそのまま公表しているのは神奈川県と埼玉県だけです。<strong>「※」の付いた値は、公表されている1日の在校等時間（休憩を含まない）から7時間45分を引いた試算</strong>です（国の調査と同じ考え方）。持ち帰りは、どれも持ち帰らなかった人も0分として入れた平均です。</p>
+<h3 class="kh" id="stack-1"><span class="hn3">3-1</span>小学校</h3>
+<div class="gchart">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25%">1時間</span><span style="left:50%">2時間</span><span style="left:75%">3時間</span><span style="left:100%">4時間</span></span><span></span></div>
+<div class="gr ref"><span class="gn"><span class="gl">国（参考）</span></span><span class="track stack"><span class="fill seg zk" style="width:75.00%"></span><span class="fill seg mk" style="width:15.42%"></span></span><span class="gv">3:37</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 3時間00分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 37分</span><span class="gb">※教諭、平日（R4）。在校等時間10:45−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:83.75%"></span><span class="fill seg mk" style="width:8.75%"></span></span><span class="gv">3:42</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 3時間21分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 21分</span><span class="gb">※教諭、平日（R5）。在校等時間11:06−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kanagawa">神奈川県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:55.00%"></span><span class="fill seg mk" style="width:5.83%"></span></span><span class="gv">2:26</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間12分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 14分</span><span class="gb">総括教諭・教諭、勤務日（R4）。県の公表値</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:50.00%"></span><span class="fill seg mk" style="width:6.25%"></span></span><span class="gv">2:15</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間00分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 15分</span><span class="gb">※主幹教諭・教諭、勤務日（R4）。在校等時間9:45−7:45</span></span></div>
+</div>
+<h3 class="kh" id="stack-2"><span class="hn3">3-2</span>中学校</h3>
+<div class="gchart">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25%">1時間</span><span style="left:50%">2時間</span><span style="left:75%">3時間</span><span style="left:100%">4時間</span></span><span></span></div>
+<div class="gr ref"><span class="gn"><span class="gl">国（参考）</span></span><span class="track stack"><span class="fill seg zk" style="width:81.67%"></span><span class="fill seg mk" style="width:13.33%"></span></span><span class="gv">3:48</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 3時間16分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 32分</span><span class="gb">※教諭、平日（R4）。在校等時間11:01−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:82.92%"></span><span class="fill seg mk" style="width:8.33%"></span></span><span class="gv">3:39</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 3時間19分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 20分</span><span class="gb">※教諭、平日（R5）。在校等時間11:04−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kanagawa">神奈川県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:71.25%"></span><span class="fill seg mk" style="width:6.67%"></span></span><span class="gv">3:07</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間51分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 16分</span><span class="gb">総括教諭・教諭、勤務日（R4）。県の公表値</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:65.83%"></span><span class="fill seg mk" style="width:4.17%"></span></span><span class="gv">2:48</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間38分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 10分</span><span class="gb">※主幹教諭・教諭、勤務日（R4）。在校等時間10:23−7:45</span></span></div>
+</div>
+<div class="munote" id="bukatsu"><p class="mh">部活動を地域に移したところでは、中学校の先生の時間は変わったか</p>
+<p>3-2の調査（R4〜R5）のころは、休日の部活動の地域移行はまだ始まったばかりでした（全国で地域に移った部活動はR5で4.7%、R6で8.5%）。<strong>移した自治体と移していない自治体を、同じ調査・同じ物差しで比べた数字は見つかりませんでした。</strong>代わりに、近い比べ方ができる数字をまとめます。どれも<strong>持ち帰りへの影響は調べられていません。</strong></p>
+<div class="tbl"><table>
+<thead><tr><th>比べたもの</th><th>平日1日</th><th>土日1日</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="3">国（R4）　運動部の顧問をしている教諭の在校等時間</td></tr>
+<tr><td>部活動指導員がいない</td><td class="num">11:12</td><td class="num">2:46</td></tr>
+<tr><td>部活動指導員が1人で指導・引率している</td><td class="num"><b>10:59</b>（−13分）</td><td class="num"><b>2:14</b>（−32分）</td></tr>
+<tr class="grp"><td colspan="3"><a href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span>（R4）　中学校の主幹教諭・教諭の在校等時間</td></tr>
+<tr><td>顧問をしていない</td><td class="num">9:21</td><td class="num">0:09</td></tr>
+<tr><td>運動部の正顧問</td><td class="num"><b>10:48</b>（+1:27）</td><td class="num"><b>2:12</b>（+2:03）</td></tr>
+</tbody></table></div>
+<p style="margin-top:12px"><b>休日の部活動を地域に移した学校・市の「前」と「後」</b>（月あたりの時間外。1校・1市ずつの事例で、比べた時期もそろっていません）</p>
+<ul>
+<li>岐阜市A校（R5.4に休日を全面移行）：時間外の月平均 38:00 → <b>30:11</b>（R4→R5の4〜8月）<a href="https://www.mext.go.jp/sports/content/20240917-spt_oripara-000028776_1.pdf" target="_blank" rel="noopener">報告書</a></li>
+<li>神奈川県秦野市 東中学校（休日を段階的に移行）：52:53 → <b>42:09</b>（R1→R5。ほかの改革の効果も含む）<a href="https://www.mext.go.jp/sports/content/20250731-spt_oripara-000028769_1.pdf" target="_blank" rel="noopener">報告書</a></li>
+<li>岡山県赤磐市 磐梨中（土日のどちらかを地域の指導者に）：47.2時間 → <b>37.5時間</b>（R3→R4）<a href="https://www.mext.go.jp/sports/content/20220629-spt_oripara01-000028788_01.pdf" target="_blank" rel="noopener">報告書</a></li>
+<li>富山県魚津市（中学校の全教員の<b>休日の</b>時間外、4〜12月の平均）：15:46 → 12:31 → <b>7:41</b>（R4→R5→R6）<a href="https://www.mext.go.jp/sports/content/20250731-spt_oripara-000028771_1.pdf" target="_blank" rel="noopener">報告書</a></li>
+<li>福井県大野市（時間外のうち部活動指導の分、6月）：26:28 → <b>7:36</b>（R4→R6）<a href="https://www.mext.go.jp/sports/content/20250731-spt_oripara-000028773_2.pdf" target="_blank" rel="noopener">報告書</a></li>
+</ul>
+<p class="small">まとめると、減るのは主に<b>休日</b>の時間と顧問1人あたりの時間で、平日1日の差は国の調査でも10分ほどです。出典：国＝<a href="https://www.mext.go.jp/content/20240701-mxt_zaimu01-100003067-3.pdf" target="_blank" rel="noopener">教員勤務実態調査（R4）報告書</a> 第15章 表15-3（p.224）／北海道＝本編p.28／移行の割合＝<a href="https://www.mext.go.jp/sports/content/20260204-spt_oripara-000047118_02_01.pdf" target="_blank" rel="noopener">スポーツ庁・文化庁資料</a> p.15／事例＝スポーツ庁 地域移行の実証事業 成果報告書</p></div>
+<h3 class="kh" id="stack-3"><span class="hn3">3-3</span>高等学校</h3>
+<div class="gchart">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25%">1時間</span><span style="left:50%">2時間</span><span style="left:75%">3時間</span><span style="left:100%">4時間</span></span><span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:60.42%"></span><span class="fill seg mk" style="width:8.75%"></span></span><span class="gv">2:46</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間25分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 21分</span><span class="gb">※教諭、平日（R5）。在校等時間10:10−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-saitama">埼玉県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:52.50%"></span><span class="fill seg mk" style="width:7.08%"></span></span><span class="gv">2:23</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間06分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 17分</span><span class="gb">県立高校・中学校の教諭等、平日（R6）。「勤務時間を超過して在校している時間」は県の公表値。持ち帰りは1週間合計1時間58分を7で割った値</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:47.92%"></span><span class="fill seg mk" style="width:2.08%"></span></span><span class="gv">2:00</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 1時間55分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 5分</span><span class="gb">※主幹教諭・教諭、勤務日（R4）。在校等時間9:40−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kanagawa">神奈川県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:42.92%"></span><span class="fill seg mk" style="width:5.83%"></span></span><span class="gv">1:57</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 1時間43分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 14分</span><span class="gb">総括教諭・教諭、勤務日（R4）。県の公表値</span></span></div>
+</div>
+<h3 class="kh" id="stack-4"><span class="hn3">3-4</span>特別支援学校</h3>
+<div class="gchart">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25%">1時間</span><span style="left:50%">2時間</span><span style="left:75%">3時間</span><span style="left:100%">4時間</span></span><span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:48.33%"></span><span class="fill seg mk" style="width:6.25%"></span></span><span class="gv">2:11</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 1時間56分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 15分</span><span class="gb">※教諭、平日（R5）。在校等時間9:41−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:42.92%"></span><span class="fill seg mk" style="width:2.92%"></span></span><span class="gv">1:50</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 1時間43分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 7分</span><span class="gb">※主幹教諭・教諭、勤務日（R4）。在校等時間9:28−7:45</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-kanagawa">神奈川県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:36.25%"></span><span class="fill seg mk" style="width:3.75%"></span></span><span class="gv">1:36</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 1時間27分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 9分</span><span class="gb">総括教諭・教諭、勤務日（R4）。県の公表値</span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-saitama">埼玉県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:35.00%"></span><span class="fill seg mk" style="width:3.75%"></span></span><span class="gv">1:33</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 1時間24分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 9分</span><span class="gb">教諭等、平日（R6）。超過在校時間は県の公表値。持ち帰りは1週間合計1時間00分を7で割った値</span></span></div>
+</div>
+<h3 class="kh" id="stack-5"><span class="hn3">3-5</span>全校種（山梨県）</h3>
+<div class="gchart">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25%">1時間</span><span style="left:50%">2時間</span><span style="left:75%">3時間</span><span style="left:100%">4時間</span></span><span></span></div>
+<div class="gr"><span class="gn"><a class="gl" href="#h-yamanashi">山梨県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track stack"><span class="fill seg zk" style="width:51.67%"></span><span class="fill seg mk" style="width:3.75%"></span></span><span class="gv">2:13</span><span class="gd"><span class="lm"><i class="sw zk"></i>時間外在校等 2時間04分</span>　<span class="lm"><i class="sw mk"></i>持ち帰り 9分</span><span class="gb">※教育職員、平日（R6）。時間外をした人の平均2:13・持ち帰りをした人の平均59分を、日数の分布から全員の平均に直した値</span></span></div>
+</div>
+
+<p class="small" style="margin-top:14px"><b>山梨県が公表している値（それぞれ「した人」だけの平均）</b>　上の3-5は、この2つを全員の平均に直した試算です。</p>
+<div class="gchart">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25%">1時間</span><span style="left:50%">2時間</span><span style="left:75%">3時間</span><span style="left:100%">4時間</span></span><span></span></div>
+<div class="gr"><span class="gn">時間外</span><span class="track"><span class="fill zk" style="width:55.42%;background:var(--accent)"></span></span><span class="gv">2:13</span><span class="gd">平日に時間外勤務を1回以上した人（<b>97.8%</b>）の平均（R2は2:18）<span class="gb">小2:16（98.4%）・中2:30（98.3%）・全日制高2:13（97.6%）・定時制通信制0:57（87.1%）・特支1:34（96.4%）</span></span></div>
+<div class="gr"><span class="gn">持ち帰り</span><span class="track"><span class="fill" style="width:24.58%;background:var(--neoline)"></span></span><span class="gv">0:59</span><span class="gd">調べた平日5日間に一度でも持ち帰りをした人（回答者の<b>31.7%</b>）だけで平均した時間<span class="gb">全日制高校は25.7%・1:08。週休日は21.0%・1:50</span></span></div>
+</div>
+<p class="small">時間外はほぼ全員がしているので、した人の平均（2:13）と全員の平均（約2:04）はあまり変わりません。持ち帰りは3割ほどしかしていないので、した人の平均（59分）と全員の平均（約9分）が大きく違います。出典：<a href="https://www.pref.yamanashi.jp/documents/121042/gyomu.pdf" target="_blank" rel="noopener">山梨県 業務実態調査（R6）</a> p.3〜7</p>
+<div class="munote" id="yamanashi-q"><p class="mh">山梨県は、持ち帰りが少ない分、在校等時間が長いのか</p>
+<p>公表されている数字では<strong>確かめられません。</strong>山梨県の調査は、在校等時間そのものを公表していないためです。わかるのは次のことです。</p>
+<ul><li>平日に時間外勤務をした人（97.8%）の平均は<strong>2時間13分</strong>（R2は2時間18分）。小学校2時間16分、中学校2時間30分、全日制高校2時間13分です。</li>
+<li>「31.7%」は、<strong>平日5日間に1回でも</strong>持ち帰った人の割合です。島根県の46.3%は週休日を含む7日間の割合なので、そのまま比べられません。</li>
+<li>日数の分布から全員の平均に直すと、平日1日の時間外は約2時間04分、持ち帰りは約9分です（3-5、県の公表値ではありません）。時間外は、国・京都府の試算（約3時間）より短く、神奈川県・北海道と同じくらいです。持ち帰りが少ない分だけ学校に長くいる、という形には見えません。ただし山梨県の「時間外」の測り方は資料に書かれていないので、目安です。</li>
+<li>時間外在校等時間が月80時間を超えた人はR6年平均で5.8%（中学校12.5%）でした（<a href="https://www.pref.yamanashi.jp/documents/121043/4-honpen.pdf" target="_blank" rel="noopener">取組方針R8.3</a>）。</li></ul>
+<p class="small">出典：<a href="https://www.pref.yamanashi.jp/documents/121042/gyomu.pdf" target="_blank" rel="noopener">山梨県 時間外在校等時間等における業務実態調査（R6）</a> p.3〜7</p></div>
+<div class="munote" id="hokkaido-ex"><p class="mh">ほかの自治体の例：北海道　持ち帰りをした人は、学校にいる時間も長い</p>
+<p>北海道の調査は、主幹教諭・教諭の勤務日の在校等時間を「全体」と「持ち帰りをした人だけ」に分けて出しています。<strong>3回の調査とも、持ち帰りをした人のほうが学校にいる時間も長く</strong>、持ち帰りが学校での時間の代わりになっている形ではありません。</p>
+<div class="tbl"><table>
+<thead><tr><th>勤務日・1日</th><th>H28</th><th>R1</th><th>R4</th></tr></thead>
+<tbody>
+<tr><td class="pn">全体の在校等時間</td><td class="num">10:06</td><td class="num">9:47</td><td class="num">9:45</td></tr>
+<tr><td class="pn">持ち帰りをした人の在校等時間</td><td class="num"><b>10:20</b>（+14分）</td><td class="num"><b>10:03</b>（+16分）</td><td class="num"><b>10:08</b>（+23分）</td></tr>
+<tr><td class="pn">持ち帰りをした人の持ち帰り時間</td><td class="num">1:32</td><td class="num">1:28</td><td class="num">0:34</td></tr>
+</tbody></table></div>
+<p class="small">年齢別（R4、勤務日、4校種全体）では、30歳以下が在校等時間10:17・持ち帰り8分でいちばん長く、51〜60歳は9:36・9分でした。小学校の41〜50歳は、在校等時間9:44・持ち帰り23分で、持ち帰りがいちばん多い年代です。出典：<a href="https://www.dokyoi.pref.hokkaido.lg.jp/hk/ksi/hatarakikata/chousakekka.html" target="_blank" rel="noopener">北海道の教育職員に係る勤務実態調査（R4）</a> 本編p.17・26</p></div>
+<div class="munote"><p class="mh">この章に入れていない自治体</p>
+<ul><li>1日の在校等時間・時間外を公表していない：<a href="#h-shimane">島根県</a><span class="kchip"><span class="tc tC">C</span></span>・<a href="#h-oita">大分県</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span>・<a href="#h-fukushima">福島県</a><span class="kchip"><span class="tc tC">C</span></span>・<a href="#h-hiroshimashi">広島市</a><span class="kchip"><span class="tc tC">C</span></span>など。</li>
+<li>島根県は、同じ調査で<strong>時間外勤務と持ち帰りの合計</strong>を出しています（教職員全員、7日間の1日平均）：小 78.3分＋23.9分＝102.2分、中 99.2分＋20.2分＝119.4分、高 122.9分＋18.3分＝141.2分。月に直すと全校種で時間外42.6時間＋持ち帰り10.4時間＝53.0時間です。</li>
+<li>大分県（県立）・福島県・島根県は、月平均の時間外在校等時間を別に公表していますが、持ち帰りとは測った期間も方法も違うので、積み上げていません。</li></ul></div>
+<p class="small">出典：国＝<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf" target="_blank" rel="noopener">教員勤務実態調査（R4）確定値</a> p.16／京都府＝<a href="https://www.kyoto-be.ne.jp/kyoshoku/cms/?p=93" target="_blank" rel="noopener">勤務実態調査結果（H29〜R6合冊）</a> R5報告 p.8／神奈川県＝<a href="https://www.pref.kanagawa.jp/documents/26770/kinmuzittaityosakekka.pdf" target="_blank" rel="noopener">勤務実態調査の集計結果</a> p.25・29／北海道＝<a href="https://www.dokyoi.pref.hokkaido.lg.jp/hk/ksi/hatarakikata/chousakekka.html" target="_blank" rel="noopener">勤務実態調査（R4）</a> 本編p.17／埼玉県＝<a href="https://www.pref.saitama.lg.jp/documents/100051/r6_houkokusyo.pdf" target="_blank" rel="noopener">R6報告書</a> p.8・9・21</p>
+
+<h2 id="sannyu"><span class="hn">4</span>持ち帰りを時間外に含めるか<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>「持ち帰りを把握しているか」「どう把握しているか」とは別に、<strong>把握した持ち帰りの時間を、時間外在校等時間（時間外勤務）に数えるのか</strong>という問題があります。国の上限指針では、在校等時間に持ち帰りは入りません（入るのは、自治体が定める方法によるテレワークなどだけ）。47都道府県一覧で「把握している」と答えた都道府県教委31・政令市8と、このページに出てくる市について、上限方針・実施計画・Q&Aなどで確かめました。</p>
+<div class="points">
+  <div class="pt key"><b class="big num">2</b><p>持ち帰りも時間外に<b>含める</b>と書いているのは、<mark class="hl">久留米市と大阪市だけ</mark>。都道府県教委は<b>0</b>。</p></div>
+  <div class="pt"><b class="big num">7</b><p><b>含めない</b>（5ははっきり、2はそう読める書き方）。鳥取県は記録させたうえで数えない。</p></div>
+  <div class="pt"><b class="big num">6</b><p>在宅勤務・テレワークだけ含め、持ち帰りには触れない。<b>山口県もここ</b>（規則が国の指針を参照）。</p></div>
+  <div class="pt"><b class="big num">27</b><p>何も書いていない（都道府県19・市8）。「持ち帰りは行わないことが原則」と書くだけのところが多い。</p></div>
+</div>
+<div class="tbl" style="margin-top:12px"><table class="t5">
+<thead><tr><th>教委</th><th>書いてあること（引用）</th><th>資料</th></tr></thead>
+<tbody>
+<tr class="grp g5"><td colspan="3"><span class="jb ok">A</span><span class="g5t">含める（2）</span></td></tr>
+<tr><td class="pn">久留米市</td><td><q>必要により持ち帰って業務をした場合は「時間外在校等時間」に含める</q><span class="sb">直前に「持ち帰りは行わないことを原則」とある。方法・数値は非公表</span></td><td class="src"><a href="https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3080kyouikukaikaku/files/gyoumukannrikeikaku.pdf" target="_blank" rel="noopener">業務量管理・健康確保措置実施計画（R8〜11）p.4 備考</a></td></tr>
+<tr><td class="pn"><a href="#h-osakashi">大阪市</a><span class="kchip"><span class="tc tA">A</span></span></td><td><q>持ち帰り仕事など職場外で業務を行う場合は、必ず…「時間外勤務記録簿」にて記録</q><span class="sb">運用のうえで含める（時間外在校等時間はこの登録をもとに把握）。在校等時間の定義の文は国と同じ。入力したのは多くとも3.5%未満</span></td><td class="src"><a href="https://www.city.osaka.lg.jp/kyoiku/cmsfiles/contents/0000671/671705/ap_all.pdf" target="_blank" rel="noopener">働き方改革アクションプラン【2026-2029】p.50／第2期プラン p.40</a></td></tr>
+<tr class="grp g5"><td colspan="3"><span class="jb ng">B</span><span class="g5t">含めない（はっきり書いている）（5）</span></td></tr>
+<tr><td class="pn"><a href="#h-saitama">埼玉県（県立）</a><span class="kchip"><span class="tc tC">C</span></span></td><td><q>持ち帰って業務を行った時間については、在校等時間には含まれない</q><span class="sb">テレワークは含む。R7・R8の改定版ではこの注記が消え、持ち帰りの実態調査の結果を載せている</span></td><td class="src"><a href="https://www.pref.saitama.lg.jp/documents/121861/r4_basic_policy_for_work_style_reform_in_schools.pdf" target="_blank" rel="noopener">学校における働き方改革基本方針（R4.4）p.10</a></td></tr>
+<tr><td class="pn">茨城県（県立）</td><td><q>「持ち帰り作業」の時間（業務の持ち帰りは原則禁止）</q><span class="sb">「含まれない時間」の欄に書いている。県が定める在宅勤務・テレワークは含む</span></td><td class="src"><a href="https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/05/hatarakikatakaikaku-guideline.pdf" target="_blank" rel="noopener">県立学校の働き方改革のためのガイドライン（R8.4）Q1 p.5</a></td></tr>
+<tr><td class="pn"><a href="#h-nagano">長野県（県立）</a><span class="kchip"><span class="tc tB">B</span></span></td><td><q>次の項目は含まない。…「業務の持ち帰りの時間」</q><span class="sb">数えないが「県教育委員会は、業務の持ち帰り時間の把握に努め」るとしている</span></td><td class="src"><a href="https://www.pref.nagano.lg.jp/kyoiku/kyoiku/kyoshokuin/documents/keikakuhonntai.pdf" target="_blank" rel="noopener">県立学校の業務量管理・健康確保措置実施計画（R8.4）注1</a></td></tr>
+<tr><td class="pn">鳥取県（県立）</td><td><q>本方針における「時間外業務時間」には含まれません</q><span class="sb">持ち帰りをしたら給与・勤怠管理システムに入力させる（記録はするが数えない）</span></td><td class="src"><a href="https://www.pref.tottori.lg.jp/secure/1204025/jogenhousinQA.pdf" target="_blank" rel="noopener">上限方針Q&A 問7</a></td></tr>
+<tr><td class="pn">宮崎県（県立）</td><td><q>いわゆる「持ち帰り」の時間については、「在校等時間」には含まない</q><span class="sb">在宅勤務等によるものは含む</span></td><td class="src"><a href="https://www.pref.miyazaki.lg.jp/documents/110902/110902_20260714115232-1.pdf" target="_blank" rel="noopener">実施計画【資料編】資料1 p.3</a></td></tr>
+<tr class="grp g5"><td colspan="3"><span class="jb ng">C</span><span class="g5t">含めない（そう読める書き方）（2）</span></td></tr>
+<tr><td class="pn"><a href="#h-shimane">島根県</a><span class="kchip"><span class="tc tC">C</span></span></td><td><q>「時間外在校等時間」と同じレベルで…指標とするのは難しい</q><span class="sb">持ち帰りは別の実態調査で把握し、勤務時間・時間外在校等時間・持ち帰りを合わせた「総労働時間」を減らすとしている</span></td><td class="src"><a href="https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_plan.data/simanekenhatarakikatakaikakuplan260326.pdf" target="_blank" rel="noopener">教職員働き方改革プラン（R8.3）p.6</a></td></tr>
+<tr><td class="pn"><a href="#h-niigatashi">新潟市</a><span class="kchip"><span class="tc tD">D</span></span></td><td><q>時間外在校等時間に表れないところで、学校の業務を行って</q><span class="sb">持ち帰りは毎年の勤務実態調査で把握</span></td><td class="src"><a href="https://www.city.niigata.lg.jp/kosodate/gakko/gakko_keikaku/taboukaisyou.files/r8_well-being_koremade.pdf" target="_blank" rel="noopener">Well-Being計画の付属資料「これまでの取組の状況」p.4</a></td></tr>
+<tr class="grp g5"><td colspan="3"><span class="jb mx">D</span><span class="g5t">在宅勤務・テレワークだけ含める（持ち帰りには触れない）（6）</span></td></tr>
+<tr><td class="pn"><a href="#h-hokkaido">北海道（道立）</a><span class="kchip"><span class="tc tC">C</span></span></td><td><q>在宅勤務（情報通信技術を利用して行う事業場外勤務）等の時間</q><span class="sb">持ち帰りは「本来、行わないことが原則」。道立のテレワークは検討中</span></td><td class="src"><a href="https://www.dokyoi.pref.hokkaido.lg.jp/hk/ksi/hatarakikata/action.html" target="_blank" rel="noopener">北海道アクション・プラン第3期（R8.3一部改訂）用語解説</a></td></tr>
+<tr><td class="pn"><a href="#h-yamanashi">山梨県（県立）</a><span class="kchip"><span class="tc tC">C</span></span></td><td><q>県教育委員会が定める方法によるテレワーク</q><span class="sb">持ち帰りは原則行わず、実態を把握して縮減（資30）</span></td><td class="src"><a href="https://www.pref.yamanashi.jp/documents/121043/5-siryou.pdf" target="_blank" rel="noopener">取組方針（R8.3）資料編 資29</a></td></tr>
+<tr><td class="pn">大阪府（府立）</td><td><q>各地方公共団体で定めるテレワークの時間</q><span class="sb">持ち帰りへの言及なし</span></td><td class="src"><a href="https://www.pref.osaka.lg.jp/documents/35669/gyoumuroukeikaku.docx" target="_blank" rel="noopener">業務量管理・健康確保措置実施計画（R8.1）用語表</a></td></tr>
+<tr><td class="pn">香川県（県立）</td><td><q>時間外勤務記録票の提出により、持ち帰り仕事を含めた時間の把握に努めて</q><span class="sb">方針は国の文と同じ（県が定めるテレワークを含む）。記録票で持ち帰りの「有無」を書かせるが、時間外に足すとは書いていない</span></td><td class="src"><a href="https://www.pref.kagawa.lg.jp/documents/15171/r2kyouinjikan-jougen.pdf" target="_blank" rel="noopener">上限方針 p.2・p.4／R7.7.4 教育長答弁</a></td></tr>
+<tr><td class="pn">福井県</td><td><q>テレワークの時間は含む</q><span class="sb">持ち帰りについては書いていない</span></td><td class="src"><a href="https://www.pref.fukui.lg.jp/doc/gakushin/gakkougyoumukaizen_d/fil/kaiteihousin.pdf" target="_blank" rel="noopener">学校業務改善方針（R2.3改訂）注＊1</a></td></tr>
+<tr><td class="pn">山口県（県立）</td><td><q>指針（令和二年文部科学省告示第一号）に定める在校等時間をいう</q><span class="sb">在校等時間は国の指針のまま。文科省の調査（R2〜R4）に「テレワーク等の時間を含む」と回答（例 R4 p.5）。持ち帰りは「何時間という把握はしておりません」（R4.3.14 教職員課長）。加速化プランの上限方針（参考）にはテレワークも持ち帰りも書いていない</span></td><td class="src"><a href="https://www.pref.yamaguchi.lg.jp/uploaded/attachment/17742.pdf" target="_blank" rel="noopener">県立高等学校等の学校職員の勤務時間、休暇等に関する規則 第7条（R2.4施行）／文科省 取組状況調査 R2〜R4</a></td></tr>
+<tr class="grp g5"><td colspan="3"><span class="jb na">E</span><span class="g5t">書いていない（27）</span></td></tr>
+<tr><td colspan="3"><details class="ymd"><summary>名前を見る</summary><p class="small" style="max-width:none">都道府県（19）：岩手県、<a href="#h-fukushima">福島県</a><span class="kchip"><span class="tc tC">C</span></span>、<a href="#h-tochigi">栃木県</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span>、群馬県、東京都、<a href="#h-kanagawa">神奈川県</a><span class="kchip"><span class="tc tC">C</span></span>、新潟県、富山県、<a href="#h-ishikawa">石川県</a><span class="kchip"><span class="tc tD">D</span></span>、岐阜県、滋賀県、<a href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span>、<a href="#h-nara">奈良県</a><span class="kchip"><span class="tc tD">D</span></span>、和歌山県、岡山県、徳島県、佐賀県、<a href="#h-oita">大分県</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span>、鹿児島県<br>市（8）：名古屋市、京都市、神戸市、<a href="#h-kitakyushu">北九州市</a><span class="kchip"><span class="tc tD">D</span><span class="tc tE">E</span></span>、福岡市、<a href="#h-kumamotoshi">熊本市</a><span class="kchip"><span class="tc tD">D</span></span>、<a href="#h-kawasakishi">川崎市</a><span class="kchip"><span class="tc tC">C</span></span>、<a href="#h-hiroshimashi">広島市</a><span class="kchip"><span class="tc tC">C</span></span></p>
+<p class="small" style="max-width:none">在校等時間の決まりを国の指針から写しているだけのところが多く、実際には国と同じく「自治体が定めるテレワークの分だけ入る」扱いと考えられます。</p></details></td></tr>
+</tbody></table></div>
+<div class="munote"><p class="mh">わかること</p><ul>
+<li>持ち帰りを「把握している」と答えていても、<strong>その時間は時間外の数字に入らない</strong>のがふつうです。時間外在校等時間が減っても、持ち帰りに移っただけなら、公表される数字には表れません（5章の国・京都府）。</li>
+<li>持ち帰りを記録させるしくみがある鳥取県は「数えない」、大阪市は「数える」と、記録したあとの扱いが分かれています。</li>
+<li>大分県・山梨県・島根県・新潟市などは、持ち帰りを<b>別の調査で</b>調べて公表しています。数えないが、調べてはいる、という形です。</li>
+</ul></div>
+<p class="small">調べた範囲：各教委の上限方針（規則）、R8の業務量管理・健康確保措置実施計画、働き方改革プラン、Q&A。議会答弁は香川県・滋賀県以外は見ていません。都道府県教委は主に県立学校についての扱いです。（2026年10月5日調べ）</p>
+
+<h2 id="keinen"><span class="hn">5</span>前回の調査と比べると<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>同じ調査を2回以上して、前回と比べられる自治体をまとめました。国の下は、<b>調査の信頼度が高い順</b>に、同じ信頼度の中では<b>改善の度合いが大きい順</b>に並べています。<strong>自治体名を押すと詳しいカードへ移ります。</strong>判定は、持ち帰り・休憩・時間外の数字が前回より良くなったか悪くなったかを、ここで見たものです。</p>
+<p class="small">信頼度　<span class="rl r高">高</span> 期間を決めて時間を記録した実態調査を、同じ方法で2回以上　<span class="rl r中">中</span> アンケートで割合や区分を聞いたもの　<span class="rl r低">低</span> 比べる条件に問題がある（自己申告の記録漏れ・コロナ禍との比較）</p>
+<div id="keinen-graph">
+<p class="small">○が前回、●が今回です。<b>どの指標も、小さいほうが良い（減ったら改善）</b>ように向きをそろえました。緑の線は改善、赤の線は悪化です。</p>
+<h3 class="kh" id="keinen-1"><span class="hn3">5-1</span>持ち帰りの時間（1日あたり）</h3>
+<div class="gchart dmb">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25.00%">10分</span><span style="left:50.00%">20分</span><span style="left:75.00%">30分</span><span style="left:100.00%">40分</span></span><span></span></div>
+<div class="gr ref"><span class="gn"><span class="gl">国（小）</span></span><span class="track dt up"><span class="ln" style="left:72.50%;width:20.00%"></span><span class="p0" style="left:72.50%" title="前回 29分"></span><span class="p1" style="left:92.50%" title="今回 37分"></span></span><span class="gv up">+8分</span><span class="gd"><span class="gy">H28→R4</span>29分 → <b>37分</b>　<span class="jb ng">悪化</span><span class="gb">教諭・平日・全員の平均</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-kyoto">京都府（小）</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dt dn"><span class="ln" style="left:52.50%;width:20.00%"></span><span class="p0" style="left:72.50%" title="前回 29分"></span><span class="p1" style="left:52.50%" title="今回 21分"></span></span><span class="gv dn">−8分</span><span class="gd"><span class="gy">H29→R5</span>29分 → <b>21分</b>　<span class="jb ok">改善</span><span class="gb">教諭・平日</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-oita">大分県（県立高校等）</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:45.00%;width:15.00%"></span><span class="p0" style="left:60.00%" title="前回 24分"></span><span class="p1" style="left:45.00%" title="今回 18分"></span></span><span class="gv dn">−6分</span><span class="gd"><span class="gy">H30→R7</span>24分 → <b>18分</b>　<span class="jb ok">改善</span><span class="gb">1日あたり</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-kumamotoshi">熊本市（小）</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:80.00%;width:15.00%"></span><span class="p0" style="left:95.00%" title="前回 38分"></span><span class="p1" style="left:80.00%" title="今回 32分"></span></span><span class="gv dn">−6分</span><span class="gd"><span class="gy">H29→R5</span>38分 → <b>32分</b>　<span class="jb ok">改善</span><span class="gb">別の調査・直近5日の平均</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-kanagawa">神奈川県（高校）</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dt dn"><span class="ln" style="left:35.00%;width:7.50%"></span><span class="p0" style="left:42.50%" title="前回 17分"></span><span class="p1" style="left:35.00%" title="今回 14分"></span></span><span class="gv dn">−3分</span><span class="gd"><span class="gy">H29→R4</span>17分 → <b>14分</b>　<span class="jb ok">改善</span><span class="gb">総括教諭・教諭・勤務日</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dt dn"><span class="ln" style="left:22.50%;width:10.00%"></span><span class="p0" style="left:32.50%" title="前回 13分"></span><span class="p1" style="left:22.50%" title="今回 9分"></span></span><span class="gv dn">−4分</span><span class="gd"><span class="gy">R1→R4</span>13分 → <b>9分</b>　<span class="jb ok">改善</span><span class="gb">主幹教諭・教諭・勤務日・全員の平均</span></span></div>
+</div>
+<h3 class="kh" id="keinen-2"><span class="hn3">5-2</span>持ち帰りをしている人の割合</h3>
+<p class="small">「していない」と答えた割合を100%から引いて、向きをそろえています。栃木県だけは「1時間以上」の割合です。</p>
+<div class="gchart dmb">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:25.00%">20%</span><span style="left:50.00%">40%</span><span style="left:75.00%">60%</span><span style="left:100.00%">80%</span></span><span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-ishikawa">石川県</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:67.25%;width:13.00%"></span><span class="p0" style="left:80.25%" title="前回 64.2%"></span><span class="p1" style="left:67.25%" title="今回 53.8%"></span></span><span class="gv dn">−10.4ポイント</span><span class="gd"><span class="gy">R3→R6</span>64.2% → <b>53.8%</b>　<span class="jb ok">改善</span><span class="gb">「ほとんどない」以外</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-kumamotoshi">熊本市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track dt up"><span class="ln" style="left:78.88%;width:2.25%"></span><span class="p0" style="left:78.88%" title="前回 63.1%"></span><span class="p1" style="left:81.12%" title="今回 64.9%"></span></span><span class="gv up">+1.8ポイント</span><span class="gd"><span class="gy">R6→R7</span>63.1% → <b>64.9%</b>　<span class="jb ng">悪化</span><span class="gb">平日1日平均「0分」以外</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-shimane">島根県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dt dn"><span class="ln" style="left:57.88%;width:9.38%"></span><span class="p0" style="left:67.25%" title="前回 53.8%"></span><span class="p1" style="left:57.88%" title="今回 46.3%"></span></span><span class="gv dn">−7.5ポイント</span><span class="gd"><span class="gy">R5→R6</span>53.8% → <b>46.3%</b>　<span class="jb ok">改善</span><span class="gb">7日間に1日以上持ち帰った</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-fukushima">福島県（小）</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dt dn"><span class="ln" style="left:60.13%;width:0.50%"></span><span class="p0" style="left:60.62%" title="前回 48.5%"></span><span class="p1" style="left:60.13%" title="今回 48.1%"></span></span><span class="gv dn">−0.4ポイント</span><span class="gd"><span class="gy">R7→R8</span>48.5% → <b>48.1%</b>　<span class="jb ok">改善</span><span class="gb">平日に持ち帰りをした・全職種</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-niigatashi">新潟市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:56.00%;width:4.13%"></span><span class="p0" style="left:60.13%" title="前回 48.1%"></span><span class="p1" style="left:56.00%" title="今回 44.8%"></span></span><span class="gv dn">−3.3ポイント</span><span class="gd"><span class="gy">R5→R7</span>48.1% → <b>44.8%</b>　<span class="jb ok">改善</span><span class="gb">平日の持ち帰り「いいえ」以外</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-tochigi">栃木県（1時間以上）</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:33.88%;width:5.25%"></span><span class="p0" style="left:39.12%" title="前回 31.3%"></span><span class="p1" style="left:33.88%" title="今回 27.1%"></span></span><span class="gv dn">−4.2ポイント</span><span class="gd"><span class="gy">R6→R7</span>31.3% → <b>27.1%</b>　<span class="jb ok">改善</span><span class="gb">平日の帰宅後の仕事が1時間以上</span></span></div>
+</div>
+<h3 class="kh" id="keinen-3"><span class="hn3">5-3</span>休憩が取れていない人の割合</h3>
+<div class="gchart dmb">
+<div class="gr axrow"><span></span><span class="ticks"><span style="left:0">0</span><span style="left:28.57%">20%</span><span style="left:57.14%">40%</span><span style="left:85.71%">60%</span></span><span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-kumamotoshi">熊本市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:84.14%;width:2.14%"></span><span class="p0" style="left:86.29%" title="前回 60.4%"></span><span class="p1" style="left:84.14%" title="今回 58.9%"></span></span><span class="gv dn">−1.5ポイント</span><span class="gd"><span class="gy">R6→R7</span>60.4% → <b>58.9%</b>　<span class="jb ok">改善</span><span class="gb">休憩時間に休めていない</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-niigatashi">新潟市</a><span class="kchip"><span class="tc tD">D</span></span></span><span class="track dt dn"><span class="ln" style="left:41.71%;width:14.00%"></span><span class="p0" style="left:55.71%" title="前回 39%"></span><span class="p1" style="left:41.71%" title="今回 29.2%"></span></span><span class="gv dn">−9.8ポイント</span><span class="gd"><span class="gy">R5→R7</span>39% → <b>29.2%</b>　<span class="jb ok">改善</span><span class="gb">休憩した時間「0分」</span></span></div>
+<div class="gr "><span class="gn"><a class="gl" href="#h-shimane">島根県</a><span class="kchip"><span class="tc tC">C</span></span></span><span class="track dt dn"><span class="ln" style="left:30.86%;width:5.71%"></span><span class="p0" style="left:36.57%" title="前回 25.6%"></span><span class="p1" style="left:30.86%" title="今回 21.6%"></span></span><span class="gv dn">−4ポイント</span><span class="gd"><span class="gy">R5→R6</span>25.6% → <b>21.6%</b>　<span class="jb ok">改善</span><span class="gb">5日間「全く休憩できなかった」（小は40.5→37.8%）</span></span></div>
+</div>
+<p class="small">比べ方は自治体ごとに違うので、線の長さどうしを比べることはできません。国は時間が<b>増えた</b>（悪化）、自治体の調査では<b>減った</b>ところが多い、という向きを見るためのグラフです。くわしくは下の表（5-4）。</p>
+</div>
+<h3 class="kh" id="keinen-4"><span class="hn3">5-4</span>自治体ごとの表</h3>
+<div class="tbl"><table class="t4">
+<thead><tr><th>自治体</th><th>比べた年度<br><small>（3回以上なら経歴）</small></th><th>指標　前回→今回</th></tr></thead>
+<tbody>
+<tr class=ref><td class="pn">国（参考）<span class="pp"><span class="jb mx">混在</span></span></td><td class="c num">H28→R4<span class="hist">H18・H28・R4（3回）</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 在校等時間（教諭・平日）：<span class="num">小11:15→10:45、中11:32→11:01</span></li><li><span class="jb ng">悪化</span> 持ち帰り（全員の平均・平日）：<span class="num">小29分→37分、中20分→32分</span></li></ul><p class="small" style="margin:2px 0 0">学校にいる時間は30分ほど減ったが、持ち帰りは増えた</p></td></tr>
+<tr><td class="pn"><a href="#h-hokkaido">北海道</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">R1→R4<span class="hist">H28・R1・R4（3回、約3年おき）</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 持ち帰り（全員の平均・勤務日）：<span class="num">13分→9分（勤務不要日22→17分）</span></li><li><span class="jb mx">横ばい</span> 在校等時間（勤務日）：<span class="num">9:47→9:45</span></li></ul></td></tr>
+<tr><td class="pn"><a href="#h-oita">大分県（県立）</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">H30→R7<span class="hist">毎年（H30〜R7）</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 持ち帰り（1日）：<span class="num">高校等24→18分、特支17→13分</span></li></ul><p class="small" style="margin:2px 0 0">R6→R7は横ばい</p></td></tr>
+<tr><td class="pn"><a href="#h-shimane">島根県</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">R5→R6</td><td><ul class="kl"><li><span class="jb ok">改善</span> 7日間で持ち帰りをした人：<span class="num">53.8%→46.3%</span></li><li><span class="jb ok">改善</span> 持ち帰り1回あたり：<span class="num">87.8分→82.3分</span></li><li><span class="jb ok">改善</span> 5日間「全く休憩できなかった」：<span class="num">25.6%→21.6%（小40.5→37.8%）</span></li></ul></td></tr>
+<tr><td class="pn"><a href="#h-kyoto">京都府</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb mx">混在</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">H29→R5<span class="hist">H29・H30・R5・R6（4回。R6は持ち帰りの項目なし）</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 在校等時間（教諭・平日）：<span class="num">小11:34→11:06、中11:42→11:04、高10:22→10:10、特支10:35→9:41</span></li><li><span class="jb mx">混在</span> 持ち帰り（平日）：<span class="num">小29→21分、中18→20分、高21→21分、特支18→15分</span></li><li><span class="jb mx">混在</span> 持ち帰り（土日）：<span class="num">小18→6分、中22→6分、高18→21分</span></li></ul><p class="small" style="margin:2px 0 0">府は「在校等時間が短くなる一方、持ち帰り時間はほぼ横ばい」とまとめている</p></td></tr>
+<tr><td class="pn"><a href="#h-yamanashi">山梨県</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">R2→R6</td><td><ul class="kl"><li><span class="jb ok">改善</span> 平日の時間外（した人の平均）：<span class="num">2:18→2:13</span></li><li><span class="jb na">判定できない</span> 持ち帰り：<span class="num">R2の値が資料にない</span></li></ul></td></tr>
+<tr><td class="pn"><a href="#h-fukushima">福島県</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb mx">横ばい</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">R7→R8<span class="hist">毎年</span></td><td><ul class="kl"><li><span class="jb mx">横ばい</span> 平日に持ち帰りをした人（小）：<span class="num">48.5%→48.1%（1日11分のまま）</span></li><li><span class="jb mx">横ばい</span> 休憩（45分のうち実際に休んだ時間、小）：<span class="num">10分→9分</span></li><li><span class="jb ok">改善</span> 時間外 月45時間超（小）：<span class="num">23.2%→21.1%（R6→R7）</span></li></ul><p class="small" style="margin:2px 0 0">特支の週休日の持ち帰りは36→49分に増えた</p></td></tr>
+<tr><td class="pn"><a href="#h-kanagawa">神奈川県（高校）</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb mx">混在</span></span><span class="rl r高">信頼度 高</span></td><td class="c num">H29→R4</td><td><ul class="kl"><li><span class="jb ok">改善</span> 持ち帰り（勤務日）：<span class="num">17分→14分</span></li><li><span class="jb ng">悪化</span> 持ち帰り（週休日）：<span class="num">23分→25分</span></li></ul></td></tr>
+<tr><td class="pn"><a href="#h-ishikawa">石川県</a><span class="kchip"><span class="tc tD">D</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r中">信頼度 中</span></td><td class="c num">R3→R6</td><td><ul class="kl"><li><span class="jb ok">改善</span> 持ち帰り「ほとんどない」：<span class="num">35.8%→46.2%</span></li></ul></td></tr>
+<tr><td class="pn"><a href="#h-niigatashi">新潟市</a><span class="kchip"><span class="tc tD">D</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r中">信頼度 中</span></td><td class="c num">R5→R7<span class="hist">毎年（R3〜R7。R6は持ち帰りの値が非公表）</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 平日の持ち帰り「いいえ」：<span class="num">51.9%→55.2%</span></li><li><span class="jb ok">改善</span> 休憩「0分」：<span class="num">39.0%→29.2%</span></li><li><span class="jb ok">改善</span> 時間外の月平均：<span class="num">32:08→31:23（R5→R6）</span></li></ul><p class="small" style="margin:2px 0 0">休憩0分はR3〜R5は増え続けていた</p></td></tr>
+<tr><td class="pn"><a href="#h-tochigi">栃木県</a><span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r中">信頼度 中</span></td><td class="c num">R6→R7<span class="hist">毎年</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 平日の帰宅後の仕事「1時間未満」：<span class="num">68.7%→72.9%</span></li></ul></td></tr>
+<tr><td class="pn"><a href="#h-kumamotoshi">熊本市</a><span class="kchip"><span class="tc tD">D</span></span><span class="pp"><span class="jb mx">混在</span></span><span class="rl r中">信頼度 中</span></td><td class="c num">R6→R7<span class="hist">毎年（別の調査でH29〜R5の推移もあり）</span></td><td><ul class="kl"><li><span class="jb ng">悪化</span> 持ち帰り「0分」：<span class="num">36.9%→35.1%</span></li><li><span class="jb ok">改善</span> 休憩時間に休めていない：<span class="num">60.4%→58.9%</span></li><li><span class="jb ok">改善</span> 持ち帰り（別調査、1日）：<span class="num">小 H29 38分→R5 32分</span></li></ul><p class="small" style="margin:2px 0 0">どれも差は小さい</p></td></tr>
+<tr><td class="pn"><a href="#h-nagano">長野県</a><span class="kchip"><span class="tc tB">B</span></span><span class="pp"><span class="jb ok">改善</span></span><span class="rl r低">信頼度 低</span></td><td class="c num">H26→R7<span class="hist">H26から毎月集計（年2回報告）</span></td><td><ul class="kl"><li><span class="jb ok">改善</span> 持ち帰り（1人の月平均）：<span class="num">6時間57分→1時間14分</span></li></ul><p class="small" style="margin:2px 0 0">県教委が記録漏れの可能性を認めている</p></td></tr>
+<tr><td class="pn"><a href="#h-saitama">埼玉県（県立）</a><span class="kchip"><span class="tc tC">C</span></span><span class="pp"><span class="jb ng">悪化</span></span><span class="rl r低">信頼度 低</span></td><td class="c num">R3→R6<span class="hist">H24・H28・R3・R6（4回、約3年おき）</span></td><td><ul class="kl"><li><span class="jb ng">悪化</span> 持ち帰り（1週間）：<span class="num">高校・中1:50→1:58</span></li><li><span class="jb ng">悪化</span> 勤務時間を超えて在校（平日1日）：<span class="num">1:28→2:06</span></li></ul><p class="small" style="margin:2px 0 0">R3はコロナ禍の9月（短縮授業・部活動制限）で、県は「比較検証は行っていない」と明記</p></td></tr>
+</tbody></table></div>
+<div class="munote"><p class="mh">わかること</p>
+<ul><li>自治体の調査では、持ち帰りは<strong>減ったか横ばい</strong>のところが多い（北海道・栃木県・石川県・大分県・島根県・新潟市など）。</li>
+<li>ただし国と京都府では、<mark class="hl">学校にいる時間は減ったのに、持ち帰りは減っていない（国は増えた）</mark>。学校で減った仕事が家に移っている可能性がある。</li>
+<li>休憩の変化がわかるのは島根県・新潟市・福島県・熊本市だけで、少し良くなったところでも、小学校の4割近くが1週間まったく休憩できていない（島根県）。</li></ul>
+<p class="small">比べられないもの：奈良県（R4の持ち帰りの数字が資料にない。R7に「3年前より時間外が短くなった」36%、「長くなった」16%）、川崎市（R5に持ち帰りの設問がなく、休憩は選択肢が違う）、北九州市・広島市・大阪市（同じ指標の前回値がない）。</p></div>
+
+<h2 id="pref"><span class="hn">6</span>都道府県（12）<a class="totop" href="#toc">目次へ ↑</a></h2>
+<div class="kgrid"><article class="kc" id="h-hokkaido"><h4>北海道<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.dokyoi.pref.hokkaido.lg.jp/hk/ksi/hatarakikata/chousakekka.html" target="_blank" rel="noopener">北海道の教育職員に係る勤務実態調査（R4）</a></p><dl><dt>対象・時期</dt><dd>抽出86校・1,690人、R4.11の連続7日間（H28・R1・R4と約3年おき）</dd><dt>持ち帰り</dt><dd>主幹教諭・教諭の1日平均：勤務日9分・勤務不要日17分（R1は13分・22分）。持ち帰った人だけの平均は勤務日34分・勤務不要日1時間08分</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">全員で割ると小さく見えるが、持ち帰った人に限ると平日でも30分以上。休日のほうが長い</dd></dl></article><article class="kc" id="h-fukushima"><h4>福島県<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.pref.fukushima.lg.jp/sec/70014a/taboukakaisyou.html" target="_blank" rel="noopener">教員の勤務実態調査（R8、毎年）</a></p><dl><dt>対象・時期</dt><dd>県立全104校＋市町村立抽出193校、6月の1週間（回答 県立3,987人・市町村立3,316人）</dd><dt>持ち帰り</dt><dd>平日に持ち帰りをした人（全職種）：小48.1%・中34.1%・高30.0%・特支22.7%。その人たちの<b>平日1日あたり</b>は小11分・中13分・高14分・特支10分（平日5日間の合計は小56分・中1時間06分・高1時間10分・特支52分）。週休日に持ち帰りをした人は小48.1%で、1日あたり42分。いちばん多い業務は授業準備。主幹教諭・教諭だけでは小55.8%</dd><dt>休憩</dt><dd>設定45分のうち実際に休んだ時間は平均 小9分・中12分・高25分・特支16分（R8）</dd><dt class="kw">わかること</dt><dd class="kw">小学校では約半数が平日に持ち帰っている。持ち帰る人は平日1日11分ほどだが、週休日は42分と長い。休憩は小学校で45分のうち9分</dd></dl></article><article class="kc" id="h-tochigi"><h4>栃木県<span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span></h4><p class="ks"><a href="https://www.pref.tochigi.lg.jp/m01/documents/kyousyokuinr7.pdf" target="_blank" rel="noopener">働き方改革推進プランに基づく実態調査（R7、毎年）</a></p><dl><dt>対象・時期</dt><dd>全公立学校のフルタイム教職員（回答14,111人）。7月1〜22日の平日について聞く</dd><dt>持ち帰り</dt><dd>平日の帰宅後の仕事が「1時間未満」72.9%（R6は68.7%）。つまり1時間以上が約27%。「3時間以上」は2.5%（354人）</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">4人に1人以上が、平日に毎日1時間以上の仕事を家でしている。前年より少し改善</dd></dl></article><article class="kc" id="h-saitama"><h4>埼玉県<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.pref.saitama.lg.jp/documents/100051/r6_houkokusyo.pdf" target="_blank" rel="noopener">教職員の勤務実態に係る調査（R6、約3年おき）</a></p><dl><dt>対象・時期</dt><dd>県立学校の全フルタイム教職員（回答11,756人）、6月の1週間</dd><dt>持ち帰り</dt><dd>1週間の合計：県立高校・中学校の教諭等1時間58分、特別支援学校の教諭等1時間</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">県立高校の教諭等で1日あたり約17分。高校は特別支援学校の約2倍</dd></dl></article><article class="kc" id="h-kanagawa"><h4>神奈川県<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.pref.kanagawa.jp/docs/pi7/cnt/f537530/index.html" target="_blank" rel="noopener">神奈川県公立学校教員勤務実態調査（R4、前回H29）</a></p><dl><dt>対象・時期</dt><dd>県立30校＋市町村立小中90校、学校が指定した7日間</dd><dt>持ち帰り</dt><dd>総括教諭・教諭の1日平均：高校 勤務日14分・週休日25分（H29は17分・23分）、中学校 16分・32分、小学校 14分・25分。勤務日の在校等時間（休憩を含む）は小10時間42分・中11時間21分・高10時間13分</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">どの校種も週休日のほうが長い。高校は5年前とほぼ同じ</dd></dl></article><article class="kc" id="h-ishikawa"><h4>石川県<span class="kchip"><span class="tc tD">D</span></span></h4><p class="ks"><a href="https://www.pref.ishikawa.lg.jp/kyoiku/kyousyoku/documents/r6_siryou4.pdf" target="_blank" rel="noopener">多忙化改善に関する意識調査（R6、前回R3）</a></p><dl><dt>対象・時期</dt><dd>県立・市町立の教職員4,819人（回収率59.3%）</dd><dt>持ち帰り</dt><dd>持ち帰りが「ほとんどない」46.2%（R3から10.4ポイント増）。持ち帰る業務は授業準備・教材研究85.1%、丸付け等40.7%</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">半数以上が何らかの頻度で持ち帰っている。3年前よりは減った</dd></dl></article><article class="kc" id="h-yamanashi"><h4>山梨県<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.pref.yamanashi.jp/documents/121042/gyomu.pdf" target="_blank" rel="noopener">時間外在校等時間等における業務実態調査（R6、前回R2）</a></p><dl><dt>対象・時期</dt><dd>公立小中244校と県立41校、各校が定めた連続7日間（回答6,595人）</dd><dt>持ち帰り</dt><dd>平日に持ち帰りをした人：県全体31.7%（持ち帰った日1日あたり平均59分）、小37.2%（54分）、中30.1%（1時間04分）、全日制高校25.7%（1時間08分）、特支26.4%（1時間01分）。週休日は県全体21.0%（1時間50分）、小25.9%（1時間45分）</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">約3人に1人が平日に持ち帰り、した人は約1時間。週休日はさらに長く2時間近い</dd></dl></article><article class="kc" id="h-nagano"><h4>長野県（市町村立小中）<span class="kchip"><span class="tc tB">B</span></span></h4><p class="ks"><a href="https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r6kakuteichi_r704-07.pdf" target="_blank" rel="noopener">教職員の勤務時間等の調査（毎月集計・年2回報告）</a></p><dl><dt>対象・時期</dt><dd>市町村立小中学校の全教職員（本人の自己申告を学校が集計）</dd><dt>持ち帰り</dt><dd>1人あたり月平均：R7 4月1時間14分〜7月1時間02分。H26当初6時間57分から年々減少</dd><dt>休憩</dt><dd>県の調査には入っていない（課長答弁）</dd><dt class="kw">わかること</dt><dd class="kw">数字は減っているが、課長が「きちんと報告してもらえないと漏れてしまっている可能性」と答弁。県教組の調査とは約6倍の差（<a href="mochikaeri-03-zenkoku.html#nagano" target="_blank" rel="noopener">全国の実例 6-3</a>）</dd></dl></article><article class="kc" id="h-kyoto"><h4>京都府<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.kyoto-be.ne.jp/kyoshoku/cms/?p=93" target="_blank" rel="noopener">公立学校教員勤務実態調査（R5）</a></p><dl><dt>対象・時期</dt><dd>京都市立を除く約1割・1,100人を無作為抽出、連続7日間の業務記録</dd><dt>持ち帰り</dt><dd>教諭の1日平均（平日）：小21分、中20分、高21分、特支15分。平日の在校等時間は小11時間06分・中11時間04分・高10時間10分・特支9時間41分。土日は小・中6分、高21分</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">平日の持ち帰りは国の調査より短い（小で16分短い）。高校は土日も平日と同じくらい</dd></dl></article><article class="kc" id="h-nara"><h4>奈良県<span class="kchip"><span class="tc tD">D</span></span></h4><p class="ks"><a href="https://www.pref.nara.lg.jp/documents/5396/20260327094321.pdf" target="_blank" rel="noopener">学校における働き方に関するアンケート（R7、前回R4）</a></p><dl><dt>対象・時期</dt><dd>県立・市町村立の教育職員6,130人（回答率52.1%）</dd><dt>持ち帰り</dt><dd>持ち帰りが「ない」25.7%、「ほぼ毎日」14.3%。小学校は「ほぼ毎日」17.9%、週1回以上が51.5%</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">4人に3人が持ち帰っている。小学校では半数が週1回以上</dd></dl></article><article class="kc" id="h-shimane"><h4>島根県<span class="kchip"><span class="tc tC">C</span></span></h4><p class="ks"><a href="https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_data/kyousyokuin_hatarakikata_data.data/r6_motikaeri_tyousakekka.pdf" target="_blank" rel="noopener">教職員の休憩時間及び持ち帰り仕事等の実態調査（R6、前回R5）</a></p><dl><dt>対象・時期</dt><dd>抽出38校・1,016人、任意の1週間</dd><dt>持ち帰り</dt><dd>1日平均：全校種20.5分（小23.9分、中20.2分）。月に直すと約10時間。1週間に持ち帰りをした人46.3%</dd><dt>休憩</dt><dd>5日間<strong>一度も休憩できなかった</strong>：小学校37.8%。全て休憩できたのは全校種で21.2%</dd><dt class="kw">わかること</dt><dd class="kw">約半数が持ち帰り、月10時間ほど。小学校では4割近くが1週間まったく休憩できていない（<a href="mochikaeri-03-zenkoku.html#shimane" target="_blank" rel="noopener">全国の実例 6-1</a>）</dd></dl></article><article class="kc" id="h-oita"><h4>大分県<span class="kchip"><span class="tc tC">C</span><span class="tc tD">D</span></span></h4><p class="ks"><a href="https://www.pref.oita.jp/uploaded/attachment/2261264.pdf" target="_blank" rel="noopener">県立学校の1週間調査（毎年、業務量管理・健康確保措置実施計画 p.7）</a></p><dl><dt>対象・時期</dt><dd>県立全校、10〜11月の1週間。小中の数字は別の調査（前回H28）で、R7.6.20の教育長答弁</dd><dt>持ち帰り</dt><dd>県立の1日平均：高校等 H30 24分→R6 18分→R7 18分、特支 17分→14分→13分。小中は小24分・中18分（R7.6.20答弁）</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">県立は毎年の数字があり、少しずつ減っている。小中の調査は結果の資料が公開されていない。R5の値は答弁（高22分・特支15分）と計画（19分・13分）で食い違う</dd></dl></article></div>
+
+<h2 id="city"><span class="hn">7</span>市（6）<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>政令市4（新潟市・大阪市・北九州市・熊本市）は「把握している」と回答。広島市・川崎市は「把握していない」と回答しています。</p>
+<div class="kgrid"><article class="kc" id="h-niigatashi"><h4>新潟市<span class="kchip"><span class="tc tD">D</span></span></h4><p class="ks"><a href="https://www.city.niigata.lg.jp/kosodate/gakko/gakko_keikaku/taboukaisyou.files/r8_well-being_koremade.pdf" target="_blank" rel="noopener">教職員勤務実態調査（毎年11月ごろ）</a></p><dl><dt>対象・時期</dt><dd>市立学校の教職員（約1,700人とみられる）</dd><dt>持ち帰り</dt><dd>平日の持ち帰りが「いいえ」55.2%（R7）。持ち帰りが多いのは幼稚園、次に小学校（R5）</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">約45%が平日に持ち帰っている（グラフからの読み取り）</dd></dl></article><article class="kc" id="h-osakashi"><h4>大阪市<span class="kchip"><span class="tc tA">A</span></span></h4><p class="ks"><a href="https://www.city.osaka.lg.jp/gyouseiiinkai/cmsfiles/contents/0000431/431925/R5houkatu_Part2.pdf" target="_blank" rel="noopener">R5包括外部監査（R4年度の記録簿の実績と監査人アンケート）</a></p><dl><dt>対象・時期</dt><dd>教職員14,262人（記録簿）／監査人アンケート66人</dd><dt>持ち帰り</dt><dd>記録簿で把握された持ち帰り：493件・延べ2,685時間47分。入力した教職員は多くとも3.5%未満。アンケートでは63.6%が「持ち帰ることがある」、月60時間くらいの回答も複数</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">記録のしくみがあっても使われていない。記録の数字と実態に大きな開き（<a href="mochikaeri-03-zenkoku.html#osaka" target="_blank" rel="noopener">全国の実例 6-2</a>）</dd></dl></article><article class="kc" id="h-hiroshimashi"><h4>広島市<span class="kchip"><span class="tc tC">C</span></span></h4><span class="knote">文科省には「把握していない」と回答</span><p class="ks">教員の健康確保に向けた取組に係るアンケート調査（R7.1〜2月）。結果は <a href="https://hiroshima.gijiroku.com/voices/" target="_blank" rel="noopener">市議会こども文教委員会（R7.4.21）会議録</a>／<a href="https://www.chugoku-np.co.jp/articles/-/632340" target="_blank" rel="noopener">中国新聞</a></p><dl><dt>対象・時期</dt><dd>約2割の46園・校、常勤教員1,157人、連続7日間</dd><dt>持ち帰り</dt><dd>1回以上持ち帰った教員は約4割、1回あたり平均1時間26分（国と同じ計算で1日 小27分・中14分）</dd><dt>休憩</dt><dd>平日に取れた休憩は平均 <strong>小10分・中11分</strong>。小中で「休憩なし若しくは15分未満」が7割超</dd><dt class="kw">わかること</dt><dd class="kw">休憩は45分のうちほとんど取れていない。ふだんのシステムは休憩を45分と決めて計算している（<a href="mochikaeri-03-zenkoku.html#hiroshima" target="_blank" rel="noopener">全国の実例 6-4</a>）</dd></dl></article><article class="kc" id="h-kitakyushu"><h4>北九州市<span class="kchip"><span class="tc tD">D</span><span class="tc tE">E</span></span></h4><p class="ks"><a href="https://www.city.kitakyushu.lg.jp/files/001199354.pdf" target="_blank" rel="noopener">学校における業務改善プログラム第4版（R8.3）の指標</a></p><dl><dt>対象・時期</dt><dd>教職員意識アンケートとみられる</dd><dt>持ち帰り</dt><dd>持ち帰り仕事を行わない教職員：R6 58.3%（目標80%）</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">約4割が持ち帰り。持ち帰りを数値目標にしている数少ない例</dd></dl></article><article class="kc" id="h-kumamotoshi"><h4>熊本市<span class="kchip"><span class="tc tD">D</span></span></h4><p class="ks"><a href="https://www.city.kumamoto.jp/kiji00347820/3_47820_506051_up_phzgzc47.pdf" target="_blank" rel="noopener">働き方改革アンケート（R8.2、年1回）</a></p><dl><dt>対象・時期</dt><dd>市立学校の常勤教職員3,401人</dd><dt>持ち帰り</dt><dd>直近1週間の平日1日平均：0分35.1%、30分24.8%、1時間21.7%、1時間半以上18.3%。持ち帰る業務は授業準備67.6%</dd><dt>休憩</dt><dd>—</dd><dt class="kw">わかること</dt><dd class="kw">約3人に2人が持ち帰り、5人に1人近くが1日1時間半以上</dd></dl></article><article class="kc" id="h-kawasakishi"><h4>川崎市<span class="kchip"><span class="tc tC">C</span></span></h4><span class="knote">文科省には「把握していない」と回答</span><p class="ks"><a href="https://www.city.kawasaki.jp/880/cmsfiles/contents/0000106/106892/03jittaityousasaisyuuhoukoku.pdf" target="_blank" rel="noopener">教職員の勤務実態調査（H29・R5）</a></p><dl><dt>対象・時期</dt><dd>R5は抽出28校・882人のWeb調査</dd><dt>持ち帰り</dt><dd>持ち帰りあり約66%（小約70%・中約62%）、1時間以上34.4%。業務は授業準備81.3%</dd><dt>休憩</dt><dd>「ほとんど取れていない」<strong>88.3%</strong>（小83.9%・中92.9%）</dd><dt class="kw">わかること</dt><dd class="kw">休憩は約9割が取れていないのに、在校等時間は一律45分を差し引いて計算。文科省には持ち帰り「把握していない」と回答（<a href="mochikaeri-03-zenkoku.html#kawasaki" target="_blank" rel="noopener">全国の実例 6-6</a>）</dd></dl></article></div>
+
+<h2 id="matome"><span class="hn">8</span>全体から言えること<a class="totop" href="#toc">目次へ ↑</a></h2>
+<ul class="kmatome">
+<li><strong>持ち帰りをしている先生は、どの調査でも3〜7割。</strong>少ないところで約3割（山梨県の平日31.7%など）、多いところで約7割（川崎市の小学校、奈良県の74%）。</li>
+<li><strong>平均すると1日20分前後だが、<mark class="hl">持ち帰る人に限ると約1時間</mark>。</strong>全員で割った平均は島根県20.5分・京都府約20分など。持ち帰った人だけでは、山梨県59分、<mark class="hl">広島市は1回1時間26分</mark>。平均の小さな数字だけを見ると、実態を小さく見誤る。</li>
+<li><strong><mark class="hl">休日のほうが長い</mark>。</strong>北海道・神奈川県・山梨県・福島県とも、週休日の持ち帰りは平日より長い。</li>
+<li><strong><mark class="hl">小学校が多い</mark>。</strong>福島県（小48.1%）、奈良県（小の半数が週1回以上）、島根県（小23.9分）など。</li>
+<li><strong>持ち帰るのは主に授業準備。</strong>福島県・石川県（85.1%）・熊本市（67.6%）・川崎市（81.3%）とも1位。</li>
+<li><strong><mark class="hl">休憩はほとんど取れていない</mark>。</strong>休憩を調べた調査はどれも同じ結果。国の調査で小学校教諭が決められた休憩時間内に取れたのは平日5分、広島市は小10分、川崎市は88.3%が「ほとんど取れていない」、島根県の小学校は37.8%が5日間一度も取れず。</li>
+<li><strong>それでも、毎日の調査の数字はない。</strong>どれも年に一度か数年に一度の調査で、毎月の数字がある長野県は県教委自身が記録漏れを認めている。</li>
+</ul>
+
+<h2 id="sanko"><span class="hn">9</span>参考　国の調査と山口県<a class="totop" href="#toc">目次へ ↑</a></h2>
+<h3 class="kh" id="sanko-1"><span class="hn3">9-1</span>国の調査</h3>
+<p>国の教員勤務実態調査（R4、抽出・7日間）では、平日の持ち帰りは小学校37分・中学校32分（教諭1日当たり）、決められた休憩時間内に取れた休憩は小学校教諭5分・中学校教諭7分です（10・11月） <a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf" target="_blank" rel="noopener">https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf</a>。</p>
+<h3 class="kh" id="sanko-2"><span class="hn3">9-2</span>山口県　これまでの調査</h3>
+<p><strong>山口県教委が独自に教員の勤務実態調査をしたのは、平成17年度（2005年秋）の1回だけです。その調査にも持ち帰りは含まれていません。</strong>そのあとは、県も市町も「学校にいた時間」の記録を集めているだけで、持ち帰りや休憩を期間を決めて調べた行政の調査は見つかりませんでした。数字はどれも県議会・市議会の会議録によります（調査の報告書はWebで見つかっていません）。</p>
+<div class="tbl"><table>
+<thead><tr><th>時期</th><th>実施</th><th>中身</th><th>持ち帰り・休憩</th></tr></thead>
+<tbody>
+<tr><td class="pn">H17年度</td><td>県教委<br>「教職員勤務実態調査」</td><td>全公立学校。聞き取りも実施。平日1日の時間外業務は小1時間15分・中1時間40分・高1時間20分・盲聾養護55分。多忙感ありは小中で約9割、県立で約8割</td><td><b>持ち帰りは含まない</b>（<a href="https://ssp.kaigiroku.net/tenant/prefyamaguchi/MinuteView.html?council_id=75&schedule_id=4&minute_id=37" target="_blank" rel="noopener">H23.12.6 本会議</a>で議員が指摘）。休憩を聞いた記録なし</td></tr>
+<tr><td class="pn">H23〜</td><td>県教委</td><td>教員が自分で書く「時間外業務時間の記録表」の集計。H28年度の月平均は小40.8・中56.7・県立43.6時間。H30から県立はICカード</td><td>書かれていない。教育長は以後「<a href="https://ssp.kaigiroku.net/tenant/prefyamaguchi/MinuteView.html?council_id=75&schedule_id=4&minute_id=61" target="_blank" rel="noopener">勤務実態調査のような数値的な把握はしていない</a>」（H23.12.6）</td></tr>
+<tr><td class="pn">H29年度</td><td>県教委</td><td>加速化プランを作るときのアンケート・意見交換会（現場の要望を聞くもの）</td><td>時間の数字なし</td></tr>
+<tr><td class="pn">R4〜</td><td>県教委</td><td>「働き方改革 現状分析ツール」（教職員の意識調査）</td><td>時間の設問なし</td></tr>
+<tr><td class="pn">R4.3</td><td>県教委</td><td>文教警察委員会で教職員課長が「県教委として何時間という把握はしていない」、校長が面談等で把握と答弁</td><td>持ち帰りは把握していない</td></tr>
+<tr class="grp"><td colspan="4">市町</td></tr>
+<tr><td class="pn">H26年度</td><td>萩市</td><td>勤務実態調査。週の平均勤務時間 小50.2・中55.4時間</td><td>書かれていない</td></tr>
+<tr><td class="pn">H28</td><td>周南市</td><td>1週間の学内勤務時間 小約56・中約60時間</td><td>学校内の時間だけ</td></tr>
+<tr><td class="pn">H29〜30年度</td><td>岩国市</td><td>勤務実態調査（タイムレコーダー＋本人申告）。時間外の月平均 小43.9・中60.2時間（H29）</td><td>書かれていない</td></tr>
+<tr><td class="pn">H29〜</td><td>下関市</td><td>毎月の時間外業務時間の記録</td><td><b>含まないと明言</b>（H29.6.27 教育長）</td></tr>
+<tr><td class="pn">R1〜</td><td>防府市</td><td>時間外業務実態調査</td><td><b>含まないと明言</b>（R1.12 答弁）</td></tr>
+</tbody></table></div>
+<p class="small">文科省R7「見える化」調査で、県内で持ち帰りを「把握している」と答えたのは<b>山口県教委</b>と防府市・岩国市・阿武町の4つだけです（<a href="https://www.mext.go.jp/content/20260325-mxt_kyoikujinzai01-000048417_35.pdf" target="_blank" rel="noopener">山口県の資料</a> p.7）。県教委はR4.3の県議会で「何時間という把握はしていない」と答弁しており、3市町も方法・数値は公開資料で確認できません（<a href="mochikaeri-02-47.html#method" target="_blank" rel="noopener">47都道府県一覧の4</a>）。</p>
+<h3 class="kh" id="sanko-3"><span class="hn3">9-3</span>山口県　持ち帰りの数字があるのは組合の調査だけ</h3>
+<ul>
+<li>山口県教職員組合アンケート（H14.5、小中514人）：持ち帰り仕事が増えた 62%超（宇部市議会 H14.9.6で紹介）</li>
+<li>山口県教職員組合の新聞（H19）：小中の平均で、学校での残業 月40時間47分、<strong>持ち帰り 月23時間3分</strong>（柳井市議会 H19.12.7で紹介）</li>
+<li>山口県高等学校教員組合：県立学校の時間外 月平均71時間、<strong>持ち帰りを含めると89時間39分</strong>（<a href="https://ssp.kaigiroku.net/tenant/prefyamaguchi/MinuteView.html?council_id=84&schedule_id=5&minute_id=7" target="_blank" rel="noopener">県議会 H25.12.4</a>で紹介）</li>
+<li>山口県教職員組合アンケート（R1、266人）：<strong>持ち帰り 週平均4.5時間</strong>（防府市議会 R1.12で紹介）</li>
+</ul>
+<p class="small">まだ確かめていないこと：県議会の委員会会議録はH25より前がWebにないため、H17調査のくわしい中身（調べた期間・方法）は確かめられていません。阿武町は会議録がWebになく、光市・美祢市などは検索していません。</p>
+
+
+<h2 id="chui"><span class="hn">10</span>読むときの注意と出典<a class="totop" href="#toc">目次へ ↑</a></h2>
+<div class="note"><ul>
+<li>「把握している」かどうかは、各教育委員会の自己申告です。文科省の設問は二択で、方法・頻度・対象は問われていません。</li>
+<li>都道府県教委の回答は、主にその教委が所管する学校（県立高校・特別支援学校など）についてのものです。ただし調査によっては市町村立の小中学校も対象にしています（各カードの「対象・時期」）。</li>
+<li>数字は各自治体の公表資料・議会答弁から取りました。大分県の小中学校と広島市は議会での答弁・説明、新潟市はグラフからの読み取りです。3章の山梨県・島根県の数字は、各県の調査報告書によります。</li>
+<li>出典：文部科学省「令和7年度教育委員会における学校の働き方改革のための『見える化』調査」 <a href="https://www.mext.go.jp/a_menu/shotou/uneishien/detail/1408258_00134.htm" target="_blank" rel="noopener">https://www.mext.go.jp/a_menu/shotou/uneishien/detail/1408258_00134.htm</a>。各自治体の資料は、カードの調査名のリンク先。</li>
+</ul></div>
+
+<footer class="site-foot" aria-label="持ち帰り・休憩の調べ（シリーズ）"><p>持ち帰り・休憩の調べ</p><div class="sf"><a href="mochikaeri-00-top.html">00 入口</a><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><a href="mochikaeri-03-zenkoku.html">03 全国の実例</a><b aria-current="page">04 調査結果</b></div></footer>
+</div>

@@ -1,0 +1,307 @@
+<title>00 持ち帰り・休憩の調べ 入口</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --ng:#b3261e; --unk:#6b7280; --mid:#9a5a00;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4; --me:#fff6d6;
+  --e1:#e9edf5; --e2:#d9e1f0; --e3:#c4d1ea; --e4:#a9bde3; --fu:#fbe3ee;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --ng:#ff8f86; --unk:#a4aab6; --mid:#f0b35c;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --e1:#1f2430; --e2:#26304a; --e3:#2e3c5e; --e4:#3a4d78; --fu:#3a2230;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --ng:#ff8f86; --unk:#a4aab6; --mid:#f0b35c;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --e1:#1f2430; --e2:#26304a; --e3:#2e3c5e; --e4:#3a4d78; --fu:#3a2230;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h1,h2,h3{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.8rem;line-height:1.35;margin:0 0 8px}
+h2{font-size:1.25rem;margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+p{max-width:72ch}
+a{color:var(--link)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small{font-size:.85rem;color:var(--sub)}
+.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}
+.series .sl{font-weight:700;color:var(--sub);margin-right:4px}
+.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}
+.series b{background:var(--head);color:var(--headink);border-color:var(--head)}
+
+/* 流れ */
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.flow li{display:grid;grid-template-columns:3.2em 1fr;gap:14px;position:relative;padding-bottom:18px}
+.flow li:not(:last-child)::before{content:"";position:absolute;left:1.55em;top:3.1em;bottom:0;width:3px;background:var(--line)}
+.flow .no{width:3.2em;height:3.2em;border-radius:50%;background:var(--head);color:var(--headink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem}
+.flow li.key .no{background:var(--neoline)}
+.flow .box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.flow .q{margin:0;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.08rem;max-width:none}
+.flow .a{margin:4px 0 6px;max-width:none}
+.flow .a b{color:var(--accent)}
+.flow li.key .a b{color:var(--neoink)}
+.flow .go{display:flex;flex-wrap:wrap;gap:6px;font-size:.82rem}
+.flow .go a{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg);text-decoration:none}
+.flow .go a .pn{font-weight:700;color:var(--accent);margin-right:4px}
+
+/* オイラー図 */
+.euler{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px}
+.euler svg{width:100%;height:auto;display:block}
+.euler text{font-family:"BIZ UDPGothic","Yu Gothic UI",sans-serif;fill:var(--ink)}
+.euler .lbl{font-size:17px;font-weight:700}
+.euler .cnt{font-size:26px;font-weight:700;fill:var(--accent)}
+.euler .sm{font-size:14px;fill:var(--sub)}
+.euler .dot{fill:var(--ink)}
+.euler .dot.me{fill:var(--neoline)}
+.euler .nm{font-size:15px;font-weight:700}
+.euler .nm.me{fill:var(--neoink)}
+.euler a .nm{text-decoration:underline}
+.euler a:focus-visible{outline:2px solid var(--accent)}
+.euler .fu{fill:var(--fu);fill-opacity:.75;stroke:var(--neoline);stroke-width:3;stroke-dasharray:8 5}
+.euler .fl{font-size:16px;font-weight:700;fill:var(--neoink)}
+.euler .eu-tall{display:none}
+@media (max-width:640px){
+  .euler{padding:6px}
+  .euler .eu-wide{display:none}
+  .euler .eu-tall{display:block}
+  .euler .eu-tall .lbl{font-size:16px}
+  .euler .eu-tall .cnt{font-size:23px}
+  .euler .eu-tall .nm{font-size:15.5px}
+  .euler .eu-tall .sm{font-size:12.5px}
+  .euler .eu-tall .fl{font-size:14px}
+}
+.sets{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin-top:12px}
+.set{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.set h3{margin:0 0 4px;font-size:1rem;display:flex;align-items:center;gap:8px}
+.set .sw{display:inline-block;width:1.1em;height:1.1em;border-radius:50%;border:1.5px solid var(--sub)}
+.set .n{margin-left:auto;font-family:"BIZ UDPGothic",sans-serif;font-size:1.1rem;color:var(--accent)}
+.set p{margin:2px 0;font-size:.88rem}
+.set.fu{border:2px dashed var(--neoline);background:var(--neo)}
+.set.fu .n{color:var(--neoink)}
+
+/* ページ一覧 */
+.pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pg{display:block;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink)}
+.pg:hover{border-color:var(--accent)}
+.pg .pnum{display:inline-block;font-family:"BIZ UDPGothic",sans-serif;font-weight:700;color:var(--headink);background:var(--head);border-radius:4px;padding:0 8px;font-size:.85rem}
+.pg .pt{display:block;margin:6px 0 4px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.1rem;line-height:1.4}
+.pg .pd{display:block;font-size:.86rem;color:var(--sub)}
+.pg .pf{display:block;margin-top:6px;font-size:.75rem;color:var(--sub);word-break:break-all}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;font-size:.88rem}
+th{background:var(--head);color:var(--headink)}
+.c{text-align:center}
+.mk{font-weight:700;color:var(--ok)} .mk2{color:var(--sub)}
+@media (max-width:600px){h1{font-size:1.4rem} body{font-size:14px}}
+</style>
+<style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
+/* ===== 持ち帰り・休憩の調べ　共通テーマ ===== */
+:root{--r:12px;--sh:0 1px 2px rgba(20,30,55,.05),0 6px 18px rgba(20,30,55,.06);--band:#1b2744;--band2:#2b3c66;--rose:#c2185b;--paper:#f2f4f8;--glow:rgba(47,79,143,.10)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}}
+:root[data-theme="dark"]{--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}
+body{background:radial-gradient(1200px 420px at 50% -120px,var(--glow),transparent 70%),var(--paper) !important}
+.wrap{padding-top:0 !important}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* 上の帯（シリーズの案内） */
+nav.series{margin:0 -16px 26px !important;padding:12px 16px !important;background:linear-gradient(100deg,var(--band),var(--band2));border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);gap:6px 8px !important;font-size:.8rem !important}
+nav.series .sl{color:#fff !important;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:.98rem;letter-spacing:.06em;margin-right:10px !important;padding-right:12px;border-right:1px solid rgba(255,255,255,.25)}
+nav.series a,nav.series b{border:1px solid rgba(255,255,255,.28) !important;background:transparent !important;color:#e8edf8 !important;border-radius:999px !important;padding:3px 12px !important;transition:background .15s,border-color .15s}
+nav.series a:hover{background:rgba(255,255,255,.12) !important;border-color:rgba(255,255,255,.55) !important}
+nav.series b{background:#fff !important;color:var(--band) !important;border-color:#fff !important;box-shadow:inset 0 -3px 0 var(--rose)}
+@media (min-width:1212px){nav.series{margin:0 0 26px !important}}
+
+/* 冒頭 */
+.wrap>header{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px 20px;margin-bottom:6px;overflow:hidden}
+.wrap>header::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--accent),var(--rose))}
+.wrap>header .eyebrow{display:inline-block;background:var(--soft);color:var(--accent);border-radius:999px;padding:1px 12px;letter-spacing:.14em}
+.wrap>header h1{letter-spacing:.03em;line-height:1.4}
+.wrap>header .lead{margin-top:12px !important;color:var(--ink)}
+
+/* 見出し */
+.wrap>h2{border-bottom:0 !important;padding-bottom:10px !important;background:linear-gradient(var(--paper),var(--paper)) padding-box !important;box-shadow:none !important}
+.wrap>h2::after{content:"";display:block;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--head) 0,var(--head) 72px,var(--line) 72px)}
+.hn{border-radius:6px !important;background:linear-gradient(135deg,var(--head),var(--band2)) !important;box-shadow:0 2px 6px rgba(20,30,55,.18)}
+.hn3{border-radius:5px !important}
+h3.kh,.wrap h3{letter-spacing:.02em}
+
+/* カード類 */
+.pt,.kc,.case,.q,.set,.pg,.note,.munote,.mokuji,.tbl,.gchart,.dist,.chart,.tchart,.euler,.band,.toc a,.flow .box,details,.chu,.cmp .pt{border-radius:var(--r) !important;box-shadow:var(--sh);border-color:var(--line) !important}
+.flow .q{box-shadow:none !important;border-radius:0 !important}
+.pt.key{border-color:var(--neoline,var(--rose)) !important;box-shadow:0 1px 2px rgba(194,24,91,.10),0 6px 18px rgba(194,24,91,.10)}
+.pt b.big{letter-spacing:.01em}
+.pg,.toc a,.kc{transition:transform .15s,box-shadow .15s}
+.pg:hover,.toc a:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,30,55,.06),0 10px 24px rgba(20,30,55,.10)}
+.munote{border-left-width:4px !important}
+.mokuji{padding:16px 22px !important}
+.mokuji .mk-h{display:flex;align-items:center;gap:8px}
+.mokuji .mk-h::before{content:"";width:18px;height:2px;background:var(--rose)}
+
+/* 表 */
+.tbl{background:var(--card)}
+th{letter-spacing:.03em}
+tbody tr:hover td{background-image:linear-gradient(var(--glow),var(--glow))}
+tr.grp td{letter-spacing:.08em}
+
+/* ページの終わりの案内 */
+.site-foot{margin:56px 0 0;padding:18px 20px;border-radius:var(--r);background:linear-gradient(100deg,var(--band),var(--band2));color:#e8edf8;box-shadow:var(--sh)}
+.site-foot p{margin:0 0 8px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1rem;letter-spacing:.06em;color:#fff;max-width:none}
+.site-foot .sf{display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.82rem}
+.site-foot a,.site-foot b{display:inline-block;padding:3px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#e8edf8;text-decoration:none}
+.site-foot a:hover{background:rgba(255,255,255,.12)}
+.site-foot b{background:#fff;color:var(--band);border-color:#fff}
+.site-foot a:focus-visible,nav.series a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.pg,.toc a,.kc,nav.series a{transition:none}.pg:hover,.toc a:hover{transform:none}}
+</style>
+
+
+
+
+<div class="wrap">
+<nav class="series" aria-label="持ち帰り・休憩の調べ（シリーズ）"><span class="sl">持ち帰り・休憩の調べ</span><b aria-current="page">00 入口</b><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><a href="mochikaeri-03-zenkoku.html">03 全国の実例</a><a href="mochikaeri-04-kekka.html">04 調査結果</a></nav>
+<header>
+  <p class="eyebrow">入口</p>
+  <h1 class="h1i"><span class="ticon"><svg viewBox="0 0 48 48" width="50" height="50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22L24 7l18 15"/><path d="M10 19v21h28V19" fill="currentColor" fill-opacity=".12"/><rect x="18" y="25" width="12" height="9" rx="1.5"/><path d="M21 25v-2.5h6V25"/><circle cx="37" cy="37" r="5.5" fill="#fff"/><path d="M41 41l4 4"/></svg></span><span>教員の「持ち帰り業務」と「休憩」は、つかまれているか</span></h1>
+  <p class="date">2026年9〜10月調べ　文部科学省 令和7年度「見える化」調査（令和7年9月1日時点）と、各教育委員会の公開資料・議会会議録による</p>
+  <p>出退勤の打刻で残るのは「来た時刻」と「帰った時刻」だけです。家に持ち帰った仕事と、勤務中に休憩が取れたかは、教育委員会がつかもうとしなければ記録に残りません。山口県から始めて全国まで、5つのページで調べました。</p>
+</header>
+
+<h2 id="flow"><span class="hn">1</span>調べの流れ</h2>
+<ol class="flow">
+<li><span class="no">01</span><div class="box"><p class="q">山口県の先生の出退勤は、どう記録されているか</p><p class="a">19市町とも「客観的な方法」で記録。ICカードが11市町。ただし<b>昼休憩や持ち帰りを記録するしくみは、どの市町にもない</b>。</p><div class="go"><a href="mochikaeri-01-yamaguchi.html#part1"><span class="pn">01</span>第1部 出退勤管理システム</a></div></div></li>
+<li><span class="no">02</span><div class="box"><p class="q">持ち帰りを「把握している」と答えた教育委員会は</p><p class="a">全国で<b>776 / 1,804（43.0%）</b>。山口県内は県教委と3市町だけ（市町は19のうち3、全国45位）。</p><div class="go"><a href="mochikaeri-02-47.html#youten"><span class="pn">02</span>要点・割合</a><a href="mochikaeri-02-47.html#list"><span class="pn">02</span>都道府県別一覧</a><a href="mochikaeri-01-yamaguchi.html#part2"><span class="pn">01</span>山口県の回答</a></div></div></li>
+<li><span class="no">03</span><div class="box"><p class="q">どうやって把握しているのか</p><p class="a">設問は二択で方法を問わない。都道府県教委・政令市39を調べると、<b>毎日の記録は3つだけ</b>（大阪市・鳥取県・香川県の県立）。多いのは年に一度か数年に一度の調査と、何時間かはわからない聞き取り。16は方法を確認できず。</p><div class="go"><a href="mochikaeri-02-47.html#list"><span class="pn">02</span>把握のしかた A〜G</a><a href="mochikaeri-02-47.html#shurui"><span class="pn">02</span>種類別の数</a><a href="mochikaeri-03-zenkoku.html#jirei"><span class="pn">03</span>事例（大阪市・長野県など）</a></div></div></li>
+<li><span class="no">04</span><div class="box"><p class="q">調べた結果、何がわかったのか</p><p class="a">数字を公表しているのは16。持ち帰りをしている先生は<b>3〜7割</b>、持ち帰る人に限ると<b>1日約1時間</b>。休憩を調べた調査は、どれも「ほとんど取れていない」。</p><div class="go"><a href="mochikaeri-04-kekka.html#youten"><span class="pn">04</span>要点</a><a href="mochikaeri-04-kekka.html#graph"><span class="pn">04</span>持ち帰り時間の比べ方</a><a href="mochikaeri-03-zenkoku.html#kyukei-zenkoku"><span class="pn">03</span>休憩は取れているか</a></div></div></li>
+<li class="key"><span class="no">05</span><div class="box"><p class="q">把握した持ち帰りを、勤務時間（時間外在校等時間）に含めるか</p><p class="a">国の指針では含めない。都道府県教委・政令市で含めているのは<b>大阪市だけ</b>（市では久留米市が計画で「含める」と明記）。</p><div class="go"><a href="mochikaeri-04-kekka.html#sannyu"><span class="pn">04</span>持ち帰りを時間外に含めるか</a><a href="mochikaeri-02-47.html#sannyu-note"><span class="pn">02</span>「時間外に：」の札</a><a href="mochikaeri-03-zenkoku.html#kurume"><span class="pn">03</span>久留米市</a></div></div></li>
+<li class="key"><span class="no">06</span><div class="box"><p class="q">ここから言えること</p><p class="a">「把握している」の中身は、<b>年に一度か数年に一度の調査</b>と<b>何時間かはわからない聞き取り</b>。43.0%は実態がつかまれている割合ではない。</p><div class="go"><a href="mochikaeri-02-47.html#kousatsu"><span class="pn">02</span>考察</a><a href="mochikaeri-02-47.html#k7"><span class="pn">02</span>国に提案するなら</a><a href="mochikaeri-03-zenkoku.html#matome"><span class="pn">03</span>ここから言えること</a></div></div></li>
+</ol>
+
+<h2 id="euler"><span class="hn">2</span>全体の図</h2>
+<p>全国1,804の教育委員会を、入れ子の円で表しました。円が内側になるほど、持ち帰りの実態に近づきます。<b>都道府県教委・政令市の67</b>は全部の円を調べ、市区町村は「把握している」かどうかだけ（方法までは調べていない）です。点は、本文に出てくる主な自治体です。名前を押すと、それぞれのページへ移ります。</p>
+<div class="euler">
+<svg class="eu-wide" viewBox="0 0 1000 720" role="img" aria-labelledby="eu-t eu-d">
+<title id="eu-t">持ち帰りの把握をめぐる教育委員会の入れ子の図</title>
+<desc id="eu-d">全国1,804の教育委員会のうち、持ち帰りを把握していると答えたのは776。そのうち方法を調べた都道府県教委・政令市は39、方法がわかったのは23、数字を公表している調査があるのは16。持ち帰りを時間外在校等時間に含めるのは大阪市と久留米市。広島市と川崎市は調査をしているが把握していないと回答。山口県教委は方法はわかるが数字は公表していない23の中にある。</desc>
+<rect x="6" y="6" width="988" height="708" rx="18" fill="var(--soft)" stroke="var(--line)" stroke-width="2"/>
+<text x="28" y="40" class="lbl">全国の教育委員会</text><text x="28" y="72" class="cnt">1,804</text>
+<text x="28" y="94" class="sm">「把握していない」1,028</text>
+
+<ellipse cx="590" cy="400" rx="390" ry="250" fill="var(--e1)" stroke="var(--accent)" stroke-width="2"/>
+<text x="330" y="235" class="lbl">「把握している」と答えた</text><text x="330" y="266" class="cnt">776</text><text x="400" y="266" class="sm">（43.0%）</text>
+
+<ellipse cx="660" cy="435" rx="275" ry="185" fill="var(--e2)" stroke="var(--accent)" stroke-width="2"/>
+<text x="520" y="295" class="lbl">方法を調べた 都道府県教委・政令市</text><text x="520" y="324" class="cnt">39</text>
+
+<ellipse cx="700" cy="465" rx="205" ry="140" fill="var(--e3)" stroke="var(--accent)" stroke-width="2"/>
+<text x="570" y="380" class="lbl">方法がわかった</text><text x="690" y="380" class="cnt">23</text>
+
+<ellipse cx="760" cy="500" rx="115" ry="85" fill="var(--e4)" stroke="var(--accent)" stroke-width="2.5"/>
+<text x="690" y="458" class="lbl">数字を公表している</text><text x="745" y="490" class="cnt">16</text>
+
+<!-- 時間外に含める -->
+<ellipse cx="530" cy="570" rx="215" ry="50" class="fu"/>
+<text x="420" y="553" class="fl">持ち帰りを時間外に含める</text>
+
+<!-- 点 -->
+<a href="mochikaeri-03-zenkoku.html#osaka"><circle cx="715" cy="565" r="7" class="dot"/><text x="727" y="571" class="nm">大阪市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kurume"><circle cx="370" cy="575" r="7" class="dot"/><text x="382" y="581" class="nm">久留米市</text></a>
+<a href="mochikaeri-04-kekka.html#h-nagano"><circle cx="790" cy="540" r="7" class="dot"/><text x="802" y="546" class="nm">長野県</text></a>
+<a href="mochikaeri-04-kekka.html#h-shimane"><circle cx="700" cy="515" r="7" class="dot"/><text x="712" y="521" class="nm">島根県</text></a>
+<a href="mochikaeri-02-47.html#m-35"><circle cx="530" cy="430" r="8" class="dot me"/><text x="542" y="436" class="nm me">山口県教委</text></a><text x="542" y="456" class="sm">（聞き取り）</text>
+<a href="mochikaeri-02-47.html#m-31"><circle cx="540" cy="495" r="6" class="dot"/><text x="552" y="501" class="nm">鳥取県</text></a>
+<a href="mochikaeri-02-47.html#m-13"><circle cx="440" cy="400" r="6" class="dot"/><text x="452" y="406" class="nm">東京都</text></a>
+<a href="mochikaeri-01-yamaguchi.html#mochikaeri"><circle cx="240" cy="420" r="8" class="dot me"/><text x="252" y="426" class="nm me">防府・岩国・阿武</text></a>
+<text x="252" y="446" class="sm">（方法は未調査）</text>
+<a href="mochikaeri-03-zenkoku.html#hiroshima"><circle cx="70" cy="630" r="7" class="dot"/><text x="82" y="636" class="nm">広島市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kawasaki"><circle cx="70" cy="662" r="7" class="dot"/><text x="82" y="668" class="nm">川崎市</text></a>
+<text x="40" y="704" class="sm">↑ 調査はしているが「把握していない」と回答</text>
+<text x="40" y="250" class="sm">山口県内の</text><text x="40" y="270" class="sm">ほか16市町</text><circle cx="58" cy="290" r="7" class="dot me"/>
+</svg>
+<svg class="eu-tall" viewBox="0 0 380 1080" role="img" aria-labelledby="eu-t2 eu-d">
+<title id="eu-t2">持ち帰りの把握をめぐる教育委員会の入れ子の図（縦向き）</title>
+<rect x="4" y="4" width="372" height="1072" rx="16" fill="var(--soft)" stroke="var(--line)" stroke-width="2"/>
+<text x="18" y="32" class="lbl">全国の教育委員会</text><text x="18" y="60" class="cnt">1,804</text>
+
+<rect x="14" y="76" width="352" height="664" rx="40" fill="var(--e1)" stroke="var(--accent)" stroke-width="2"/>
+<text x="32" y="104" class="lbl">「把握している」と答えた</text><text x="32" y="132" class="cnt">776</text><text x="88" y="130" class="sm">（43.0%）</text>
+<a href="mochikaeri-01-yamaguchi.html#mochikaeri"><circle cx="40" cy="166" r="7" class="dot me"/><text x="54" y="171" class="nm me">防府・岩国・阿武</text></a>
+<text x="54" y="190" class="sm">（山口県内の市町。方法は未調査）</text>
+
+<rect x="28" y="210" width="324" height="436" rx="34" fill="var(--e2)" stroke="var(--accent)" stroke-width="2"/>
+<text x="44" y="238" class="lbl">方法を調べた</text><text x="44" y="258" class="sm">都道府県教委31・政令市8</text><text x="290" y="240" class="cnt">39</text>
+<a href="mochikaeri-02-47.html#m-13"><circle cx="52" cy="286" r="6" class="dot"/><text x="64" y="291" class="nm">東京都など16</text></a><text x="172" y="291" class="sm">（方法を確認できず）</text>
+
+<rect x="42" y="310" width="296" height="320" rx="30" fill="var(--e3)" stroke="var(--accent)" stroke-width="2"/>
+<text x="58" y="338" class="lbl">方法がわかった</text><text x="282" y="340" class="cnt">23</text>
+<a href="mochikaeri-02-47.html#m-35"><circle cx="66" cy="368" r="7" class="dot me"/><text x="80" y="373" class="nm me">山口県教委（聞き取り）</text></a>
+<a href="mochikaeri-02-47.html#m-31"><circle cx="66" cy="396" r="6" class="dot"/><text x="80" y="401" class="nm">鳥取県・香川県など7</text></a>
+
+<rect x="56" y="420" width="268" height="196" rx="26" fill="var(--e4)" stroke="var(--accent)" stroke-width="2.5"/>
+<text x="72" y="448" class="lbl">数字を公表している</text><text x="270" y="450" class="cnt">16</text>
+<a href="mochikaeri-04-kekka.html#h-shimane"><circle cx="80" cy="480" r="6" class="dot"/><text x="92" y="485" class="nm">島根県</text></a>
+<a href="mochikaeri-04-kekka.html#h-nagano"><circle cx="170" cy="480" r="6" class="dot"/><text x="182" y="485" class="nm">長野県</text></a>
+<text x="80" y="510" class="sm">北海道・福島・栃木・埼玉など</text>
+
+<rect x="70" y="552" width="236" height="166" rx="20" class="fu"/>
+<text x="84" y="574" class="fl">持ち帰りを時間外に含める</text>
+<a href="mochikaeri-03-zenkoku.html#osaka"><circle cx="90" cy="598" r="7" class="dot"/><text x="104" y="603" class="nm">大阪市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kurume"><circle cx="90" cy="690" r="7" class="dot"/><text x="104" y="695" class="nm">久留米市</text></a>
+
+<a href="mochikaeri-03-zenkoku.html#hiroshima"><circle cx="26" cy="900" r="7" class="dot"/><text x="40" y="905" class="nm">広島市</text></a>
+<a href="mochikaeri-03-zenkoku.html#kawasaki"><circle cx="120" cy="900" r="7" class="dot"/><text x="134" y="905" class="nm">川崎市</text></a>
+<text x="18" y="800" class="lbl">「把握していない」と答えた</text><text x="18" y="832" class="cnt">1,028</text><text x="92" y="830" class="sm">（57.0%）</text>
+<text x="20" y="928" class="sm">↑ 調査はしているが「把握していない」と回答</text>
+<circle cx="26" cy="970" r="6" class="dot me"/><text x="38" y="974" class="sm">山口県内のほか16市町（把握していない）</text>
+</svg>
+</div>
+<p class="small">横向きの図では、外の枠（1,804）に対する「把握している」の円（776）の面積を、実際の割合と同じ約43%にしています。それより内側の円は、見やすさのため数に比例させていません。スマホでは縦向きの図（角の丸い四角の入れ子）で表示します。「持ち帰りを時間外に含める」の囲みは、調べた範囲（都道府県教委・政令市と、計画で明記していた久留米市）で見つかったものだけを示しています。市区町村737の方法と「含めるか」は調べていません。</p>
+
+<div class="sets">
+<div class="set"><h3><span class="sw" style="background:var(--e1)"></span>「把握している」と答えた<span class="n">776</span></h3><p>都道府県教委31・政令市8・市区町村737。設問は「把握している／していない」の二択で、方法も基準も問わない。<a href="mochikaeri-02-47.html#list">02 都道府県別一覧</a></p></div>
+<div class="set"><h3><span class="sw" style="background:var(--e2)"></span>方法を調べた<span class="n">39</span></h3><p>「把握している」都道府県教委31と政令市8。方法を確認できなかったのは16（東京都・岩手県・名古屋市など）。<a href="mochikaeri-02-47.html#shurui">02 種類別の数</a></p></div>
+<div class="set"><h3><span class="sw" style="background:var(--e3)"></span>方法がわかったが、数字は公表していない<span class="n">7</span></h3><p>鳥取県・香川県（毎日の記録）、山口県・徳島県・鹿児島県（聞き取り）、茨城県・大阪府（テレワーク等を含める）。</p></div>
+<div class="set"><h3><span class="sw" style="background:var(--e4)"></span>数字を公表している調査がある<span class="n">16</span></h3><p>北海道・福島・栃木・埼玉・神奈川・石川・山梨・長野・京都・奈良・島根・大分・新潟市・大阪市・北九州市・熊本市。<a href="mochikaeri-04-kekka.html#pref">04 調査結果</a></p></div>
+<div class="set fu"><h3><span class="sw" style="background:var(--fu);border:2px dashed var(--neoline)"></span>持ち帰りを時間外に含める<span class="n">大阪市</span></h3><p>都道府県教委・政令市では大阪市だけ（記録簿に入力した分）。市では久留米市が計画（R8）で明記。国の指針では含めない。<a href="mochikaeri-04-kekka.html#sannyu">04 持ち帰りを時間外に含めるか</a></p></div>
+<div class="set"><h3><span class="sw" style="background:var(--soft)"></span>円の外：調査はあるが「把握していない」<span class="n">2</span></h3><p>広島市（休憩 平日平均10分）・川崎市（休憩「ほとんど取れていない」88.3%）。同じ事実でも答え方が逆になる例。<a href="mochikaeri-03-zenkoku.html#kawasaki">03 川崎市</a></p></div>
+</div>
+
+<h2 id="pages"><span class="hn">3</span>ページ一覧</h2>
+<div class="pages">
+<a class="pg" href="mochikaeri-01-yamaguchi.html"><span class="pnum">01</span><span class="pt">山口県19市町 出退勤管理白書</span><span class="pd">第1部 出退勤管理システム（打刻方法・調査票）、第2部 持ち帰り・休憩の把握（県教委と3市町）</span><span class="pf">mochikaeri-01-yamaguchi.html</span></a>
+<a class="pg" href="mochikaeri-02-47.html"><span class="pnum">02</span><span class="pt">持ち帰り把握 47都道府県一覧（把握の方法）</span><span class="pd">「把握している」776教委の名前、都道府県教委・政令市の把握のしかた（A〜G）と「時間外に含めるか」、考察と国への提案</span><span class="pf">mochikaeri-02-47.html</span></a>
+<a class="pg" href="mochikaeri-03-zenkoku.html"><span class="pnum">03</span><span class="pt">持ち帰り把握 全国の実例</span><span class="pd">43.0%の意味、休憩は取れているか、6つの事例（島根・大阪市・長野・広島市・久留米市・川崎市）</span><span class="pf">mochikaeri-03-zenkoku.html</span></a>
+<a class="pg" href="mochikaeri-04-kekka.html"><span class="pnum">04</span><span class="pt">持ち帰り・休憩 調査結果</span><span class="pd">数字がある18自治体の結果、時間外在校等時間と合わせた時間、時間外に含めるか、前回との比較</span><span class="pf">mochikaeri-04-kekka.html</span></a>
+</div>
+
+<h2 id="matrix"><span class="hn">4</span>4つの観点と、載っているページ</h2>
+<div class="tbl"><table>
+<thead><tr><th>観点</th><th class="c">01 山口県</th><th class="c">02 47都道府県</th><th class="c">03 全国の実例</th><th class="c">04 調査結果</th></tr></thead>
+<tbody>
+<tr><td>「把握している」と答えた自治体</td><td class="c mk">○ 県内</td><td class="c mk">◎ 全国776</td><td class="c mk2">△ 説明</td><td class="c mk2">△ 要点</td></tr>
+<tr><td>把握・調査の方法</td><td class="c mk">○ 県教委と3市町</td><td class="c mk">◎ 39教委 A〜G</td><td class="c mk">○ 事例6</td><td class="c mk2">△ 記号</td></tr>
+<tr><td>調査結果（持ち帰り・休憩の数字）</td><td class="c mk2">—</td><td class="c mk2">△ 数値の欄</td><td class="c mk">○ 事例・休憩</td><td class="c mk">◎ 18自治体</td></tr>
+<tr><td>持ち帰りを時間外に含めるか</td><td class="c mk2">—</td><td class="c mk">○ 「時間外に：」の札</td><td class="c mk">○ 大阪市・久留米市</td><td class="c mk">◎ 根拠と引用</td></tr>
+</tbody></table></div>
+<p class="small">◎＝中心となるページ、○＝くわしく載っている、△＝ふれている。</p>
+<footer class="site-foot" aria-label="持ち帰り・休憩の調べ（シリーズ）"><p>持ち帰り・休憩の調べ</p><div class="sf"><b aria-current="page">00 入口</b><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><a href="mochikaeri-03-zenkoku.html">03 全国の実例</a><a href="mochikaeri-04-kekka.html">04 調査結果</a></div></footer>
+</div>

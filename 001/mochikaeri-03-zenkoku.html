@@ -1,0 +1,585 @@
+<title>03 持ち帰り把握 全国の実例</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --okbg:#e5f3ea; --mid:#9a5a00; --midbg:#fbf0dd; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --tB:#2f7a8f; --tD:#6a4fa0; --link:#1a5fb4;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --mid:#f0b35c; --midbg:#3a2e1a; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --tB:#6cc3d6; --tD:#b9a2ea; --link:#8ab4f8;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+  --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+  --ok:#6fd09a; --okbg:#1c3327; --mid:#f0b35c; --midbg:#3a2e1a; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+  --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --tB:#6cc3d6; --tD:#b9a2ea; --link:#8ab4f8;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+h1,h2{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.75rem;line-height:1.35;margin:0 0 6px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+h2{font-size:1.25rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+h3{font-size:1rem;margin:0 0 6px}
+a{color:var(--link)}
+p{max-width:68ch}
+.lead{max-width:72ch;margin:18px 0 0}
+.small{font-size:.85rem;color:var(--sub)}
+.num{font-variant-numeric:tabular-nums}
+
+/* 要点 */
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:8px}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pt b.big{display:block;font-size:1.6rem;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pt.key{border:2px solid var(--neoline);background:var(--neo)}
+.pt.key b.big{color:var(--neoink)}
+.pt p{margin:4px 0 0;font-size:.92rem}
+
+/* 分布 */
+.dist{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px}
+.bar{display:grid;grid-template-columns:11em 1fr 2.5em;gap:10px;align-items:center;margin:6px 0}
+.bar .lab{font-size:.9rem}
+.bar .track{background:var(--soft);border-radius:3px;height:18px;position:relative}
+.bar .fill{height:100%;border-radius:3px;background:var(--accent)}
+.bar .fill.pc{background:#6a7fb5}
+.bar .fill.un{background:var(--unk);opacity:.55}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.bar .who{grid-column:2 / 4;font-size:.8rem;color:var(--sub);margin-top:-4px}
+@media (max-width:560px){ .bar{grid-template-columns:1fr 2.5em} .bar .lab{grid-column:1 / 3} .bar .who{grid-column:1 / 3} }
+
+/* 表 */
+.tbl{overflow:auto;max-height:82vh;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:separate;border-spacing:0;width:100%}
+table.main{min-width:1560px}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left;font-size:.88rem}
+th{background:var(--head);color:var(--headink);font-weight:700;white-space:nowrap;position:sticky;top:0;z-index:2}
+td:first-child,th:first-child{position:sticky;left:0;z-index:1;background:var(--card);font-weight:700;white-space:nowrap;border-right:1px solid var(--line)}
+th:first-child{z-index:3;background:var(--head)}
+tr.grp td{background:var(--soft);font-size:.8rem;color:var(--sub);font-weight:700;letter-spacing:.05em;padding:4px 10px}
+tr.grp td:first-child{background:var(--soft)}
+tr.neo td{background:var(--neo);border-top:3px solid var(--neoline)}
+tr.neo td:first-child{color:var(--neoink);background:var(--neo)}
+.s{display:inline-block;min-width:1.7em;text-align:center;font-weight:700;border-radius:4px;padding:0 5px}
+.s.ok{color:var(--ok);background:var(--okbg)} .s.mid{color:var(--mid);background:var(--midbg)}
+.s.ng{color:var(--ng);background:var(--ngbg)} .s.unk{color:var(--unk);background:var(--unkbg)}
+.c{display:inline-block;font-size:.7rem;font-weight:700;border:1px solid;border-radius:3px;padding:0 4px;margin-left:3px;vertical-align:1px;white-space:nowrap}
+.c.k{color:var(--ok)} .c.y{color:var(--mid)} .c.g{color:var(--neoink)}
+td .n2{display:block;font-size:.8rem;color:var(--sub);margin-top:2px}
+
+/* 凡例 */
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.85rem;color:var(--sub);margin:0 0 10px}
+
+/* 根拠 */
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:8px 0}
+summary{cursor:pointer;padding:10px 14px;font-weight:700}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+details .body{padding:0 16px 12px}
+details ul{margin:4px 0;padding-left:1.2em}
+details li{margin:3px 0;font-size:.92rem}
+.src{font-size:.82rem;word-break:break-all}
+
+.jump{margin:8px 0 0!important;font-weight:700}
+.jump a{color:var(--neoink)}
+.jump a:focus-visible{outline:2px solid var(--neoline);outline-offset:2px}
+h2{scroll-margin-top:16px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.cmp .pt b.big{font-size:1.4rem}
+.quote{margin:8px 0 12px;padding:10px 16px;border-left:4px solid var(--neoline);background:var(--neo);font-size:.95rem;max-width:72ch}
+.fn{font-size:.7rem;font-weight:700;vertical-align:super;margin-left:2px;text-decoration:none;color:var(--neoink)}
+.fn:focus-visible{outline:2px solid var(--neoline);outline-offset:1px}
+.chu{margin:16px 0;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--neoline);border-radius:8px}
+.chu h4{margin:0 0 8px;font-size:1rem}
+.chu dl{margin:0}
+.chu dt{font-weight:700;margin:14px 0 4px;scroll-margin-top:16px;color:var(--neoink)}
+.chu dt:first-child{margin-top:4px}
+.chu dd{margin:0;font-size:.93rem;max-width:74ch}
+.chu dt:target{background:var(--neo)}
+h4.sub{font-size:.95rem;margin:18px 0 6px;color:var(--accent)}
+h3{scroll-margin-top:16px}
+.qa{display:grid;gap:14px;margin-top:6px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.qh{margin:0 0 8px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.15rem;max-width:none}
+.qn{display:inline-block;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8rem;border-radius:4px;padding:1px 8px;margin-right:8px;vertical-align:2px}
+.lead2{margin:0 0 10px;max-width:none}
+.q .pt{background:var(--bg)}
+.q .pt.key{background:var(--neo)}
+.pt a{font-size:.85rem;white-space:nowrap}
+.mokuji{margin:22px 0 0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 20px}
+.mk-h{margin:0 0 6px;font-weight:700;letter-spacing:.12em;font-size:.85rem;color:var(--accent)}
+.mokuji ol{margin:0;padding-left:1.5em}
+.mokuji ol>li{margin:6px 0;font-weight:700}
+.mokuji ul{margin:2px 0 4px;padding-left:1.2em;font-weight:400;font-size:.92rem}
+.mokuji ul li{margin:2px 0}
+.mokuji a{text-decoration:none}
+.mokuji a:hover{text-decoration:underline}
+.mokuji a:focus-visible,.totop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.totop{float:right;font-family:"BIZ UDPGothic",sans-serif;font-size:.78rem;font-weight:400;text-decoration:none;margin-top:.4em}
+h2,h3,section,p[id]{scroll-margin-top:16px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 20px;margin:18px 0;scroll-margin-top:16px}
+.case>h3{margin:0 0 10px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.25rem}
+.csub{display:block;font-family:"BIZ UDPGothic",sans-serif;font-size:.9rem;font-weight:400;color:var(--sub);margin-top:2px}
+.csum{display:grid;grid-template-columns:7em 1fr;gap:6px 14px;margin:0 0 12px;padding:12px 14px;background:var(--bg);border-radius:6px}
+.csum dt{font-weight:700;color:var(--accent);font-size:.88rem}
+.csum dd{margin:0;font-size:.92rem}
+@media (max-width:520px){.csum{grid-template-columns:1fr}.csum dd{margin-bottom:6px}}
+.jlist{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.jlist a{display:inline-block;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none}
+.jlist a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a[target="_blank"]{word-break:break-all}
+/* 番号と先頭行固定 */
+.hn,.hn3{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em;font-variant-numeric:tabular-nums}
+.hn3{background:var(--accent);font-size:.72em}
+.wrap>h2{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-top:10px;margin-top:34px;box-shadow:0 6px 8px -8px rgba(0,0,0,.25)}
+h3,.case,p[id],dt[id],section[id],h4[id]{scroll-margin-top:64px}
+h2{scroll-margin-top:0}
+.mokuji ul.mk{list-style:none;padding-left:0;margin:0}
+.mokuji ul.mk>li{margin:6px 0;font-weight:700}
+.mokuji ul.mk ul{list-style:none;padding-left:2.6em}
+.mokuji .n{display:inline-block;min-width:2.4em;color:var(--accent);font-variant-numeric:tabular-nums}
+.h2btn{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.h2t{flex:0 0 auto}
+.hbtns{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto;font-family:"BIZ UDPGothic",sans-serif;font-size:.8rem;font-weight:400}
+.hbtns a{display:inline-block;padding:3px 11px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;line-height:1.5}
+.hbtns a:hover{border-color:var(--accent)}
+.hbtns a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hbtns a.totop2{border:0;background:none;padding:3px 4px}
+.tc{display:inline-block;min-width:1.5em;text-align:center;font-weight:700;font-size:.76rem;border:1.5px solid;border-radius:4px;margin:0 3px 0 0;padding:0 3px;vertical-align:1px}
+.tA{color:var(--ok)} .tB{color:var(--tB)} .tC{color:var(--accent)} .tD{color:var(--tD)} .tE{color:var(--mid)} .tF{color:var(--neoink)} .tG{color:var(--unk)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.note ul{margin:6px 0;padding-left:1.3em}
+.note li{margin:4px 0}
+@media (max-width:600px){ h1{font-size:1.35rem} body{font-size:14px} }
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:22px 0 0}
+.toc a{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.toc a:hover{border-color:var(--accent)}
+.toc a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toc .no{display:block;font-size:.78rem;font-weight:700;letter-spacing:.12em;color:var(--accent)}
+.toc .tt{display:block;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.1rem}
+.toc .ds{display:block;font-size:.85rem;color:var(--sub)}
+.toc a.p2 .no{color:var(--neoink)}
+.parthead{margin:56px 0 0;padding:18px 20px;border-radius:8px;background:var(--head);color:var(--headink);scroll-margin-top:16px}
+.parthead.p2{background:var(--neoink)}
+.parthead .no{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.14em;opacity:.85}
+.parthead h2{margin:2px 0 4px;padding:0;border:0;font-size:1.5rem;color:inherit}
+.parthead p{margin:0;font-size:.92rem;opacity:.92;max-width:72ch}
+.partend{margin:56px 0 0;padding-top:4px;border-top:3px double var(--line)}
+</style>
+<style>.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}.series .sl{font-weight:700;color:var(--sub);margin-right:4px}.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}.series b{background:var(--head);color:var(--headink);border-color:var(--head)}.series a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}</style>
+<style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
+/* ===== 持ち帰り・休憩の調べ　共通テーマ ===== */
+:root{--r:12px;--sh:0 1px 2px rgba(20,30,55,.05),0 6px 18px rgba(20,30,55,.06);--band:#1b2744;--band2:#2b3c66;--rose:#c2185b;--paper:#f2f4f8;--glow:rgba(47,79,143,.10)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}}
+:root[data-theme="dark"]{--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}
+body{background:radial-gradient(1200px 420px at 50% -120px,var(--glow),transparent 70%),var(--paper) !important}
+.wrap{padding-top:0 !important}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* 上の帯（シリーズの案内） */
+nav.series{margin:0 -16px 26px !important;padding:12px 16px !important;background:linear-gradient(100deg,var(--band),var(--band2));border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);gap:6px 8px !important;font-size:.8rem !important}
+nav.series .sl{color:#fff !important;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:.98rem;letter-spacing:.06em;margin-right:10px !important;padding-right:12px;border-right:1px solid rgba(255,255,255,.25)}
+nav.series a,nav.series b{border:1px solid rgba(255,255,255,.28) !important;background:transparent !important;color:#e8edf8 !important;border-radius:999px !important;padding:3px 12px !important;transition:background .15s,border-color .15s}
+nav.series a:hover{background:rgba(255,255,255,.12) !important;border-color:rgba(255,255,255,.55) !important}
+nav.series b{background:#fff !important;color:var(--band) !important;border-color:#fff !important;box-shadow:inset 0 -3px 0 var(--rose)}
+@media (min-width:1212px){nav.series{margin:0 0 26px !important}}
+
+/* 冒頭 */
+.wrap>header{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px 20px;margin-bottom:6px;overflow:hidden}
+.wrap>header::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--accent),var(--rose))}
+.wrap>header .eyebrow{display:inline-block;background:var(--soft);color:var(--accent);border-radius:999px;padding:1px 12px;letter-spacing:.14em}
+.wrap>header h1{letter-spacing:.03em;line-height:1.4}
+.wrap>header .lead{margin-top:12px !important;color:var(--ink)}
+
+/* 見出し */
+.wrap>h2{border-bottom:0 !important;padding-bottom:10px !important;background:linear-gradient(var(--paper),var(--paper)) padding-box !important;box-shadow:none !important}
+.wrap>h2::after{content:"";display:block;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--head) 0,var(--head) 72px,var(--line) 72px)}
+.hn{border-radius:6px !important;background:linear-gradient(135deg,var(--head),var(--band2)) !important;box-shadow:0 2px 6px rgba(20,30,55,.18)}
+.hn3{border-radius:5px !important}
+h3.kh,.wrap h3{letter-spacing:.02em}
+
+/* カード類 */
+.pt,.kc,.case,.q,.set,.pg,.note,.munote,.mokuji,.tbl,.gchart,.dist,.chart,.tchart,.euler,.band,.toc a,.flow .box,details,.chu,.cmp .pt{border-radius:var(--r) !important;box-shadow:var(--sh);border-color:var(--line) !important}
+.flow .q{box-shadow:none !important;border-radius:0 !important}
+.pt.key{border-color:var(--neoline,var(--rose)) !important;box-shadow:0 1px 2px rgba(194,24,91,.10),0 6px 18px rgba(194,24,91,.10)}
+.pt b.big{letter-spacing:.01em}
+.pg,.toc a,.kc{transition:transform .15s,box-shadow .15s}
+.pg:hover,.toc a:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,30,55,.06),0 10px 24px rgba(20,30,55,.10)}
+.munote{border-left-width:4px !important}
+.mokuji{padding:16px 22px !important}
+.mokuji .mk-h{display:flex;align-items:center;gap:8px}
+.mokuji .mk-h::before{content:"";width:18px;height:2px;background:var(--rose)}
+
+/* 表 */
+.tbl{background:var(--card)}
+th{letter-spacing:.03em}
+tbody tr:hover td{background-image:linear-gradient(var(--glow),var(--glow))}
+tr.grp td{letter-spacing:.08em}
+
+/* ページの終わりの案内 */
+.site-foot{margin:56px 0 0;padding:18px 20px;border-radius:var(--r);background:linear-gradient(100deg,var(--band),var(--band2));color:#e8edf8;box-shadow:var(--sh)}
+.site-foot p{margin:0 0 8px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1rem;letter-spacing:.06em;color:#fff;max-width:none}
+.site-foot .sf{display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.82rem}
+.site-foot a,.site-foot b{display:inline-block;padding:3px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#e8edf8;text-decoration:none}
+.site-foot a:hover{background:rgba(255,255,255,.12)}
+.site-foot b{background:#fff;color:var(--band);border-color:#fff}
+.site-foot a:focus-visible,nav.series a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.pg,.toc a,.kc,nav.series a{transition:none}.pg:hover,.toc a:hover{transform:none}}
+</style>
+
+
+
+
+
+<div class="wrap">
+<nav class="series" aria-label="持ち帰り・休憩の調べ（シリーズ）"><span class="sl">持ち帰り・休憩の調べ</span><a href="mochikaeri-00-top.html">00 入口</a><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><b aria-current="page">03 全国の実例</b><a href="mochikaeri-04-kekka.html">04 調査結果</a></nav>
+
+<header>
+  <p class="eyebrow">全国の実例</p>
+  <h1 class="h1i"><span class="ticon"><svg viewBox="0 0 48 48" width="50" height="50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 6h18l8 8v26H10z" fill="currentColor" fill-opacity=".12"/><path d="M28 6v8h8"/><circle cx="30" cy="31" r="7" fill="#fff"/><path d="M35 36l6 6"/><path d="M15 18h9M15 24h6"/></svg></span><span>教員の「持ち帰り業務」は、全国でどう把握されているか</span></h1>
+  <p class="date">2026年9月25日調べ　文部科学省の調査・指針、各県市の公表資料と議会会議録による</p>
+  <p class="lead">山口県19市町の調べ（<a href="mochikaeri-01-yamaguchi.html">山口県19市町 教職員出退勤管理システム調査</a>）の姉妹編です。山口県内では「持ち帰りを把握している」市町が19のうち3つでしたが、全国平均は43.0%でした。その「把握している」の中身を、全国の公開資料から調べました。</p>
+</header>
+
+<nav class="mokuji" id="toc" aria-label="目次">
+<p class="mk-h">目次</p>
+<ul class="mk">
+<li><a href="#youten"><span class="n">1</span>要点</a></li>
+<li><a href="#zenkoku"><span class="n">2</span>「把握している」43.0%の意味</a>
+  <ul><li><a href="#hoho"><span class="n">2-1</span>公開資料で見つかった把握のしかた</a></li></ul></li>
+<li><a href="#hikaku"><span class="n">3</span>6つの事例の比較</a></li>
+<li><a href="#kyukei-zenkoku"><span class="n">4</span>休憩は取れているか（全国）</a></li>
+<li><a href="#matome"><span class="n">5</span>ここから言えること</a></li>
+<li><a href="#jirei"><span class="n">6</span>事例</a>
+  <ul>
+  <li><a href="#shimane"><span class="n">6-1</span>島根県：一部の学校で、毎年1週間の実態調査</a></li>
+  <li><a href="#osaka"><span class="n">6-2</span>大阪市：記録するしくみはあるのに、ほとんど使われていない</a></li>
+  <li><a href="#nagano"><span class="n">6-3</span>長野県：自己申告を集計して公表、県教委が記録漏れを認める</a>（<a href="#chu">注釈</a>）</li>
+  <li><a href="#hiroshima"><span class="n">6-4</span>広島市：市教委として初めて、休憩と持ち帰りを測る調査をした</a></li>
+  <li><a href="#kurume"><span class="n">6-5</span>久留米市：計画で「持ち帰りも時間外在校等時間に含める」と定めた</a></li>
+  <li><a href="#kawasaki"><span class="n">6-6</span>川崎市：休憩は約9割が取れていないと調べて知りながら、一律45分を差し引く</a></li>
+  </ul></li>
+<li><a href="#shutten-h"><span class="n">7</span>出典</a></li>
+</ul>
+</nav>
+
+<h2 id="youten"><span class="hn">1</span>要点<a class="totop" href="#toc">目次へ ↑</a></h2>
+<div class="qa">
+  <div class="q">
+    <p class="qh"><span class="qn">問1</span>全国で、持ち帰り業務と休憩の取得は把握されているのか</p>
+    <div class="ans">
+      <p class="lead2"><strong>「把握している」と答える教育委員会は多いが、その中身は問われていない。先生が実際に休憩を取れたかは、国の調査でも聞いていない。</strong></p>
+      <div class="points">
+        <div class="pt"><b class="big num">43.0%</b><p><strong>持ち帰り</strong>の有無を「把握している」教育委員会（令和7年度 文科省調査）。二択で、方法も基準も問わない。<a href="#zenkoku">くわしく</a></p></div>
+        <div class="pt"><b class="big num">66.5%</b><p>学校の<strong>休憩の「決まり」</strong>を把握している教育委員会（同じ調査）。先生が実際に休憩を取れたかは聞いていない。<a href="#kyukei-zenkoku">くわしく</a></p></div>
+        <div class="pt key"><b class="big num">5分</b><p>小学校教諭が、決められた休憩時間（45分）の中で実際に取れた休憩（平日平均、10・11月。国の教員勤務実態調査 令和4年度）。<a href="#kyukei-zenkoku">くわしく</a></p></div>
+      </div>
+    </div>
+  </div>
+  <div class="q">
+    <p class="qh"><span class="qn">問2</span>持ち帰りを、継続的・日常的に把握しているのはどこか</p>
+    <div class="ans">
+      <p class="lead2"><strong>公開資料で確認できたのは3例だけ。どれも先生の自己申告に頼っており、記録されない分が多いことを当局や監査が認めている。</strong></p>
+      <div class="tbl" tabindex="0" aria-label="日常的に持ち帰りを記録している例">
+      <table style="min-width:640px">
+      <thead><tr><th>どこ</th><th>どうやって</th><th>記録の実際</th></tr></thead>
+      <tbody>
+      <tr><td>鳥取県<br>（県立学校）</td><td>持ち帰ったら給与・勤怠管理システムに本人が入力</td><td>数値の公表なし。議会で「自己申告で正確な管理になるか」と質問</td></tr>
+      <tr><td>大阪市</td><td>やむを得ず持ち帰ったら「時間外勤務記録簿」で申請し、校園長が許可</td><td><strong>入力した教職員は多くとも3.5%未満</strong>（令和4年度、包括外部監査）<a class="fn" href="#osaka">詳細</a></td></tr>
+      <tr><td>長野県<br>（市町村立小中）</td><td>本人の申告を学校が集計し、県が月別平均を公表</td><td>組合調査と約6倍の差。県教委が「漏れてしまっている可能性」を認める<a class="fn" href="#nagano">詳細</a></td></tr>
+      </tbody></table></div>
+      <p class="small" style="margin-top:8px">久留米市は令和8年の計画で「持ち帰って業務をした場合は時間外在校等時間に含める」と定めたが、記録の方法と実績は公開資料で確認できない（<a href="#kurume">久留米市</a>）。<br>システムの側から毎日「持ち帰りをしたか」「休憩は取れたか」をたずねて記録するしくみは、全国の公開資料では見つからなかった。</p>
+    </div>
+  </div>
+</div>
+
+<h2 id="zenkoku"><span class="hn">2</span>「把握している」43.0%の意味<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p class="jump" style="margin:0 0 10px!important"><a href="mochikaeri-02-47.html" target="_blank" rel="noopener">47都道府県別の一覧（「把握している」776教委の名前と、都道府県教委・政令市の把握のしかた）→</a></p>
+<p>令和7年度の「見える化」調査で、全国の教育委員会の43.0%が「把握している」と答えました。ただしこの設問は令和7年度に新しく加わったもので、<strong>「把握している」「把握していない」の二択</strong>です。どの方法で把握しているかも、何をもって「把握」とするかの基準も聞いていません。<strong>各教育委員会が自分の判断で答えた数字</strong>です。</p>
+<div class="cmp">
+  <div class="pt"><b class="big num">66.0%</b><p>都道府県（47のうち31）。主に県立学校についての回答で、山口県教委もここに入る</p></div>
+  <div class="pt"><b class="big num">40.0%</b><p>政令市（20のうち8）</p></div>
+  <div class="pt"><b class="big num">42.4%</b><p>市区町村（1,737のうち737）。山口県内の市町は16%（19のうち3）</p></div>
+</div>
+<p>文科省の指針は、持ち帰りは原則行わず「その実態把握に努める」と定めています。しかし指針にもQ&amp;Aにも、<strong>把握の具体的な方法は書かれていません</strong>。そのため「把握している」には、毎日の記録から、管理職への一度きりの聞き取りまでが同じように含まれ得ます。43.0%の方法別の内訳は、公開資料にはありません。</p>
+
+<h3 id="hoho"><span class="hn3">2-1</span>公開資料で見つかった把握のしかた</h3>
+<p>全国の都道府県教委・政令市を調べると、把握のしかたは次のA〜Gに分けられます（<a href="mochikaeri-02-47.html#list" target="_blank" rel="noopener">47都道府県一覧 3</a>と同じ分け方）。</p>
+<div class="tbl" tabindex="0" aria-label="持ち帰りの把握のしかた">
+<table style="min-width:760px">
+<thead><tr><th>種類</th><th>例</th><th>どうやっているか</th></tr></thead>
+<tbody>
+<tr><td><span class="tc tA">A</span> 日常の記録</td><td>鳥取県（県立学校）・香川県（県立学校）・大阪市</td><td>持ち帰ったら勤怠システムや記録簿・記録票に記録する。鳥取県「持ち帰り業務を行った場合は、給与・勤怠管理システムに入力してください」（方針Q&amp;A 問7）、大阪市「教職員勤務情報システムの『時間外勤務記録簿』にて記録」（第2期推進プラン）</td></tr>
+<tr><td><span class="tc tB">B</span> 定期的な集計</td><td>長野県（市町村立小中）・香川県（県立学校）</td><td>先生の自己申告を学校が毎月まとめる。長野県は県の「学校集計表（A票）」の「持ち帰り仕事」欄へ入れ、県が月別平均を公表</td></tr>
+<tr><td><span class="tc tC">C</span> 期間を決めた実態調査</td><td>福島県・栃木県・埼玉県・山梨県・神奈川県・北海道・京都府・島根県・大分県（ほかに広島市・川崎市）</td><td>決まった1週間（7日間）ほど、先生が業務を記録する。毎年行っているのは福島県・栃木県・大分県だけ</td></tr>
+<tr><td><span class="tc tD">D</span> アンケート</td><td>熊本市・新潟市・石川県・奈良県など</td><td>年1回などのアンケートで聞く。熊本市「直近１週間の平日で１日平均どれくらい持ち帰り仕事をしていますか」</td></tr>
+<tr><td><span class="tc tE">E</span> 聞き取り</td><td>山口県・徳島県・鹿児島県・北九州市</td><td>校長などの面談や学校訪問で聞く。山口県教委は「県教委として何時間という把握はしていない」と答弁</td></tr>
+<tr><td><span class="tc tF">F</span> 制度で含める</td><td>茨城県・大阪府</td><td>県が定めるテレワーク・在宅勤務の時間を在校等時間に含める（持ち帰りそのものを数えるしくみではない）</td></tr>
+<tr><td><span class="tc tG">G</span> 確認できず</td><td>東京都・名古屋市など16教委</td><td>公開資料では方法がわからない</td></tr>
+</tbody></table></div>
+<p class="small">例にあげた教委は、令和7年度の調査でいずれも「把握している」と回答。ただし広島市・川崎市は「把握していない」と回答している。C・Dのような年に一度や数年に一度の調査、Eの聞き取りでも「把握している」と答えられる。</p>
+
+<h2 id="hikaku"><span class="hn">3</span>6つの事例の比較<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>くわしくは、ページの最後の<a href="#jirei">「事例」</a>にまとめました。</p>
+<div class="tbl" tabindex="0" aria-label="6つの事例の比較">
+<table style="min-width:1140px">
+<thead><tr><th></th><th>島根県</th><th>大阪市</th><th>長野県</th><th>広島市</th><th>久留米市</th><th>川崎市</th></tr></thead>
+<tbody>
+<tr><td>種類</td><td><span class="tc tC">C</span> 抽出・1週間の調査</td><td><span class="tc tA">A</span> 日常の記録</td><td><span class="tc tB">B</span> 自己申告を毎月集計</td><td><span class="tc tC">C</span> 抽出・7日間の調査</td><td><span class="tc tG">G</span> 計画で定め（方法は不明）</td><td><span class="tc tC">C</span><span class="tc tD">D</span> 数年おきの調査（悉皆・抽出）</td></tr>
+<tr><td>頻度</td><td>R5・R6</td><td>持ち帰ったつど</td><td>毎月（年2回報告）</td><td>R7に1回</td><td>—</td><td>H29・R5の2回</td></tr>
+<tr><td>持ち帰り</td><td>1日 小23.9分・中20.2分。46.3%が1週間に持ち帰り</td><td>記録は493件。入力した人は<strong>3.5%未満</strong></td><td>月平均 約1時間17分（R6）と公表</td><td>約4割が持ち帰り。1回平均1時間26分</td><td>時間外在校等時間に含めると定める。数値なし</td><td>持ち帰りありが約66%（R5）。H29は小75.2%</td></tr>
+<tr><td>休憩が取れたか</td><td>小学校の37.8%が5日間一度も取れず</td><td>—</td><td>調査に入っていない</td><td>平日平均 小10分・中11分</td><td>確認できず</td><td>「ほとんど取れていない」88.3%（R5）</td></tr>
+<tr><td>主な課題</td><td>抽出・短期間で、日々の実態はわからない</td><td>しくみが知られず使われない</td><td>自己申告の漏れを県教委が認める</td><td>日常のシステムは休憩45分固定・持ち帰りなし</td><td>記録の方法と実績が見えない</td><td>在校等時間は休憩を<strong>一律45分差し引く</strong>。文科省には持ち帰り「把握していない」と回答</td></tr>
+<tr><td>くわしく</td><td><a href="#shimane">6-1 島根県</a></td><td><a href="#osaka">6-2 大阪市</a></td><td><a href="#nagano">6-3 長野県</a></td><td><a href="#hiroshima">6-4 広島市</a></td><td><a href="#kurume">6-5 久留米市</a></td><td><a href="#kawasaki">6-6 川崎市</a></td></tr>
+</tbody></table></div>
+<p class="small">このほか鳥取県（県立学校）も、持ち帰りを給与・勤怠管理システムに入力するよう定めている（方針Q&amp;A 問7）。数値は公表されていない。</p>
+
+<h2 id="kyukei-zenkoku"><span class="hn">4</span>休憩は取れているか（全国）<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p>先生の休憩時間は1日45分です。文科省の「見える化」調査が聞いているのは、学校が休憩を<em>いつ取る決まりにしているか</em>を教育委員会が知っているかどうかで、全国の66.5%が「把握している」と答えました（山口県内の市町は19のうち16）。<strong>先生が実際に休憩を取れたかどうかは、この調査では聞いていません。</strong>実際に取れたかを調べているのは、一部の学校を選んで行う実態調査です。</p>
+<div class="tbl" tabindex="0" aria-label="国の教員勤務実態調査の休憩時間">
+<table style="min-width:600px">
+<thead><tr><th>平日1日の平均（10・11月）</th><th>出勤から退勤までに取った休憩</th><th>決められた休憩時間の中で取った休憩</th></tr></thead>
+<tbody>
+<tr><td>小学校 教諭</td><td class="num">23分</td><td class="num"><strong>5分</strong></td></tr>
+<tr><td>中学校 教諭</td><td class="num">23分</td><td class="num"><strong>7分</strong></td></tr>
+<tr><td>小学校 副校長・教頭</td><td class="num">28分</td><td class="num">12分</td></tr>
+<tr><td>（参考）小学校 教諭・8月</td><td class="num">45分</td><td class="num">38分</td></tr>
+</tbody></table></div>
+<p class="small">文部科学省「教員勤務実態調査（令和4年度）の集計（確定値）」p.44。抽出した学校の教員が、連続7日間の業務を30分単位で記録した調査。「教諭」には主幹教諭・指導教諭を含む。</p>
+
+<div class="points" style="margin-top:14px">
+  <div class="pt key"><b class="big num">37.8%</b><p>島根県の小学校で、調査した5日間<strong>一度も休憩できなかった</strong>教職員（令和6年度）</p></div>
+  <div class="pt"><b class="big num">11.7%</b><p>同じく、5日間とも<strong>全て休憩できた</strong>小学校の教職員</p></div>
+  <div class="pt"><b class="big num">21.2%</b><p>全校種で、5日間とも全て休憩できた教職員（1,000人中212人）</p></div>
+</div>
+<p class="small">島根県「令和６年度教職員の休憩時間及び持ち帰り仕事等の実態調査結果について」（令和7年3月）。抽出38校、任意の1週間について教職員が様式に記入。休憩できなかった理由は「授業準備、片付け」「児童生徒への指導」が半数以上。</p>
+<p>広島市の抽出調査（令和7年1〜2月、7日間）でも、平日に取れた休憩は平均で<strong>小学校10分・中学校11分</strong>、小・中学校では「休憩なし若しくは15分未満」が7割を超えました（<a href="#hiroshima">広島市</a>）。</p>
+<p>川崎市の調査（令和5年度、抽出28校）では、休憩が「ほとんど取れていない」教職員が<strong>88.3%</strong>でした。それでも川崎市の在校等時間は、実際に取れたかに関係なく<strong>全員から一律45分を差し引いて</strong>計算しています（<a href="#kawasaki">川崎市</a>）。</p>
+<p>長野県でも、担当課長が「休憩時間がきちんと取れているかどうかについては、県の調査ではそこの部分は入っていません」と答弁しています（<a href="#chu5">注5</a>）。<strong>休憩が取れたかを日常的に記録している教育委員会は、公開資料では見つかりませんでした。</strong></p>
+
+<h2 id="matome"><span class="hn">5</span>ここから言えること<a class="totop" href="#toc">目次へ ↑</a></h2>
+<ul>
+<li>見つかった実例はどれも、先生が思い出したときに自分から入力するしくみ。<strong>システムの側から毎日たずねるしくみ</strong>は、公開資料では確認できなかった</li>
+<li>その結果、大阪市では入力した教職員が多くとも3.5%未満、長野県では県教委自身が記録漏れの可能性を認めている。<strong>「記録してください」と周知するだけでは記録は集まらない</strong></li>
+<li>「持ち帰りはしなかった」を記録するしくみも確認できなかった。そのため「0時間」が、本当にしなかったのか書き忘れたのかを区別できない</li>
+<li>出勤のたびに「持ち帰りをしたか」を必ずたずねれば、この2つは区別できる。ただし本人が答える以上、少なめに答える問題は残る</li>
+<li>記録の手間を小さくした方式で本当に記録が集まるかは、<strong>記録率</strong>で確かめられる。たとえば「出勤日のうち、持ち帰りの有無（なし を含む）に答えた日の割合」「答えなかった日の割合」。大阪市の「3.5%未満」と比べられる数字になる</li>
+</ul>
+<h2 id="jirei" class="h2btn"><span class="h2t"><span class="hn">6</span>事例</span><span class="hbtns" role="navigation" aria-label="事例へ移動"><a href="#shimane">島根県</a><a href="#osaka">大阪市</a><a href="#nagano">長野県</a><a href="#hiroshima">広島市</a><a href="#kurume">久留米市</a><a href="#kawasaki">川崎市</a><a class="totop2" href="#toc">目次へ ↑</a></span></h2>
+<p>各事例の最初に、「どこが・何を・どうやって・頻度・わかったこと・課題」をまとめています。</p>
+<article class="case" id="shimane">
+<h3><span class="hn3">6-1</span>島根県<a class="totop" href="#jirei">事例の一覧へ ↑</a><span class="csub">一部の学校で、毎年1週間の実態調査</span></h3>
+<dl class="csum"><dt>どこが</dt><dd>島根県教育委員会（学校企画課）</dd><dt>何を</dt><dd>休憩の取得状況（勤務日5日間）と持ち帰り仕事（週休日を含む1週間）</dd><dt>どうやって</dt><dd><span class="tc tC">C</span> 抽出38校（市町村立小20・中10、県立高6・特支2）の教職員が、任意の1週間について所定の様式に記入。回答1,016人</dd><dt>頻度</dt><dd>令和5年度・6年度に同じ学校で実施（期間を決めた調査）</dd><dt>わかったこと</dt><dd>持ち帰りは1日平均 小23.9分・中20.2分（月換算 小12.1時間・中10.3時間）。1週間に持ち帰りをした人は46.3%。<br>小学校の37.8%が5日間一度も休憩できず、全て休憩できたのは11.7%。理由は「授業準備、片付け」「児童生徒への指導」</dd><dt>課題</dt><dd>抽出・1週間の調査なので、日々の実態や個人ごとの推移はわからない</dd></dl>
+<p class="small">出典：島根県「令和６年度教職員の休憩時間及び持ち帰り仕事等の実態調査結果について」（令和7年3月）<a href="https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_data/kyousyokuin_hatarakikata_data.data/r6_motikaeri_tyousakekka.pdf" target="_blank" rel="noopener">https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_data/kyousyokuin_hatarakikata_data.data/r6_motikaeri_tyousakekka.pdf</a></p>
+</article>
+<article class="case" id="osaka">
+<h3><span class="hn3">6-2</span>大阪市<a class="totop" href="#jirei">事例の一覧へ ↑</a><span class="csub">記録するしくみはあるのに、ほとんど使われていない</span></h3>
+<dl class="csum"><dt>どこが</dt><dd>大阪市教育委員会</dd><dt>何を</dt><dd>持ち帰り仕事の時間</dd><dt>どうやって</dt><dd><span class="tc tA">A</span> 教職員勤務情報システムの「時間外勤務記録簿」で本人が申請し、校園長が許可</dd><dt>頻度</dt><dd>日常（持ち帰ったそのつど）</dd><dt>わかったこと</dt><dd>令和4年度に記録されたのは493件・延べ2,685時間47分。入力した教職員は<strong>多くとも3.5%未満</strong>。監査人アンケートでは63.6%が「持ち帰ることがある」</dd><dt>課題</dt><dd>記録簿を知らない教職員・管理職がいる。持ち帰りは「原則認めていない」ので申請しにくい可能性。市教委の対策は「周知」にとどまる</dd></dl>
+
+<p>大阪市は、持ち帰り仕事を記録する場所をシステムの中にはっきり用意しています。ところが、令和5年度の包括外部監査で、<strong>実際に記録した教職員はごく一部だった</strong>ことが数字で示されました。</p>
+
+<h4 class="sub">しくみ：時間外勤務記録簿</h4>
+<ul>
+<li><strong>第1期プラン（令和元年12月）</strong>：「時間外勤務時間」を、出勤打刻前・退勤打刻後の時間、出張命令時間、「時間外勤務記録簿（職場外）で処理した時間」の合計と定めた。ただし実績の注記には「いわゆる持ち帰り仕事にかかる時間は含まれない」とある</li>
+<li><strong>第2期プラン（令和5年5月）</strong>：「いわゆる持ち帰り仕事など職場外で業務を行う場合は、必ず教職員勤務情報システムの『時間外勤務記録簿』にて記録すること」とした</li>
+<li><strong>市教委の説明（R7.2.3 大阪市教職員組合との交渉）</strong>：持ち帰りは個人情報の問題もあり「原則認めてない」。やむを得ない場合は「時間外勤務記録簿に申請していただいて、校園長の判断のもと、許可をする」。入力された持ち帰り仕事は時間外の時間として数えられる</li>
+<li>教職員勤務情報システムは令和7年5月26日に新システムへ移行した（R8.2.9 交渉）。記録簿の<strong>入力画面や入力項目は、公開資料では確認できなかった</strong></li>
+</ul>
+
+<h4 class="sub">監査でわかったこと（令和4年度の実績）</h4>
+<div class="cmp">
+  <div class="pt"><b class="big num">493件</b><p>教育委員会が把握した持ち帰り仕事（1年間）。延べ2,685時間47分</p></div>
+  <div class="pt key"><b class="big num">3.5%未満</b><p>記録簿に入力申請した教職員の割合（多くとも）。教職員数1万4,262人から監査人が計算</p></div>
+  <div class="pt key"><b class="big num">63.6%</b><p>監査人アンケートで「家に持ち帰って仕事をすることがある」と答えた人（66人中42人）</p></div>
+</div>
+<div class="tbl" tabindex="0" aria-label="大阪市の持ち帰り記録の内訳">
+<table style="min-width:560px">
+<thead><tr><th>職位</th><th>記録簿で把握された件数・時間（R4）</th><th>監査人アンケートの回答（参考）</th></tr></thead>
+<tbody>
+<tr><td>校長</td><td class="num">24件（約95時間）</td><td></td></tr>
+<tr><td>教頭・副校長</td><td class="num"><strong>1件（約3時間）</strong></td><td>月に50時間以上の持ち帰りがあるとの回答</td></tr>
+<tr><td>その他の教職員</td><td class="num">468件（約2,588時間）</td><td>月に60時間くらいとの回答が複数</td></tr>
+</tbody></table></div>
+<p>監査人は、教育委員会が把握している時間は「監査人アンケートの結果と大きく乖離している」とし、次のように意見を述べました（意見13）。</p>
+<blockquote class="quote">教育委員会事務局は、学校園に対して「…必ず教職員勤務情報システムの『時間外勤務記録簿』にて記録する」よう周知するだけでなく、実際に記録が行われているかまで確認し、仮に記録されていないケースがあるのであれば、教育委員会事務局において積極的に働きかけ、正しく勤務時間を把握する必要がある。</blockquote>
+<p class="small">監査人アンケートは66件の回答で、監査人自身も「あくまで参考」としています。</p>
+
+<h4 class="sub">その後も続く「知らない」「入力されない」</h4>
+<div class="tbl" tabindex="0" aria-label="大阪市の交渉記録">
+<table style="min-width:720px">
+<thead><tr><th>日付・相手</th><th>組合側の発言</th><th>市教委の答え</th></tr></thead>
+<tbody>
+<tr><td>R7.2.3<br>大阪市教職員組合</td><td>「時間外勤務記録簿に入力をするということは、私は聞いたことないです」</td><td>周知が足りないと認識せざるを得ない。機会あるたびに周知していく</td></tr>
+<tr><td>R7.2.18<br>大阪教育合同労働組合</td><td>「現場で設定されていないからみんな知らない」</td><td>課題はある。教員の意識や管理職の指導も必要</td></tr>
+<tr><td>R8.2.26<br>大阪教育合同労働組合</td><td>記録簿に1回入れたら、教頭から「なんですか、これ」と聞き返された。委員会に上がっている数字は「実態とは程遠い」</td><td>「マニュアルにも入力方法を記載」している。「正確な勤務実態を掴まないと、対策も立てていけない」。入力の徹底を「今後も引き続き、周知していきたい」</td></tr>
+</tbody></table></div>
+<p>監査のあとも、市教委の対策は「周知」にとどまり、記録されない状態が続いていることがうかがえます（市教委自身も「ずっと言われていて恐縮なんですけど」と述べています）。</p>
+
+<h4 class="sub">毎日の記録のしくみがある3教委と比べると</h4>
+<p>全国の都道府県教委・政令市のうち、持ち帰りを毎日の記録に入れるしくみがあるのは、大阪市・鳥取県・香川県（県立学校）の3つだけです（<a href="mochikaeri-02-47.html#k5" target="_blank" rel="noopener">47都道府県一覧 5-5</a>）。その3つでも、持ち帰りがどれだけ記録されているかを示す数字はほとんどありません。</p>
+<div class="tbl" tabindex="0" aria-label="毎日の記録のしくみがある3教委の記録状況"><table style="min-width:640px">
+<thead><tr><th>教委</th><th>しくみ</th><th>公開されている数字</th></tr></thead>
+<tbody>
+<tr><td style="white-space:nowrap"><strong>大阪市</strong></td><td>持ち帰ったら「時間外勤務記録簿」で申請（校園長が許可）</td><td><strong>入力した教職員は多くとも3.5%未満</strong>（令和4年度、493件。包括外部監査の試算）。監査人のアンケートでは63.6%が「持ち帰ることがある」</td></tr>
+<tr><td style="white-space:nowrap"><strong>香川県（県立）</strong></td><td>毎月「時間外勤務記録票」を提出し、持ち帰りも含めて記録</td><td>記録票の<strong>提出率は100%</strong>（令和2年12月 教育長答弁）。ただし、持ち帰りを書いた人の割合や時間は公表されていない</td></tr>
+<tr><td style="white-space:nowrap"><strong>鳥取県（県立）</strong></td><td>持ち帰ったら給与・勤怠管理システムに入力</td><td><strong>公表なし</strong>。入力の状況は公開資料で確認できない</td></tr>
+</tbody></table></div>
+<p class="small">香川県の100%は記録票そのものを出した割合で、持ち帰りをきちんと書いた割合ではありません。大阪市の3.5%とは別の種類の数字です。3.5%は、記録された493件がすべて別々の人だったとしても教職員14,262人の3.5%に届かない、という上限の数字です。出典：香川県議会 R2.11月定例会 文教厚生委員会・R7.6定例会 会議録 <a href="https://www.pref.kagawa.dbsr.jp/" target="_blank" rel="noopener">https://www.pref.kagawa.dbsr.jp/</a> ／ 鳥取県 上限方針Q&amp;A <a href="https://www.pref.tottori.lg.jp/secure/1204025/jogenhousinQA.pdf" target="_blank" rel="noopener">https://www.pref.tottori.lg.jp/secure/1204025/jogenhousinQA.pdf</a></p>
+
+<h4 class="sub">大阪市の事例から見えること</h4>
+<ul>
+<li>大阪市の問題は「記録するしくみがない」ことではなく、<strong>しくみはあるのに使われない</strong>こと</li>
+<li>記録するには、持ち帰ったあとで勤務情報システムを開き、記録簿で申請し、校園長の許可を受ける必要がある。持ち帰りは「原則認めていない」ことになっているので、申請は「原則に反して持ち帰った」と申し出る形になる。<strong>申請しにくさにつながっている可能性</strong>がある（推測）</li>
+<li>管理職も記録簿を知らない学校がある（教頭・副校長の記録はR4で1件だけ）</li>
+<li>このことから、<strong>記録されるかどうかは、制度があるかどうかよりも、先生が記録するためにかかる手間や心理的な負担に左右されるのではないか</strong>という仮説が立てられる。ただし大阪市の公開資料だけでは、入力されない理由を手間・周知不足・心理的な負担に分けることはできない</li>
+</ul>
+
+</article>
+<article class="case" id="nagano">
+<h3><span class="hn3">6-3</span>長野県<a class="totop" href="#jirei">事例の一覧へ ↑</a><span class="csub">自己申告を集計して公表、県教委が記録漏れを認める</span></h3>
+<dl class="csum"><dt>どこが</dt><dd>長野県教育委員会（義務教育課）。市町村立小中学校</dd><dt>何を</dt><dd>時間外勤務・休日勤務・持ち帰り仕事の時間</dd><dt>どうやって</dt><dd><span class="tc tB">B</span> 在校時間は校務支援システムやタイムカード。持ち帰りは本人の自己申告を学校が集計し、県の「学校集計表（A票）」へ</dd><dt>頻度</dt><dd>毎月の値を、年2回県へ報告。平成26年度以前から継続</dd><dt>わかったこと</dt><dd>持ち帰りの1人あたり月平均は平成26年度 6時間57分 → 令和6年度 約1時間17分と公表</dd><dt>課題</dt><dd>県教組の調査と約6倍の差（R5.2 県議会）。課長が「きちんと報告してもらえないと漏れてしまっている可能性」と答弁。休憩が取れたかは調査に入っていない</dd></dl>
+<h4 class="sub">公表された数値と、組合調査との差</h4>
+<div class="tbl" tabindex="0" aria-label="長野県の持ち帰り時間の推移">
+<table style="min-width:520px">
+<thead><tr><th>年度</th><th>1人あたり月平均の持ち帰り時間</th></tr></thead>
+<tbody>
+<tr><td>H26当初</td><td class="num">6時間57分</td></tr>
+<tr><td>H29</td><td class="num">4時間39分</td></tr>
+<tr><td>R4</td><td class="num">約1時間45分</td></tr>
+<tr><td>R6</td><td class="num">約1時間17分</td></tr>
+</tbody></table></div>
+<p class="small">H26・H29は県議会委員会での課長答弁。R4・R6は県の公表値（月別）から平均を計算。</p>
+<p>令和5年2月24日の県議会本会議で、中川博司議員が県教委の調査と長野県教職員組合（県教組）のアンケートを比べ、次の数字を挙げました。</p>
+<div class="cmp">
+  <div class="pt"><b class="big num">1時間34分</b><p>県教委の調査による持ち帰り時間。県の公表資料では、令和4年度の<strong>中学校・1人あたり月平均</strong>（5月・6月）と一致する<a class="fn" href="#chu3">注3</a></p></div>
+  <div class="pt key"><b class="big num">9時間32分</b><p>県教組の組合員アンケート。差は7時間58分で、<strong>約6倍</strong></p></div>
+</div>
+<p>同じ質問で議員は、先生たちの声として次のことも挙げています。</p>
+<ul>
+<li>休日の部活動や持ち帰り残業をしても、「自己申告となっていて全ての報告がされていない」</li>
+<li>休憩時間は勤務時間から外されているが、「実際は休憩できていない」</li>
+<li>家庭訪問や外での会議のあと直接家に帰った場合は、記録をつけていない</li>
+</ul>
+
+<h4 class="sub" id="more">「漏れてしまっている可能性」とはどういうことか</h4>
+<p>令和5年7月4日の県議会環境文教委員会で、義務教育課長（加藤浩）はこう答えています。</p>
+<blockquote class="quote">県で行っている調査については、出勤時と退勤時に、タイムカード等で客観的に管理しているので、学校にいる時間は正確に把握ができています。ただ、持ち帰り仕事については申告して入力するようになっていますので、きちんと報告してもらえないと漏れてしまっている可能性があります。</blockquote>
+<p>つまり、次のような違いがあるということです。</p>
+<div class="tbl" tabindex="0" aria-label="在校時間と持ち帰りの記録のされ方">
+<table style="min-width:620px">
+<thead><tr><th></th><th>学校にいる時間</th><th>持ち帰り仕事の時間</th></tr></thead>
+<tbody>
+<tr><td>記録のされ方</td><td>出勤・退勤のときにタイムカード等で打刻<a class="fn" href="#chu1">注1</a></td><td>先生が自分から申告して入力<a class="fn" href="#chu2">注2</a></td></tr>
+<tr><td>記録されないのは</td><td>打刻を忘れたときくらい</td><td>先生が申告しなかったとき。<strong>申告しなかった分は0として数えられる</strong></td></tr>
+<tr><td>県の数字の意味</td><td>ほぼ実際の在校時間</td><td>実際の持ち帰り時間ではなく、<strong>報告された分の合計</strong></td></tr>
+</tbody></table></div>
+<p>この答弁は、県教委自身が「持ち帰りの数字は実際より少ないかもしれない」と認めたものです。同じ答弁の中で、休憩についても大事なことを述べています。くわしくは下の注釈にまとめました。</p>
+
+<section class="chu" id="chu" aria-labelledby="chu-h">
+<h4 id="chu-h">注釈　長野県の数字を読むときに知っておきたいこと</h4>
+<dl>
+<dt id="chu1">注1　学校にいる時間は、打刻で機械的に記録される</dt>
+<dd>長野県は令和4年度から全ての公立小中学校で、校務支援システムやタイムカードで出勤・退勤の時刻を記録しています（R5.2.24 教育長答弁「全ての公立小中学校において、校務支援システムやタイムカードなどの活用によりできる限り客観的に勤務時間を管理」）。先生が何かを思い出して書く必要はなく、打刻さえすれば記録が残ります。課長が「学校にいる時間は正確に把握ができています」と言えるのはこのためです。</dd>
+
+<dt id="chu2">注2　持ち帰りは、先生が自分から報告したときだけ記録される</dt>
+<dd>持ち帰り仕事は打刻では記録できないので、先生本人が「何時間やった」と申告して入力します（R5.7.4 課長「申告して入力するようになっています」）。公開資料を見るかぎり、システムの側から「昨日は持ち帰りをしましたか」とたずねるしくみはありません。そのため、先生が申告しなかった日は何も記録されず、<strong>持ち帰りをしなかった日と同じ「0」として数えられます</strong>。議員が紹介した先生たちの声（「自己申告となっていて全ての報告がされていない」）は、この点を指しています。</dd>
+
+<dt id="chu3">注3　「1時間34分」は、実際の持ち帰り時間ではなく「報告された分」の平均</dt>
+<dd>県の数字は、学校から報告された時間をもとに出した<strong>1人あたりの月平均</strong>です（集計表の注記「平均時間はすべて一人当たり」）。申告しなかった先生も「0時間」として人数に含まれるので、報告されない分が多いほど平均は小さくなります。したがって「1時間34分」は、<strong>「令和4年度の中学校で、1人あたり月に1時間34分の持ち帰りが<em>報告された</em>」</strong>という意味で、「中学校の先生の持ち帰りは月1時間34分だった」とは読めません。公表値が平成26年度の6時間57分から年々減っているのも、持ち帰りそのものが減ったのか、報告されなくなったのかを区別できません。</dd>
+
+<dt id="chu4">注4　県教委自身が「少ない可能性」を認めている</dt>
+<dd>課長の「きちんと報告してもらえないと漏れてしまっている可能性があります」は、県教委の担当課長が議会の場で、自らの調査の数字が実際より少ないかもしれないと認めた発言です。教育長も R5.2.24 に、持ち帰りの自己申告による調査を「全国的にも例が少ない取組」と位置づけたうえで、「正確に勤務状況を報告するよう依頼する」と答えています。つまり対策は「報告してください」というお願いにとどまっています。</dd>
+
+<dt id="chu5">注5　休憩が取れたかどうかは、県の調査に入っていない</dt>
+<dd>同じ R5.7.4 の答弁で課長は、「休憩時間がきちんと取れているかどうかについては、県の調査ではそこの部分は入っていません」「実際にどうなのかは把握ができていない」と述べ、自身の経験として「給食の時間は休憩が取れない」とも語っています。議員も R5.2.24 に「休憩時間は勤務時間から外されているが、実際は休憩できていない」と指摘しました。休憩時間は在校等時間から除かれるので、<strong>取れなかった休憩は、どこにも記録されないまま勤務時間から差し引かれている</strong>ことになります。これは山口県の19市町でも同じで、第2部の<a href="mochikaeri-01-yamaguchi.html#kyukei">「休憩の決まりを把握」とは</a>で見たとおり、教委が知っているのは休憩の「決まり」までです。教育長は R5.2.24 に「取れなかった休憩時間の把握も含め…工夫してまいります」と答えています。</dd>
+
+<dt id="chu6">注6　6倍の差は、すべてが記録漏れというわけではない</dt>
+<dd>R5.10.2 の委員会で課長は、差の理由として、県教組の調査には「取れなかった休憩時間」も入っていること、県の調査は全教職員が対象で県教組は調査に応じた組合員だけが対象であることを挙げ、「どちらが正しくて、どちらが正しくないことはありません」と述べています。県教組のアンケートの設問や集計方法は、今回は確認できていません。したがって6倍の差の中身は分けられませんが、<strong>申告しなければ記録されない</strong>というしくみの弱さは、注4のとおり県教委も認めています。</dd>
+</dl>
+<p class="small">出典：長野県議会会議録 R5.2.24本会議（中川博司議員の質問、内堀繁利教育長の答弁）、R5.7.4・R5.10.2環境文教委員会（加藤浩 参事兼義務教育課長の答弁）／長野県教育委員会「R4 教職員の勤務時間等の調査 集計結果」（R5.9.7）<a href="https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r4kinmujikan.pdf" target="_blank" rel="noopener">https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r4kinmujikan.pdf</a></p>
+</section>
+
+</article>
+<article class="case" id="hiroshima">
+<h3><span class="hn3">6-4</span>広島市<a class="totop" href="#jirei">事例の一覧へ ↑</a><span class="csub">市教委として初めて、休憩と持ち帰りを測る調査をした</span></h3>
+<dl class="csum"><dt>どこが</dt><dd>広島市教育委員会（教職員課 服務・健康管理担当）</dd><dt>何を</dt><dd>休憩の取り方、平日の持ち帰り、睡眠、勤務間インターバル</dd><dt>どうやって</dt><dd><span class="tc tC">C</span> 全231園・校の約2割（46園・校）を無作為に選び、常勤教員がWebアンケートで連続7日間を記録。有効回答1,157人</dd><dt>頻度</dt><dd>令和7年1〜2月に1回。休憩と持ち帰りを測る調査は市教委として初めて（令和4年度の抽出アンケートは在校時間のみ）。継続は確認できず</dd><dt>わかったこと</dt><dd>平日に取れた休憩は平均 小10分・中11分。小・中学校では「休憩なし若しくは15分未満」が7割超。<br>持ち帰りを1回以上した教員は約4割、1回あたり平均1時間26分（国と同じ計算で1日 小27分・中14分）</dd><dt>課題</dt><dd>日常の「在校等時間管理システム」は休憩を一律45分として集計し、持ち帰りは記録しない。議会で「入退勤を調整している」との指摘。結果は委員会で報告、市HPでの公表は確認できず</dd></dl>
+<h4 class="sub">日常のシステムでは記録していない</h4>
+<ul>
+<li>「在校等時間管理システム」（平成30年6月導入）は、教職員が入校・退校時刻を入力するしくみ</li>
+<li>休憩は「法令上の45分として集計」しており、休憩中の勤務は把握していない（R1.6.21 文教委員会）</li>
+<li>持ち帰りは「システム上把握しておりません」（R3.9.24 文教委員会）。在校等時間にも含めない</li>
+<li>令和6年6月の本会議で教育長は、持ち帰りについて「これまでそれに関する調査は行っておりません」と答弁。その後に行ったのが今回の調査</li>
+</ul>
+<h4 class="sub">記録の正確さをめぐる議会の指摘</h4>
+<ul>
+<li>令和元年10月の決算特別委員会：月45時間を超えないよう「システムの入退勤というのを調整している」、土日に勤務しても入力しない、との指摘。市は「虚偽の記録を行うことがあってはならない」と校長に通知したと答弁</li>
+<li>令和6年6月の本会議：土日の長時間勤務を申告すると検査を受けなければならず、申請していない教員がいる、との指摘</li>
+</ul>
+<p>調査では、自分の学校の休憩時間がいつに割り振られているかを、小学校の約6割・中学校の約5割の教員がよく理解していなかったこともわかりました。</p>
+<p class="small">出典：広島市議会 令和7年4月21日こども文教委員会（教育委員会の報告と答弁）、R1.6.21・R3.9.24 文教委員会、R1.10.14 決算特別委員会、R6.6.25 本会議 会議録 <a href="https://hiroshima.gijiroku.com/voices/g07v_search.asp" target="_blank" rel="noopener">https://hiroshima.gijiroku.com/voices/g07v_search.asp</a> ／ 中国新聞 2025年4月22日 <a href="https://www.chugoku-np.co.jp/articles/-/632340" target="_blank" rel="noopener">https://www.chugoku-np.co.jp/articles/-/632340</a> ／ 広島市 第2期働き方改革推進プラン <a href="https://www.city.hiroshima.lg.jp/education/keikaku/1026047/1009117.html" target="_blank" rel="noopener">https://www.city.hiroshima.lg.jp/education/keikaku/1026047/1009117.html</a></p>
+</article>
+<article class="case" id="kurume">
+<h3><span class="hn3">6-5</span>久留米市<a class="totop" href="#jirei">事例の一覧へ ↑</a><span class="csub">計画で「持ち帰りも時間外在校等時間に含める」と定めた</span></h3>
+<dl class="csum"><dt>どこが</dt><dd>久留米市教育委員会</dd><dt>何を</dt><dd>出退勤（校務支援システムで打刻）。持ち帰りは計画で「時間外在校等時間に含める」</dd><dt>どうやって</dt><dd><span class="tc tG">G</span> 令和元年5月からICカード・タイムレコーダー、現在は校務支援システムで出退勤を打刻。持ち帰りをどう申告・入力するかは公開資料で確認できず</dd><dt>頻度</dt><dd>出退勤は日常。持ち帰り・休憩を数量で調べた調査は確認できず</dd><dt>わかったこと</dt><dd>持ち帰り・休憩の数値は公開されていない。令和7年度の時間外在校等時間は月平均 小29.1時間・中38.6時間</dd><dt>課題</dt><dd>定めはあるが、記録の方法と実績が見えない。点検評価の学識経験者も「持ち帰りの業務はそのままになる懸念」を指摘</dd></dl>
+<ul>
+<li>令和8年の業務量管理・健康確保措置実施計画（令和8〜11年度）の備考：「業務の持ち帰りは行わないことを原則としていますが、必要により持ち帰って業務をした場合は『時間外在校等時間』に含めることとします」</li>
+<li>平成30年6月、教育長は当時の自己申告のパソコン入力について「必ずしも正確な勤務実態の把握とはなり得ていない」と答弁し、令和元年5月にICカード等へ切り替えた</li>
+<li>平成31年3月には、子育て等のある教員向けに「校務テレワーク」を試行し、自宅で勤務した時間は校長が報告を受けて勤務時間として把握する、と答弁（その後の実績は確認できず）</li>
+</ul>
+<p class="small">出典：久留米市立学校の教職員に関する業務量管理・健康確保措置実施計画（令和8年）<a href="https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3080kyouikukaikaku/files/gyoumukannrikeikaku.pdf" target="_blank" rel="noopener">https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3080kyouikukaikaku/files/gyoumukannrikeikaku.pdf</a> ／ 久留米市 学校における働き方改革 <a href="https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3080kyouikukaikaku/2022-1019-1104-306.html" target="_blank" rel="noopener">https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3080kyouikukaikaku/2022-1019-1104-306.html</a> ／ 久留米市議会 H30.6.14・H31.3.5・R1.12.6 本会議 会議録 <a href="https://www.kensakusystem.jp/kurume/" target="_blank" rel="noopener">https://www.kensakusystem.jp/kurume/</a> ／ 教育委員会点検評価（令和6年度分）</p>
+</article>
+
+<article class="case" id="kawasaki">
+<h3><span class="hn3">6-6</span>川崎市<a class="totop" href="#jirei">事例の一覧へ ↑</a><span class="csub">休憩は約9割が取れていないと調べて知りながら、一律45分を差し引く</span></h3>
+<dl class="csum"><dt>どこが</dt><dd>川崎市教育委員会（政令市）</dd><dt>何を</dt><dd>持ち帰りの有無・時間・理由、休憩が取れているか</dd><dt>どうやって</dt><dd><span class="tc tC">C</span><span class="tc tD">D</span> 平成29年度は全教職員アンケート（回答4,236人）＋抽出25校の7日間タイムスタディ。令和5年度は抽出28校のWeb意識調査（有効回答882人）</dd><dt>頻度</dt><dd>不定期で2回（H29・R5）。「今後も定期的に調査を実施してまいりたい」と答弁（R7.12.9）</dd><dt>わかったこと</dt><dd>持ち帰りありは約66%（R5。小約70%・中約62%）、1時間以上が34.4%。持ち帰る業務は授業準備が81.3%。<br>休憩が「ほとんど取れていない」88.3%（R5）。H29も「取れていない」計93.3%</dd><dt>課題</dt><dd>日々の在校等時間は、休憩が取れたかに関係なく<strong>一律45分を差し引いて</strong>算出。取れなかった休憩も持ち帰りも記録に出ない。システム改修の予定なし。計画に持ち帰り・休憩の数値目標なし</dd></dl>
+<h4 class="sub">出退勤の記録と休憩の扱い</h4>
+<ul>
+<li>平成31年4月からICカードで出退勤を記録（職員情報システム）。在校等時間は「打刻時刻及び出張の時刻から休憩時間及び自己申告による自己研鑚等時間を差し引いて算出」（第2次方針）</li>
+<li>差し引く休憩は「所定の４５分という取り扱い」（R2.6.12 文教委員会）。取れなかった休憩を申告して足すしくみはない</li>
+<li>「ＩＣカード等による休憩時間の把握について、現時点ではシステム改修の予定はございません」（R4.9.28 決算審査特別委員会）</li>
+<li>持ち帰りを記録する欄もない。令和5年度調査の資料は、調査の目的を「出退勤記録では取得できない持ち帰り業務…も明らかにする」と書いている</li>
+</ul>
+<h4 class="sub">議会での指摘</h4>
+<ul>
+<li>R2〜R4：一律45分の差し引きは、国の指針が禁じる「虚偽の記録」に当たるのではないかと繰り返し質問。教育長は「個々の教員が休憩時間をどういうふうに取っているかと把握するのは非常に難しい」と答弁（R2.6.12）</li>
+<li>R4.9.28：休憩時間を4校時や昼食指導の時間帯に設定していた中学校が11校あったと答弁</li>
+<li>R7.9.25：休憩の状況が6年間改善していないとの指摘に、課長は「調査結果の改善には至っておらず、引き続き検討が必要な課題」</li>
+<li>R8.2.27：休憩が取れていない割合0%、持ち帰り「ない」100%を目標にするよう求める質問。答弁は「引き続き取り組んでまいります」で、目標にはしなかった</li>
+</ul>
+<h4 class="sub">文科省調査への回答</h4>
+<p>令和7年度の「見える化」調査（政令市版 p.11）で、川崎市は持ち帰りを<strong>「把握していない」</strong>と答えています（休憩の決まりは「把握している」）。ところが同じ年度のうちに、議会では「実態を把握してまいりました」と答弁しています。</p>
+<div class="tbl" tabindex="0" aria-label="川崎市の持ち帰り把握をめぐる時系列"><table style="min-width:640px">
+<thead><tr><th>時期</th><th>できごと</th></tr></thead>
+<tbody>
+<tr><td class="num" style="white-space:nowrap">平成29年度</td><td>勤務実態調査。持ち帰りをしている総括教諭・教諭は小75.2%・中69.9%</td></tr>
+<tr><td class="num" style="white-space:nowrap">令和5年度</td><td>勤務実態調査。持ち帰りが「ない」は小29.5%・中38.2%（約6〜7割が持ち帰り）</td></tr>
+<tr><td class="num" style="white-space:nowrap">令和7年5月28日</td><td>文教委員会で持ち帰りのデータの有無を聞かれ、職員部長が「ちょっと今手元にない」「至急確認」と答える</td></tr>
+<tr style="background:var(--neo)"><td class="num" style="white-space:nowrap"><strong>令和7年9月1日</strong></td><td><strong>文科省「見える化」調査の基準日。持ち帰りを「把握していない」と回答</strong></td></tr>
+<tr style="background:var(--neo)"><td class="num" style="white-space:nowrap"><strong>令和7年12月9日</strong></td><td><strong>本会議で教育次長が「業務の持ち帰りにつきましては、これまでも勤務実態調査において実態を把握してまいりました。今後も定期的に調査を実施してまいりたい」と答弁</strong></td></tr>
+<tr><td class="num" style="white-space:nowrap">令和8年2月27日</td><td>本会議で、休憩が取れていない割合0%・持ち帰り「ない」100%を目標にするよう求める質問。答弁は「引き続き取り組んでまいります」</td></tr>
+</tbody></table></div>
+<p>文科省の調査票の問いは「教育委員会が所管する学校において、業務の持ち帰りが行われているかどうかを把握しているか」だけで、何をもって「把握」とするかも、いつの時点のことかも示していません。川崎市が「把握していない」と答えた理由を示す資料は見つかりませんでした。考えられるのは、最後の調査が2年前だった、ふだんの出退勤記録では持ち帰りがわからない、回答の担当者が調査の設問を知らなかった、などですが、いずれも推測です。</p>
+<p><strong>同じ事実があっても、答える人の受け止め方しだいで「把握している／していない」が逆になります。</strong>山口県教委のように何時間かを把握していなくても「把握している」と答える教委がある一方、川崎市のように調べていても「把握していない」と答える教委があります。「把握している」の43.0%が、持ち帰りの実態がつかまれている割合ではないことを示す例です。</p>
+<p>令和8年3月の第3次方針「未来を育む学校サポートプログラム」（給特法8条の計画）には、休憩の取得促進の取組（職員室での休憩時間の明示など）はありますが、「持ち帰り」という言葉は出てきません。</p>
+<p class="small">出典：川崎市「教職員の勤務実態調査」最終報告（H31.2）<a href="https://www.city.kawasaki.jp/880/cmsfiles/contents/0000106/106892/03jittaityousasaisyuuhoukoku.pdf" target="_blank" rel="noopener">https://www.city.kawasaki.jp/880/cmsfiles/contents/0000106/106892/03jittaityousasaisyuuhoukoku.pdf</a> ／ 令和5年度 川崎市立学校教職員勤務実態調査（R6.5.14 教育委員会報告）／ 第3次方針 本編（R8.3）<a href="https://www.city.kawasaki.jp/880/cmsfiles/contents/0000106/106892/02_honpen.pdf" target="_blank" rel="noopener">https://www.city.kawasaki.jp/880/cmsfiles/contents/0000106/106892/02_honpen.pdf</a> ／ 川崎市議会 R2.6.12・R3.8.31・R7.5.28 文教委員会、R4.9.28 決算審査特別委員会、R7.9.25 決算審査特別委員会、R7.12.9・R8.2.27 本会議 会議録 ／ 文部科学省 令和7年度「見える化」調査 政令市版 p.11–12・調査票 <a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000047785_01.pdf" target="_blank" rel="noopener">https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000047785_01.pdf</a></p>
+</article>
+
+<h2 id="shutten-h"><span class="hn">7</span>出典<a class="totop" href="#toc">目次へ ↑</a></h2>
+<p class="small" id="shutten">出典：文部科学省 令和7年度「見える化」調査 結果概要 <a href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf" target="_blank" rel="noopener">https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf</a> ・調査票 <a href="https://www.mext.go.jp/content/20260304-mxt_kyoikujinzai01-000047785_3.pdf" target="_blank" rel="noopener">https://www.mext.go.jp/content/20260304-mxt_kyoikujinzai01-000047785_3.pdf</a> ／ 指針Q&amp;A 問13 <a href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf" target="_blank" rel="noopener">https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf</a> ／ 鳥取県 県立学校教育職員の勤務時間の上限に関する方針Q&amp;A <a href="https://www.pref.tottori.lg.jp/secure/1204025/jogenhousinQA.pdf" target="_blank" rel="noopener">https://www.pref.tottori.lg.jp/secure/1204025/jogenhousinQA.pdf</a> ・鳥取県議会 R2.3.16会議録 ／ 大阪市 第2期 学校園における働き方改革推進プラン（R5.5）<a href="https://www.city.osaka.lg.jp/kyoiku/cmsfiles/contents/0000671/671705/2plan1.pdf" target="_blank" rel="noopener">https://www.city.osaka.lg.jp/kyoiku/cmsfiles/contents/0000671/671705/2plan1.pdf</a> ・アクションプラン【2026-2029】<a href="https://www.city.osaka.lg.jp/hodoshiryo/cmsfiles/contents/0000672/672745/3-2_plan.pdf" target="_blank" rel="noopener">https://www.city.osaka.lg.jp/hodoshiryo/cmsfiles/contents/0000672/672745/3-2_plan.pdf</a> ・第1期推進プラン（R1.12）<a href="https://www.city.osaka.lg.jp/kyoiku/cmsfiles/contents/0000671/671705/1plan.pdf" target="_blank" rel="noopener">https://www.city.osaka.lg.jp/kyoiku/cmsfiles/contents/0000671/671705/1plan.pdf</a> ・令和5年度包括外部監査「子どもの教育と学びの支援に関する事務事業の執行について」報告書（意見13）<a href="https://www.city.osaka.lg.jp/gyouseiiinkai/cmsfiles/contents/0000431/431925/R5houkatu_Part2.pdf" target="_blank" rel="noopener">https://www.city.osaka.lg.jp/gyouseiiinkai/cmsfiles/contents/0000431/431925/R5houkatu_Part2.pdf</a> ・大阪市教職員組合との交渉（R7.2.3、R8.2.9）<a href="https://www.city.osaka.lg.jp/kyoiku/page/0000538631.html" target="_blank" rel="noopener">https://www.city.osaka.lg.jp/kyoiku/page/0000538631.html</a> ・大阪教育合同労働組合との交渉（R7.2.18、R8.2.26）<a href="https://www.city.osaka.lg.jp/kyoiku/page/0000538752.html" target="_blank" rel="noopener">https://www.city.osaka.lg.jp/kyoiku/page/0000538752.html</a> ／ 長野県 教職員の勤務時間等の調査 <a href="https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r6kakuteichi_r704-07.pdf" target="_blank" rel="noopener">https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r6kakuteichi_r704-07.pdf</a> ・R4集計結果（R5.9.7）<a href="https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r4kinmujikan.pdf" target="_blank" rel="noopener">https://www.pref.nagano.lg.jp/kyoiku/gimukyo/documents/r4kinmujikan.pdf</a> ・長野県議会 H29.12.5文教企業委員会／R5.2.24本会議（中川博司議員・内堀教育長）／R5.7.4・R5.10.2環境文教委員会（加藤義務教育課長）会議録 ／ 島根県 令和6年度 休憩時間及び持ち帰り仕事等の実態調査 <a href="https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_data/kyousyokuin_hatarakikata_data.data/r6_motikaeri_tyousakekka.pdf" target="_blank" rel="noopener">https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_data/kyousyokuin_hatarakikata_data.data/r6_motikaeri_tyousakekka.pdf</a> ／ 熊本市 第2期時間創造プログラム R7実績報告 <a href="https://www.city.kumamoto.jp/kiji00347820/3_47820_506051_up_phzgzc47.pdf" target="_blank" rel="noopener">https://www.city.kumamoto.jp/kiji00347820/3_47820_506051_up_phzgzc47.pdf</a> ／ 文部科学省 教員勤務実態調査（令和4年度）の集計（確定値）<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf" target="_blank" rel="noopener">https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf</a></p>
+
+<footer class="site-foot" aria-label="持ち帰り・休憩の調べ（シリーズ）"><p>持ち帰り・休憩の調べ</p><div class="sf"><a href="mochikaeri-00-top.html">00 入口</a><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><b aria-current="page">03 全国の実例</b><a href="mochikaeri-04-kekka.html">04 調査結果</a></div></footer>
+</div>
