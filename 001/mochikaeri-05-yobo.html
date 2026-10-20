@@ -1,0 +1,271 @@
+<title>05 持ち帰り・休憩 県や各自治体への要望（案）</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --ng:#b3261e; --unk:#6b7280; --mid:#9a5a00;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4; --me:#fff6d6;
+  --e1:#e9edf5; --e2:#d9e1f0; --e3:#c4d1ea; --e4:#a9bde3; --fu:#fbe3ee;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --ng:#ff8f86; --unk:#a4aab6; --mid:#f0b35c;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --e1:#1f2430; --e2:#26304a; --e3:#2e3c5e; --e4:#3a4d78; --fu:#3a2230;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --ng:#ff8f86; --unk:#a4aab6; --mid:#f0b35c;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --e1:#1f2430; --e2:#26304a; --e3:#2e3c5e; --e4:#3a4d78; --fu:#3a2230;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h1,h2,h3{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.8rem;line-height:1.35;margin:0 0 8px}
+h2{font-size:1.25rem;margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+p{max-width:72ch}
+a{color:var(--link)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small{font-size:.85rem;color:var(--sub)}
+.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}
+.series .sl{font-weight:700;color:var(--sub);margin-right:4px}
+.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}
+.series b{background:var(--head);color:var(--headink);border-color:var(--head)}
+
+/* 流れ */
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.flow li{display:grid;grid-template-columns:3.2em 1fr;gap:14px;position:relative;padding-bottom:18px}
+.flow li:not(:last-child)::before{content:"";position:absolute;left:1.55em;top:3.1em;bottom:0;width:3px;background:var(--line)}
+.flow .no{width:3.2em;height:3.2em;border-radius:50%;background:var(--head);color:var(--headink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem}
+.flow li.key .no{background:var(--neoline)}
+.flow .box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.flow .q{margin:0;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.08rem;max-width:none}
+.flow .a{margin:4px 0 6px;max-width:none}
+.flow .a b{color:var(--accent)}
+.flow li.key .a b{color:var(--neoink)}
+.flow .go{display:flex;flex-wrap:wrap;gap:6px;font-size:.82rem}
+.flow .go a{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg);text-decoration:none}
+.flow .go a .pn{font-weight:700;color:var(--accent);margin-right:4px}
+
+/* オイラー図 */
+.euler{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px}
+.euler svg{width:100%;height:auto;display:block}
+.euler text{font-family:"BIZ UDPGothic","Yu Gothic UI",sans-serif;fill:var(--ink)}
+.euler .lbl{font-size:17px;font-weight:700}
+.euler .cnt{font-size:26px;font-weight:700;fill:var(--accent)}
+.euler .sm{font-size:14px;fill:var(--sub)}
+.euler .dot{fill:var(--ink)}
+.euler .dot.me{fill:var(--neoline)}
+.euler .nm{font-size:15px;font-weight:700}
+.euler .nm.me{fill:var(--neoink)}
+.euler a .nm{text-decoration:underline}
+.euler a:focus-visible{outline:2px solid var(--accent)}
+.euler .fu{fill:var(--fu);fill-opacity:.75;stroke:var(--neoline);stroke-width:3;stroke-dasharray:8 5}
+.euler .fl{font-size:16px;font-weight:700;fill:var(--neoink)}
+.euler .eu-tall{display:none}
+@media (max-width:640px){
+  .euler{padding:6px}
+  .euler .eu-wide{display:none}
+  .euler .eu-tall{display:block}
+  .euler .eu-tall .lbl{font-size:16px}
+  .euler .eu-tall .cnt{font-size:23px}
+  .euler .eu-tall .nm{font-size:15.5px}
+  .euler .eu-tall .sm{font-size:12.5px}
+  .euler .eu-tall .fl{font-size:14px}
+}
+.sets{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin-top:12px}
+.set{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.set h3{margin:0 0 4px;font-size:1rem;display:flex;align-items:center;gap:8px}
+.set .sw{display:inline-block;width:1.1em;height:1.1em;border-radius:50%;border:1.5px solid var(--sub)}
+.set .n{margin-left:auto;font-family:"BIZ UDPGothic",sans-serif;font-size:1.1rem;color:var(--accent)}
+.set p{margin:2px 0;font-size:.88rem}
+.set.fu{border:2px dashed var(--neoline);background:var(--neo)}
+.set.fu .n{color:var(--neoink)}
+
+/* ページ一覧 */
+.pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pg{display:block;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink)}
+.pg:hover{border-color:var(--accent)}
+.pg .pnum{display:inline-block;font-family:"BIZ UDPGothic",sans-serif;font-weight:700;color:var(--headink);background:var(--head);border-radius:4px;padding:0 8px;font-size:.85rem}
+.pg .pt{display:block;margin:6px 0 4px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.1rem;line-height:1.4}
+.pg .pd{display:block;font-size:.86rem;color:var(--sub)}
+.pg .pf{display:block;margin-top:6px;font-size:.75rem;color:var(--sub);word-break:break-all}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;font-size:.88rem}
+th{background:var(--head);color:var(--headink)}
+.c{text-align:center}
+.mk{font-weight:700;color:var(--ok)} .mk2{color:var(--sub)}
+@media (max-width:600px){h1{font-size:1.4rem} body{font-size:14px}}
+</style>
+<style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
+/* ===== 持ち帰り・休憩の調べ　共通テーマ ===== */
+:root{--r:12px;--sh:0 1px 2px rgba(20,30,55,.05),0 6px 18px rgba(20,30,55,.06);--band:#1b2744;--band2:#2b3c66;--rose:#c2185b;--paper:#f2f4f8;--glow:rgba(47,79,143,.10)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}}
+:root[data-theme="dark"]{--sh:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--band:#121a2e;--band2:#22325a;--rose:#e0609a;--paper:#15171c;--glow:rgba(143,176,240,.10)}
+body{background:radial-gradient(1200px 420px at 50% -120px,var(--glow),transparent 70%),var(--paper) !important}
+.wrap{padding-top:0 !important}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* 上の帯（シリーズの案内） */
+nav.series{margin:0 -16px 26px !important;padding:12px 16px !important;background:linear-gradient(100deg,var(--band),var(--band2));border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);gap:6px 8px !important;font-size:.8rem !important}
+nav.series .sl{color:#fff !important;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:.98rem;letter-spacing:.06em;margin-right:10px !important;padding-right:12px;border-right:1px solid rgba(255,255,255,.25)}
+nav.series a,nav.series b{border:1px solid rgba(255,255,255,.28) !important;background:transparent !important;color:#e8edf8 !important;border-radius:999px !important;padding:3px 12px !important;transition:background .15s,border-color .15s}
+nav.series a:hover{background:rgba(255,255,255,.12) !important;border-color:rgba(255,255,255,.55) !important}
+nav.series b{background:#fff !important;color:var(--band) !important;border-color:#fff !important;box-shadow:inset 0 -3px 0 var(--rose)}
+@media (min-width:1212px){nav.series{margin:0 0 26px !important}}
+
+/* 冒頭 */
+.wrap>header{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px 20px;margin-bottom:6px;overflow:hidden}
+.wrap>header::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--accent),var(--rose))}
+.wrap>header .eyebrow{display:inline-block;background:var(--soft);color:var(--accent);border-radius:999px;padding:1px 12px;letter-spacing:.14em}
+.wrap>header h1{letter-spacing:.03em;line-height:1.4}
+.wrap>header .lead{margin-top:12px !important;color:var(--ink)}
+
+/* 見出し */
+.wrap>h2{border-bottom:0 !important;padding-bottom:10px !important;background:linear-gradient(var(--paper),var(--paper)) padding-box !important;box-shadow:none !important}
+.wrap>h2::after{content:"";display:block;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--head) 0,var(--head) 72px,var(--line) 72px)}
+.hn{border-radius:6px !important;background:linear-gradient(135deg,var(--head),var(--band2)) !important;box-shadow:0 2px 6px rgba(20,30,55,.18)}
+.hn3{border-radius:5px !important}
+h3.kh,.wrap h3{letter-spacing:.02em}
+
+/* カード類 */
+.pt,.kc,.case,.q,.set,.pg,.note,.munote,.mokuji,.tbl,.gchart,.dist,.chart,.tchart,.euler,.band,.toc a,.flow .box,details,.chu,.cmp .pt{border-radius:var(--r) !important;box-shadow:var(--sh);border-color:var(--line) !important}
+.flow .q{box-shadow:none !important;border-radius:0 !important}
+.pt.key{border-color:var(--neoline,var(--rose)) !important;box-shadow:0 1px 2px rgba(194,24,91,.10),0 6px 18px rgba(194,24,91,.10)}
+.pt b.big{letter-spacing:.01em}
+.pg,.toc a,.kc{transition:transform .15s,box-shadow .15s}
+.pg:hover,.toc a:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,30,55,.06),0 10px 24px rgba(20,30,55,.10)}
+.munote{border-left-width:4px !important}
+.mokuji{padding:16px 22px !important}
+.mokuji .mk-h{display:flex;align-items:center;gap:8px}
+.mokuji .mk-h::before{content:"";width:18px;height:2px;background:var(--rose)}
+
+/* 表 */
+.tbl{background:var(--card)}
+th{letter-spacing:.03em}
+tbody tr:hover td{background-image:linear-gradient(var(--glow),var(--glow))}
+tr.grp td{letter-spacing:.08em}
+
+/* ページの終わりの案内 */
+.site-foot{margin:56px 0 0;padding:18px 20px;border-radius:var(--r);background:linear-gradient(100deg,var(--band),var(--band2));color:#e8edf8;box-shadow:var(--sh)}
+.site-foot p{margin:0 0 8px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1rem;letter-spacing:.06em;color:#fff;max-width:none}
+.site-foot .sf{display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.82rem}
+.site-foot a,.site-foot b{display:inline-block;padding:3px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#e8edf8;text-decoration:none}
+.site-foot a:hover{background:rgba(255,255,255,.12)}
+.site-foot b{background:#fff;color:var(--band);border-color:#fff}
+.site-foot a:focus-visible,nav.series a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.pg,.toc a,.kc,nav.series a{transition:none}.pg:hover,.toc a:hover{transform:none}}
+</style>
+
+
+
+
+<style id="yobo-style">
+ul.facts{padding-left:1.2em;max-width:80ch}
+ul.facts li{margin:8px 0}
+a.go{display:inline-block;margin-left:6px;padding:0 8px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:.75rem;text-decoration:none;white-space:nowrap;vertical-align:.1em}
+a.go::before{content:"→ "}
+.reqs{display:grid;gap:12px}
+.req{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--r);box-shadow:var(--sh);padding:12px 18px}
+.rq{margin:0 0 6px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.08rem;max-width:none}
+.rn{display:inline-block;min-width:3em;margin-right:10px;padding:0 8px;border-radius:6px;background:var(--neoline);color:#fff;font-family:"BIZ UDPGothic",sans-serif;font-size:.8rem;text-align:center;vertical-align:.15em}
+.rw,.re{margin:4px 0;font-size:.92rem;max-width:none}
+.rw b,.re b{display:inline-block;min-width:2.6em;margin-right:6px;color:var(--sub);font-size:.8rem}
+.re{color:var(--sub)}
+</style>
+
+<div class="wrap">
+<nav class="series" aria-label="持ち帰り・休憩の調べ（シリーズ）"><span class="sl">持ち帰り・休憩の調べ</span><a href="mochikaeri-00-top.html">00 入口</a><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><a href="mochikaeri-03-zenkoku.html">03 全国の実例</a><a href="mochikaeri-04-kekka.html">04 調査結果</a><b aria-current="page">05 要望（案）</b></nav>
+<header>
+  <p class="eyebrow">まとめ</p>
+  <h1 class="h1i"><span class="ticon"><svg viewBox="0 0 48 48" width="50" height="50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10h32v22H22l-9 8v-8H8z" fill="currentColor" fill-opacity=".12"/><path d="M15 18h18M15 24h12"/></svg></span><span>持ち帰り業務と休憩について、県や各自治体への要望（案）</span></h1>
+  <p class="date">2026年10月　00〜04の調べをもとに作成（案）</p>
+  <p>00〜04で調べたことをもとに、<b>持ち帰り業務と休憩</b>について、山口県教育委員会と各市町教育委員会にお願いしたいことを整理しました。それぞれの要望に、根拠となるページを付けています。時間外在校等時間（学校にいる時間）全体についての要望は、<a href="zikangai-zaikoto.html#tsutaeru">「時間外在校等時間」まとめの8章</a>と市町教委交渉で要求することにまとめています。</p>
+</header>
+
+<h2 id="youten"><span class="hn">1</span>要点</h2>
+<div class="points">
+  <div class="pt key"><b class="big">数字でつかむ</b><p>持ち帰りの時間と、<strong>実際に取れた休憩</strong>を、数字で調べて公表してほしい。山口県教委は「何時間という把握はしていない」と答弁しています。</p></div>
+  <div class="pt key"><b class="big">「なし」も記録</b><p>出退勤の打刻のときに、持ち帰りと休憩を<strong>「なし」も含めて</strong>答えるしくみにしてほしい。申告を待つだけでは記録は集まりません（大阪市は3.5%未満）。</p></div>
+  <div class="pt"><b class="big">計画に書く</b><p>県のプランと市町の計画（給特法8条）に、持ち帰り・休憩の<strong>目標と調べ方</strong>を書いてほしい。</p></div>
+</div>
+
+<h2 id="wakatta"><span class="hn">2</span>00〜04でわかったこと</h2>
+<ul class="facts">
+<li><b>山口県内で持ち帰りを「把握している」のは、県教委と3市町（防府・岩国・阿武）だけ。</b>市町は19のうち3（16%）で、全国45位。<a class="go" href="mochikaeri-01-yamaguchi.html#mochikaeri">01 2-3</a><a class="go" href="mochikaeri-02-47.html#rate">02 2</a></li>
+<li><b>その「把握」の中身は、何時間かはわからない聞き取り。</b>県教委は「県教委として何時間という把握はしていない」（R4.3.14 文教警察委員会）。3市町は方法を公開資料で確認できない。<a class="go" href="mochikaeri-01-yamaguchi.html#mochikaeri">01 2-3</a></li>
+<li><b>休憩は、学校の「決まり」を知っているだけ。</b>実際に休憩が取れたかを記録している市町はない。上関町・平生町は決まりも把握しておらず、田布施町は通知のみ。<a class="go" href="mochikaeri-01-yamaguchi.html#kyukei">01 2-4</a></li>
+<li><b>全国でも、毎日の記録のしくみがあるのは3教委だけ。</b>そのうち大阪市は、記録簿に入力した教職員が多くとも3.5%未満。<a class="go" href="mochikaeri-03-zenkoku.html#osaka">03 6-2</a><a class="go" href="mochikaeri-02-47.html#k6">02 5-6</a></li>
+<li><b>調べたところでは、持ち帰りをしている先生は3〜7割、持ち帰る人に限ると1日約1時間。</b>休憩を調べた調査は、どれも「ほとんど取れていない」。<a class="go" href="mochikaeri-04-kekka.html#youten">04 1</a></li>
+<li><b>国の調査（R4）でも、決められた休憩時間の中で取れた休憩は、小学校教諭で平日平均5分。</b><a class="go" href="mochikaeri-03-zenkoku.html#kyukei-zenkoku">03 4</a></li>
+</ul>
+
+<h2 id="ken"><span class="hn">3</span>山口県教育委員会への要望（案）</h2>
+<div class="reqs">
+<div class="req"><p class="rq"><span class="rn">県1</span>県立学校の持ち帰りと休憩を、数字で調べて公表してください</p>
+<p class="rw"><b>なぜ</b>県教委は文科省の調査で「把握している」と答えていますが、議会では「何時間という把握はしていない」と答弁しています。指針は、持ち帰りの実態把握に努めるよう求めています。</p>
+<p class="re"><b>例</b>期間を決めた実態調査（1週間）を毎年行う。毎年行っているのは福島県・栃木県・大分県。<a class="go" href="mochikaeri-02-47.html#k2">02 5-2</a><a class="go" href="mochikaeri-04-kekka.html#pref">04 6</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">県2</span>休憩は「実際に取れた時間」で記録してください</p>
+<p class="rw"><b>なぜ</b>国のQ&amp;A（問15）は、在校等時間から除くのは「実際に休憩した分の時間」としています。取れなかった休憩まで一律に差し引くと、勤務時間が短く記録されます。</p>
+<p class="re"><b>例</b>川崎市・広島市は、調査で休憩がほとんど取れていないとわかっても、日々の記録では一律45分を差し引いている。県立学校のクラウド型出退勤システムで、休憩をどう扱っているかを示す。<a class="go" href="mochikaeri-03-zenkoku.html#kawasaki">03 6-6</a><a class="go" href="mochikaeri-03-zenkoku.html#hiroshima">03 6-4</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">県3</span>加速化プラン（8条計画）に、持ち帰りと休憩の目標と調べ方を書いてください</p>
+<p class="rw"><b>なぜ</b>R8.4に改訂した加速化プラン第3期に「持ち帰り」の語はありません。時間外在校等時間だけが減っても、持ち帰りに移っていればわかりません。</p>
+<p class="re"><b>例</b>持ち帰りを時間外在校等時間に含めると計画に書いた久留米市。<a class="go" href="mochikaeri-03-zenkoku.html#kurume">03 6-5</a><a class="go" href="mochikaeri-04-kekka.html#sannyu">04 4</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">県4</span>市町に、「把握」の方法と結果を報告してもらい、まとめて公表してください</p>
+<p class="rw"><b>なぜ</b>文科省の調査は「把握している／していない」の二択で、方法も時間も聞いていません。県内の3市町がどう把握しているのかは、公開資料ではわかりません。</p>
+<p class="re"><b>例</b>市町立小中の持ち帰りを毎月集計し、県が月別平均を公表している長野県。ただし自己申告の漏れを県教委が認めている。<a class="go" href="mochikaeri-03-zenkoku.html#nagano">03 6-3</a></p></div>
+</div>
+
+<h2 id="shicho"><span class="hn">4</span>各市町教育委員会への要望（案）</h2>
+<div class="reqs">
+<div class="req"><p class="rq"><span class="rn">市町1</span>持ち帰りと休憩を、どうやって把握するかを決めてください</p>
+<p class="rw"><b>なぜ</b>19市町のうち16は持ち帰りを「把握していない」と答えています。「把握している」3市町（防府・岩国・阿武）も、方法と数字を公表していません。</p>
+<p class="re"><b>例</b>3市町は、何をもって「把握している」と答えたかを示す。ほかの市町は、年に一度でもよいので期間を決めて調べる。<a class="go" href="mochikaeri-01-yamaguchi.html#mochikaeri">01 2-3</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">市町2</span>出退勤の打刻のときに、持ち帰りと休憩を「なし」も含めて答えられるようにしてください</p>
+<p class="rw"><b>なぜ</b>いまの出退勤システムで残るのは「来た時刻」と「帰った時刻」だけです。申告しなかった日は「0」と同じになり、本当になかったのか書き忘れたのか区別できません。</p>
+<p class="re"><b>例</b>打刻のたびに「持ち帰りは」「休憩は取れたか」をたずねる方式。答えた日の割合（記録率）で、記録が集まっているかを確かめられる。<a class="go" href="mochikaeri-03-zenkoku.html#matome">03 5</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">市町3</span>持ち帰りの記録を、申請・許可の形にしないでください</p>
+<p class="rw"><b>なぜ</b>大阪市は、持ち帰りは「原則認めていない」としたうえで、記録簿での申請と校園長の許可を求めています。記録したのは多くとも3.5%未満で、管理職も記録簿を知らない学校がありました。</p>
+<p class="re"><b>例</b>持ち帰りは「申し出」ではなく「記録」として扱う。<a class="go" href="mochikaeri-03-zenkoku.html#osaka">03 6-2</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">市町4</span>学校の休憩の決まりを把握し、実際に取れたかも調べてください</p>
+<p class="rw"><b>なぜ</b>上関町・平生町は休憩の決まりを把握しておらず、田布施町は通知だけです。決まりを把握している16市町も、実際に休憩が取れたかは記録していません。</p>
+<p class="re"><b>例</b>島根県は抽出38校で5日間の休憩を調べ、小学校の37.8%が一度も休憩できなかったと公表。<a class="go" href="mochikaeri-01-yamaguchi.html#kyukei">01 2-4</a><a class="go" href="mochikaeri-03-zenkoku.html#shimane">03 6-1</a></p></div>
+
+<div class="req"><p class="rq"><span class="rn">市町5</span>市町の計画（8条計画）に、持ち帰りと休憩の目標を書いてください</p>
+<p class="rw"><b>なぜ</b>周南市はR8.3の計画で「持ち帰り残業時間の適切な把握」を「検討」としています。多くの市町の計画は「課題となっている学校に個別の支援・指導」の一文にとどまります。</p>
+<p class="re"><b>例</b>市町別の要望は市町教委交渉で要求することに。</p></div>
+</div>
+
+<h2 id="kuni"><span class="hn">5</span>国（文部科学省）への提案</h2>
+<p>国への提案は、<a href="mochikaeri-02-47.html#k7">02 の5-7「国に提案するなら」</a>にまとめています。①「把握している」の中身を聞く　②「把握」の基準を示す　③休憩が実際に取れたかを聞く　④把握の方法の例を示す　⑤申請・許可制にしない　⑥結果を集めて公表する　⑦国の調査の間隔を短くする、の7つです。</p>
+
+<h2 id="chui"><span class="hn">6</span>このページについて</h2>
+<ul class="facts">
+<li>このページは、00〜04の調べをもとにした<b>要望の案</b>です。団体として決めたものではありません。</li>
+<li>数字や答弁は、それぞれのページの出典（公開資料・議会会議録）によります。くわしくは各ページへ。</li>
+</ul>
+<footer class="site-foot" aria-label="持ち帰り・休憩の調べ（シリーズ）"><p>持ち帰り・休憩の調べ</p><div class="sf"><a href="mochikaeri-00-top.html">00 入口</a><a href="mochikaeri-01-yamaguchi.html">01 山口県19市町</a><a href="mochikaeri-02-47.html">02 47都道府県一覧</a><a href="mochikaeri-03-zenkoku.html">03 全国の実例</a><a href="mochikaeri-04-kekka.html">04 調査結果</a><b aria-current="page">05 要望（案）</b></div></footer>
+</div>
