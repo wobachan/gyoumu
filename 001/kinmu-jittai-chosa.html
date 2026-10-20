@@ -166,6 +166,19 @@ table.cmp3 td,table.cmp3 th{font-size:.86rem;vertical-align:top}
 .where .wnotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:8px;margin-top:10px}
 .where .wn{margin:0;padding:8px 12px;border-radius:8px;border:1px dashed var(--line);font-size:.88rem;max-width:none}
 .where .wn.me{border:2px solid var(--neoline,#c2185b)}
+.jlegend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:6px 0 4px;font-size:.82rem}
+.jlegend .jls{color:var(--sub)}
+.jd{display:inline-block;margin:0 6px;padding:0 6px;border:1.5px solid currentColor;border-radius:999px;font-family:"BIZ UDPGothic",sans-serif;font-size:.74rem;font-weight:700;line-height:1.5;white-space:nowrap;vertical-align:.1em}
+.jd.dn{color:var(--ok)} .jd.up{color:var(--ng)} .jd.na{color:var(--sub)}
+.jlegend .jd{margin:0}
+.vd{display:inline-block;margin:0 0 6px;padding:1px 10px;border-radius:6px;font-size:.8rem;font-weight:700;color:#fff}
+.vd.dn{background:var(--ok)} .vd.up{background:var(--ng)} .vd.na{background:var(--sub)}
+.pt .tline{margin:2px 0;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.02rem;font-variant-numeric:tabular-nums}
+.pt .tline b{color:var(--accent)} .pt.key .tline b{color:var(--neoink)}
+.pt .tline .sk{display:inline-block;min-width:1.5em;color:var(--sub);font-family:"BIZ UDPGothic",sans-serif;font-size:.85rem}
+.pt .tline .of{font-size:.8rem;color:var(--sub);font-weight:400}
+.pt .ngt{color:var(--ng);font-weight:700}
+.pt .tline+p:not(.tline){margin-top:6px}
 </style>
 
 <style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
@@ -287,13 +300,31 @@ tr.grp td{letter-spacing:.08em}
 </header>
 
 <h2 id="youten"><span class="hn">1</span>要点</h2>
+<div class="jlegend"><span class="jd dn">● 改善</span><span class="jd up">▲ 悪化・問題</span><span class="jd na">■ 比べられない</span><span class="jls">矢印の上の数字は、前回からの増減です（H18→H28→R4）。</span></div>
 <div class="pts">
-  <div class="pt"><p class="pl">平日の在校等時間（教諭）</p><p class="pv">小 <b>10:32 → 11:15 → 10:45</b><br>中 <b>11:00 → 11:32 → 11:01</b></p><p>H18→H28で小43分・中32分増え、R4で約30分減って、H18に近い水準にもどった。正規の勤務時間（7:45）より約3時間長い。</p></div>
-  <div class="pt"><p class="pl">平日の持ち帰り（教諭）</p><p class="pv">小 <b>38分 → 29分 → 37分</b><br>中 <b>22分 → 20分 → 32分</b></p><p>R4は在校等時間が減った一方、平日の持ち帰りはH28より増えた。土日の持ち帰りは3回とも減っている。</p></div>
-  <div class="pt key"><p class="pl">休憩（R4・平日・教諭）</p><p class="pv">所定の休憩時間内に取れた休憩<br>小 <b>5分</b>・中 <b>7分</b></p><p>出勤から退勤までの間に取れた休憩でも小・中とも23分。決まりの45分には遠い。</p></div>
-  <div class="pt key"><p class="pl">週60時間以上（月80h超の目安）</p><p class="pv">小 <b>33.4% → 14.2%</b><br>中 <b>57.7% → 36.5%</b>（H28→R4）</p><p>週50時間以上（月45h超の目安）は、R4でも小64.5%・中77.0%。</p></div>
-  <div class="pt"><p class="pl">「見える化」調査との違い</p><p class="pv">R4の推計 月 小約<b>41h</b>・中約<b>58h</b><br>見える化（R6年度） 小<b>30.6h</b>・中<b>40.4h</b></p><p>時期（繁忙期の1週間か、夏休みを含む1年か）、測り方、集計に入る教委がちがうので、差がそのまま「記録漏れ」ではない（<a href="#mieruka">6章</a>）。</p></div>
-  <div class="pt"><p class="pl">次回の調査</p><p class="pv">国は<b>抽出調査を続けない</b>方針</p><p>R7.4.10の答弁で「今後は、基本的に、毎年度、教育委員会に対して実施する調査」で把握するとした。給特法改正の附則6条は、R8.1.1から2年を目途に「勤務の状況」を調査すると定めるが、方法は書いていない（<a href="#kongo">7章</a>）。</p></div>
+  <div class="pt"><p class="pl">平日の在校等時間（教諭）</p><span class="vd dn">● R4はH28より改善</span>
+  <p class="tline"><span class="sk">小</span>10:32<span class="jd up">▲+43分</span>11:15<span class="jd dn">●−30分</span><b>10:45</b></p>
+  <p class="tline"><span class="sk">中</span>11:00<span class="jd up">▲+32分</span>11:32<span class="jd dn">●−31分</span><b>11:01</b></p>
+  <p>H28で増え、R4で減ってH18と同じくらいにもどった。ただし正規の勤務時間（7:45）より<span class="ngt">約3時間長い</span>まま。</p></div>
+  <div class="pt key"><p class="pl">平日の持ち帰り（教諭）</p><span class="vd up">▲ R4はH28より悪化</span>
+  <p class="tline"><span class="sk">小</span>38分<span class="jd dn">●−9分</span>29分<span class="jd up">▲+8分</span><b>37分</b></p>
+  <p class="tline"><span class="sk">中</span>22分<span class="jd dn">●−2分</span>20分<span class="jd up">▲+12分</span><b>32分</b></p>
+  <p>R4は学校にいる時間が減った一方で、<span class="ngt">家での仕事が増えた</span>。土日の持ち帰りは3回とも減っている。</p></div>
+  <div class="pt key"><p class="pl">休憩（R4・平日・教諭）</p><span class="vd up">▲ 決まりの45分に遠く届かない</span>
+  <p class="tline">所定の休憩時間内に取れた休憩</p>
+  <p class="tline"><span class="sk">小</span><b>5分</b><span class="of">／45分</span>　<span class="sk">中</span><b>7分</b><span class="of">／45分</span></p>
+  <p>出勤から退勤までの間に取れた休憩でも、小・中とも23分。</p></div>
+  <div class="pt"><p class="pl">週60時間以上（月80h超の目安）</p><span class="vd dn">● H28より改善</span>
+  <p class="tline"><span class="sk">小</span>33.4%<span class="jd dn">●−19.2ポイント</span><b>14.2%</b></p>
+  <p class="tline"><span class="sk">中</span>57.7%<span class="jd dn">●−21.2ポイント</span><b>36.5%</b></p>
+  <p><span class="jd up">▲</span>ただし週50時間以上（月45h超の目安）は、R4でも<span class="ngt">小64.5%・中77.0%</span>。</p></div>
+  <div class="pt"><p class="pl">「見える化」調査との違い</p><span class="vd na">■ そのまま比べられない</span>
+  <p class="tline">R4の推計　月 小約<b>41h</b>・中約<b>58h</b></p>
+  <p class="tline">見える化（R6年度）　小<b>30.6h</b>・中<b>40.4h</b></p>
+  <p>時期（繁忙期の1週間か、夏休みを含む1年か）、測り方、集計に入る教委がちがうので、差がそのまま「記録漏れ」ではない（<a href="#mieruka">6章</a>）。</p></div>
+  <div class="pt key"><p class="pl">次回の調査</p><span class="vd up">▲ 懸念</span>
+  <p class="tline">国は<b>抽出調査を続けない</b>方針</p>
+  <p>R7.4.10の答弁で「今後は、基本的に、毎年度、教育委員会に対して実施する調査」で把握するとした。給特法改正の附則6条の調査も方法は決まっていない（<a href="#kongo">7章</a>・<a href="#kuni">8章</a>）。</p></div>
 </div>
 <p class="small">年は調査を行った年度。H18＝平成18年度、H28＝平成28年度、R4＝令和4年度。「教諭」には主幹教諭・指導教諭を含む（H18は主幹教諭・指導教諭の制度がない）。時間は「時間:分」、1分未満は切り捨て。</p>
 
