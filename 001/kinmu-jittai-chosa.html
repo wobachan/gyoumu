@@ -145,6 +145,27 @@ blockquote{margin:6px 0;padding:6px 12px;border-left:3px solid var(--e4);backgro
 ol.three{margin:8px 0 6px;padding-left:1.4em}
 ol.three li{margin:4px 0}
 table.cmp3 td,table.cmp3 th{font-size:.86rem;vertical-align:top}
+.where{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0}
+.where .wh{margin:0 0 10px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.12rem;max-width:none}
+.where .wbox{border-radius:10px;padding:10px 14px}
+.where .wb1{background:var(--soft);border:2px solid var(--accent)}
+.where .wb2{margin-top:10px;background:var(--card);border:2px solid var(--neoline,#c2185b)}
+.where .wbh{margin:0 0 4px;max-width:none}
+.where .wbn{display:inline-flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;margin-right:8px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700}
+.where .wb2 .wbn{background:var(--neoline,#c2185b)}
+.where .wbs{font-size:.8rem;color:var(--sub);margin-left:4px}
+.where .wbd{margin:0;font-size:.92rem;max-width:none}
+.where .wtag{display:inline-block;margin-left:6px;padding:0 8px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:.75rem;color:var(--sub);white-space:nowrap}
+.where .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:8px;margin-top:6px}
+.where .wcell{background:var(--soft);border-radius:8px;padding:8px 12px}
+.where .wcell.key{background:var(--neo,#fdf1f6);outline:2px solid var(--neoline,#c2185b)}
+.where .wch{margin:0;font-size:.8rem;font-weight:700;color:var(--sub);max-width:none}
+.where .wcell.key .wch{color:var(--neoink,#8c2350)}
+.where .wcn{margin:2px 0 0;font-weight:700;font-size:.95rem;max-width:none}
+.where .wcs{margin:4px 0 0;font-size:.8rem;max-width:none}
+.where .wnotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:8px;margin-top:10px}
+.where .wn{margin:0;padding:8px 12px;border-radius:8px;border:1px dashed var(--line);font-size:.88rem;max-width:none}
+.where .wn.me{border:2px solid var(--neoline,#c2185b)}
 </style>
 
 <style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
@@ -233,6 +254,24 @@ tr.grp td{letter-spacing:.08em}
   <tr><td class="pn">弱いところ</td><td>都道府県・市町村ごとの数字がない</td><td>持ち帰り・仕事の中身・記録の正しさはわからない</td><td>方法がそろわず、自治体どうしで比べにくい</td></tr>
   <tr><td class="pn">くわしく</td><td>このページ</td><td><a href="#mieruka">6章</a>、<a href="zikangai-zaikoto.html#zenkoku">「時間外在校等時間」まとめ 3章</a></td><td><a href="mochikaeri-02-47.html#k2">持ち帰り・休憩の調べ 02 5-2</a>、<a href="mochikaeri-04-kekka.html#pref">04</a></td></tr>
   </tbody></table></div>
+  <div class="where" role="group" aria-label="自治体ごとの勤務実態の数値はどこにあるか">
+  <p class="wh">結局、自治体ごとの勤務実態の数値はどこにあるか</p>
+  <div class="wbox wb1"><p class="wbh"><span class="wbn">①</span><b>学校にいた時間（時間外在校等時間）</b></p>
+  <p class="wbd">全国1,804の教育委員会<b>すべて</b>に数値がある（国の「見える化」調査。令和6年度の実績から教育委員会ごとに公表）<span class="wtag">持ち帰りは入らない</span><span class="wtag">記録のしかたは教委ごと</span></p>
+    <div class="wbox wb2"><p class="wbh"><span class="wbn">②</span><b>仕事の中身・持ち帰り・休憩まで調べている自治体</b><span class="wbs">（公開資料で確認できたもの）</span></p>
+    <div class="wgrid">
+      <div class="wcell key"><p class="wch">毎年、期間を決めて時間を記録</p><p class="wcn"><a href="mochikaeri-04-kekka.html#h-fukushima">福島県</a>・<a href="mochikaeri-04-kekka.html#h-tochigi">栃木県</a>・<a href="mochikaeri-04-kekka.html#h-oita">大分県</a>（県立）</p><p class="wcs">時間を<b>毎年同じ方法で</b>出しているのは、この<b>3つだけ</b></p></div>
+      <div class="wcell"><p class="wch">数年おき・1回、期間を決めて時間を記録</p><p class="wcn"><a href="mochikaeri-04-kekka.html#h-hokkaido">北海道</a>・<a href="mochikaeri-04-kekka.html#h-saitama">埼玉県</a>（県立）・<a href="mochikaeri-04-kekka.html#h-kanagawa">神奈川県</a>・<a href="mochikaeri-04-kekka.html#h-yamanashi">山梨県</a>・<a href="mochikaeri-04-kekka.html#h-kyoto">京都府</a>・<a href="mochikaeri-04-kekka.html#h-shimane">島根県</a>・<a href="mochikaeri-04-kekka.html#h-hiroshimashi">広島市</a>・<a href="mochikaeri-04-kekka.html#h-kawasakishi">川崎市</a></p></div>
+      <div class="wcell"><p class="wch">アンケートで割合などを聞く</p><p class="wcn"><a href="mochikaeri-04-kekka.html#h-ishikawa">石川県</a>・<a href="mochikaeri-04-kekka.html#h-nara">奈良県</a>・<a href="mochikaeri-04-kekka.html#h-niigatashi">新潟市</a>・<a href="mochikaeri-04-kekka.html#h-kumamotoshi">熊本市</a>・<a href="mochikaeri-04-kekka.html#h-kitakyushu">北九州市</a></p></div>
+      <div class="wcell"><p class="wch">ふだんの自己申告・記録簿を集計</p><p class="wcn"><a href="mochikaeri-04-kekka.html#h-nagano">長野県</a>・<a href="mochikaeri-04-kekka.html#h-osakashi">大阪市</a></p><p class="wcs">記録漏れを県教委が認める／入力は3.5%未満</p></div>
+    </div></div>
+  </div>
+  <div class="wnotes">
+    <p class="wn"><b>国の教員勤務実態調査</b>　抽出の調査なので<b>全国の値だけ</b>。都道府県別・市町村別の数値はない</p>
+    <p class="wn me"><b>山口県</b>　②にあたる調査はない。県独自の勤務実態調査は平成17年度の1回だけ（持ち帰りは含まない）。①の県全体の月平均（R6 小35.0時間・中41.7時間・県立32.1時間）は公表</p>
+  </div>
+  <p class="small" style="margin:6px 0 0">自治体名を押すと、その調査の結果（持ち帰り・休憩の調べ 04）へ移ります。調べた範囲は、持ち帰りを「把握している」と答えた都道府県教委・政令市39が中心です。市区町村（約1,700）は一つずつは調べていないので、ほかにも独自の調査をしているところがある可能性があります。</p>
+  </div>
   <p class="lead">このページでは、<b>1 の国の「教員勤務実態調査」</b>をくわしく取り上げます。抽出した学校の先生に、1週間（平成18年度は4週間）の仕事を<b>30分ごとに本人が記入</b>してもらう調査で、昭和41年度から数えて4回行われました。ここでは比べられる3回（平成18・28年度、令和4年度）の調べ方と結果をまとめます。2 との違いは<a href="#mieruka">6章</a>にまとめました。</p>
   <ul class="toc">
     <li><a href="#youten"><span class="n">1</span>要点</a></li>
