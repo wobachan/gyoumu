@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>養成学部と採用倍率</title>
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1f2328; --sub:#5b6168; --line:#dcd9d0; --grid:#ebe8e0;
+  --dot:#2a78d6; --dot-weak:#9fb7cf; --yama:#eb6834; --fit:#8a8f96;
+  --warn:#9a3b3b; --warn-bg:#f8e9e9; --ok:#2e7d4f; --ok-bg:#e8f4ec; --mark:#fff2b3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181b; --card:#202328; --ink:#e7e9ec; --sub:#a3a9b1; --line:#353a41; --grid:#2a2e34;
+    --dot:#3987e5; --dot-weak:#4e6a86; --yama:#f08a5d; --fit:#7d838b;
+    --warn:#f0a3a3; --warn-bg:#3a2222; --ok:#7fd3a0; --ok-bg:#1d3326; --mark:#5a4d12;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181b; --card:#202328; --ink:#e7e9ec; --sub:#a3a9b1; --line:#353a41; --grid:#2a2e34;
+  --dot:#3987e5; --dot-weak:#4e6a86; --yama:#f08a5d; --fit:#7d838b;
+  --warn:#f0a3a3; --warn-bg:#3a2222; --ok:#7fd3a0; --ok-bg:#1d3326; --mark:#5a4d12;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:16px}
+main{max-width:980px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.65rem;margin:.2em 0 .1em;line-height:1.35}
+h2{font-size:1.3rem;margin:2.2em 0 .6em;padding-bottom:.25em;border-bottom:2px solid var(--line)}
+h3{font-size:1.08rem;margin:1.4em 0 .4em}
+p{margin:.5em 0}
+.lead{color:var(--sub);margin-top:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.point{border-left:6px solid var(--ok)}
+.warn{background:var(--warn-bg);border-color:transparent;border-left:6px solid var(--warn)}
+mark{background:var(--mark);color:inherit;padding:0 .15em}
+small,.note{color:var(--sub);font-size:.85rem}
+ul,ol{padding-left:1.3em;margin:.4em 0}
+li{margin:.25em 0}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:12px 0 0}
+nav.toc a{font-size:.85rem;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){.answers{grid-template-columns:1fr}}
+.answers .card{margin:0}
+.q{font-size:.85rem;color:var(--sub);margin:0}
+.a{font-size:1.15rem;font-weight:700;margin:.2em 0 .3em;line-height:1.5}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:6px 0 4px}
+.ctrl label{font-size:.88rem;color:var(--sub)}
+select{font:inherit;font-size:.9rem;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:100%}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.presets button{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
+.presets button.on{border-color:var(--dot);background:var(--dot);color:#fff}
+.stat{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.92rem;margin:6px 0}
+.stat b{font-size:1.05rem}
+.chartwrap{position:relative}
+svg.sc{width:100%;height:auto;display:block}
+svg text{font-family:inherit}
+.tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:.82rem;line-height:1.5;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.82rem;color:var(--sub)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.tbl-wrap{overflow:auto;max-height:80vh;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.82rem;white-space:nowrap}
+th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right}
+th{position:sticky;top:0;background:var(--card);cursor:pointer;font-weight:700;text-align:center;vertical-align:bottom;white-space:normal;min-width:4.5em}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--card);z-index:1}
+th{z-index:2;box-shadow:0 1px 0 var(--line)}
+th:first-child{z-index:3}
+tr.yama td{background:var(--mark)}
+td .fl{color:var(--warn);font-size:.75rem}
+.src li{font-size:.86rem;word-break:break-all}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;font-size:.92rem}
+footer{margin-top:40px;color:var(--sub);font-size:.82rem}
+</style>
+</head>
+<body>
+<main>
+
+<p class="note">2026年10月 作成</p>
+<h1>教員養成学部や免許を取れる大学が多い県ほど、採用試験の倍率は高いのか</h1>
+<p class="lead">「先生を育てる大学が多い県は、受ける人も多くて倍率が高いのでは？」という見方を、47都道府県の公開データで確かめました。</p>
+<nav class="toc"><a href="#kotae">こたえ</a><a href="#zu">散布図</a><a href="#yamaguchi">山口県の位置</a><a href="#mikake">見かけの関係に注意</a><a href="#hyo">47都道府県の表</a><a href="#kurabekata">データと比べ方</a><a href="#shutten">出典</a></nav>
+
+<h2 id="kotae">こたえ（わかったこと）</h2>
+<div class="answers">
+ <div class="card point"><p class="q">問1　国立の教員養成学部の数・定員で、倍率は変わる？</p>
+  <p class="a">ほとんど関係が見られません。</p>
+  <p>ほぼすべての県に1つずつあるので、数ではちがいが出ません（0の県：鳥取・山形・福島、2の県：新潟）。定員を採用者数で割って比べても、小学校の倍率との順位の相関は ρ＝0.13（ほとんど関係なし）でした。</p></div>
+ <div class="card point"><p class="q">問2　小学校免許を取れる大学の定員が多いほど、受験者は多い？</p>
+  <p class="a">数だけ見ると強い関係。でもその多くは「県の大きさ」のせいです。</p>
+  <p>定員と受験者数の相関は r＝0.84 と強いですが、採用者数と受験者数のほうがさらに強く（r＝0.92）、大きい県はどちらも多いだけです。採用者数でそろえると、関係はρ＝0.41（中くらいの＋）に下がり、その多くは近畿の府県によるものです。</p></div>
+</div>
+<div class="card">
+<p><b>まとめると：</b></p>
+<ul>
+ <li>「養成学部がある・ない」「国立の定員が多い・少ない」は、倍率の高さを説明しません。</li>
+ <li>小学校免許を取れる私立大学などが採用数にくらべて多い県（奈良・京都・大阪・兵庫など近畿）は、倍率が高めです。ただし近畿をのぞくと関係ははっきりしなくなります（ρ＝0.29、41都道府県）。</li>
+ <li>いちばん倍率が高い<b>鳥取県（4.72倍）・高知県（4.83倍）</b>は、県内で免許を取れる枠がとても少ない県です。受験者の約9割が国立養成学部以外の出身で、<b>県の外から受けに来る人</b>が倍率を押し上げていると考えられます（一次試験も6月上旬と早めです）。</li>
+ <li>実際、小学校受験者のうち国立養成学部の出身者の割合が<b>低い県ほど倍率が高い</b>傾向があります（ρ＝-0.53）。倍率は「県内で何人育てているか」より、「どれだけ広い範囲から受験者を集めているか」で決まっている面が大きいと言えます。</li>
+</ul>
+<p class="note">相関は「いっしょに動くか」を見るもので、原因を示すものではありません。ρ（ロー）は順位どうしの相関で、飛びぬけた県に引っぱられにくい数字です。0.2未満は「ほとんど関係なし」、0.2〜0.4「弱い」、0.4〜0.7「中くらい」の目安で書いています。</p>
+</div>
+
+<h2 id="zu">散布図で見る</h2>
+<p>ボタンで問いを切りかえられます。横じく・たてじくは下のメニューで自由に選べます。点にふれると数字が出ます。<span style="color:var(--yama);font-weight:700">●</span>が山口県、うすい点は小学校の受験者を中学校と合わせて数えている県（東京・大阪・群馬）です。点線は全体の傾向を表す線です。</p>
+<div class="card">
+ <div class="presets" id="presets"></div>
+ <div class="ctrl"><label>横じく <select id="xsel"></select></label><label>たてじく <select id="ysel"></select></label></div>
+ <div class="stat" id="stat"></div>
+ <div class="chartwrap" id="wrap"><svg class="sc" id="sc" role="img" aria-label="都道府県ごとの散布図"></svg><div class="tip" id="tip"></div></div>
+ <div class="legend"><span style="--c:var(--dot)">都道府県</span><span style="--c:var(--dot-weak)">小学校を合算で数えている県</span><span style="--c:var(--yama)">山口県</span></div>
+ <p class="note" id="note"></p>
+</div>
+
+<h2 id="yamaguchi">山口県の位置</h2>
+<div class="card">
+<div class="kv">
+ <span>国立の教員養成学部</span><span>山口大学 教育学部（1つ）。教員養成課程の定員は令和6年度 180人 → <b>令和7年度 155人</b>に減りました。</span>
+ <span>小学校一種を取れる大学</span><span>4大学・学科定員 計345人（山口大学155・梅光学院大学100・山口学芸大学60・東亜大学30、令和7年4月）</span>
+ <span>小学校の倍率（令和7年度）</span><span><b>1.76倍</b>（受験280人・採用159人）＝47都道府県で高いほうから31番目。3年平均 1.66倍（34番目）</span>
+ <span>中学校の倍率（令和7年度）</span><span>2.12倍（42番目）</span>
+ <span>小一種定員 ÷ 小採用</span><span>2.17（多いほうから14番目、全国ではやや多いほう）</span>
+ <span>国立養成出身の割合</span><span>小学校受験者の30.5％（令和6年度、多いほうから14番目）</span>
+</div>
+<p style="margin-top:.8em">山口県は、採用数にくらべた「免許を取れる枠」は全国でやや多いほうなのに、倍率は低いほうです。小学校受験者のうち国立養成学部の出身者が約3割と多めで、鳥取・高知のように県外から大勢が受けに来る形ではありません。これが倍率の低さにつながっていると見られます。<b>大学の定員を増やせば倍率が上がる、という単純な関係は、全国のデータからは読み取れません。</b>山口大学の定員が減ったこと（180→155人）の影響は、これからの年度で確かめる必要があります。</p>
+</div>
+
+<h2 id="mikake">見かけの関係になりやすい点</h2>
+<div class="card warn">
+<ol>
+ <li><b>県の大きさ</b>：人口が多い県は、大学も採用者数も受験者数もみな多くなります。「定員が多い県ほど受験者が多い」（r＝0.84）は、ほとんどこれで説明できます。採用者数で予想した受験者数に、定員の情報を足しても、説明できる割合は 81％→82％ と少ししか増えませんでした（対数で回帰）。</li>
+ <li><b>県をまたぐ受験</b>：他県の大学で免許を取って地元や別の県で受ける人、何県もかけもちで受ける人がいます。受験者数は「延べ」なので、試験日がほかと重ならない早い県などは、受験者が多くなりやすいです。鳥取・高知はその例と見られます（国立養成出身の割合は約1割）。この2県をのぞくと、問2の関係はρ＝0.57と強まるので、「県内の免許の枠」と「県外からの受験」の2つの力が重なって、関係を見えにくくしています。</li>
+ <li><b>倍率の分母（採用者数）</b>：倍率が下がった大きな理由は、退職が多くて採用者数が増えたことです。供給（大学）だけでなく、需要（採用数）の動きもいっしょに見る必要があります。</li>
+ <li><b>都市への進学</b>：地方の高校生の多くが都市の大学へ進みます。県ごとの「大学の定員」は、その県の出身者がどれだけ免許を取るかとは一致しません。都道府県別の免許取得者数は国の統計で公表されていないため、ここでは確かめられませんでした。</li>
+ <li><b>試験の区分のちがい</b>：小中・中高をまとめて試験する県市があります。その県は合算の倍率を使い、表に※をつけました。</li>
+</ol>
+</div>
+
+<h2 id="hyo">47都道府県の表</h2>
+<p class="note">見出しをクリックすると並べかえられます。政令市（豊能地区をふくむ）は所在する道府県に合算。※は合算の倍率（小＝小中または小中高の合算、中＝中高の合算）。山口県は黄色。</p>
+<div class="tbl-wrap"><table id="tbl"></table></div>
+
+<h2 id="kurabekata">データと比べ方</h2>
+<div class="card">
+<ul>
+ <li><b>倍率・受験者数</b>：文部科学省「公立学校教員採用選考試験の実施状況」の第2表-1（県市別・通年）。令和7年度選考（令和6年度実施）を中心に、令和5・6年度選考も使って3年平均を出しました。倍率＝受験者数÷採用者数で計算し直しています。</li>
+ <li><b>政令市のあつかい</b>：政令市と豊能地区は、その道府県に<b>合算</b>しました（例：福岡県＝福岡県＋北九州市＋福岡市）。大学の所在地も県単位のため、そろえています。北海道と札幌市・千葉県と千葉市・広島県と広島市は合同選考で、もともと県の数字に入っています。</li>
+ <li><b>合算の倍率</b>：小学校と中学校を分けずに受験者を数えている県（東京・大阪・群馬（R7））は小中（東京は小中高）合算、中学校と高校を分けていない県市がある県は、中学校を中高合算にしました。文部科学省が（　）で示しているのと同じ方法です。</li>
+ <li><b>国立の教員養成学部</b>：文部科学省「国立大学法人等の現状について（教員養成大学）」の令和6年度の設置状況（45大学・教員養成課程の定員 計10,986人）。新課程（教員以外の進路の課程）はふくみません。令和7年度に受けた人は令和3年ごろの入学なので、時期は少しずれます。</li>
+ <li><b>小学校一種免許を取れる大学</b>：文部科学省「教員免許状を取得可能な大学等」（令和7年4月1日現在）の一覧から、通学課程の大学（全国251大学）を所在地の都道府県ごとに数え、その学科の入学定員を足しました（全国 計31,272人）。定員は学科全体の数で、全員が小学校免許を取るわけではありません。通信教育課程はふくみません。</li>
+ <li><b>国立養成出身の割合</b>：令和6年度選考の第4表-2〜5（出身大学等別・県市別）。この表は令和6年度版にしかないため、この項目だけ1年前の数字です。</li>
+ <li><b>人口</b>：総務省「人口推計」2024年10月1日現在。</li>
+ <li><b>公表されていないもの</b>：都道府県別の教員免許状の授与件数（普通免許状）は全国計しか公表されていません。学校基本調査の「教育」学科の学生数も、都道府県別×学科別の表はありませんでした。そのため「実際に免許を取った人数」ではなく「免許を取れる学科の定員」で比べています。</li>
+</ul>
+</div>
+
+<h2 id="shutten">出典</h2>
+<ul class="src">
+ <li>文部科学省「令和7年度（令和6年度実施）公立学校教員採用選考試験の実施状況等について」 https://www.mext.go.jp/a_menu/shotou/senkou/1416039_00013.html （参考資料1 第2表-1・第14表 https://www.mext.go.jp/content/20261001-kyoikushokuin-000046447_2.pdf ）</li>
+ <li>文部科学省「令和6年度（令和5年度実施）公立学校教員採用選考試験の実施状況について」 https://www.mext.go.jp/a_menu/shotou/senkou/1416039_00012.html （参考資料1 第2表-1・第4表 https://www.mext.go.jp/content/20250124-mxt_kyoikujinzai01-000039457_2.pdf ）</li>
+ <li>文部科学省「令和5年度（令和4年度実施）公立学校教員採用選考試験の実施状況について」 https://www.mext.go.jp/a_menu/shotou/senkou/1416039_00009.html （参考資料1 https://www.mext.go.jp/content/20241226-mxt_kyoikujinzai01-000033218_22.pdf ）</li>
+ <li>文部科学省「国立大学法人等の現状について（教員養成大学）」資料4（令和6年度の設置状況・入学定員） https://www.mext.go.jp/content/20241125-mxt_hojinka-000038979_05.pdf</li>
+ <li>文部科学省「令和7年度 国立大学の入学定員増減予定」（山口大学 教育学部 180→155人） https://www.mext.go.jp/content/20250114-mxt_hojinka-000037642_2.pdf</li>
+ <li>文部科学省「教員免許状を取得可能な大学等」（令和7年4月1日現在） https://www.mext.go.jp/a_menu/shotou/kyoin/daigaku/1286948.htm （一覧PDF https://www.mext.go.jp/content/20260615-mxtkyoikuzinnzai01-100002439_1.pdf ・小学校Excel https://www.mext.go.jp/content/20260615-mxtkyoikuzinnzai01-100002439_4.xlsx ）</li>
+ <li>文部科学省「令和6年度 教員免許状授与件数等調査結果」（普通免許状は全国計のみ） https://www.mext.go.jp/a_menu/shotou/kyoin/1413991_00008.html</li>
+ <li>総務省統計局「人口推計（2024年10月1日現在）」第2表 https://www.stat.go.jp/data/jinsui/2024np/index.html</li>
+</ul>
+<footer>数字は上の出典の表から読み取り、都道府県への合算・割り算・相関の計算だけを行いました。推計で埋めた数字はありません。</footer>
+
+</main>
+<script>
+const D={"vars": [{"key": "nfac", "label": "国立の教員養成学部の数", "short": "養成学部の数", "axis": "x", "dec": 0, "jitter": true, "note": "横に少しずらして重なりを防いでいます（0・1・2のどれかです）。"}, {"key": "tkok", "label": "国立の教員養成課程の入学定員（人）", "short": "国立養成の定員", "axis": "x", "dec": 0}, {"key": "tk_per_s", "label": "国立養成の定員 ÷ 小中の採用者数", "short": "国立定員÷小中採用", "axis": "x", "dec": 2, "note": "国立の教員養成課程の定員（令和6年度）を、令和7年度の小学校＋中学校の採用者数で割った値。1より大きいと「地元の国立だけで採用数をまかなえる計算」。"}, {"key": "nsho1", "label": "小学校一種免許を取れる大学の数", "short": "小一種の大学数", "axis": "x", "dec": 0}, {"key": "csho1", "label": "小学校一種免許を取れる学科の入学定員（人）", "short": "小一種の学科定員", "axis": "x", "dec": 0, "log": true}, {"key": "c1_per_s", "label": "小一種の学科定員 ÷ 小学校の採用者数", "short": "小一種定員÷小採用", "axis": "x", "dec": 2, "note": "小学校一種免許を取れる学科の入学定員（令和7年4月）を、令和7年度の小学校採用者数で割った値。大きいほど「採用の数にくらべて、免許を取れる学生の枠が多い」。"}, {"key": "c1_per_pop", "label": "小一種の学科定員（人口10万人あたり）", "short": "小一種定員/10万人", "axis": "x", "dec": 1}, {"key": "sho_s", "label": "小学校の採用者数（人）", "short": "小学校の採用者数", "axis": "x", "dec": 0, "log": true, "note": "受験者の数は、まず採用の規模（採用者数）で決まることを確かめるための比べ相手。"}, {"key": "pop", "label": "人口（千人）", "short": "人口（千人）", "axis": "x", "dec": 0, "log": true}, {"key": "kshare", "label": "小学校受験者のうち国立養成学部の出身（％、R6）", "short": "国立養成出身の割合", "dec": 1, "note": "令和6年度選考（令和5年度実施）の小学校受験者のうち、国立の教員養成大学・学部の出身者の割合。県外の国立養成学部の出身者もふくむ。"}, {"key": "sho_r", "label": "小学校の採用倍率（令和7年度）", "short": "小学校の倍率", "axis": "y", "dec": 2}, {"key": "sho_r3", "label": "小学校の採用倍率（令和5〜7年度の平均）", "short": "小学校の倍率（3年平均）", "axis": "y", "dec": 2}, {"key": "chu_r", "label": "中学校の採用倍率（令和7年度）", "short": "中学校の倍率", "axis": "y", "dec": 2, "note": "中学校は、中高をまとめて試験している県市があり、その県は「中＋高」の合算倍率です（表の※）。"}, {"key": "sho_j", "label": "小学校の受験者数（人、令和7年度）", "short": "小学校の受験者数", "axis": "y", "dec": 0, "log": true}, {"key": "j_per_pop", "label": "小学校の受験者数（人口10万人あたり）", "short": "受験者/10万人", "axis": "y", "dec": 1}], "rows": [{"code": 1, "pref": "北海道", "pop": 5043, "nfac": 1, "fac": "北海道教育大学", "tkok": 720, "nsho1": 5, "csho1": 1095, "sho_j": 943.0, "sho_s": 468.0, "sho_r": 2.01, "chu_j": 1354.0, "chu_s": 381.0, "chu_r": 3.2, "flag": null, "flag_c": "中高合算", "sho_r3": 2.23, "sho_r6": 2.27, "sho_r5": 2.4, "kshare": 41.4, "early": "6中", "tk_per_s": 0.85, "c1_per_s": 2.34, "j_per_pop": 18.7, "c1_per_pop": 21.7, "s_per_pop": 9.3, "early_t": "6月中旬"}, {"code": 2, "pref": "青森県", "pop": 1165, "nfac": 1, "fac": "弘前大学", "tkok": 160, "nsho1": 2, "csho1": 180, "sho_j": 175.0, "sho_s": 113.0, "sho_r": 1.55, "chu_j": 297.0, "chu_s": 101.0, "chu_r": 2.94, "flag": null, "flag_c": null, "sho_r3": 1.46, "sho_r6": 1.27, "sho_r5": 1.55, "kshare": 37.8, "early": "7中", "tk_per_s": 0.75, "c1_per_s": 1.59, "j_per_pop": 15.0, "c1_per_pop": 15.5, "s_per_pop": 9.7, "early_t": "7月中旬"}, {"code": 3, "pref": "岩手県", "pop": 1145, "nfac": 1, "fac": "岩手大学", "tkok": 160, "nsho1": 2, "csho1": 300, "sho_j": 240.0, "sho_s": 125.0, "sho_r": 1.92, "chu_j": 227.0, "chu_s": 80.0, "chu_r": 2.84, "flag": null, "flag_c": null, "sho_r3": 2.18, "sho_r6": 2.22, "sho_r5": 2.41, "kshare": 33.7, "early": "7中", "tk_per_s": 0.78, "c1_per_s": 2.4, "j_per_pop": 21.0, "c1_per_pop": 26.2, "s_per_pop": 10.9, "early_t": "7月中旬"}, {"code": 4, "pref": "宮城県", "pop": 2248, "nfac": 1, "fac": "宮城教育大学", "tkok": 345, "nsho1": 6, "csho1": 775, "sho_j": 673.0, "sho_s": 339.0, "sho_r": 1.99, "chu_j": 892.0, "chu_s": 176.0, "chu_r": 4.64, "flag": null, "flag_c": "中高合算", "sho_r3": 2.08, "sho_r6": 2.3, "sho_r5": 1.95, "kshare": 32.5, "early": "7中", "tk_per_s": 0.67, "c1_per_s": 2.29, "j_per_pop": 29.9, "c1_per_pop": 34.5, "s_per_pop": 15.1, "early_t": "7月中旬"}, {"code": 5, "pref": "秋田県", "pop": 897, "nfac": 1, "fac": "秋田大学", "tkok": 110, "nsho1": 1, "csho1": 110, "sho_j": 108.0, "sho_s": 98.0, "sho_r": 1.1, "chu_j": 187.0, "chu_s": 60.0, "chu_r": 3.12, "flag": null, "flag_c": null, "sho_r3": 1.31, "sho_r6": 1.49, "sho_r5": 1.35, "kshare": 57.5, "early": "7中", "tk_per_s": 0.7, "c1_per_s": 1.12, "j_per_pop": 12.0, "c1_per_pop": 12.3, "s_per_pop": 10.9, "early_t": "7月中旬"}, {"code": 6, "pref": "山形県", "pop": 1011, "nfac": 0, "fac": "なし", "tkok": 0, "nsho1": 2, "csho1": 150, "sho_j": 202.0, "sho_s": 151.0, "sho_r": 1.34, "chu_j": 230.0, "chu_s": 77.0, "chu_r": 2.99, "flag": null, "flag_c": null, "sho_r3": 1.43, "sho_r6": 1.48, "sho_r5": 1.48, "kshare": 25.4, "early": "7中", "tk_per_s": 0.0, "c1_per_s": 0.99, "j_per_pop": 20.0, "c1_per_pop": 14.8, "s_per_pop": 14.9, "early_t": "7月中旬"}, {"code": 7, "pref": "福島県", "pop": 1743, "nfac": 0, "fac": "なし", "tkok": 0, "nsho1": 1, "csho1": 260, "sho_j": 383.0, "sho_s": 286.0, "sho_r": 1.34, "chu_j": 567.0, "chu_s": 212.0, "chu_r": 2.67, "flag": null, "flag_c": null, "sho_r3": 1.35, "sho_r6": 1.27, "sho_r5": 1.45, "kshare": 15.2, "early": "7中", "tk_per_s": 0.0, "c1_per_s": 0.91, "j_per_pop": 22.0, "c1_per_pop": 14.9, "s_per_pop": 16.4, "early_t": "7月中旬"}, {"code": 8, "pref": "茨城県", "pop": 2806, "nfac": 1, "fac": "茨城大学", "tkok": 275, "nsho1": 4, "csho1": 435, "sho_j": 745.0, "sho_s": 455.0, "sho_r": 1.64, "chu_j": 884.0, "chu_s": 292.0, "chu_r": 3.03, "flag": null, "flag_c": null, "sho_r3": 2.04, "sho_r6": 1.88, "sho_r5": 2.61, "kshare": 17.1, "early": "5中", "tk_per_s": 0.37, "c1_per_s": 0.96, "j_per_pop": 26.6, "c1_per_pop": 15.5, "s_per_pop": 16.2, "early_t": "5月中旬"}, {"code": 9, "pref": "栃木県", "pop": 1885, "nfac": 1, "fac": "宇都宮大学", "tkok": 170, "nsho1": 3, "csho1": 430, "sho_j": 647.0, "sho_s": 236.0, "sho_r": 2.74, "chu_j": 572.0, "chu_s": 134.0, "chu_r": 4.27, "flag": null, "flag_c": null, "sho_r3": 3.21, "sho_r6": 3.49, "sho_r5": 3.39, "kshare": 21.8, "early": "7上", "tk_per_s": 0.46, "c1_per_s": 1.82, "j_per_pop": 34.3, "c1_per_pop": 22.8, "s_per_pop": 12.5, "early_t": "7月上旬"}, {"code": 10, "pref": "群馬県", "pop": 1890, "nfac": 1, "fac": "群馬大学", "tkok": 190, "nsho1": 5, "csho1": 410, "sho_j": 443.0, "sho_s": 182.0, "sho_r": 2.69, "chu_j": 566.0, "chu_s": 193.0, "chu_r": 2.69, "flag": "小中合算", "flag_c": "小中合算", "sho_r3": 2.98, "sho_r6": 2.87, "sho_r5": 3.38, "kshare": 17.2, "early": "7上", "tk_per_s": 0.51, "c1_per_s": 2.25, "j_per_pop": 23.4, "c1_per_pop": 21.7, "s_per_pop": 9.6, "early_t": "7月上旬"}, {"code": 11, "pref": "埼玉県", "pop": 7332, "nfac": 1, "fac": "埼玉大学", "tkok": 380, "nsho1": 7, "csho1": 1100, "sho_j": 1638.0, "sho_s": 802.0, "sho_r": 2.04, "chu_j": 1964.0, "chu_s": 492.0, "chu_r": 4.04, "flag": null, "flag_c": "中高合算", "sho_r3": 2.05, "sho_r6": 2.09, "sho_r5": 2.01, "kshare": 14.3, "early": "7上", "tk_per_s": 0.29, "c1_per_s": 1.37, "j_per_pop": 22.3, "c1_per_pop": 15.0, "s_per_pop": 10.9, "early_t": "7月上旬"}, {"code": 12, "pref": "千葉県", "pop": 6251, "nfac": 1, "fac": "千葉大学", "tkok": 380, "nsho1": 7, "csho1": 1155, "sho_j": 1161.0, "sho_s": 917.0, "sho_r": 1.27, "chu_j": 2067.0, "chu_s": 580.0, "chu_r": 2.46, "flag": null, "flag_c": "中高合算", "sho_r3": 1.57, "sho_r6": 1.6, "sho_r5": 1.85, "kshare": 12.3, "early": "7上", "tk_per_s": 0.25, "c1_per_s": 1.26, "j_per_pop": 18.6, "c1_per_pop": 18.5, "s_per_pop": 14.7, "early_t": "7月上旬"}, {"code": 13, "pref": "東京都", "pop": 14178, "nfac": 1, "fac": "東京学芸大学", "tkok": 825, "nsho1": 38, "csho1": 4981, "sho_j": 2513.0, "sho_s": 1888.0, "sho_r": 2.04, "chu_j": 4329.0, "chu_s": 1050.0, "chu_r": 2.04, "flag": "小中高合算", "flag_c": "小中高合算", "sho_r3": 2.07, "sho_r6": 1.82, "sho_r5": 2.33, "kshare": 16.9, "early": "7上", "tk_per_s": 0.28, "c1_per_s": 2.64, "j_per_pop": 17.7, "c1_per_pop": 35.1, "s_per_pop": 13.3, "early_t": "7月上旬"}, {"code": 14, "pref": "神奈川県", "pop": 9225, "nfac": 1, "fac": "横浜国立大学", "tkok": 200, "nsho1": 7, "csho1": 1000, "sho_j": 2506.0, "sho_s": 1294.0, "sho_r": 1.94, "chu_j": 2319.0, "chu_s": 654.0, "chu_r": 3.55, "flag": null, "flag_c": null, "sho_r3": 2.13, "sho_r6": 2.12, "sho_r5": 2.34, "kshare": 10.3, "early": "7上", "tk_per_s": 0.1, "c1_per_s": 0.77, "j_per_pop": 27.2, "c1_per_pop": 10.8, "s_per_pop": 14.0, "early_t": "7月上旬"}, {"code": 15, "pref": "新潟県", "pop": 2099, "nfac": 2, "fac": "新潟大学・上越教育大学", "tkok": 340, "nsho1": 2, "csho1": 340, "sho_j": 626.0, "sho_s": 360.0, "sho_r": 1.74, "chu_j": 603.0, "chu_s": 285.0, "chu_r": 2.06, "flag": null, "flag_c": "中高合算", "sho_r3": 1.77, "sho_r6": 1.73, "sho_r5": 1.85, "kshare": 38.0, "early": "6中", "tk_per_s": 0.53, "c1_per_s": 0.94, "j_per_pop": 29.8, "c1_per_pop": 16.2, "s_per_pop": 17.2, "early_t": "6月中旬"}, {"code": 16, "pref": "富山県", "pop": 997, "nfac": 1, "fac": "富山大学", "tkok": 85, "nsho1": 2, "csho1": 175, "sho_j": 225.0, "sho_s": 182.0, "sho_r": 1.24, "chu_j": 308.0, "chu_s": 65.0, "chu_r": 2.66, "flag": null, "flag_c": "中高合算", "sho_r3": 1.56, "sho_r6": 2.02, "sho_r5": 1.44, "kshare": 23.9, "early": "7中", "tk_per_s": 0.34, "c1_per_s": 0.96, "j_per_pop": 22.6, "c1_per_pop": 17.6, "s_per_pop": 18.3, "early_t": "7月中旬"}, {"code": 17, "pref": "石川県", "pop": 1098, "nfac": 1, "fac": "金沢大学", "tkok": 85, "nsho1": 4, "csho1": 243, "sho_j": 289.0, "sho_s": 143.0, "sho_r": 2.02, "chu_j": 437.0, "chu_s": 82.0, "chu_r": 3.04, "flag": null, "flag_c": "中高合算", "sho_r3": 2.28, "sho_r6": 2.35, "sho_r5": 2.46, "kshare": 28.9, "early": "7中", "tk_per_s": 0.38, "c1_per_s": 1.7, "j_per_pop": 26.3, "c1_per_pop": 22.1, "s_per_pop": 13.0, "early_t": "7月中旬"}, {"code": 18, "pref": "福井県", "pop": 739, "nfac": 1, "fac": "福井大学", "tkok": 100, "nsho1": 2, "csho1": 170, "sho_j": 257.0, "sho_s": 136.0, "sho_r": 1.89, "chu_j": 257.0, "chu_s": 62.0, "chu_r": 2.82, "flag": null, "flag_c": "中高合算", "sho_r3": 2.13, "sho_r6": 2.12, "sho_r5": 2.38, "kshare": 45.1, "early": "6下", "tk_per_s": 0.51, "c1_per_s": 1.25, "j_per_pop": 34.8, "c1_per_pop": 23.0, "s_per_pop": 18.4, "early_t": "6月下旬"}, {"code": 19, "pref": "山梨県", "pop": 791, "nfac": 1, "fac": "山梨大学", "tkok": 120, "nsho1": 3, "csho1": 320, "sho_j": 226.0, "sho_s": 153.0, "sho_r": 1.48, "chu_j": 190.0, "chu_s": 74.0, "chu_r": 2.57, "flag": null, "flag_c": null, "sho_r3": 1.53, "sho_r6": 1.49, "sho_r5": 1.63, "kshare": 19.3, "early": "7上", "tk_per_s": 0.53, "c1_per_s": 2.09, "j_per_pop": 28.6, "c1_per_pop": 40.5, "s_per_pop": 19.3, "early_t": "7月上旬"}, {"code": 20, "pref": "長野県", "pop": 1987, "nfac": 1, "fac": "信州大学", "tkok": 240, "nsho1": 2, "csho1": 320, "sho_j": 566.0, "sho_s": 237.0, "sho_r": 2.39, "chu_j": 513.0, "chu_s": 141.0, "chu_r": 3.64, "flag": null, "flag_c": null, "sho_r3": 2.5, "sho_r6": 2.43, "sho_r5": 2.69, "kshare": 30.0, "early": "6下", "tk_per_s": 0.63, "c1_per_s": 1.35, "j_per_pop": 28.5, "c1_per_pop": 16.1, "s_per_pop": 11.9, "early_t": "6月下旬"}, {"code": 21, "pref": "岐阜県", "pop": 1916, "nfac": 1, "fac": "岐阜大学", "tkok": 220, "nsho1": 4, "csho1": 500, "sho_j": 467.0, "sho_s": 244.0, "sho_r": 1.91, "chu_j": 411.0, "chu_s": 129.0, "chu_r": 3.19, "flag": null, "flag_c": null, "sho_r3": 2.0, "sho_r6": 2.28, "sho_r5": 1.81, "kshare": 25.4, "early": "6中", "tk_per_s": 0.59, "c1_per_s": 2.05, "j_per_pop": 24.4, "c1_per_pop": 26.1, "s_per_pop": 12.7, "early_t": "6月中旬"}, {"code": 22, "pref": "静岡県", "pop": 3527, "nfac": 1, "fac": "静岡大学", "tkok": 260, "nsho1": 5, "csho1": 580, "sho_j": 982.0, "sho_s": 367.0, "sho_r": 2.68, "chu_j": 1066.0, "chu_s": 206.0, "chu_r": 5.17, "flag": null, "flag_c": null, "sho_r3": 2.71, "sho_r6": 2.56, "sho_r5": 2.89, "kshare": 24.8, "early": "5中", "tk_per_s": 0.45, "c1_per_s": 1.58, "j_per_pop": 27.8, "c1_per_pop": 16.4, "s_per_pop": 10.4, "early_t": "5月中旬"}, {"code": 23, "pref": "愛知県", "pop": 7460, "nfac": 1, "fac": "愛知教育大学", "tkok": 729, "nsho1": 18, "csho1": 2594, "sho_j": 2348.0, "sho_s": 986.0, "sho_r": 2.38, "chu_j": 2051.0, "chu_s": 535.0, "chu_r": 3.53, "flag": null, "flag_c": "中高合算", "sho_r3": 2.33, "sho_r6": 2.28, "sho_r5": 2.32, "kshare": 26.7, "early": "6中", "tk_per_s": 0.48, "c1_per_s": 2.63, "j_per_pop": 31.5, "c1_per_pop": 34.8, "s_per_pop": 13.2, "early_t": "6月中旬"}, {"code": 24, "pref": "三重県", "pop": 1711, "nfac": 1, "fac": "三重大学", "tkok": 200, "nsho1": 3, "csho1": 450, "sho_j": 619.0, "sho_s": 254.0, "sho_r": 2.44, "chu_j": 599.0, "chu_s": 158.0, "chu_r": 3.79, "flag": null, "flag_c": null, "sho_r3": 2.76, "sho_r6": 2.99, "sho_r5": 2.86, "kshare": 13.5, "early": "6中", "tk_per_s": 0.49, "c1_per_s": 1.77, "j_per_pop": 36.2, "c1_per_pop": 26.3, "s_per_pop": 14.8, "early_t": "6月中旬"}, {"code": 25, "pref": "滋賀県", "pop": 1402, "nfac": 1, "fac": "滋賀大学", "tkok": 230, "nsho1": 2, "csho1": 310, "sho_j": 551.0, "sho_s": 237.0, "sho_r": 2.32, "chu_j": 532.0, "chu_s": 147.0, "chu_r": 3.62, "flag": null, "flag_c": null, "sho_r3": 2.37, "sho_r6": 2.42, "sho_r5": 2.38, "kshare": 22.4, "early": "6中", "tk_per_s": 0.6, "c1_per_s": 1.31, "j_per_pop": 39.3, "c1_per_pop": 22.1, "s_per_pop": 16.9, "early_t": "6月中旬"}, {"code": 26, "pref": "京都府", "pop": 2520, "nfac": 1, "fac": "京都教育大学", "tkok": 300, "nsho1": 11, "csho1": 1234, "sho_j": 880.0, "sho_s": 314.0, "sho_r": 2.8, "chu_j": 846.0, "chu_s": 185.0, "chu_r": 4.43, "flag": null, "flag_c": "中高合算", "sho_r3": 3.31, "sho_r6": 3.24, "sho_r5": 3.9, "kshare": 19.4, "early": "6中", "tk_per_s": 0.6, "c1_per_s": 3.93, "j_per_pop": 34.9, "c1_per_pop": 49.0, "s_per_pop": 12.5, "early_t": "6月中旬"}, {"code": 27, "pref": "大阪府", "pop": 8757, "nfac": 1, "fac": "大阪教育大学", "tkok": 550, "nsho1": 23, "csho1": 2733, "sho_j": 2675.0, "sho_s": 1075.0, "sho_r": 3.07, "chu_j": 2654.0, "chu_s": 663.0, "chu_r": 3.07, "flag": "小中合算", "flag_c": "小中合算", "sho_r3": 3.33, "sho_r6": 3.49, "sho_r5": 3.43, "kshare": 13.6, "early": "6中", "tk_per_s": 0.32, "c1_per_s": 2.54, "j_per_pop": 30.5, "c1_per_pop": 31.2, "s_per_pop": 12.3, "early_t": "6月中旬"}, {"code": 28, "pref": "兵庫県", "pop": 5337, "nfac": 1, "fac": "兵庫教育大学", "tkok": 160, "nsho1": 15, "csho1": 1895, "sho_j": 2165.0, "sho_s": 784.0, "sho_r": 2.76, "chu_j": 1567.0, "chu_s": 433.0, "chu_r": 3.96, "flag": null, "flag_c": "中高合算", "sho_r3": 3.36, "sho_r6": 3.5, "sho_r5": 3.82, "kshare": 14.6, "early": "6中", "tk_per_s": 0.13, "c1_per_s": 2.42, "j_per_pop": 40.6, "c1_per_pop": 35.5, "s_per_pop": 14.7, "early_t": "6月中旬"}, {"code": 29, "pref": "奈良県", "pop": 1285, "nfac": 1, "fac": "奈良教育大学", "tkok": 255, "nsho1": 5, "csho1": 682, "sho_j": 553.0, "sho_s": 145.0, "sho_r": 3.81, "chu_j": 430.0, "chu_s": 84.0, "chu_r": 5.12, "flag": null, "flag_c": null, "sho_r3": 4.08, "sho_r6": 4.5, "sho_r5": 3.94, "kshare": 20.9, "early": "6中", "tk_per_s": 1.11, "c1_per_s": 4.7, "j_per_pop": 43.0, "c1_per_pop": 53.1, "s_per_pop": 11.3, "early_t": "6月中旬"}, {"code": 30, "pref": "和歌山県", "pop": 880, "nfac": 1, "fac": "和歌山大学", "tkok": 165, "nsho1": 3, "csho1": 265, "sho_j": 350.0, "sho_s": 109.0, "sho_r": 3.21, "chu_j": 383.0, "chu_s": 65.0, "chu_r": 5.89, "flag": null, "flag_c": null, "sho_r3": 3.03, "sho_r6": 2.77, "sho_r5": 3.11, "kshare": 20.5, "early": "6中", "tk_per_s": 0.95, "c1_per_s": 2.43, "j_per_pop": 39.8, "c1_per_pop": 30.1, "s_per_pop": 12.4, "early_t": "6月中旬"}, {"code": 31, "pref": "鳥取県", "pop": 531, "nfac": 0, "fac": "なし", "tkok": 0, "nsho1": 1, "csho1": 55, "sho_j": 481.0, "sho_s": 102.0, "sho_r": 4.72, "chu_j": 271.0, "chu_s": 37.0, "chu_r": 7.32, "flag": null, "flag_c": null, "sho_r3": 5.61, "sho_r6": 7.53, "sho_r5": 4.6, "kshare": 9.9, "early": "6上", "tk_per_s": 0.0, "c1_per_s": 0.54, "j_per_pop": 90.6, "c1_per_pop": 10.4, "s_per_pop": 19.2, "early_t": "6月上旬"}, {"code": 32, "pref": "島根県", "pop": 642, "nfac": 1, "fac": "島根大学", "tkok": 130, "nsho1": 2, "csho1": 170, "sho_j": 283.0, "sho_s": 118.0, "sho_r": 2.4, "chu_j": 267.0, "chu_s": 93.0, "chu_r": 2.87, "flag": null, "flag_c": null, "sho_r3": 2.21, "sho_r6": 2.36, "sho_r5": 1.89, "kshare": 23.7, "early": "5上", "tk_per_s": 0.62, "c1_per_s": 1.44, "j_per_pop": 44.1, "c1_per_pop": 26.5, "s_per_pop": 18.4, "early_t": "5月上旬"}, {"code": 33, "pref": "岡山県", "pop": 1831, "nfac": 1, "fac": "岡山大学", "tkok": 280, "nsho1": 9, "csho1": 1000, "sho_j": 740.0, "sho_s": 320.0, "sho_r": 2.31, "chu_j": 637.0, "chu_s": 149.0, "chu_r": 4.28, "flag": null, "flag_c": null, "sho_r3": 2.7, "sho_r6": 2.7, "sho_r5": 3.07, "kshare": 24.0, "early": "7上", "tk_per_s": 0.6, "c1_per_s": 3.12, "j_per_pop": 40.4, "c1_per_pop": 54.6, "s_per_pop": 17.5, "early_t": "7月上旬"}, {"code": 34, "pref": "広島県", "pop": 2714, "nfac": 1, "fac": "広島大学", "tkok": 137, "nsho1": 10, "csho1": 885, "sho_j": 767.0, "sho_s": 394.0, "sho_r": 1.95, "chu_j": 743.0, "chu_s": 178.0, "chu_r": 4.17, "flag": null, "flag_c": null, "sho_r3": 2.17, "sho_r6": 2.26, "sho_r5": 2.3, "kshare": 21.9, "early": "7中", "tk_per_s": 0.24, "c1_per_s": 2.25, "j_per_pop": 28.3, "c1_per_pop": 32.6, "s_per_pop": 14.5, "early_t": "7月中旬"}, {"code": 35, "pref": "山口県", "pop": 1281, "nfac": 1, "fac": "山口大学", "tkok": 180, "nsho1": 4, "csho1": 345, "sho_j": 280.0, "sho_s": 159.0, "sho_r": 1.76, "chu_j": 237.0, "chu_s": 112.0, "chu_r": 2.12, "flag": null, "flag_c": null, "sho_r3": 1.66, "sho_r6": 1.52, "sho_r5": 1.7, "kshare": 30.5, "early": "7上", "tk_per_s": 0.66, "c1_per_s": 2.17, "j_per_pop": 21.9, "c1_per_pop": 26.9, "s_per_pop": 12.4, "early_t": "7月上旬"}, {"code": 36, "pref": "徳島県", "pop": 685, "nfac": 1, "fac": "鳴門教育大学", "tkok": 100, "nsho1": 3, "csho1": 240, "sho_j": 307.0, "sho_s": 113.0, "sho_r": 2.72, "chu_j": 238.0, "chu_s": 56.0, "chu_r": 4.25, "flag": null, "flag_c": null, "sho_r3": 3.45, "sho_r6": 3.71, "sho_r5": 3.93, "kshare": 23.3, "early": "5下", "tk_per_s": 0.59, "c1_per_s": 2.12, "j_per_pop": 44.8, "c1_per_pop": 35.0, "s_per_pop": 16.5, "early_t": "5月下旬"}, {"code": 37, "pref": "香川県", "pop": 917, "nfac": 1, "fac": "香川大学", "tkok": 160, "nsho1": 3, "csho1": 280, "sho_j": 356.0, "sho_s": 129.0, "sho_r": 2.76, "chu_j": 354.0, "chu_s": 116.0, "chu_r": 3.05, "flag": null, "flag_c": null, "sho_r3": 3.27, "sho_r6": 3.68, "sho_r5": 3.36, "kshare": 27.2, "early": "7中", "tk_per_s": 0.65, "c1_per_s": 2.17, "j_per_pop": 38.8, "c1_per_pop": 30.5, "s_per_pop": 14.1, "early_t": "7月中旬"}, {"code": 38, "pref": "愛媛県", "pop": 1276, "nfac": 1, "fac": "愛媛大学", "tkok": 160, "nsho1": 1, "csho1": 160, "sho_j": 292.0, "sho_s": 182.0, "sho_r": 1.6, "chu_j": 273.0, "chu_s": 142.0, "chu_r": 1.92, "flag": null, "flag_c": null, "sho_r3": 1.87, "sho_r6": 1.95, "sho_r5": 2.06, "kshare": 29.0, "early": "7下", "tk_per_s": 0.49, "c1_per_s": 0.88, "j_per_pop": 22.9, "c1_per_pop": 12.5, "s_per_pop": 14.3, "early_t": "7月下旬"}, {"code": 39, "pref": "高知県", "pop": 656, "nfac": 1, "fac": "高知大学", "tkok": 130, "nsho1": 1, "csho1": 130, "sho_j": 623.0, "sho_s": 129.0, "sho_r": 4.83, "chu_j": 354.0, "chu_s": 42.0, "chu_r": 8.43, "flag": null, "flag_c": null, "sho_r3": 6.52, "sho_r6": 5.3, "sho_r5": 9.42, "kshare": 9.6, "early": "6上", "tk_per_s": 0.76, "c1_per_s": 1.01, "j_per_pop": 95.0, "c1_per_pop": 19.8, "s_per_pop": 19.7, "early_t": "6月上旬"}, {"code": 40, "pref": "福岡県", "pop": 5092, "nfac": 1, "fac": "福岡教育大学", "tkok": 615, "nsho1": 8, "csho1": 1110, "sho_j": 1762.0, "sho_s": 875.0, "sho_r": 2.01, "chu_j": 1525.0, "chu_s": 567.0, "chu_r": 2.69, "flag": null, "flag_c": null, "sho_r3": 1.87, "sho_r6": 1.9, "sho_r5": 1.7, "kshare": 28.0, "early": "6中", "tk_per_s": 0.43, "c1_per_s": 1.27, "j_per_pop": 34.6, "c1_per_pop": 21.8, "s_per_pop": 17.2, "early_t": "6月中旬"}, {"code": 41, "pref": "佐賀県", "pop": 788, "nfac": 1, "fac": "佐賀大学", "tkok": 120, "nsho1": 2, "csho1": 200, "sho_j": 278.0, "sho_s": 186.0, "sho_r": 1.49, "chu_j": 163.0, "chu_s": 85.0, "chu_r": 1.92, "flag": null, "flag_c": null, "sho_r3": 1.46, "sho_r6": 1.32, "sho_r5": 1.56, "kshare": 32.4, "early": "6中", "tk_per_s": 0.44, "c1_per_s": 1.08, "j_per_pop": 35.3, "c1_per_pop": 25.4, "s_per_pop": 23.6, "early_t": "6月中旬"}, {"code": 42, "pref": "長崎県", "pop": 1252, "nfac": 1, "fac": "長崎大学", "tkok": 180, "nsho1": 2, "csho1": 280, "sho_j": 283.0, "sho_s": 203.0, "sho_r": 1.39, "chu_j": 212.0, "chu_s": 110.0, "chu_r": 1.93, "flag": null, "flag_c": null, "sho_r3": 1.38, "sho_r6": 1.33, "sho_r5": 1.42, "kshare": 41.3, "early": "6中", "tk_per_s": 0.58, "c1_per_s": 1.38, "j_per_pop": 22.6, "c1_per_pop": 22.4, "s_per_pop": 16.2, "early_t": "6月中旬"}, {"code": 43, "pref": "熊本県", "pop": 1697, "nfac": 1, "fac": "熊本大学", "tkok": 220, "nsho1": 2, "csho1": 255, "sho_j": 366.0, "sho_s": 256.0, "sho_r": 1.43, "chu_j": 431.0, "chu_s": 189.0, "chu_r": 2.28, "flag": null, "flag_c": null, "sho_r3": 1.51, "sho_r6": 1.21, "sho_r5": 1.9, "kshare": 42.7, "early": "6中", "tk_per_s": 0.49, "c1_per_s": 1.0, "j_per_pop": 21.6, "c1_per_pop": 15.0, "s_per_pop": 15.1, "early_t": "6月中旬"}, {"code": 44, "pref": "大分県", "pop": 1085, "nfac": 1, "fac": "大分大学", "tkok": 150, "nsho1": 1, "csho1": 150, "sho_j": 215.0, "sho_s": 163.0, "sho_r": 1.32, "chu_j": 303.0, "chu_s": 107.0, "chu_r": 2.83, "flag": null, "flag_c": null, "sho_r3": 1.4, "sho_r6": 1.52, "sho_r5": 1.34, "kshare": 43.5, "early": "6中", "tk_per_s": 0.56, "c1_per_s": 0.92, "j_per_pop": 19.8, "c1_per_pop": 13.8, "s_per_pop": 15.0, "early_t": "6月中旬"}, {"code": 45, "pref": "宮崎県", "pop": 1033, "nfac": 1, "fac": "宮崎大学", "tkok": 140, "nsho1": 3, "csho1": 270, "sho_j": 228.0, "sho_s": 184.0, "sho_r": 1.24, "chu_j": 264.0, "chu_s": 83.0, "chu_r": 3.18, "flag": null, "flag_c": null, "sho_r3": 1.41, "sho_r6": 1.34, "sho_r5": 1.66, "kshare": 31.4, "early": "6中", "tk_per_s": 0.52, "c1_per_s": 1.47, "j_per_pop": 22.1, "c1_per_pop": 26.1, "s_per_pop": 17.8, "early_t": "6月中旬"}, {"code": 46, "pref": "鹿児島県", "pop": 1532, "nfac": 1, "fac": "鹿児島大学", "tkok": 190, "nsho1": 3, "csho1": 360, "sho_j": 302.0, "sho_s": 233.0, "sho_r": 1.3, "chu_j": 296.0, "chu_s": 138.0, "chu_r": 2.14, "flag": null, "flag_c": null, "sho_r3": 1.3, "sho_r6": 1.24, "sho_r5": 1.38, "kshare": 31.6, "early": "6中", "tk_per_s": 0.51, "c1_per_s": 1.55, "j_per_pop": 19.7, "c1_per_pop": 23.5, "s_per_pop": 15.2, "early_t": "6月中旬"}, {"code": 47, "pref": "沖縄県", "pop": 1466, "nfac": 1, "fac": "琉球大学", "tkok": 140, "nsho1": 2, "csho1": 190, "sho_j": 715.0, "sho_s": 252.0, "sho_r": 2.84, "chu_j": 751.0, "chu_s": 168.0, "chu_r": 4.47, "flag": null, "flag_c": null, "sho_r3": 3.03, "sho_r6": 2.96, "sho_r5": 3.29, "kshare": 12.5, "early": "6中", "tk_per_s": 0.33, "c1_per_s": 0.75, "j_per_pop": 48.8, "c1_per_pop": 13.0, "s_per_pop": 17.2, "early_t": "6月中旬"}], "presets": [{"label": "問1 養成学部の数と倍率", "x": "nfac", "y": "sho_r"}, {"label": "問1 国立定員÷採用者と倍率", "x": "tk_per_s", "y": "sho_r"}, {"label": "問2 免許の定員と受験者数", "x": "csho1", "y": "sho_j"}, {"label": "くらべ：採用者数と受験者数", "x": "sho_s", "y": "sho_j"}, {"label": "問2 定員÷採用者と倍率", "x": "c1_per_s", "y": "sho_r"}, {"label": "問2 人口あたり", "x": "c1_per_pop", "y": "j_per_pop"}, {"label": "出身の割合と倍率", "x": "kshare", "y": "sho_r"}], "tableCols": [{"key": "pref", "label": "都道府県"}, {"key": "fac", "label": "国立の教員養成学部（R6）", "text": true}, {"key": "tkok", "label": "国立養成の定員"}, {"key": "nsho1", "label": "小一種の大学数"}, {"key": "csho1", "label": "小一種の学科定員"}, {"key": "sho_j", "label": "小 受験者"}, {"key": "sho_s", "label": "小 採用者"}, {"key": "sho_r", "label": "小 倍率 R7", "flagKey": "flag"}, {"key": "sho_r3", "label": "小 倍率 3年平均", "flagKey": "flag"}, {"key": "chu_r", "label": "中 倍率 R7", "flagKey": "flag_c"}, {"key": "tk_per_s", "label": "国立定員÷小中採用"}, {"key": "c1_per_s", "label": "小一種定員÷小採用"}, {"key": "kshare", "label": "国立養成出身％(R6)"}, {"key": "early_t", "label": "一次試験（最初）", "text": true}, {"key": "pop", "label": "人口(千人)"}], "labelPrefs": ["鳥取県", "高知県", "奈良県", "京都府", "東京都", "大阪府", "沖縄県", "秋田県", "千葉県", "神奈川県", "新潟県", "愛知県", "福岡県", "山形県", "福島県"]};
+(function(){
+const V=D.vars, R=D.rows;
+const vmap=Object.fromEntries(V.map(v=>[v.key,v]));
+const $=s=>document.querySelector(s);
+const fmt=(v,k)=>{if(v==null||isNaN(v))return'—';const d=vmap[k]?.dec??0;return Number(v).toLocaleString('ja-JP',{minimumFractionDigits:d,maximumFractionDigits:d});};
+function ranks(a){const idx=a.map((v,i)=>[v,i]).sort((x,y)=>x[0]-y[0]);const r=new Array(a.length);let i=0;while(i<idx.length){let j=i;while(j+1<idx.length&&idx[j+1][0]===idx[i][0])j++;const m=(i+j)/2+1;for(let k=i;k<=j;k++)r[idx[k][1]]=m;i=j+1;}return r;}
+function pear(x,y){const n=x.length,mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let sxy=0,sx=0,sy=0;for(let i=0;i<n;i++){sxy+=(x[i]-mx)*(y[i]-my);sx+=(x[i]-mx)**2;sy+=(y[i]-my)**2;}return sxy/Math.sqrt(sx*sy);}
+function words(r){const a=Math.abs(r);const s=a<0.2?'ほとんど関係なし':a<0.4?'弱い':a<0.7?'中くらい':'強い';return a<0.2?s:(r>0?s+'＋（多いほど高い）':s+'−（多いほど低い）');}
+const xs=$('#xsel'),ys=$('#ysel');
+V.filter(v=>v.axis!=='y').forEach(v=>xs.add(new Option(v.label,v.key)));
+V.filter(v=>v.axis!=='x').forEach(v=>ys.add(new Option(v.label,v.key)));
+const pres=$('#presets');
+D.presets.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.textContent=p.label;b.onclick=()=>{xs.value=p.x;ys.value=p.y;draw();};pres.appendChild(b);});
+xs.onchange=ys.onchange=draw;
+const LABEL=new Set(D.labelPrefs);
+function draw(){
+  const xk=xs.value,yk=ys.value,X=vmap[xk],Y=vmap[yk];
+  [...pres.children].forEach((b,i)=>b.classList.toggle('on',D.presets[i].x===xk&&D.presets[i].y===yk));
+  const pts=R.filter(r=>r[xk]!=null&&r[yk]!=null&&!isNaN(r[xk])&&!isNaN(r[yk]));
+  const tx=v=>X.log?Math.log10(v):v, ty=v=>Y.log?Math.log10(v):v;
+  const W=860,H=480,ml=62,mr=20,mt=16,mb=52;
+  let x0=Math.min(...pts.map(p=>tx(p[xk]))),x1=Math.max(...pts.map(p=>tx(p[xk])));
+  let y0=Math.min(...pts.map(p=>ty(p[yk]))),y1=Math.max(...pts.map(p=>ty(p[yk])));
+  if(!X.log&&x0>=0&&X.zero!==false)x0=0; if(!Y.log&&y0>=0&&Y.zero!==false)y0=0;
+  const px=(x1-x0)*.05||1,py=(y1-y0)*.06||1; x0-=X.log?px:(x0===0?0:px); x1+=px; y1+=py; if(Y.log||y0!==0)y0-=py;
+  const sx=v=>ml+(tx(v)-x0)/(x1-x0)*(W-ml-mr), sy=v=>mt+(1-(ty(v)-y0)/(y1-y0))*(H-mt-mb);
+  function ticks(a,b,log){if(log){const t=[];for(let e=Math.floor(a);e<=Math.ceil(b);e++)for(const m of[1,2,5]){const v=m*10**e;if(Math.log10(v)>=a&&Math.log10(v)<=b)t.push(v);}return t;}
+    const span=b-a,st=10**Math.floor(Math.log10(span/5)),s=[1,2,5,10].map(k=>k*st).find(k=>span/k<=7);const t=[];for(let v=Math.ceil(a/s)*s;v<=b+1e-9;v+=s)t.push(+v.toFixed(6));return t;}
+  let g='';
+  ticks(y0,y1,Y.log).forEach(v=>{const y=sy(v);g+=`<line x1="${ml}" x2="${W-mr}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${ml-6}" y="${y+4}" text-anchor="end" font-size="12" fill="var(--sub)">${fmt(v,yk==='x'?0:null)}</text>`;});
+  ticks(x0,x1,X.log).filter(v=>X.dec!==0||Number.isInteger(v)).forEach(v=>{const x=sx(v);g+=`<line x1="${x}" x2="${x}" y1="${mt}" y2="${H-mb}" stroke="var(--grid)"/><text x="${x}" y="${H-mb+17}" text-anchor="middle" font-size="12" fill="var(--sub)">${Number(v).toLocaleString('ja-JP')}</text>`;});
+  g+=`<line x1="${ml}" x2="${W-mr}" y1="${H-mb}" y2="${H-mb}" stroke="var(--sub)"/>`;
+  g+=`<text x="${(ml+W-mr)/2}" y="${H-10}" text-anchor="middle" font-size="13" fill="var(--ink)">${X.label}${X.log?'（目もりは対数）':''}</text>`;
+  g+=`<text transform="translate(14 ${(mt+H-mb)/2}) rotate(-90)" text-anchor="middle" font-size="13" fill="var(--ink)">${Y.short||Y.label}${Y.log?'（対数）':''}</text>`;
+  // fit line (on transformed scale)
+  const a=pts.map(p=>tx(p[xk])),b=pts.map(p=>ty(p[yk]));
+  const n=a.length,ma=a.reduce((s,v)=>s+v)/n,mb2=b.reduce((s,v)=>s+v)/n;let sab=0,saa=0;for(let i=0;i<n;i++){sab+=(a[i]-ma)*(b[i]-mb2);saa+=(a[i]-ma)**2;}
+  const sl=sab/saa,ic=mb2-sl*ma; const fx0=Math.min(...a),fx1=Math.max(...a);
+  const toS=(t,ax)=>ax.log?10**t:t;
+  g+=`<line x1="${sx(toS(fx0,X))}" y1="${sy(toS(ic+sl*fx0,Y))}" x2="${sx(toS(fx1,X))}" y2="${sy(toS(ic+sl*fx1,Y))}" stroke="var(--fit)" stroke-width="2" stroke-dasharray="6 5"/>`;
+  const order=[...pts].sort((p,q)=>(p.pref==='山口県')-(q.pref==='山口県'));
+  order.forEach(p=>{const y=p.pref==='山口県',cy=sy(p[yk]);let cx=sx(p[xk]);if(X.jitter){cx+=((p.code*37)%13-6)*9;}
+    g+=`<circle class="pt" data-p="${p.pref}" cx="${cx}" cy="${cy}" r="${y?7.5:5.5}" fill="${y?'var(--yama)':(p.flag?'var(--dot-weak)':'var(--dot)')}" stroke="var(--card)" stroke-width="2"/>`;
+    if(LABEL.has(p.pref)||y) g+=`<text x="${cx+(cx>W-90?-9:9)}" y="${cy-8}" text-anchor="${cx>W-90?'end':'start'}" font-size="${y?13:12}" font-weight="${y?700:400}" fill="var(--ink)" paint-order="stroke" stroke="var(--card)" stroke-width="3">${p.pref.replace(/[都府県]$/,'')}</text>`;
+    g+=`<circle class="hit" data-p="${p.pref}" cx="${cx}" cy="${cy}" r="12" fill="transparent"/>`;});
+  const svg=$('#sc'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.innerHTML=g;
+  const r=pear(a,b), rho=pear(ranks(pts.map(p=>p[xk])),ranks(pts.map(p=>p[yk])));
+  $('#stat').innerHTML=`<span>都道府県の数：<b>${n}</b></span><span>相関係数 r＝<b>${r.toFixed(2)}</b>${X.log||Y.log?'（対数で計算）':''}</span><span>順位の相関 ρ＝<b>${rho.toFixed(2)}</b></span><span>読み方：<b>${words(rho)}</b></span>`;
+  $('#note').textContent=(X.note||'')+(Y.note?' '+Y.note:'');
+  const tip=$('#tip'),wrap=$('#wrap');
+  svg.querySelectorAll('.hit').forEach(c=>{c.onmouseenter=c.onclick=e=>{const p=R.find(q=>q.pref===c.dataset.p);
+    tip.innerHTML=`<b>${p.pref}</b><br>${X.short||X.label}：${fmt(p[xk],xk)}<br>${Y.short||Y.label}：${fmt(p[yk],yk)}${p.flag?'<br><span style="color:var(--warn)">※'+p.flag+'</span>':''}`;
+    tip.style.display='block';const bb=wrap.getBoundingClientRect(),cb=c.getBoundingClientRect();
+    let l=cb.left-bb.left+16,t=cb.top-bb.top-10; if(l>bb.width-200)l=cb.left-bb.left-tip.offsetWidth-6; tip.style.left=l+'px';tip.style.top=t+'px';};
+    c.onmouseleave=()=>tip.style.display='none';});
+}
+xs.value=D.presets[0].x; ys.value=D.presets[0].y; draw();
+// table
+const cols=D.tableCols; let sk='code',asc=true;
+function tbl(){const th=cols.map(c=>`<th data-k="${c.key}">${c.label}${sk===c.key?(asc?' ▲':' ▼'):''}</th>`).join('');
+  const rows=[...R].sort((p,q)=>{const a=p[sk],b=q[sk];if(typeof a==='string')return asc?a.localeCompare(b,'ja'):b.localeCompare(a,'ja');return asc?(a??-1)-(b??-1):(b??-1)-(a??-1);});
+  $('#tbl').innerHTML=`<thead><tr>${th}</tr></thead><tbody>`+rows.map(r=>`<tr class="${r.pref==='山口県'?'yama':''}">`+cols.map(c=>{let v=c.key==='pref'?r.pref:(c.text?(r[c.key]??'—'):fmt(r[c.key],c.key));if(c.flagKey&&r[c.flagKey])v+=` <span class="fl">※</span>`;return`<td>${v}</td>`;}).join('')+'</tr>').join('')+'</tbody>';
+  $('#tbl').querySelectorAll('th').forEach(h=>h.onclick=()=>{const k=h.dataset.k;if(sk===k)asc=!asc;else{sk=k;asc=k==='pref'||k==='code';}tbl();});}
+tbl();
+})();
+
+</script>
+</body>
+</html>

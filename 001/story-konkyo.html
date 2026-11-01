@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>私の思いと根拠</title>
+<meta name="description" content="なぜ突き詰めたいか、何を変えたいか、どうやったら変えられそうか。思いの各章に、公表資料で調べた根拠をつないだページ">
+<style>
+  :root {
+    --bg: #fafaf7; --ink: #333; --sub: #666; --card: #fff; --line: #ddd;
+    --green: #2f6f4f; --green-soft: #eef5f0; --rust: #b5563a;
+    --flash-bg: #fff7e0; --flash-line: #e0b43c; --flash-ink: #8a5a00;
+    --ev-bg: #f3f7fb; --ev-line: #9db6d1; --ev-ink: #1f4f7a; --link: #1f5fa8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16181b; --ink: #e6e4df; --sub: #a3a9b1; --card: #1f2226; --line: #363a40;
+      --green: #7cc7ae; --green-soft: #1f3a31; --rust: #e0896c;
+      --flash-bg: #3a2f1a; --flash-line: #a37d2c; --flash-ink: #e8b75c;
+      --ev-bg: #1c2733; --ev-line: #3f5d7d; --ev-ink: #9cc3ea; --link: #8ab8f0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16181b; --ink: #e6e4df; --sub: #a3a9b1; --card: #1f2226; --line: #363a40;
+    --green: #7cc7ae; --green-soft: #1f3a31; --rust: #e0896c;
+    --flash-bg: #3a2f1a; --flash-line: #a37d2c; --flash-ink: #e8b75c;
+    --ev-bg: #1c2733; --ev-line: #3f5d7d; --ev-ink: #9cc3ea; --link: #8ab8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.9;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  header {
+    background: #2f6f4f;
+    color: #fff;
+    padding: 32px 16px;
+    text-align: center;
+  }
+  header h1 { margin: 0; font-size: 1.6rem; }
+  header .sub { margin: 8px 0 0; font-size: 0.95rem; opacity: 0.9; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+  .howto {
+    margin: 0 0 8px; padding: 12px 16px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 6px; font-size: 0.92rem; color: var(--sub);
+  }
+  .howto b { color: var(--ev-ink); }
+  h2 {
+    font-size: 1.15rem;
+    border-left: 5px solid var(--green);
+    padding-left: 10px;
+    margin-top: 44px;
+  }
+  p { margin: 0 0 14px; }
+  a { color: var(--link); }
+  .point {
+    margin: 24px 0 18px; padding: 14px 16px; background: var(--card);
+    border: 1px solid var(--line); border-left: 5px solid var(--rust);
+    font-weight: bold; font-size: 1.05rem;
+  }
+  .point .num { color: var(--rust); margin-right: 4px; }
+  .voice { font-size: 1.1rem; font-weight: bold; color: var(--green); }
+  .tasks {
+    margin: 0 0 14px; padding: 12px 16px; background: var(--card);
+    border: 1px dashed var(--line); font-size: 0.95rem;
+  }
+  .flash {
+    margin: 28px 0; padding: 18px 16px; background: var(--flash-bg);
+    border: 2px solid var(--flash-line); border-radius: 8px; text-align: center; font-weight: bold;
+  }
+  .flash .big { display: block; font-size: 1.2rem; color: var(--flash-ink); margin-top: 4px; }
+  ol.road { list-style: none; padding: 0; margin: 20px 0; }
+  ol.road li {
+    position: relative; padding: 10px 14px 10px 52px; margin-bottom: 10px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+  }
+  ol.road li .n { position: absolute; left: 12px; top: 9px; font-size: 1.3rem; line-height: 1.4; }
+  ol.road li.goal { border: 2px solid var(--green); background: var(--green-soft); }
+  ol.road .year {
+    display: inline-block; margin-left: 6px; padding: 0 8px; background: #2f6f4f; color: #fff;
+    border-radius: 10px; font-size: 0.8rem; font-weight: bold; white-space: nowrap;
+  }
+  ol.road .ref { display: block; font-size: 0.85rem; margin-top: 2px; }
+  .closing {
+    margin: 32px 0 8px; padding: 18px 16px; background: #2f6f4f; color: #fff;
+    border-radius: 8px; text-align: center; font-size: 1.1rem; font-weight: bold;
+  }
+  .postscript { margin-top: 48px; padding-top: 8px; border-top: 2px dashed var(--line); }
+  ul.needs { list-style: none; padding: 0; margin: 0 0 14px; }
+  ul.needs li {
+    margin-bottom: 8px; padding: 10px 14px; background: var(--card);
+    border: 1px solid var(--line); border-left: 5px solid var(--rust); font-weight: bold;
+  }
+  .example {
+    margin: 0 0 16px; padding: 14px 16px 4px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  .example .label { font-weight: bold; color: var(--green); margin-bottom: 8px; }
+  .example ul { margin: 0 0 14px; padding-left: 1.3em; }
+  .example li { margin-bottom: 4px; }
+
+  .later {
+    margin: 24px 0 8px; padding: 14px 16px 4px; background: var(--card);
+    border: 2px solid var(--green); border-radius: 8px;
+  }
+  .later .label { font-weight: bold; color: var(--green); margin-bottom: 8px; }
+  .later ul { margin: 0 0 14px; padding-left: 1.3em; }
+  .later li { margin-bottom: 10px; }
+
+  /* 根拠 */
+  details.ev {
+    margin: 18px 0 8px; background: var(--ev-bg); border: 1px solid var(--ev-line);
+    border-radius: 8px; font-size: 0.93rem; line-height: 1.75;
+  }
+  details.ev summary {
+    cursor: pointer; padding: 10px 14px; font-weight: bold; color: var(--ev-ink); list-style: none;
+  }
+  details.ev summary::-webkit-details-marker { display: none; }
+  details.ev summary::before { content: "▶"; display: inline-block; margin-right: 8px; font-size: 0.75rem; transition: transform .15s; }
+  details.ev[open] summary::before { transform: rotate(90deg); }
+  details.ev ul { margin: 0; padding: 0 14px 12px 14px; list-style: none; }
+  details.ev li { padding: 8px 0; border-top: 1px dashed var(--ev-line); }
+  details.ev li a { font-weight: bold; }
+  details.ev .date { color: var(--sub); font-size: 0.82rem; margin-left: 4px; }
+  details.ev .find { display: block; margin-top: 2px; }
+
+  .to-data {
+    margin: 40px 0 0; padding: 16px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 8px; text-align: center;
+  }
+  .back { text-align: center; margin-top: 28px; font-size: 0.95rem; }
+  footer {
+    text-align: center; font-size: 0.85rem; color: var(--sub);
+    padding: 24px 16px; border-top: 1px solid var(--line); margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>私の思い・ロードマップ</h1>
+  <p class="sub">私を突き動かすものは何か、何をするか</p>
+</header>
+
+<main>
+
+  <p class="howto">各章の終わりにある <b>▶ 根拠を見る</b> を開くと、その章のもとになった調べ（だれでも見られる公表資料をもとにしたもの）に進めます。</p>
+
+  <h2>法改正と「実施計画」</h2>
+  <p>令和７年に法改正がなされ、いよいよ教育委員会が教職員の業務量管理をPDCAを回して厳密に行うこととなりました。</p>
+  <p>国が作成し例示を参考に、各市町教育委員会がウェブページで公表している「業務量管理・健康確保措置実施計画」が、それです。</p>
+
+  <details class="ev">
+    <summary>根拠を見る：計画をくらべる</summary>
+    <ul>
+      <li><a href="gyomuryo-keikaku-hikaku-v3.html">業務量管理計画 19市町比較</a><span class="date">2026年9月14日</span>（<a href="gyomuryo-keikaku-sp-v3.html">スマホ版</a>）
+        <span class="find">19市町すべてで計画を確認。目標はほぼ同じ「月平均30時間程度」ですが、持ち帰り仕事をどう把握するかまで決めた計画はありません。</span></li>
+      <li><a href="kasokuka-plan.html">山口県「加速化プラン」の変遷</a><span class="date">2026年10月4日</span>
+        <span class="find">目標は「3年で30%減」から「月平均30時間以内」へ。令和6年度は小学校35.0時間・中学校41.7時間で、まだ届いていません。</span></li>
+    </ul>
+  </details>
+
+  <h2>比べてみて、衝撃を受けました</h2>
+  <p>AIを使って、県内各市町のそれらを比較してみると、<br>私は、衝撃を受けました。</p>
+
+  <p class="point"><span class="num">①</span>美祢市の小学校教職員は県内で一番「時間外在校等時間」の平均が短い。</p>
+
+  <p class="voice">・・・え！？私も同僚も知人も、ものすごい量の業務をしていますよ？！</p>
+  <p>でも、確かに、私は家庭との両立のため、17時半～18時には退勤し、あとは「持ち帰り」です。</p>
+  <p>小規模校は複式ですし、分掌も多いです。<br>
+  年度初めの学年業務、各分掌業務（特に運動会関連）が重なり、土日の夜に合計１０時間することもあります。<br>
+  研究授業の準備や、学期末評価は早め早めにしますが、それでもどうしても落ち着いて考えるのは、夜中です。</p>
+  <p>そうでない平日も、</p>
+  <p class="tasks">修学旅行・宿泊学習関連、卒業関連、学習発表会、マラソン大会、陸上記録会、水泳記録会、小体連理事会準備、交流学習準備、校外学習計画、全学調関連、スポーツテスト関連、などなど、</p>
+  <p>絶え間なく何かがあります。<br>
+  授業準備は最後の最後で、学校でする暇はまずないです。</p>
+
+  <p>それなのに、客観的に見ると、「美祢市小学校は残業が少ない」なのですね。</p>
+  <p class="voice">シンプルに、悔しいです。</p>
+
+  <div class="later">
+    <p class="label">【その後、わかったこと】（2026年10月）</p>
+    <p>その後、全国の調査（文科省の「見える化」調査）を調べてまとめると、見え方が変わりました。</p>
+    <ul>
+      <li><b>山口県は、全国で見ると時間が長い方でした。</b><br>
+        市町立小学校の教諭の月平均（試算）は37.5時間で、47都道府県の中で長い方から6位。中学校は45.5時間で10位、県立高校も42.3時間で45県中10位です。</li>
+      <li><b>しかも、そもそも数字の取り方がそろっていませんでした。</b><br>
+        下関・宇部・山口・長門の4市は、文科省の調査に教諭の数字がありません。萩・防府・岩国など11市町は、教諭の数字に養護教諭など他の職の数字が混ざっています。教諭だけの数字を出せたのは、19市町のうち4市町だけ。県内で教諭の多い市の数字が、入っていないのです。</li>
+      <li>使えない数字の割合（74%）は、47都道府県で最も高い県でした。全国でも約2割の教育委員会で、教諭の数字がそのままでは使えません。すべての市町村がそろっていたのは、鳥取・香川・福井・三重の4県だけです。</li>
+    </ul>
+    <p class="voice">「県内で一番短い」という比べ方そのものが、同じ物差しの上に立っていなかったのです。</p>
+    <p>全国で、データの取り方をそろえなければ、そもそも比べることができない。<br>
+    これが、私が次に突き詰めたいことになりました。</p>
+  </div>
+
+  <details class="ev">
+    <summary>根拠を見る：数字は本当に短いのか</summary>
+    <ul>
+      <li><a href="zikangai-zaikoto.html">「時間外在校等時間」あなたは何時間？平均は何時間？</a><span class="date">2026年10月4日（10月17日更新）</span>
+        <span class="find">全国の教諭の月平均（令和6年度）は小学校30.6時間・中学校40.4時間。山口県と19市町の数字、記録と実態のずれを整理しています。</span>
+        <span class="find">とくに：<a href="zikangai-zaikoto.html#pref">4章 47都道府県（数字の出し方がそろっていない）</a>／<a href="zikangai-zaikoto.html#yamaguchi">5章 山口県と19市町</a>／<a href="zikangai-zaikoto.html#tsutaeru">山口県・各市町に伝えること</a></span></li>
+      <li><a href="shokibo-fukabori.html">小規模校が多い自治体は、働き方改革を進めにくいか</a><span class="date">2026年10月17日</span>
+        <span class="find">美祢市の小学校は、冬だけでなく1年を通して短い（秋の水準で25.5時間）。養護教諭などの割合を差し引いても短さは説明しきれず、「持ち帰り」などが残る仮説です。</span></li>
+      <li><a href="mine-hatarakikata.html">美祢市立小中学校（14校）の公表状況</a><span class="date">2026年9月13日</span>
+        <span class="find">14校すべてに掲載あり。数字を載せたのは9校で、載せる指標は学校ごとにばらばらでした。</span></li>
+    </ul>
+  </details>
+
+  <h2>「持ち帰り」を証明するには</h2>
+  <p>これを分かっていただくには、「持ち帰り」も含めた業務時間を証明しなくてはならないのです。<br>
+  （ちなみに「持ち帰り業務がある」と触れているのは市内で１校だけでした。）</p>
+  <p>でも、そもそも、国も市も「持ち帰りを把握し、ある場合は対策を」と言っているのです。<br>
+  その把握の方法は？！と思って、かなり調べました。</p>
+
+  <p class="point"><span class="num">②</span>ところが・・・実態把握の方法は、どこにも書いていないんです！</p>
+
+  <p>美祢市も、だいたいの市町教委も、「持ち帰り・休憩時間が課題の学校に、当該年度中の改善を目指し個別に支援・指導する」と書いています。しかしその把握方法の記載はないんです。</p>
+  <p>市もこれをどうにかしたいと思っているのです。しかし「持ち帰り」の記録のための新たな負担を現場にかけない方法が分からず困っているのです。</p>
+  <p>それを解決する一つになればと、自作アプリ「私のタスク　まもるさん」による私の１日20秒記録を紹介しました。<br>
+  しかし、普及するとは、開発者の私ですら思えません。<br>
+  やはり、手間です。</p>
+
+  <details class="ev">
+    <summary>根拠を見る：持ち帰り・休憩は、把握されているか</summary>
+    <ul>
+      <li><a href="zaikoto-jikan.html">在校等時間と持ち帰り業務（ことばの整理）</a><span class="date">2026年9月12日</span>
+        <span class="find">文科省のQ&amp;Aでは、持ち帰りの時間は在校等時間に入らない、制度にもとづくテレワークは入る、とはっきり分けられました。</span></li>
+      <li><a href="zaikoto-jittai-haaku.html">持ち帰りと休憩の実態把握（指針・Q&amp;Aの整理）</a><span class="date">2026年9月23日</span>
+        <span class="find">持ち帰りは「原則しない」もの。あれば校長と教育委員会が実態をつかみ、減らすことが求められています。</span></li>
+      <li><a href="mochikaeri-01-yamaguchi.html">山口県19市町 出退勤管理白書</a><span class="date">2026年9月23日</span>
+        <span class="find">19市町とも出退勤は客観的な方法で記録。でも、昼の休憩や持ち帰りを記録するしくみは、どの市町にもありません。</span></li>
+      <li><a href="mochikaeri-02-47.html">持ち帰り把握 47都道府県一覧</a><span class="date">2026年9月29日</span>
+        <span class="find">「把握している」教育委員会は全国で1,804のうち776（43.0%）。山口県内は19市町のうち3つです。</span></li>
+      <li><a href="mochikaeri-03-zenkoku.html">持ち帰り把握 全国の実例</a><span class="date">2026年9月25日</span>
+        <span class="find">多くは年に一度などの調査や聞き取り。毎日記録しているのは、大阪市・鳥取県・香川県（県立）だけでした。</span></li>
+      <li><a href="mochikaeri-04-kekka.html">持ち帰り・休憩 調査結果</a><span class="date">2026年10月4日</span>
+        <span class="find">持ち帰りをしている先生は3〜7割、持ち帰る人は1日約1時間。休憩は、どの調査も「ほとんど取れていない」でした。</span></li>
+    </ul>
+  </details>
+
+  <div class="flash">
+    考えて考えて、ふと、私はある方法を思いつきました！
+    <span class="big">毎日１秒で「持ち帰り」「休憩」が記録できます！<br>しかもほぼ無料！</span>
+  </div>
+
+  <details class="ev">
+    <summary>根拠を見る：その方法と、今あるしくみ</summary>
+    <ul>
+      <li>周南市 T-Net とタイムカードNEO「把握できるちゃん」<span class="date">2026年9月26日</span>
+        <span class="find">打刻の仕組みはもうある。足りないのは「持ち帰り」と「休憩」。打刻に質問を2つ足すだけで進める案と、予算の目安・道のりをまとめた提案（仮案）です。</span></li>
+      <li><a href="shuttaikin-hikaku.html">教職員の出退勤管理システム比較</a><span class="date">2026年9月23日</span>
+        <span class="find">しくみによって、教育委員会とのつながり方や費用の決まり方が大きく違います。</span></li>
+    </ul>
+  </details>
+
+  <h2>ロードマップ</h2>
+  <p>これで見えてきました。<br>私がこれからやりたいこと、ロードマップは、これです。</p>
+
+  <ol class="road">
+    <li><span class="n">1️⃣</span>とりあえず本校から、毎日１秒で「持ち帰り」「休憩」を記録していく。</li>
+    <li><span class="n">2️⃣</span>市に提案して、導入！　ほぼ無料！
+      <span class="ref">→ 提案の中身：T-Netと把握できるちゃん</span></li>
+    <li><span class="n">3️⃣</span>市で「持ち帰り」「休憩」も含めた、実質的な業務時間が分かる。</li>
+    <li><span class="n">4️⃣</span>他の市町にも広がる。他の市町も「持ち帰り」「休憩」を含めた、実質的な業務時間が分かる。
+      <span class="ref">→ 今の各市町：<a href="mochikaeri-01-yamaguchi.html">山口県19市町 出退勤管理白書</a></span></li>
+    <li><span class="n">5️⃣</span>美祢市（小規模校が多い自治体）の業務時間が短いわけではない、むしろ長いことが分かる。</li>
+    <li class="goal"><span class="n">6️⃣</span>なぜそうなのか、「小規模校業務コスト」なるものについて提言する。<span class="year">令和11年度</span>
+      <span class="ref">→ 提言のたたき台：<a href="shokibo-fukushiki-teigen.html">小規模校・複式学級の業務構造から考える学校の働き方改革</a>／<a href="shokibo-fukabori.html">小規模校の深掘り</a></span></li>
+    <li class="goal"><span class="n">7️⃣</span>それを加味した人員加配、予算加配がなされ、小規模校が多い自治体の働き方改革が進む。<span class="year">令和13年度</span></li>
+    <li><span class="n">8️⃣</span>小規模校が多い自治体の学校教育が充実し、教職員や児童生徒のウェルビーイングが高まる。
+      <span class="ref">→ 時間だけでは測れないもの：<a href="hatarakigai.html">🍀 働きやすさと働きがい</a></span></li>
+  </ol>
+  <p>目標、6️⃣が３年後。令和11年度。<br>7️⃣は令和13年度。</p>
+
+  <div class="closing">この「感覚」を「数値」で可視化したい。</div>
+
+  <h2>だから、「地図」と「本棚」を</h2>
+  <p>そして、教委や管理職と協議する際に、<br>
+  抽象的なお願い、忙しいという訴えではなく、<br>
+  「根拠となる法律や文科省指針」を、はっきり提示したい。</p>
+  <p>そのためには、すぐに開ける資料が必要です。<br>
+  でも、・・・・文科省サイトには、字ばかりのものが山ほどあるんです！<br>
+  どれを読めばよいの？</p>
+  <p>それを解決する、「地図」、「本棚」を、ここにつくりたい。</p>
+
+  <details class="ev">
+    <summary>根拠を見る：いまの「本棚」</summary>
+    <ul>
+      <li><a href="index.html">学校の働き方改革データ（入口）</a><span class="date">2026年10月18日</span>
+        <span class="find">これまでの調べを、計画・時間外在校等時間・持ち帰りと休憩・学校の公表・学校の規模の分野ごとにまとめた一覧です。</span></li>
+      <li><a href="zaikoto-jittai-haaku.html">持ち帰りと休憩の実態把握（指針・Q&amp;Aの整理）</a><span class="date">2026年9月23日</span>
+        <span class="find">国の指針・Q&amp;Aの該当箇所を、原文とリンクつきで整理しています。</span></li>
+    </ul>
+  </details>
+
+  <section class="postscript">
+    <h2>【追記】</h2>
+    <p>この数年間かけて現場で進めてきた働き方改革。<br>
+    しかし、管理職が変わると、見事に後退するのです。</p>
+    <p class="voice">結局、管理職次第なのだと痛感しました。</p>
+    <p>これを防ぐ方法を確立しなければ・・・<br>
+    どうやって・・・</p>
+
+    <p>やはり、「教育委員会による指導」しかないのではないでしょうか。<br>
+    そのためには、</p>
+    <ul class="needs">
+      <li>「①　市町による、基準」と、</li>
+      <li>「②　正しい報告（校長による虚偽報告を防ぐ）」</li>
+    </ul>
+    <p>が必要なのではないでしょうか。</p>
+
+    <p>例えば、</p>
+    <div class="example">
+      <p class="label">①　市町による、基準</p>
+      <p>「小規模校では、～～のような特徴があります。実際、今年度前期の時間外勤務時間は、長時間です。<br>
+      ですから、</p>
+      <ul>
+        <li>通知表は年に2回とし、所見は年度末のみとします。</li>
+        <li>総案を書く研究授業は年に１人までとします。</li>
+        <li>朝の交通立哨は、教職員は実施しません。</li>
+        <li>中間休み・昼休みの見守りは、休憩時間ではない教職員や業務支援員で行います。</li>
+        <li>学級通信は作成せず、学校通信とします。</li>
+        <li>給食指導は、常勤教職員全員による輪番制をとる等します。</li>
+        <li>掃除の指導、プール機械操作当番は、常勤教職員全員による輪番制をとる等します。」</li>
+      </ul>
+      <p>等。</p>
+    </div>
+    <div class="example">
+      <p class="label">②　正しい報告</p>
+      <p>「上記①が実施されているかどうか、校長による報告のみでなく、教職員（抽出）によるアンケート回答も同時に行う。」</p>
+    </div>
+
+    <p>そして、これを実現するためには、やはり「データ」が必要なのです。「持ち帰り」「休憩」も含めた勤務実態の。</p>
+    <p class="voice">そのためにも、何とかして実現したいのです。</p>
+
+    <details class="ev">
+      <summary>根拠を見る：基準と報告</summary>
+      <ul>
+        <li><a href="shokibo-fukushiki-teigen.html">小規模校・複式学級の業務構造から考える学校の働き方改革（提言 概要版）</a>
+          <span class="find">小規模校・複式の7つの業務負荷を示し、県・市教委が学校規模に応じた業務基準・業務免除基準を整えることを提言しています。</span></li>
+        <li><a href="shokibo-fukabori.html">小規模校が多い自治体は、働き方改革を進めにくいか</a><span class="date">2026年10月17日</span>
+          <span class="find">小規模校の負担は「時間の量」より「一人が何役も持つ」「代わりがいない」こと。小規模校には「学校をまたいで束ねる」打ち手が効きそうです（仮説）。</span></li>
+        <li><a href="sanyo-onoda-hatarakikata.html">山陽小野田市立小中学校（18校）の公表状況</a><span class="date">2026年9月13日</span>
+          <span class="find">ほぼ全校が県の様式で同じ物差しの数字を公表。自分の学校の目標を掲げた学校は0校でした。学校の報告をそろえる手がかりになります。</span></li>
+        <li><a href="kasokuka-plan.html">山口県「加速化プラン」の変遷</a><span class="date">2026年10月4日</span>
+          <span class="find">県の「現状分析ツール」（教職員の意識調査）の設問にもふれています。教職員の声を集めるしくみはあっても、持ち帰りの時間はわかりません。</span></li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="to-data">
+    すべての調べの一覧は<br><a href="index.html"><b>学校の働き方改革データ（入口）</b></a>へ
+  </div>
+
+  <p class="back"><a href="./">← トップページへ戻る</a></p>
+</main>
+
+<footer>
+  &copy; 2026 教職員不足解消をめざす教員A
+</footer>
+
+</body>
+</html>
