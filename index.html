@@ -61,6 +61,94 @@
     margin-top: 40px;
   }
 </style>
+<style>
+  /* トップの挿絵（荷車の荷物＝テトリス） */
+  .hero { max-width: 720px; margin: 0 auto; padding: 18px 20px 0; }
+  .hero svg { display: block; width: 100%; height: auto; }
+  .hero-cap {
+    margin: 4px 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #777;
+  }
+  .hero .row, .hero .piece, .hero .bent, .hero .up, .hero .cartbody, .hero .speed {
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  .hero .up, .hero .speed, .hero .piece { opacity: 0; }
+  .hero .rowA { animation-name: rowA; }
+  .hero .rowB { animation-name: rowB; }
+  .hero .rowC { animation-name: rowC; }
+  .hero .rowD { animation-name: rowD; }
+  .hero .pieceL { animation-name: dropL; }
+  .hero .pieceT { animation-name: dropT; }
+  .hero .bent { animation-name: bent; }
+  .hero .up   { animation-name: up; }
+  .hero .cartbody { animation-name: bob; }
+  .hero .speed { animation-name: speed; }
+
+  @keyframes rowA {
+    0%, 20% { opacity: 1; }
+    22% { opacity: .15; }
+    24% { opacity: 1; }
+    26%, 88% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes rowB {
+    0%, 28% { opacity: 1; transform: translateY(0); }
+    34%, 42% { opacity: 1; transform: translateY(25px); }
+    44% { opacity: .15; transform: translateY(25px); }
+    45.5% { opacity: 1; transform: translateY(25px); }
+    47%, 87.9% { opacity: 0; transform: translateY(25px); }
+    88% { opacity: 0; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rowC {
+    0%, 28% { opacity: 1; transform: translateY(0); }
+    34%, 48% { opacity: 1; transform: translateY(25px); }
+    54%, 62% { opacity: 1; transform: translateY(50px); }
+    64% { opacity: .15; transform: translateY(50px); }
+    65.5% { opacity: 1; transform: translateY(50px); }
+    67%, 87.9% { opacity: 0; transform: translateY(50px); }
+    88% { opacity: 0; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rowD {
+    0%, 28% { opacity: 1; transform: translateY(0); }
+    34%, 48% { opacity: 1; transform: translateY(25px); }
+    54%, 68% { opacity: 1; transform: translateY(50px); }
+    74%, 82% { opacity: 1; transform: translateY(75px); }
+    88% { opacity: 0; transform: translateY(75px); }
+    88.1% { opacity: 0; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bent { 0%, 58% { opacity: 1; } 61%, 86% { opacity: 0; } 89%, 100% { opacity: 1; } }
+  @keyframes up   { 0%, 58% { opacity: 0; } 61%, 86% { opacity: 1; } 89%, 100% { opacity: 0; } }
+  @keyframes bob  { 0%, 30% { transform: translateY(0); } 60%, 86% { transform: translateY(-3px); } 100% { transform: translateY(0); } }
+  @keyframes speed { 0%, 58% { opacity: 0; } 68%, 84% { opacity: .9; } 92%, 100% { opacity: 0; } }
+  @keyframes dropL {
+    0%, 2% { opacity: 0; transform: translateY(-80px); }
+    2.1% { opacity: 1; transform: translateY(-80px); }
+    12%, 28% { opacity: 1; transform: translateY(0); }
+    34%, 48% { opacity: 1; transform: translateY(25px); }
+    54%, 68% { opacity: 1; transform: translateY(50px); }
+    74%, 82% { opacity: 1; transform: translateY(75px); }
+    88%, 100% { opacity: 0; transform: translateY(75px); }
+  }
+  @keyframes dropT {
+    0%, 34% { opacity: 0; transform: translateY(-80px); }
+    34.1% { opacity: 1; transform: translateY(-80px); }
+    44%, 48% { opacity: 1; transform: translateY(0); }
+    54%, 68% { opacity: 1; transform: translateY(25px); }
+    74%, 82% { opacity: 1; transform: translateY(50px); }
+    88%, 100% { opacity: 0; transform: translateY(50px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero .row, .hero .piece, .hero .bent, .hero .up, .hero .cartbody, .hero .speed { animation: none; }
+  }
+</style>
 </head>
 <body>
 
@@ -74,6 +162,126 @@
     だから、改善しようと必死なんよ。
   </p>
 </header>
+
+<section class="hero">
+  <svg viewBox="20 68 690 230" role="img" aria-labelledby="heroTitle">
+    <title id="heroTitle">荷車の荷物がテトリスのように一段ずつ消えて、軽くなっていく絵</title>
+    <defs>
+      <clipPath id="wellClip"><rect x="382" y="86" width="176" height="152"/></clipPath>
+    </defs>
+
+    <!-- 地面 -->
+    <line x1="30" y1="282" x2="690" y2="282" stroke="#cfd8d2" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- うしろに流れる線（軽くなって進む） -->
+    <g class="speed" stroke="#9ab8a6" stroke-width="4" stroke-linecap="round">
+      <line x1="612" y1="180" x2="652" y2="180"/>
+      <line x1="604" y1="208" x2="636" y2="208"/>
+      <line x1="616" y1="236" x2="660" y2="236"/>
+    </g>
+
+    <g class="cartbody">
+      <!-- 荷台 -->
+      <rect x="348" y="240" width="244" height="12" rx="3" fill="#9b7b5a" stroke="#7a6047" stroke-width="2"/>
+
+      <!-- 荷物＝テトリスの枠 -->
+      <rect x="382" y="86" width="176" height="152" fill="#ffffff"/>
+      <g stroke="#eceff0" stroke-width="1">
+        <line x1="407" y1="86" x2="407" y2="238"/>
+        <line x1="432" y1="86" x2="432" y2="238"/>
+        <line x1="457" y1="86" x2="457" y2="238"/>
+        <line x1="482" y1="86" x2="482" y2="238"/>
+        <line x1="507" y1="86" x2="507" y2="238"/>
+        <line x1="532" y1="86" x2="532" y2="238"/>
+        <line x1="382" y1="113" x2="558" y2="113"/>
+        <line x1="382" y1="138" x2="558" y2="138"/>
+        <line x1="382" y1="163" x2="558" y2="163"/>
+        <line x1="382" y1="188" x2="558" y2="188"/>
+        <line x1="382" y1="213" x2="558" y2="213"/>
+      </g>
+
+      <!-- 積みあがったブロック（下から A・B・C・D） -->
+      <g class="row rowD">
+        <rect x="408" y="139" width="23" height="23" rx="3" fill="#7fa968"/>
+        <rect x="508" y="139" width="23" height="23" rx="3" fill="#5b8fa8"/>
+      </g>
+      <g class="row rowC">
+        <rect x="383" y="164" width="23" height="23" rx="3" fill="#7fa968"/>
+        <rect x="408" y="164" width="23" height="23" rx="3" fill="#e0a158"/>
+        <rect x="433" y="164" width="23" height="23" rx="3" fill="#e0a158"/>
+        <rect x="458" y="164" width="23" height="23" rx="3" fill="#8d82b6"/>
+        <rect x="483" y="164" width="23" height="23" rx="3" fill="#5b8fa8"/>
+        <rect x="508" y="164" width="23" height="23" rx="3" fill="#5b8fa8"/>
+        <rect x="533" y="164" width="23" height="23" rx="3" fill="#c9736b"/>
+      </g>
+      <g class="row rowB">
+        <rect x="383" y="189" width="23" height="23" rx="3" fill="#8d82b6"/>
+        <rect x="408" y="189" width="23" height="23" rx="3" fill="#8d82b6"/>
+        <rect x="433" y="189" width="23" height="23" rx="3" fill="#5b8fa8"/>
+        <rect x="458" y="189" width="23" height="23" rx="3" fill="#c9736b"/>
+        <rect x="483" y="189" width="23" height="23" rx="3" fill="#c9736b"/>
+        <rect x="508" y="189" width="23" height="23" rx="3" fill="#e0a158"/>
+        <rect x="533" y="189" width="23" height="23" rx="3" fill="#7fa968"/>
+      </g>
+      <g class="row rowA">
+        <rect x="383" y="214" width="23" height="23" rx="3" fill="#5b8fa8"/>
+        <rect x="408" y="214" width="23" height="23" rx="3" fill="#5b8fa8"/>
+        <rect x="433" y="214" width="23" height="23" rx="3" fill="#e0a158"/>
+        <rect x="458" y="214" width="23" height="23" rx="3" fill="#e0a158"/>
+        <rect x="483" y="214" width="23" height="23" rx="3" fill="#c9736b"/>
+        <rect x="508" y="214" width="23" height="23" rx="3" fill="#7fa968"/>
+        <rect x="533" y="214" width="23" height="23" rx="3" fill="#7fa968"/>
+      </g>
+
+      <!-- 枠（上はあいている） -->
+      <!-- 上から落ちてくるブロック（枠の外は隠す） -->
+      <g clip-path="url(#wellClip)">
+        <g class="piece pieceL">
+          <rect x="483" y="114" width="23" height="23" rx="3" fill="#e0a158"/>
+          <rect x="433" y="139" width="23" height="23" rx="3" fill="#e0a158"/>
+          <rect x="458" y="139" width="23" height="23" rx="3" fill="#e0a158"/>
+          <rect x="483" y="139" width="23" height="23" rx="3" fill="#e0a158"/>
+        </g>
+        <g class="piece pieceT">
+          <rect x="533" y="114" width="23" height="23" rx="3" fill="#8d82b6"/>
+          <rect x="533" y="139" width="23" height="23" rx="3" fill="#8d82b6"/>
+          <rect x="533" y="164" width="23" height="23" rx="3" fill="#8d82b6"/>
+          <rect x="508" y="139" width="23" height="23" rx="3" fill="#8d82b6"/>
+        </g>
+      </g>
+      <path d="M380,84 V240 H560 V84" fill="none" stroke="#2f6f4f" stroke-width="4" stroke-linejoin="round"/>
+
+      <!-- 車輪 -->
+      <g>
+        <circle cx="392" cy="266" r="15" fill="#4b4b4b"/>
+        <circle cx="392" cy="266" r="5" fill="#e7e7e7"/>
+        <circle cx="552" cy="266" r="15" fill="#4b4b4b"/>
+        <circle cx="552" cy="266" r="5" fill="#e7e7e7"/>
+      </g>
+    </g>
+
+    <!-- 人（重いとき：前かがみ） -->
+    <g class="bent" stroke-linecap="round" fill="none">
+      <path d="M348,246 L300,236" stroke="#9b7b5a" stroke-width="5"/>
+      <circle cx="230" cy="198" r="13" fill="#2f6f4f" stroke="none"/>
+      <path d="M238,212 L256,248" stroke="#2f6f4f" stroke-width="9"/>
+      <path d="M256,248 L230,280" stroke="#2f6f4f" stroke-width="8"/>
+      <path d="M256,248 L272,280" stroke="#2f6f4f" stroke-width="8"/>
+      <path d="M242,220 L300,236" stroke="#2f6f4f" stroke-width="7"/>
+    </g>
+
+    <!-- 人（軽くなったとき：背すじが伸びる） -->
+    <g class="up" stroke-linecap="round" fill="none">
+      <path d="M348,246 L306,242" stroke="#9b7b5a" stroke-width="5"/>
+      <circle cx="246" cy="192" r="13" fill="#2f6f4f" stroke="none"/>
+      <path d="M248,206 L252,248" stroke="#2f6f4f" stroke-width="9"/>
+      <path d="M252,248 L236,280" stroke="#2f6f4f" stroke-width="8"/>
+      <path d="M252,248 L268,280" stroke="#2f6f4f" stroke-width="8"/>
+      <path d="M250,214 L306,242" stroke="#2f6f4f" stroke-width="7"/>
+    </g>
+  </svg>
+  <p class="hero-cap">たまっていく業務を、一段ずつ消していく。</p>
+</section>
 
 <main>
   <h2>私の思い・ロードマップ</h2>
