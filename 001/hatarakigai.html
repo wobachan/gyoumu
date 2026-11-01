@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>働きやすさと働きがい</title>
+<meta name="description" content="残業時間だけの物差しでは、教職員のウェルビーイングは見えない。ストレスチェック・休職・ほかの職業や世界との比較から考えたページ">
+<style>
+  :root {
+    --bg: #fafaf7; --ink: #333; --sub: #666; --card: #fff; --line: #ddd;
+    --green: #2f6f4f; --green-soft: #eef5f0; --rust: #b5563a;
+    --leaf: #3f8f5f; --leaf-dark: #2f6f4f; --leaf-pale: #e3efe6; --leaf-text: #2f6f4f;
+    --flash-bg: #fff7e0; --flash-line: #e0b43c; --flash-ink: #8a5a00;
+    --ev-bg: #f3f7fb; --ev-line: #9db6d1; --ev-ink: #1f4f7a; --link: #1f5fa8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16181b; --ink: #e6e4df; --sub: #a3a9b1; --card: #1f2226; --line: #363a40;
+      --green: #7cc7ae; --green-soft: #1f3a31; --rust: #e0896c;
+      --leaf: #4fa874; --leaf-dark: #7cc7ae; --leaf-pale: #1f3a31; --leaf-text: #9fdcc3;
+      --flash-bg: #3a2f1a; --flash-line: #a37d2c; --flash-ink: #e8b75c;
+      --ev-bg: #1c2733; --ev-line: #3f5d7d; --ev-ink: #9cc3ea; --link: #8ab8f0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16181b; --ink: #e6e4df; --sub: #a3a9b1; --card: #1f2226; --line: #363a40;
+    --green: #7cc7ae; --green-soft: #1f3a31; --rust: #e0896c;
+    --leaf: #4fa874; --leaf-dark: #7cc7ae; --leaf-pale: #1f3a31; --leaf-text: #9fdcc3;
+    --flash-bg: #3a2f1a; --flash-line: #a37d2c; --flash-ink: #e8b75c;
+    --ev-bg: #1c2733; --ev-line: #3f5d7d; --ev-ink: #9cc3ea; --link: #8ab8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.9;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  header {
+    background: #2f6f4f;
+    color: #fff;
+    padding: 28px 16px 32px;
+    text-align: center;
+  }
+  header .clover { width: 84px; height: 84px; display: block; margin: 0 auto 6px; }
+  header h1 { margin: 0; font-size: 1.6rem; }
+  header .sub { margin: 8px 0 0; font-size: 0.95rem; opacity: 0.9; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+  h2 {
+    font-size: 1.15rem;
+    border-left: 5px solid var(--green);
+    padding-left: 10px;
+    margin-top: 44px;
+  }
+  p { margin: 0 0 14px; }
+  a { color: var(--link); }
+  sup.fn { font-size: 0.75rem; }
+  sup.fn a { text-decoration: none; }
+  .voice { font-size: 1.1rem; font-weight: bold; color: var(--green); }
+  .flash {
+    margin: 24px 0; padding: 16px; background: var(--flash-bg);
+    border: 2px solid var(--flash-line); border-radius: 8px; font-weight: bold;
+  }
+  .flash .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; text-align: center; }
+  .flash .item { min-width: 220px; }
+  .flash .label { display: block; font-size: 0.88rem; color: var(--sub); font-weight: normal; }
+  .flash .big { display: block; font-size: 1.25rem; color: var(--flash-ink); }
+  .flash .down { color: var(--green); }
+  .flash .up { color: var(--rust); }
+
+  .tbl-wrap { overflow-x: auto; margin: 0 0 16px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; line-height: 1.6; background: var(--card); }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+  th { background: var(--green-soft); }
+  td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  tr.me td { font-weight: bold; background: var(--flash-bg); }
+  .tbl-note { font-size: 0.82rem; color: var(--sub); margin-top: -8px; }
+
+  /* 四つ葉の図 */
+  figure.four { margin: 28px 0 8px; padding: 20px 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; text-align: center; }
+  figure.four svg { width: 100%; max-width: 340px; height: auto; }
+  figure.four figcaption { font-size: 0.95rem; margin-top: 6px; }
+  .legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; font-size: 0.82rem; color: var(--sub); margin-top: 4px; }
+  .legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+  .legend .on::before { background: var(--leaf); }
+  .legend .off::before { background: var(--leaf-pale); border: 1.5px dashed var(--leaf-dark); }
+
+  .closing {
+    margin: 28px 0 8px; padding: 18px 16px; background: #2f6f4f; color: #fff;
+    border-radius: 8px; text-align: center; font-size: 1.1rem; font-weight: bold;
+  }
+  .closing .mini { width: 26px; height: 26px; vertical-align: -6px; margin-right: 6px; }
+
+  .footnotes { margin-top: 36px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 0.86rem; color: var(--sub); line-height: 1.75; }
+  .footnotes p { margin: 0 0 8px; }
+
+  details.ev {
+    margin: 18px 0 8px; background: var(--ev-bg); border: 1px solid var(--ev-line);
+    border-radius: 8px; font-size: 0.93rem; line-height: 1.75;
+  }
+  details.ev summary {
+    cursor: pointer; padding: 10px 14px; font-weight: bold; color: var(--ev-ink); list-style: none;
+  }
+  details.ev summary::-webkit-details-marker { display: none; }
+  details.ev summary::before { content: "▶"; display: inline-block; margin-right: 8px; font-size: 0.75rem; transition: transform .15s; }
+  details.ev[open] summary::before { transform: rotate(90deg); }
+  details.ev ul { margin: 0; padding: 0 14px 12px 14px; list-style: none; }
+  details.ev li { padding: 8px 0; border-top: 1px dashed var(--ev-line); }
+  details.ev li a { font-weight: bold; }
+  details.ev .find { display: block; margin-top: 2px; }
+
+  .to-data {
+    margin: 40px 0 0; padding: 16px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 8px; text-align: center;
+  }
+  .back { text-align: center; margin-top: 28px; font-size: 0.95rem; }
+  footer {
+    text-align: center; font-size: 0.85rem; color: var(--sub);
+    padding: 24px 16px; border-top: 1px solid var(--line); margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 四つ葉の葉1枚（ハート形、先が原点） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="leaf" d="M0,0 C-6,-10 -30,-20 -25,-42 C-21,-56 -4,-56 0,-43 C4,-56 21,-56 25,-42 C30,-20 6,-10 0,0 Z"/>
+    <symbol id="clover" viewBox="-60 -60 120 130">
+      <path d="M2,4 C8,24 4,44 14,64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+      <use href="#leaf" transform="rotate(-45)"/>
+      <use href="#leaf" transform="rotate(45)"/>
+      <use href="#leaf" transform="rotate(135)"/>
+      <use href="#leaf" transform="rotate(225)"/>
+      <circle r="5" fill="rgba(0,0,0,.15)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <svg class="clover" style="color:#9fdcb4; fill:#9fdcb4" role="img" aria-label="四つ葉のクローバー"><use href="#clover"/></svg>
+  <h1>働きやすさと働きがい</h1>
+  <p class="sub">残業が減っても、ウェルビーイングとは言い難い</p>
+</header>
+
+<main>
+
+  <h2>国も「両立」を掲げてきた</h2>
+  <p>文科省・中教審も、「働きやすさ」と「働きがい」の両立を掲げてきた（中教審答申、令和6年8月）。答申は、在校等時間の目標を基本としながら、「教師のやりがいや教師のメンタルヘルスの状況」についての目標も追加できると述べている。その例として、精神疾患による休職者の割合や、ストレスチェックの高ストレス者の割合を挙げている。改正された指針も、働きがいなどの目標を「可能な限り」設定するよう求めている。</p>
+
+  <h2>必ず置く目標は、時間だけ</h2>
+  <p>しかし、必ず置かなければならない目標は時間外在校等時間だけである。働きがいや心身の健康の目標は、自治体に任された努力規定にとどまっている。山口県内の市町の計画を見ても、高ストレス者の目標は「0%」から「11%以下」までばらばらで、目標を置いていない町もある。働きがいそのものを数値目標にしているのは、萩市と下松市だけだ。国の「見える化」で全国比較されるのは時間だけで、教職員の研修や学びの充実については指標すらない。結局、わかりやすい数字である残業時間の長さだけで評価され、教育委員会も教職員も苦しめられていく。</p>
+
+  <h2>時間は減っても、ストレスは減らない</h2>
+  <div class="flash">
+    <div class="row">
+      <div class="item"><span class="label">1日12時間以上働く人</span><span class="big down">25.6% → 17.5%</span><span class="label">2016年度 → 2022年度</span></div>
+      <div class="item"><span class="label">高ストレス者</span><span class="big up">8.9% → 11.7%</span><span class="label">2016年度 → 2023年（過去最高）</span></div>
+    </div>
+  </div>
+  <p>時間だけでは足りないことは、データにも表れている。公立学校共済組合のストレスチェックでは、1日12時間以上働く人の割合は、2016年度の25.6%から2022年度の17.5%まで下がった。それなのに、高ストレス者の割合は8.9%から11.4%に上がり、2023年には11.7%と過去最高になった。報告書自身も「就労時間は減少傾向にあるが、高ストレス者の割合は低下していない」と書いている。OECDのTALIS 2024でも同じ傾向が出ている。事務や保護者対応にかける時間は2018年と同じか減っているのに、それらへのストレスは増えた。精神疾患による休職者も、令和6年度は7,087人（0.77%）だった。過去最多だった前年度（7,119人）とほぼ同じ水準で、高止まりしている。</p>
+
+  <h2>ほかの職業・世界と比べると</h2>
+  <p>ほかの職業と比べると、教員の置かれた状態がさらにはっきりする。精神疾患で休職した人と1か月以上の病気休暇をとった人を合わせると、教員は令和6年度に13,310人、全体の1.44%にのぼる。民間企業で心の不調により1か月以上休んだ人は0.5%（従業員1,000人以上の事業所でも1.0%）なので、教員はその約3倍だ<sup class="fn"><a href="#fn1" id="fnref1">※1</a></sup>。一方で、国家公務員（2.02%）や、同じ学校で働く事務職員など（1.98%）と比べると、教員が特に高いわけではない。心の不調は公務の職場全体の問題であり、教員はその中で最も人数の多い職種だと言える。世界と比べても特徴がある。日本の教員の仕事時間は週52〜55時間で、2018年から約4時間減ったものの、参加国の中で今も最も長い（TALIS 2024）。それでも、教えることのやりがいに満足している割合は国際平均より高く、同じくらいの学歴でほかの仕事をする人よりも仕事への満足度は高い。</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>精神疾患で長く休んだ人の割合</th><th>割合</th><th>年度</th></tr></thead>
+      <tbody>
+        <tr><td>国家公務員</td><td class="num">2.02%</td><td>R5</td></tr>
+        <tr><td>学校の事務職員など</td><td class="num">1.98%</td><td>R6</td></tr>
+        <tr class="me"><td>公立学校の教員</td><td class="num">1.44%</td><td>R6</td></tr>
+        <tr><td>民間（従業員1,000人以上）</td><td class="num">1.0%</td><td>R6</td></tr>
+        <tr><td>民間（全体）</td><td class="num">0.5%</td><td>R6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tbl-note">公務員・教員は「休職＋1か月以上の病気休暇」、民間は「連続1か月以上の休業」（※1）。</p>
+
+  <h2>働きがいという支え</h2>
+  <p>つまり、日本の教員は世界で最も長く働きながら、高い働きがいを支えにしてきた。だが、ストレスチェックの「働きがい」の値も、2016年度から2022年度にかけて少しずつ下がっている。支えが崩れはじめているのに、評価の物差しは時間しかない。</p>
+  <p class="voice">これでは、いくら残業が減っても、ウェルビーイングとは言い難い。</p>
+
+  <h2>四つ葉のクローバー</h2>
+  <p>ただし、働きがいだけを指標にすればよいわけでもない。同じデータでは、長く働く人ほど働きがいは高く出るが、高ストレスの割合も高い。時間・健康・働きがいを一緒に見て、はじめて教職員の状態が見えてくる。</p>
+
+  <figure class="four">
+    <svg viewBox="-130 -130 260 290" role="img" aria-label="四つ葉のクローバー。時間の葉だけが塗られ、心身の健康・働きがい・学びの葉は点線で描かれている">
+      <path d="M4,10 C16,60 8,100 30,150" fill="none" stroke="var(--leaf-dark)" stroke-width="9" stroke-linecap="round"/>
+      <g transform="scale(2.2)">
+        <use href="#leaf" transform="rotate(-45)" fill="var(--leaf)" stroke="var(--leaf-dark)" stroke-width="1.2"/>
+        <use href="#leaf" transform="rotate(45)" fill="var(--leaf-pale)" stroke="var(--leaf-dark)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+        <use href="#leaf" transform="rotate(135)" fill="var(--leaf-pale)" stroke="var(--leaf-dark)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+        <use href="#leaf" transform="rotate(225)" fill="var(--leaf-pale)" stroke="var(--leaf-dark)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+      </g>
+      <g font-size="17" font-weight="bold" text-anchor="middle" font-family="inherit">
+        <text x="-50" y="-44" fill="#fff">時間</text>
+        <text x="50" y="-44" fill="var(--leaf-text)">働きがい</text>
+        <text x="52" y="62" fill="var(--leaf-text)">心身の</text>
+        <text x="52" y="82" fill="var(--leaf-text)">健康</text>
+        <text x="-52" y="62" fill="var(--leaf-text)">学び</text>
+        <text x="-52" y="82" fill="var(--leaf-text)" font-size="12">（研修）</text>
+      </g>
+    </svg>
+    <div class="legend"><span class="on">いま全国で比べられている</span><span class="off">まだ物差しがない・ばらばら</span></div>
+    <figcaption>いま全国で比べられているのは、<b>「時間」の葉っぱ1枚だけ</b>。<br>四枚そろって、はじめて四つ葉のクローバーになる。</figcaption>
+  </figure>
+
+  <div class="closing">
+    <svg class="mini" style="color:#9fdcb4; fill:#9fdcb4" aria-hidden="true"><use href="#clover"/></svg>時間・健康・働きがい・学び。<br>四枚の葉をそろえて見る物差しを。
+  </div>
+
+  <div class="footnotes">
+    <p id="fn1">※1 民間とは数え方が少し異なる。民間の数値は、厚生労働省「令和6年 労働安全衛生調査（実態調査）」によるもので、従業員10人以上の事業所を対象にした抽出調査である。休んだあとに退職した人は「退職」として別に数えている（退職者は0.2%）。教員の数値は、文部科学省「令和6年度 公立学校教職員の人事行政状況調査」による全数の集計である。<a href="#fnref1">↩</a></p>
+  </div>
+
+  <details class="ev">
+    <summary>根拠を見る：使った資料</summary>
+    <ul>
+      <li><a href="https://www.mext.go.jp/content/20240726-mxt_zaimu-000037162_10.pdf">公立学校共済組合「ストレスチェックデータ分析結果報告書」</a>
+        <span class="find">質の高い教師の確保特別部会（第14回）参考資料4。高ストレス者の推移（p.5）、12時間以上働く人の割合、働きがいの尺度。</span></li>
+      <li><a href="https://www.mext.go.jp/content/20240829mxt_zaimu000037816_3.pdf">中教審答申（令和6年8月27日）</a>
+        <span class="find">副題「『働きやすさ』と『働きがい』の両立に向けて」。p.25と脚注56に、やりがい・メンタルヘルスの目標の例。</span></li>
+      <li><a href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf">改正指針（令和7年文科省告示第114号）</a>
+        <span class="find">第2章第2節(2)イ(ⅱ)：働きがい等の目標を「可能な限り」設定。</span></li>
+      <li><a href="gyomuryo-keikaku-hikaku-v3.html">業務量管理計画 19市町比較</a>
+        <span class="find">山口県内の市町の高ストレス者・働きがいの目標。</span></li>
+      <li><a href="https://www.mext.go.jp/a_menu/shotou/jinji/1411820_00009.htm">文科省「令和6年度 公立学校教職員の人事行政状況調査」</a>
+        <span class="find">精神疾患による休職者7,087人。教員（1-1-11）・事務職員等（1-2-5）の休職＋1か月以上の病気休暇。</span></li>
+      <li><a href="https://www.mhlw.go.jp/toukei/list/dl/r06-46-50_gaikyo.pdf">厚生労働省「令和6年 労働安全衛生調査（実態調査）」</a>
+        <span class="find">第1表：心の不調で連続1か月以上休業した労働者0.5%、退職0.2%（事業所規模別あり）。</span></li>
+      <li><a href="https://www.jinji.go.jp/kouho_houdo/koumuinhakusyo/hakusho/R6/1-3-05-2.html">人事院「公務員白書」</a>
+        <span class="find">国家公務員の精神及び行動の障害による長期病休者 2.02%（令和5年度）。</span></li>
+      <li><a href="https://www.nier.go.jp/kokusai/talis/pdf/talis2024_point.pdf">国立教育政策研究所「TALIS 2024 ポイント」</a>
+        <span class="find">仕事時間（小52.1h・中55.1h、参加国最長）、ストレスの要因、やりがい・満足度。</span></li>
+    </ul>
+  </details>
+
+  <div class="to-data">
+    すべての調べの一覧は<br><a href="index.html"><b>学校の働き方改革データ（入口）</b></a>へ
+  </div>
+
+  <p class="back"><a href="./">← トップページへ戻る</a></p>
+</main>
+
+<footer>
+  &copy; 2026 教職員不足解消をめざす教員A
+</footer>
+
+</body>
+</html>
