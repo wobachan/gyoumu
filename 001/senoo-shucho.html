@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>妹尾昌俊氏の主張まとめ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f; --link:#1a5fb4; --me:#fff6d6;
+  --same:#1d7a46; --samebg:#e5f4ec; --diff:#b3261e; --diffbg:#fbe9e7; --part:#9a5a00; --partbg:#fbf0dc;
+  --other:#7a3e8f; --otherbg:#f4ecf7;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0; --link:#8ab4f8; --me:#3a331a;
+    --same:#6fd09a; --samebg:#1c3328; --diff:#ff8f86; --diffbg:#3a2220; --part:#f0b35c; --partbg:#3a2e18;
+    --other:#d4a6e4; --otherbg:#2e2234;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0; --link:#8ab4f8; --me:#3a331a;
+    --same:#6fd09a; --samebg:#1c3328; --diff:#ff8f86; --diffbg:#3a2220; --part:#f0b35c; --partbg:#3a2e18;
+    --other:#d4a6e4; --otherbg:#2e2234;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h1,h2,h3{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.8rem;line-height:1.35;margin:0 0 8px}
+h2{font-size:1.25rem;margin:48px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+h2.other{border-bottom-color:var(--other)}
+h3{font-size:1.06rem;margin:28px 0 8px}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em}
+h2.other .hn{background:var(--other)}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+p{max-width:72ch}
+a{color:var(--link)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small{font-size:.85rem;color:var(--sub)}
+.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}
+.series .sl{font-weight:700;color:var(--sub);margin-right:4px}
+.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}
+.series b{background:var(--head);color:var(--headink);border-color:var(--head)}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:18px 0}
+.toc ol{margin:4px 0 0;padding-left:1.4em;columns:2 260px;column-gap:28px}
+.toc li{break-inside:avoid;font-size:.92rem}
+.toc .tg{font-size:.78rem;font-weight:700;color:var(--sub);letter-spacing:.05em;margin:0}
+.core{background:var(--me);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:8px;padding:14px 18px;margin:14px 0}
+.core ol{margin:6px 0 0;padding-left:1.4em}
+.core li{margin:4px 0}
+.core li b{color:var(--accent)}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;margin:10px 0}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;font-size:.86rem}
+th{background:var(--head);color:var(--headink)}
+td.pn{font-weight:700;white-space:nowrap}
+td.se{background:var(--me)}
+.cards{display:grid;gap:10px;margin:10px 0}
+.cd{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.cd h4{margin:0 0 2px;font-size:.98rem;line-height:1.5}
+.cd .m{margin:0 0 6px;font-size:.8rem;color:var(--sub)}
+.cd p{margin:4px 0}
+.cd ul{margin:4px 0;padding-left:1.3em}
+.cd li{margin:2px 0}
+.cd.key{border-left:5px solid var(--accent)}
+.cd.zen{border-left:5px solid var(--part);background:linear-gradient(var(--card),var(--card))}
+.who{font-weight:700;font-size:1rem;margin:0}
+.who .role{font-weight:400;font-size:.8rem;color:var(--sub);margin-left:6px}
+.tag{display:inline-block;padding:0 8px;border-radius:999px;font-size:.74rem;font-weight:700;margin-right:6px;vertical-align:.1em;white-space:nowrap}
+.t-same{background:var(--samebg);color:var(--same)}
+.t-diff{background:var(--diffbg);color:var(--diff)}
+.t-part{background:var(--partbg);color:var(--part)}
+.part-note{display:block;font-size:.84rem;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
+.hm{font-size:.74rem;color:var(--sub);background:var(--soft);border-radius:4px;padding:0 5px;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.84rem;margin:8px 0}
+.note{background:var(--soft);border-radius:8px;padding:12px 16px;font-size:.88rem}
+.note ul{margin:4px 0;padding-left:1.3em}
+footer{margin-top:48px;font-size:.82rem;color:var(--sub);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:600px){h1{font-size:1.4rem} body{font-size:14px}}
+@media print{body{background:#fff} .cd,.tbl,.toc{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="series" aria-label="働き方改革の調べ"><span class="sl">働き方改革の調べ</span><a href="index.html">001 入口</a><a href="zikangai-zaikoto.html">021 「時間外在校等時間」まとめ</a><a href="3bunrui-tsukiawase.html">047 3分類の突き合わせ</a><b aria-current="page">081 妹尾昌俊氏の主張まとめ</b></nav>
+
+<header>
+<p class="eyebrow">識者の主張</p>
+<h1>妹尾昌俊氏の主張まとめ<br><span style="font-size:.62em">― ネットで読める記事から ／ ほかの人のコメントつき</span></h1>
+<p class="date">2026年11月2日調べ</p>
+</header>
+
+<p>教育研究家の<b>妹尾昌俊（せのお まさとし）氏</b>は、一般社団法人ライフ＆ワーク代表理事で、中央教育審議会の特別部会委員です。東洋経済オンライン（<a href="https://toyokeizai.net/list/author/6555" target="_blank" rel="noopener">著者ページ</a>）と Yahoo!ニュース エキスパート（<a href="https://news.yahoo.co.jp/expert/authors/senoomasatoshi" target="_blank" rel="noopener">著者ページ</a>）に、教員の働き方について多くの記事を書いています。</p>
+<p>このページでは、無料で読める記事から主張をテーマ別にまとめました。下の方には、<b>内田良氏など、ほかの人のコメント</b>を載せ、妹尾氏の主張と比べられるようにしています。要約はこの調べで書いたものです。正確な表現はリンク先で確かめてください。</p>
+
+<nav class="toc" aria-label="目次">
+<p class="tg">妹尾氏の主張</p>
+<ol>
+<li><a href="#core">主張の芯（5つ）</a></li>
+<li><a href="#s1">給特法・教職調整額</a></li>
+<li><a href="#s2">時間の把握・「見えない化」</a></li>
+<li><a href="#s3">業務の3分類・削減・部活動</a></li>
+<li><a href="#s4">教員不足・なり手</a></li>
+<li><a href="#s5">校長・教育委員会・定数</a></li>
+<li><a href="#s6">健康・過労死・メンタルヘルス</a></li>
+<li><a href="#s7">中教審での発言</a></li>
+<li><a href="#s8">2026年の発言・著書</a></li>
+</ol>
+<p class="tg" style="margin-top:8px">ほかの人のコメント</p>
+<ol start="10">
+<li><a href="#axis">論点ごとの立ち位置（一覧表）</a></li>
+<li><a href="#uchida">内田良氏</a></li>
+<li><a href="#others">給特法・時間管理をめぐる論者</a></li>
+<li><a href="#teisu">教員不足・定数の研究者</a></li>
+<li><a href="#dantai">教職員団体・国</a></li>
+<li><a href="#chui">確かめきれなかったこと</a></li>
+</ol>
+</nav>
+
+<h2 id="core"><span class="hn">1</span>主張の芯</h2>
+<div class="core">
+<p style="margin:0"><b>たくさんの記事を読むと、妹尾氏の主張は次の5つにまとまります。</b></p>
+<ol>
+<li><b>長時間労働は「仕組み」の問題。</b>教員の意識や給特法だけが原因ではなく、学校の業務が広がりすぎたこと、教員定数が少ないこと（学級数×係数）、責任のあいまいな労務管理が原因だと見ています。</li>
+<li><b>残業代は手段の一つで、副作用もある。</b>給特法を廃止するかどうかより、<b>業務削減・定数改善・処遇改善</b>を一緒に進めることと、健康を守る仕組みを入れることを重く見ています。</li>
+<li><b>「時短の目的化」と「見えない化」を警戒。</b>数字だけ減らすと過少申告や持ち帰りが増えるとして、働きやすさと働きがいの両方を測るよう求めています。</li>
+<li><b>改革が進むかは教育委員会と校長しだい。</b>ただしトップダウンだけでなく、現場の対話と内発的な改善が要るとしています。</li>
+<li><b>教職員を大切にすることが子どもを守る。</b>なり手を増やすには魅力の発信より不安を減らすこと、辞める人・休む人を出さないことが先だという考えです。</li>
+</ol>
+</div>
+
+<h2 id="s1"><span class="hn">2</span>給特法・教職調整額</h2>
+<p>給特法の問題は認めています。ただし「給特法をなくせば解決する」とは考えず、<b>廃止論にも副作用がある</b>という立場です。</p>
+<div class="cards">
+<article class="cd key"><h4><a href="https://news.yahoo.co.jp/expert/articles/d86c8946ef97c09579cda4c2a62fd4850c1b4a7e" target="_blank" rel="noopener">公立学校の先生は本当に「定額働かせ放題」なのか？ 給特法と給特法廃止論、双方に大問題</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2022年8月2日</p>
+<p>内田良氏・斉藤ひでみ氏らの署名提出（2022年7月）に応えた記事です。「給特法さえ変えれば解決」は単純すぎるとして、残業代方式の副作用を挙げています。</p>
+<ul><li>業務改善に熱心な人ほど給与が減る</li><li>財政負担で定数改善が後回しになる</li><li>私立学校のようにサービス残業が残る</li></ul>
+<p>本当の問題は、行政が業務を増やし続けてきたこと、校長の登用・評価の仕組み、学校の労働安全衛生の弱さだとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/680512" target="_blank" rel="noopener">「定額働かせ放題」という言い方への反論</a></h4>
+<p class="m">東洋経済オンライン／2023年6月23日</p>
+<p>授業準備などが「労働」とされず、教育委員会や文科省が業務を増やしてもお金の痛みを感じにくい、という給特法の問題は認めています。一方で「無制限に働かされる」という誤解が広まると、教員志望者が減るおそれがあるとして、冷静な議論を求めています。</p></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/6a5858e8f3fd4a2391ae74da9556b5f5b714de02" target="_blank" rel="noopener">給特法廃止案の賛否の比較</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2023年3月29日</p>
+<p>賛成側も反対側も目指すのは残業の削減で、残業代はその手段にすぎないとしています。議論が「残業代の有無」だけに狭まらず、教員や支援スタッフの増員も含めて考えるべきだという主張です。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/755251" target="_blank" rel="noopener">調整額「4%→10%以上」の提案と、廃止を阻む難点</a></h4>
+<p class="m">東洋経済オンライン／2024年5月23日</p>
+<p>廃止論の根拠（対価を払うべき、コストがかかれば業務が絞られる、36協定で歯止めがかかる）には説得力があると認めています。そのうえで、授業準備や教材研究のどこからが残業かという線引きの難しさを挙げています。ただし「線引きが難しいから維持」という論法も弱いとしており、どちらか一方を正解とはしていません。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/764005" target="_blank" rel="noopener">教職が魅力ある仕事になるための3本柱</a> <span class="hm">後半は見出しのみ確認</span></h4>
+<p class="m">東洋経済オンライン／2024年6月23日</p>
+<p>調整額を上げるだけでは足りず、<b>働き方改革・定数改善・処遇改善</b>の3つが要るとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/840687" target="_blank" rel="noopener">財務省案と文科省案、どちらにも問題</a></h4>
+<p class="m">東洋経済オンライン／2024年11月20日</p>
+<p>一律の引き上げは勤務の実態に応じたメリハリがなく、残業削減につながる保証もないとしています。財務省案の事務作業を減らす点などは評価し、感情的に拒まず議論すべきだとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/878461" target="_blank" rel="noopener">改正給特法の衆院通過（修正）を受けて</a></h4>
+<p class="m">東洋経済オンライン／2025年5月22日</p>
+<p>教育委員会に計画の策定・公表を<b>義務付けた</b>ことを評価しています。残った課題として、義務化だけで進むのか、残業を「自発的」とみなす制度のままでよいのか、外部のチェック、シニア教員の動機づけ、専門性と健康の両立の5つを挙げています。</p></article>
+</div>
+
+<h2 id="s2"><span class="hn">3</span>時間の把握・「見えない化」</h2>
+<p>数字の上で残業が減っても、<b>過少申告や持ち帰りで見えなくなっているだけ</b>ではないか、という指摘をくり返しています。</p>
+<div class="cards">
+<article class="cd key"><h4><a href="https://toyokeizai.net/articles/-/938318" target="_blank" rel="noopener">「見える化」調査の公表を受けて</a></h4>
+<p class="m">東洋経済オンライン／2026年3月23日</p>
+<p>残業は月30時間に近づいて見えますが、教育委員会ごとの測り方の違い（休憩45分の自動控除、早朝・休日を測らないなど）、過少申告、持ち帰りで「見えない化」が進んでいるとしています。市町村別の公表は、時間を短く見せる圧力を強めるおそれがあるとも述べています。勤務実態調査は何年かに一度は続けるべきだという主張です。<a href="zikangai-zaikoto.html">021のページ</a>でも紹介しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/859545" target="_blank" rel="noopener">月30時間の計画づくりについて</a></h4>
+<p class="m">東洋経済オンライン／2025年2月23日</p>
+<p>時短のプレッシャーだけが強まると、見かけだけの削減になると警告しています。当時、市区町村の計画策定は約66%、縮減状況の公表は約24%だったと紹介しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/695231" target="_blank" rel="noopener">時短の目的化への批判</a></h4>
+<p class="m">東洋経済オンライン／2023年8月28日</p>
+<p>仕事が減らないのに「早く帰れ」と言うだけでは、時短が目的になってしまうとしています。2016年度に出退勤を客観的に管理していた市区町村は6.1%だったと紹介しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/503692" target="_blank" rel="noopener">記録は出発点にすぎない</a></h4>
+<p class="m">東洋経済オンライン／2022年1月21日</p>
+<p>ICカードで記録するのは出発点で、「隠れ残業」で記録の信頼性が揺らいでいるとしています。</p></article>
+<article class="cd"><h4><a href="https://career-research.mynavi.jp/column/20260303_107279/" target="_blank" rel="noopener">マイナビ キャリアリサーチLab のインタビュー</a></h4>
+<p class="m">2026年3月3日</p>
+<p>今後の課題として3つを挙げています。</p>
+<ul><li>自宅での授業準備も含めて残業を見える化し、一元管理する</li><li>時短一辺倒をやめ、ウェルビーイングやワークエンゲージメントも測る</li><li>現場からの内発的な改善を進める</li></ul></article>
+</div>
+
+<h2 id="s3"><span class="hn">4</span>業務の3分類・削減・部活動</h2>
+<div class="cards">
+<article class="cd key"><h4><a href="https://toyokeizai.net/articles/-/892041" target="_blank" rel="noopener">「学校の業務を仕分ける3分類」更新へ　業務削減や分業が進まない5つの背景</a></h4>
+<p class="m">東洋経済オンライン／2025年7月26日</p>
+<p>3分類は有効なのに現場であまり知られていないとしています。支援が必要な子への対応、SNSトラブル、ICT端末の管理、保護者対応などで負担はむしろ増え、教員が何でも一人で担う「ワンオペ」になっていると指摘しています。</p></article>
+<article class="cd"><h4><a href="https://career-research.mynavi.jp/column/20260303_107279/" target="_blank" rel="noopener">業務を3つの層で考える（マイナビのインタビュー）</a></h4>
+<p class="m">2026年3月3日</p>
+<p>業務を①教育活動、②学校運営の事務、③家庭・地域との境があいまいな業務に分け、②③は教育委員会や校長が上から仕分け、①は教職員の対話と試行錯誤で見直すべきだとしています。</p></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/47ffe3def485a45cd907330a29ad32fa54889c9d" target="_blank" rel="noopener">部活動の地域移行、文科省が言わない3つの課題</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2022年6月19日</p>
+<p>地域移行には賛成です。そのうえで、けが・燃え尽き・ハラスメントへの対策、教職員増による遅番シフトなど他の案との費用対効果の比較、先に活動の種類と量を絞ることを求めています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/872782" target="_blank" rel="noopener">小学校の授業時数</a></h4>
+<p class="m">東洋経済オンライン／2025年4月30日</p>
+<p>小学4年生以上はほぼ毎日6時間授業で、週29コマ以上の学校が多いとしています。授業は多ければよいとは限らないとして、時数を見直す余地を論じています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/912351" target="_blank" rel="noopener">学習指導要領の論点整理について</a> <span class="hm">後半は見出しのみ確認</span></h4>
+<p class="m">東洋経済オンライン／2025年10月22日</p>
+<p>カリキュラムの詰め込みすぎ（オーバーロード）を問題にしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/646668" target="_blank" rel="noopener">働き方改革は「保護者のせい」か</a></h4>
+<p class="m">東洋経済オンライン／2023年1月23日</p>
+<p>学校が保護者の反発を恐れて先回りし、業務の見直しが止まっているとしています。学校の実態を保護者に伝えて共有すべきだという主張です。</p></article>
+</div>
+
+<h2 id="s4"><span class="hn">5</span>教員不足・なり手</h2>
+<div class="cards">
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/590743" target="_blank" rel="noopener">教員不足は「深刻ではない」という見方の盲点</a></h4>
+<p class="m">東洋経済オンライン／2022年5月27日</p>
+<p>国が初めて調べた不足数2558人（2021年度）は現場の実感より少ないとしています。最大の被害者は子どもだという立場です。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/715715" target="_blank" rel="noopener">教員不足とメンタルヘルスに本腰を</a></h4>
+<p class="m">東洋経済オンライン／2023年11月23日</p>
+<p>教員不足→多忙化→休職増という悪循環を指摘し、文科省が正確な欠員数をつかめていないことを批判しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/748679" target="_blank" rel="noopener">やりがいの発信より不安の解消を</a></h4>
+<p class="m">東洋経済オンライン／2024年4月24日</p>
+<p>2022年度は約2割の小中学校で欠員があったと紹介しています。学生は「担任が務まるか」「保護者対応は大丈夫か」と不安を抱えており、チーム担任制などで不安を減らすべきだとしています。</p></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/b41fceeaaf38945bd2e7a7fca2593ec3d6224d60" target="_blank" rel="noopener">採用試験の前倒しは意味があるのか</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2024年6月30日</p>
+<p>倍率が低いことは、そのまま質の低下を意味しないとしています。前倒しは「お試し受験」や内定辞退を増やすだけだと批判しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/853071" target="_blank" rel="noopener">採用試験の低倍率と「全国共同実施」</a></h4>
+<p class="m">東洋経済オンライン／2025年1月25日</p>
+<p>倍率の数字で騒ぐより、本命として受ける人の数を見るべきだとしています。自治体どうしで奪い合わず、採用試験を共同で実施するよう提案しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/910825" target="_blank" rel="noopener">TALIS2024の結果を受けて</a></h4>
+<p class="m">東洋経済オンライン／2025年10月11日</p>
+<p>日本の教員の仕事時間は小学校週52.1時間・中学校週55.1時間で、3回続けて参加国最長です。20代の約2割が5年以内に辞める可能性があるとして、教職員を大切にする政策を求めています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/941716" target="_blank" rel="noopener">若手を辞めさせない・休ませない</a></h4>
+<p class="m">東洋経済オンライン／2026年4月18日</p>
+<p>新人がいきなり担任をするのは無理があるとし、2〜3年目や異動した若手への支援も手薄だと指摘しています。</p></article>
+</div>
+
+<h2 id="s5"><span class="hn">6</span>校長・教育委員会・定数</h2>
+<div class="cards">
+<article class="cd key"><h4><a href="https://toyokeizai.net/articles/-/834130" target="_blank" rel="noopener">小学校の授業コマ数と教員定数</a> <span class="hm">後半は見出しのみ確認</span></h4>
+<p class="m">東洋経済オンライン／2024年10月22日</p>
+<p>週26コマ以上の小学校教員が37.2%で、休みなく働く状態だとしています。原因は教員数を「学級数×係数」で決める義務標準法にあり、係数を改善すべきだと主張しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/919055" target="_blank" rel="noopener">改革が進む学校と止まる学校を分けるのは教育委員会</a></h4>
+<p class="m">東洋経済オンライン／2025年11月24日</p>
+<p>法律で義務になった計画づくりは必要だが、計画づくりが目的になってはいけないとしています。何のための改革かを共有すること、テレワークの整備と勤務時間のモニタリング、教職員のせいにせず仕組みを変えることを挙げています。</p></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/0d591dd236c9a4ffba47824d462f3ab0a15d0ffc" target="_blank" rel="noopener">スーパー校長に期待しすぎない</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2022年7月31日</p>
+<p>一人の校長に頼る運営には限界があるとしています。長時間労働を本人の要領のせいにせず、業務量をならさない管理職にも責任があるとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/778673" target="_blank" rel="noopener">名古屋市立日比津中の事例</a></h4>
+<p class="m">東洋経済オンライン／2024年7月22日</p>
+<p>学校は行事や生徒指導が次々に流れてくる「ベルトコンベヤ」状態だとし、夏休みなどに立ち止まって改善を考えるべきだとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/899862" target="_blank" rel="noopener">保護者からのクレームと教職員の保護</a></h4>
+<p class="m">東洋経済オンライン／2025年8月26日（続報 <a href="https://toyokeizai.net/articles/-/958290" target="_blank" rel="noopener">2026年9月21日</a>）</p>
+<p>公立校は「よそへ行ってください」と言えず、教職員を守る仕組みが弱すぎるとしています。一方で保護者をすべてクレーマー扱いしないよう求めています。続報では、国の保護者対応ガイドラインを評価しつつ、判断基準のあいまいさや、学校が手を離した後の受け皿を問題にしています。</p></article>
+</div>
+
+<h2 id="s6"><span class="hn">7</span>健康・過労死・メンタルヘルス</h2>
+<div class="cards">
+<article class="cd key"><h4>公立学校は労務管理できているのか（3回連載）</h4>
+<p class="m">Yahoo!ニュース エキスパート／2024年4月17日・4月30日</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/expert/articles/65017ccabdb605f63a0485b96d383efee1e0fbac" target="_blank" rel="noopener">（1）</a>時間外の業務が労働と扱われない、コスト意識が働かない、責任があいまい、を制度の欠陥として挙げています。</li>
+<li><a href="https://news.yahoo.co.jp/expert/articles/a1828c8b1ba17a6d33da918cbf0a9736b10fb10d" target="_blank" rel="noopener">（2）</a>公立学校には労基署が来ず、人事委員会や首長の監督も働きにくいとしています。</li>
+<li><a href="https://news.yahoo.co.jp/expert/articles/5daedb2958178273827cf8981e2e3c65e08ed2f8" target="_blank" rel="noopener">（3）</a>給特法を維持するなら、「見えない化」対策、勤務間インターバル、衛生委員会での業務の協議、労基署の管轄にすることの検討が要るとしています。</li>
+</ul></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/828684" target="_blank" rel="noopener">勤務間インターバル</a></h4>
+<p class="m">東洋経済オンライン／2024年9月26日</p>
+<p>答申に入ったのにほとんど注目されていないとし、「学校にはなじまない」と退けずに導入を検討すべきだとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/687825" target="_blank" rel="noopener">教師の過労死（富山県滑川市の判決）</a></h4>
+<p class="m">東洋経済オンライン／2023年7月22日（続報 <a href="https://news.yahoo.co.jp/expert/articles/5ef6c24295eaa23c95336a59191abbedf7ba7cac" target="_blank" rel="noopener">Yahoo! 2023年11月22日</a>）</p>
+<p>地裁が約8300万円の賠償を命じた事案で、改革があと2〜3年早ければ防げた可能性があるとしています。続報では、過労死がほとんど調査・検証されず、誰も責任を取らないとして、原因究明を求めています。</p></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/cbab314cfc7178306bdf3cd1759ad8bba1f24829" target="_blank" rel="noopener">新任教諭の自死（福岡県春日市）</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2024年6月10日</p>
+<p>教育委員会の事なかれ主義を批判し、教育委員会の外にある相談窓口、深夜勤務の禁止、勤務間インターバルを提案しています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/935182" target="_blank" rel="noopener">精神疾患による休職と那覇市の取り組み</a></h4>
+<p class="m">東洋経済オンライン／2026年2月21日</p>
+<p>2024年度の休職者は13,310人（1.44%）で、全労働者の平均（約0.5%）を大きく上回るとしています。採用対策だけでなく、辞める・休む人を出さない「出血防止策」が必要だという主張です。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/611508" target="_blank" rel="noopener">教頭・副校長の過労死リスク</a></h4>
+<p class="m">東洋経済オンライン／2022年8月22日</p>
+<p>約8割が月80時間を超えているとみられるとしています。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/924169" target="_blank" rel="noopener">「攻めの休養」</a> <span class="hm">後半は見出しのみ確認</span></h4>
+<p class="m">東洋経済オンライン／2025年12月31日</p>
+<p>教職員が余暇を失っているとし、スポーツのオーバートレーニングになぞらえて休むことを勧めています。</p></article>
+</div>
+<p class="small">休憩時間（45分が取れないこと）そのものを主題にした記事は、この調べでは見つかりませんでした。</p>
+
+<h2 id="s7"><span class="hn">8</span>中教審での発言</h2>
+<div class="cards">
+<article class="cd key"><h4><a href="https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/102/gijiroku/mext_00002.html" target="_blank" rel="noopener">教師を取り巻く環境整備特別部会（第2回）議事録</a>／<a href="https://www.mext.go.jp/content/000377107.pdf" target="_blank" rel="noopener">提出資料（PDF）</a></h4>
+<p class="m">文部科学省／2025年8月19日</p>
+<ul>
+<li>3分類の見直しは、専門スタッフなど人の手当てがなければ「絵に描いた餅」になる。</li>
+<li>SNSやゲームなど、学校の外で起きたトラブルへの対応は「学校以外が担う業務」と明確にすべき。</li>
+<li>保護者対応の基本は首長部局や第三者機関が担うようにすべき。</li>
+<li>独自調査で、教育委員会に相談して効果を期待できると答えた人は2.2%だけ。第三者性のある相談窓口を置くべき。</li>
+<li>教員の負担を事務職員や教頭に移すだけにしてはいけない。文科省内でも仕事のスクラップ・アンド・ビルドを強めるべき。</li>
+</ul>
+<p class="small">提出資料の中身（教職員332件の意見募集、プール・ICT保守・校内清掃を「学校以外が担うべき業務」にという提案）は、<a href="3bunrui-tsukiawase.html#hyoka">047のページ 8章</a>にまとめています。</p></article>
+<article class="cd"><h4><a href="https://www.kyobun.co.jp/article/2024040401" target="_blank" rel="noopener">教員の時間外勤務手当、否定的な意見相次ぐ　中教審特別部会</a></h4>
+<p class="m">教育新聞／2024年4月4日</p>
+<p>多くの委員が残業代方式に否定的だった回で、妹尾委員は、時間外勤務を労働と認めない今の制度は問題だとしつつ、手当の支給には長所と短所があるとして慎重な立場でした。</p></article>
+<article class="cd"><h4><a href="https://toyokeizai.net/articles/-/905778" target="_blank" rel="noopener">教員養成部会の論点整理（案）への批判</a></h4>
+<p class="m">東洋経済オンライン／2025年9月23日</p>
+<p>スーパーマンを前提にした教師像、即戦力ばかり重んじる見方、やりがいの宣伝への偏りを挙げ、「対策してますポーズ」をやめるよう求めています。</p></article>
+</div>
+
+<h2 id="s8"><span class="hn">9</span>2026年の発言・著書</h2>
+<div class="cards">
+<article class="cd"><h4>2026年のおもな記事</h4>
+<ul>
+<li><a href="https://toyokeizai.net/articles/-/944960" target="_blank" rel="noopener">高校の「やりすぎ教育」</a>（東洋経済 5月21日）… 特色づくりの過熱で教職員も生徒も負担が増えていると批判。<span class="hm">題名のみ確認</span></li>
+<li><a href="https://news.yahoo.co.jp/expert/articles/30e77588da6d6f0f026a77a33215cda14720844c" target="_blank" rel="noopener">辺野古での事故と平和学習</a>（Yahoo! 5月30日）… 平和学習は禁じられていないとして、学校が萎縮しないよう求める。萎縮の背景に保護者・議員への対応の負担があるとする。</li>
+<li><a href="https://toyokeizai.net/articles/-/948303" target="_blank" rel="noopener">学校の風土</a>（東洋経済 6月21日）… 教員どうしが干渉しあわず、異論が出ない風土を問題に。<span class="hm">題名のみ確認</span></li>
+<li><a href="https://toyokeizai.net/articles/-/951765" target="_blank" rel="noopener">次期学習指導要領への3つの懸念</a>（東洋経済 7月23日）<span class="hm">題名のみ確認</span></li>
+<li><a href="https://toyokeizai.net/articles/-/958290" target="_blank" rel="noopener">カスハラ防止の義務化と保護者対応ガイドライン</a>（東洋経済 9月21日）… <a href="#s5">6章</a>参照。</li>
+</ul></article>
+<article class="cd"><h4>おもな著書</h4>
+<ul>
+<li>『変わる学校、変わらない学校』学事出版（2015）</li>
+<li>『先生がつぶれる学校、先生がいきる学校』学事出版（2018）</li>
+<li>『教師崩壊』PHP新書（2020）</li>
+<li>『教師と学校の失敗学』PHP新書（2021）</li>
+<li>『先生を、死なせない。』教育開発研究所</li>
+<li>共著『給特法等の改正で変わる教師の処遇、変える教師の働き方』（2025）</li>
+</ul></article>
+</div>
+
+<!-- ============ ほかの人のコメント ============ -->
+
+<h2 id="axis" class="other"><span class="hn">10</span>ほかの人のコメント ― 論点ごとの立ち位置</h2>
+<p>給特法をめぐっては、大きく「<b>給特法を見直して残業代を払う</b>」立場と、「<b>給特法の枠組みの中で改善する</b>」立場に分かれます。妹尾氏はどちらにも問題があるとする、まん中寄りの位置にいます。下の表はこの調べでの整理です。</p>
+<div class="tbl"><table>
+<thead><tr><th style="width:16%">論点</th><th style="width:29%">A：給特法を見直し・残業代を払う</th><th style="width:29%">B：今の枠組みの中で改善</th><th class="se" style="width:26%;background:var(--accent)">妹尾氏の位置</th></tr></thead>
+<tbody>
+<tr><td class="pn">給特法の扱い</td><td>廃止か抜本改正（内田良、斉藤ひでみ、嶋崎量、小室淑恵、今野晴貴、髙橋哲、日教組、全教）</td><td>維持して改正（全日教連、中教審、戸ヶ﨑勤、末冨芳＝拙速な廃止に反対）</td><td class="se">問題は認めるが、急な廃止には反対。両方を批判。</td></tr>
+<tr><td class="pn">残業代か調整額か</td><td>残業代を払えばコストの歯止めになる</td><td>調整額10%以上。残業代は管理職の負担・不公平・財政リスクを生む</td><td class="se">残業代の副作用（熱心な人ほど損、定数を圧迫）を重く見る。</td></tr>
+<tr><td class="pn">調整額10%の評価</td><td>実態に見合わず「黙って働け」の圧力になる（嶋崎、中嶋、今野、斉藤）</td><td>長年の要望が実現（全日教連）</td><td class="se">一律の引き上げより業務削減と定数を優先。</td></tr>
+<tr><td class="pn">お金の使い道</td><td colspan="2">業務削減の設備・人へ（内田）／定数改善計画を（佐久間、広田）／処遇と定数の両輪で（全日教連、日教組）</td><td class="se">定数・人の手当てを重視。ここは内田氏・佐久間氏と一致。</td></tr>
+<tr><td class="pn">時間管理・数値目標</td><td>残業の概念がない以上30時間目標は無意味（内田）。改ざん・持ち帰りが増える（嶋崎、今野、日教組）</td><td>教育委員会の計画策定・公表を評価（全日教連、澤田）</td><td class="se">計画義務化は評価。過少申告・「見えない化」への懸念はA側と共通。</td></tr>
+<tr><td class="pn">教員不足の原因</td><td>長時間労働と給特法（内田、斉藤）</td><td>正規採用控え・定数削減（佐久間、広田）</td><td class="se">働き方と定数の両方。</td></tr>
+<tr><td class="pn">部活動</td><td>本来の業務ではない。時間外は命令できない（内田）</td><td>段階的に地域へ移す</td><td class="se">地域移行に賛成。内田氏と一致。</td></tr>
+</tbody></table></div>
+<div class="legend"><span><span class="tag t-same">妹尾氏と共通</span>考えが近い</span><span><span class="tag t-part">一部共通</span>問題意識は同じで手段が違う など</span><span><span class="tag t-diff">妹尾氏と違う</span>はっきり立場が違う</span></div>
+
+<h2 id="uchida" class="other"><span class="hn">11</span>内田良氏（名古屋大学教授・教育社会学）</h2>
+<p>部活動や「定額働かせ放題」の問題を早くから発信してきた研究者です。<b>給特法を見直して残業代を払い、コストで残業に歯止めをかける</b>という立場で、ここが妹尾氏とのいちばんの違いです。一方、部活動や業務削減、人への投資では考えが重なります。</p>
+<div class="cards">
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/07058d17f91fb47d0521f3e3150af77738205179" target="_blank" rel="noopener">部活動は教員の仕事か？ 中教審「中間まとめ」に期待すること</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2017年12月3日</p>
+<p>部活動の位置づけがあいまいで、時間外の部活動は命令できず、優先度も低いとしています。中教審で妹尾委員が時間外の部活動を問題にした発言を、名前を挙げて支持しています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>部活動については両氏の考えが一致しています。</span></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/8c7aa71c767d8813ab49978f2130650d7b48ee96" target="_blank" rel="noopener">残業代ゼロ　教員の長時間労働を生む法制度</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2017年12月11日</p>
+<p>4%は1966年の調査をもとにした数字で、実態とかけ離れているとしています。勤務時間を把握する義務がないため、業務を減らす動機も生まれないとし、労務管理の基本を整えるのが国の責務だと述べています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>勤務時間の管理と労働安全衛生が弱いという問題意識は同じです。</span></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/a38b9b3f99aa26e2890f0f1c78ba6eccf3c5ffa9" target="_blank" rel="noopener">教員の勤務実態「持ち帰り業務」の日々</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2023年4月30日</p>
+<p>R4勤務実態調査をもとに、持ち帰りを含めると平均で過労死ラインを超える（小学校約82時間、中学校約101時間/月）と試算しています。前回より減った点ばかり強調せず、水準そのものを見るべきだとしています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>持ち帰りを含めて見るべきという数字の読み方は近い立場です。</span></article>
+<article class="cd"><h4><a href="https://www.ktv.jp/news/feature/230605-teacherst/" target="_blank" rel="noopener">関西テレビ「newsランナー」でのコメント</a></h4>
+<p class="m">関西テレビ／2023年6月5日</p>
+<p>調整額の増額自体は良いことでも残業は減らないとし、働いた分を払う仕組みにすれば時間を減らす動機が生まれると述べています。教員でなくてもよい仕事は外に任せるべきだとしています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>業務を外に出す点は同じ。残業代で時間を抑えるという手段は違います。</span></article>
+<article class="cd"><h4><a href="https://www.nikkan-gendai.com/articles/view/life/341201" target="_blank" rel="noopener">日刊ゲンダイDIGITAL のインタビュー</a></h4>
+<p class="m">2024年6月9日</p>
+<p>給特法は「定額働かせ放題」の温床で、残業にコストの歯止めがないとしています。10%案は根本的な解決にならず、教員が望むのはお金より早く帰ることだと述べています。</p>
+<span class="part-note"><span class="tag t-diff">妹尾氏と違う</span>妹尾氏は「定額働かせ放題」という言い方そのものに異を唱えています（<a href="#s1">2章</a>）。</span></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/profile/commentator/ryouchida/comments/f812ceae-c1ca-4161-9b53-b80226a69f06" target="_blank" rel="noopener">調整額引き上げのニュースへのコメント</a></h4>
+<p class="m">Yahoo!ニュース コメント／2024年12月24日</p>
+<p>10%に上げる財源は、業務削減に直接役立つ設備・システムや人に使うべきだとしています。上げるなら条件つきで段階的に、という意見で、給特法廃止の可能性も探り続けるべきだとしています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>「お金より人と業務削減へ」という点は、妹尾氏の定数重視に近いです。</span></article>
+<article class="cd"><h4><a href="https://www.bengo4.com/c_5/n_18782/" target="_blank" rel="noopener">給特法改正案に内田良教授が批判「大いに疑問」</a></h4>
+<p class="m">弁護士ドットコムニュース／2025年5月9日</p>
+<p>教員が求めているのは業務削減で、給料だけ上げても負担は減らないとしています。給特法の下では「残業」という概念がないので、月30時間の目標には意味がないと述べています。勤務実態調査は方法を変えずに続けるべきだとしています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>勤務実態調査を続けるべきという点は同じ。計画義務化の評価は分かれます。</span></article>
+<article class="cd"><h4><a href="https://www.kyobun.co.jp/article/20220513-03" target="_blank" rel="noopener">勤務時間の「書き換え」調査</a></h4>
+<p class="m">教育新聞／2022年5月13日</p>
+<p>内田氏らが2021年に小中教員924人に行った調査で、書類上の勤務時間を少なく書き換えるよう求められた教員が16.6%（約6人に1人）いたと報じられています。国会でも引用されました。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>過少申告で実態が「見えない化」するという妹尾氏の懸念を、数字で裏づける調査です。</span></article>
+<article class="cd"><h4><a href="https://news.yahoo.co.jp/expert/articles/19a61e39ede790b1644b07a883b50dc100420b84" target="_blank" rel="noopener">教員の働き方　新制度に強い反発　8月は休めるか？</a></h4>
+<p class="m">Yahoo!ニュース エキスパート／2019年ごろ（掲載日はページで確認できず）</p>
+<p>1年単位の変形労働時間制は長時間労働を減らさず、データの裏づけもないとしています。まず学力テストなど国が持っている業務を削るべきだと述べています。</p></article>
+<article class="cd"><h4><a href="https://www.iwanami.co.jp/book/b498531.html" target="_blank" rel="noopener">岩波ブックレット『迷走する教員の働き方改革』</a></h4>
+<p class="m">岩波書店／2020年3月</p>
+<p>内田良・広田照幸・髙橋哲・嶋﨑量・斉藤ひでみの共著で、「給特法を見直し、残業代を」という論者が集まった本です。妹尾氏は加わっていません。</p></article>
+</div>
+<p class="small">内田氏と妹尾氏の対談や共著は、この調べでは見つかりませんでした。</p>
+
+<h2 id="others" class="other"><span class="hn">12</span>給特法・時間管理をめぐる論者</h2>
+<div class="cards">
+<article class="cd"><p class="who">斉藤ひでみ（西村祐二）氏<span class="role">岐阜県立高校教員、給特法廃止を求める署名の呼びかけ人</span></p>
+<p class="m"><a href="https://www.bengo4.com/c_5/n_14093/" target="_blank" rel="noopener">弁護士ドットコム 2022年2月13日</a>／<a href="https://www.bengo4.com/c_5/n_18949/" target="_blank" rel="noopener">同 2025年6月12日</a></p>
+<p>調整額を増やすだけでは改正とはいえず、できるだけ廃止に近づけ、授業以外の業務には残業代を払うべきだとしています。2025年の改正法は評価できず、業務を減らしても別の業務が増える「いたちごっこ」になると述べています。勤務実態調査をやめれば実態が見えなくなるとも懸念しています。</p>
+<span class="part-note"><span class="tag t-diff">妹尾氏と違う</span>残業代の扱いでは対立。勤務実態調査を続けるべきという点は共通です。</span></article>
+<article class="cd"><p class="who">小室淑恵氏<span class="role">ワーク・ライフバランス社社長、中教審委員</span></p>
+<p class="m"><a href="https://www.ben54.jp/news/1446" target="_blank" rel="noopener">ben54.jp 2024年8月28日（西村氏ほかと並べた記事）</a></p>
+<p>給特法がある限り対価は正しく払われないとして、廃止して残業代を払い、残業をコストとして管理職の評価に反映させるよう提言しています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>管理職のマネジメントを問う点は同じ。手段（残業代）が違います。</span></article>
+<article class="cd"><p class="who">嶋崎量氏<span class="role">弁護士、日本労働弁護団</span></p>
+<p class="m"><a href="https://news.yahoo.co.jp/expert/articles/6854beb7f3477bf47f23f2915823733b568a9ece" target="_blank" rel="noopener">Yahoo!ニュース エキスパート 2025年3月1日</a></p>
+<p>給特法の枠組みを残せば根本の原因は手つかずだとしています。小幅な増額は「黙って働け」という空気を強めかねず、数値管理による「時短ハラスメント」で持ち帰りや記録の改ざんが増えると警告しています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>数値目標が過少申告を生むという懸念は妹尾氏と同じ。給特法の扱いは違います。</span></article>
+<article class="cd"><p class="who">今野晴貴氏<span class="role">NPO法人POSSE代表</span></p>
+<p class="m"><a href="https://news.yahoo.co.jp/expert/articles/81ebac51f8e944ee1bdb8c92b7b9b98188378637" target="_blank" rel="noopener">Yahoo!ニュース エキスパート 2025年6月13日</a></p>
+<p>増額しても「定額働かせ放題」は変わらず、10%は残業月20時間分にしかあたらないとしています。大幅な増員なしに月30時間は難しく、隠れ残業が増えると述べています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>増員なしでは無理という点は同じです。</span></article>
+<article class="cd"><p class="who">髙橋哲氏<span class="role">大阪大学准教授（教育法）</span>／戸ヶ﨑勤氏<span class="role">戸田市教育長</span></p>
+<p class="m"><a href="https://www.kyobun.co.jp/article/2025042504" target="_blank" rel="noopener">教育新聞 2025年4月25日（衆院の参考人質疑）</a></p>
+<p><b>髙橋氏</b>：超勤4項目以外を「自発的な行為」とする文科省の運用は行政の越権で、時間外勤務を労働時間と認めることが最優先だとしています。<br><b>戸ヶ﨑氏</b>：教職は職務とそれ以外を切り分けにくく、教師の裁量を守るべきだとして改正案に賛成。残業代は学校運営を混乱させ、管理職のなり手を減らすと述べています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>「労働と認めない制度が問題」は髙橋氏と、「残業代の副作用」は戸ヶ﨑氏と重なります。</span></article>
+<article class="cd"><p class="who">中嶋哲彦氏<span class="role">日本教育政策学会会長</span></p>
+<p class="m"><a href="https://www.kyobun.co.jp/article/2024092601" target="_blank" rel="noopener">教育新聞 2024年9月26日</a></p>
+<p>残業代の代わりである調整額を処遇改善に使うのは、人確法と給特法を混同していると批判しています。長時間労働は直らず、「給料が上がったのだから文句を言うな」という圧力になると述べています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>「処遇改善と時間削減は別物」という整理は妹尾氏と通じます。</span></article>
+<article class="cd"><p class="who">末冨芳氏<span class="role">日本大学教授</span></p>
+<p class="m"><a href="https://news.yahoo.co.jp/expert/articles/51cdce8af8504f8635d234ed273b98fd3de5645c" target="_blank" rel="noopener">Yahoo!ニュース エキスパート 2024年6月1日「今『給特法廃止』で起きる最悪のシナリオ」</a></p>
+<p>改革が進まないまま廃止すると残業代は約2兆円にのぼり、財政の苦しい自治体が給与を下げたり、4%そのものが消えたりするおそれがあるとしています。中教審のまとめの内容を法律に書き込むことが大事だと述べています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>廃止論の副作用という見方はほぼ同じ。妹尾氏と「#教員不足をなくそう緊急アクション」を一緒に組んでいます。</span></article>
+<article class="cd"><p class="who">澤田真由美氏<span class="role">先生の幸せ研究所</span>／藤川伸治氏<span class="role">共育の杜</span></p>
+<p class="m"><a href="https://www.kyobun.co.jp/article/2025051601" target="_blank" rel="noopener">教育新聞 2025年5月16日</a></p>
+<p><b>澤田氏</b>：衆院の修正で「調査を行う」が加わったことと、業務3分類の実施を評価。今の枠組みでも工夫できるとしています。<br><b>藤川氏</b>：修正には意味があるが、財源が示されず自治体の財政力で差が出ると懸念。健康確保は参院で議論すべきだとしています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>どちらも今の枠組みの中で改善する立場で、妹尾氏に近い考えです。</span></article>
+</div>
+
+<h2 id="teisu" class="other"><span class="hn">13</span>教員不足・定数の研究者</h2>
+<div class="cards">
+<article class="cd"><p class="who">佐久間亜紀氏<span class="role">慶應義塾大学教授（教員不足研究）</span></p>
+<p class="m"><a href="https://toyokeizai.net/articles/-/863028?display=b" target="_blank" rel="noopener">東洋経済 2025年3月24日</a>／<a href="https://ryukyushimpo.jp/news/entry-1714484.html" target="_blank" rel="noopener">琉球新報 2023年5月22日</a></p>
+<p>不足の最大の原因は自治体の正規採用控えで、2001年以降の行財政改革で教員が削られてきたとしています。欠員は最後には今いる教員の負担で埋められているとし、国は定数改善計画を再開し、自治体は病休を減らし育休からの復帰を支えるべきだと述べています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>「定数こそ本丸」という点は同じです。</span></article>
+<article class="cd"><p class="who">広田照幸氏<span class="role">日本大学教授（教育学）</span></p>
+<p class="m"><a href="https://www.nihon-u.ac.jp/feature/article/587.html" target="_blank" rel="noopener">日本大学 2021年3月19日</a></p>
+<p>教員10万人・職員13万人規模の増員が必要だとしています。学校は残業代の出ない善意の長時間労働で支えられ、その背景に給特法があると述べています。</p>
+<span class="part-note"><span class="tag t-part">一部共通</span>増員重視は同じ。給特法の見方は内田氏寄りです。</span></article>
+<article class="cd"><p class="who">工藤祥子氏<span class="role">神奈川過労死等を考える家族の会 代表</span></p>
+<p class="m"><a href="https://www.jcp.or.jp/akahata/aik19/2019-11-13/2019111301_04_1.html" target="_blank" rel="noopener">しんぶん赤旗 2019年11月13日（国会の参考人陳述）</a></p>
+<p>変形労働時間制は生活のリズムを壊し、疲れの回復を妨げるとしています。教員の過労死は6・7・12月に多く、新学期や行事の重さが背景にあると述べています。</p>
+<span class="part-note"><span class="tag t-same">妹尾氏と共通</span>「教員の命と健康を守る」という軸は同じです。妹尾氏も過労死の検証を求めています（<a href="#s6">7章</a>）。</span></article>
+</div>
+
+<h2 id="dantai" class="other"><span class="hn">14</span>教職員団体・国</h2>
+<div class="cards">
+<article class="cd zen"><p class="who">全日本教職員連盟（全日教連）</p>
+<p class="m"><a href="https://www.kyoiku-press.com/post-278204/" target="_blank" rel="noopener">日本教育新聞 2024年5月15日</a>／<a href="https://www.kyobun.co.jp/article/2024051502" target="_blank" rel="noopener">教育新聞 2024年5月15日</a>／<a href="https://www.kyobun.co.jp/article/2025042504" target="_blank" rel="noopener">教育新聞 2025年4月25日</a></p>
+<ul>
+<li>給特法の枠組みを残して調整額を10%以上にする方向を高く評価。長年の要望が実現したとしています。</li>
+<li>残業代方式（時間外勤務命令が前提）は、管理職の負担増や学校間の不公平を招くと懸念しています。</li>
+<li>処遇改善と時間削減は両輪で進めるべきだとし、時間外在校等時間を月20時間以内にするための定数改善、中学校35人学級も求めています。</li>
+<li>衆院の参考人として、働き方改革・指導運営体制・処遇改善を一体で進めること、教育委員会の計画策定・公表を評価すると述べました。</li>
+</ul>
+<span class="part-note"><span class="tag t-part">一部共通</span>残業代の副作用を心配し、定数改善を求める点は妹尾氏と同じ。調整額10%の評価は、妹尾氏の方が控えめです。</span></article>
+<article class="cd"><p class="who">日本教職員組合（日教組）</p>
+<p class="m"><a href="https://www.kyobun.co.jp/article/2024082905" target="_blank" rel="noopener">教育新聞 2024年8月29日</a>／<a href="https://www.kyobun.co.jp/article/2025061103" target="_blank" rel="noopener">同 2025年6月11日</a></p>
+<p>答申の処遇改善は一定評価しつつ、業務削減が不十分としています。調整額ではなく基本給で処遇すべきだという立場です。改正法の成立時には、月30時間目標と中学35人学級の附則明記を評価しましたが、廃止や抜本見直しに至らなかったのは「極めて遺憾」とし、罰則がないこと、改ざんのおそれも指摘しています。</p></article>
+<article class="cd"><p class="who">全日本教職員組合（全教）</p>
+<p class="m">上と同じ教育新聞2本</p>
+<p>答申は「問題だらけ」とし、改正法に抗議する立場です。残業代の支給と基礎定数の改善を求め、主務教諭は序列化を招くと反対しています。3分類の見直しについての談話は<a href="3bunrui-tsukiawase.html#hyoka">047のページ 8章</a>にあります。</p></article>
+<article class="cd"><p class="who">中教審 特別部会長　貞廣斎子氏／文部科学大臣</p>
+<p class="m"><a href="https://www.kyobun.co.jp/article/2024080902" target="_blank" rel="noopener">教育新聞 2024年8月9日</a>／<a href="https://www.mext.go.jp/b_menu/activity/detail/2025/20250611.html" target="_blank" rel="noopener">文部科学省 2025年6月11日</a></p>
+<p>貞廣部会長は、教師を「学びの専門職」として環境を良くする議論をしてきたとし、答申の後が本番だと述べています。大臣は改正法の成立を受け、首長・地域・保護者にも働き方改革への理解と協力を求めるメッセージを出しました。</p></article>
+</div>
+
+<h2 id="chui"><span class="hn">15</span>確かめきれなかったこと</h2>
+<div class="note"><ul>
+<li>東洋経済の記事は1ページ目しか読めないものが多く、「見出しのみ確認」「題名のみ確認」と書いたものは、後半の中身を見出しから読み取っています。</li>
+<li>妹尾氏の note・X、ライフ＆ワークの公式サイト、教育新聞・NHKなどのインタビューは、この調べでは見つけられませんでした。</li>
+<li>内田氏の「書き換え16.6%」は教育新聞の記事によるもので、調査の一次資料は確認できていません。</li>
+<li>全日教連の公式サイトに接続できず、改正法成立時（2025年6月）の全日教連の談話は見つかっていません。</li>
+<li>青木栄一氏（東北大学教授）など、無料で読めるコメントが見つからなかった人は載せていません。</li>
+<li>「妹尾氏と共通／違う」の札は、この調べでの見立てです。</li>
+</ul></div>
+
+<footer>
+<p>2026年11月2日調べ。各記事の要約はこの調べで書いたもので、原文の表現とは違います。引用・配布のときはリンク先で確かめてください。</p>
+<p>関連：<a href="zikangai-zaikoto.html">021 「時間外在校等時間」まとめ</a>／<a href="3bunrui-tsukiawase.html">047 3分類の突き合わせ</a>／<a href="hatarakigai.html">004 働きやすさと働きがい</a></p>
+</footer>
+</div>
+</body>
+</html>
