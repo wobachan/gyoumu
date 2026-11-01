@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学校のOKR</title>
+<style>
+:root{
+  --bg:#f7f5f0; --card:#fff; --ink:#24302e; --sub:#5d6b68; --line:#dcd6ca;
+  --o:#2f6f62; --o-soft:#e3f0ec; --kr:#b5652b; --kr-soft:#fbeee3;
+  --ng:#b23a3a; --ng-soft:#fae6e6; --ok:#2f7a3d; --ok-soft:#e5f3e7;
+  --goal:#3b3a6e; --goal-soft:#e9e8f5; --sheet:#dff1f7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,sans-serif;line-height:1.75}
+header{background:var(--o);color:#fff;padding:28px 16px 22px}
+header .in,main{max-width:1060px;margin:0 auto}
+header h1{margin:0;font-size:1.9rem;letter-spacing:.05em}
+header p{margin:.4em 0 0;opacity:.92}
+nav{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav .in{max-width:1060px;margin:0 auto;padding:0 8px}
+nav a{display:inline-block;padding:10px 9px;color:var(--o);text-decoration:none;font-size:.9rem}
+nav a:hover{background:var(--o-soft)}
+main{padding:8px 16px 60px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:20px 0}
+h2{margin:0 0 .6em;font-size:1.35rem;border-left:6px solid var(--o);padding-left:10px}
+h3{font-size:1.08rem;margin:1.2em 0 .4em}
+.num{color:var(--sub);font-size:.9rem;margin-right:.3em}
+.lead{font-size:1.05rem}
+.okbox{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border-radius:8px;padding:14px 16px}
+.box.o{background:var(--o-soft);border:2px solid var(--o)}
+.box.kr{background:var(--kr-soft);border:2px solid var(--kr)}
+.box b.big{font-size:1.2rem;display:block}
+.tag{display:inline-block;font-size:.78rem;font-weight:bold;padding:1px 8px;border-radius:99px;color:#fff;margin-right:6px;vertical-align:2px;white-space:nowrap}
+.tag.o{background:var(--o)} .tag.kr{background:var(--kr)} .tag.g{background:var(--goal)}
+.tag.ng{background:var(--ng)} .tag.ok{background:var(--ok)} .tag.s{background:#2a7f9e}
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.points div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fcfbf8}
+.points b{color:var(--o)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.94rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+thead th{background:var(--o-soft)}
+th.sheet,td.sheet{background:var(--sheet)}
+td.hl{background:var(--o-soft);font-weight:bold}
+.warn{background:var(--ng-soft);border-left:5px solid var(--ng);padding:10px 14px;border-radius:4px;margin:12px 0}
+.hint{background:var(--kr-soft);border-left:5px solid var(--kr);padding:10px 14px;border-radius:4px;margin:12px 0}
+.src{font-size:.85rem;color:var(--sub)}
+.src a{color:var(--o)}
+.finds{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.finds div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.finds h3{margin:0 0 .3em;font-size:1rem}
+.finds .good{border-color:#9cc9a4;background:#f6fbf6}
+.five{counter-reset:f;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.five li{counter-increment:f;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;border:1px solid var(--line);border-radius:8px;padding:12px}
+.five li::before{content:counter(f);background:var(--o);color:#fff;font-weight:bold;font-size:1.3rem;border-radius:50%;width:40px;height:40px;display:grid;place-items:center}
+.five b{display:block;font-size:1.05rem}
+.five p{margin:.2em 0 0;color:var(--sub)}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:12px 0}
+.ba>div{padding:12px 14px}
+.ba .before{background:#f4f3ef}
+.ba .after{background:var(--ok-soft)}
+.ba h4{margin:0 0 .3em;font-size:.95rem}
+.ba .ttl{grid-column:1/-1;background:var(--ink);color:#fff;padding:6px 14px;font-weight:bold}
+.ba .ttl small{font-weight:normal;opacity:.8;margin-left:8px}
+.ba p{margin:.25em 0}
+.ba .res{font-size:.9rem;color:var(--sub)}
+
+/* 目標の木 */
+.tree .goal{background:var(--goal);color:#fff;border-radius:8px;padding:12px 16px;text-align:center}
+.tree .goal small{display:block;opacity:.8;font-size:.8rem}
+.tree .goal b{font-size:1.15rem}
+.tree .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px;border-top:3px solid var(--goal);padding-top:14px}
+.tree .col{display:flex;flex-direction:column;gap:10px}
+.tree .ideal{color:#fff;border-radius:6px;padding:8px 12px;font-weight:bold}
+.tree .ideal small{display:block;font-weight:normal;opacity:.85;font-size:.78rem}
+.tree .unit{border:1px solid var(--line);border-left:6px solid;border-radius:6px;padding:8px 10px;background:#fff;font-size:.9rem}
+.tree .unit.star{box-shadow:0 0 0 2px #e0b13a inset}
+.tree .un{font-size:.82rem;color:var(--sub)}
+.tree .uo{font-weight:bold;margin:.1em 0 .3em}
+.tree .kr{border-top:1px dashed var(--line);padding-top:4px;margin-top:4px}
+.tree .vals{font-size:.8rem;color:var(--sub)}
+.lv{display:inline-block;min-width:1.6em;text-align:center;font-size:.78rem;font-weight:bold;border-radius:4px;padding:0 4px;margin-left:2px}
+.lv4{background:#cfe3f7}.lv3{background:#d6efd9}.lv2{background:#fbeccc}.lv1{background:#f6dcdc}
+.tree .none{color:var(--sub);font-size:.88rem;border:1px dashed var(--line);border-radius:6px;padding:8px}
+.tree .stop{font-size:.82rem;margin-top:4px;color:var(--sub)}
+.sheettbl td,.sheettbl th{font-size:.85rem}
+.sheettbl .ar{white-space:pre-line}
+
+.checker{display:flex;gap:8px;flex-wrap:wrap}
+.checker input{flex:1;min-width:240px}
+input[type=text],textarea,select{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:6px;width:100%;background:#fff;color:var(--ink)}
+textarea{resize:vertical}
+button.btn{font:inherit;background:var(--o);color:#fff;border:0;border-radius:6px;padding:8px 16px;cursor:pointer}
+button.btn.sub{background:#fff;color:var(--o);border:1px solid var(--o)}
+button.btn.small{padding:4px 12px;font-size:.88rem}
+button.btn:disabled{opacity:.4;cursor:default}
+button.x{font:inherit;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--sub);padding:4px 10px}
+#result{margin-top:12px}
+#result .r{padding:10px 14px;border-radius:6px}
+#result .r.ok{background:var(--ok-soft)}
+#result .r.ng{background:var(--ng-soft)}
+#result ul{margin:.3em 0 0;padding-left:1.4em}
+.samples{font-size:.88rem;color:var(--sub);margin-top:8px}
+.samples button{font:inherit;font-size:.85rem;border:1px dashed var(--sub);background:none;border-radius:4px;padding:1px 8px;margin:2px;cursor:pointer;color:var(--ink)}
+
+/* ワークシート */
+.ws label.l{display:block;font-weight:bold;margin:14px 0 4px}
+.step{display:inline-block;background:var(--ink);color:#fff;border-radius:4px;padding:0 8px;margin-right:6px;font-size:.85rem}
+.irow{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:center;margin:6px 0}
+.irow i{width:18px;height:18px;border-radius:4px;display:block}
+.ucard{border:1px solid var(--line);border-left:6px solid #aaa;border-radius:8px;padding:12px;margin:12px 0;background:#fcfbf8}
+.ucard.star{background:#fffaf0}
+.uhead{display:grid;grid-template-columns:auto 1.3fr 1fr auto;gap:8px;align-items:center}
+.starbox{display:flex;align-items:center;gap:4px;font-size:.88rem;white-space:nowrap;cursor:pointer}
+.ucard .ul{font-size:.86rem;font-weight:bold;margin:8px 0 2px;display:block}
+.ucard .ul small{font-weight:normal;color:var(--sub)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.krbox{border:1px solid #ecd9c8;background:#fff;border-radius:6px;padding:8px 10px;margin:6px 0}
+.krtop{display:grid;grid-template-columns:1fr 82px 82px 70px;gap:6px;align-items:end}
+.krtop small{display:block;font-size:.75rem;color:var(--sub)}
+.krvals{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.krvals small{display:block;font-size:.75rem;color:var(--sub)}
+.thr{font-size:.8rem;color:var(--kr);margin-top:4px}
+.jt{font-size:.78rem;text-align:center;border-radius:99px;padding:2px 4px;color:#fff;display:inline-block}
+.jt.ok{background:var(--ok)} .jt.ng{background:var(--ng)}
+.wsbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.flow{list-style:none;padding:0;margin:0}
+.flow li{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.flow .t{font-weight:bold;color:var(--o);text-align:right}
+.flow p{margin:.2em 0 0;color:var(--sub);font-size:.93rem}
+.flow .q{display:block;margin-top:.3em;color:var(--ink);background:var(--kr-soft);padding:4px 10px;border-radius:4px;font-size:.92rem}
+.year{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.year div{border-top:5px solid var(--kr);background:#fcfbf8;border-radius:6px;padding:12px}
+.year b{display:block;color:var(--kr)}
+footer{text-align:center;color:var(--sub);font-size:.85rem;padding:20px}
+@media (max-width:760px){
+  .okbox,.points,.finds,.ba,.two,.year{grid-template-columns:1fr}
+  .uhead{grid-template-columns:auto 1fr auto}
+  .uhead select{grid-column:1/-1}
+  .krtop{grid-template-columns:1fr 1fr}
+  .krtop>div:first-child{grid-column:1/-1}
+  .flow li{grid-template-columns:56px 1fr}
+  header h1{font-size:1.5rem}
+}
+@media print{
+  nav,.noprint,.wsbtns{display:none!important}
+  body{background:#fff}
+  section{break-inside:avoid;border-color:#999}
+  section.ws{break-inside:auto}
+  header{background:#fff;color:#000;border-bottom:3px solid #000}
+  .tree .goal,.tree .ideal,.lv,th.sheet,td.sheet{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>学校のOKR</h1>
+  <p>新しい書類は作らない。今ある学校評価書を、OKRの考え方で使い直す。校内研修・業務改善のための手引き</p>
+</div></header>
+
+<nav><div class="in">
+  <a href="#s1">1 OKRとは</a><a href="#s2">2 評価書とOKR</a><a href="#s3">3 評価書を見てみると</a>
+  <a href="#s4">4 使い直す5つのこと</a><a href="#s5">5 書き直し例</a><a href="#s6">6 指標チェック</a>
+  <a href="#s7">7 ワークシート</a><a href="#s8">8 研修の流れ</a><a href="#s9">9 1年の回し方</a>
+</div></nav>
+
+<main>
+
+<section id="s1">
+  <h2><span class="num">1</span>OKRとは</h2>
+  <div class="okbox">
+    <div class="box o">
+      <span class="tag o">O</span><b>Objective（目標）</b>
+      <b class="big">どうなりたいか</b>
+      みんなが「そうなりたい」と思える、言葉で書くめざす姿。数字は入れない。
+    </div>
+    <div class="box kr">
+      <span class="tag kr">KR</span><b>Key Results（主な成果）</b>
+      <b class="big">近づいたと、何でわかるか</b>
+      Oに近づいたかを確かめる数字。「何をするか」ではなく「どうなったか」で書く。
+    </div>
+  </div>
+  <div class="points">
+    <div><b>しぼる</b><br>力を入れる目標は少しだけ。全部を同じ重さで追わない。</div>
+    <div><b>ねらいは高め</b><br>7割できれば成功。全部達成できたなら、ねらいが低すぎた。</div>
+    <div><b>こまめに見る</b><br>年度末を待たず、学期ごと・月ごとに数字を確かめる。</div>
+  </div>
+</section>
+
+<section id="s2">
+  <h2><span class="num">2</span>学校評価書は、もうOKRとほぼ同じ形</h2>
+  <p class="lead">学校評価は法律で決まっていて（学校教育法第42条、同施行規則第66〜68条）、どの学校にも評価書があります。美祢市の小学校の学校評価書（市の「別紙様式」）を見ると、欄の並びはOKRとほとんど同じです。</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th class="sheet">学校評価書の欄（美祢市の様式）</th><th>OKRでいうと</th><th>このページでの使い方</th></tr></thead>
+    <tbody>
+      <tr><td class="sheet">1 学校教育目標</td><td>いちばん上のめざす姿</td><td>そのまま使う</td></tr>
+      <tr><td class="sheet">4 自己評価の「評価領域」<br><small>知識及び技能／思考力・判断力・表現力／学びに向かう力・人間性／人材育成・業務改善</small></td><td>理念的な目標</td><td>そのまま使う</td></tr>
+      <tr><td class="sheet">重点目標（1行ずつ）</td><td class="hl">O</td><td>今学期に力を入れる行に★をつける</td></tr>
+      <tr><td class="sheet">具体的方策（教育活動）</td><td>Oに近づくためにやること</td><td>「やめること」も1つ書く</td></tr>
+      <tr><td class="sheet">評価基準（指標と4段階）</td><td class="hl">KR</td><td>前年度の値→ねらいの値で書き、4段階をそこから決める</td></tr>
+      <tr><td class="sheet">達成度（1〜4）</td><td>達成度</td><td>学期ごとに数字を見て、年度末につける</td></tr>
+      <tr><td class="sheet">重点目標の達成状況の診断・分析</td><td>振り返り</td><td>学期ごとに短く書きためて、年度末に写す</td></tr>
+      <tr><td class="sheet">6 総括／7 次年度への改善策</td><td>次のOKR</td><td>★の行を中心にまとめる</td></tr>
+    </tbody>
+  </table></div>
+  <div class="hint"><strong>新しい書類は作りません。</strong>OKRは「学校評価書の使い方」です。書く場所は今までどおり評価書の欄で、変えるのは<strong>しぼり方・ねらいの高さ・見るタイミング</strong>だけです。学校評価は学校の自己評価で、個人の評価（人事評価）とは関係ありません。研修でもはっきり伝えます。</div>
+  <p class="src">参考：美祢市内の小学校2校（このページではA小・B小）が学校のサイトで公開している、令和7年度の学校評価書。</p>
+</section>
+
+<section id="s3">
+  <h2><span class="num">3</span>公開されている評価書を見てみると</h2>
+  <p>A小・B小の令和7年度の学校評価書から読み取れることです。どちらもよくできた評価書で、OKRの考え方で足すことは少しです。</p>
+  <div class="finds">
+    <div class="good"><h3>◎ 指標がもう数字になっている</h3>ほぼすべての行が「アンケート肯定率」「確認問題の平均正答率の県平均との差」「時間外在校等時間」などの数字です。「研修を○回開いた」のような活動の指標はほとんどありません。</div>
+    <div class="good"><h3>◎ 年の途中でも数字を見ている</h3>B小は7月と12月にアンケートをとり、「7月○%→12月○%」のように変化を書いています。学期ごとに見るしくみは、もうあります。</div>
+    <div><h3>▲ 行が多い</h3>どちらの学校も、重点目標が15行前後あります。全部を同じ重さで追うと、どれに力を入れているかが見えにくくなります。</div>
+    <div><h3>▲ ねらいの高さが全部同じ</h3>4段階の基準が多くの行で「4＝85%以上、3＝70%以上、2＝50%以上」と同じです。前年度の値に関係なく決まっているので、もともと高い項目は動かなくても4になります。</div>
+    <div><h3>▲ 4が多い</h3>A小は、半分近くの行が4でした。OKRの考え方では、半分近くが最高の段階なら「ねらいが低め」と見ます。</div>
+    <div><h3>▲ 指標が大まか</h3>「『授業』に関する児童アンケート肯定率」のように、いくつかの問いをまとめた数字が多く、何が良くなったのかが見えにくいことがあります。</div>
+  </div>
+</section>
+
+<section id="s4">
+  <h2><span class="num">4</span>OKRの考え方で使い直す5つのこと</h2>
+  <ol class="five">
+    <li><div><b>★をつけて、しぼる</b><p>評価書の行はそのまま。今学期に力を入れる行に★を2〜4つつける。達成度が低かった行や、学校として変えたい行を選ぶ。</p></div></li>
+    <li><div><b>指標を1つの数字にする</b><p>「〜に関する肯定率」をまとめた数字ではなく、いちばん大事な1問や、記録からとれる数字（貸出冊数・欠席数・在校等時間など）にする。</p></div></li>
+    <li><div><b>前年度の値から、ねらいを決める</b><p>4段階を全部同じにせず、「前年度の値→ねらいの値」で決める。目安は <strong>4＝ねらい以上／3＝ねらいまでの7割以上／2＝前年度以上／1＝前年度より下</strong>。</p></div></li>
+    <li><div><b>学期ごとに数字を見る</b><p>★の行は、7月・12月のアンケートや毎月の記録で数字を確かめ、職員打ち合わせで5分だけ共有する。診断・分析はそのとき1〜2行書いておく。</p></div></li>
+    <li><div><b>「やめること」を方策に入れる</b><p>具体的方策は足すばかりになりがち。★の行には「やめること・減らすこと」を1つ書く。</p></div></li>
+  </ol>
+</section>
+
+<section id="s5">
+  <h2><span class="num">5</span>書き直し例</h2>
+  <p>公開されている評価書の行を例に、OKRの考え方で書き直すとどうなるかを示します。元の評価書が悪いということではなく、次の年度に向けた書き直しの例です。</p>
+
+  <div class="ba">
+    <div class="ttl">読書<small>A小 令和7年度より</small></div>
+    <div class="before"><h4>今の評価基準</h4>
+      <p>「読書の楽しさ」に関する児童アンケート肯定率</p>
+      <p>4：85%以上　3：70%以上　2：50%以上</p>
+      <p class="res">結果：82.2%で達成度3。学校関係者評価では「貸出冊数が前年度より10冊以上多い」という声も。</p></div>
+    <div class="after"><h4>書き直し</h4>
+      <p><span class="tag kr">KR1</span>「本を読むのが楽しい」と答える児童　82%→90%</p>
+      <p><span class="tag kr">KR2</span>1人あたりの年間貸出冊数　前年度＋10冊</p>
+      <p class="res">貸出冊数は図書の記録から毎月わかる。ほめられた成果を、そのまま指標にする。</p></div>
+  </div>
+
+  <div class="ba">
+    <div class="ttl">業務改善<small>B小 令和7年度より</small></div>
+    <div class="before"><h4>今の評価基準</h4>
+      <p>教職員の1か月の時間外在校等時間の平均</p>
+      <p>4：30時間以内　3：35時間以内　2：35〜40時間</p>
+      <p class="res">結果：25時間で達成度4。</p></div>
+    <div class="after"><h4>書き直し</h4>
+      <p><span class="tag kr">KR1</span>平均　25時間→20時間</p>
+      <p><span class="tag kr">KR2</span>月45時間を超えた教職員　毎月0人</p>
+      <p class="res">4が取れたら、次の年はねらいを上げる。平均だけだと、長い人がかくれるので「超えた人数」も見る。</p></div>
+  </div>
+
+  <div class="ba">
+    <div class="ttl">業務改善<small>A小 令和7年度より</small></div>
+    <div class="before"><h4>今の評価基準</h4>
+      <p>「業務改善」に関する教職員アンケート肯定率</p>
+      <p>4：85%以上　3：70%以上　2：50%以上</p>
+      <p class="res">結果：100%で達成度4。</p></div>
+    <div class="after"><h4>書き直し</h4>
+      <p><span class="tag kr">KR1</span>職員会議1回あたりの時間　前年度→3割短く</p>
+      <p><span class="tag kr">KR2</span>全員で合意して「やめた業務」　3つ</p>
+      <p class="res">100%になった指標はそれ以上動かない。感じ方から、時間や「やめたこと」の数へ移る。</p></div>
+  </div>
+
+  <div class="ba">
+    <div class="ttl">生徒指導<small>A小 令和7年度より</small></div>
+    <div class="before"><h4>今の評価基準</h4>
+      <p>「生徒指導」に関する保護者アンケート肯定率</p>
+      <p>4：85%以上　3：70%以上　2：50%以上</p>
+      <p class="res">結果：達成度2。総括で「喫緊の課題」とされている。</p></div>
+    <div class="after"><h4>★をつける候補</h4>
+      <p><span class="tag kr">KR1</span>「困ったとき相談できる先生がいる」と答える保護者　74%→85%</p>
+      <p><span class="tag kr">KR2</span>毎週の生活アンケートで見つけたことに、1週間以内に対応した割合　100%</p>
+      <p class="res">達成度が低い行こそ★をつけて、学期ごとに見る。今ある生活アンケートを数字の元にする。</p></div>
+  </div>
+</section>
+
+<section id="s6">
+  <h2><span class="num">6</span>指標チェック：それは「活動」？「成果」？</h2>
+  <p>評価基準の案を入れると、成果の形になっているかを確かめます（言葉の形から見る簡単な目安です。最後は自分たちで判断してください）。</p>
+  <div class="checker noprint">
+    <input type="text" id="krIn" placeholder="例：「本を読むのが楽しい」と答える児童を82%→90%にする">
+    <button class="btn" id="krBtn">確かめる</button>
+  </div>
+  <div class="samples noprint">ためしに：
+    <button>校内研修を年3回開く</button>
+    <button>ノー残業デーを実施する</button>
+    <button>「本を読むのが楽しい」と答える児童を82%→90%にする</button>
+    <button>月45時間を超えた教職員を0人にする</button>
+  </div>
+  <div id="result"></div>
+  <h3>3つの問いで確かめる</h3>
+  <ol>
+    <li><strong>数字がある？</strong>　前年度の値とねらいの値が書けるか。</li>
+    <li><strong>結果を書いている？</strong>　「〜を実施する」「〜を開く」なら活動。「〜が〜になる」が成果。</li>
+    <li><strong>それが良くなれば、重点目標に近づく？</strong>　数字が良くなっても目標と関係なければ意味がない。</li>
+  </ol>
+</section>
+
+<section id="s7" class="ws">
+  <h2><span class="num">7</span>ワークシート：評価書をOKRの考え方で書く</h2>
+  <p class="noprint">美祢市の評価書の欄に合わせています。書いた内容はこの端末のブラウザに残ります。ほかの端末に渡すときは「ファイルに保存」を使います。下の「評価書に写す表」を印刷して、評価書の作成に使えます。</p>
+  <div class="wsbtns noprint" style="margin-top:0">
+    <button class="btn sub small" id="btnSample">例を入れる</button>
+    <button class="btn sub small" id="btnSave">ファイルに保存</button>
+    <button class="btn sub small" id="btnLoad">ファイルを読みこむ</button>
+    <input type="file" id="fileIn" accept=".json,application/json" hidden>
+  </div>
+
+  <div class="noprint">
+  <label class="l" for="wsYear"><span class="step">0</span>年度</label>
+  <input type="text" id="wsYear" placeholder="例：令和9年度">
+
+  <label class="l" for="wsGoal"><span class="step">1</span>学校教育目標（評価書の1から写す）</label>
+  <input type="text" id="wsGoal" placeholder="例：ふるさとを語り、夢に向かって挑戦しつづける子どもの育成">
+
+  <label class="l"><span class="step">2</span>評価領域（評価書の4の左の列）</label>
+  <div id="idealList"></div>
+  <button class="btn sub small" id="addIdeal">＋ 評価領域を足す</button>
+
+  <label class="l"><span class="step">3</span>重点目標と評価基準（1行ずつ）　今学期に力を入れる行に★</label>
+  <div id="unitList"></div>
+  <button class="btn sub small" id="addUnit">＋ 重点目標を足す</button>
+  </div>
+
+  <h3><span class="step noprint">4</span>目標の木（★の行を太く囲んでいます）</h3>
+  <div id="myTree" class="tree"></div>
+  <div id="treeNote"></div>
+
+  <h3><span class="step noprint">5</span>評価書に写す表</h3>
+  <div class="tablewrap"><table class="sheettbl" id="sheetTbl"></table></div>
+
+  <div class="wsbtns">
+    <button class="btn" onclick="window.print()">印刷する</button>
+    <button class="btn sub" id="wsClear">ぜんぶ消す</button>
+  </div>
+</section>
+
+<section id="s8">
+  <h2><span class="num">8</span>校内研修の流れ（90分）</h2>
+  <p>事前に、昨年度の学校評価書と今年度の評価書（案）を全員に配っておきます。グループは評価領域ごと、または分掌ごとに分かれます。進行役が話すことの例を<span style="background:var(--kr-soft);padding:0 6px">色のついた行</span>に書いています。</p>
+  <ol class="flow">
+    <li><span class="t">10分</span><div><strong>OKRの説明</strong><p>このページの1・2を使う。</p>
+      <span class="q">「新しい書類は増やしません。いつもの学校評価書の使い方を、少し変えるだけです。」</span></div></li>
+    <li><span class="t">15分</span><div><strong>昨年度の評価書を読む</strong><p>3の観点で、自分の学校の評価書に印をつける。達成度4の行、達成度が低い行、指標が大まかな行。</p>
+      <span class="q">「4がついた行は、本当に良くなったのでしょうか。もともと高かっただけではありませんか。」</span></div></li>
+    <li><span class="t">10分</span><div><strong>★をつける行を決める</strong><p>今学期に力を入れる行を学校全体で2〜4つにしぼる。</p>
+      <span class="q">「全部を同じ力で追うのはやめましょう。今学期、いちばん変えたいのはどの行ですか。」</span></div></li>
+    <li><span class="t">30分</span><div><strong>★の行の評価基準を書き直す</strong><p>グループで、指標を1つの数字にし、前年度の値→ねらいの値を決める。6の指標チェックで確かめる。方策に「やめること」を1つ入れる。</p>
+      <span class="q">「その数字は、今ある記録やアンケートでとれますか。新しい調査を増やさないようにしましょう。」</span></div></li>
+    <li><span class="t">20分</span><div><strong>共有する</strong><p>7のワークシートに入れて画面に映す。グループごとに1分で発表し、全体で確かめる。</p>
+      <span class="q">「ねらいは高すぎず低すぎず、7割届けば成功、くらいになっていますか。」</span></div></li>
+    <li><span class="t">5分</span><div><strong>数字を見る係を決める</strong><p>★の行ごとに、数字を集めて打ち合わせで言う人を1人決める。</p></div></li>
+  </ol>
+</section>
+
+<section id="s9">
+  <h2><span class="num">9</span>1年の回し方</h2>
+  <div class="year">
+    <div><b>4月</b>評価書を作るときに★の行を決め、前年度の値→ねらいの値で評価基準を書く。</div>
+    <div><b>毎月</b>★の行の数字（貸出冊数・在校等時間など記録でわかるもの）を、職員打ち合わせで5分だけ共有する。</div>
+    <div><b>7月・12月</b>アンケートの値を学期の欄に入れ、診断・分析を1〜2行書く。必要なら2学期の★を入れかえる。</div>
+    <div><b>2月</b>学期ごとの記録を評価書に写す。年度末にゼロから書かなくてよくなる。4が取れた行は次の年のねらいを上げる。</div>
+  </div>
+  <p>達成度が低かったときは、だれかの責任にせず「ねらいが高すぎたか」「方策を変えるか」を話し合います。学校関係者評価（学校運営協議会など）でも、学期ごとの数字があると説明しやすくなります。</p>
+</section>
+
+</main>
+<footer>学校のOKR ─ 学校評価書を生かす、校内研修・業務改善のための手引き</footer>
+
+<script>
+const PAL=['#2f6f62','#b5652b','#4a5fa8','#8a4f9e','#5b7d2a','#a8475b'];
+const TERMS=['1学期','2学期','3学期'];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9);
+const $=id=>document.getElementById(id);
+
+// ---------- 指標チェック ----------
+const ACT=/(を?(開く|開催|実施|行う|おこなう|する|やる|配る|配布|作る|作成|導入|設置|周知|呼びかけ|取り組む|努める|図る|進める|推進|徹底|充実|強化|検討|参加|整備))$/;
+const RES=/(になる|にする|に減らす|減らす|増やす|上げる|下げる|に増やす|以下|以上|未満|超え|0人|ゼロ|→)/;
+const NUM=/[0-9０-９一二三四五六七八九十百]+\s*(%|％|割|時間|分|人|件|回|日|点|冊|校|つ|個|倍|P|ポイント)|全員|ゼロ/;
+function judge(t,numOK){
+  t=t.trim().replace(/[。．.]$/,'');
+  const hasNum=numOK||NUM.test(t), act=ACT.test(t)&&!RES.test(t);
+  const tips=[];
+  if(!hasNum) tips.push('数字がありません。前年度の値とねらいの値（○%、○時間、○人など）を入れましょう。');
+  if(act) tips.push('「〜する・〜を開く」で終わっていて、活動の形です。「それをした結果、何がどうなる？」と考えて書きかえましょう。');
+  if(/(実施|開催)?回数|実施率|(回|度)(開く|開催|実施|行う)/.test(t)) tips.push('回数や実施率は「やった量」です。それで何が変わるかを数字にしましょう。');
+  if(/に関する.*肯定率/.test(t)) tips.push('「〜に関する肯定率」は、いくつかの問いをまとめた数字になりがちです。いちばん大事な1問にしぼれないか考えましょう。');
+  if(!tips.length&&!numOK&&!(RES.test(t)||/%|％|割/.test(t))) tips.push('「〜が〜になる」の形にすると、成果がはっきりします。');
+  return {ok:!tips.length,tips};
+}
+function check(t){
+  if(!t.trim()) return '';
+  const j=judge(t);
+  if(j.ok) return '<div class="r ok"><span class="tag ok">成果</span>成果の形になっています。最後に「これが良くなれば重点目標に近づく？」を確かめましょう。</div>';
+  return '<div class="r ng"><span class="tag ng">見直し</span>もう少しです。<ul>'+j.tips.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
+}
+const krIn=$('krIn'), out=$('result');
+$('krBtn').onclick=()=>out.innerHTML=check(krIn.value);
+krIn.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing)out.innerHTML=check(krIn.value)});
+document.querySelectorAll('.samples button').forEach(b=>b.onclick=()=>{krIn.value=b.textContent;out.innerHTML=check(b.textContent)});
+
+// ---------- 数字と4段階 ----------
+function num(s){
+  const m=String(s??'').replace(/[０-９．－]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).match(/-?\d+(\.\d+)?/);
+  return m?+m[0]:NaN;
+}
+const r1=x=>Math.round(x*10)/10;
+function thresholds(k){
+  const b=num(k.base),g=num(k.goal);
+  if(isNaN(b)||isNaN(g)||b===g) return null;
+  const up=g>b, w=up?'以上':'以下';
+  return {up,txt:'4：'+r1(g)+w+'　3：'+r1(b+0.7*(g-b))+w+'　2：'+r1(b)+w+'　1：それ以外'};
+}
+function level(k,v){
+  const b=num(k.base),g=num(k.goal),x=num(v);
+  if(isNaN(b)||isNaN(g)||isNaN(x)||b===g) return 0;
+  const p=(x-b)/(g-b);
+  return p>=1-1e-9?4:p>=0.7-1e-9?3:p>=0?2:1;
+}
+const lvHTML=n=>n?'<span class="lv lv'+n+'">'+n+'</span>':'';
+function lastVal(k){for(let i=2;i>=0;i--) if(String(k.v[i]).trim()) return {i,v:k.v[i]}; return null}
+
+// ---------- 例 ----------
+function sample(){
+  return {
+    year:'令和9年度（例）',
+    goal:'ふるさとを語り、夢に向かって挑戦しつづける子どもの育成',
+    ideals:[
+      {id:'a',name:'知識及び技能'},
+      {id:'b',name:'思考力・判断力・表現力'},
+      {id:'c',name:'学びに向かう力・人間性'},
+      {id:'d',name:'人材育成・業務改善'}],
+    units:[
+      {id:'u1',ideal:'a',star:true,name:'研究部',o:'自由進度学習による、子ども主体の授業づくり',how:'自己選択・自己決定の場を毎時間つくる\n外部講師を招いた校内研修',stop:'指導案の細案をやめ、略案1枚にする',lv:'',memo:'',krs:[
+        {t:'「授業がわかる」と答える児童（%）',base:'80',goal:'90',v:['84','','']},
+        {t:'「自分で学び方を選べた」と答える児童（%）',base:'55',goal:'75',v:['62','','']}]},
+      {id:'u2',ideal:'a',star:false,name:'図書担当',o:'読書活動の充実による言語能力の育成',how:'朝の読書（週2回）\n読み聞かせボランティア',stop:'',lv:'',memo:'',krs:[
+        {t:'「本を読むのが楽しい」と答える児童（%）',base:'82',goal:'90',v:['','','']},
+        {t:'1人あたりの貸出冊数（冊）',base:'40',goal:'50',v:['','','']}]},
+      {id:'u3',ideal:'b',star:false,name:'体育部',o:'体を動かす習慣づくり',how:'業間の外遊び\n家庭と連携した運動チャレンジ',stop:'',lv:'',memo:'',krs:[
+        {t:'「体を動かすのが好き」と答える児童（%）',base:'78',goal:'88',v:['','','']},
+        {t:'',base:'',goal:'',v:['','','']}]},
+      {id:'u4',ideal:'c',star:true,name:'生徒指導部',o:'組織的な生徒指導体制によるいじめ防止',how:'毎週の生活アンケートで早めに対応\n月1回15分の情報交換',stop:'学期末の生徒指導報告書を、月1回の記録で代える',lv:'',memo:'',krs:[
+        {t:'「困ったとき相談できる先生がいる」と答える保護者（%）',base:'74',goal:'85',v:['80','','']},
+        {t:'生活アンケートで見つけたことに1週間以内に対応した割合（%）',base:'80',goal:'100',v:['95','','']}]},
+      {id:'u5',ideal:'d',star:true,name:'教務部',o:'会議と行事を見直し、授業に向かう時間をつくる',how:'会議資料は前日までに共有し、報告は文書で\n行事の目的をそろえて精選',stop:'学期末の個別懇談を希望制にする',lv:'',memo:'1学期：会議は短くなったが、行事前の準備時間が長い。',krs:[
+        {t:'月45時間を超えた教職員（人）',base:'3',goal:'0',v:['1','','']},
+        {t:'職員会議1回あたりの時間（分）',base:'90',goal:'60',v:['65','','']}]}
+    ]};
+}
+
+// ---------- 目標の木・表 ----------
+function filledKrs(u){return u.krs.filter(k=>k.t.trim())}
+function isEmptyUnit(u){return !u.name.trim()&&!u.o.trim()&&!filledKrs(u).length}
+function krLine(k){
+  const vals=k.v.map((v,i)=>String(v).trim()?TERMS[i]+' '+esc(v)+lvHTML(level(k,v)):'').filter(Boolean).join('　');
+  return '<div class="kr"><span class="tag kr">KR</span>'+esc(k.t)
+    +((k.base||k.goal)?'<div class="vals">前年度 '+esc(k.base||'—')+' → ねらい '+esc(k.goal||'—')+'</div>':'')
+    +(vals?'<div class="vals">'+vals+'</div>':'')+'</div>';
+}
+function unitHTML(u,color){
+  return '<div class="unit'+(u.star?' star':'')+'" style="border-left-color:'+color+'">'
+    +'<div class="un">'+(u.star?'★ ':'')+esc(u.name||'')+'</div>'
+    +'<div class="uo"><span class="tag o">O</span>'+esc(u.o||'（重点目標）')+'</div>'
+    +filledKrs(u).map(krLine).join('')
+    +(u.stop.trim()?'<div class="stop">やめること：'+esc(u.stop)+'</div>':'')
+    +(u.lv?'<div class="vals">達成度 '+lvHTML(+u.lv)+'</div>':'')
+    +'</div>';
+}
+function renderTree(d,el){
+  const units=d.units.filter(u=>!isEmptyUnit(u)), ids=d.ideals.map(i=>i.id);
+  let h='<div class="goal"><small>学校教育目標'+(d.year?'（'+esc(d.year)+'）':'')+'</small><b>'+esc(d.goal||'（学校教育目標）')+'</b></div><div class="cols">';
+  d.ideals.forEach((it,i)=>{
+    const c=PAL[i%PAL.length], us=units.filter(u=>u.ideal===it.id);
+    h+='<div class="col"><div class="ideal" style="background:'+c+'"><small>評価領域 '+(i+1)+'</small>'+esc(it.name||'（未記入）')+'</div>'
+      +(us.length?us.map(u=>unitHTML(u,c)).join(''):'<div class="none">重点目標がまだありません。</div>')+'</div>';
+  });
+  const lost=units.filter(u=>!ids.includes(u.ideal));
+  if(lost.length) h+='<div class="col"><div class="ideal" style="background:#999"><small>評価領域が</small>まだ選ばれていません</div>'+lost.map(u=>unitHTML(u,'#999')).join('')+'</div>';
+  el.innerHTML=h+'</div>';
+  return {units,lost};
+}
+function renderSheet(d,el){
+  const units=d.units.filter(u=>!isEmptyUnit(u));
+  let h='<thead><tr><th class="sheet">評価領域</th><th class="sheet">重点目標</th><th class="sheet">具体的方策（教育活動）</th><th class="sheet">評価基準</th><th class="sheet">達成度</th><th class="sheet">診断・分析（学期ごとの数字）</th></tr></thead><tbody>';
+  if(!units.length) h+='<tr><td colspan="6">（まだありません）</td></tr>';
+  units.forEach(u=>{
+    const it=d.ideals.find(x=>x.id===u.ideal);
+    const crit=filledKrs(u).map(k=>{const th=thresholds(k);return esc(k.t)+(th?'<br><small>'+esc(th.txt)+'</small>':'')}).join('<hr style="border:0;border-top:1px dashed #ccc">');
+    const nums=filledKrs(u).map(k=>{const s=k.v.map((v,i)=>String(v).trim()?TERMS[i]+' '+esc(v):'').filter(Boolean).join('、');return s?esc(k.t.replace(/（.*?）$/,''))+'：'+s:''}).filter(Boolean).join('<br>');
+    h+='<tr><td>'+esc(it?it.name:'')+'</td><td>'+(u.star?'★ ':'')+esc(u.o)+(u.name?'<br><small>（'+esc(u.name)+'）</small>':'')+'</td>'
+      +'<td class="ar">'+esc(u.how)+(u.stop.trim()?'\n<b>やめること：</b>'+esc(u.stop):'')+'</td><td>'+crit+'</td><td style="text-align:center">'+esc(u.lv)+'</td>'
+      +'<td>'+nums+(u.memo.trim()?'<div class="ar">'+esc(u.memo)+'</div>':'')+'</td></tr>';
+  });
+  el.innerHTML=h+'</tbody>';
+}
+
+// ---------- ワークシート ----------
+const KEY='gakko-okr-hyoka';
+const newKr=()=>({t:'',base:'',goal:'',v:['','','']});
+const newUnit=()=>({id:uid(),ideal:'',star:false,name:'',o:'',how:'',stop:'',lv:'',memo:'',krs:[newKr(),newKr()]});
+const blank=()=>({year:'',goal:'',ideals:['知識及び技能','思考力・判断力・表現力','学びに向かう力・人間性','人材育成・業務改善'].map(n=>({id:uid(),name:n})),units:[newUnit()]});
+function normalize(d){
+  if(!d||!Array.isArray(d.ideals)||!Array.isArray(d.units)) return null;
+  const S=v=>v==null?'':String(v);
+  return {year:S(d.year),goal:S(d.goal),
+    ideals:d.ideals.map(i=>({id:S(i.id)||uid(),name:S(i.name)})),
+    units:d.units.map(u=>{
+      const k=(u.krs||[]).slice(0,2).map(x=>({t:S(x.t),base:S(x.base),goal:S(x.goal),v:[0,1,2].map(i=>S((x.v||[])[i]))}));
+      while(k.length<2)k.push(newKr());
+      return {id:S(u.id)||uid(),ideal:S(u.ideal),star:!!u.star,name:S(u.name),o:S(u.o),how:S(u.how),stop:S(u.stop),lv:S(u.lv),memo:S(u.memo),krs:k};
+    })};
+}
+let D=null;
+try{D=normalize(JSON.parse(localStorage.getItem(KEY)||'null'))}catch(e){}
+if(!D) D=blank();
+
+const idealList=$('idealList'), unitList=$('unitList');
+function idealOptions(sel){
+  return '<option value="">評価領域を選ぶ</option>'+D.ideals.map((it,i)=>'<option value="'+esc(it.id)+'"'+(it.id===sel?' selected':'')+'>'+(i+1)+'　'+esc(it.name||'（未記入）')+'</option>').join('');
+}
+function jtHTML(k){
+  if(!k.t.trim()) return '';
+  const j=judge(k.t,!isNaN(num(k.base))&&!isNaN(num(k.goal)));
+  return '<span class="jt '+(j.ok?'ok':'ng')+'" title="'+esc(j.tips.join(' '))+'">'+(j.ok?'成果':'見直し')+'</span>';
+}
+function krInfo(u,i,j){
+  const k=D.units[u].krs[j], th=thresholds(k);
+  const lv=k.v.map((v,t)=>level(k,v)?TERMS[t]+lvHTML(level(k,v)):'').filter(Boolean).join(' ');
+  return (th?'4段階の目安　'+esc(th.txt):'')+(lv?'　｜　'+lv:'');
+}
+function buildEditor(){
+  $('wsYear').value=D.year; $('wsGoal').value=D.goal;
+  idealList.innerHTML=D.ideals.map((it,i)=>'<div class="irow"><i style="background:'+PAL[i%PAL.length]+'"></i>'
+    +'<input type="text" data-ideal="'+i+'" value="'+esc(it.name)+'" placeholder="例：知識及び技能【かしこく】">'
+    +'<button class="x" data-delideal="'+i+'" aria-label="この評価領域を消す">×</button></div>').join('');
+  unitList.innerHTML=D.units.map((u,i)=>{
+    const idx=D.ideals.findIndex(x=>x.id===u.ideal), c=idx<0?'#aaa':PAL[idx%PAL.length];
+    return '<div class="ucard'+(u.star?' star':'')+'" style="border-left-color:'+c+'">'
+      +'<div class="uhead"><label class="starbox"><input type="checkbox" data-u="'+i+'" data-f="star"'+(u.star?' checked':'')+'>★今学期</label>'
+      +'<select data-u="'+i+'" data-f="ideal">'+idealOptions(u.ideal)+'</select>'
+      +'<input type="text" data-u="'+i+'" data-f="name" value="'+esc(u.name)+'" placeholder="担当（例：研究部）">'
+      +'<button class="x" data-delunit="'+i+'" aria-label="この重点目標を消す">×</button></div>'
+      +'<span class="ul"><span class="tag o">O</span>重点目標</span>'
+      +'<input type="text" data-u="'+i+'" data-f="o" value="'+esc(u.o)+'" placeholder="例：読書活動の充実による言語能力の育成">'
+      +'<div class="two"><div><span class="ul">具体的方策（教育活動）<small>1行に1つ</small></span>'
+      +'<textarea rows="2" data-u="'+i+'" data-f="how" placeholder="例：朝の読書（週2回）">'+esc(u.how)+'</textarea></div>'
+      +'<div><span class="ul">やめること・減らすこと</span>'
+      +'<textarea rows="2" data-u="'+i+'" data-f="stop" placeholder="例：手書きの読書記録カードをやめる">'+esc(u.stop)+'</textarea></div></div>'
+      +'<span class="ul"><span class="tag kr">KR</span>評価基準<small>　指標は1つの数字に。単位は指標の後ろに（%）のように書く</small></span>'
+      +u.krs.map((k,j)=>'<div class="krbox"><div class="krtop">'
+        +'<div><small>指標 '+(j+1)+'</small><input type="text" data-u="'+i+'" data-kr="'+j+'" data-k="t" value="'+esc(k.t)+'" placeholder="例：「本を読むのが楽しい」と答える児童（%）"></div>'
+        +'<div><small>前年度</small><input type="text" data-u="'+i+'" data-kr="'+j+'" data-k="base" value="'+esc(k.base)+'" placeholder="82"></div>'
+        +'<div><small>ねらい</small><input type="text" data-u="'+i+'" data-kr="'+j+'" data-k="goal" value="'+esc(k.goal)+'" placeholder="90"></div>'
+        +'<div data-jt="'+i+'-'+j+'">'+jtHTML(k)+'</div></div>'
+        +'<div class="krvals">'+TERMS.map((t,x)=>'<div><small>'+t+'の値</small><input type="text" data-u="'+i+'" data-kr="'+j+'" data-v="'+x+'" value="'+esc(k.v[x])+'"></div>').join('')+'</div>'
+        +'<div class="thr" data-th="'+i+'-'+j+'">'+krInfo(i,0,j)+'</div></div>').join('')
+      +'<div class="two"><div><span class="ul">達成度（年度末）</span><select data-u="'+i+'" data-f="lv">'
+      +['','4','3','2','1'].map(s=>'<option value="'+s+'"'+(s===u.lv?' selected':'')+'>'+(s||'—')+'</option>').join('')+'</select></div>'
+      +'<div><span class="ul">診断・分析のメモ<small>学期ごとに1〜2行</small></span>'
+      +'<textarea rows="2" data-u="'+i+'" data-f="memo">'+esc(u.memo)+'</textarea></div></div>'
+      +'</div>';
+  }).join('');
+  $('addIdeal').disabled=D.ideals.length>=6;
+}
+function refreshSelects(){
+  document.querySelectorAll('select[data-f="ideal"]').forEach(sel=>{sel.innerHTML=idealOptions(D.units[+sel.dataset.u].ideal)});
+}
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}
+  const r=renderTree(D,$('myTree'));
+  renderSheet(D,$('sheetTbl'));
+  const stars=r.units.filter(u=>u.star).length, notes=[];
+  if(r.units.length&&!stars) notes.push('★がついた行がありません。今学期に力を入れる行を2〜4つ選びましょう。');
+  if(stars>4) notes.push('★が'+stars+'つあります。2〜4つにしぼると、毎月の確認が続けやすくなります。');
+  if(r.lost.length) notes.push('評価領域を選んでいない重点目標があります。');
+  $('treeNote').innerHTML=notes.length?'<div class="hint noprint">'+notes.map(esc).join('<br>')+'</div>':'';
+}
+
+$('s7').addEventListener('input',e=>{
+  const t=e.target, d=t.dataset;
+  if(t.id==='wsYear') D.year=t.value;
+  else if(t.id==='wsGoal') D.goal=t.value;
+  else if(d.ideal!=null){D.ideals[+d.ideal].name=t.value;refreshSelects()}
+  else if(d.u!=null){
+    const u=D.units[+d.u];
+    if(d.f==='star'){u.star=t.checked;t.closest('.ucard').classList.toggle('star',t.checked)}
+    else if(d.f){
+      u[d.f]=t.value;
+      if(d.f==='ideal'){const idx=D.ideals.findIndex(x=>x.id===t.value);t.closest('.ucard').style.borderLeftColor=idx<0?'#aaa':PAL[idx%PAL.length]}
+    } else if(d.kr!=null){
+      const k=u.krs[+d.kr];
+      if(d.k) k[d.k]=t.value; else if(d.v!=null) k.v[+d.v]=t.value;
+      document.querySelector('[data-jt="'+d.u+'-'+d.kr+'"]').innerHTML=jtHTML(k);
+      document.querySelector('[data-th="'+d.u+'-'+d.kr+'"]').innerHTML=krInfo(+d.u,0,+d.kr);
+    }
+  } else return;
+  save();
+});
+$('s7').addEventListener('click',e=>{
+  const t=e.target.closest('button'); if(!t) return;
+  const d=t.dataset;
+  if(d.delideal!=null){
+    const it=D.ideals[+d.delideal];
+    if(D.units.some(u=>u.ideal===it.id)&&!confirm('この評価領域を消しますか？（つながっている重点目標は「未選択」になります）'))return;
+    D.ideals.splice(+d.delideal,1);
+  } else if(d.delunit!=null){
+    const u=D.units[+d.delunit];
+    if(!isEmptyUnit(u)&&!confirm('「'+(u.o||'この重点目標')+'」を消しますか？'))return;
+    D.units.splice(+d.delunit,1);
+  } else if(t.id==='addIdeal'){ if(D.ideals.length<6)D.ideals.push({id:uid(),name:''}); }
+  else if(t.id==='addUnit'){ D.units.push(newUnit()); }
+  else if(t.id==='btnSample'){ if(!confirm('書いた内容を、例に置きかえますか？'))return; D=sample(); }
+  else if(t.id==='wsClear'){ if(!confirm('ワークシートの内容をぜんぶ消しますか？'))return; D=blank(); }
+  else if(t.id==='btnSave'){
+    const blob=new Blob([JSON.stringify(D,null,1)],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='学校のOKR_'+(D.year||'学校評価').replace(/[\\/:*?"<>|\s（）()]/g,'')+'.json';
+    a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);return;
+  } else if(t.id==='btnLoad'){ $('fileIn').click();return; }
+  else return;
+  buildEditor();save();
+});
+$('fileIn').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  f.text().then(txt=>{const d=normalize(JSON.parse(txt)); if(!d) throw 0; D=d; buildEditor(); save();})
+   .catch(()=>alert('このファイルは読みこめませんでした。')).finally(()=>e.target.value='');
+});
+buildEditor();save();
+</script>
+</body>
+</html>
