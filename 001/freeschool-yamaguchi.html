@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>山口県 フリースクール地図</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--bg:#fbfaf7;--fg:#222;--sub:#666;--line:#ddd;--head:#2f4a6d;--headfg:#fff;--card:#fff;--soft:#f2f2f2;--accent:#b03a2e;
+--fs:#2f6fb0;--ib:#1f8a5b;--oya:#c0761a;--so:#8a4fb0;--ref:#7a7a7a;
+--ok:#1f7a4d;--okbg:#e6f4ec;--chk:#9a6a00;--chkbg:#fff4d6;--cl:#b03a2e;--clbg:#fbe7e4;--nw:#2f6fb0;--nwbg:#e5eef8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1d21;--fg:#e8e8e8;--sub:#aaa;--line:#3a3d44;--head:#3b5a82;--card:#24262b;--soft:#2a2c31;--accent:#ff8a7a;
+--fs:#6aa6e8;--ib:#5cc794;--oya:#f0a650;--so:#c08ae6;--ref:#a0a0a0;
+--ok:#7fd6a6;--okbg:#1f3a2c;--chk:#f0c460;--chkbg:#3d3418;--cl:#ff8a7a;--clbg:#46241f;--nw:#9cc1ff;--nwbg:#1e2d42}}
+:root[data-theme="dark"]{--bg:#1b1d21;--fg:#e8e8e8;--sub:#aaa;--line:#3a3d44;--head:#3b5a82;--card:#24262b;--soft:#2a2c31;--accent:#ff8a7a;
+--fs:#6aa6e8;--ib:#5cc794;--oya:#f0a650;--so:#c08ae6;--ref:#a0a0a0;
+--ok:#7fd6a6;--okbg:#1f3a2c;--chk:#f0c460;--chkbg:#3d3418;--cl:#ff8a7a;--clbg:#46241f;--nw:#9cc1ff;--nwbg:#1e2d42}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"BIZ UDPGothic","Hiragino Sans","Yu Gothic UI",sans-serif;line-height:1.65;font-size:15px}
+main{max-width:1200px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:1.6rem;margin:0 0 4px}
+h2{font-size:1.2rem;border-left:6px solid var(--head);padding-left:10px;margin:36px 0 12px}
+.meta{color:var(--sub);font-size:.85rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:12px 0}
+.box.key{border-left:6px solid var(--accent)}
+a{color:var(--head);word-break:break-all}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a{color:#9cc1ff}}
+:root[data-theme="dark"] a{color:#9cc1ff}
+.count{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.count div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.85rem}
+.count b{font-size:1.5rem;display:block}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:10px 0}
+.ctrl label{font-size:.88rem;cursor:pointer;white-space:nowrap}
+.ctrl select,.ctrl input[type=search]{font:inherit;font-size:.9rem;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg)}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+#map{height:620px;border:1px solid var(--line);border-radius:8px;background:var(--soft);position:sticky;top:10px}
+@media (max-width:860px){#map{height:420px;position:static}}
+#list{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--ref);border-radius:8px;padding:10px 12px;font-size:.88rem;cursor:pointer}
+.card.sel{outline:2px solid var(--accent)}
+.card h3{margin:0 0 2px;font-size:1rem}
+.card .org{color:var(--sub);font-size:.8rem}
+.card dl{display:grid;grid-template-columns:4.5em 1fr;gap:2px 8px;margin:6px 0 0}
+.card dt{color:var(--sub);font-size:.8rem}
+.card dd{margin:0}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;border-radius:4px;padding:0 6px;margin:0 4px 2px 0}
+.t-ok{color:var(--ok);background:var(--okbg)}.t-chk{color:var(--chk);background:var(--chkbg)}.t-cl{color:var(--cl);background:var(--clbg)}.t-nw{color:var(--nw);background:var(--nwbg)}
+.t-cat{color:#fff}
+.nopin{color:var(--sub);font-size:.75rem}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.86rem}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+thead th{background:var(--head);color:#fff;font-weight:600}
+td.zero{color:var(--sub)}
+ol.src{font-size:.8rem;color:var(--sub);padding-left:1.4em;word-break:break-all}
+#mapfail{display:none;padding:16px;color:var(--sub)}
+.leaflet-popup-content{font-size:13px;line-height:1.5}
+@media print{#map{height:380px;position:static}.layout{grid-template-columns:1fr}.ctrl{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<h1>山口県のフリースクール・民間の不登校支援　地図つき一覧</h1>
+<p class="meta">調べた日：2026年10月13日　｜　対象：県内の民間（NPO法人・一般社団法人・株式会社・任意団体・個人）。教育支援センターなど公立のものは <a href="futoko-yamaguchi.html">「山口県 不登校支援 19市町一覧」</a> を参照。</p>
+
+<div class="box key">
+<b>まず押さえておくこと</b>
+<ul style="margin:6px 0 0;padding-left:1.3em">
+<li>山口県教委・県は、民間フリースクールの一覧を公表していない。この一覧は、各団体の公式サイト、市の広報・補助金ページ、県の「やまぐち県民活動スーパーネット」の団体登録、地元紙、民間のまとめサイトから集めた。</li>
+<li>行政が施設として認めているのは、<b>宇部市の補助金の認定施設2か所（さなぎ・おかむら塾）だけ</b>。補助は授業料の1/2・上限月2万円。</li>
+<li>民間施設は <b>周南・下松・光・岩国・山口・防府・宇部・下関</b> の山陽側の市に集まっている。<b>萩・美祢・柳井・周防大島・和木・上関・田布施・平生・阿武</b>では1件も見つからなかった。</li>
+<li>まとめサイトの「〇〇市のフリースクール12校」といった見出しの多くは、オンライン校の広告。実際に市内にある施設は、ここに載せたものがほぼすべて。</li>
+<li>小さな団体はInstagramやLINEだけで発信していることが多く、検索で拾い切れていない可能性がある。開所日・費用は変わるので、利用前に必ず問い合わせを。</li>
+</ul>
+</div>
+
+<div class="count" id="count"></div>
+
+<h2>地図と一覧</h2>
+<div class="ctrl" id="cats"></div>
+<div class="ctrl">
+<label>市町 <select id="city"><option value="">すべて</option></select></label>
+<label><input type="checkbox" id="hideClosed" checked> 閉所の疑いがあるものを隠す</label>
+<input type="search" id="q" placeholder="名前・内容で絞り込み">
+<span class="meta" id="shown"></span>
+</div>
+<p class="meta" style="margin:0 0 8px">● 番地まで確認できた場所　◌（破線）は地区までしかわからない、おおよその位置。所在地が非公開・未確認のものは地図に出さず、一覧にだけ載せている。</p>
+<div class="layout">
+<div><div id="map"><div id="mapfail">地図を読み込めませんでした（ネットにつながっていない可能性があります）。右の一覧はそのまま使えます。</div></div></div>
+<div id="list"></div>
+</div>
+
+<h2>市町ごとの件数</h2>
+<div class="wrap"><table id="cityTable"><thead><tr><th>市町</th><th>フリースクール</th><th>居場所・学習支援</th><th>親の会・茶話会</th><th>相談・家族支援</th><th>参考</th><th>メモ</th></tr></thead><tbody></tbody></table></div>
+
+<h2>分類のしかた</h2>
+<div class="box" style="font-size:.9rem">
+<p style="margin:0"><span class="dot" style="background:var(--fs)"></span><b>フリースクール</b>：平日の日中に通える場。不登校の子を主な対象としていると明記しているもの。</p>
+<p style="margin:4px 0 0"><span class="dot" style="background:var(--ib)"></span><b>居場所・学習支援</b>：週1〜数回、または土曜・夜間に開く場。</p>
+<p style="margin:4px 0 0"><span class="dot" style="background:var(--oya)"></span><b>親の会・茶話会</b>：保護者が集まる会。</p>
+<p style="margin:4px 0 0"><span class="dot" style="background:var(--so)"></span><b>相談・家族支援</b>：カウンセリングや家族会が中心。ひきこもり支援と兼ねるものも含む。</p>
+<p style="margin:4px 0 0"><span class="dot" style="background:var(--ref)"></span><b>参考</b>：放課後等デイサービス（受給者証が必要）、企業の中等部、不登校に限らない子どもの居場所やオルタナティブスクールなど、境界にあるもの。</p>
+<p style="margin:8px 0 0">除外したもの：通信制高校・サポート校の高校部分、オンライン専業校（NIJINアカデミー、クラスジャパンなど）、一般の学習塾、公立の教育支援センター。</p>
+<p style="margin:8px 0 0">周南・下松・防府では、不登校支援の団体のネットワーク <b>MICAN</b>（2024年10月設立）がある。<a href="https://mican-futoko-shien.hp.peraichi.com/">https://mican-futoko-shien.hp.peraichi.com/</a></p>
+</div>
+
+<h2>主な出典</h2>
+<ol class="src">
+<li>宇部市 フリースクール等利用支援補助金 https://www.city.ube.yamaguchi.jp/kosodate/kyouiku/kenzentorikumi/1016904.html （2026-04-30更新）</li>
+<li>市報しものせき 2025年8月号 https://www.city.shimonoseki.lg.jp/uploaded/attachment/88897.pdf</li>
+<li>防府市「ほうふっ子だれでもリンク」 https://www.city.hofu.yamaguchi.jp/soshiki/112/hofu-daredemo-link.html （2026-10-01更新）</li>
+<li>下松市 市民活動団体紹介（フリースペースコティ） https://www.city.kudamatsu.lg.jp/chiiki/kyoudou/dantai/kotei.html</li>
+<li>やまぐち県民活動スーパーネット 団体検索 https://kenmin.pref.yamaguchi.lg.jp/boranetapp/supernet/organization/list?page=0&amp;keyword=不登校</li>
+<li>山陽小野田市 ひきこもり相談 https://www.city.sanyo-onoda.lg.jp/site/smile-ageing/hikikomori.html</li>
+<li>MICAN（周南・下松・防府の不登校支援ネットワーク） https://mican-futoko-shien.hp.peraichi.com/</li>
+<li>新周南新聞 2023年12月 https://www.shinshunan.co.jp/news/local/shunan/202312/032391.html</li>
+<li>PR TIMES フリースクールSUN岩国 開校（2026-03-31） https://prtimes.jp/main/html/rd/p/000000008.000118630.html</li>
+<li>みなと山口（チャレンジスクールF）https://yama.minato-yamaguchi.co.jp/e-yama/articles/72298 ／（萩市須佐の要望）https://yama.minato-yamaguchi.co.jp/e-yama/articles/108735</li>
+<li>民間のまとめサイト（施設名の手がかりとして使用。中身は公式で確認）：hikari-smile.com／nijin.jp／cocon.ltd／shingaku-fs.jp（ツナグバ）／miraitizu.com</li>
+<li>各団体の公式サイト（一覧の各カードにリンク）</li>
+<li>位置：国土地理院 住所検索API で番地から求めた。地図：国土地理院 淡色地図</li>
+</ol>
+<p class="meta">「（二次情報）」は公式サイトで確かめられず、まとめサイトにしか載っていなかった項目。</p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const CATS={fs:{n:'フリースクール',v:'--fs'},ib:{n:'居場所・学習支援',v:'--ib'},oya:{n:'親の会・茶話会',v:'--oya'},so:{n:'相談・家族支援',v:'--so'},ref:{n:'参考',v:'--ref'}};
+const ST={ok:['活動を確認','t-ok'],nw:['新しい','t-nw'],chk:['要確認','t-chk'],cl:['閉所の疑い','t-cl']};
+const CITIES=['下関市','宇部市','山口市','萩市','防府市','下松市','岩国市','光市','長門市','柳井市','美祢市','周南市','山陽小野田市','周防大島町','和木町','上関町','田布施町','平生町','阿武町'];
+const CITYNOTE={'萩市':'民間は見つからず。須佐地区の住民有志が旧弥富小に居場所を開くよう市に要望（2026年）','美祢市':'民間は見つからず','山陽小野田市':'フリースクールは見つからず。近くでは宇部市文京台の「さなぎ」','長門市':'不登校対象と明記した施設はない','柳井市':'見つからず','周防大島町':'見つからず','和木町':'見つからず','上関町':'見つからず','田布施町':'見つからず','平生町':'見つからず','阿武町':'見つからず','光市':'2023年時点で市教委は「市内のフリースクールは把握していない」','下松市':'2023年時点で市教委は「市内のフリースクールは把握していない」。その後コティが法人化（2024年9月）'};
+
+/* lat/lng が null のものは地図に出さない。ap=true はおおよその位置 */
+const D=[
+// ── 下関市
+{n:'フリースクール下関／フリースペースNest',c:'fs',city:'下関市',org:'NPO法人 Nest（1996年開始）',addr:'下関市生野町2-27-7',lat:33.985046,lng:130.934692,st:'ok',
+ who:'不登校・ひきこもり状態の子ども・青年',what:'フリースクールは月〜金。義務教育中の利用日は在籍校の出席扱い。フリースペース（火曜）、学習会、訪問サポート（市の委託）、家族の会（月1回土曜）、お母さんの会',fee:'初回相談は無料（50分・予約制）。利用料は未確認',tel:'083-255-1026',url:'https://nest-fs.sakura.ne.jp/',src:'公式（お知らせ 2026-10-04）、市報しものせき2025年8月号'},
+{n:'こどもスクール なな色',c:'ib',city:'下関市',org:'運営者名の記載なし',addr:'下関市彦島弟子待町3-3-16（古民家）',lat:33.919281,lng:130.922775,st:'chk',
+ who:'小学1〜6年',what:'自然体験・草木染め・竹細工・書道などの体験活動と、希望制の学習サポート。月極は毎週土曜9:00〜15:00。不登校の無料相談あり。平日の受け入れは未確認',fee:'1日2,500円、月極11,000円（弁当・学習込み）、体験1,500円',url:'https://www.nanairo-childschool.com/',src:'公式（©2023、更新日不明）'},
+{n:'第3の居場所「ぬっく」',c:'ib',city:'下関市',org:'下関市の事業（運営：認定NPO法人 皆繋）',addr:'下関市垢田地区（番地は未確認）',lat:null,lng:null,st:'ok',
+ who:'学校に行きづらさを感じる子ども',what:'2025年4月開設。学習支援、相談、体験活動',fee:'未確認',tel:'083-231-1353（市 子育て政策課）',url:'',src:'市報しものせき2025年8月号'},
+{n:'ICS垢田家（子ども第三の居場所）',c:'ref',city:'下関市',org:'認定NPO法人 皆繋（日本財団助成）',addr:'下関市新垢田南町1丁目11-11（二次情報）',lat:33.986927,lng:130.916916,st:'ok',
+ who:'小中学生中心（定員約20名）',what:'学習支援・食事・遊び。不登校専門ではない一般的な子どもの居場所。月・金の夕方、土曜（二次情報）',fee:'無料',url:'https://minatsunagi.org/activity_01/',src:'法人公式、みなと山口'},
+// ── 宇部市
+{n:'フリースクールさなぎ',c:'fs',city:'宇部市',org:'代表 白石貴美（臨床心理士・公認心理師）。カウンセリングルームPupa併設',addr:'宇部市文京台3丁目10-10',lat:33.979687,lng:131.230896,st:'ok',sub:true,
+ who:'学校になじめない小中学生。義務教育後の若者支援も',what:'個別学習、元教員の教科指導、畑・調理・茶道などの体験、保護者の自助グループ。校長の許可で出席扱い',fee:'未確認（カウンセリングは別料金）',url:'https://freeschool-sanagi.com/',src:'公式、宇部市補助金ページ、宇部日報2025-10-17'},
+{n:'もうひとつの学校「おかむら塾」',c:'fs',city:'宇部市',org:'一般社団法人 未来は人でつくる',addr:'宇部市東須恵1271-15（法人住所）',lat:33.966953,lng:131.191788,st:'ok',sub:true,
+ who:'不登校や生きづらさを感じる小中学生（小1から）',what:'2020年6月開校。通学コース（週1・3・5日、月〜金10:00〜16:00）、短期見守り、通信制コース（自宅学習）。出席扱いあり。同法人で「森と海の学校」も',fee:'未確認',tel:'0836-41-8204',url:'https://okamura21.com/',src:'公式、宇部市補助金ページ'},
+{n:'チャレンジスクールF',c:'fs',city:'宇部市',org:'一般社団法人 時修学館（学習塾運営）',addr:'宇部市芝中町7-25',lat:33.942493,lng:131.257034,st:'chk',
+ who:'学校や生活に息苦しさを感じる子、学習障害のある子、中卒後・高校中退者、保護者',what:'2023年4月開講。少人数の伴走型指導、家庭訪問、資格取得・就労支援、保護者講座。宇部市の補助対象外',fee:'未確認',url:'https://jisyuu-gakkan.com/f/',src:'公式（最新2024-08）、みなと山口'},
+{n:'ふらっとコミュニティひだまり',c:'so',city:'宇部市',org:'NPO法人',addr:'宇部市海南町2-58-1 OXビル3階',lat:33.958942,lng:131.260696,st:'ok',
+ who:'ひきこもり・不登校の本人と家族（主に若者・成人）',what:'相談、居場所、訪問、家族会・当事者会。宇部市・山陽小野田市がひきこもり相談を委託。小中学生の利用は未確認',fee:'山陽小野田市民は無料',tel:'0836-21-1552',url:'',src:'山陽小野田市ページ（2026-06-01更新）、スーパーネット'},
+// ── 山陽小野田市
+{n:'こころ和み',c:'so',city:'山陽小野田市',org:'NPO法人',addr:'山陽小野田市大字郡398-23',lat:34.022358,lng:131.141968,ap:true,st:'chk',
+ who:'ひきこもり・不登校の人も対象',what:'カウンセリング、日中の預かり',fee:'未確認',url:'',src:'スーパーネット（2016年更新・現状未確認）'},
+// ── 長門市
+{n:'かえるのがっこう（平日小学部）',c:'ref',city:'長門市',org:'かえる村（法人名は未確認）',addr:'長門市油谷向津具下234-1',lat:34.414085,lng:130.971558,ap:true,st:'ok',
+ who:'小学1〜6年（定員15名）',what:'自然体験・料理・工作中心の異年齢少人数。月〜金9:00〜15:00、週1日から相談可。不登校対象とは書かれていない（オルタナティブ型）',fee:'入学料33,000円/年、月38,500円（昼食込み）',url:'https://kaeru.fun/freeschool-about/',src:'公式（2026-10-04更新）'},
+// ── 山口市
+{n:'フリースクールyou',c:'fs',city:'山口市',org:'代表 佐々木健太（学習塾セカンドスタディー協力）',addr:'山口市赤妻町3-20 信和ビル2階（二次情報）',lat:34.167423,lng:131.448441,st:'ok',
+ who:'小1〜中3（二次情報）。中学生・高校進学をめざす子が中心',what:'個別の学習支援、給食。火〜金10:30〜15:00（二次情報）。学校と連携して出席扱いも可',fee:'登録料0円、月7,700〜22,000円（回数制・税込）、給食1食150円',url:'https://you-alternative.com/',src:'公式、ツナグバ'},
+{n:'フリースクール Happy Education（ハピエデュ）',c:'fs',city:'山口市',org:'一般社団法人 Happy Education（2018年発足）',addr:'山口市徳地船路575-4',lat:34.262150,lng:131.667877,ap:true,st:'chk',
+ who:'子どもと保護者（小・中学生が中心）',what:'月・水・土11:00〜17:00、出入り自由。体験学習、保護者の茶話会（オンラインあり）、講演会、学校との仲立ち',fee:'年会費5,000円・月会費2,000円（公式）',tel:'090-4579-1368',url:'https://happy-edu.amebaownd.com/',src:'公式（新着は2024-05で止まっている）、スーパーネット、防府市冊子'},
+{n:'フリースクール エイ・ユー・シー（AUC）',c:'fs',city:'山口市',org:'NPO法人（1991年設立）',addr:'山口市桜畠4-3-21',lat:34.195797,lng:131.501251,st:'cl',
+ who:'不登校・中退の小〜高校生',what:'通所型フリースクール（月・水・金）、訪問による学習支援。2025年6月に「6月末で解散手続きに入る」との告知があったとされる',fee:'未確認',url:'',src:'スーパーネット（2016年更新）、小幡和輝氏の記事。公式サイトはつながらない'},
+{n:'ネムハイスクール学習センター',c:'ref',city:'山口市',org:'法人名の記載なし',addr:'山口市小郡高砂町3-24 伸光ビル2F',lat:34.092308,lng:131.399261,st:'ok',
+ who:'18歳以下で受給者証を持つ子',what:'「フリースクール型」の放課後等デイサービス・児童発達支援。「出席認定フリースクール」と自称',fee:'福祉サービスの負担上限による（二次情報）',url:'https://sites.google.com/view/nemlearningcenter/',src:'公式、hikari-smile'},
+{n:'トライ式中等部 新山口キャンパス',c:'ref',city:'山口市',org:'株式会社トライグループ',addr:'山口市小郡明治2-12-5 TPUビル2F（二次情報）',lat:34.094368,lng:131.395432,st:'ok',
+ who:'中学1〜3年',what:'企業のフリースクール型中等部。学習支援、進路指導、カウンセリング。校長が認めれば出席扱い',fee:'未確認',url:'https://www.try-gakuin.com/',src:'公式ブログ（2024-10）、hikari-smile'},
+{n:'親の会カフェ山口〜起立性調節障害と不登校を考える〜',c:'oya',city:'山口市',org:'任意団体（2017年設立）',addr:'非公開',lat:null,lng:null,st:'chk',
+ who:'起立性調節障害や不登校の子の保護者',what:'茶話会、講演会、情報交換（ブログで告知）',fee:'基本無料（二次情報）',url:'https://www.saporant.jp/author/oyanokai/',src:'山口市市民活動支援センター さぽらんて'},
+{n:'こころのほし',c:'so',city:'山口市',org:'任意団体',addr:'山口市（番地の記載なし）',lat:null,lng:null,st:'ok',
+ who:'思春期〜青年期の子と保護者',what:'SNS・電話・対面の相談、さぽらんてでのカフェ（月1回程度）',fee:'未確認',url:'',src:'スーパーネット（2026年5月更新）'},
+// ── 防府市
+{n:'ミナミカゼ（旧「不登校カフェ」）',c:'oya',city:'防府市',org:'任意団体（保護者が主催）',addr:'防府市国衙1-12-1 国衙会館（二次情報。市のチラシは「会場はLINEで問い合わせ」）',lat:34.054756,lng:131.585281,st:'ok',
+ who:'学校が苦手な子と保護者（予約なし）',what:'居場所・茶話会。月2回、9:30〜11:30ごろ',fee:'1家族100円',url:'',src:'防府市「ほうふっ子だれでもリンク」チラシ、MICAN。LINE：@779ofpxn'},
+{n:'ママのコミュニティ「わっこ」',c:'oya',city:'防府市',org:'任意団体（防府市市民活動支援センター登録）',addr:'未確認',lat:null,lng:null,st:'ok',
+ who:'不登校・行きしぶりの子を持つ母親や家族',what:'茶話会 月1回金曜10〜15時。オープンチャットあり',fee:'未確認',tel:'0835-38-4422（市民活動支援センター気付）',url:'',src:'防府市チラシ、MICAN'},
+{n:'まんま会（まんまスクール・まんまんち）',c:'ib',city:'防府市',org:'任意団体とみられる',addr:'未確認',lat:null,lng:null,st:'chk',
+ who:'不登校の子を含む子ども',what:'まんまスクール月1回13:30〜16:00、まんまんち火・木・金9〜13時（市の名簿）',fee:'未確認',tel:'090-2297-5271',url:'',src:'防府市「ほうふっ子だれでもリンク」。公式サイトは工事中'},
+{n:'山口自主夜間中学校（防府校）',c:'ib',city:'防府市',org:'任意団体とみられる（代表は元教員）',addr:'防府市栄町1-5-1 ルルサス防府2階（市民活動支援センター）',lat:34.053509,lng:131.570450,st:'ok',
+ who:'学び直したい人、不登校で勉強できなかった人など',what:'月2回 土曜18〜21時。市の名簿では「不登校児童の学習支援、保護者の相談」',fee:'無料（2022年報道）',url:'https://yamaguchiyakanchu.com/',src:'公式（2023-04）、防府市ページ、中国新聞'},
+// ── 周南市
+{n:'フリースクール まなポート',c:'fs',city:'周南市',org:'NPO法人 まなびデザインラボ（2016年開設）',addr:'周南市河東町9-35',lat:34.046501,lng:131.812469,st:'ok',
+ who:'不登校・行き渋りの子（原則10〜18歳）。学校との併用、週1コースあり',what:'コーチングで「やりたいこと」を仲間と学ぶ。部活動（釣り・アウトドア）、地域活動、不登校進路相談会、保護者の茶話会（周南公立大で無料）',fee:'週1日12,000円/月〜週5日40,000円/月（税別、二次情報）',tel:'0834-33-9314',url:'https://manaportschool.wixsite.com/manaport',src:'公式（2026-10茶話会告知）、新周南新聞、hikari-smile'},
+{n:'ひるまの寺子屋（無料学習）',c:'ib',city:'周南市',org:'NPO法人 まなびデザインラボ',addr:'第1部 ゆめプラザ熊毛（周南市熊毛中央町1-1）／第2部 まなラボスクール（河東町9-35）',lat:34.049927,lng:131.968170,st:'chk',
+ who:'小5〜中3の学校に行きづらい子（各回先着10名）',what:'毎週木曜 10:00〜12:00（熊毛）／14:00〜16:00（河東町）。周南公立大の学生が学習・雑談の相手',fee:'無料',url:'https://manaportschool.wixsite.com/manaport/hirumanoterakoya',src:'公式（チラシ2023.4）'},
+{n:'ネムハイスクール 周南キャンパス（中学生部門）',c:'ref',city:'周南市',org:'株式会社ノムラエキスパートモール（新周南新聞による）',addr:'周南市桜馬場通2-3',lat:34.053234,lng:131.809525,st:'ok',
+ who:'中学生（高校部門は通信制連携のため対象外）',what:'「中学年フリースクール」の案内あり。学習・キャリア支援',fee:'未確認',tel:'0834-33-1123',url:'https://www.nem-hs.com/',src:'公式、新周南新聞2023-12'},
+{n:'寺子屋『なごみ』',c:'ib',city:'周南市',org:'未確認（MICAN加盟）',addr:'未確認',lat:null,lng:null,st:'nw',
+ who:'不登校・行き渋りの親子。保護者だけも可',what:'体験や学習を通して次の道筋を一緒に考える。月・木10:00〜14:00。2026年5月開始',fee:'未確認',url:'https://www.instagram.com/loveheartnagomi',src:'MICAN'},
+{n:'COCO color cafe（3rd place COCO）',c:'ib',city:'周南市',org:'個人運営（MICAN設立者）',addr:'未確認',lat:null,lng:null,st:'chk',
+ who:'不登校の子ども・若者',what:'不登校カフェ。2026年のMICAN加盟一覧には名前がない',fee:'未確認',url:'https://www.instagram.com/3rd_place_coco/',src:'周南経済新聞（2024-11-07）'},
+{n:'まるっとカフェ',c:'oya',city:'周南市',org:'未確認',addr:'未確認',lat:null,lng:null,st:'ok',
+ who:'保護者（子ども同伴可）',what:'月1回平日昼の茶話会。ときどき子どもと楽しめるワークショップ',fee:'未確認',url:'https://www.instagram.com/marutto_cafe/',src:'MICAN'},
+{n:'JACFA',c:'so',city:'周南市',org:'NPO法人',addr:'周南市冨田2-12-5',lat:34.075184,lng:131.754791,st:'chk',
+ who:'不登校の子・とじこもりの人と家族',what:'カウンセリングなど',fee:'未確認',url:'',src:'スーパーネット（2018年更新・現状未確認）'},
+// ── 下松市
+{n:'フリースペース コティ',c:'fs',city:'下松市',org:'NPO法人 フリースペースコティ（2024年9月設立）',addr:'下松市末武上1790（スーパーネットの登録は末武上1107-8）',lat:34.035957,lng:131.867950,st:'ok',
+ who:'子どもと、子育てに悩む保護者',what:'フリースクールが柱。学習支援・体験学習・子育て相談・ペアトレ・子ども食堂。10:00〜15:00、第2金曜休み、土曜は予約制',fee:'会費1,000円。利用料は未確認',tel:'090-2297-2786',url:'https://www.freespace-koti.com/',src:'公式（2026-09更新）、下松市ページ、スーパーネット'},
+{n:'夢光塾（ゆめひかりじゅく）',c:'ib',city:'下松市',org:'個人運営（講師は現役教員）',addr:'下松市瑞穂町4丁目3-12 中村総合福祉センター（久保公民館でも）',lat:34.024086,lng:131.849579,st:'chk',
+ who:'小・中・高、自由登校の子',what:'学習支援・相談、個別指導、出張指導。Zoom・LINE可。木曜クラスなど一部休止中',fee:'30分500円、個別1時間1,000円〜',url:'https://genkimania777.wixsite.com/mysite',src:'公式（2025-04の予定が最新）、MICAN'},
+// ── 光市
+{n:'不登校支援「ぽっかぽか」',c:'ib',city:'光市',org:'NPO法人 チャイルドハウスひなたぼっこ',addr:'光市島田6-10-4',lat:33.979252,lng:131.935043,st:'ok',
+ who:'登校をしぶる子・不登校の子（ひきこもりは保護者の相談のみ）',what:'料理・創作・園芸・釣り・学習・職場体験など。月・水・金10:00〜13:00（予約制）。家族支援・訪問学習支援・親のカフェも',fee:'未確認（二次情報では無料）',tel:'0833-57-0083',url:'http://child-hinatabokko.com/support/',src:'公式（©2024）、hikari-smile'},
+// ── 岩国市
+{n:'フリースクールSUN岩国',c:'fs',city:'岩国市',org:'株式会社サンミュージック名古屋（CSR事業）',addr:'岩国市麻里布町2丁目5-8',lat:34.169548,lng:132.224106,st:'nw',
+ who:'不登校・ひきこもりなど生きづらさを抱える子（小・中・高、二次情報）',what:'歌・ダンス・演奏・創作などの表現活動。2026年4月5日開校。開所日は未確認',fee:'要問い合わせ',tel:'070-1645-3482',url:'https://sun-music.jp/',src:'PR TIMES（2026-03-31）'},
+{n:'ウィズ・ユー岩国 不登校支援',c:'ref',city:'岩国市',org:'放課後等デイサービス事業所',addr:'岩国市由宇町北1丁目11-1',lat:34.049484,lng:132.212189,st:'ok',
+ who:'不登校・登校に不安のある小中学生',what:'運動や体験活動を通した居場所。毎週木曜11:00〜13:00',fee:'サイトの料金ページ参照',tel:'0827-93-1096',url:'https://withyou-iwakuni.com/free/futoukou',src:'公式（©2026）'}
+];
+
+const $=s=>document.querySelector(s);
+const cssv=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+D.forEach((d,i)=>d.id=i);
+
+// 件数
+(()=>{const live=D.filter(d=>d.st!=='cl');const by=k=>live.filter(d=>d.c===k).length;
+ const cities=new Set(live.filter(d=>d.c!=='ref').map(d=>d.city)).size;
+ $('#count').innerHTML=`<div><b>${live.length}</b>載せた団体・場（閉所の疑い1件を除く）</div><div><b>${by('fs')}</b>フリースクール</div><div><b>${by('ib')}</b>居場所・学習支援</div><div><b>${by('oya')+by('so')}</b>親の会・相談</div><div><b>${cities}</b>/19 見つかった市町（参考を除く）</div><div><b>2</b>行政の認定施設（宇部市）</div>`;})();
+
+// 絞り込みUI
+const on=new Set(Object.keys(CATS));
+$('#cats').innerHTML=Object.entries(CATS).map(([k,c])=>`<label><input type="checkbox" data-c="${k}" checked> <span class="dot" style="background:var(${c.v})"></span>${c.n}</label>`).join('');
+CITIES.forEach(c=>{if(D.some(d=>d.city===c)){const o=document.createElement('option');o.textContent=c;$('#city').appendChild(o);}});
+document.querySelectorAll('#cats input').forEach(el=>el.onchange=()=>{el.checked?on.add(el.dataset.c):on.delete(el.dataset.c);render();});
+['#city','#hideClosed'].forEach(s=>$(s).onchange=render);$('#q').oninput=render;
+
+// 地図
+let map=null;const mk={};
+try{
+ map=L.map('map',{scrollWheelZoom:false}).setView([34.12,131.55],9);
+ L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',{maxZoom:18,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'}).addTo(map);
+ map.on('focus',()=>map.scrollWheelZoom.enable());map.on('blur',()=>map.scrollWheelZoom.disable());
+ D.forEach(d=>{if(d.lat==null)return;
+  const col=cssv(CATS[d.c].v);
+  const m=L.circleMarker([d.lat,d.lng],{radius:d.c==='fs'?9:7,color:d.ap?col:'#fff',weight:d.ap?2:1.5,dashArray:d.ap?'3 3':null,fillColor:col,fillOpacity:d.ap?.35:.9});
+  m.bindPopup(`<b>${esc(d.n)}</b><br>${esc(CATS[d.c].n)}　${esc(d.city)}<br>${esc(d.addr)}${d.ap?'<br><i>位置はおおよそ</i>':''}${d.url?`<br><a href="${esc(d.url)}" target="_blank" rel="noopener">公式</a>`:''}`);
+  m.on('click',()=>sel(d.id,false));mk[d.id]=m;});
+}catch(e){map=null;$('#mapfail').style.display='block';}
+
+function vis(){const city=$('#city').value,hc=$('#hideClosed').checked,q=$('#q').value.trim();
+ return D.filter(d=>on.has(d.c)&&(!city||d.city===city)&&!(hc&&d.st==='cl')&&(!q||[d.n,d.org,d.what,d.who,d.addr,d.city].join(' ').includes(q)));}
+function render(){const v=vis(),ids=new Set(v.map(d=>d.id));
+ v.sort((a,b)=>CITIES.indexOf(a.city)-CITIES.indexOf(b.city)||Object.keys(CATS).indexOf(a.c)-Object.keys(CATS).indexOf(b.c));
+ $('#list').innerHTML=v.map(d=>{const s=ST[d.st];return `<div class="card" id="c${d.id}" data-id="${d.id}" style="border-left-color:var(${CATS[d.c].v})">
+ <div><span class="tag t-cat" style="background:var(${CATS[d.c].v})">${CATS[d.c].n}</span><span class="tag ${s[1]}">${s[0]}</span>${d.sub?'<span class="tag t-ok">宇部市補助の認定</span>':''}${d.lat==null?'<span class="nopin">地図なし</span>':d.ap?'<span class="nopin">位置はおおよそ</span>':''}</div>
+ <h3>${esc(d.n)}</h3><div class="org">${esc(d.city)}｜${esc(d.org)}</div>
+ <dl><dt>所在地</dt><dd>${esc(d.addr)}</dd><dt>対象</dt><dd>${esc(d.who)}</dd><dt>内容</dt><dd>${esc(d.what)}</dd><dt>費用</dt><dd>${esc(d.fee)}</dd>${d.tel?`<dt>電話</dt><dd>${esc(d.tel)}</dd>`:''}${d.url?`<dt>URL</dt><dd><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.url)}</a></dd>`:''}<dt>出典</dt><dd>${esc(d.src)}</dd></dl></div>`;}).join('')||'<p class="meta">条件に合うものがありません。</p>';
+ $('#shown').textContent=`${v.length}件を表示`;
+ document.querySelectorAll('.card').forEach(el=>el.onclick=e=>{if(e.target.tagName!=='A')sel(+el.dataset.id,true);});
+ if(map){Object.entries(mk).forEach(([id,m])=>{ids.has(+id)?m.addTo(map):m.remove();});}
+}
+function sel(id,fly){document.querySelectorAll('.card.sel').forEach(e=>e.classList.remove('sel'));
+ const c=$('#c'+id);if(c){c.classList.add('sel');if(!fly)c.scrollIntoView({behavior:'smooth',block:'nearest'});}
+ const m=mk[id];if(map&&m&&fly){map.setView(m.getLatLng(),13);m.openPopup();}}
+
+// 市町表
+$('#cityTable tbody').innerHTML=CITIES.map(c=>{const r=D.filter(d=>d.city===c&&d.st!=='cl');const n=k=>r.filter(d=>d.c===k).length;
+ const cell=k=>{const x=n(k);return `<td class="${x?'':'zero'}">${x||'―'}</td>`;};
+ return `<tr><th>${c}</th>${['fs','ib','oya','so','ref'].map(cell).join('')}<td>${esc(CITYNOTE[c]||'')}${c==='山口市'?'AUC（閉所の疑い）は数えていない':''}</td></tr>`;}).join('');
+render();
+</script>
+</body>
+</html>
