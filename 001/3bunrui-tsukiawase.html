@@ -15,7 +15,7 @@
   --plan:#2f4f8f; --mie:#1d7a46; --mie2:#8cc7a3;
   --m3:#1d7a46; --m2:#8cc7a3; --m1:#f3e3b5; --m0:#ffffff; --m3ink:#fff;
   --tA:#e7eefb; --tAink:#2f4f8f; --tB:#e4f3ea; --tBink:#1d6b3e; --tC:#fbe9e7; --tCink:#a1271d; --tD:#eceef3; --tDink:#5a6272;
-  --hiA:#e7eefb; --hiB:#e4f3ea; --pt:#2f4f8f; --kwm:#ffe28a;
+  --hiA:#e7eefb; --hiB:#e4f3ea; --pt:#2f4f8f; --kwm:#ffe28a; --bud:#d9822b;
   --h0:#e3f2e8; --h1:#fff3d1; --h2:#fddcbf; --h3:#f6ad99; --h4:#d4483b; --h4ink:#fff;
   --b1:#e9effa; --b2:#cddcf5; --b3:#a7c0ee;
   color-scheme:light;
@@ -27,7 +27,7 @@
     --plan:#8fb0f0; --mie:#6fd09a; --mie2:#2f6b4a;
     --m3:#3f9f69; --m2:#2c5c43; --m1:#5a4b22; --m0:#1e2128; --m3ink:#fff;
     --tA:#26304a; --tAink:#a9c1f2; --tB:#1f3a2c; --tBink:#8fe0b2; --tC:#3a2422; --tCink:#ff9d94; --tD:#272b34; --tDink:#a4aab6;
-    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12;
+    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12; --bud:#f0a050;
     --h0:#1f3a2c; --h1:#3d3520; --h2:#4d3421; --h3:#683027; --h4:#a8352a; --h4ink:#fff;
     --b1:#222a3b; --b2:#2c3c5e; --b3:#3d5894;
     color-scheme:dark;
@@ -39,7 +39,7 @@
     --plan:#8fb0f0; --mie:#6fd09a; --mie2:#2f6b4a;
     --m3:#3f9f69; --m2:#2c5c43; --m1:#5a4b22; --m0:#1e2128; --m3ink:#fff;
     --tA:#26304a; --tAink:#a9c1f2; --tB:#1f3a2c; --tBink:#8fe0b2; --tC:#3a2422; --tCink:#ff9d94; --tD:#272b34; --tDink:#a4aab6;
-    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12;
+    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12; --bud:#f0a050;
     --h0:#1f3a2c; --h1:#3d3520; --h2:#4d3421; --h3:#683027; --h4:#a8352a; --h4ink:#fff;
     --b1:#222a3b; --b2:#2c3c5e; --b3:#3d5894;
     color-scheme:dark;
@@ -177,13 +177,21 @@ details.tc .tcb p.tlead{background:var(--soft);border-radius:4px;padding:8px 12p
 .s4a{border-top-color:var(--mie)}.s4b{border-top-color:var(--plan)}.s4c{border-top-color:var(--mie2)}.s4d{border-top-color:var(--tCink)}
 .s4h{font-weight:700;font-size:.9rem}
 .s4t{font-size:.82rem;color:var(--sub)}
+.s4t strong{color:var(--ink);font-weight:700}
 .fukano{border-left:5px solid var(--tCink)}
 .fukano p{max-width:none}
 .ute{margin:4px 0 2px;padding-left:1.2em;list-style:none}
 .ute li{margin:2px 0;padding-left:2.2em;text-indent:-2.2em}
 .ute b{display:inline-block;text-indent:0;min-width:1.4em;text-align:center;background:var(--soft);border-radius:3px;margin-right:2px}
+.r4ref{display:block;margin-top:4px;font-size:.78rem;color:var(--sub)}
+.kasetsu{border-left:5px solid var(--accent)}
+.kasetsu p,.kasetsu li{max-width:none}
+.kv td{vertical-align:top}
+.kv td.nm{min-width:9em;font-weight:700}
+.jh{font-weight:700;margin:18px 0 6px;max-width:none}
 .bnr td{vertical-align:top}
 .bnr td:nth-child(3){font-weight:700;white-space:nowrap}
+strong.red{color:var(--tCink)}
 .mx2{font-size:.85rem}
 .mx2 th,.mx2 td{border:1px solid var(--line);vertical-align:top;padding:7px 8px}
 .mx2 thead th{font-size:.78rem}
@@ -194,6 +202,28 @@ details.tc .tcb p.tlead{background:var(--soft);border-radius:4px;padding:8px 12p
 .mx2 td.none{text-align:center;color:var(--sub)}
 .mx2 td.hot{background:var(--tC)}
 .mx2 th.te,.mx2 td.te{min-width:13em;font-size:.82rem;background:var(--soft)}
+.quadbox{padding:6px}
+.quad{width:100%;min-width:620px;height:auto;display:block}
+.quad .q1{fill:var(--tB)}.quad .q4{fill:var(--tA)}.quad .q2{fill:var(--soft)}.quad .q3{fill:var(--tC)}
+.quad .fr{fill:none;stroke:var(--line)}
+.quad .mid{stroke:var(--sub);stroke-width:1.2;stroke-dasharray:5 4}
+.quad .qn{font-size:13px;font-weight:700;fill:var(--sub)}
+.quad .qn4{fill:var(--tAink)}.quad .qn3{fill:var(--tCink)}
+.quad .tk{font-size:11px;fill:var(--sub)}
+.quad .ax{font-size:12px;font-weight:700;fill:var(--ink)}
+.quad .al{font-size:12px;fill:var(--sub)}
+.quad .pt circle{fill:var(--accent);stroke:var(--card);stroke-width:2}
+.quad .pt .pn{font-size:11px;font-weight:700;fill:var(--card)}
+.quad .pt .pl{font-size:12px;fill:var(--ink);font-weight:700}
+.quad .pt.bud circle{fill:var(--bud)}
+.quad .pt.hol.bud circle{fill:var(--card);stroke:var(--bud)}
+.quad .pt.hol.bud .pn{fill:var(--bud)}
+.budbox{border-left:5px solid var(--bud)}
+.budbox p{max-width:none}
+.quad .pt.hol circle{fill:var(--card);stroke:var(--accent);stroke-width:2;stroke-dasharray:3 2}
+.quad .pt.hol .pn{fill:var(--accent)}
+.quad .side{fill:var(--soft);stroke:var(--line)}
+.q4cards .qa{border-top-color:var(--mie)}.q4cards .qb{border-top-color:var(--plan)}.q4cards .qc{border-top-color:var(--sub)}.q4cards .qd{border-top-color:var(--tCink)}
 .src li{font-size:.85rem;margin:4px 0;overflow-wrap:anywhere}
 dl.def{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
 dl.def dt{font-weight:700;white-space:nowrap}
@@ -220,7 +250,7 @@ dl.def dd{margin:0}
 <circle cx="46.4" cy="26.3" r="1.6"/><circle cx="46.4" cy="34.5" r="1.6"/><circle cx="46.4" cy="42.5" r="1.6"/></g>
 </svg></div>
 <p class="subt"><span class="mk2">「業務量管理・健康確保措置実施計画」</span>の記載・国への回答・時間外在校等時間を突き合わせる</p>
-<p class="date">2026年10月26日調べ ／ 関連：<a href="gyomuryo-keikaku-hikaku-v3.html">19市町の計画の比較</a>・<a href="3bunrui-yamaguchi-r7.csv">見える化の回答（CSV）</a></p>
+<p class="date">2026年10月26日調べ ／ 関連：<a href="3bunrui-datosei.html">3分類は妥当か</a>・<a href="gyomuryo-keikaku-hikaku-v3.html">19市町の計画の比較</a>・<a href="3bunrui-yamaguchi-r7.csv">見える化の回答（CSV）</a></p>
 
 <p>3分類（19項目）について、山口県の19市町ごとに3つの資料を並べました。<strong>同じ市町でも、資料によって見え方がかなり違います。</strong></p>
 
@@ -274,7 +304,7 @@ dl.def dd{margin:0}
 </div>
 <p class="b3foot">※ 専門スタッフとの協働、デジタル技術の活用や外部委託の促進については、地方公共団体の関係機関が積極的に参画</p>
 </figure>
-<p class="small" style="margin-left:0">原図の文言をそのまま写しています（15の「支援スタッフを実施」も原文どおり）。原図にあるイラストは省きました。2019年答申の14項目から加わったのは、5（過剰な苦情・不当な要求）、7（広報・ウェブサイト）、8（ICT保守）、9（プール・体育館）、10（開錠・施錠）です。このページの①〜⑲は、この図の番号と同じです。この改定への評価・コメントは<a href="#hyoka">8章</a>にまとめました。</p>
+<p class="small" style="margin-left:0">原図の文言をそのまま写しています（15の「支援スタッフを実施」も原文どおり）。原図にあるイラストは省きました。2019年答申の14項目から加わったのは、5（過剰な苦情・不当な要求）、7（広報・ウェブサイト）、8（ICT保守）、9（プール・体育館）、10（開錠・施錠）です。このページの①〜⑲は、この図の番号と同じです。この改定への評価・コメントや、3分類そのものが妥当かの検討は、別のページ<a href="3bunrui-datosei.html">「3分類は妥当か」</a>にまとめました。</p>
 
 <div class="card">
 <dl class="def">
@@ -291,13 +321,13 @@ dl.def dd{margin:0}
 <li><strong>計画と回答はほとんど対応していません</strong>（市町ごとの数の相関 +0.11）。山陽小野田市は計画を3分類で整理していないのに、回答では25小項目中21が「実施」（県内2位）でした。周防大島町は10項目に具体策を書きましたが、回答の「実施」は10にとどまります。</li>
 <li>計画と回答のずれには2つの向きがあります。<br>・<strong>計画には書いたが、国には「実施」と答えていない</strong>項目：夜間の見回り・補導、プール・体育館、学習評価。R7.9の時点ではまだ実施しておらず、R8年度からの計画で「これからやる」と書いた、と読めます。<br>・<strong>国には「実施」と答えたが、計画には書いていない</strong>項目：地域との連絡調整、ICT保守、給食、学校行事。</li>
 <li><strong>広報・ウェブサイト、校舎の開錠・施錠、休み時間、進路指導の準備は、どちらの資料でも手薄です。</strong>休み時間は、R4調査で小学校教員の62%が「削減は難しい」と答えた項目です。</li>
-<li><strong>時間外が長い市町ほど取組が手厚い、という関係ははっきりしません。</strong>中学校ではやや正の関係（計画の具体策の数と +0.48）がありますが、19市町しかなく、部活動や学校規模の影響も混ざっています（<a href="#jikan">9章</a>）。</li>
+<li><strong>時間外が長い市町ほど取組が手厚い、という関係ははっきりしません。</strong>中学校ではやや正の関係（計画の具体策の数と +0.48）がありますが、19市町しかなく、部活動や学校規模の影響も混ざっています（<a href="#jikan">8章</a>）。</li>
 <li><strong>市町の「実施」や「全ての学校」の中にも、学校ごとの差があります。</strong>美祢市内の小規模小学校（教職員7人）の例では、自校プールの管理が残り、R8年度は業務支援員も7月まで来ませんでした。授業準備の支援スタッフは、実施と答えた18市町のうち10市町が「全校ではない」と答えています（<a href="#ana">4 計画の穴</a>）。</li>
 </ol>
 </div>
 
 <h2><span class="hn">1</span>項目ごとに見る</h2>
-<p>19市町のうち、計画に具体策を書いた数（青）と、回答で「実施」とした数（緑。薄い緑は小項目の一部だけ実施）です。右端は、R4勤務実態調査で教員（小学校、部活動は中学校）が「削減すべきで削減可能」と答えた割合（全国）です。</p>
+<p>19市町のうち、計画に具体策を書いた数（青）と、回答で「実施」とした数（緑。薄い緑は小項目の一部だけ実施）です。右端は、R4勤務実態調査で教員（小学校、部活動は中学校）が「削減すべきで削減可能」と答えた割合（全国）です。<span class="r4ref">出典：文部科学省<a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf">「教員勤務実態調査（令和4年度）の集計（確定値）」（PDF）</a>p.75〜80 教員調査Q45／<a href="https://www.mext.go.jp/a_menu/shotou/kyoshi-kankyo/1297093_00006.htm">調査のページ</a></span></p>
 <div class="scroll">
 <table>
 <thead><tr><th></th><th>業務</th><th>計画に具体策<br><span class="small">（19市町中）</span></th><th>回答「実施」<br><span class="small">（19市町中）</span></th><th>計画と回答の関係</th><th>教員「削減可能」<br><span class="small">R4全国</span></th></tr></thead>
@@ -330,93 +360,12 @@ dl.def dd{margin:0}
 <h3 id="matome1">1章のまとめ</h3>
 <p>19項目を、計画と国への回答の両方から見ると、4つのまとまりに分かれます。</p>
 <div class="sum4">
-<div class="s4 s4a"><p class="s4h">計画でも回答でも進んでいる</p><p><span class="chip cb">①登下校</span><span class="chip cb">⑥調査回答</span><span class="chip cb">⑬部活動</span><span class="chip cb">⑮授業準備</span><span class="chip cb">⑲要支援</span></p><p class="s4t">支援員・専門スタッフの配置や部活動の地域展開など、国の予算や制度が先にあるものが多い。</p></div>
+<div class="s4 s4a"><p class="s4h">計画でも回答でも進んでいる</p><p><span class="chip cb">①登下校</span><span class="chip cb">⑥調査回答</span><span class="chip cb">⑬部活動</span><span class="chip cb">⑮授業準備</span><span class="chip cb">⑲要支援</span></p><p class="s4t">支援員・専門スタッフの配置や部活動の地域展開など、国の予算や制度が先にあるものが多い。ただし⑮⑲は、補助や専門スタッフとの協働が入っただけで、仕事の中心は教員に残っている。</p></div>
 <div class="s4 s4b"><p class="s4h">計画には書いたが、まだ「実施」と答えていない</p><p><span class="chip ca">②見回り</span><span class="chip ca">⑨プール</span><span class="chip ca">⑯成績処理</span></p><p class="s4t">R8年度からの計画で「これからやる」と書いた項目。実際に動いたかを、次の見える化調査で確かめられる。</p></div>
-<div class="s4 s4c"><p class="s4h">「実施」と答えたが、計画にない</p><p><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></p><p class="s4t">何を、どの学校でしているのかが計画からは読めない。</p></div>
-<div class="s4 s4d"><p class="s4h">計画でも回答でも少ない</p><p><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></p><p class="s4t">19市町のうち計画に具体策を書いたのは0〜3、「実施」と答えたのは3〜6。</p></div>
+<div class="s4 s4c"><p class="s4h">「実施」と答えたが、計画にない</p><p><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></p><p class="s4t">何を、どの学校でしているのかが計画からは読めない。<strong>だから、取組の中身と対象の学校を計画に書き込み、担当や予算が変わっても続けられるようにする必要がある。</strong></p></div>
+<div class="s4 s4d"><p class="s4h">計画でも回答でも少ない</p><p><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></p><p class="s4t">19市町のうち計画に具体策を書いたのは0〜3、「実施」と答えたのは3〜6。なぜ少ないのかは、別のページ<a href="3bunrui-datosei.html#fukano">「3分類は妥当か」</a>で検討しています。</p></div>
 </div>
 <p class="small" style="margin-left:0">③学校徴収金・⑤苦情対応・⑫校内清掃は、計画・回答とも6〜12市町で、この間にあります。</p>
-
-<div class="card fukano">
-<strong>計画でも回答でも少ない4項目は、本県ではそもそも実行が難しいのではないか</strong>
-<p>この4項目は、山口県だけでなく<strong>全国の市区町村でも「実施」が1〜3割</strong>にとどまっています。山口県が全国より低いのは⑩開錠・施錠だけです。</p>
-<div class="scroll" style="max-height:none">
-<table>
-<thead><tr><th>項目</th><th>計画に具体策<br><span class="small">山口19市町</span></th><th>国に「実施」<br><span class="small">山口19市町</span></th><th>国に「実施」<br><span class="small">全国の市区町村</span></th><th>教員「削減は難しい」<br><span class="small">R4・小学校</span></th></tr></thead>
-<tbody>
-<tr><td class="nm">⑦ 広報・ウェブサイト</td><td class="c n">0</td><td class="c n">4（21%）</td><td class="c n">18.3%</td><td class="c"><span class="small">—</span></td></tr>
-<tr><td class="nm">⑩ 校舎の開錠・施錠</td><td class="c n">1</td><td class="c n">3（16%）</td><td class="c n">26.1%</td><td class="c"><span class="small">—</span></td></tr>
-<tr><td class="nm">⑪ 休み時間の安全</td><td class="c n">3</td><td class="c n">4（21%）</td><td class="c n">12.1%</td><td class="c n">62.3%</td></tr>
-<tr><td class="nm">⑱ 進路指導の準備</td><td class="c n">0</td><td class="c n">6（32%）</td><td class="c n">14.1%</td><td class="c n">54.6%</td></tr>
-</tbody>
-</table>
-</div>
-<p>4項目に共通するのは、<strong>担う人がいないと動かせない業務</strong>だということです。広報・ウェブサイトは事務職員の増員か委託費、開錠・施錠は管理員・用務員か委託、休み時間は見守る大人、進路の準備は事務を担うスタッフが要ります。休み時間と進路指導は、小学校の教員の5〜6割が「削減は難しい」と答えています。</p>
-<p><strong>市町の工夫だけでは進めにくく、今の人と予算のままでは、本県では実行が難しい項目と考えられます。</strong>市町に「着手すること」を求めるだけでなく、国・県に人と予算を求める項目として扱うのがよいと思います（<a href="#teian">6章</a>の提言6）。</p>
-<p class="small" style="margin-left:0">全国の値は文科省「令和7年度 見える化調査 結果概要」p.17〜20の市区町村（n=1,737）、R4はR4勤務実態調査 確定値 p.76。⑦⑩はR7の改定で加わった項目で、R4調査にはありません。⑱は主に中学校の業務です。</p>
-</div>
-
-
-<h3 id="bunrui2">3分類をさらに分類（分析）</h3>
-<p>3分類は「だれが担うべきか」で分けた表ですが、項目によって<strong>進まない理由が違います</strong>。妹尾氏の意見書（<a href="#hyoka">8章</a>）も、項目ごとに担い手を見直すよう求めています。R4勤務実態調査で教員が答えた「削減できるか」とその理由をもとに、19項目を<strong>任せにくさの種類</strong>で4つに分けてみました。この調べの見立てです。</p>
-<div class="sum4">
-<div class="s4 s4b"><p class="s4h">A　任せたいが、人と予算が要る</p><p><span class="chip ca">③徴収金</span><span class="chip ca">⑦広報・HP</span><span class="chip ca">⑧ICT保守</span><span class="chip ca">⑨プール</span><span class="chip ca">⑩開錠施錠</span><span class="chip ca">⑫清掃</span><span class="chip ca">⑬部活動</span><span class="chip ca">⑰行事の準備</span><span class="chip ca">⑮⑯の補助的な作業</span></p><p class="s4t">外に出す先（管理員、委託業者、支援員、地域クラブ、公会計のしくみ）を、お金をかけて用意しないと動かない。</p></div>
-<div class="s4 s4c"><p class="s4h">B　相手の理解がないと任せにくい</p><p><span class="chip cb">①登下校</span><span class="chip cb">②見回り</span><span class="chip cb">④地域調整</span><span class="chip cb">⑤苦情対応</span><span class="chip cb">⑲要支援</span></p><p class="s4t">保護者や地域が「学校がやるもの」と思っている。難しい理由のいちばんは「保護者の理解」「地域の理解」。</p></div>
-<div class="s4 s4d"><p class="s4h">C　教員が任せたいと思っていない</p><p><span class="chip cc">⑪休み時間</span><span class="chip cc">⑭給食</span><span class="chip cc">⑱進路</span><span class="chip cc">⑮授業準備・⑯評価の中心部分</span></p><p class="s4t">子どもを見ること・教えることと切り離しにくい。「削減できる」と答えた教員は1割前後しかいない。</p></div>
-<div class="s4 s4a"><p class="s4h">D　決めればすぐできる</p><p><span class="chip cb">⑥調査・統計</span></p><p class="s4t">教委が学校への依頼を減らせば済む。「削減できる」が7割で、19項目でいちばん高い。</p></div>
-</div>
-
-<div class="scroll" style="max-height:none">
-<table class="bnr">
-<thead><tr><th></th><th>項目</th><th>分け方</th><th>削減できる<br><span class="small">R4・小</span></th><th>削減は難しい<br><span class="small">R4・小</span></th><th>難しい理由のいちばん<br><span class="small">R4・小、複数回答</span></th></tr></thead>
-<tbody>
-<tr><td class="no">①</td><td class="nm">登下校の見守り</td><td class="c">B</td><td class="c n">44.8%</td><td class="c n">45.2%</td><td>保護者の理解（63.0%）</td></tr>
-<tr><td class="no">②</td><td class="nm">夜間の見回り・補導</td><td class="c">B</td><td class="c n">59.4%</td><td class="c n">31.8%</td><td>保護者の理解（57.6%）</td></tr>
-<tr><td class="no">③</td><td class="nm">学校徴収金</td><td class="c">A</td><td class="c n">66.4%</td><td class="c n">26.0%</td><td>保護者の理解（37.9%）・学校の慣行（36.7%）</td></tr>
-<tr><td class="no">④</td><td class="nm">地域との連絡調整</td><td class="c">B</td><td class="c n">39.7%</td><td class="c n">45.2%</td><td>地域の理解（56.8%）</td></tr>
-<tr><td class="no">⑤</td><td class="nm">過剰な苦情・不当な要求</td><td class="c">B</td><td class="c" colspan="3"><span class="small">R7の改定で加わった項目。教員の8〜9割が「学校外が担うべき」（妹尾氏の意見募集）</span></td></tr>
-<tr><td class="no">⑥</td><td class="nm">調査・統計への回答</td><td class="c">D</td><td class="c n">70.2%</td><td class="c n">23.7%</td><td>学校の慣行（44.1%）</td></tr>
-<tr><td class="no">⑦</td><td class="nm">広報・ウェブサイト</td><td class="c">A</td><td class="c" colspan="3"><span class="small">R7の改定で加わった項目。事務職員への付け替えになるという懸念（全学労連）</span></td></tr>
-<tr><td class="no">⑧</td><td class="nm">ICT機器の保守</td><td class="c">A</td><td class="c" colspan="3"><span class="small">R7の改定で加わった項目。「学校以外が担うべき業務」にという提案（妹尾氏）</span></td></tr>
-<tr><td class="no">⑨</td><td class="nm">プール・体育館の管理</td><td class="c">A</td><td class="c" colspan="3"><span class="small">R7の改定で加わった項目。プールの管理は教員の8〜9割が「学校外が担うべき」（妹尾氏の意見募集）</span></td></tr>
-<tr><td class="no">⑩</td><td class="nm">校舎の開錠・施錠</td><td class="c">A</td><td class="c" colspan="3"><span class="small">R7の改定で加わった項目。機械警備はあっても、開け閉めの作業は教頭に残る</span></td></tr>
-<tr><td class="no">⑪</td><td class="nm">休み時間の安全</td><td class="c">C</td><td class="c n">14.2%</td><td class="c n">62.3%</td><td>児童生徒の理解（50.9%）</td></tr>
-<tr><td class="no">⑫</td><td class="nm">校内清掃</td><td class="c">A</td><td class="c n">33.3%</td><td class="c n">45.9%</td><td>学校の慣行（44.7%）・人の協力（40.1%）</td></tr>
-<tr><td class="no">⑬</td><td class="nm">部活動<span class="small">（中学校）</span></td><td class="c">A</td><td class="c n">40.5%</td><td class="c n">45.0%</td><td>人の協力（52.6%）</td></tr>
-<tr><td class="no">⑭</td><td class="nm">給食の時間</td><td class="c">C</td><td class="c n">15.3%</td><td class="c n">60.1%</td><td>児童生徒の理解（42.1%）</td></tr>
-<tr><td class="no">⑮</td><td class="nm">授業準備</td><td class="c">C（補助はA）</td><td class="c n">9.9%</td><td class="c n">58.0%</td><td>学校の慣行（36.7%）</td></tr>
-<tr><td class="no">⑯</td><td class="nm">学習評価・成績処理</td><td class="c">C（補助はA）</td><td class="c n">14.0%</td><td class="c n">56.9%</td><td>学校の慣行（38.6%）</td></tr>
-<tr><td class="no">⑰</td><td class="nm">学校行事の準備・運営</td><td class="c">A</td><td class="c" colspan="3"><span class="small">R4は別の聞き方。「精選できる行事がある」が62.8%</span></td></tr>
-<tr><td class="no">⑱</td><td class="nm">進路指導の準備</td><td class="c">C</td><td class="c n">13.3%</td><td class="c n">54.6%</td><td>保護者の理解（49.3%）</td></tr>
-<tr><td class="no">⑲</td><td class="nm">支援が必要な児童生徒・家庭</td><td class="c">B</td><td class="c n">11.3%</td><td class="c n">59.6%</td><td>保護者の理解（62.0%）</td></tr>
-</tbody>
-</table>
-</div>
-<p class="small" style="margin-left:0">R4はR4勤務実態調査 確定値 p.75〜80（教員調査Q45）。⑬部活動は中学校の値、⑱はR4の「進路指導」の値です。R4の設問には「削減すべきでない」という選択肢がなく、無回答が2〜3割あります。⑲は専門スタッフとの協働がすでに進んでいる（<a href="#matome1">1章のまとめ</a>）一方、家庭への対応そのものは保護者の理解が要るため、Bにしました。</p>
-
-<h3 id="mx2">2つの見方を重ねる（マトリクス）</h3>
-<p>横に「1章のまとめ」の4つのまとまり（計画と国への回答から見た進み具合）、縦に「3分類をさらに分類」のA〜D（任せにくさの種類）をとって、19項目を置きました。右端は、それぞれに打つ手です。</p>
-<div class="scroll" style="max-height:none">
-<table class="mx2">
-<thead><tr><th class="rh">任せにくさ ＼ 進み具合</th><th class="c1">計画でも回答でも<br>進んでいる</th><th class="c2">計画には書いたが<br>まだ「実施」でない</th><th class="c3">「実施」と答えたが<br>計画にない</th><th class="c4">その間<br><span class="small">計画・回答とも6〜12</span></th><th class="c5">計画でも回答でも<br>少ない</th><th class="te">打つ手</th></tr></thead>
-<tbody>
-<tr><th class="rh ra">A　任せたいが、<br>人と予算が要る</th><td><span class="chip ca">⑬部活動</span><span class="chip ca">⑮授業準備の補助</span></td><td><span class="chip ca">⑨プール</span><span class="chip ca">⑯採点などの補助</span></td><td><span class="chip ca">⑧ICT保守</span><span class="chip ca">⑰行事の準備</span></td><td><span class="chip ca">③徴収金</span><span class="chip ca">⑫清掃</span></td><td class="hot"><span class="chip ca">⑦広報・HP</span><span class="chip ca">⑩開錠施錠</span></td><td class="te">国・県・市町の<b>予算</b>で、外に出す先（人・委託・しくみ）を用意する</td></tr>
-<tr><th class="rh rb">B　相手の理解がないと<br>任せにくい</th><td><span class="chip cb">①登下校</span><span class="chip cb">⑲要支援</span></td><td><span class="chip cb">②見回り</span></td><td><span class="chip cb">④地域調整</span></td><td><span class="chip cb">⑤苦情対応</span></td><td class="none">—</td><td class="te">教委から保護者・地域への<b>説明</b></td></tr>
-<tr><th class="rh rc">C　教員が任せたいと<br>思っていない</th><td class="none">—</td><td class="none">—</td><td><span class="chip cc">⑭給食</span></td><td class="none">—</td><td class="hot"><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></td><td class="te">外に出すのではなく、授業時数や持ちコマ・学級の人数など、<b>業務の量そのものを減らす</b>（⑮授業準備・⑯評価の中心部分もここ）</td></tr>
-<tr><th class="rh rd">D　決めれば<br>すぐできる</th><td><span class="chip cb">⑥調査回答</span></td><td class="none">—</td><td class="none">—</td><td class="none">—</td><td class="none">—</td><td class="te">教委が<b>決める</b></td></tr>
-</tbody>
-</table>
-</div>
-<div class="card">
-<strong>マトリクスの読み方</strong>
-<ul style="margin:6px 0 0;padding-left:1.3em">
-<li><strong>「少ない」の列は、AとCの2種類だけです。</strong>⑦広報・⑩開錠施錠は人と予算がないから（A）、⑪休み時間・⑱進路は教員が任せたいと思っていないから（C）で、同じ「進んでいない」でも理由が違います。</li>
-<li><strong>Bの項目は、どれも少しずつ進んでいます。</strong>理解を得るのに時間はかかっても、市町の説明しだいで動く項目と言えます。</li>
-<li><strong>Aの項目は、すべての列に散らばっています。</strong>同じ「人と予算が要る」項目でも、部活動の地域展開や教員業務支援員のように国の予算や制度があるものは進み、広報や開錠・施錠のように予算の裏づけがないものは進んでいません。予算があるかどうかが、進み具合を分けていると考えられます。</li>
-<li>Cの項目について、松本美奈氏は子どもを理解するための業務を外に出さない学校の判断を取り上げ、全教は休み時間の対応は教育活動と切り分けられないとしています（<a href="#hyoka">8章</a>）。Cは「任せる」より「減らす」ことを考える項目と言えます。</li>
-</ul>
-</div>
-
 
 <h2><span class="hn">2</span>市町ごとに見る</h2>
 <p>左側は<strong>取組の数</strong>（青が濃いほど多い）、右側は<strong>時間外在校等時間の長さ</strong>（赤が濃いほど危ない）です。国への回答で「実施」とした数の多い順に並べ、いちばん下に県全体を置きました。</p>
@@ -619,7 +568,7 @@ dl.def dd{margin:0}
 <p class="tk">根拠：<a href="#ana">4章</a></p></li>
 <li><b>措置が届かない学校の分を、計画に書くこと。</b>
 <p>市営プールに行く学校がある一方で、自校プールが残る学校もある。残る学校の管理と、故障・操作ミスのときに外から対応する窓口を決めること。プールの管理を「学校以外が担うべき業務」にすべきだという意見も、国の部会に出ている。</p>
-<p class="tk">根拠：<a href="#ana">4章</a>・<a href="#hyoka">8章</a>（妹尾氏の意見書）</p></li>
+<p class="tk">根拠：<a href="#ana">4章</a>・<a href="3bunrui-datosei.html#hyoka">「3分類は妥当か」8章</a>（妹尾氏の意見書）</p></li>
 <li><b>支援員などの配置の基準に、教職員1人あたりの業務量を入れること。</b>
 <p>時間外の長さや児童生徒数だけで決めると、人数の少ない学校に回りにくくなる。7人の学校も、大きな学校と同じ数の業務を抱えている。</p>
 <p class="tk">根拠：<a href="#ana">4章</a></p></li>
@@ -631,10 +580,10 @@ dl.def dd{margin:0}
 <p class="tk">根拠：1章・3章</p></li>
 <li><b>業務を移すときは、受け皿の人と予算を一緒に示すこと。</b>
 <p>3分類の多くは、事務職員や支援スタッフ、地域の人が担う前提である。事務職員は1人配置の学校が多く、人を増やさないままの付け替えでは負担が移るだけである。教職員団体や学校事務職員からも、同じ懸念が出ている。</p>
-<p class="tk">根拠：<a href="#hyoka">8章</a></p></li>
+<p class="tk">根拠：<a href="3bunrui-datosei.html#hyoka">「3分類は妥当か」8章</a></p></li>
 <li><b>教職員の声を聞いて、優先順位を決めること。</b>
 <p>国の指針は、学校運営協議会等での議論を経て優先順位を定めるとしている。教職員への調査では、新しい3分類に「賛成できないところもかなりある」という答えが小・中学校とも過半数だった。何から手をつけるかを、教職員と一緒に決めること。</p>
-<p class="tk">根拠：<a href="#shin3">0章</a>・<a href="#hyoka">8章</a></p></li>
+<p class="tk">根拠：<a href="#shin3">0章</a>・<a href="3bunrui-datosei.html#hyoka">「3分類は妥当か」8章</a></p></li>
 </ol>
 
 <p>市町ごとの確かめどころと、市町別の提案（案）は、<a href="#shicho">3章</a>にまとめました。</p>
@@ -647,81 +596,8 @@ dl.def dd{margin:0}
 <li>R7年度の時間外在校等時間が19市町そろったら、R6→R7の変化と取組の多さを比べられます。</li>
 </ul>
 
-<h2 id="hyoka"><span class="hn">8</span>この改定への評価・コメント</h2>
-<p>改定案が示された2025年8月から、国の審議に加わった人、教職員団体、研究者、保護者団体などが意見を出しています。要点はこの調べでまとめたものなので、くわしくはリンク先で確かめてください。</p>
-
-<div class="hy">
-<p class="hyg">国の審議に加わった人</p>
-<article class="hyc">
-<h5><a href="https://www.mext.go.jp/content/000377107.pdf">業務量管理・健康確保措置に関する指針の改正案への意見・提案</a></h5>
-<p class="hym">妹尾昌俊（ライフ＆ワーク代表理事、特別部会委員）／2025年8月19日／特別部会（第2回）参考資料（文科省PDF）</p>
-<p>3分類の更新を指針に入れることを「重要な一歩」と評価したうえで、これまでの取組の検証がないまま項目を足していると指摘しています。教職員への意見募集（332件）では、苦情対応・朝の預かり・プールの管理を8〜9割が「学校外が担うべき」と答えたとして、<strong>⑨プール・⑧ICT保守・⑫校内清掃は「学校以外が担うべき業務」に</strong>するよう提案しています。SNSなど学校の管理外で起きたトラブル、検定試験の監督などが抜けているとも述べています。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://toyokeizai.net/articles/-/892041">多忙な先生に「やる必要ない仕事」国が示す利点、「学校の業務を仕分ける3分類」更新へ　学校の業務削減や分業が進まない5つの背景</a></h5>
-<p class="hym">妹尾昌俊／2025年7月26日／東洋経済オンライン</p>
-<p>改定の前に、3分類が学校で知られず、使われてこなかった背景を論じた記事です。</p>
-</article>
-
-<p class="hyg">教職員団体・学校事務職員</p>
-<article class="hyc">
-<h5><a href="https://www.kyobun.co.jp/article/2025090301">新3分類に学校事務職員らが提言　配置改善など求める</a></h5>
-<p class="hym">#教員不足をなくそう！緊急アクション（妹尾昌俊・末冨芳ほか）、全国公立小中学校事務職員研究会（全事研）／2025年9月3日／教育新聞</p>
-<p>どちらも見直しの方向には賛成しつつ、予算と人材の確保、教職員の意見を取り入れる手順、事務職員の配置改善を求めています。緊急アクションの調査では、「賛成できないところもかなりある」が小学校53.0%・中学校57.7%で、減らした業務の受け皿が見えないという声があったと報じています。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://www.kyobun.co.jp/article/2025082804">学校事務職員への業務転嫁を危惧　全学労連が新3分類に抗議</a></h5>
-<p class="hym">全国学校事務労働組合連絡会議（全学労連）／2025年8月28日／教育新聞</p>
-<p>⑦広報・ウェブサイト、⑧ICT保守を「事務職員等を中心に」とした表現は、1人配置の多い事務職員への業務の付け替えだとして、撤回・修正を求めています。必要なのは人員増と定数改善だという主張です。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://note.com/it_zgrr/n/n99a06f791836">またまた学校事務職員への業務押し付けの動き〜「学校と教師の業務の３分類」</a></h5>
-<p class="hym">伊藤拓也（学校事務職員、全学労連事務局長）／2025年8月21日／note</p>
-<p>改定案が出た2日後に、事務職員の立場から同じ懸念を書いた個人の記事です。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://www.zenkyo.jp/_cms/wp-content/uploads/2025/09/25-09-19%E3%80%90%E8%AB%87%E8%A9%B1%E3%80%91%E4%B8%AD%E6%95%99%E5%AF%A9%E7%89%B9%E5%88%A5%E9%83%A8%E4%BC%9A%E3%81%A7%E8%AD%B0%E8%AB%96%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%80%8C%E5%AD%A6%E6%A0%A1%E3%81%A8%E6%95%99%E5%B8%AB%E3%81%AE%E6%A5%AD%E5%8B%99%E3%81%AE3%E5%88%86%E9%A1%9E%E3%80%8D%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6.pdf">【談話】中教審特別部会で議論されている「学校と教師の業務の3分類」のアップデートについて</a></h5>
-<p class="hym">全日本教職員組合（全教）書記長／2025年9月19日／PDF</p>
-<p>2017年から示されてきた3分類が長時間勤務の解消に効いたかの総括がないまま、14項目を19項目に増やしたと批判しています。最大の問題は<strong>お金をかけず今いる教職員で分担しようとしていること</strong>だとし、休み時間の対応は教育活動と切り分けられない、苦情を一方的に「不当」と見なす危険がある、とも述べています。ICT保守やプールの外部委託、部活動の地域展開などは改善につながる面があるとしています。</p>
-</article>
-
-<p class="hyg">研究者・論者</p>
-<article class="hyc">
-<h5><a href="https://www.tkfd.or.jp/research/detail.php?id=4589">AI時代の先生はどう働いているか〜 同意なき「3分類」見直しを</a></h5>
-<p class="hym">松本美奈（東京財団政策研究所）／2024年10月24日</p>
-<p>改定の前の論考です。R4勤務実態調査の設問が「削減すべき」を前提にしていて無回答も多いこと、子どもを理解するための休み時間や給食の対応を外に出さないと判断している学校があることを取り上げ、教員・保護者・地域の合意がないまま見直すことに疑問を投げかけています。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://cir.nii.ac.jp/crid/1520306207714589824">対応困難な保護者対応は「学校以外が担うべき業務」に分類</a></h5>
-<p class="hym">小野田正利／2025年11月7日／『内外教育』連載「普通の教師が生きる学校」第674回（有料誌。リンクは論文データベースCiNiiの書誌）</p>
-<p>保護者対応の研究で知られる筆者が、⑤の追加を取り上げた回です。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://cir.nii.ac.jp/crid/1520025893987537152">新「3分類」の生かし方</a></h5>
-<p class="hym">川上泰彦／2026年2月／『教職研修』（有料誌。リンクはCiNiiの書誌）</p>
-<p>同じ号には、働き方改革の実践記事や座談会「やっぱり『働き方改革』はむずかしい?」も載っています。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://cir.nii.ac.jp/crid/1520871701601666816">「学校と教師の業務の3分類」に基づく適切な業務分担に関する調査結果から見えること</a></h5>
-<p class="hym">指田泰志／2026年7月／『学校事務』（有料誌。リンクはCiNiiの書誌）</p>
-<p>全事研が行った、3分類にもとづく業務分担の調査を扱った記事です。</p>
-</article>
-
-<p class="hyg">保護者団体・報道</p>
-<article class="hyc">
-<h5><a href="https://zen-p.net/ts/s411.html">学校や教師が担う業務に係る課題</a></h5>
-<p class="hym">全国PTA連絡協議会／2026年9月更新</p>
-<p>改定後の19項目を、保護者向けに整理した解説ページです。</p>
-</article>
-<article class="hyc">
-<h5><a href="https://www.kyobun.co.jp/article/2025081901">改正給特法に伴う指針改定案を大筋了承　業務の3分類も見直し</a>／<a href="https://reseed.resemom.jp/article/2025/08/20/11526.html">保護者からの過剰な苦情・不当要求「学校以外が担う」文科省が改訂案</a></h5>
-<p class="hym">教育新聞 2025年8月19日／リシード 2025年8月20日</p>
-<p>改定案が示された特別部会（第2回）を伝えた記事です。</p>
-</article>
-</div>
-<p class="small" style="margin-left:0">2026年11月1日に各リンク先で、筆者・日付・内容を確かめました。東洋経済の記事は本文を読めず、題とリードだけで紹介しています。有料誌の3本は題だけで、中身は確かめていません。</p>
-
-<h2 id="jikan"><span class="hn">9</span>参考：時間外の長さとの関係</h2>
+<h2 id="jikan"><span class="hn">8</span>参考</h2>
+<h3>時間外の長さとの関係</h3>
 <p>ちなみに、<strong>時間外在校等時間が長い市町ほど取組が多い（あるいは少ない）、という関係はほとんど見られませんでした。</strong>R6年度の月平均と、取組の数との相関は、小学校で −0.31〜+0.18、中学校で +0.35〜+0.48 です。弱いうえに、小学校と中学校で向きもそろっていません。</p>
 <p>R6年度は取組の前の値なので、これは取組の効果ではなく、「時間外が長い市町ほど多く答えた・書いたか」を見たものです。19市町しかなく、学校が1〜2校の町は1校の事情で値が大きく動きます（上関中 23.5時間、平生中 56.7時間など）。</p>
 <details class="tc"><summary><b>散布図を見る</b></summary><div class="tcb" style="padding-left:12px">
@@ -732,6 +608,7 @@ dl.def dd{margin:0}
 <figure class="sc"><figcaption>計画の具体策の数 × 小学校の月平均（R6）<span class="small">（相関 +0.18、18市町）</span></figcaption><svg viewBox="0 0 470 300" role="img" aria-label="計画に具体策を書いた項目数（19項目）と小学校の月平均（R6）の散布図"><line x1="46" x2="456" y1="260.0" y2="260.0" class="gl"/><text x="40" y="264.0" class="tk" text-anchor="end">15</text><line x1="46" x2="456" y1="178.0" y2="178.0" class="gl"/><text x="40" y="182.0" class="tk" text-anchor="end">30</text><line x1="46" x2="456" y1="96.0" y2="96.0" class="gl"/><text x="40" y="100.0" class="tk" text-anchor="end">45</text><line x1="46" x2="456" y1="14.0" y2="14.0" class="gl"/><text x="40" y="18.0" class="tk" text-anchor="end">60</text><text x="46.0" y="276" class="tk" text-anchor="middle">0</text><text x="148.5" y="276" class="tk" text-anchor="middle">5</text><text x="251.0" y="276" class="tk" text-anchor="middle">10</text><text x="353.5" y="276" class="tk" text-anchor="middle">15</text><text x="456.0" y="276" class="tk" text-anchor="middle">20</text><line x1="46" x2="46" y1="14" y2="260" class="ax"/><line x1="46" x2="456" y1="260" y2="260" class="ax"/><g><circle cx="210.0" cy="158.3" r="4.5" class="pt"><title>下関市：8・33.6時間</title></circle><text x="216.0" y="161.8" class="pl">下関</text></g><g><circle cx="210.0" cy="167.1" r="4.5" class="pt"><title>宇部市：8・32.0時間</title></circle><text x="216.0" y="170.6" class="pl">宇部</text></g><g><circle cx="189.5" cy="143.0" r="4.5" class="pt"><title>山口市：7・36.4時間</title></circle><text x="195.5" y="146.5" class="pl">山口</text></g><g><circle cx="251.0" cy="150.1" r="4.5" class="pt"><title>萩市：10・35.1時間</title></circle><text x="257.0" y="153.6" class="pl">萩</text></g><g><circle cx="271.5" cy="150.7" r="4.5" class="pt"><title>防府市：11・35.0時間</title></circle><text x="277.5" y="154.2" class="pl">防府</text></g><g><circle cx="251.0" cy="151.2" r="4.5" class="pt"><title>岩国市：10・34.9時間</title></circle><text x="257.0" y="154.7" class="pl">岩国</text></g><g><circle cx="107.5" cy="141.9" r="4.5" class="pt"><title>光市：3・36.6時間</title></circle><text x="113.5" y="145.4" class="pl">光</text></g><g><circle cx="230.5" cy="136.5" r="4.5" class="pt"><title>長門市：9・37.6時間</title></circle><text x="236.5" y="140.0" class="pl">長門</text></g><g><circle cx="251.0" cy="147.9" r="4.5" class="pt"><title>柳井市：10・35.5時間</title></circle><text x="257.0" y="151.4" class="pl">柳井</text></g><g><circle cx="292.0" cy="194.9" r="4.5" class="pt"><title>美祢市：12・26.9時間</title></circle><text x="298.0" y="198.4" class="pl">美祢</text></g><g><circle cx="374.0" cy="114.6" r="4.5" class="pt"><title>周南市：16・41.6時間</title></circle><text x="380.0" y="118.1" class="pl">周南</text></g><g><circle cx="46.0" cy="174.2" r="4.5" class="pt"><title>山陽小野田市：0・30.7時間</title></circle><text x="52.0" y="177.7" class="pl">山陽小野田</text></g><g><circle cx="251.0" cy="164.3" r="4.5" class="pt"><title>周防大島町：10・32.5時間</title></circle><text x="257.0" y="167.8" class="pl">周防大島</text></g><g><circle cx="148.5" cy="184.6" r="4.5" class="pt"><title>和木町：5・28.8時間</title></circle><text x="154.5" y="188.1" class="pl">和木</text></g><g><circle cx="87.0" cy="112.9" r="4.5" class="pt"><title>上関町：2・41.9時間</title></circle><text x="93.0" y="116.4" class="pl">上関</text></g><g><circle cx="292.0" cy="131.0" r="4.5" class="pt"><title>田布施町：12・38.6時間</title></circle><text x="298.0" y="134.5" class="pl">田布施</text></g><g><circle cx="271.5" cy="139.7" r="4.5" class="pt"><title>平生町：11・37.0時間</title></circle><text x="277.5" y="143.2" class="pl">平生</text></g><g><circle cx="251.0" cy="84.0" r="4.5" class="pt"><title>阿武町：10・47.2時間</title></circle><text x="257.0" y="87.5" class="pl">阿武</text></g><text x="258.0" y="294" class="al" text-anchor="middle">計画に具体策を書いた項目数（19項目）</text></svg></figure>
 <figure class="sc"><figcaption>計画の具体策の数 × 中学校の月平均（R6）<span class="small">（相関 +0.48、18市町）</span></figcaption><svg viewBox="0 0 470 300" role="img" aria-label="計画に具体策を書いた項目数（19項目）と中学校の月平均（R6）の散布図"><line x1="46" x2="456" y1="260.0" y2="260.0" class="gl"/><text x="40" y="264.0" class="tk" text-anchor="end">15</text><line x1="46" x2="456" y1="178.0" y2="178.0" class="gl"/><text x="40" y="182.0" class="tk" text-anchor="end">30</text><line x1="46" x2="456" y1="96.0" y2="96.0" class="gl"/><text x="40" y="100.0" class="tk" text-anchor="end">45</text><line x1="46" x2="456" y1="14.0" y2="14.0" class="gl"/><text x="40" y="18.0" class="tk" text-anchor="end">60</text><text x="46.0" y="276" class="tk" text-anchor="middle">0</text><text x="148.5" y="276" class="tk" text-anchor="middle">5</text><text x="251.0" y="276" class="tk" text-anchor="middle">10</text><text x="353.5" y="276" class="tk" text-anchor="middle">15</text><text x="456.0" y="276" class="tk" text-anchor="middle">20</text><line x1="46" x2="46" y1="14" y2="260" class="ax"/><line x1="46" x2="456" y1="260" y2="260" class="ax"/><g><circle cx="210.0" cy="125.0" r="4.5" class="pt"><title>下関市：8・39.7時間</title></circle><text x="216.0" y="128.5" class="pl">下関</text></g><g><circle cx="210.0" cy="141.9" r="4.5" class="pt"><title>宇部市：8・36.6時間</title></circle><text x="216.0" y="145.4" class="pl">宇部</text></g><g><circle cx="189.5" cy="118.4" r="4.5" class="pt"><title>山口市：7・40.9時間</title></circle><text x="195.5" y="121.9" class="pl">山口</text></g><g><circle cx="251.0" cy="85.1" r="4.5" class="pt"><title>萩市：10・47.0時間</title></circle><text x="257.0" y="88.6" class="pl">萩</text></g><g><circle cx="271.5" cy="121.7" r="4.5" class="pt"><title>防府市：11・40.3時間</title></circle><text x="277.5" y="125.2" class="pl">防府</text></g><g><circle cx="251.0" cy="85.6" r="4.5" class="pt"><title>岩国市：10・46.9時間</title></circle><text x="257.0" y="89.1" class="pl">岩国</text></g><g><circle cx="107.5" cy="159.4" r="4.5" class="pt"><title>光市：3・33.4時間</title></circle><text x="113.5" y="162.9" class="pl">光</text></g><g><circle cx="230.5" cy="94.4" r="4.5" class="pt"><title>長門市：9・45.3時間</title></circle><text x="236.5" y="97.9" class="pl">長門</text></g><g><circle cx="251.0" cy="77.4" r="4.5" class="pt"><title>柳井市：10・48.4時間</title></circle><text x="257.0" y="80.9" class="pl">柳井</text></g><g><circle cx="292.0" cy="110.8" r="4.5" class="pt"><title>美祢市：12・42.3時間</title></circle><text x="298.0" y="114.3" class="pl">美祢</text></g><g><circle cx="374.0" cy="95.5" r="4.5" class="pt"><title>周南市：16・45.1時間</title></circle><text x="380.0" y="99.0" class="pl">周南</text></g><g><circle cx="46.0" cy="123.3" r="4.5" class="pt"><title>山陽小野田市：0・40.0時間</title></circle><text x="52.0" y="126.8" class="pl">山陽小野田</text></g><g><circle cx="251.0" cy="139.2" r="4.5" class="pt"><title>周防大島町：10・37.1時間</title></circle><text x="257.0" y="142.7" class="pl">周防大島</text></g><g><circle cx="148.5" cy="67.6" r="4.5" class="pt"><title>和木町：5・50.2時間</title></circle><text x="154.5" y="71.1" class="pl">和木</text></g><g><circle cx="87.0" cy="213.5" r="4.5" class="pt"><title>上関町：2・23.5時間</title></circle><text x="93.0" y="217.0" class="pl">上関</text></g><g><circle cx="292.0" cy="121.7" r="4.5" class="pt"><title>田布施町：12・40.3時間</title></circle><text x="298.0" y="125.2" class="pl">田布施</text></g><g><circle cx="271.5" cy="32.0" r="4.5" class="pt"><title>平生町：11・56.7時間</title></circle><text x="277.5" y="35.5" class="pl">平生</text></g><g><circle cx="251.0" cy="103.1" r="4.5" class="pt"><title>阿武町：10・43.7時間</title></circle><text x="257.0" y="106.6" class="pl">阿武</text></g><text x="258.0" y="294" class="al" text-anchor="middle">計画に具体策を書いた項目数（19項目）</text></svg></figure>
 </div></div></details>
+
 
 <h2>出典</h2>
 <ul class="src">
