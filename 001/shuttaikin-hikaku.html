@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教職員の出退勤管理システム比較</title>
+<style>
+:root{
+  --bg:#f7f6f3; --card:#ffffff; --ink:#222; --sub:#5d5d5d; --line:#dedbd4;
+  --head:#2f3a4a; --headink:#fff; --ok:#1d7a46; --warn:#b35c00; --ng:#b3261e;
+  --neo:#fdf3f7; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16171a; --card:#1f2126; --ink:#e8e8e8; --sub:#a9a9a9; --line:#3a3d44;
+    --head:#3a4658; --headink:#fff; --ok:#5cc58a; --warn:#f0a050; --ng:#ff8a80;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.7;font-size:15px}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 16px 48px}
+h1{font-size:1.6rem;margin:0 0 4px}
+.date{color:var(--sub);font-size:.9rem;margin:0 0 20px}
+h2{font-size:1.15rem;margin:32px 0 10px;padding-left:10px;border-left:5px solid var(--head)}
+a{color:var(--link)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.note ul{margin:6px 0;padding-left:1.3em}
+.tbl{overflow:auto;max-height:85vh;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:900px}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left}
+th{background:var(--head);color:var(--headink);font-weight:bold;white-space:nowrap;position:sticky;top:0;z-index:2}
+td:first-child{font-weight:bold;white-space:nowrap}
+th:nth-child(2){width:24%} th:nth-child(3){width:32%} th:nth-child(4){width:15%} th:nth-child(5){width:21%}
+td ul{margin:0;padding-left:1.1em}
+.v{display:inline-block;font-size:.78rem;font-weight:bold;border-radius:4px;padding:0 6px;margin-bottom:4px;border:1px solid}
+.v.ok{color:var(--ok);border-color:var(--ok)}
+.v.warn{color:var(--warn);border-color:var(--warn)}
+.v.ng{color:var(--ng);border-color:var(--ng)}
+.small{font-size:.85rem;color:var(--sub)}
+tr.neo td{background:var(--neo);border-top:3px solid var(--neoline)}
+tr.neo td:first-child{color:var(--neoink)}
+.neo-title{font-size:1.05rem}
+.axis{margin:0 0 8px;font-size:.92rem;color:var(--sub)}
+.src li{margin:2px 0;font-size:.9rem;word-break:break-all}
+@media (max-width:600px){ h1{font-size:1.3rem} body{font-size:14px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>教職員の出退勤管理システム比較</h1>
+<p class="date">2026年9月23日調べ（各社公式サイト・公開資料による）</p>
+
+<h2>比較表</h2>
+<p class="axis">▲ 上ほど<b>クラウド型</b>（ネットワークで教育委員会とつながる）　／　▼ 下ほど<b>スタンドアローン型</b>（学校の中だけで完結）</p>
+<div class="tbl">
+<table>
+<thead>
+<tr><th>方式</th><th>主な製品・メーカー（リンク）</th><th>特徴</th><th>費用体系</th><th>費用の目安（公表されている例）</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>校務支援システム<br>一体型</td>
+<td><ul>
+<li><a href="https://www.uchida.co.jp/education/koumu/digitalkoumu.html" target="_blank" rel="noopener">内田洋行　デジタル校務</a></li>
+<li><a href="https://www.educom.co.jp/service/c4th" target="_blank" rel="noopener">EDUCOM　C4th</a>（出退勤機能は要確認※）</li>
+<li><a href="https://www.suzukisoft.co.jp/products/evanix/" target="_blank" rel="noopener">スズキ教育ソフト　evanix／スズキ校務</a>（出退勤機能は要確認※）</li>
+</ul>
+<p class="small" style="margin:6px 0 0">※公式ページで出退勤打刻の機能を確認できない（教育委員会ごとの契約・オプションの可能性あり）。</p></td>
+<td>成績・出欠などの校務と同じシステムで勤怠も扱える。デジタル校務はICカード・QRコード・ポータルのボタンで打刻、申請・承認まで。</td>
+<td>校務支援システムの契約に含む、またはオプション（自治体ごとの契約）</td>
+<td>公表なし（「利用機能等で費用が異なるため見積」＝C4th）</td>
+</tr>
+<tr>
+<td>市独自の校務支援<br>システム<br><span style="font-size:.85rem;font-weight:normal">（例：周南市 T-Net）</span></td>
+<td><ul>
+<li><a href="https://fa.fureai-cloud.jp/_view/shunan-erc/attach/get2/1331/12" target="_blank" rel="noopener">周南市教育研究センター「教頭先生のためのT-Net」</a>（操作マニュアル）</li>
+<li><a href="https://fa.fureai-cloud.jp/_view/shunan-erc/attach/get2/1405/8" target="_blank" rel="noopener">同「校長先生のためのT-Net」</a></li>
+<li><a href="https://rengo-y.com/kenou/%E3%80%8C%E5%AD%A6%E6%A0%A1%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%80%8D%E6%B1%82%E3%82%81%E5%91%A8%E5%8D%97%E5%B8%82%E6%95%99%E8%82%B2%E5%A7%94%E5%93%A1/" target="_blank" rel="noopener">連合山口　周南市教委への要請（2018年6月）</a></li>
+</ul></td>
+<td><ul>
+<li>平成27年度から全小・中学校に、市が独自に開発したタイムレコーダーソフトと専用パソコンを配置（連合山口の要請記録）</li>
+<li>現在は学校事務系統合型校務支援システム「T-Net」の一部。職員室の共用パソコンで「タイムレコーダー」モードを起動し、出退勤のたびに記録</li>
+<li>データは市教委のサーバーに集まり、市教委が毎月、時間外在校等時間を回収。月初めに本人が抜けを直し、45時間を超えたら理由を選ぶ</li>
+<li>早出・遅出、育児短時間勤務、勤務の割り振りを反映して自動計算。出張・休暇・出勤簿の自動作成と一体</li>
+<li>昼休憩や持ち帰り仕事を打刻時に記録する機能は、公開マニュアルでは確認できない</li>
+</ul></td>
+<td>市の独自開発・運用（市教委にサーバー設置）</td>
+<td>公表なし</td>
+</tr>
+<tr>
+<td>PCクリック打刻</td>
+<td><ul>
+<li><a href="https://www.lgsta.jp/amslite/" target="_blank" rel="noopener">シフトプラス　AMS Lite</a></li>
+<li><a href="https://nscs.jp/solution/public/SchoolTimeReco.html" target="_blank" rel="noopener">SchoolTimeReco</a></li>
+<li><a href="https://www.ekintai.jp/" target="_blank" rel="noopener">アットシステム　勤怠先生</a></li>
+<li><a href="https://www.amano.co.jp/tis/line-up/clouza/" target="_blank" rel="noopener">アマノビジネスソリューションズ　CLOUZA</a>（一般向け）</li>
+</ul></td>
+<td>校務用PCからボタンで打刻。専用機器が要らない。PCを起動しないと打刻できない点に注意。</td>
+<td>クラウド利用料（1人月額または1校年額）</td>
+<td><ul>
+<li>CLOUZA：打刻した人数×月200円（税抜）、初期費用0円</li>
+<li>一般向けクラウド勤怠は1人月200〜550円程度が多い</li>
+</ul></td>
+</tr>
+<tr>
+<td>スマートフォン打刻</td>
+<td><ul>
+<li><a href="https://www.lgsta.jp/amslite/" target="_blank" rel="noopener">シフトプラス　AMS Lite</a></li>
+<li><a href="https://solution.oec-o.co.jp/data/227/shomu_dtl/" target="_blank" rel="noopener">OEC株式会社　学校用出退勤管理</a></li>
+<li><a href="https://www.ekintai.jp/" target="_blank" rel="noopener">勤怠先生</a></li>
+</ul></td>
+<td>出張先・校外でも打刻できる。私物スマホの利用ルールや、校外での打刻をどう扱うかの取り決めが必要。</td>
+<td>多くはPC打刻と同じ契約に含まれる</td>
+<td>PC打刻と同じ料金の製品が多い</td>
+</tr>
+<tr>
+<td>ICカード打刻</td>
+<td><ul>
+<li><a href="https://www.amano.co.jp/tis/solutions/school/" target="_blank" rel="noopener">アマノ　TimePro-VG</a>（<a href="https://www.amano.co.jp/tis/case/customer_13/" target="_blank" rel="noopener">豊中市教委の事例</a>）</li>
+<li><a href="https://www.oec.co.jp/service-solution/solution/1009/" target="_blank" rel="noopener">オーイーシー　タイムノート for education</a></li>
+<li><a href="https://solution.oec-o.co.jp/data/227/shomu_dtl/" target="_blank" rel="noopener">OEC株式会社　学校用出退勤管理</a></li>
+<li><a href="https://www.lgsta.jp/amslite/" target="_blank" rel="noopener">シフトプラス　AMS Lite</a></li>
+<li><a href="https://www.de-net.com/products/attendance_school/" target="_blank" rel="noopener">デネット　パソコンで勤怠管理School</a></li>
+<li><a href="https://nscs.jp/solution/public/SchoolTimeReco.html" target="_blank" rel="noopener">NS・コンピュータサービス　SchoolTimeReco</a></li>
+</ul></td>
+<td>職員証やICカードをかざして打刻。自己申告でない客観的な記録になる。多くの製品がPC・スマホ打刻も併用できる。</td>
+<td>買い切り／年額（1校単位）／クラウド月額（1人単位）／大規模はオンプレ一括導入＋保守</td>
+<td><ul>
+<li>パソコンで勤怠管理School：買い切り、50人までなら2万円（税別）以下</li>
+<li>SchoolTimeReco：1校 年26,400円（税込）</li>
+<li>TimePro-VG・タイムノート・AMS Lite：要見積（オープン価格）</li>
+<li>別途カードリーダー・カード代</li>
+</ul></td>
+</tr>
+<tr>
+<td>タイムレコーダー<br>（紙のタイムカード）</td>
+<td><ul>
+<li><a href="https://shop.amano.co.jp/shop/g/g2608001/" target="_blank" rel="noopener">アマノ　TimeP@CK ALEX std</a>（データ出力あり）</li>
+<li><a href="https://shop.amano.co.jp/shop/pages/timerecorder_hikaku.aspx" target="_blank" rel="noopener">機種比較</a></li>
+</ul></td>
+<td>紙のカードを差しこんで「ガチャン」と時刻を印字。操作がいちばんかんたん。法令でも客観的な方法の例に「タイムカードによる記録」があげられている。データ出力のある機種なら、打刻データをUSBケーブル・microSDカード（LTE通信も可）でパソコンに取りこみ、付属ソフト「サッと勤怠with」で修正・集計、CSVや月報で出力できる。</td>
+<td>本体の買い切り＋タイムカード・インクリボン代（データ出力型のクラウド・LTE利用は有料の保守契約が必要）</td>
+<td><ul>
+<li>TimeP@CK ALEX std：126,500円（税込）、ソフト・USBケーブル付き</li>
+<li>別途タイムカード代</li>
+</ul></td>
+</tr>
+<tr>
+<td>Excel・独自システム</td>
+<td>自治体・学校の独自様式</td>
+<td>自由度が高く費用がかからない。ただし自己申告や手作業の集計になりやすく、客観的な記録としては弱い。</td>
+<td>自前（開発を委託すれば開発・保守費）</td>
+<td>既存環境ならほぼ0円。委託開発の費用は公表例を確認できず</td>
+</tr>
+<tr class="neo">
+<td class="neo-title">タイムカードNEO<br>「把握できるちゃん」<br><span style="font-size:.85rem;font-weight:normal">（本市教職員が開発）</span></td>
+<td><ul>
+<li><a href="https://wobachan.github.io/time/timecard-neo.html" target="_blank" rel="noopener">お試し版（ブラウザで動きます）</a></li>
+</ul></td>
+<td><ul>
+<li>名前ボタンをタッチして打刻（カード不要）。ICカード版もあり</li>
+<li>インターネット不要。Windows 7〜11 のPCでそのまま動く1ファイル</li>
+<li>時間外在校等時間を自動計算（勤務時間の前後に在校した時間）。月45時間・80時間で色で注意</li>
+<li>退勤時に「昼休憩はとれたか」、出勤時に「持ち帰り仕事をしたか」をたずねて記録</li>
+<li>1日に複数回の出入り、時短勤務・時差出勤にも対応</li>
+<li>Excel出力、一覧＋個人票を1つのPDFに</li>
+</ul></td>
+<td>無料（既存のWindows PCを利用）</td>
+<td>名前タッチ版：0円</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="small">※金額は各社の公開情報による例で、税込・税抜の表記は出典のとおりです。自治体の契約価格とは異なる場合があります。</p>
+
+<h2>出典</h2>
+<ul class="src">
+<li><a href="https://www.amano.co.jp/tis/solutions/school/" target="_blank" rel="noopener">アマノ【学校向け】勤怠管理のお悩み改善</a></li>
+<li><a href="https://www.amano.co.jp/tis/case/customer_13/" target="_blank" rel="noopener">アマノ 導入事例 豊中市教育委員会（TimePro-VG、約2,300人）</a></li>
+<li><a href="https://www.amano.co.jp/tis/line-up/clouza/" target="_blank" rel="noopener">アマノ CLOUZA</a> ／ <a href="https://clouza.jp/price/" target="_blank" rel="noopener">CLOUZA 料金</a></li>
+<li><a href="https://www.oec.co.jp/service-solution/solution/1009/" target="_blank" rel="noopener">オーイーシー 教職員向け出退勤管理システム（タイムノート for education）</a></li>
+<li><a href="https://solution.oec-o.co.jp/data/227/shomu_dtl/" target="_blank" rel="noopener">OEC株式会社 学校用出退勤管理</a></li>
+<li><a href="https://www.lgsta.jp/amslite/" target="_blank" rel="noopener">LGSTA AMS Lite（教職員出退勤管理APP）</a></li>
+<li><a href="https://www.de-net.com/products/attendance_school/" target="_blank" rel="noopener">デネット パソコンで勤怠管理School</a></li>
+<li><a href="https://nscs.jp/solution/public/SchoolTimeReco.html" target="_blank" rel="noopener">NS・コンピュータサービス SchoolTimeReco</a></li>
+<li><a href="https://www.ekintai.jp/" target="_blank" rel="noopener">アットシステム 勤怠先生</a></li>
+<li><a href="https://www.uchida.co.jp/education/koumu/digitalkoumu.html" target="_blank" rel="noopener">内田洋行 デジタル校務</a></li>
+<li><a href="https://www.educom.co.jp/service/c4th" target="_blank" rel="noopener">EDUCOM C4th</a> ／ <a href="https://ppp-education-dx.jp/ServiceCatalog/sis/271/" target="_blank" rel="noopener">教育DXサービスマップ C4th</a></li>
+<li><a href="https://shop.amano.co.jp/shop/g/g2608001/" target="_blank" rel="noopener">アマノ公式ショップ TimeP@CK ALEX std（パソコン集計モデル・紙カード）</a></li>
+<li><a href="https://www.rodo.co.jp/laws/117021/" target="_blank" rel="noopener">労働安全衛生規則 第52条の7の3（労働時間の状況の把握）</a></li>
+<li><a href="https://www.suzukisoft.co.jp/products/evanix/" target="_blank" rel="noopener">スズキ教育ソフト evanix</a></li>
+<li><a href="https://fa.fureai-cloud.jp/_view/shunan-erc/attach/get2/1331/12" target="_blank" rel="noopener">周南市教育研究センター 教頭先生のためのT-Net（2026/04/25版）</a> ／ <a href="https://fa.fureai-cloud.jp/_view/shunan-erc/attach/get2/1405/8" target="_blank" rel="noopener">校長先生のためのT-Net（2026/04/05版）</a></li>
+<li><a href="https://rengo-y.com/kenou/%E3%80%8C%E5%AD%A6%E6%A0%A1%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9%E3%80%8D%E6%B1%82%E3%82%81%E5%91%A8%E5%8D%97%E5%B8%82%E6%95%99%E8%82%B2%E5%A7%94%E5%93%A1/" target="_blank" rel="noopener">連合山口「『学校における働き方改革』求め周南市教育委員会に要請」（2018年6月1日）</a></li>
+<li><a href="https://www.shopowner-support.net/attracting_customers/school/university/school-attendance-management-system/" target="_blank" rel="noopener">キャククル 学校用の勤怠管理システム比較（一般向け製品の料金）</a></li>
+<li><a href="https://it-trend.jp/attendance_management_system/article/103-5266" target="_blank" rel="noopener">ITトレンド 学校向け勤怠管理システム</a></li>
+</ul>
+</div>
+</body>
+</html>
