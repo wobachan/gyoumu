@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3分類 山口県19市町の進み具合</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f; --link:#1a5fb4;
+  --plan:#2f4f8f; --mie:#1d7a46; --mie2:#8cc7a3;
+  --m3:#1d7a46; --m2:#8cc7a3; --m1:#f3e3b5; --m0:#ffffff; --m3ink:#fff;
+  --tA:#e7eefb; --tAink:#2f4f8f; --tB:#e4f3ea; --tBink:#1d6b3e; --tC:#fbe9e7; --tCink:#a1271d; --tD:#eceef3; --tDink:#5a6272;
+  --hiA:#e7eefb; --hiB:#e4f3ea; --pt:#2f4f8f; --kwm:#ffe28a;
+  --h0:#e3f2e8; --h1:#fff3d1; --h2:#fddcbf; --h3:#f6ad99; --h4:#d4483b; --h4ink:#fff;
+  --b1:#e9effa; --b2:#cddcf5; --b3:#a7c0ee;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0; --link:#8ab4f8;
+    --plan:#8fb0f0; --mie:#6fd09a; --mie2:#2f6b4a;
+    --m3:#3f9f69; --m2:#2c5c43; --m1:#5a4b22; --m0:#1e2128; --m3ink:#fff;
+    --tA:#26304a; --tAink:#a9c1f2; --tB:#1f3a2c; --tBink:#8fe0b2; --tC:#3a2422; --tCink:#ff9d94; --tD:#272b34; --tDink:#a4aab6;
+    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12;
+    --h0:#1f3a2c; --h1:#3d3520; --h2:#4d3421; --h3:#683027; --h4:#a8352a; --h4ink:#fff;
+    --b1:#222a3b; --b2:#2c3c5e; --b3:#3d5894;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0; --link:#8ab4f8;
+    --plan:#8fb0f0; --mie:#6fd09a; --mie2:#2f6b4a;
+    --m3:#3f9f69; --m2:#2c5c43; --m1:#5a4b22; --m0:#1e2128; --m3ink:#fff;
+    --tA:#26304a; --tAink:#a9c1f2; --tB:#1f3a2c; --tBink:#8fe0b2; --tC:#3a2422; --tCink:#ff9d94; --tD:#272b34; --tDink:#a4aab6;
+    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12;
+    --h0:#1f3a2c; --h1:#3d3520; --h2:#4d3421; --h3:#683027; --h4:#a8352a; --h4ink:#fff;
+    --b1:#222a3b; --b2:#2c3c5e; --b3:#3d5894;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h1,h2,h3{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.8rem;line-height:1.35;margin:0 0 8px}
+h2{font-size:1.25rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+h3{font-size:1.06rem;margin:24px 0 8px}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center}
+.ttl{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.ttl h1{margin-bottom:8px}
+.b3ico{flex:0 0 auto;width:84px;height:84px}
+@media (max-width:640px){.b3ico{width:56px;height:56px}}
+h1 .nw{display:inline-block}
+h1 .kw{font-size:1.45em;color:var(--accent);background:linear-gradient(transparent 62%,var(--kwm) 62%);padding:0 .08em;margin-right:.08em;letter-spacing:.04em}
+.subt .mk2{color:var(--ink);background:linear-gradient(transparent 58%,var(--kwm) 58%);padding:0 .05em}
+.subt{font-family:"BIZ UDPMincho","Yu Mincho",serif;font-weight:700;font-size:1.05rem;color:var(--sub);margin:0 0 10px;line-height:1.5;max-width:none}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0 0 18px}
+p,li{max-width:76ch}
+a{color:var(--link)}
+.small{font-size:.8rem;color:var(--sub);font-weight:400;margin-left:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+.key{border-left:5px solid var(--accent)}
+.key ol{margin:6px 0 0;padding-left:1.4em}
+.key li{margin:8px 0}
+.scroll{overflow:auto;max-height:78vh;-webkit-overflow-scrolling:touch;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;vertical-align:middle}
+thead th{background:var(--soft);font-weight:700;text-align:center;font-size:.8rem;line-height:1.35;position:sticky;top:var(--top,0);z-index:2;box-shadow:inset 0 -1px 0 var(--line)}
+td.c{text-align:center}
+td.n{font-variant-numeric:tabular-nums}
+td.no{text-align:center;color:var(--sub);width:2em}
+td.nm{min-width:13em}
+.bun{display:inline-block;margin-left:6px;padding:0 6px;border-radius:3px;font-size:.7rem;background:var(--soft);color:var(--sub)}
+td.bar{white-space:nowrap;min-width:190px}
+td.bar .trk{display:inline-flex;vertical-align:middle;width:90px;height:12px;background:var(--soft);border-radius:2px;overflow:hidden;margin-right:8px}
+td.bar .bv{display:block;height:100%;background:var(--plan)}
+td.bar .bm{background:var(--mie)}
+td.bar .bo{background:var(--mie2)}
+td.bar b{font-variant-numeric:tabular-nums;display:inline-block;min-width:1.4em;text-align:right}
+.tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.75rem;white-space:nowrap}
+.tA{background:var(--tA);color:var(--tAink)}.tB{background:var(--tB);color:var(--tBink)}.tC{background:var(--tC);color:var(--tCink)}.tD{background:var(--tD);color:var(--tDink)}
+td.pn,th.pn{white-space:nowrap;text-align:left;font-weight:700}
+td.hiA{background:var(--hiA);font-weight:700}
+td.hiB{background:var(--hiB);font-weight:700}
+.mx{width:auto;font-size:.8rem}
+.mx th.pn{position:sticky;left:0;background:var(--card);z-index:1;padding-right:10px}
+.mx thead th.pn{z-index:3}
+.mx thead th.pn{background:var(--soft)}
+.mx th.mh{padding:4px 2px 6px;min-width:28px;vertical-align:bottom;font-weight:400}
+.mx th.mh .mn{display:block;font-weight:700}
+.mx th.mh .mt{display:inline-block;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.05em;font-size:.78rem;line-height:1.1;margin-top:3px}
+.mx th.mg{font-size:.72rem;padding:3px 2px;border-left:2px solid var(--card);border-right:2px solid var(--card)}
+.mx th.g1{background:var(--tC);color:var(--tCink)}.mx th.g2{background:var(--tA);color:var(--tAink)}.mx th.g3{background:var(--tB);color:var(--tBink)}
+.mx td.mc{text-align:center;padding:0;width:28px;height:26px;border:1px solid var(--line);font-size:.85rem;line-height:1}
+.m3{background:var(--m3);color:var(--m3ink)}.m2{background:var(--m2)}.m1{background:var(--m1)}.m0{background:var(--m0)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.82rem;color:var(--sub);margin:8px 2px}
+.mk{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:16px;height:16px;border:1px solid var(--line);border-radius:2px}
+.scs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+.sc{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 10px 4px}
+.sc figcaption{font-size:.85rem;font-weight:700;margin:0 4px 4px}
+.sc svg{width:100%;height:auto;display:block}
+.sc .gl{stroke:var(--line);stroke-width:1}
+.sc .ax{stroke:var(--sub);stroke-width:1}
+.sc .tk{fill:var(--sub);font-size:12px}
+.sc .al{fill:var(--sub);font-size:12px}
+.sc .pt{fill:var(--pt);opacity:.85}
+.sc .pl{fill:var(--ink);font-size:11px}
+.ana td{vertical-align:top;font-size:.85rem;min-width:9em}
+.ana td.c{min-width:5em}
+.h0{background:var(--h0)}.h1{background:var(--h1)}.h2{background:var(--h2)}.h3{background:var(--h3)}.h4{background:var(--h4);color:var(--h4ink);font-weight:700}
+.b0{background:var(--card)}.b1{background:var(--b1)}.b2{background:var(--b2)}.b3{background:var(--b3);font-weight:700}
+.city td{border-left:1px solid var(--line)}
+.city tr.ken td{border-top:2px solid var(--sub);font-weight:700}
+.city th.gq{background:var(--b1)}.city th.gz{background:var(--soft)}.city th.gh{background:var(--h2)}
+.lg2{margin:4px 2px}
+.city thead tr:last-child th{min-width:4.6em}
+.city td.pn{min-width:6.5em}
+.b3f{margin:14px 0;background:#fff;color:#1d2433;border:1px solid var(--line);border-radius:10px;padding:0 0 12px;overflow:hidden;font-size:.9rem;position:relative}
+.b3top{background:#3b8eea;color:#fff;text-align:center;font-weight:700;font-size:1.25rem;padding:6px 90px;position:relative;letter-spacing:.05em}
+.b3top em{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-style:normal;font-size:.8rem;background:#fff;color:#1d2433;border:1px solid #1d2433;padding:0 8px}
+.b3lead{margin:10px 16px 6px;padding:0;list-style:none;font-weight:700;line-height:1.55;max-width:none}
+.b3lead li{position:relative;padding-left:1.4em;margin:4px 0;max-width:none}
+.b3lead li::before{content:"➢";position:absolute;left:0}
+.b3bubble{float:right;margin:0 16px 6px 8px;background:#e8eef5;border-radius:18px;padding:6px 14px;font-size:.78rem;font-weight:700;line-height:1.45;text-align:center}
+.b3cols{clear:both;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:6px 12px 0;align-items:start}
+.b3col h4{margin:0 0 8px;background:#3b8eea;color:#fff;font-family:"BIZ UDPGothic",sans-serif;font-size:.98rem;text-align:center;padding:7px 6px;box-shadow:4px 4px 0 #2a3a55}
+.b3col.c2{margin-top:22px}.b3col.c3{margin-top:44px}
+.b3col ol{list-style:none;margin:0;padding:0 0 0 0;border-left:10px solid #d8e7fb}
+.b3col li{display:flex;gap:8px;align-items:flex-start;padding:6px 6px 6px 8px;line-height:1.4;max-width:none}
+.b3col li b{flex:0 0 auto;min-width:1.7em;text-align:center;background:#3b8eea;color:#fff;font-size:.9rem;padding:1px 4px;border-radius:2px}
+.b3col.c1 li strong{font-size:1rem}
+.b3col li i{font-style:normal;font-size:.76rem;color:#3d4452}
+.b3note{background:#e6e6e6;font-size:.76rem;padding:6px 10px;margin:8px 0 0;max-width:none}
+.b3foot{background:#e6e6e6;font-size:.78rem;padding:6px 10px;margin:10px 12px 0;max-width:none}
+@media (max-width:760px){.b3cols{grid-template-columns:1fr}.b3col.c2,.b3col.c3{margin-top:4px}.b3top{padding:6px 70px 6px 12px;text-align:left;font-size:1.05rem}.b3bubble{float:none;margin:4px 16px 8px}}
+.hy{margin:10px 0}
+.hyg{font-weight:700;color:var(--accent);margin:18px 0 6px;font-size:.92rem;border-left:4px solid var(--accent);padding-left:8px;max-width:none}
+.hyc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}
+.hyc h5{margin:0 0 2px;font-size:.95rem;line-height:1.5}
+.hyc .hym{font-size:.78rem;color:var(--sub);margin:0 0 4px;max-width:none}
+.hyc p{margin:4px 0;font-size:.88rem;max-width:none}
+.tei{padding-left:1.4em;margin:8px 0}
+.tei>li{margin:12px 0;max-width:none}
+.tei>li>b{font-size:1rem}
+.tei p{margin:4px 0;font-size:.9rem;max-width:72ch}
+.tei .tk{font-size:.78rem;color:var(--sub)}
+.teit td{vertical-align:top;border-left:1px solid var(--line)}
+.teit th.ta,.teit th.tb,.teit th.tc{width:30%;min-width:12em}
+.teit th.ta{background:var(--tA)}.teit th.tb{background:var(--tB)}.teit th.tc{background:var(--tC)}
+.chip{display:inline-block;margin:2px 3px 2px 0;padding:1px 8px;border-radius:999px;font-size:.78rem;white-space:nowrap}
+.chip.ca{background:var(--tA);color:var(--tAink)}.chip.cb{background:var(--tB);color:var(--tBink)}.chip.cc{background:var(--tC);color:var(--tCink)}
+.tcs{margin:8px 0}
+details.tc{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:6px 0}
+details.tc summary{cursor:pointer;padding:9px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;list-style:none}
+details.tc summary::-webkit-details-marker{display:none}
+details.tc summary::before{content:"▶";font-size:.7rem;color:var(--accent);transition:transform .15s}
+details.tc[open] summary::before{transform:rotate(90deg)}
+details.tc summary b{font-size:1rem}
+details.tc .tcb{padding:0 16px 10px 34px}
+details.tc .tcb p{margin:6px 0;font-size:.9rem;max-width:74ch}
+.tcall{font:inherit;font-size:.85rem;padding:4px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer}
+.tcall:hover{border-color:var(--accent)}
+.tleadbox blockquote{margin:8px 0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--soft);border-radius:4px;font-size:.92rem;line-height:1.8}
+.tleadbox p{margin:6px 0;max-width:none}
+details.tc .tcb p.tlead{background:var(--soft);border-radius:4px;padding:8px 12px;max-width:none}
+.src li{font-size:.85rem;margin:4px 0;overflow-wrap:anywhere}
+dl.def{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
+dl.def dt{font-weight:700;white-space:nowrap}
+dl.def dd{margin:0}
+@media (max-width:640px){
+  h1{font-size:1.45rem}
+  dl.def{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="eyebrow">学校と教師の業務の3分類 ／ 山口県19市町</p>
+<div class="ttl"><h1><span class="kw">3分類</span>は<span class="nw">山口県19市町で</span><span class="nw">どこまで進んでいるか</span></h1><svg class="b3ico" viewBox="0 0 64 64" role="img" aria-label="3分類のマーク（3列の表）">
+<rect x="2" y="2" width="60" height="60" rx="14" fill="#e3f4fc" stroke="#8fd3f2" stroke-width="2"/>
+<rect x="9" y="12" width="46" height="41" rx="3" fill="#fff" stroke="#2fa3dc" stroke-width="2"/>
+<path d="M10 14a2 2 0 0 1 2-2h13.3v10H10z" fill="#1b7fb4"/>
+<rect x="25.3" y="12" width="13.4" height="10" fill="#2fa3dc"/>
+<path d="M38.7 12H52a2 2 0 0 1 2 2v8H38.7z" fill="#5bbde9"/>
+<g stroke="#2fa3dc" stroke-width="1.6"><path d="M25.3 12v41M38.7 12v41"/></g>
+<g stroke="#b5e2f7" stroke-width="1.6"><path d="M10 30.5h44M10 38.5h44M10 46.5h44"/></g>
+<g fill="#5bbde9"><circle cx="17.6" cy="26.3" r="1.6"/><circle cx="17.6" cy="34.5" r="1.6"/><circle cx="17.6" cy="42.5" r="1.6"/>
+<circle cx="32" cy="26.3" r="1.6"/><circle cx="32" cy="34.5" r="1.6"/><circle cx="32" cy="42.5" r="1.6"/><circle cx="32" cy="49.8" r="1.6"/>
+<circle cx="46.4" cy="26.3" r="1.6"/><circle cx="46.4" cy="34.5" r="1.6"/><circle cx="46.4" cy="42.5" r="1.6"/></g>
+</svg></div>
+<p class="subt"><span class="mk2">「業務量管理・健康確保措置実施計画」</span>の記載・国への回答・時間外在校等時間を突き合わせる</p>
+<p class="date">2026年10月26日調べ ／ 関連：<a href="gyomuryo-keikaku-hikaku-v3.html">19市町の計画の比較</a>・<a href="3bunrui-yamaguchi-r7.csv">見える化の回答（CSV）</a></p>
+
+<p>3分類（19項目）について、山口県の19市町ごとに3つの資料を並べました。<strong>同じ市町でも、資料によって見え方がかなり違います。</strong></p>
+
+<h2 id="shin3"><span class="hn">0</span>新しい3分類とは</h2>
+<p>「学校と教師の業務の3分類」は、学校や教師が担ってきた業務を、<strong>だれが担うべきか</strong>で3つに分けたものです。2019年の中教審答申で示された14項目を、2025年に改定しました。改定後は19項目で、改正された国の指針（令和7年文部科学省告示第114号、R8.4.1適用）に位置付けられています。服務監督教育委員会は、これを踏まえて業務量管理・健康確保措置実施計画に反映することになりました。</p>
+<p class="small" style="margin-left:0">文部科学省「<a href="https://www.mext.go.jp/b_menu/hakusho/mext_00026.html">公立の義務教育諸学校等の教育職員の給与等に関する特別措置法等の一部を改正する法律の施行に伴う関係政令の整備に関する政令の制定等について（通知）</a>」（令和7年9月26日）の【別添4】<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">学校と教師の業務の３分類（PDF）</a>を、文字をそのまま写して再現した図です。</p>
+
+<figure class="b3f" aria-label="学校と教師の業務の３分類">
+<div class="b3top"><span>学校と教師の業務の３分類</span><em>別添４</em></div>
+<ul class="b3lead">
+<li>教師が教師でなければできない業務に専念できるよう、服務監督教育委員会は、これらを踏まえて、それぞれの地域における業務の見直しについて、優先的に対応するものから「業務量管理・健康確保措置実施計画」に反映。</li>
+<li>学校は、学校運営協議会等での議論を経て、優先順位を定めながら、各校の実情に応じた運用を行う。<br>これらの代表例のほか、地域・学校ごとの議論を踏まえて、業務を不断に見直すことが必要。</li>
+</ul>
+<div class="b3bubble">まず取り組めること・<br>取り組むべきことは何か、<br>話し合うことが大切です。</div>
+<div class="b3cols">
+<section class="b3col c1">
+<h4>学校以外が担うべき業務</h4>
+<ol>
+<li><b>1</b><span><strong>登下校時の通学路における日常的な見守り活動等</strong></span></li>
+<li><b>2</b><span><strong>放課後から夜間などにおける校外の見回り、児童生徒が補導された時の対応</strong></span></li>
+<li><b>3</b><span><strong>学校徴収金の徴収・管理（公会計化等）</strong></span></li>
+<li><b>4</b><span><strong>地域学校協働活動の関係者間の連絡調整等</strong></span></li>
+<li><b>5</b><span><strong>保護者等からの過剰な苦情や不当な要求等の学校では対応が困難な事案への対応</strong></span></li>
+</ol>
+<p class="b3note">※朝の時間帯や下校時間の後に、学校施設で預かり活動を行う必要がある場合は、学校以外の管理体制を構築</p>
+</section>
+<section class="b3col c2">
+<h4>教師以外が積極的に参画すべき業務</h4>
+<ol>
+<li><b>6</b><span><strong>調査・統計等への回答</strong><i>｜学校への依頼を減らし、デジタル技術を活用しつつ、事務職員を中心に実施</i></span></li>
+<li><b>7</b><span><strong>学校の広報資料・ウェブサイトの作成・管理</strong><i>｜学校が行う場合は事務職員等が積極的に参画</i></span></li>
+<li><b>8</b><span><strong>ICT機器・ネットワーク設備の日常的な保守・管理</strong><i>｜教育委員会と連携を図りながら、事務職員等を中心に実施しつつ、地域の実情に応じて外部委託も積極的に検討</i></span></li>
+<li><b>9</b><span><strong>学校プールや体育館等の施設・設備の管理</strong><i>｜教師は授業等に付随して行う日常点検を担い、外部委託等も積極的に検討</i></span></li>
+<li><b>10</b><span><strong>校舎の開錠・施錠</strong><i>｜副校長・教頭に固定せず、機械警備、役割分担の見直し等を促進</i></span></li>
+<li><b>11</b><span><strong>児童生徒の休み時間における安全への配慮</strong><i>｜地域住民等の支援や、輪番等を促進</i></span></li>
+<li><b>12</b><span><strong>校内清掃</strong><i>｜児童生徒への清掃指導は、地域住民等の支援を得て、回数・範囲の合理化等を促進</i></span></li>
+<li><b>13</b><span><strong>部活動</strong><i>｜部活動の地域展開・地域連携を推進</i></span></li>
+</ol>
+</section>
+<section class="b3col c3">
+<h4>教師の業務だが負担軽減を促進すべき業務</h4>
+<ol>
+<li><b>14</b><span><strong>給食の時間における対応</strong><i>｜食に関する指導については、栄養教諭等が対応</i></span></li>
+<li><b>15</b><span><strong>授業準備</strong><i>｜教材の印刷など補助的業務を教員業務支援員等の支援スタッフを実施、デジタル技術の活用を促進</i></span></li>
+<li><b>16</b><span><strong>学習評価や成績処理</strong><i>｜採点作業等のうち補助的業務を教員業務支援員等の支援スタッフを中心に実施、自動採点等のデジタル技術の活用を促進</i></span></li>
+<li><b>17</b><span><strong>学校行事の準備・運営</strong><i>｜関係機関との日程調整や物品の準備等について、事務職員や支援スタッフとの協働を促進しつつ、必要に応じて外部委託等も検討</i></span></li>
+<li><b>18</b><span><strong>進路指導の準備</strong><i>｜就職先に関する情報収集等について、事務職員や支援スタッフとの協働を促進</i></span></li>
+<li><b>19</b><span><strong>支援が必要な児童生徒・家庭への対応</strong><i>｜専門スタッフとの協働等を促進</i></span></li>
+</ol>
+</section>
+</div>
+<p class="b3foot">※ 専門スタッフとの協働、デジタル技術の活用や外部委託の促進については、地方公共団体の関係機関が積極的に参画</p>
+</figure>
+<p class="small" style="margin-left:0">原図の文言をそのまま写しています（15の「支援スタッフを実施」も原文どおり）。原図にあるイラストは省きました。2019年答申の14項目から加わったのは、5（過剰な苦情・不当な要求）、7（広報・ウェブサイト）、8（ICT保守）、9（プール・体育館）、10（開錠・施錠）です。このページの①〜⑲は、この図の番号と同じです。この改定への評価・コメントは<a href="#hyoka">8章</a>にまとめました。</p>
+
+<div class="card">
+<dl class="def">
+<dt>① 計画</dt><dd>各市町の「業務量管理・健康確保措置実施計画」（R8.2〜4月策定、R8年度からの取組）。19項目ごとに、具体策が書いてあるか（●）、触れるだけか（○）、記載がないかを本文から読み取りました。</dd>
+<dt>② 回答</dt><dd>文部科学省「見える化」調査 R7年度（<strong>R7.9.1時点</strong>）問4。教育委員会が自分で「実施／検討中／未実施」を答えたもの。</dd>
+<dt>③ 時間</dt><dd>各計画に載っている<strong>R6年度</strong>の時間外在校等時間（月平均・月45時間超の割合）。</dd>
+</dl>
+<p class="small" style="margin:10px 0 0">時点の順は ③R6年度 → ②R7.9 → ①R8年度〜 です。③は取組の「結果」ではなく「出発点」、②は「いま」、①は「これから」と読んでください。</p>
+</div>
+
+<div class="card key">
+<strong>わかったこと</strong>
+<ol>
+<li><strong>計画と回答はほとんど対応していません</strong>（市町ごとの数の相関 +0.11）。山陽小野田市は計画を3分類で整理していないのに、回答では25小項目中21が「実施」（県内2位）でした。周防大島町は10項目に具体策を書きましたが、回答の「実施」は10にとどまります。</li>
+<li>計画と回答のずれには2つの向きがあります。<br>・<strong>計画には書いたが、国には「実施」と答えていない</strong>項目：夜間の見回り・補導、プール・体育館、学習評価。R7.9の時点ではまだ実施しておらず、R8年度からの計画で「これからやる」と書いた、と読めます。<br>・<strong>国には「実施」と答えたが、計画には書いていない</strong>項目：地域との連絡調整、ICT保守、給食、学校行事。</li>
+<li><strong>広報・ウェブサイト、校舎の開錠・施錠、休み時間、進路指導の準備は、どちらの資料でも手薄です。</strong>休み時間は、R4調査で小学校教員の62%が「削減は難しい」と答えた項目です。</li>
+<li><strong>時間外が長い市町ほど取組が手厚い、という関係ははっきりしません。</strong>中学校ではやや正の関係（計画の具体策の数と +0.48）がありますが、19市町しかなく、部活動や学校規模の影響も混ざっています（<a href="#jikan">9章</a>）。</li>
+<li><strong>市町の「実施」や「全ての学校」の中にも、学校ごとの差があります。</strong>美祢市内の小規模小学校（教職員7人）の例では、自校プールの管理が残り、R8年度は業務支援員も7月まで来ませんでした。授業準備の支援スタッフは、実施と答えた18市町のうち10市町が「全校ではない」と答えています（<a href="#ana">4 計画の穴</a>）。</li>
+</ol>
+</div>
+
+<h2><span class="hn">1</span>項目ごとに見る</h2>
+<p>19市町のうち、計画に具体策を書いた数（青）と、回答で「実施」とした数（緑。薄い緑は小項目の一部だけ実施）です。右端は、R4勤務実態調査で教員（小学校、部活動は中学校）が「削減すべきで削減可能」と答えた割合（全国）です。</p>
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>業務</th><th>計画に具体策<br><span class="small">（19市町中）</span></th><th>回答「実施」<br><span class="small">（19市町中）</span></th><th>計画と回答の関係</th><th>教員「削減可能」<br><span class="small">R4全国</span></th></tr></thead>
+<tbody>
+<tr><td class="no">①</td><td class="nm">登下校の見守り<span class="bun b学校">学校以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:79%"></span></span><b>15</b><span class=small>＋触れるだけ2</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:89%"></span><span class="bv bo" style="width:0%"></span></span><b>17</b></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">45%</td></tr>
+<tr><td class="no">②</td><td class="nm">夜間の見回り・補導<span class="small">（見回り／補導）</span><span class="bun b学校">学校以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:74%"></span></span><b>14</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:32%"></span><span class="bv bo" style="width:21%"></span></span><b>6</b><span class=small>＋一部4</span></td><td class="c"><span class="tag tA">計画あり・実施はまだ</span></td><td class="c">59%</td></tr>
+<tr><td class="no">③</td><td class="nm">学校徴収金<span class="bun b学校">学校以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:32%"></span></span><b>6</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:42%"></span><span class="bv bo" style="width:0%"></span></span><b>8</b></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">66%</td></tr>
+<tr><td class="no">④</td><td class="nm">地域との連絡調整<span class="bun b学校">学校以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:42%"></span></span><b>8</b><span class=small>＋触れるだけ1</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:84%"></span><span class="bv bo" style="width:0%"></span></span><b>16</b></td><td class="c"><span class="tag tB">実施と回答・計画になし</span></td><td class="c">40%</td></tr>
+<tr><td class="no">⑤</td><td class="nm">過剰な苦情・不当な要求<span class="bun b学校">学校以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:47%"></span></span><b>9</b><span class=small>＋触れるだけ1</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:63%"></span><span class="bv bo" style="width:0%"></span></span><b>12</b></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c"><span class="small">—</span></td></tr>
+<tr><td class="no">⑥</td><td class="nm">調査・統計への回答<span class="small">（文書の縮減／事務職員が回答）</span><span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:95%"></span></span><b>18</b><span class=small>＋触れるだけ1</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:47%"></span><span class="bv bo" style="width:53%"></span></span><b>9</b><span class=small>＋一部10</span></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">70%</td></tr>
+<tr><td class="no">⑦</td><td class="nm">広報・ウェブサイト<span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:0%"></span></span><b>0</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:21%"></span><span class="bv bo" style="width:0%"></span></span><b>4</b></td><td class="c"><span class="tag tC">どちらも少ない</span></td><td class="c"><span class="small">—</span></td></tr>
+<tr><td class="no">⑧</td><td class="nm">ICT機器の保守<span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:26%"></span></span><b>5</b><span class=small>＋触れるだけ1</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:79%"></span><span class="bv bo" style="width:0%"></span></span><b>15</b></td><td class="c"><span class="tag tB">実施と回答・計画になし</span></td><td class="c"><span class="small">—</span></td></tr>
+<tr><td class="no">⑨</td><td class="nm">プール・体育館の管理<span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:63%"></span></span><b>12</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:32%"></span><span class="bv bo" style="width:0%"></span></span><b>6</b></td><td class="c"><span class="tag tA">計画あり・実施はまだ</span></td><td class="c"><span class="small">—</span></td></tr>
+<tr><td class="no">⑩</td><td class="nm">校舎の開錠・施錠<span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:5%"></span></span><b>1</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:16%"></span><span class="bv bo" style="width:0%"></span></span><b>3</b></td><td class="c"><span class="tag tC">どちらも少ない</span></td><td class="c"><span class="small">—</span></td></tr>
+<tr><td class="no">⑪</td><td class="nm">休み時間の安全<span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:16%"></span></span><b>3</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:21%"></span><span class="bv bo" style="width:0%"></span></span><b>4</b></td><td class="c"><span class="tag tC">どちらも少ない</span></td><td class="c">14%</td></tr>
+<tr><td class="no">⑫</td><td class="nm">校内清掃<span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:37%"></span></span><b>7</b><span class=small>＋触れるだけ10</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:32%"></span><span class="bv bo" style="width:0%"></span></span><b>6</b></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">33%</td></tr>
+<tr><td class="no">⑬</td><td class="nm">部活動<span class="small">（休日／平日）</span><span class="bun b教師">教師以外</span></td><td class="bar"><span class="trk"><span class="bv" style="width:84%"></span></span><b>16</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:63%"></span><span class="bv bo" style="width:11%"></span></span><b>12</b><span class=small>＋一部2</span></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">40%</td></tr>
+<tr><td class="no">⑭</td><td class="nm">給食の時間<span class="bun b負担">負担軽減</span></td><td class="bar"><span class="trk"><span class="bv" style="width:11%"></span></span><b>2</b><span class=small>＋触れるだけ1</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:68%"></span><span class="bv bo" style="width:0%"></span></span><b>13</b></td><td class="c"><span class="tag tB">実施と回答・計画になし</span></td><td class="c">15%</td></tr>
+<tr><td class="no">⑮</td><td class="nm">授業準備<span class="small">（支援スタッフ／ICT）</span><span class="bun b負担">負担軽減</span></td><td class="bar"><span class="trk"><span class="bv" style="width:79%"></span></span><b>15</b><span class=small>＋触れるだけ3</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:89%"></span><span class="bv bo" style="width:5%"></span></span><b>17</b><span class=small>＋一部1</span></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">10%</td></tr>
+<tr><td class="no">⑯</td><td class="nm">学習評価・成績処理<span class="small">（支援スタッフ／ICT）</span><span class="bun b負担">負担軽減</span></td><td class="bar"><span class="trk"><span class="bv" style="width:74%"></span></span><b>14</b><span class=small>＋触れるだけ1</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:32%"></span><span class="bv bo" style="width:32%"></span></span><b>6</b><span class=small>＋一部6</span></td><td class="c"><span class="tag tA">計画あり・実施はまだ</span></td><td class="c">14%</td></tr>
+<tr><td class="no">⑰</td><td class="nm">学校行事の準備・運営<span class="bun b負担">負担軽減</span></td><td class="bar"><span class="trk"><span class="bv" style="width:16%"></span></span><b>3</b><span class=small>＋触れるだけ4</span></td><td class="bar"><span class="trk"><span class="bv bm" style="width:74%"></span><span class="bv bo" style="width:0%"></span></span><b>14</b></td><td class="c"><span class="tag tB">実施と回答・計画になし</span></td><td class="c"><span class="small">—</span></td></tr>
+<tr><td class="no">⑱</td><td class="nm">進路指導の準備<span class="bun b負担">負担軽減</span></td><td class="bar"><span class="trk"><span class="bv" style="width:0%"></span></span><b>0</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:32%"></span><span class="bv bo" style="width:0%"></span></span><b>6</b></td><td class="c"><span class="tag tB">実施と回答・計画になし</span></td><td class="c">13%</td></tr>
+<tr><td class="no">⑲</td><td class="nm">支援が必要な児童生徒・家庭<span class="small">（専門人材／関係機関）</span><span class="bun b負担">負担軽減</span></td><td class="bar"><span class="trk"><span class="bv" style="width:89%"></span></span><b>17</b></td><td class="bar"><span class="trk"><span class="bv bm" style="width:95%"></span><span class="bv bo" style="width:0%"></span></span><b>18</b></td><td class="c"><span class="tag tD">おおむね一致</span></td><td class="c">11%</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">計画と回答の関係：「計画あり・実施はまだ」＝計画に具体策を書いた市町が12以上で、「実施」と答えた市町がそれより5以上少ない。「実施と回答・計画になし」＝「実施」と答えた市町が、計画に書いた市町より6以上多い。「どちらも少ない」＝計画に書いた市町が3以下で、「実施」も6以下。⑤⑦⑧⑨⑩はR7の改定で加わった項目で、R4調査にはありません。⑰学校行事はR4では別の聞き方（行事の精選）でした。</p>
+
+<h2><span class="hn">2</span>市町ごとに見る</h2>
+<p>左側は<strong>取組の数</strong>（青が濃いほど多い）、右側は<strong>時間外在校等時間の長さ</strong>（赤が濃いほど危ない）です。国への回答で「実施」とした数の多い順に並べ、いちばん下に県全体を置きました。</p>
+<div class="legend lg2">
+<span class="mk"><b>取組の数</b></span>
+<span class="mk"><i class="sw b0"></i>4割未満</span><span class="mk"><i class="sw b1"></i>4割以上</span><span class="mk"><i class="sw b2"></i>6割以上</span><span class="mk"><i class="sw b3"></i>8割以上</span>
+</div>
+<div class="legend lg2">
+<span class="mk"><b>月平均</b></span>
+<span class="mk"><i class="sw h0"></i>30時間未満（国の目標）</span><span class="mk"><i class="sw h1"></i>30〜</span><span class="mk"><i class="sw h2"></i>35〜</span><span class="mk"><i class="sw h3"></i>40〜</span><span class="mk"><i class="sw h4"></i>45時間以上（上限）</span>
+</div>
+<div class="legend lg2">
+<span class="mk"><b>45時間超の割合</b></span>
+<span class="mk"><i class="sw h0"></i>20%未満</span><span class="mk"><i class="sw h1"></i>20〜</span><span class="mk"><i class="sw h2"></i>30〜</span><span class="mk"><i class="sw h3"></i>40〜</span><span class="mk"><i class="sw h4"></i>50%以上</span>
+</div>
+<div class="scroll">
+<table class="city">
+<thead>
+<tr><th rowspan="2">市町</th><th colspan="3" class="gq">取組の数<br><span class="small">多いほど進んでいる</span></th><th colspan="2" class="gz">計画と回答のずれ<br><span class="small">確かめどころ</span></th><th colspan="4" class="gh">時間外在校等時間（R6年度）<br><span class="small">赤いほど危ない</span></th></tr>
+<tr><th>計画に<br>具体策</th><th>国に<br>「実施」</th><th>両方<br>そろう</th><th>計画だけ<br><span class="small">まだ実施と<br>答えていない</span></th><th>回答だけ<br><span class="small">計画に<br>書いていない</span></th><th>小<br>月平均</th><th>中<br>月平均</th><th>小<br>45h超%</th><th>中<br>45h超%</th></tr>
+</thead>
+<tbody>
+<tr class=""><td class="pn">下関市</td><td class="c n b1">8<span class="small">/19</span></td><td class="c n b3">24<span class="small">/25</span></td><td class="c n">8</td><td class="c n ">0</td><td class="c n hiB">9</td><td class="c n h1">33.6</td><td class="c n h2">39.7</td><td class="c n h1">26.7</td><td class="c n h2">36.8</td></tr>
+<tr class=""><td class="pn">山陽小野田市</td><td class="c n b0">0<span class="small">/19</span></td><td class="c n b3">21<span class="small">/25</span></td><td class="c n">0</td><td class="c n ">0</td><td class="c n hiB">12</td><td class="c n h1">30.7</td><td class="c n h3">40.0</td><td class="c n h1">21.2</td><td class="c n h3">40.2</td></tr>
+<tr class=""><td class="pn">宇部市</td><td class="c n b1">8<span class="small">/19</span></td><td class="c n b2">19<span class="small">/25</span></td><td class="c n">8</td><td class="c n ">0</td><td class="c n hiB">7</td><td class="c n h1">32.0</td><td class="c n h2">36.6</td><td class="c n h1">24.5</td><td class="c n h2">36.1</td></tr>
+<tr class=""><td class="pn">防府市</td><td class="c n b1">11<span class="small">/19</span></td><td class="c n b2">17<span class="small">/25</span></td><td class="c n">9</td><td class="c n ">2</td><td class="c n ">3</td><td class="c n h2">35.0</td><td class="c n h3">40.3</td><td class="c n h2">30.8</td><td class="c n h2">37.1</td></tr>
+<tr class=""><td class="pn">周南市</td><td class="c n b3">16<span class="small">/19</span></td><td class="c n b2">17<span class="small">/25</span></td><td class="c n">12</td><td class="c n hiA">4</td><td class="c n ">1</td><td class="c n h3">41.6</td><td class="c n h4">45.1</td><td class="c n h3">42.6</td><td class="c n h3">44.4</td></tr>
+<tr class=""><td class="pn">長門市</td><td class="c n b1">9<span class="small">/19</span></td><td class="c n b2">16<span class="small">/25</span></td><td class="c n">7</td><td class="c n ">2</td><td class="c n hiB">5</td><td class="c n h2">37.6</td><td class="c n h4">45.3</td><td class="c n h2">36.3</td><td class="c n h3">45.3</td></tr>
+<tr class=""><td class="pn">美祢市</td><td class="c n b2">12<span class="small">/19</span></td><td class="c n b2">16<span class="small">/25</span></td><td class="c n">10</td><td class="c n ">2</td><td class="c n ">2</td><td class="c n h0">26.9</td><td class="c n h3">42.3</td><td class="c n h0">15.8</td><td class="c n h3">43.4</td></tr>
+<tr class=""><td class="pn">平生町</td><td class="c n b1">11<span class="small">/19</span></td><td class="c n b2">16<span class="small">/25</span></td><td class="c n">10</td><td class="c n ">1</td><td class="c n ">1</td><td class="c n h2">37.0</td><td class="c n h4">56.7</td><td class="c n h2">30.4</td><td class="c n h4">75.3</td></tr>
+<tr class=""><td class="pn">岩国市</td><td class="c n b1">10<span class="small">/19</span></td><td class="c n b2">15<span class="small">/25</span></td><td class="c n">7</td><td class="c n hiA">3</td><td class="c n ">4</td><td class="c n h1">34.9</td><td class="c n h4">46.9</td><td class="c n h2">31.0</td><td class="c n h3">46.9</td></tr>
+<tr class=""><td class="pn">和木町</td><td class="c n b0">5<span class="small">/19</span></td><td class="c n b2">15<span class="small">/25</span></td><td class="c n">4</td><td class="c n ">1</td><td class="c n ">4</td><td class="c n h0">28.8</td><td class="c n h4">50.2</td><td class="c n h1">29.9</td><td class="c n h4">54.4</td></tr>
+<tr class=""><td class="pn">田布施町</td><td class="c n b2">12<span class="small">/19</span></td><td class="c n b2">15<span class="small">/25</span></td><td class="c n">9</td><td class="c n hiA">3</td><td class="c n ">2</td><td class="c n h2">38.6</td><td class="c n h3">40.3</td><td class="c n h2">39.5</td><td class="c n h4">51.4</td></tr>
+<tr class=""><td class="pn">阿武町</td><td class="c n b1">10<span class="small">/19</span></td><td class="c n b2">15<span class="small">/25</span></td><td class="c n">7</td><td class="c n hiA">3</td><td class="c n ">4</td><td class="c n h4">47.2</td><td class="c n h3">43.7</td><td class="c n h4">50.0</td><td class="c n h2">30.8</td></tr>
+<tr class=""><td class="pn">柳井市</td><td class="c n b1">10<span class="small">/19</span></td><td class="c n b1">14<span class="small">/25</span></td><td class="c n">8</td><td class="c n ">2</td><td class="c n ">2</td><td class="c n h2">35.5</td><td class="c n h4">48.4</td><td class="c n h2">30.6</td><td class="c n h3">45.0</td></tr>
+<tr class=""><td class="pn">山口市</td><td class="c n b0">7<span class="small">/19</span></td><td class="c n b1">13<span class="small">/25</span></td><td class="c n">7</td><td class="c n ">0</td><td class="c n ">3</td><td class="c n h2">36.4</td><td class="c n h3">40.9</td><td class="c n h2">34.4</td><td class="c n h3">41.0</td></tr>
+<tr class=""><td class="pn">下松市</td><td class="c n b1">11<span class="small">/19</span></td><td class="c n b1">12<span class="small">/25</span></td><td class="c n">8</td><td class="c n hiA">3</td><td class="c n ">2</td><td class="c n ">—</td><td class="c n ">—</td><td class="c n h2">31.9</td><td class="c n h3">44.9</td></tr>
+<tr class=""><td class="pn">光市</td><td class="c n b0">3<span class="small">/19</span></td><td class="c n b1">12<span class="small">/25</span></td><td class="c n">3</td><td class="c n ">0</td><td class="c n ">4</td><td class="c n h2">36.6</td><td class="c n h1">33.4</td><td class="c n h2">34.5</td><td class="c n h1">26.5</td></tr>
+<tr class=""><td class="pn">萩市</td><td class="c n b1">10<span class="small">/19</span></td><td class="c n b1">11<span class="small">/25</span></td><td class="c n">6</td><td class="c n hiA">4</td><td class="c n ">3</td><td class="c n h2">35.1</td><td class="c n h4">47.0</td><td class="c n h2">33.2</td><td class="c n h3">46.5</td></tr>
+<tr class=""><td class="pn">周防大島町</td><td class="c n b1">10<span class="small">/19</span></td><td class="c n b1">10<span class="small">/25</span></td><td class="c n">6</td><td class="c n hiA">4</td><td class="c n ">0</td><td class="c n h1">32.5</td><td class="c n h2">37.1</td><td class="c n h1">27.6</td><td class="c n h2">34.5</td></tr>
+<tr class=""><td class="pn">上関町</td><td class="c n b0">2<span class="small">/19</span></td><td class="c n b0">5<span class="small">/25</span></td><td class="c n">2</td><td class="c n ">0</td><td class="c n ">1</td><td class="c n h3">41.9</td><td class="c n h0">23.5</td><td class="c n h2">31.7</td><td class="c n h0">16.7</td></tr>
+<tr class="ken"><td class="pn">山口県</td><td class="c n" colspan="5"><span class="small">県全体（参考）</span></td><td class="c n h2">35.0</td><td class="c n h3">41.7</td><td class="c n h2">30.8</td><td class="c n h3">41.4</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">「計画に具体策」「両方そろう」「計画だけ」「回答だけ」は19項目、「国に『実施』」は小項目ごとの25で数えています。<span style="background:var(--hiA);padding:0 4px">計画だけ</span>は3項目以上、<span style="background:var(--hiB);padding:0 4px">回答だけ</span>は5項目以上の市町に色をつけました。時間外の値は各市町の計画に載っているR6年度の実績です。県全体の値は、山陽小野田市の計画に載っている県の値です。下松市の計画には月平均の記載がありません。</p>
+<div class="card" style="margin-top:10px">
+<strong>この表の読み方</strong>
+<ul style="margin:6px 0 0;padding-left:1.3em">
+<li><strong>中学校は赤が多く、18市町中13市町で月平均が40時間以上です。</strong>45時間超が半数を超えるのは、平生町（75.3%）・和木町（54.4%）・田布施町（51.4%）です。</li>
+<li><strong>小学校で国の目標（月平均30時間）を下回るのは、美祢市（26.9時間）と和木町（28.8時間）だけです。</strong></li>
+<li><strong>取組の数（青）と時間外の長さ（赤）は、そろって動いていません。</strong>周南市は計画の具体策が16で最も多い一方、小学校の月平均41.6時間・45時間超42.6%は、どちらも19市町で2〜3番目に長い値です。</li>
+<li>時間外はR6年度の値なので、取組の「結果」ではなく「出発点」です。赤い市町ほど取組が急がれる、と読んでください。</li>
+</ul>
+</div>
+
+<h2><span class="hn">3</span>19市町×19項目の一覧</h2>
+<p>マスの色が回答、記号が計画です。マスにポインタを当てると、項目名が出ます。</p>
+<div class="legend"><span class="mk"><i class="sw m3"></i>実施</span><span class="mk"><i class="sw m2"></i>一部</span><span class="mk"><i class="sw m1"></i>検討中</span><span class="mk"><i class="sw m0"></i>未実施</span><span class="mk"><b>●</b>計画に具体策</span><span class="mk"><b>○</b>計画で触れるだけ</span></div>
+<div class="scroll">
+<table class="mx"><thead><tr><th class="pn"></th><th colspan="5" class="mg g1">学校以外が担う</th><th colspan="8" class="mg g2">教師以外が参画</th><th colspan="6" class="mg g3">教師の負担軽減</th></tr><tr><th class="pn"></th><th class="mh" title="登下校の見守り"><span class="mn">①</span><span class="mt">登下校</span></th><th class="mh" title="夜間の見回り・補導"><span class="mn">②</span><span class="mt">見回り</span></th><th class="mh" title="学校徴収金"><span class="mn">③</span><span class="mt">徴収金</span></th><th class="mh" title="地域との連絡調整"><span class="mn">④</span><span class="mt">地域調整</span></th><th class="mh" title="過剰な苦情・不当な要求"><span class="mn">⑤</span><span class="mt">苦情対応</span></th><th class="mh" title="調査・統計への回答"><span class="mn">⑥</span><span class="mt">調査回答</span></th><th class="mh" title="広報・ウェブサイト"><span class="mn">⑦</span><span class="mt">広報・HP</span></th><th class="mh" title="ICT機器の保守"><span class="mn">⑧</span><span class="mt">ICT保守</span></th><th class="mh" title="プール・体育館の管理"><span class="mn">⑨</span><span class="mt">プール</span></th><th class="mh" title="校舎の開錠・施錠"><span class="mn">⑩</span><span class="mt">開錠施錠</span></th><th class="mh" title="休み時間の安全"><span class="mn">⑪</span><span class="mt">休み時間</span></th><th class="mh" title="校内清掃"><span class="mn">⑫</span><span class="mt">清掃</span></th><th class="mh" title="部活動"><span class="mn">⑬</span><span class="mt">部活動</span></th><th class="mh" title="給食の時間"><span class="mn">⑭</span><span class="mt">給食</span></th><th class="mh" title="授業準備"><span class="mn">⑮</span><span class="mt">授業準備</span></th><th class="mh" title="学習評価・成績処理"><span class="mn">⑯</span><span class="mt">成績処理</span></th><th class="mh" title="学校行事の準備・運営"><span class="mn">⑰</span><span class="mt">行事</span></th><th class="mh" title="進路指導の準備"><span class="mn">⑱</span><span class="mt">進路</span></th><th class="mh" title="支援が必要な児童生徒・家庭"><span class="mn">⑲</span><span class="mt">要支援</span></th></tr></thead><tbody><tr><th class="pn">下関市</th><td class="mc m3" title="下関市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下関市・夜間の見回り・補導：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下関市・学校徴収金：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・過剰な苦情・不当な要求：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下関市・広報・ウェブサイト：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・プール・体育館の管理：計画に具体策／回答「実施」">●</td><td class="mc m0" title="下関市・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="下関市・休み時間の安全：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・校内清掃：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="下関市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下関市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下関市・学習評価・成績処理：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下関市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・進路指導の準備：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下関市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">山陽小野田市</th><td class="mc m3" title="山陽小野田市・登下校の見守り：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="山陽小野田市・夜間の見回り・補導：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・学校徴収金：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・過剰な苦情・不当な要求：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・調査・統計への回答：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="山陽小野田市・広報・ウェブサイト：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・プール・体育館の管理：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・校舎の開錠・施錠：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・休み時間の安全：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・校内清掃：計画で触れるだけ／回答「実施」">○</td><td class="mc m1" title="山陽小野田市・部活動：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="山陽小野田市・給食の時間：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="山陽小野田市・授業準備：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・学習評価・成績処理：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山陽小野田市・学校行事の準備・運営：計画で触れるだけ／回答「実施」">○</td><td class="mc m0" title="山陽小野田市・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="山陽小野田市・支援が必要な児童生徒・家庭：計画に記載なし／回答「実施」"></td></tr><tr><th class="pn">宇部市</th><td class="mc m3" title="宇部市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m2" title="宇部市・夜間の見回り・補導：計画に具体策／回答「一部」">●</td><td class="mc m3" title="宇部市・学校徴収金：計画に記載なし／回答「実施」"></td><td class="mc m3" title="宇部市・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m3" title="宇部市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="宇部市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m1" title="宇部市・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="宇部市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m1" title="宇部市・プール・体育館の管理：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="宇部市・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="宇部市・休み時間の安全：計画に記載なし／回答「実施」"></td><td class="mc m3" title="宇部市・校内清掃：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="宇部市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="宇部市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="宇部市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m2" title="宇部市・学習評価・成績処理：計画に具体策／回答「一部」">●</td><td class="mc m3" title="宇部市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m3" title="宇部市・進路指導の準備：計画に記載なし／回答「実施」"></td><td class="mc m3" title="宇部市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">防府市</th><td class="mc m3" title="防府市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m2" title="防府市・夜間の見回り・補導：計画に具体策／回答「一部」">●</td><td class="mc m3" title="防府市・学校徴収金：計画に具体策／回答「実施」">●</td><td class="mc m3" title="防府市・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m1" title="防府市・過剰な苦情・不当な要求：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="防府市・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m1" title="防府市・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="防府市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m3" title="防府市・プール・体育館の管理：計画に具体策／回答「実施」">●</td><td class="mc m3" title="防府市・校舎の開錠・施錠：計画に記載なし／回答「実施」"></td><td class="mc m1" title="防府市・休み時間の安全：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="防府市・校内清掃：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="防府市・部活動：計画に記載なし／回答「実施」"></td><td class="mc m1" title="防府市・給食の時間：計画に記載なし／回答「検討中」"></td><td class="mc m2" title="防府市・授業準備：計画に具体策／回答「一部」">●</td><td class="mc m3" title="防府市・学習評価・成績処理：計画に具体策／回答「実施」">●</td><td class="mc m3" title="防府市・学校行事の準備・運営：計画で触れるだけ／回答「実施」">○</td><td class="mc m1" title="防府市・進路指導の準備：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="防府市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">周南市</th><td class="mc m3" title="周南市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周南市・夜間の見回り・補導：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周南市・学校徴収金：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="周南市・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周南市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="周南市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m1" title="周南市・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="周南市・ICT機器の保守：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周南市・プール・体育館の管理：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周南市・校舎の開錠・施錠：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周南市・休み時間の安全：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="周南市・校内清掃：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="周南市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周南市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="周南市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周南市・学習評価・成績処理：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="周南市・学校行事の準備・運営：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周南市・進路指導の準備：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="周南市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">長門市</th><td class="mc m3" title="長門市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m3" title="長門市・夜間の見回り・補導：計画に具体策／回答「実施」">●</td><td class="mc m3" title="長門市・学校徴収金：計画に記載なし／回答「実施」"></td><td class="mc m3" title="長門市・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m3" title="長門市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="長門市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m0" title="長門市・広報・ウェブサイト：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="長門市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m0" title="長門市・プール・体育館の管理：計画に具体策／回答「未実施」">●</td><td class="mc m0" title="長門市・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="長門市・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="長門市・校内清掃：計画で触れるだけ／回答「未実施」">○</td><td class="mc m3" title="長門市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="長門市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="長門市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m1" title="長門市・学習評価・成績処理：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="長門市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m0" title="長門市・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="長門市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">美祢市</th><td class="mc m3" title="美祢市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m1" title="美祢市・夜間の見回り・補導：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="美祢市・学校徴収金：計画に具体策／回答「実施」">●</td><td class="mc m3" title="美祢市・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m3" title="美祢市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="美祢市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m3" title="美祢市・広報・ウェブサイト：計画に記載なし／回答「実施」"></td><td class="mc m3" title="美祢市・ICT機器の保守：計画に具体策／回答「実施」">●</td><td class="mc m0" title="美祢市・プール・体育館の管理：計画に具体策／回答「未実施」">●</td><td class="mc m0" title="美祢市・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="美祢市・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="美祢市・校内清掃：計画で触れるだけ／回答「未実施」">○</td><td class="mc m3" title="美祢市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="美祢市・給食の時間：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="美祢市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m2" title="美祢市・学習評価・成績処理：計画に具体策／回答「一部」">●</td><td class="mc m3" title="美祢市・学校行事の準備・運営：計画に具体策／回答「実施」">●</td><td class="mc m0" title="美祢市・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="美祢市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">平生町</th><td class="mc m3" title="平生町・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m1" title="平生町・夜間の見回り・補導：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="平生町・学校徴収金：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="平生町・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m1" title="平生町・過剰な苦情・不当な要求：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="平生町・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m1" title="平生町・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="平生町・ICT機器の保守：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="平生町・プール・体育館の管理：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="平生町・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="平生町・休み時間の安全：計画に具体策／回答「実施」">●</td><td class="mc m3" title="平生町・校内清掃：計画に具体策／回答「実施」">●</td><td class="mc m3" title="平生町・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="平生町・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="平生町・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m3" title="平生町・学習評価・成績処理：計画に具体策／回答「実施」">●</td><td class="mc m3" title="平生町・学校行事の準備・運営：計画に具体策／回答「実施」">●</td><td class="mc m0" title="平生町・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="平生町・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">岩国市</th><td class="mc m3" title="岩国市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m0" title="岩国市・夜間の見回り・補導：計画に具体策／回答「未実施」">●</td><td class="mc m0" title="岩国市・学校徴収金：計画に具体策／回答「未実施」">●</td><td class="mc m3" title="岩国市・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m3" title="岩国市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="岩国市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m0" title="岩国市・広報・ウェブサイト：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="岩国市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m0" title="岩国市・プール・体育館の管理：計画に具体策／回答「未実施」">●</td><td class="mc m0" title="岩国市・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="岩国市・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="岩国市・校内清掃：計画で触れるだけ／回答「未実施」">○</td><td class="mc m3" title="岩国市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="岩国市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="岩国市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m3" title="岩国市・学習評価・成績処理：計画に具体策／回答「実施」">●</td><td class="mc m3" title="岩国市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m0" title="岩国市・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="岩国市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">和木町</th><td class="mc m3" title="和木町・登下校の見守り：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="和木町・夜間の見回り・補導：計画に記載なし／回答「実施」"></td><td class="mc m0" title="和木町・学校徴収金：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="和木町・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m3" title="和木町・過剰な苦情・不当な要求：計画に記載なし／回答「実施」"></td><td class="mc m2" title="和木町・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m1" title="和木町・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="和木町・ICT機器の保守：計画で触れるだけ／回答「実施」">○</td><td class="mc m0" title="和木町・プール・体育館の管理：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="和木町・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="和木町・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m1" title="和木町・校内清掃：計画に具体策／回答「検討中」">●</td><td class="mc m2" title="和木町・部活動：計画に具体策／回答「一部」">●</td><td class="mc m1" title="和木町・給食の時間：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="和木町・授業準備：計画で触れるだけ／回答「実施」">○</td><td class="mc m2" title="和木町・学習評価・成績処理：計画に記載なし／回答「一部」"></td><td class="mc m3" title="和木町・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m3" title="和木町・進路指導の準備：計画に記載なし／回答「実施」"></td><td class="mc m3" title="和木町・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">田布施町</th><td class="mc m3" title="田布施町・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m2" title="田布施町・夜間の見回り・補導：計画に具体策／回答「一部」">●</td><td class="mc m1" title="田布施町・学校徴収金：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="田布施町・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m0" title="田布施町・過剰な苦情・不当な要求：計画で触れるだけ／回答「未実施」">○</td><td class="mc m3" title="田布施町・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m3" title="田布施町・広報・ウェブサイト：計画に記載なし／回答「実施」"></td><td class="mc m0" title="田布施町・ICT機器の保守：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="田布施町・プール・体育館の管理：計画に具体策／回答「未実施」">●</td><td class="mc m0" title="田布施町・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m1" title="田布施町・休み時間の安全：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="田布施町・校内清掃：計画に具体策／回答「実施」">●</td><td class="mc m1" title="田布施町・部活動：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="田布施町・給食の時間：計画に具体策／回答「実施」">●</td><td class="mc m3" title="田布施町・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m3" title="田布施町・学習評価・成績処理：計画に具体策／回答「実施」">●</td><td class="mc m1" title="田布施町・学校行事の準備・運営：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="田布施町・進路指導の準備：計画に記載なし／回答「実施」"></td><td class="mc m3" title="田布施町・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">阿武町</th><td class="mc m3" title="阿武町・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m0" title="阿武町・夜間の見回り・補導：計画に具体策／回答「未実施」">●</td><td class="mc m3" title="阿武町・学校徴収金：計画に具体策／回答「実施」">●</td><td class="mc m3" title="阿武町・地域との連絡調整：計画に記載なし／回答「実施」"></td><td class="mc m1" title="阿武町・過剰な苦情・不当な要求：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="阿武町・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m1" title="阿武町・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="阿武町・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m1" title="阿武町・プール・体育館の管理：計画に具体策／回答「検討中」">●</td><td class="mc m0" title="阿武町・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="阿武町・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="阿武町・校内清掃：計画で触れるだけ／回答「未実施」">○</td><td class="mc m3" title="阿武町・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="阿武町・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="阿武町・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m2" title="阿武町・学習評価・成績処理：計画に具体策／回答「一部」">●</td><td class="mc m3" title="阿武町・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m0" title="阿武町・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="阿武町・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">柳井市</th><td class="mc m3" title="柳井市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m2" title="柳井市・夜間の見回り・補導：計画に具体策／回答「一部」">●</td><td class="mc m1" title="柳井市・学校徴収金：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="柳井市・地域との連絡調整：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="柳井市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="柳井市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m1" title="柳井市・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="柳井市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m3" title="柳井市・プール・体育館の管理：計画に具体策／回答「実施」">●</td><td class="mc m1" title="柳井市・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="柳井市・休み時間の安全：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="柳井市・校内清掃：計画で触れるだけ／回答「実施」">○</td><td class="mc m3" title="柳井市・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="柳井市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="柳井市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m1" title="柳井市・学習評価・成績処理：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="柳井市・学校行事の準備・運営：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="柳井市・進路指導の準備：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="柳井市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">山口市</th><td class="mc m3" title="山口市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m1" title="山口市・夜間の見回り・補導：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="山口市・学校徴収金：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山口市・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m3" title="山口市・過剰な苦情・不当な要求：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山口市・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m1" title="山口市・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="山口市・ICT機器の保守：計画に具体策／回答「実施」">●</td><td class="mc m1" title="山口市・プール・体育館の管理：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="山口市・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="山口市・休み時間の安全：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="山口市・校内清掃：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="山口市・部活動：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="山口市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="山口市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m2" title="山口市・学習評価・成績処理：計画に具体策／回答「一部」">●</td><td class="mc m1" title="山口市・学校行事の準備・運営：計画で触れるだけ／回答「検討中」">○</td><td class="mc m1" title="山口市・進路指導の準備：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="山口市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">下松市</th><td class="mc m3" title="下松市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m1" title="下松市・夜間の見回り・補導：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="下松市・学校徴収金：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="下松市・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m3" title="下松市・過剰な苦情・不当な要求：計画に具体策／回答「実施」">●</td><td class="mc m2" title="下松市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m0" title="下松市・広報・ウェブサイト：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="下松市・ICT機器の保守：計画に具体策／回答「実施」">●</td><td class="mc m1" title="下松市・プール・体育館の管理：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="下松市・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m0" title="下松市・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="下松市・校内清掃：計画で触れるだけ／回答「未実施」">○</td><td class="mc m1" title="下松市・部活動：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="下松市・給食の時間：計画に記載なし／回答「実施」"></td><td class="mc m3" title="下松市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m2" title="下松市・学習評価・成績処理：計画に具体策／回答「一部」">●</td><td class="mc m3" title="下松市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m0" title="下松市・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="下松市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">光市</th><td class="mc m3" title="光市・登下校の見守り：計画に記載なし／回答「実施」"></td><td class="mc m3" title="光市・夜間の見回り・補導：計画に記載なし／回答「実施」"></td><td class="mc m0" title="光市・学校徴収金：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="光市・地域との連絡調整：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="光市・過剰な苦情・不当な要求：計画に記載なし／回答「実施」"></td><td class="mc m3" title="光市・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m0" title="光市・広報・ウェブサイト：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="光市・ICT機器の保守：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="光市・プール・体育館の管理：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="光市・校舎の開錠・施錠：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="光市・休み時間の安全：計画に記載なし／回答「未実施」"></td><td class="mc m0" title="光市・校内清掃：計画で触れるだけ／回答「未実施」">○</td><td class="mc m2" title="光市・部活動：計画に具体策／回答「一部」">●</td><td class="mc m0" title="光市・給食の時間：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="光市・授業準備：計画で触れるだけ／回答「実施」">○</td><td class="mc m1" title="光市・学習評価・成績処理：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="光市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m0" title="光市・進路指導の準備：計画に記載なし／回答「未実施」"></td><td class="mc m3" title="光市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">萩市</th><td class="mc m3" title="萩市・登下校の見守り：計画に具体策／回答「実施」">●</td><td class="mc m1" title="萩市・夜間の見回り・補導：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="萩市・学校徴収金：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="萩市・地域との連絡調整：計画に具体策／回答「実施」">●</td><td class="mc m1" title="萩市・過剰な苦情・不当な要求：計画に記載なし／回答「検討中」"></td><td class="mc m2" title="萩市・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m1" title="萩市・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="萩市・ICT機器の保守：計画に記載なし／回答「実施」"></td><td class="mc m3" title="萩市・プール・体育館の管理：計画に具体策／回答「実施」">●</td><td class="mc m1" title="萩市・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="萩市・休み時間の安全：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="萩市・校内清掃：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="萩市・部活動：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="萩市・給食の時間：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="萩市・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m0" title="萩市・学習評価・成績処理：計画に具体策／回答「未実施」">●</td><td class="mc m3" title="萩市・学校行事の準備・運営：計画に記載なし／回答「実施」"></td><td class="mc m3" title="萩市・進路指導の準備：計画に記載なし／回答「実施」"></td><td class="mc m3" title="萩市・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">周防大島町</th><td class="mc m1" title="周防大島町・登下校の見守り：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="周防大島町・夜間の見回り・補導：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="周防大島町・学校徴収金：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="周防大島町・地域との連絡調整：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="周防大島町・過剰な苦情・不当な要求：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="周防大島町・調査・統計への回答：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周防大島町・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="周防大島町・ICT機器の保守：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周防大島町・プール・体育館の管理：計画に具体策／回答「検討中」">●</td><td class="mc m1" title="周防大島町・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="周防大島町・休み時間の安全：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="周防大島町・校内清掃：計画に具体策／回答「検討中」">●</td><td class="mc m3" title="周防大島町・部活動：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周防大島町・給食の時間：計画に具体策／回答「実施」">●</td><td class="mc m3" title="周防大島町・授業準備：計画に具体策／回答「実施」">●</td><td class="mc m1" title="周防大島町・学習評価・成績処理：計画で触れるだけ／回答「検討中」">○</td><td class="mc m1" title="周防大島町・学校行事の準備・運営：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="周防大島町・進路指導の準備：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="周防大島町・支援が必要な児童生徒・家庭：計画に具体策／回答「実施」">●</td></tr><tr><th class="pn">上関町</th><td class="mc m1" title="上関町・登下校の見守り：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・夜間の見回り・補導：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・学校徴収金：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="上関町・地域との連絡調整：計画で触れるだけ／回答「実施」">○</td><td class="mc m1" title="上関町・過剰な苦情・不当な要求：計画に記載なし／回答「検討中」"></td><td class="mc m2" title="上関町・調査・統計への回答：計画に具体策／回答「一部」">●</td><td class="mc m1" title="上関町・広報・ウェブサイト：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・ICT機器の保守：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・プール・体育館の管理：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・校舎の開錠・施錠：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・休み時間の安全：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・校内清掃：計画に記載なし／回答「検討中」"></td><td class="mc m3" title="上関町・部活動：計画に具体策／回答「実施」">●</td><td class="mc m1" title="上関町・給食の時間：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・授業準備：計画で触れるだけ／回答「検討中」">○</td><td class="mc m1" title="上関町・学習評価・成績処理：計画に記載なし／回答「検討中」"></td><td class="mc m1" title="上関町・学校行事の準備・運営：計画で触れるだけ／回答「検討中」">○</td><td class="mc m3" title="上関町・進路指導の準備：計画に記載なし／回答「実施」"></td><td class="mc m1" title="上関町・支援が必要な児童生徒・家庭：計画に記載なし／回答「検討中」"></td></tr></tbody></table>
+</div>
+<p class="small">① 登下校の見守り ② 夜間の見回り・補導 ③ 学校徴収金 ④ 地域との連絡調整 ⑤ 過剰な苦情・不当な要求 ⑥ 調査・統計への回答 ⑦ 広報・ウェブサイト ⑧ ICT機器の保守 ⑨ プール・体育館の管理 ⑩ 校舎の開錠・施錠 ⑪ 休み時間の安全 ⑫ 校内清掃 ⑬ 部活動 ⑭ 給食の時間 ⑮ 授業準備 ⑯ 学習評価・成績処理 ⑰ 学校行事の準備・運営 ⑱ 進路指導の準備 ⑲ 支援が必要な児童生徒・家庭。②⑥⑬⑮⑯⑲は回答が2つの小項目に分かれていて、両方「実施」なら実施、片方だけなら一部実施としました。</p>
+
+<h3 id="shicho">市町ごとの確かめどころ</h3>
+<p>上の一覧を、市町ごとに言葉で読めるようにしました。計画と国への回答を19項目で突き合わせ、3つに分けています。左から順に、交渉で聞く・求めることの目安です。</p>
+<div class="scroll">
+<table class="teit">
+<thead><tr><th>市町</th><th class="ta">計画に書いたが、まだ「実施」と答えていない<br><span class="small">→ R8年度に実施できたか</span></th><th class="tb">「実施」と答えたが、計画にない<br><span class="small">→ 何を、どの学校でしているか</span></th><th class="tc">計画にも回答にもない<br><span class="small">→ 着手の予定はあるか</span></th></tr></thead>
+<tbody>
+<tr><td class="pn">下関市</td><td><span class="small">なし</span></td><td><span class="chip cb">③徴収金</span><span class="chip cb">④地域調整</span><span class="chip cb">⑤苦情対応</span><span class="chip cb">⑦広報・HP</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑪休み時間</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span><span class="chip cb">⑱進路</span></td><td><span class="chip cc">⑩開錠施錠</span></td></tr>
+<tr><td class="pn">山陽小野田市</td><td><span class="small">なし</span></td><td><span class="chip cb">②見回り</span><span class="chip cb">③徴収金</span><span class="chip cb">④地域調整</span><span class="chip cb">⑤苦情対応</span><span class="chip cb">⑦広報・HP</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑨プール</span><span class="chip cb">⑩開錠施錠</span><span class="chip cb">⑪休み時間</span><span class="chip cb">⑮授業準備</span><span class="chip cb">⑯成績処理</span><span class="chip cb">⑲要支援</span></td><td><span class="chip cc">⑬部活動</span><span class="chip cc">⑭給食</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">宇部市</td><td><span class="small">なし</span></td><td><span class="chip cb">③徴収金</span><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑪休み時間</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span><span class="chip cb">⑱進路</span></td><td><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑨プール</span><span class="chip cc">⑩開錠施錠</span></td></tr>
+<tr><td class="pn">防府市</td><td><span class="chip ca">⑤苦情対応</span><span class="chip ca">⑫清掃</span></td><td><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑩開錠施錠</span><span class="chip cb">⑬部活動</span></td><td><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑭給食</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">周南市</td><td><span class="chip ca">③徴収金</span><span class="chip ca">⑪休み時間</span><span class="chip ca">⑫清掃</span><span class="chip ca">⑯成績処理</span></td><td><span class="chip cb">⑭給食</span></td><td><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">長門市</td><td><span class="chip ca">⑨プール</span><span class="chip ca">⑯成績処理</span></td><td><span class="chip cb">③徴収金</span><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></td><td><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">美祢市</td><td><span class="chip ca">②見回り</span><span class="chip ca">⑨プール</span></td><td><span class="chip cb">④地域調整</span><span class="chip cb">⑦広報・HP</span></td><td><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">平生町</td><td><span class="chip ca">②見回り</span></td><td><span class="chip cb">⑭給食</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">⑤苦情対応</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑧ICT保守</span><span class="chip cc">⑨プール</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">岩国市</td><td><span class="chip ca">②見回り</span><span class="chip ca">③徴収金</span><span class="chip ca">⑨プール</span></td><td><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></td><td><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">和木町</td><td><span class="chip ca">⑫清掃</span></td><td><span class="chip cb">②見回り</span><span class="chip cb">⑤苦情対応</span><span class="chip cb">⑰行事</span><span class="chip cb">⑱進路</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑨プール</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑭給食</span></td></tr>
+<tr><td class="pn">田布施町</td><td><span class="chip ca">⑨プール</span><span class="chip ca">⑪休み時間</span><span class="chip ca">⑬部活動</span></td><td><span class="chip cb">⑦広報・HP</span><span class="chip cb">⑱進路</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">⑧ICT保守</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑰行事</span></td></tr>
+<tr><td class="pn">阿武町</td><td><span class="chip ca">②見回り</span><span class="chip ca">⑤苦情対応</span><span class="chip ca">⑨プール</span></td><td><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></td><td><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">柳井市</td><td><span class="chip ca">③徴収金</span><span class="chip ca">⑯成績処理</span></td><td><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span></td><td><span class="chip cc">④地域調整</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑰行事</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">山口市</td><td><span class="small">なし</span></td><td><span class="chip cb">③徴収金</span><span class="chip cb">⑤苦情対応</span><span class="chip cb">⑭給食</span></td><td><span class="chip cc">②見回り</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑨プール</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑫清掃</span><span class="chip cc">⑬部活動</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">下松市</td><td><span class="chip ca">②見回り</span><span class="chip ca">⑨プール</span><span class="chip ca">⑬部活動</span></td><td><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">光市</td><td><span class="small">なし</span></td><td><span class="chip cb">①登下校</span><span class="chip cb">②見回り</span><span class="chip cb">⑤苦情対応</span><span class="chip cb">⑰行事</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">④地域調整</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑧ICT保守</span><span class="chip cc">⑨プール</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑭給食</span><span class="chip cc">⑯成績処理</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">萩市</td><td><span class="chip ca">②見回り</span><span class="chip ca">⑫清掃</span><span class="chip ca">⑬部活動</span><span class="chip ca">⑯成績処理</span></td><td><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑰行事</span><span class="chip cb">⑱進路</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">⑤苦情対応</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑭給食</span></td></tr>
+<tr><td class="pn">周防大島町</td><td><span class="chip ca">①登下校</span><span class="chip ca">②見回り</span><span class="chip ca">⑨プール</span><span class="chip ca">⑫清掃</span></td><td><span class="small">なし</span></td><td><span class="chip cc">③徴収金</span><span class="chip cc">④地域調整</span><span class="chip cc">⑤苦情対応</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑰行事</span><span class="chip cc">⑱進路</span></td></tr>
+<tr><td class="pn">上関町</td><td><span class="small">なし</span></td><td><span class="chip cb">⑱進路</span></td><td><span class="chip cc">①登下校</span><span class="chip cc">②見回り</span><span class="chip cc">③徴収金</span><span class="chip cc">⑤苦情対応</span><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑧ICT保守</span><span class="chip cc">⑨プール</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑫清掃</span><span class="chip cc">⑭給食</span><span class="chip cc">⑯成績処理</span><span class="chip cc">⑲要支援</span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">「計画にも回答にもない」は、計画に具体策がなく、国への回答も「検討中」か「未実施」の項目です（計画で触れるだけの項目を除く）。進路指導の準備は、主に中学校の業務です。国への回答はR7.9.1時点で、計画はR8年度からの取組です。</p>
+
+<h3 id="shicho-teian">市町別　教委への提案（案）</h3>
+<p>上の表と、時間外在校等時間・国への回答（どの程度の学校で実施しているか）から、市町ごとに提案の文案を作りました。市町名を押すと開きます。19市町に共通する提言は<a href="#teian">6章</a>にあります。</p>
+<div class="card tleadbox">
+<strong>各市町教委への提案（案）の初めの文</strong>
+<p>どの市町にも、次の文から始めています。「貴市（町）」と計画の名前、計画へのリンクは市町ごとに変えています。</p>
+<blockquote>文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市（町）の「業務量管理・健康確保措置実施計画」の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</blockquote>
+<p class="small" style="margin-left:0">リンク先：3分類＝文科省の通知（令和7年9月26日）の別添4、見える化調査＝文科省が公表した山口県分（市町ごとの回答）。上関町は「学校における働き方改革プラン」、岩国市は「学校における働き方改革実施計画」の名前にしています。</p>
+</div>
+<p><button type="button" class="tcall" onclick="var o=this.dataset.o!=='1';document.querySelectorAll('details.tc').forEach(function(d){d.open=o});this.dataset.o=o?'1':'0';this.textContent=o?'すべて閉じる':'すべて開く'">すべて開く</button></p>
+<div class="tcs">
+<details class="tc"><summary><b>下関市</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.shimonoseki.lg.jp/uploaded/life/154105_607086_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中8、国に「実施」と答えた項目は25小項目中24である。R6年度の時間外在校等時間の月平均は、小学校33.6時間・中学校39.7時間である。</p><p>「③学校徴収金」、「④地域との連絡調整」、「⑤過剰な苦情・不当な要求への対応」、「⑦広報・ウェブサイト」、「⑧ICT機器の保守」、「⑪休み時間の安全」、「⑭給食の時間」、「⑰学校行事」、「⑱進路指導の準備」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑮-1授業準備（支援スタッフ）」（一部の学校）、「⑯-2採点など（ICT）」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑩校舎の開錠・施錠」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>山陽小野田市</b><span class="tag tD">計画が3分類の構成でない</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.sanyo-onoda.lg.jp/uploaded/life/159759_242112_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中0、国に「実施」と答えた項目は25小項目中21である。R6年度の時間外在校等時間の月平均は、小学校30.7時間・中学校40.0時間である。</p><p>計画は3分類ではなく独自の6項目で組まれている。国への回答と対応させるため、計画を3分類の19項目で整理し直すこと。</p><p>「②夜間の見回り・補導」、「③学校徴収金」、「④地域との連絡調整」、「⑤過剰な苦情・不当な要求への対応」、「⑦広報・ウェブサイト」、「⑧ICT機器の保守」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑮授業準備」、「⑯学習評価・成績処理」、「⑲支援が必要な児童生徒・家庭への対応」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑪休み時間の安全」（半数程度の学校）、「⑮-1授業準備（支援スタッフ）」（一部の学校）、「⑯-1採点など（支援スタッフ）」（一部の学校）、「⑯-2採点など（ICT）」（一部の学校）、「⑰学校行事」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑬部活動」、「⑭給食の時間」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>宇部市</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.ube.yamaguchi.jp/_res/projects/default_project/_page_/001/028/795/keikaku4.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中8、国に「実施」と答えた項目は25小項目中19である。R6年度の時間外在校等時間の月平均は、小学校32.0時間・中学校36.6時間である。</p><p>「③学校徴収金」、「④地域との連絡調整」、「⑧ICT機器の保守」、「⑪休み時間の安全」、「⑭給食の時間」、「⑰学校行事」、「⑱進路指導の準備」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑪休み時間の安全」（一部の学校）、「⑫校内清掃」（一部の学校）、「⑬-1部活動（休日）」（半数程度の学校）、「⑬-2部活動（平日）」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑦広報・ウェブサイト」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>防府市</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.hofu.yamaguchi.jp/uploaded/attachment/146368.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中11、国に「実施」と答えた項目は25小項目中17である。R6年度の時間外在校等時間の月平均は、小学校35.0時間・中学校40.3時間である。</p><p>「⑤過剰な苦情・不当な要求への対応」、「⑫校内清掃」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑧ICT機器の保守」、「⑩校舎の開錠・施錠」、「⑬部活動」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑨プール・体育館の管理」（一部の学校）、「⑮-1授業準備（支援スタッフ）」（一部の学校）、「⑯-1採点など（支援スタッフ）」（一部の学校）、「⑯-2採点など（ICT）」（一部の学校）、「⑰学校行事」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑦広報・ウェブサイト」、「⑪休み時間の安全」、「⑭給食の時間」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>周南市</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中16、国に「実施」と答えた項目は25小項目中17である。R6年度の時間外在校等時間の月平均は、小学校41.6時間・中学校45.1時間である。中学校は上限の45時間を超えている。小学校も40時間を超えている。負担の大きい項目から優先して進めること。</p><p>「③学校徴収金」、「⑪休み時間の安全」、「⑫校内清掃」、「⑯学習評価・成績処理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑭給食の時間」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑨プール・体育館の管理」（一部の学校）、「⑬-1部活動（休日）」（一部の学校）、「⑬-2部活動（平日）」（一部の学校）、「⑭給食の時間」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑦広報・ウェブサイト」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>長門市</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.nagato.yamaguchi.jp/uploaded/life/67735_276584_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中9、国に「実施」と答えた項目は25小項目中16である。R6年度の時間外在校等時間の月平均は、小学校37.6時間・中学校45.3時間である。中学校は上限の45時間を超えている。負担の大きい項目から優先して進めること。</p><p>「⑨プール・体育館の管理」、「⑯学習評価・成績処理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「③学校徴収金」、「④地域との連絡調整」、「⑧ICT機器の保守」、「⑭給食の時間」、「⑰学校行事」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑭給食の時間」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>美祢市</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www2.city.mine.lg.jp/material/files/group/29/R8_2gyoumuryoukanri.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中12、国に「実施」と答えた項目は25小項目中16である。R6年度の時間外在校等時間の月平均は、小学校26.9時間・中学校42.3時間である。</p><p>市営温水プールに行く学校と自校プールを管理する学校があり、自校で管理する小規模校ではトラブル時の外部対応がない。「全小中学校に配置」とした教員業務支援員も、R8年度は7月まで来なかった小規模校がある。配置の開始時期と日数を学校ごとに示し、自校プールの管理を学校の外に移すこと。</p><p>「②夜間の見回り・補導」、「⑨プール・体育館の管理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「④地域との連絡調整」、「⑦広報・ウェブサイト」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑦広報・ウェブサイト」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>平生町</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴町の<a href="https://www.town.hirao.lg.jp/material/files/group/49/hatarakikata_r8.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中11、国に「実施」と答えた項目は25小項目中16である。R6年度の時間外在校等時間の月平均は、小学校37.0時間・中学校56.7時間である。中学校は上限の45時間を超えている。中学校で月45時間を超える教職員が75.3%いる。負担の大きい項目から優先して進めること。</p><p>「②夜間の見回り・補導」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑭給食の時間」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>「③学校徴収金」、「⑤過剰な苦情・不当な要求への対応」、「⑦広報・ウェブサイト」、「⑧ICT機器の保守」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>岩国市</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.iwakuni.lg.jp/uploaded/attachment/62745.pdf">「学校における働き方改革実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中10、国に「実施」と答えた項目は25小項目中15である。R6年度の時間外在校等時間の月平均は、小学校34.9時間・中学校46.9時間である。中学校は上限の45時間を超えている。負担の大きい項目から優先して進めること。</p><p>「②夜間の見回り・補導」、「③学校徴収金」、「⑨プール・体育館の管理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「④地域との連絡調整」、「⑧ICT機器の保守」、「⑭給食の時間」、「⑰学校行事」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「④地域との連絡調整」（一部の学校）、「⑬-1部活動（休日）」（一部の学校）、「⑬-2部活動（平日）」（一部の学校）、「⑮-1授業準備（支援スタッフ）」（半数程度の学校）、「⑯-1採点など（支援スタッフ）」（半数程度の学校）、「⑯-2採点など（ICT）」（一部の学校）、「⑰学校行事」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>和木町</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴町の<a href="https://www.town.waki.lg.jp/uploaded/life/9226_38235_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中5、国に「実施」と答えた項目は25小項目中15である。R6年度の時間外在校等時間の月平均は、小学校28.8時間・中学校50.2時間である。中学校は上限の45時間を超えている。中学校で月45時間を超える教職員が54.4%いる。負担の大きい項目から優先して進めること。</p><p>「⑫校内清掃」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「②夜間の見回り・補導」、「⑤過剰な苦情・不当な要求への対応」、「⑰学校行事」、「⑱進路指導の準備」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>「③学校徴収金」、「⑦広報・ウェブサイト」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑭給食の時間」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>田布施町</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴町の<a href="https://www.town.tabuse.lg.jp/uploaded/attachment/8641.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中12、国に「実施」と答えた項目は25小項目中15である。R6年度の時間外在校等時間の月平均は、小学校38.6時間・中学校40.3時間である。中学校で月45時間を超える教職員が51.4%いる。負担の大きい項目から優先して進めること。</p><p>「⑨プール・体育館の管理」、「⑪休み時間の安全」、「⑬部活動」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑦広報・ウェブサイト」、「⑱進路指導の準備」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑫校内清掃」（一部の学校）、「⑭給食の時間」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「③学校徴収金」、「⑧ICT機器の保守」、「⑩校舎の開錠・施錠」、「⑰学校行事」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>阿武町</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴町の<a href="https://abutown-edu.blogspot.com/2026/04/blog-post_28.html">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中10、国に「実施」と答えた項目は25小項目中15である。R6年度の時間外在校等時間の月平均は、小学校47.2時間・中学校43.7時間である。小学校も40時間を超えている。負担の大きい項目から優先して進めること。</p><p>「②夜間の見回り・補導」、「⑤過剰な苦情・不当な要求への対応」、「⑨プール・体育館の管理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「④地域との連絡調整」、「⑧ICT機器の保守」、「⑭給食の時間」、「⑰学校行事」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑮-1授業準備（支援スタッフ）」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>柳井市</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city-yanai.jp/uploaded/life/66867_122420_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中10、国に「実施」と答えた項目は25小項目中14である。R6年度の時間外在校等時間の月平均は、小学校35.5時間・中学校48.4時間である。中学校は上限の45時間を超えている。負担の大きい項目から優先して進めること。</p><p>「③学校徴収金」、「⑯学習評価・成績処理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑧ICT機器の保守」、「⑭給食の時間」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑨プール・体育館の管理」（半数程度の学校）、「⑬-1部活動（休日）」（半数程度の学校）、「⑬-2部活動（平日）」（半数程度の学校）、「⑭給食の時間」（一部の学校）、「⑮-1授業準備（支援スタッフ）」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「④地域との連絡調整」、「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑰学校行事」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>山口市</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.yamaguchi.lg.jp/uploaded/attachment/121877.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中7、国に「実施」と答えた項目は25小項目中13である。R6年度の時間外在校等時間の月平均は、小学校36.4時間・中学校40.9時間である。</p><p>「③学校徴収金」、「⑤過剰な苦情・不当な要求への対応」、「⑭給食の時間」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑭給食の時間」（半数程度の学校）、「⑮-1授業準備（支援スタッフ）」（一部の学校）、「⑯-1採点など（支援スタッフ）」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「②夜間の見回り・補導」、「⑦広報・ウェブサイト」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑫校内清掃」、「⑬部活動」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>下松市</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.kudamatsu.lg.jp/gakkou/kyouiku/gakkyou/documents/gyoumuryoukannri.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中11、国に「実施」と答えた項目は25小項目中12である。R6年度の時間外在校等時間の月平均は、小学校—時間・中学校—時間である。</p><p>「②夜間の見回り・補導」、「⑨プール・体育館の管理」、「⑬部活動」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑭給食の時間」、「⑰学校行事」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑯-2採点など（ICT）」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「③学校徴収金」、「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>光市</b><span class="tag tD">計画が3分類の構成でない</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.hikari.lg.jp/material/files/group/111/gyoumukanri.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中3、国に「実施」と答えた項目は25小項目中12である。R6年度の時間外在校等時間の月平均は、小学校36.6時間・中学校33.4時間である。</p><p>計画は「4本柱・13の取組」の独自の構成で、3分類での整理がない。国への回答と対応させるため、19項目ごとの取組を示すこと。</p><p>「①登下校の見守り」、「②夜間の見回り・補導」、「⑤過剰な苦情・不当な要求への対応」、「⑰学校行事」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「⑬-2部活動（平日）」（一部の学校）、「⑮-1授業準備（支援スタッフ）」（一部の学校）、「⑰学校行事」（一部の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「③学校徴収金」、「④地域との連絡調整」、「⑦広報・ウェブサイト」、「⑧ICT機器の保守」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑭給食の時間」、「⑯学習評価・成績処理」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>萩市</b><span class="tag tC">中学校の時間外が長い</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴市の<a href="https://www.city.hagi.lg.jp/uploaded/life/69379_626259_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中10、国に「実施」と答えた項目は25小項目中11である。R6年度の時間外在校等時間の月平均は、小学校35.1時間・中学校47.0時間である。中学校は上限の45時間を超えている。負担の大きい項目から優先して進めること。</p><p>「②夜間の見回り・補導」、「⑫校内清掃」、「⑬部活動」、「⑯学習評価・成績処理」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>「⑧ICT機器の保守」、「⑰学校行事」、「⑱進路指導の準備」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>国への回答で、「④地域との連絡調整」（半数程度の学校）、「⑨プール・体育館の管理」（一部の学校）、「⑮-1授業準備（支援スタッフ）」（半数程度の学校）、「⑮-2授業準備（ICT）」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「③学校徴収金」、「⑤過剰な苦情・不当な要求への対応」、「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑭給食の時間」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>周防大島町</b></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴町の<a href="https://www.town.suo-oshima.lg.jp/uploaded/life/14941_26470_misc.pdf">「業務量管理・健康確保措置実施計画」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中10、国に「実施」と答えた項目は25小項目中10である。R6年度の時間外在校等時間の月平均は、小学校32.5時間・中学校37.1時間である。</p><p>「①登下校の見守り」、「②夜間の見回り・補導」、「⑨プール・体育館の管理」、「⑫校内清掃」は計画に書かれているが、R7.9時点の国への回答では「実施」になっていない。R8年度に実施できたか、どの学校で始めたかを示すこと。</p><p>国への回答で、「⑬-2部活動（平日）」（半数程度の学校）、「⑭給食の時間」（一部の学校）、「⑮-1授業準備（支援スタッフ）」（半数程度の学校）としている取組がある。残りの学校に広げる時期を示すこと。</p><p>「③学校徴収金」、「④地域との連絡調整」、「⑤過剰な苦情・不当な要求への対応」、「⑦広報・ウェブサイト」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑰学校行事」、「⑱進路指導の準備」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+<details class="tc"><summary><b>上関町</b><span class="tag tD">計画が3分類の構成でない</span></summary><div class="tcb"><p class="tlead">文部科学省が示した<a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">「学校と教師の業務の３分類」</a>（19項目）について、貴町の<a href="https://www.town.kaminoseki.lg.jp/wp-content/uploads/2026/04/kaminoseki_school_hatarakikata_kaikaku.docx">「学校における働き方改革プラン」</a>の記載と、文部科学省<a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査」</a>への貴教育委員会の回答（令和7年9月1日時点）を比べたところ、以下のことが分かった。ついては、次の点について改善を求める。</p><p>計画で具体策を書いた項目は19項目中2、国に「実施」と答えた項目は25小項目中5である。R6年度の時間外在校等時間の月平均は、小学校41.9時間・中学校23.5時間である。小学校も40時間を超えている。負担の大きい項目から優先して進めること。</p><p>公表されているのは「学校における働き方改革プラン」で、給特法第8条の業務量管理・健康確保措置実施計画として3分類を整理したものではない。19項目ごとの方針を計画として示すこと。</p><p>「⑱進路指導の準備」は国に「実施」と答えているが、計画には書かれていない。何を、どの学校でしているかを計画に書き込み、続ける根拠にすること。</p><p>「①登下校の見守り」、「②夜間の見回り・補導」、「③学校徴収金」、「⑤過剰な苦情・不当な要求への対応」、「⑦広報・ウェブサイト」、「⑧ICT機器の保守」、「⑨プール・体育館の管理」、「⑩校舎の開錠・施錠」、「⑪休み時間の安全」、「⑫校内清掃」、「⑭給食の時間」、「⑯学習評価・成績処理」、「⑲支援が必要な児童生徒・家庭への対応」は、計画にも国への回答にもない。着手の予定を示すこと。</p></div></details>
+</div>
+<p class="small">文案は公開資料から機械的に組み立てたものです（美祢市・山陽小野田市・光市・上関町には個別の事情を書き足しています）。交渉や意見交換で使うときは、各市町の事情に合わせて直してください。</p>
+
+<h2 id="ana"><span class="hn">4</span>計画の穴：市町の数字では見えない学校の差</h2>
+<p>計画も国への回答も、<strong>市町ごとに1つ</strong>です。そのため、同じ市町の中で「措置が届いている学校」と「届いていない学校」があっても、表の上では同じ「実施」になります。ここでは、現場の報告から見えた例と、それがほかの市町でも起きていないかを見ます。</p>
+
+<h3>例：美祢市内の小規模小学校（教職員7人）</h3>
+<div class="scroll">
+<table class="ana">
+<thead><tr><th>業務</th><th>市の計画に書いてあること</th><th>国への回答<br><span class="small">R7.9.1時点</span></th><th>現場で起きていること</th><th>穴</th></tr></thead>
+<tbody>
+<tr><td class="nm">⑨ プールの管理</td>
+<td>⑨としては「運動場や学校体育館の地域開放施設の管理を公民館が行う」とだけ書いています。プールは3分類の外で、「水泳指導における美祢市温水プールの利用」を<strong>促進</strong>すると書いています。</td>
+<td class="c"><span class="tag tC">未実施</span></td>
+<td>市営温水プールに行く学校もあれば、自校のプールを管理している学校もあります。この学校は自校で管理しています。操作ミスなどのトラブルがあっても、外部からは対応に来ません。</td>
+<td>「利用を促進」は一部の学校の話です。<strong>自校プールが残る学校で、管理とトラブル対応を誰が担うのか</strong>が、計画に書いてありません。</td></tr>
+<tr><td class="nm">⑮ 教員業務支援員</td>
+<td>「教材の印刷や物品の準備等を補助する教員業務支援員を<strong>全小中学校に配置</strong>」と書いています。一方で「配置の日数は、<strong>長時間勤務の実態</strong>や各学校の学校課題の状況によって総合的に判断」ともしています。</td>
+<td class="c"><span class="tag tB">実施</span><br><span class="small">全ての学校</span></td>
+<td>教職員7人のこの学校には、R8年度、7月まで業務支援員が来ませんでした。</td>
+<td>「全校配置」とあっても、<strong>いつから・週何日か</strong>は書いてありません。配置日数を時間外の長さで決めると、平均が短く出やすい小規模校は後回しになりえます。美祢市の小学校の月平均26.9時間（R6）は、19市町で最も短い値です。</td></tr>
+</tbody>
+</table>
+</div>
+<p>この2つが重なると、<strong>7人の学校が、ほかの学校なら外に出せている業務（プールの管理など）を抱えたまま、支援員もいない時期を少ない人数で回す</strong>ことになります。1校あたりの業務の数が同じでも、1人あたりにすると重くなります。市全体の「実施」や「全ての学校」からは、この差は見えません。</p>
+<p class="small">この学校の状況は現場からの報告です（2026年10月）。国への回答はR7.9.1時点、計画はR8年度からの取組で、時点が違います。</p>
+
+<h3>ほかの市町でも「全校ではない」回答がある</h3>
+<p>見える化調査では、一部の項目について「実施」と答えた市町に、<strong>域内のどの程度の学校で取り組んでいるか</strong>も聞いています。「半数程度」「一部」と答えた市町が1つ以上ある項目は、次のとおりです。</p>
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>取組</th><th>「実施」の<br>市町</th><th>うち<br>ほぼ全校</th><th>うち<br>半数・一部</th><th>半数・一部と答えた市町</th></tr></thead>
+<tbody>
+<tr><td class="no">⑮-1</td><td class="nm">授業準備（支援スタッフ）</td><td class="c n">18</td><td class="c n">8</td><td class="c n hiA">10</td><td class="small" style="margin:0">下関市（一部）、山口市（一部）、萩市（半数）、防府市（一部）、岩国市（半数）、光市（一部）、柳井市（半数）、山陽小野田市（一部）、周防大島町（半数）、阿武町（半数）</td></tr>
+<tr><td class="no">⑬-2</td><td class="nm">部活動（平日）</td><td class="c n">13</td><td class="c n">7</td><td class="c n hiA">6</td><td class="small" style="margin:0">宇部市（半数）、岩国市（一部）、光市（一部）、柳井市（半数）、周南市（一部）、周防大島町（半数）</td></tr>
+<tr><td class="no">⑭</td><td class="nm">給食の時間</td><td class="c n">13</td><td class="c n">7</td><td class="c n hiA">6</td><td class="small" style="margin:0">山口市（半数）、長門市（一部）、柳井市（一部）、周南市（半数）、周防大島町（一部）、田布施町（一部）</td></tr>
+<tr><td class="no">⑯-2</td><td class="nm">採点など（ICT）</td><td class="c n">8</td><td class="c n">3</td><td class="c n hiA">5</td><td class="small" style="margin:0">下関市（半数）、防府市（一部）、下松市（一部）、岩国市（一部）、山陽小野田市（一部）</td></tr>
+<tr><td class="no">⑨</td><td class="nm">プール・体育館の管理</td><td class="c n">6</td><td class="c n">2</td><td class="c n hiA">4</td><td class="small" style="margin:0">萩市（一部）、防府市（一部）、柳井市（半数）、周南市（一部）</td></tr>
+<tr><td class="no">⑬-1</td><td class="nm">部活動（休日）</td><td class="c n">13</td><td class="c n">9</td><td class="c n hiA">4</td><td class="small" style="margin:0">宇部市（半数）、岩国市（一部）、柳井市（半数）、周南市（一部）</td></tr>
+<tr><td class="no">⑯-1</td><td class="nm">採点など（支援スタッフ）</td><td class="c n">10</td><td class="c n">6</td><td class="c n hiA">4</td><td class="small" style="margin:0">山口市（一部）、防府市（一部）、岩国市（半数）、山陽小野田市（一部）</td></tr>
+<tr><td class="no">⑰</td><td class="nm">学校行事</td><td class="c n">14</td><td class="c n">10</td><td class="c n hiA">4</td><td class="small" style="margin:0">防府市（一部）、岩国市（半数）、光市（一部）、山陽小野田市（一部）</td></tr>
+<tr><td class="no">④</td><td class="nm">地域との連絡調整</td><td class="c n">16</td><td class="c n">14</td><td class="c n hiA">2</td><td class="small" style="margin:0">萩市（半数）、岩国市（一部）</td></tr>
+<tr><td class="no">⑪</td><td class="nm">休み時間の安全</td><td class="c n">4</td><td class="c n">2</td><td class="c n hiA">2</td><td class="small" style="margin:0">宇部市（一部）、山陽小野田市（半数）</td></tr>
+<tr><td class="no">⑫</td><td class="nm">校内清掃</td><td class="c n">6</td><td class="c n">4</td><td class="c n hiA">2</td><td class="small" style="margin:0">宇部市（一部）、田布施町（一部）</td></tr>
+<tr><td class="no">⑦</td><td class="nm">広報・ウェブサイト</td><td class="c n">4</td><td class="c n">3</td><td class="c n hiA">1</td><td class="small" style="margin:0">美祢市（一部）</td></tr>
+<tr><td class="no">⑮-2</td><td class="nm">授業準備（ICT）</td><td class="c n">17</td><td class="c n">16</td><td class="c n hiA">1</td><td class="small" style="margin:0">萩市（半数）</td></tr>
+</tbody>
+</table>
+</div>
+<p>授業準備の支援スタッフ（⑮-1）は、「実施」と答えた18市町のうち10市町が「全校ではない」と答えています。美祢市は「全ての学校」と答えていますが、上の例のようにR8年度は<strong>「全校」でも配置の時期や日数には差があります</strong>。この設問では、その差は見えません。プール・体育館（⑨）も、実施と答えた6市町のうち4市町が「全校ではない」と答えています。</p>
+
+<h3>計画の穴を見つける5つの問い</h3>
+<p>市町の計画や回答を読むとき、また市町教委に聞くときに使えます。</p>
+<ol>
+<li><strong>「全校」は、いつから・週何日か。</strong>年度の途中まで来ない学校はないか。</li>
+<li><strong>措置が届かない学校では、誰がその業務を担うか。</strong>（例：温水プールに行かず、自校プールが残る学校）</li>
+<li><strong>配置の基準で、小規模校が後回しになっていないか。</strong>時間外の長さや児童数で決めると、人数の少ない学校に回りにくい。</li>
+<li><strong>故障やトラブルのとき、外から来る人がいるか。</strong>プール・機械警備・ICTなど。</li>
+<li><strong>1人あたりで見ているか。</strong>業務の数を教職員数で割ると、小規模校の重さが見える。</li>
+</ol>
+
+<h2><span class="hn">5</span>読むときの注意</h2>
+<ul>
+<li><strong>回答は自己申告です。</strong>「実施」の基準は教育委員会によって違います。下関市は25中24を「実施」と答えましたが、計画で具体策を書いたのは8項目です。</li>
+<li><strong>計画の読み取りは、この調べで行ったものです。</strong>●は、その業務について誰が何をするかが計画本文に書いてあるもの（3分類の節以外も含む）です。○は、学校向けの一般的な措置（「清掃時間・頻度の見直し」など）や、現状の説明・検討の呼びかけにとどまるものです。計画に添付された文科省の3分類一覧図は数えていません。平生町・田布施町はスキャン画像を目で読みました。</li>
+<li>上関町は業務量管理計画ではなく「働き方改革プラン」です。山陽小野田市・光市の計画は、3分類ではない独自の構成です。</li>
+<li>時間は各計画に載っているR6実績で、市町によって対象の職（管理職を含むか等）がそろっていない可能性があります。</li>
+</ul>
+
+<h2 id="teian"><span class="hn">6</span>各市町の教委への提言（案）</h2>
+<p>ここまでの調べから考えた、市町教育委員会への提言の案です。19市町に共通する7つの提言と、市町ごとの確かめどころに分けました。交渉や意見交換で使うときは、各市町の事情に合わせて直してください。</p>
+
+<h3>19市町に共通する提言</h3>
+<ol class="tei">
+<li><b>「実施」の中身を、学校ごとに公表すること。</b>
+<p>どの学校で、いつから、週何日か。授業準備の支援スタッフは、実施と答えた18市町のうち10市町が「全校ではない」と答えている。「全校」と答えた市でも、R8年度に7月まで支援員が来なかった小規模校がある。</p>
+<p class="tk">根拠：<a href="#ana">4章</a></p></li>
+<li><b>措置が届かない学校の分を、計画に書くこと。</b>
+<p>市営プールに行く学校がある一方で、自校プールが残る学校もある。残る学校の管理と、故障・操作ミスのときに外から対応する窓口を決めること。プールの管理を「学校以外が担うべき業務」にすべきだという意見も、国の部会に出ている。</p>
+<p class="tk">根拠：<a href="#ana">4章</a>・<a href="#hyoka">8章</a>（妹尾氏の意見書）</p></li>
+<li><b>支援員などの配置の基準に、教職員1人あたりの業務量を入れること。</b>
+<p>時間外の長さや児童生徒数だけで決めると、人数の少ない学校に回りにくくなる。7人の学校も、大きな学校と同じ数の業務を抱えている。</p>
+<p class="tk">根拠：<a href="#ana">4章</a></p></li>
+<li><b>計画と国への回答をそろえ、毎年点検すること。</b>
+<p>計画の具体策の数と国への回答の「実施」の数は、ほとんど対応していない（相関 +0.11）。計画に書いたがまだ「実施」と答えていない項目は、R8年度の見える化調査で実施に変わったかを示すこと。「実施」と答えたが計画にない項目は、計画に書いて続ける根拠にすること。</p>
+<p class="tk">根拠：1〜3章</p></li>
+<li><b>どの市町でも手薄な4項目に、着手すること。</b>
+<p>校舎の開錠・施錠（国に「実施」と答えたのは19市町中3）、広報・ウェブサイト（4）、休み時間の安全（4）、進路指導の準備（6）である。開錠・施錠の機械警備は、すでにどの学校にも入っている。残っているのは、<strong>朝いちばんの解錠、最後の施錠と警備のセット、休日の行事や地域の利用のときの開け閉め</strong>といった作業そのもので、多くは教頭が担っている。この作業を管理員・用務員の配置や委託、利用団体や市による鍵の管理、輪番などで、教頭に固定しないしくみにすること。</p>
+<p class="tk">根拠：1章・3章</p></li>
+<li><b>業務を移すときは、受け皿の人と予算を一緒に示すこと。</b>
+<p>3分類の多くは、事務職員や支援スタッフ、地域の人が担う前提である。事務職員は1人配置の学校が多く、人を増やさないままの付け替えでは負担が移るだけである。教職員団体や学校事務職員からも、同じ懸念が出ている。</p>
+<p class="tk">根拠：<a href="#hyoka">8章</a></p></li>
+<li><b>教職員の声を聞いて、優先順位を決めること。</b>
+<p>国の指針は、学校運営協議会等での議論を経て優先順位を定めるとしている。教職員への調査では、新しい3分類に「賛成できないところもかなりある」という答えが小・中学校とも過半数だった。何から手をつけるかを、教職員と一緒に決めること。</p>
+<p class="tk">根拠：<a href="#shin3">0章</a>・<a href="#hyoka">8章</a></p></li>
+</ol>
+
+<p>市町ごとの確かめどころと、市町別の提案（案）は、<a href="#shicho">3章</a>にまとめました。</p>
+
+<h2><span class="hn">7</span>次に確かめること</h2>
+<ul>
+<li><strong>計画には書いたが「実施」と答えていなかった項目は、R8年度の見える化（R8.9時点）で「実施」に変わるか。</strong>同じ市町を2年追えば、計画が実際に動いたかを確かめられます。</li>
+<li><strong>「実施」と答えたが計画に書いていない項目は、実際に何をしているのか。</strong>給食・学校行事・ICT保守など、計画に書いていない「実施」の中身を、市町教委への聞き取りや交渉の場で確かめられます。</li>
+<li><strong>学校単位で確かめる。</strong>「全校配置」の支援員が各校にいつから・週何日来ているか、自校プールが残る学校はどこかを、市町教委に聞いたり学校の公表資料で見たりして、学校ごとの一覧にする。</li>
+<li>R7年度の時間外在校等時間が19市町そろったら、R6→R7の変化と取組の多さを比べられます。</li>
+</ul>
+
+<h2 id="hyoka"><span class="hn">8</span>この改定への評価・コメント</h2>
+<p>改定案が示された2025年8月から、国の審議に加わった人、教職員団体、研究者、保護者団体などが意見を出しています。要点はこの調べでまとめたものなので、くわしくはリンク先で確かめてください。</p>
+
+<div class="hy">
+<p class="hyg">国の審議に加わった人</p>
+<article class="hyc">
+<h5><a href="https://www.mext.go.jp/content/000377107.pdf">業務量管理・健康確保措置に関する指針の改正案への意見・提案</a></h5>
+<p class="hym">妹尾昌俊（ライフ＆ワーク代表理事、特別部会委員）／2025年8月19日／特別部会（第2回）参考資料（文科省PDF）</p>
+<p>3分類の更新を指針に入れることを「重要な一歩」と評価したうえで、これまでの取組の検証がないまま項目を足していると指摘しています。教職員への意見募集（332件）では、苦情対応・朝の預かり・プールの管理を8〜9割が「学校外が担うべき」と答えたとして、<strong>⑨プール・⑧ICT保守・⑫校内清掃は「学校以外が担うべき業務」に</strong>するよう提案しています。SNSなど学校の管理外で起きたトラブル、検定試験の監督などが抜けているとも述べています。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://toyokeizai.net/articles/-/892041">多忙な先生に「やる必要ない仕事」国が示す利点、「学校の業務を仕分ける3分類」更新へ　学校の業務削減や分業が進まない5つの背景</a></h5>
+<p class="hym">妹尾昌俊／2025年7月26日／東洋経済オンライン</p>
+<p>改定の前に、3分類が学校で知られず、使われてこなかった背景を論じた記事です。</p>
+</article>
+
+<p class="hyg">教職員団体・学校事務職員</p>
+<article class="hyc">
+<h5><a href="https://www.kyobun.co.jp/article/2025090301">新3分類に学校事務職員らが提言　配置改善など求める</a></h5>
+<p class="hym">#教員不足をなくそう！緊急アクション（妹尾昌俊・末冨芳ほか）、全国公立小中学校事務職員研究会（全事研）／2025年9月3日／教育新聞</p>
+<p>どちらも見直しの方向には賛成しつつ、予算と人材の確保、教職員の意見を取り入れる手順、事務職員の配置改善を求めています。緊急アクションの調査では、「賛成できないところもかなりある」が小学校53.0%・中学校57.7%で、減らした業務の受け皿が見えないという声があったと報じています。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://www.kyobun.co.jp/article/2025082804">学校事務職員への業務転嫁を危惧　全学労連が新3分類に抗議</a></h5>
+<p class="hym">全国学校事務労働組合連絡会議（全学労連）／2025年8月28日／教育新聞</p>
+<p>⑦広報・ウェブサイト、⑧ICT保守を「事務職員等を中心に」とした表現は、1人配置の多い事務職員への業務の付け替えだとして、撤回・修正を求めています。必要なのは人員増と定数改善だという主張です。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://note.com/it_zgrr/n/n99a06f791836">またまた学校事務職員への業務押し付けの動き〜「学校と教師の業務の３分類」</a></h5>
+<p class="hym">伊藤拓也（学校事務職員、全学労連事務局長）／2025年8月21日／note</p>
+<p>改定案が出た2日後に、事務職員の立場から同じ懸念を書いた個人の記事です。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://www.zenkyo.jp/_cms/wp-content/uploads/2025/09/25-09-19%E3%80%90%E8%AB%87%E8%A9%B1%E3%80%91%E4%B8%AD%E6%95%99%E5%AF%A9%E7%89%B9%E5%88%A5%E9%83%A8%E4%BC%9A%E3%81%A7%E8%AD%B0%E8%AB%96%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%80%8C%E5%AD%A6%E6%A0%A1%E3%81%A8%E6%95%99%E5%B8%AB%E3%81%AE%E6%A5%AD%E5%8B%99%E3%81%AE3%E5%88%86%E9%A1%9E%E3%80%8D%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6.pdf">【談話】中教審特別部会で議論されている「学校と教師の業務の3分類」のアップデートについて</a></h5>
+<p class="hym">全日本教職員組合（全教）書記長／2025年9月19日／PDF</p>
+<p>2017年から示されてきた3分類が長時間勤務の解消に効いたかの総括がないまま、14項目を19項目に増やしたと批判しています。最大の問題は<strong>お金をかけず今いる教職員で分担しようとしていること</strong>だとし、休み時間の対応は教育活動と切り分けられない、苦情を一方的に「不当」と見なす危険がある、とも述べています。ICT保守やプールの外部委託、部活動の地域展開などは改善につながる面があるとしています。</p>
+</article>
+
+<p class="hyg">研究者・論者</p>
+<article class="hyc">
+<h5><a href="https://www.tkfd.or.jp/research/detail.php?id=4589">AI時代の先生はどう働いているか〜 同意なき「3分類」見直しを</a></h5>
+<p class="hym">松本美奈（東京財団政策研究所）／2024年10月24日</p>
+<p>改定の前の論考です。R4勤務実態調査の設問が「削減すべき」を前提にしていて無回答も多いこと、子どもを理解するための休み時間や給食の対応を外に出さないと判断している学校があることを取り上げ、教員・保護者・地域の合意がないまま見直すことに疑問を投げかけています。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://cir.nii.ac.jp/crid/1520306207714589824">対応困難な保護者対応は「学校以外が担うべき業務」に分類</a></h5>
+<p class="hym">小野田正利／2025年11月7日／『内外教育』連載「普通の教師が生きる学校」第674回（有料誌。リンクは論文データベースCiNiiの書誌）</p>
+<p>保護者対応の研究で知られる筆者が、⑤の追加を取り上げた回です。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://cir.nii.ac.jp/crid/1520025893987537152">新「3分類」の生かし方</a></h5>
+<p class="hym">川上泰彦／2026年2月／『教職研修』（有料誌。リンクはCiNiiの書誌）</p>
+<p>同じ号には、働き方改革の実践記事や座談会「やっぱり『働き方改革』はむずかしい?」も載っています。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://cir.nii.ac.jp/crid/1520871701601666816">「学校と教師の業務の3分類」に基づく適切な業務分担に関する調査結果から見えること</a></h5>
+<p class="hym">指田泰志／2026年7月／『学校事務』（有料誌。リンクはCiNiiの書誌）</p>
+<p>全事研が行った、3分類にもとづく業務分担の調査を扱った記事です。</p>
+</article>
+
+<p class="hyg">保護者団体・報道</p>
+<article class="hyc">
+<h5><a href="https://zen-p.net/ts/s411.html">学校や教師が担う業務に係る課題</a></h5>
+<p class="hym">全国PTA連絡協議会／2026年9月更新</p>
+<p>改定後の19項目を、保護者向けに整理した解説ページです。</p>
+</article>
+<article class="hyc">
+<h5><a href="https://www.kyobun.co.jp/article/2025081901">改正給特法に伴う指針改定案を大筋了承　業務の3分類も見直し</a>／<a href="https://reseed.resemom.jp/article/2025/08/20/11526.html">保護者からの過剰な苦情・不当要求「学校以外が担う」文科省が改訂案</a></h5>
+<p class="hym">教育新聞 2025年8月19日／リシード 2025年8月20日</p>
+<p>改定案が示された特別部会（第2回）を伝えた記事です。</p>
+</article>
+</div>
+<p class="small" style="margin-left:0">2026年11月1日に各リンク先で、筆者・日付・内容を確かめました。東洋経済の記事は本文を読めず、題とリードだけで紹介しています。有料誌の3本は題だけで、中身は確かめていません。</p>
+
+<h2 id="jikan"><span class="hn">9</span>参考：時間外の長さとの関係</h2>
+<p>ちなみに、<strong>時間外在校等時間が長い市町ほど取組が多い（あるいは少ない）、という関係はほとんど見られませんでした。</strong>R6年度の月平均と、取組の数との相関は、小学校で −0.31〜+0.18、中学校で +0.35〜+0.48 です。弱いうえに、小学校と中学校で向きもそろっていません。</p>
+<p>R6年度は取組の前の値なので、これは取組の効果ではなく、「時間外が長い市町ほど多く答えた・書いたか」を見たものです。19市町しかなく、学校が1〜2校の町は1校の事情で値が大きく動きます（上関中 23.5時間、平生中 56.7時間など）。</p>
+<details class="tc"><summary><b>散布図を見る</b></summary><div class="tcb" style="padding-left:12px">
+<p class="small" style="margin-left:0">縦軸はR6年度の時間外在校等時間の月平均（時間）。上の2つは横軸が国への回答の「実施」の数、下の2つは計画に具体策を書いた数です。相関はピアソンの相関係数です。</p>
+<div class="scs">
+<figure class="sc"><figcaption>回答「実施」の数 × 小学校の月平均（R6）<span class="small">（相関 -0.31、18市町）</span></figcaption><svg viewBox="0 0 470 300" role="img" aria-label="見える化で「実施」と答えた数（25小項目）と小学校の月平均（R6）の散布図"><line x1="46" x2="456" y1="260.0" y2="260.0" class="gl"/><text x="40" y="264.0" class="tk" text-anchor="end">15</text><line x1="46" x2="456" y1="178.0" y2="178.0" class="gl"/><text x="40" y="182.0" class="tk" text-anchor="end">30</text><line x1="46" x2="456" y1="96.0" y2="96.0" class="gl"/><text x="40" y="100.0" class="tk" text-anchor="end">45</text><line x1="46" x2="456" y1="14.0" y2="14.0" class="gl"/><text x="40" y="18.0" class="tk" text-anchor="end">60</text><text x="46.0" y="276" class="tk" text-anchor="middle">0</text><text x="128.0" y="276" class="tk" text-anchor="middle">5</text><text x="210.0" y="276" class="tk" text-anchor="middle">10</text><text x="292.0" y="276" class="tk" text-anchor="middle">15</text><text x="374.0" y="276" class="tk" text-anchor="middle">20</text><text x="456.0" y="276" class="tk" text-anchor="middle">25</text><line x1="46" x2="46" y1="14" y2="260" class="ax"/><line x1="46" x2="456" y1="260" y2="260" class="ax"/><g><circle cx="439.6" cy="158.3" r="4.5" class="pt"><title>下関市：24・33.6時間</title></circle><text x="445.6" y="161.8" class="pl">下関</text></g><g><circle cx="357.6" cy="167.1" r="4.5" class="pt"><title>宇部市：19・32.0時間</title></circle><text x="363.6" y="170.6" class="pl">宇部</text></g><g><circle cx="259.2" cy="143.0" r="4.5" class="pt"><title>山口市：13・36.4時間</title></circle><text x="265.2" y="146.5" class="pl">山口</text></g><g><circle cx="226.4" cy="150.1" r="4.5" class="pt"><title>萩市：11・35.1時間</title></circle><text x="232.4" y="153.6" class="pl">萩</text></g><g><circle cx="324.8" cy="150.7" r="4.5" class="pt"><title>防府市：17・35.0時間</title></circle><text x="330.8" y="154.2" class="pl">防府</text></g><g><circle cx="292.0" cy="151.2" r="4.5" class="pt"><title>岩国市：15・34.9時間</title></circle><text x="298.0" y="154.7" class="pl">岩国</text></g><g><circle cx="242.8" cy="141.9" r="4.5" class="pt"><title>光市：12・36.6時間</title></circle><text x="248.8" y="145.4" class="pl">光</text></g><g><circle cx="308.4" cy="136.5" r="4.5" class="pt"><title>長門市：16・37.6時間</title></circle><text x="314.4" y="140.0" class="pl">長門</text></g><g><circle cx="275.6" cy="147.9" r="4.5" class="pt"><title>柳井市：14・35.5時間</title></circle><text x="281.6" y="151.4" class="pl">柳井</text></g><g><circle cx="308.4" cy="194.9" r="4.5" class="pt"><title>美祢市：16・26.9時間</title></circle><text x="314.4" y="198.4" class="pl">美祢</text></g><g><circle cx="324.8" cy="114.6" r="4.5" class="pt"><title>周南市：17・41.6時間</title></circle><text x="330.8" y="118.1" class="pl">周南</text></g><g><circle cx="390.4" cy="174.2" r="4.5" class="pt"><title>山陽小野田市：21・30.7時間</title></circle><text x="396.4" y="177.7" class="pl">山陽小野田</text></g><g><circle cx="210.0" cy="164.3" r="4.5" class="pt"><title>周防大島町：10・32.5時間</title></circle><text x="216.0" y="167.8" class="pl">周防大島</text></g><g><circle cx="292.0" cy="184.6" r="4.5" class="pt"><title>和木町：15・28.8時間</title></circle><text x="298.0" y="188.1" class="pl">和木</text></g><g><circle cx="128.0" cy="112.9" r="4.5" class="pt"><title>上関町：5・41.9時間</title></circle><text x="134.0" y="116.4" class="pl">上関</text></g><g><circle cx="292.0" cy="131.0" r="4.5" class="pt"><title>田布施町：15・38.6時間</title></circle><text x="298.0" y="134.5" class="pl">田布施</text></g><g><circle cx="308.4" cy="139.7" r="4.5" class="pt"><title>平生町：16・37.0時間</title></circle><text x="314.4" y="143.2" class="pl">平生</text></g><g><circle cx="292.0" cy="84.0" r="4.5" class="pt"><title>阿武町：15・47.2時間</title></circle><text x="298.0" y="87.5" class="pl">阿武</text></g><text x="258.0" y="294" class="al" text-anchor="middle">見える化で「実施」と答えた数（25小項目）</text></svg></figure>
+<figure class="sc"><figcaption>回答「実施」の数 × 中学校の月平均（R6）<span class="small">（相関 +0.35、18市町）</span></figcaption><svg viewBox="0 0 470 300" role="img" aria-label="見える化で「実施」と答えた数（25小項目）と中学校の月平均（R6）の散布図"><line x1="46" x2="456" y1="260.0" y2="260.0" class="gl"/><text x="40" y="264.0" class="tk" text-anchor="end">15</text><line x1="46" x2="456" y1="178.0" y2="178.0" class="gl"/><text x="40" y="182.0" class="tk" text-anchor="end">30</text><line x1="46" x2="456" y1="96.0" y2="96.0" class="gl"/><text x="40" y="100.0" class="tk" text-anchor="end">45</text><line x1="46" x2="456" y1="14.0" y2="14.0" class="gl"/><text x="40" y="18.0" class="tk" text-anchor="end">60</text><text x="46.0" y="276" class="tk" text-anchor="middle">0</text><text x="128.0" y="276" class="tk" text-anchor="middle">5</text><text x="210.0" y="276" class="tk" text-anchor="middle">10</text><text x="292.0" y="276" class="tk" text-anchor="middle">15</text><text x="374.0" y="276" class="tk" text-anchor="middle">20</text><text x="456.0" y="276" class="tk" text-anchor="middle">25</text><line x1="46" x2="46" y1="14" y2="260" class="ax"/><line x1="46" x2="456" y1="260" y2="260" class="ax"/><g><circle cx="439.6" cy="125.0" r="4.5" class="pt"><title>下関市：24・39.7時間</title></circle><text x="445.6" y="128.5" class="pl">下関</text></g><g><circle cx="357.6" cy="141.9" r="4.5" class="pt"><title>宇部市：19・36.6時間</title></circle><text x="363.6" y="145.4" class="pl">宇部</text></g><g><circle cx="259.2" cy="118.4" r="4.5" class="pt"><title>山口市：13・40.9時間</title></circle><text x="265.2" y="121.9" class="pl">山口</text></g><g><circle cx="226.4" cy="85.1" r="4.5" class="pt"><title>萩市：11・47.0時間</title></circle><text x="232.4" y="88.6" class="pl">萩</text></g><g><circle cx="324.8" cy="121.7" r="4.5" class="pt"><title>防府市：17・40.3時間</title></circle><text x="330.8" y="125.2" class="pl">防府</text></g><g><circle cx="292.0" cy="85.6" r="4.5" class="pt"><title>岩国市：15・46.9時間</title></circle><text x="298.0" y="89.1" class="pl">岩国</text></g><g><circle cx="242.8" cy="159.4" r="4.5" class="pt"><title>光市：12・33.4時間</title></circle><text x="248.8" y="162.9" class="pl">光</text></g><g><circle cx="308.4" cy="94.4" r="4.5" class="pt"><title>長門市：16・45.3時間</title></circle><text x="314.4" y="97.9" class="pl">長門</text></g><g><circle cx="275.6" cy="77.4" r="4.5" class="pt"><title>柳井市：14・48.4時間</title></circle><text x="281.6" y="80.9" class="pl">柳井</text></g><g><circle cx="308.4" cy="110.8" r="4.5" class="pt"><title>美祢市：16・42.3時間</title></circle><text x="314.4" y="114.3" class="pl">美祢</text></g><g><circle cx="324.8" cy="95.5" r="4.5" class="pt"><title>周南市：17・45.1時間</title></circle><text x="330.8" y="99.0" class="pl">周南</text></g><g><circle cx="390.4" cy="123.3" r="4.5" class="pt"><title>山陽小野田市：21・40.0時間</title></circle><text x="396.4" y="126.8" class="pl">山陽小野田</text></g><g><circle cx="210.0" cy="139.2" r="4.5" class="pt"><title>周防大島町：10・37.1時間</title></circle><text x="216.0" y="142.7" class="pl">周防大島</text></g><g><circle cx="292.0" cy="67.6" r="4.5" class="pt"><title>和木町：15・50.2時間</title></circle><text x="298.0" y="71.1" class="pl">和木</text></g><g><circle cx="128.0" cy="213.5" r="4.5" class="pt"><title>上関町：5・23.5時間</title></circle><text x="134.0" y="217.0" class="pl">上関</text></g><g><circle cx="292.0" cy="121.7" r="4.5" class="pt"><title>田布施町：15・40.3時間</title></circle><text x="298.0" y="125.2" class="pl">田布施</text></g><g><circle cx="308.4" cy="32.0" r="4.5" class="pt"><title>平生町：16・56.7時間</title></circle><text x="314.4" y="35.5" class="pl">平生</text></g><g><circle cx="292.0" cy="103.1" r="4.5" class="pt"><title>阿武町：15・43.7時間</title></circle><text x="298.0" y="106.6" class="pl">阿武</text></g><text x="258.0" y="294" class="al" text-anchor="middle">見える化で「実施」と答えた数（25小項目）</text></svg></figure>
+<figure class="sc"><figcaption>計画の具体策の数 × 小学校の月平均（R6）<span class="small">（相関 +0.18、18市町）</span></figcaption><svg viewBox="0 0 470 300" role="img" aria-label="計画に具体策を書いた項目数（19項目）と小学校の月平均（R6）の散布図"><line x1="46" x2="456" y1="260.0" y2="260.0" class="gl"/><text x="40" y="264.0" class="tk" text-anchor="end">15</text><line x1="46" x2="456" y1="178.0" y2="178.0" class="gl"/><text x="40" y="182.0" class="tk" text-anchor="end">30</text><line x1="46" x2="456" y1="96.0" y2="96.0" class="gl"/><text x="40" y="100.0" class="tk" text-anchor="end">45</text><line x1="46" x2="456" y1="14.0" y2="14.0" class="gl"/><text x="40" y="18.0" class="tk" text-anchor="end">60</text><text x="46.0" y="276" class="tk" text-anchor="middle">0</text><text x="148.5" y="276" class="tk" text-anchor="middle">5</text><text x="251.0" y="276" class="tk" text-anchor="middle">10</text><text x="353.5" y="276" class="tk" text-anchor="middle">15</text><text x="456.0" y="276" class="tk" text-anchor="middle">20</text><line x1="46" x2="46" y1="14" y2="260" class="ax"/><line x1="46" x2="456" y1="260" y2="260" class="ax"/><g><circle cx="210.0" cy="158.3" r="4.5" class="pt"><title>下関市：8・33.6時間</title></circle><text x="216.0" y="161.8" class="pl">下関</text></g><g><circle cx="210.0" cy="167.1" r="4.5" class="pt"><title>宇部市：8・32.0時間</title></circle><text x="216.0" y="170.6" class="pl">宇部</text></g><g><circle cx="189.5" cy="143.0" r="4.5" class="pt"><title>山口市：7・36.4時間</title></circle><text x="195.5" y="146.5" class="pl">山口</text></g><g><circle cx="251.0" cy="150.1" r="4.5" class="pt"><title>萩市：10・35.1時間</title></circle><text x="257.0" y="153.6" class="pl">萩</text></g><g><circle cx="271.5" cy="150.7" r="4.5" class="pt"><title>防府市：11・35.0時間</title></circle><text x="277.5" y="154.2" class="pl">防府</text></g><g><circle cx="251.0" cy="151.2" r="4.5" class="pt"><title>岩国市：10・34.9時間</title></circle><text x="257.0" y="154.7" class="pl">岩国</text></g><g><circle cx="107.5" cy="141.9" r="4.5" class="pt"><title>光市：3・36.6時間</title></circle><text x="113.5" y="145.4" class="pl">光</text></g><g><circle cx="230.5" cy="136.5" r="4.5" class="pt"><title>長門市：9・37.6時間</title></circle><text x="236.5" y="140.0" class="pl">長門</text></g><g><circle cx="251.0" cy="147.9" r="4.5" class="pt"><title>柳井市：10・35.5時間</title></circle><text x="257.0" y="151.4" class="pl">柳井</text></g><g><circle cx="292.0" cy="194.9" r="4.5" class="pt"><title>美祢市：12・26.9時間</title></circle><text x="298.0" y="198.4" class="pl">美祢</text></g><g><circle cx="374.0" cy="114.6" r="4.5" class="pt"><title>周南市：16・41.6時間</title></circle><text x="380.0" y="118.1" class="pl">周南</text></g><g><circle cx="46.0" cy="174.2" r="4.5" class="pt"><title>山陽小野田市：0・30.7時間</title></circle><text x="52.0" y="177.7" class="pl">山陽小野田</text></g><g><circle cx="251.0" cy="164.3" r="4.5" class="pt"><title>周防大島町：10・32.5時間</title></circle><text x="257.0" y="167.8" class="pl">周防大島</text></g><g><circle cx="148.5" cy="184.6" r="4.5" class="pt"><title>和木町：5・28.8時間</title></circle><text x="154.5" y="188.1" class="pl">和木</text></g><g><circle cx="87.0" cy="112.9" r="4.5" class="pt"><title>上関町：2・41.9時間</title></circle><text x="93.0" y="116.4" class="pl">上関</text></g><g><circle cx="292.0" cy="131.0" r="4.5" class="pt"><title>田布施町：12・38.6時間</title></circle><text x="298.0" y="134.5" class="pl">田布施</text></g><g><circle cx="271.5" cy="139.7" r="4.5" class="pt"><title>平生町：11・37.0時間</title></circle><text x="277.5" y="143.2" class="pl">平生</text></g><g><circle cx="251.0" cy="84.0" r="4.5" class="pt"><title>阿武町：10・47.2時間</title></circle><text x="257.0" y="87.5" class="pl">阿武</text></g><text x="258.0" y="294" class="al" text-anchor="middle">計画に具体策を書いた項目数（19項目）</text></svg></figure>
+<figure class="sc"><figcaption>計画の具体策の数 × 中学校の月平均（R6）<span class="small">（相関 +0.48、18市町）</span></figcaption><svg viewBox="0 0 470 300" role="img" aria-label="計画に具体策を書いた項目数（19項目）と中学校の月平均（R6）の散布図"><line x1="46" x2="456" y1="260.0" y2="260.0" class="gl"/><text x="40" y="264.0" class="tk" text-anchor="end">15</text><line x1="46" x2="456" y1="178.0" y2="178.0" class="gl"/><text x="40" y="182.0" class="tk" text-anchor="end">30</text><line x1="46" x2="456" y1="96.0" y2="96.0" class="gl"/><text x="40" y="100.0" class="tk" text-anchor="end">45</text><line x1="46" x2="456" y1="14.0" y2="14.0" class="gl"/><text x="40" y="18.0" class="tk" text-anchor="end">60</text><text x="46.0" y="276" class="tk" text-anchor="middle">0</text><text x="148.5" y="276" class="tk" text-anchor="middle">5</text><text x="251.0" y="276" class="tk" text-anchor="middle">10</text><text x="353.5" y="276" class="tk" text-anchor="middle">15</text><text x="456.0" y="276" class="tk" text-anchor="middle">20</text><line x1="46" x2="46" y1="14" y2="260" class="ax"/><line x1="46" x2="456" y1="260" y2="260" class="ax"/><g><circle cx="210.0" cy="125.0" r="4.5" class="pt"><title>下関市：8・39.7時間</title></circle><text x="216.0" y="128.5" class="pl">下関</text></g><g><circle cx="210.0" cy="141.9" r="4.5" class="pt"><title>宇部市：8・36.6時間</title></circle><text x="216.0" y="145.4" class="pl">宇部</text></g><g><circle cx="189.5" cy="118.4" r="4.5" class="pt"><title>山口市：7・40.9時間</title></circle><text x="195.5" y="121.9" class="pl">山口</text></g><g><circle cx="251.0" cy="85.1" r="4.5" class="pt"><title>萩市：10・47.0時間</title></circle><text x="257.0" y="88.6" class="pl">萩</text></g><g><circle cx="271.5" cy="121.7" r="4.5" class="pt"><title>防府市：11・40.3時間</title></circle><text x="277.5" y="125.2" class="pl">防府</text></g><g><circle cx="251.0" cy="85.6" r="4.5" class="pt"><title>岩国市：10・46.9時間</title></circle><text x="257.0" y="89.1" class="pl">岩国</text></g><g><circle cx="107.5" cy="159.4" r="4.5" class="pt"><title>光市：3・33.4時間</title></circle><text x="113.5" y="162.9" class="pl">光</text></g><g><circle cx="230.5" cy="94.4" r="4.5" class="pt"><title>長門市：9・45.3時間</title></circle><text x="236.5" y="97.9" class="pl">長門</text></g><g><circle cx="251.0" cy="77.4" r="4.5" class="pt"><title>柳井市：10・48.4時間</title></circle><text x="257.0" y="80.9" class="pl">柳井</text></g><g><circle cx="292.0" cy="110.8" r="4.5" class="pt"><title>美祢市：12・42.3時間</title></circle><text x="298.0" y="114.3" class="pl">美祢</text></g><g><circle cx="374.0" cy="95.5" r="4.5" class="pt"><title>周南市：16・45.1時間</title></circle><text x="380.0" y="99.0" class="pl">周南</text></g><g><circle cx="46.0" cy="123.3" r="4.5" class="pt"><title>山陽小野田市：0・40.0時間</title></circle><text x="52.0" y="126.8" class="pl">山陽小野田</text></g><g><circle cx="251.0" cy="139.2" r="4.5" class="pt"><title>周防大島町：10・37.1時間</title></circle><text x="257.0" y="142.7" class="pl">周防大島</text></g><g><circle cx="148.5" cy="67.6" r="4.5" class="pt"><title>和木町：5・50.2時間</title></circle><text x="154.5" y="71.1" class="pl">和木</text></g><g><circle cx="87.0" cy="213.5" r="4.5" class="pt"><title>上関町：2・23.5時間</title></circle><text x="93.0" y="217.0" class="pl">上関</text></g><g><circle cx="292.0" cy="121.7" r="4.5" class="pt"><title>田布施町：12・40.3時間</title></circle><text x="298.0" y="125.2" class="pl">田布施</text></g><g><circle cx="271.5" cy="32.0" r="4.5" class="pt"><title>平生町：11・56.7時間</title></circle><text x="277.5" y="35.5" class="pl">平生</text></g><g><circle cx="251.0" cy="103.1" r="4.5" class="pt"><title>阿武町：10・43.7時間</title></circle><text x="257.0" y="106.6" class="pl">阿武</text></g><text x="258.0" y="294" class="al" text-anchor="middle">計画に具体策を書いた項目数（19項目）</text></svg></figure>
+</div></div></details>
+
+<h2>出典</h2>
+<ul class="src">
+<li>各市町「教育職員に関する業務量管理・健康確保措置実施計画」（R8.2〜4。上関町は「学校における働き方改革プラン」R8.3）。掲載先は<a href="gyomuryo-keikaku-hikaku-v3.html#keisai">19市町の計画の比較 ⑤掲載先</a></li>
+<li>文部科学省「令和7年度 教育委員会における学校の働き方改革のための『見える化』調査結果（山口県）」 <a href="https://www.mext.go.jp/content/20260513-mxt_kyoikujinzai01-000048426_35.pdf">PDF</a>（p.18〜24 問4 3分類19項目）</li>
+<li>文部科学省「教員勤務実態調査（令和4年度）の集計（確定値）」 <a href="https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf">PDF</a>（p.75〜76 教員調査Q45-1）</li>
+<li>文部科学省「学校と教師の業務の３分類」（令和7年9月26日通知の別添4） <a href="https://www.mext.go.jp/content/20250926-mxt_syoto01-000045031_06.pdf">PDF</a>／<a href="https://www.mext.go.jp/b_menu/hakusho/mext_00026.html">通知のページ</a></li>
+</ul>
+</div>
+<script>
+// 見出しが2行ある表は、2行目を1行目の高さだけ下にずらして固定する
+function stickHead(){document.querySelectorAll('thead').forEach(function(h){var top=0;[].forEach.call(h.rows,function(r){[].forEach.call(r.cells,function(c){c.style.setProperty('--top',top+'px')});top+=r.getBoundingClientRect().height;});});}
+window.addEventListener('load',stickHead);window.addEventListener('resize',stickHead);
+</script>
+</body>
+</html>
