@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教師不足の見通し</title>
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1f2328; --sub:#5b6168; --line:#dcd9d0;
+  --ok:#2e7d4f; --ok-bg:#e6f3eb; --ng:#b03a3a; --ng-bg:#f8e7e7; --mid:#b07514; --mid-bg:#fbf0dc;
+  --key:#2f6fb3; --key-bg:#e7f0fa; --mark:#fff2b3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181b; --card:#202328; --ink:#e7e9ec; --sub:#a3a9b1; --line:#353a41;
+    --ok:#7fd3a0; --ok-bg:#1c3226; --ng:#f0a3a3; --ng-bg:#3a2222; --mid:#e8b660; --mid-bg:#3a2e17;
+    --key:#7fb2ea; --key-bg:#1d2b3b; --mark:#5a4d12;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181b; --card:#202328; --ink:#e7e9ec; --sub:#a3a9b1; --line:#353a41;
+  --ok:#7fd3a0; --ok-bg:#1c3226; --ng:#f0a3a3; --ng-bg:#3a2222; --mid:#e8b660; --mid-bg:#3a2e17;
+  --key:#7fb2ea; --key-bg:#1d2b3b; --mark:#5a4d12;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:16px}
+main{max-width:900px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.7rem;margin:.2em 0 .2em;line-height:1.35}
+h2{font-size:1.25rem;margin:2em 0 .6em;padding-bottom:.25em;border-bottom:2px solid var(--line)}
+p{margin:.5em 0}
+.lead{color:var(--sub);margin-top:0}
+mark{background:var(--mark);color:inherit;padding:0 .15em}
+.note{color:var(--sub);font-size:.85rem}
+
+/* 問い */
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0;
+  display:flex;gap:14px;align-items:center}
+.q .bubble{font-size:2rem;line-height:1}
+.q b{font-size:1.15rem}
+
+/* 3つの見通し */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.ka{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--c);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column}
+.ka.ok{--c:var(--ok);--cb:var(--ok-bg)}
+.ka.ng{--c:var(--ng);--cb:var(--ng-bg)}
+.ka.mid{--c:var(--mid);--cb:var(--mid-bg)}
+.ka .what{font-weight:700;font-size:1.05rem;line-height:1.45}
+.ka .sign{display:flex;align-items:center;gap:10px;margin:10px 0;padding:8px 10px;border-radius:10px;background:var(--cb)}
+.ka .sign .mk{font-size:1.9rem;font-weight:700;color:var(--c);line-height:1;width:1.2em;text-align:center}
+.ka .sign .ans{font-weight:700;color:var(--c);line-height:1.45}
+.ka .why{font-size:.92rem;margin:0}
+.ka .why li{margin:.25em 0}
+.ka ul{padding-left:1.2em;margin:.2em 0}
+.ka .pit{margin:10px 0 0;padding:8px 10px;border:1.5px dashed var(--ng);border-radius:10px}
+.ka .pit > b{color:var(--ng)}
+.ka .pit ul{margin:.3em 0 0;font-size:.86rem}
+.ka .pit li{margin:.25em 0}
+
+/* 待つ vs 先回り */
+.turn{text-align:center;margin:26px 0 8px;font-weight:700;font-size:1.15rem}
+.turn span{display:inline-block;background:var(--key);color:#fff;border-radius:999px;padding:6px 18px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vs > div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.vs .bad{opacity:.85}
+.vs .bad h3{color:var(--sub)}
+.vs .good{border:2px solid var(--key)}
+.vs h3{margin:0 0 .3em;font-size:1.05rem}
+.vs ul{padding-left:1.2em;margin:.2em 0}
+
+/* 要求 */
+.req{display:grid;grid-template-columns:52px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);
+  border-left:6px solid var(--key);border-radius:12px;padding:16px;margin:12px 0}
+.req .no{width:52px;height:52px;border-radius:50%;background:var(--key-bg);color:var(--key);display:grid;place-items:center;font-size:1.5rem;font-weight:700}
+.req h3{margin:0 0 .3em;font-size:1.12rem;line-height:1.45}
+.req ul{padding-left:1.2em;margin:.3em 0}
+.req .fix{font-size:.85rem;color:var(--sub);margin-top:.4em}
+.req .fix b{color:var(--ink)}
+
+/* ひとこと */
+.say{background:var(--key-bg);border-radius:12px;padding:16px 18px;margin:14px 0;font-size:1.05rem}
+.say p{margin:.3em 0}
+
+/* クイズ */
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 20px 22px;margin:8px 0 18px;text-align:center}
+.js-quiz:not(.opened) .quiz{min-height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center}
+.quiz-tag{display:inline-block;align-self:center;background:var(--key);color:#fff;font-weight:700;border-radius:999px;padding:4px 18px;font-size:1.05rem;letter-spacing:.1em}
+.quiz h1{font-size:2rem;margin:.5em 0 .7em}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:720px;margin:0 auto;width:100%}
+.choices button{font:inherit;font-weight:700;font-size:1.15rem;color:var(--ink);background:var(--bg);border:2px solid var(--line);
+  border-radius:14px;padding:18px 10px;cursor:pointer;transition:transform .1s,border-color .15s}
+.choices button:hover:not(:disabled){border-color:var(--key);transform:translateY(-2px)}
+.choices button:focus-visible{outline:3px solid var(--key);outline-offset:2px}
+.choices button:disabled{cursor:default;opacity:.55}
+.choices button.picked{opacity:1;box-shadow:0 0 0 3px var(--key)}
+.quiz-hint{color:var(--sub);font-size:.9rem;margin-top:14px}
+.quiz.done .quiz-hint{display:none}
+.result{--c:var(--key);--cb:var(--key-bg);display:none;max-width:720px;margin:16px auto 0;text-align:left;border-radius:12px;padding:12px 16px;background:var(--cb);border-left:6px solid var(--c)}
+.result.show{display:block;animation:pop .35s ease-out}
+.result.ok{--c:var(--ok);--cb:var(--ok-bg)} .result.ng{--c:var(--ng);--cb:var(--ng-bg)} .result.mid{--c:var(--mid);--cb:var(--mid-bg)}
+.result .r-head{font-size:1.3rem;font-weight:700;color:var(--c)}
+.result p{margin:.3em 0}
+.result .r-link{font-size:.88rem}
+.result a{color:var(--key)}
+.result .em{display:inline;font-size:1.08em;color:var(--ng);background:linear-gradient(transparent 60%,var(--mark) 60%);padding:0 .1em}
+.result .r-next{text-align:center;color:var(--sub);font-size:.9rem}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.js-quiz:not(.opened) #rest{display:none}
+#rest{scroll-margin-top:12px}
+.opened #rest{animation:pop .5s ease-out}
+
+@media (max-width:720px){
+  .three,.vs{grid-template-columns:1fr}
+  h1{font-size:1.4rem}
+  .quiz h1{font-size:1.6rem}
+  .choices{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff;font-size:12.5px}
+  main{padding:0}
+  .js-quiz #rest{display:block}
+  .quiz{min-height:0 !important;padding:12px}
+  .quiz-hint{display:none}
+  .ka,.req,.vs>div,.q{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main>
+
+<section class="quiz" aria-labelledby="qtitle">
+  <div class="quiz-tag">クイズ！</div>
+  <h1 id="qtitle">子どもが減れば、<br>先生不足は解消する？</h1>
+  <div class="choices" role="group" aria-label="答えをえらぶ">
+    <button type="button" data-a="yes">解決する</button>
+    <button type="button" data-a="some">少しは解決する</button>
+    <button type="button" data-a="no">解決しない</button>
+  </div>
+  <p class="quiz-hint">えらぶと、答えと説明が下に開きます。</p>
+  <div class="result" id="result" aria-live="polite"></div>
+</section>
+
+<div id="rest">
+<p class="lead">「先生不足」は1つの問題ではなく、3つに分けると見通しがまったく違います。</p>
+
+<div class="q">
+  <div class="bubble">💬</div>
+  <div><b>「少子化だから、待っていれば先生は足りるようになる」</b><br>
+  <span class="note">――よく聞くこの説明が当てはまるのは、3つのうち1つだけです。</span></div>
+</div>
+
+<h2>3つに分けた見通し</h2>
+<div class="three">
+
+  <div class="ka ok">
+    <div class="what">① 全体の先生の数</div>
+    <div class="sign"><div class="mk">○</div><div class="ans">全国では2030年代に向けて<br>徐々に楽になる</div></div>
+    <ul class="why">
+      <li>子どもと学級が減り、必要な先生の数が減る</li>
+      <li>全国では大量退職の山がなだらかになってきた</li>
+      <li>ただし<mark>地域差がある</mark>（へき地・離島は遅れる）</li>
+    </ul>
+    <div class="pit">
+      <b>⚠ 山口県の落とし穴</b>
+      <ul>
+        <li><b>退職の山はこれから</b>：55歳以上が小24%・中32%（全国は約20%）。定年退職は<mark>2030〜2035年度</mark>がいちばん多く、落ち着くのは小で2036年度以降、中で2040年代</li>
+        <li><b>志願者が先に減る</b>：小の受験者は−43%（2016→2024年度実施）。児童−16%、先生−6%より速い</li>
+        <li><b>子どもほど先生は減らない</b>：特別支援学級は小で+26%（2016→2025年度）。中学校35人学級も始まる</li>
+        <li><b>県外へ流れる</b>：都市部の大量採用が続くあいだは、志願者が戻りにくい</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ka ng">
+    <div class="what">② 講師・代わりの先生の不足</div>
+    <div class="sign"><div class="mk">×</div><div class="ans">子どもが減るだけでは<br>解消しない</div></div>
+    <ul class="why">
+      <li>産休・育休・病休は子どもの数と関係なく起きる</li>
+      <li>受験者が減り、講師の候補になる<mark>「不合格だった人」は大きく減った</mark>（全国の小学校で2010→2024年度に約6割減）</li>
+      <li>子どもが減っても、育休をとる先生は増えている（全国 約4.3万人→4.8万人、2017→2021年度）</li>
+      <li>年度途中に代わりが来ない数は、国の調査では数えていない</li>
+    </ul>
+  </div>
+
+  <div class="ka mid">
+    <div class="what">③ 小さい中学校の教科の免許</div>
+    <div class="sign"><div class="mk">△</div><div class="ans">統廃合しないと<br>解消しにくい</div></div>
+    <ul class="why">
+      <li>先生の数は学級数で決まるので、小さい学校では<mark>9教科の免許がそろわない</mark></li>
+      <li>子どもが減ると学校はさらに小さくなり、むしろ悪化する</li>
+      <li>免許外教科担任・兼務でしのいでいる</li>
+    </ul>
+  </div>
+
+</div>
+
+<p class="turn"><span>だから交渉では…</span></p>
+
+<div class="vs">
+  <div class="bad">
+    <h3>✕ 子どもが減るのを待つ</h3>
+    <ul>
+      <li>②と③は待っても良くならない</li>
+      <li>①で浮いた分は「定数減」として削られてしまう</li>
+      <li>山口県は、楽になる前に退職の山と志願者減が重なる</li>
+    </ul>
+  </div>
+  <div class="good">
+    <h3>◎ 先回りして手を打つ</h3>
+    <ul>
+      <li>代わりの先生を<b>最初から正規の数</b>に入れる</li>
+      <li>浮いた分は<b>1人ひとりの持ち分を軽く</b>する方に使う</li>
+    </ul>
+  </div>
+</div>
+
+<h2>求めること</h2>
+
+<div class="req">
+  <div class="no">1</div>
+  <div>
+    <h3>代わりの先生を、最初から正規の定数に入れておく</h3>
+    <ul>
+      <li><b>産休・育休の代わりを前もって配置する</b>（休みに入ってから探すのではなく、年度初めから）</li>
+      <li><b>予備の先生を加配する</b>（病休など急な休みに回せる先生を、地域ごとに置いておく）</li>
+    </ul>
+    <p class="fix">効くところ → <b>②</b>（講師・代わりの先生の不足）</p>
+  </div>
+</div>
+
+<div class="req">
+  <div class="no">2</div>
+  <div>
+    <h3>子どもが減っても先生の数を減らさず、1人ひとりの持ち分を軽くする</h3>
+    <ul>
+      <li>学級が減って浮いた先生を<b>定数減に回さない</b></li>
+      <li>持ち授業時数を減らす、担任外の先生を置く、小さい中学校の教科の先生を確保する、に使う</li>
+    </ul>
+    <p class="fix">効くところ → <b>①</b>を働き方改革に変える・<b>③</b>を和らげる</p>
+  </div>
+</div>
+
+<h2>交渉でのひとこと</h2>
+<div class="say">
+  <p>「少子化で全体は楽になっても、<b>代わりの先生が来ない問題は残ります</b>。」</p>
+  <p>「子どもが減って浮く先生を減らすのではなく、<b>代わりの先生と、1人ひとりの持ち分を軽くする方に回してください</b>。」</p>
+</div>
+
+<p class="note">採用数・教員数・学級数・児童数の推移グラフは別ページにまとめています。</p>
+</div>
+
+</main>
+<script>
+(function(){
+  var ANSWER = '<p>答えは<b>「地域によっては、少しは解決する」</b>。</p>'
+    + '<p>先生の全体の数は、<b>全国では</b>2030年代に向けて楽になっていきます。<br>しかし、<b>山口県は退職の山がこれから</b>です（<b>2030〜2035年度ごろ</b>に定年退職がいちばん多くなります）。'
+    + '<br><span class="r-link">→ グラフで見る：<a href="kyoin-busoku-suii.html?a=yama&amp;lv=sho#c_nenrei">山口県の先生の年齢構成（小学校）</a>・<a href="kyoin-busoku-suii.html?a=yama&amp;lv=chu#c_nenrei">（中学校）</a></span></p>'
+    + '<p>さらに言うと、<strong class="em">代わりの先生の不足と、小さい中学校で教科の免許がそろわない問題は、解決しません。</strong></p>';
+  var root = document.documentElement, quiz = document.querySelector('.quiz');
+  root.classList.add('js-quiz');
+  quiz.querySelectorAll('.choices button').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (quiz.classList.contains('done')) return;
+      quiz.classList.add('done');
+      quiz.querySelectorAll('.choices button').forEach(function(x){ x.disabled = true; });
+      b.classList.add('picked');
+      var r = document.getElementById('result');
+      r.className = 'result show';
+      r.innerHTML = ANSWER + '<p class="r-next">くわしくは下へ ▼</p>';
+      root.classList.add('opened');
+      setTimeout(function(){ document.getElementById('rest').scrollIntoView({behavior:'smooth', block:'start'}); }, 900);
+    });
+  });
+})();
+</script>
+</body>
+</html>
