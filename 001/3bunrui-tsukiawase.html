@@ -18,7 +18,7 @@
   --plan:#2f4f8f; --mie:#1d7a46; --mie2:#8cc7a3;
   --m3:#1d7a46; --m2:#8cc7a3; --m1:#f3e3b5; --m0:#ffffff; --m3ink:#fff;
   --tA:#e7eefb; --tAink:#2f4f8f; --tB:#e4f3ea; --tBink:#1d6b3e; --tC:#fbe9e7; --tCink:#a1271d; --tD:#eceef3; --tDink:#5a6272;
-  --hiA:#e7eefb; --hiB:#e4f3ea; --pt:#2f4f8f; --kwm:#ffe28a; --bud:#d9822b;
+  --hiA:#e7eefb; --hiB:#e4f3ea; --pt:#2f4f8f; --kwm:#ffe28a; --bud:#d9822b; --purp:#7b2fa8;
   --h0:#e3f2e8; --h1:#fff3d1; --h2:#fddcbf; --h3:#f6ad99; --h4:#d4483b; --h4ink:#fff;
   --b1:#e9effa; --b2:#cddcf5; --b3:#a7c0ee;
   color-scheme:light;
@@ -30,7 +30,7 @@
     --plan:#8fb0f0; --mie:#6fd09a; --mie2:#2f6b4a;
     --m3:#3f9f69; --m2:#2c5c43; --m1:#5a4b22; --m0:#1e2128; --m3ink:#fff;
     --tA:#26304a; --tAink:#a9c1f2; --tB:#1f3a2c; --tBink:#8fe0b2; --tC:#3a2422; --tCink:#ff9d94; --tD:#272b34; --tDink:#a4aab6;
-    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12; --bud:#f0a050;
+    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12; --bud:#f0a050; --purp:#cfa0f0;
     --h0:#1f3a2c; --h1:#3d3520; --h2:#4d3421; --h3:#683027; --h4:#a8352a; --h4ink:#fff;
     --b1:#222a3b; --b2:#2c3c5e; --b3:#3d5894;
     color-scheme:dark;
@@ -42,7 +42,7 @@
     --plan:#8fb0f0; --mie:#6fd09a; --mie2:#2f6b4a;
     --m3:#3f9f69; --m2:#2c5c43; --m1:#5a4b22; --m0:#1e2128; --m3ink:#fff;
     --tA:#26304a; --tAink:#a9c1f2; --tB:#1f3a2c; --tBink:#8fe0b2; --tC:#3a2422; --tCink:#ff9d94; --tD:#272b34; --tDink:#a4aab6;
-    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12; --bud:#f0a050;
+    --hiA:#26304a; --hiB:#1f3a2c; --pt:#8fb0f0; --kwm:#5a4a12; --bud:#f0a050; --purp:#cfa0f0;
     --h0:#1f3a2c; --h1:#3d3520; --h2:#4d3421; --h3:#683027; --h4:#a8352a; --h4ink:#fff;
     --b1:#222a3b; --b2:#2c3c5e; --b3:#3d5894;
     color-scheme:dark;
@@ -159,6 +159,7 @@ td.hiB{background:var(--hiB);font-weight:700}
 .teit th.ta,.teit th.tb,.teit th.tc{width:30%;min-width:12em}
 .teit th.ta{background:var(--tA)}.teit th.tb{background:var(--tB)}.teit th.tc{background:var(--tC)}
 .chip{display:inline-block;margin:2px 3px 2px 0;padding:1px 8px;border-radius:999px;font-size:.78rem;white-space:nowrap}
+.nA{color:var(--tCink);font-weight:700}.nB{color:var(--purp);font-weight:700}.nC{color:var(--plan);font-weight:700}
 .chip.ca{background:var(--tA);color:var(--tAink)}.chip.cb{background:var(--tB);color:var(--tBink)}.chip.cc{background:var(--tC);color:var(--tCink)}
 .tcs{margin:8px 0}
 details.tc{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:6px 0}
@@ -362,13 +363,14 @@ dl.def dd{margin:0}
 
 <h3 id="matome1">1章のまとめ</h3>
 <p>19項目を、計画と国への回答の両方から見ると、4つのまとまりに分かれます。</p>
+<div class="legend" id="matome1-leg"><span class="mk"><b>番号の色</b>（3分類）</span><span class="mk"><i class="sw" style="background:var(--tCink);border-color:var(--tCink);border-radius:50%"></i>学校以外が担うべき業務（①〜⑤）</span><span class="mk"><i class="sw" style="background:var(--purp);border-color:var(--purp);border-radius:50%"></i>教師以外が積極的に参画すべき業務（⑥〜⑬）</span><span class="mk"><i class="sw" style="background:var(--plan);border-color:var(--plan);border-radius:50%"></i>教師の業務だが負担軽減を促進すべき業務（⑭〜⑲）</span></div>
 <div class="sum4">
-<div class="s4 s4a"><p class="s4h">計画でも回答でも進んでいる</p><p><span class="chip cb">①登下校</span><span class="chip cb">⑥調査回答</span><span class="chip cb">⑬部活動</span><span class="chip cb">⑮授業準備</span><span class="chip cb">⑲要支援</span></p><p class="s4t">支援員・専門スタッフの配置や部活動の地域展開など、国の予算や制度が先にあるものが多い。ただし⑮⑲は、補助や専門スタッフとの協働が入っただけで、仕事の中心は教員に残っている。</p></div>
-<div class="s4 s4b"><p class="s4h">計画には書いたが、まだ「実施」と答えていない</p><p><span class="chip ca">②見回り</span><span class="chip ca">⑨プール</span><span class="chip ca">⑯成績処理</span></p><p class="s4t">R8年度からの計画で「これからやる」と書いた項目。実際に動いたかを、次の見える化調査で確かめられる。</p></div>
-<div class="s4 s4c"><p class="s4h">「実施」と答えたが、計画にない</p><p><span class="chip cb">④地域調整</span><span class="chip cb">⑧ICT保守</span><span class="chip cb">⑭給食</span><span class="chip cb">⑰行事</span></p><p class="s4t">何を、どの学校でしているのかが計画からは読めない。<strong>だから、取組の中身と対象の学校を計画に書き込み、担当や予算が変わっても続けられるようにする必要がある。</strong></p></div>
-<div class="s4 s4d"><p class="s4h">計画でも回答でも少ない</p><p><span class="chip cc">⑦広報・HP</span><span class="chip cc">⑩開錠施錠</span><span class="chip cc">⑪休み時間</span><span class="chip cc">⑱進路</span></p><p class="s4t">19市町のうち計画に具体策を書いたのは0〜3、「実施」と答えたのは3〜6。なぜ少ないのかは、別のページ<a href="3bunrui-datosei.html#fukano">「3分類は妥当か」</a>で検討しています。</p></div>
+<div class="s4 s4a"><p class="s4h">計画でも回答でも進んでいる</p><p><span class="chip cb"><b class="nA">①</b>登下校</span><span class="chip cb"><b class="nB">⑥</b>調査回答</span><span class="chip cb"><b class="nB">⑬</b>部活動</span><span class="chip cb"><b class="nC">⑮</b>授業準備</span><span class="chip cb"><b class="nC">⑲</b>要支援</span></p><p class="s4t">支援員・専門スタッフの配置や部活動の地域展開など、国の予算や制度が先にあるものが多い。ただし⑮⑲は、補助や専門スタッフとの協働が入っただけで、仕事の中心は教員に残っている。</p></div>
+<div class="s4 s4b"><p class="s4h">計画には書いたが、まだ「実施」と答えていない</p><p><span class="chip ca"><b class="nA">②</b>見回り</span><span class="chip ca"><b class="nB">⑨</b>プール</span><span class="chip ca"><b class="nC">⑯</b>成績処理</span></p><p class="s4t">R8年度からの計画で「これからやる」と書いた項目。実際に動いたかを、次の見える化調査で確かめられる。</p></div>
+<div class="s4 s4c"><p class="s4h">「実施」と答えたが、計画にない</p><p><span class="chip cb"><b class="nA">④</b>地域調整</span><span class="chip cb"><b class="nB">⑧</b>ICT保守</span><span class="chip cb"><b class="nC">⑭</b>給食</span><span class="chip cb"><b class="nC">⑰</b>行事</span></p><p class="s4t">何を、どの学校でしているのかが計画からは読めない。<strong>だから、取組の中身と対象の学校を計画に書き込み、担当や予算が変わっても続けられるようにする必要がある。</strong></p></div>
+<div class="s4 s4d"><p class="s4h">計画でも回答でも少ない</p><p><span class="chip cc"><b class="nB">⑦</b>広報・HP</span><span class="chip cc"><b class="nB">⑩</b>開錠施錠</span><span class="chip cc"><b class="nB">⑪</b>休み時間</span><span class="chip cc"><b class="nC">⑱</b>進路</span></p><p class="s4t">19市町のうち計画に具体策を書いたのは0〜3、「実施」と答えたのは3〜6。なぜ少ないのかは、別のページ<a href="3bunrui-datosei.html#fukano">「3分類は妥当か」</a>で検討しています。</p></div>
 </div>
-<p class="small" style="margin-left:0">③学校徴収金・⑤苦情対応・⑫校内清掃は、計画・回答とも6〜12市町で、この間にあります。</p>
+<p class="small" style="margin-left:0"><b class="nA">③</b>学校徴収金・<b class="nA">⑤</b>苦情対応・<b class="nB">⑫</b>校内清掃は、計画・回答とも6〜12市町で、この間にあります。</p>
 
 <h2><span class="hn">2</span>市町ごとに見る</h2>
 <p>左側は<strong>取組の数</strong>（青が濃いほど多い）、右側は<strong>時間外在校等時間の長さ</strong>（赤が濃いほど危ない）です。国への回答で「実施」とした数の多い順に並べ、いちばん下に県全体を置きました。</p>
