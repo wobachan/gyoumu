@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国庫負担3分の1の深掘り</title>
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#222;--sub:#5b5b5b;--line:#ddd8cf;--acc:#1f5f8b;--acc2:#b4532a;--soft:#eef4f8;--warn:#fff5e6;--ok:#eef7ee}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17191c;--card:#202328;--ink:#e8e6e1;--sub:#a9a59d;--line:#3a3d43;--acc:#7fb6dc;--acc2:#e59a76;--soft:#1e2a33;--warn:#33291b;--ok:#1d2b1f}}
+:root[data-theme="dark"]{--bg:#17191c;--card:#202328;--ink:#e8e6e1;--sub:#a9a59d;--line:#3a3d43;--acc:#7fb6dc;--acc2:#e59a76;--soft:#1e2a33;--warn:#33291b;--ok:#1d2b1f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Hiragino Sans","Yu Gothic",sans-serif;line-height:1.75;font-size:16px}
+main{max-width:920px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.6rem;margin:.2em 0 .1em}
+.lead{color:var(--sub);margin:0 0 1.2em}
+h2{font-size:1.2rem;border-left:6px solid var(--acc);padding-left:.5em;margin:2.2em 0 .7em}
+h3{font-size:1.02rem;margin:1.4em 0 .4em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:.8em 0}
+.point{background:var(--soft)}
+.warn{background:var(--warn)}
+.ok{background:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+th{background:var(--soft);white-space:nowrap}
+.tw{overflow-x:auto}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+small,.src{color:var(--sub);font-size:.82rem}
+a{color:var(--acc)}
+.tag{display:inline-block;font-size:.75rem;border:1px solid var(--line);border-radius:4px;padding:0 6px;margin-right:4px;color:var(--sub)}
+.tag.v{border-color:var(--acc);color:var(--acc)}
+.tag.x{border-color:var(--acc2);color:var(--acc2)}
+.bar{display:flex;height:34px;border-radius:6px;overflow:hidden;font-size:.85rem;margin:.3em 0 .2em}
+.bar div{display:flex;align-items:center;justify-content:center;color:#fff}
+.b1{background:#1f5f8b}.b2{background:#8a9aa6}.b3{background:#b4532a}
+ol li,ul li{margin:.2em 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>国庫負担「3分の1」を深掘りする</h1>
+<p class="lead">義務教育費国庫負担金の負担割合はどう変わり、何が変わり、何を確かめれば「負担割合と財政力が配置に表れているか」がわかるのか。2026-10-26調べ。<br>
+<span class="tag v">確認</span>＝一次資料・論文本文で確かめた　<span class="tag x">未確認</span>＝出どころを見つけられなかった　<span class="tag">理屈</span>＝制度から導いた推論</p>
+
+<div class="card point">
+<b>結論を先に</b>
+<ol>
+<li>現在の国庫負担は<b>3分の1</b>（2006年度から）。<span class="tag v">確認</span></li>
+<li>ただし、なくなった6分の1は「消えた」わけではなく、<b>税源移譲と地方交付税</b>で県に渡っている。変わったのはお金の<b>量</b>より<b>色</b>（使い道が決まったお金 → 使い道自由なお金）。</li>
+<li>その結果、県が教員給与費を1円削ったときに県の手元に残る割合が <b>1/2 → 2/3</b> に上がった。削る誘因が強まった、というのが2分の1復元論の芯。<span class="tag">理屈</span></li>
+<li>実証研究では「財政力が弱い県ほど非正規が多い」は<b>単純には出ない</b>。効いているのは財政力指数より<b>歳出の中身</b>（福祉費が増える・教育費の割合が下がる・借金返済が増える）だった（菊地原2021）。<span class="tag v">確認</span></li>
+<li><b>2000〜2012年度の47都道府県データで確かめると、2006年の後に「財政の弱い県ほど講師が増えた」形跡は見られない</b>（8章）。<span class="tag v">確認</span></li>
+<li>ChatGPTの例「広島県府中市議会 2021年意見書」は、今回の検索では<b>見つからなかった</b>。同じ広島県では<b>福山市議会</b>の2023・2024年度政府予算に係る意見書（負担割合の引上げ）が確認できる。<span class="tag x">未確認</span></li>
+</ol>
+</div>
+
+<h2>1. しくみ：教員の給料はだれが払っているか</h2>
+<div class="card">
+<p style="margin:.2em 0">市町村立小中学校の教職員の給与費（県費負担教職員。2017年度からは政令市は市が負担）</p>
+<div class="bar"><div class="b1" style="width:33.3%">国 1/3（国庫負担金）</div><div class="b2" style="width:66.7%">県 2/3（県税＋地方交付税）</div></div>
+<small>2005年度までは 国1/2・県1/2。</small>
+<ul>
+<li><b>国の1/3</b>：実際に払った額（実支出額）と、国が定数・給与単価から計算する限度額の<b>低いほう</b>の3分の1。使い道は教職員給与に限られる。</li>
+<li><b>県の2/3</b>：地方交付税の「基準財政需要額」に標準的な額が算入される。ただし交付税は<b>使い道自由</b>の一般財源で、「教員に使え」という縛りはない。</li>
+<li><b>総額裁量制</b>（2004年度〜）：国庫負担金の総額の範囲なら、給与の水準や職員の配置を県が自由に決められる。給料を下げて浮いたお金で人数を増やす（＝常勤1人分で非常勤を複数）ことができる。</li>
+</ul>
+<small class="src">出典：文部科学省「義務教育費国庫負担制度」 <a href="https://www.mext.go.jp/a_menu/shotou/kyuyo/1394395.htm">mext.go.jp/a_menu/shotou/kyuyo/1394395.htm</a>、金子真理子2014（後掲）</small>
+</div>
+
+<h2>2. 年表：2分の1はどうやって3分の1になったか</h2>
+<div class="tw"><table>
+<tr><th>年</th><th>できごと</th><th>意味</th></tr>
+<tr><td class="num">1900（明33）</td><td>市町村立小学校教育費国庫補助法</td><td>授業料をとらない義務教育の財源を国が補助</td></tr>
+<tr><td class="num">1940（昭15）</td><td>義務教育費国庫負担法：給与を<b>県</b>が負担し、その<b>1/2</b>を国が負担</td><td>財政力の弱い市町村でも先生を置けるように</td></tr>
+<tr><td class="num">1950（昭25）</td><td>シャウプ勧告で国庫負担金を<b>廃止</b> → 地方財政平衡交付金に吸収</td><td>使い道自由のお金に。<b>県の間の格差が広がる</b>（児童1人あたり教育費 S27 東京100：茨城53）</td></tr>
+<tr><td class="num">1953（昭28）</td><td>知事会の決議などを背景に国庫負担法が<b>復活</b>（1/2）</td><td>「一般的な財源調整では義務教育費は守れない」という教訓</td></tr>
+<tr><td class="num">1985〜</td><td>旅費・教材費・恩給費・共済追加費用などを国庫負担の対象から外す（一般財源化）</td><td>のちに措置率の低下・県の格差として表れる（4章）</td></tr>
+<tr><td class="num">2001</td><td>義務標準法改正：常勤の定数を非常勤講師に振り替え可能に</td><td>いわゆる「定数崩し」</td></tr>
+<tr><td class="num">2004</td><td>国立学校準拠制の廃止／<b>総額裁量制</b>導入</td><td>給与水準も配置も県が決める時代へ</td></tr>
+<tr><td class="num">2004.11</td><td>三位一体改革の政府・与党合意：義務教育費国庫負担金（暫定）<b>8,500億円程度</b>を税源移譲の対象に</td><td>地方六団体は国庫負担金の廃止・一般財源化を求め、文科省は存続を主張</td></tr>
+<tr><td class="num">2005</td><td>中教審答申：制度は<b>堅持</b>（1/2）とする</td><td>それでも政治決着で削減へ</td></tr>
+<tr><td class="num">2006（平18）</td><td>負担割合を<b>1/2 → 1/3</b>（小中とも）</td><td>補助金額 2004年度 約2.5兆円 → 2006年度 1兆6,763億円</td></tr>
+<tr><td class="num">2017（平29）</td><td>政令市に給与負担などを移す（道府県民税所得割2%を市へ）</td><td>負担割合は1/3のまま</td></tr>
+<tr><td class="num">2026（令8）</td><td>義務教育費国庫負担金 予算 <b>1兆7,118億円</b>（前年度比+909億円、+5.6%）</td><td>文教及び科学振興費の28.3%</td></tr>
+</table></div>
+<p class="src">出典：文部科学省 中教審資料「義務教育費国庫負担制度について（参考資料）」<a href="https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo6/gijiroku/attach/__icsFiles/afieldfile/2017/06/22/1387196_001.pdf">PDF</a>／総務省 地方財政白書 資料「三位一体の改革について」<a href="https://www.soumu.go.jp/menu_seisaku/hakusyo/chihou/18data/18czs3-3.html">soumu.go.jp</a>／財務省『ファイナンス』2026年4月号 令和8年度予算 <a href="https://www.mof.go.jp/public_relations/finance/202604/202604g.pdf">PDF</a>／imidas「義務教育費国庫負担金」<a href="https://imidas.jp/genre/detail/F-101-0003.html">imidas.jp</a>（2006年度の金額）／金子2014・菊地原2021（2001・2004年の改正）</p>
+
+<h2>3. 1/2と1/3で何が違うのか：「削ったら手元にいくら残るか」</h2>
+<div class="grid2">
+<div class="card">
+<b>2005年度まで（国1/2）</b>
+<p style="margin:.4em 0">県が給与費を <b>100</b> 削る（給料を下げる・正規を講師に置き換える等）<br>
+→ 国の負担金が <b>50</b> 減る<br>
+→ 県の手元に残るのは <b>50</b></p>
+</div>
+<div class="card">
+<b>2006年度から（国1/3）</b>
+<p style="margin:.4em 0">県が給与費を <b>100</b> 削る<br>
+→ 国の負担金が <b>33</b> 減る<br>
+→ 県の手元に残るのは <b>67</b></p>
+</div>
+</div>
+<div class="card point">
+<p style="margin:0">交付税の基準財政需要額は「標準的な額」で決まるので、実際に削っても交付税は減らない。だから、<b>国庫負担の割合が下がるほど、県が教員費を削る「うまみ」が大きくなる</b>。<span class="tag">理屈</span><br>
+逆に言えば、国庫負担の割合を上げる＝県が教員費を守る誘因を強くする、ということ。2分の1復元の理屈は「お金が増える」より、ここで説明するほうが筋が通る。</p>
+<small>補足：限度額をこえて県が上乗せする分（県単独の加配など）は、国庫負担がつかないので<b>全額県</b>の負担になる。1/2でも1/3でもここは同じ。</small>
+</div>
+
+<h2>4. 先例：一般財源化されたお金は県ごとにばらついた</h2>
+<p>1985年以降に国庫負担から外された費目は、交付税で「措置」されていても、実際の予算はそのとおりにならなかった。文科省自身が2004年に示した資料。</p>
+<div class="tw"><table>
+<tr><th>費目</th><th>実際の予算化（全国）</th><th>県の差</th></tr>
+<tr><td>教材費（H15）</td><td>基準財政需要額788億円の <b>75.7%</b></td><td>最高 東京 163.7% ／ 最低 徳島 35.6%。基準額以上は3都府県だけ</td></tr>
+<tr><td>教員旅費（H15）</td><td>交付税の単価 72,300円/人 の <b>84.1%</b></td><td>—</td></tr>
+<tr><td>学校図書の購入費（H14、小1校あたり）</td><td>全国平均 42.1万円</td><td>最高 山梨 70.7万円 ／ 最低 青森 18.6万円</td></tr>
+</table></div>
+<p class="src">出典：同上 文部科学省「義務教育費国庫負担制度について（参考資料）」p.7-9</p>
+<div class="card warn">
+<p style="margin:0"><b>読み方の注意</b>：教員給与の2/3部分は、教材費と違って<b>標準法の定数</b>と<b>人事委員会勧告に準じた給与</b>の縛りがあるので、教材費ほど簡単には削れない。削られるとしたら、①正規を講師に置き換える、②県単独の加配や少人数学級をやめる・やらない、③支援員など交付税だけで措置される職を置かない、の形で表れると考えられる。<span class="tag">理屈</span></p>
+</div>
+
+<h2>5. 先行研究：財政力と配置の関係は何がわかっているか</h2>
+<div class="tw"><table>
+<tr><th>研究</th><th>わかったこと</th></tr>
+<tr><td>小川正人・山下絢 2007「義務教育費国庫負担金総額裁量制の運用実態」東大院教育学研究科紀要47</td><td>財政力の弱い自治体で、総額裁量制を使った非常勤講師の採用が行われるようになった（菊地原2021の要約による）</td></tr>
+<tr><td>妹尾渉 2010（苅谷・金子編『教員評価の社会学』）</td><td>2008年度の教員人件費と財政力指数を分析。「財政状況の苦しい自治体ほど、教員給与を抑制する誘因が強くなる」</td></tr>
+<tr><td>青木栄一 2013『地方分権と教育行政』勁草書房</td><td>総額裁量制が「非常勤講師等の非正規雇用の常態化」をもたらした。1/3化で交付税の割合が増え、浮いた人件費を他の費目に回せるようになった</td></tr>
+<tr><td>金子真理子 2014「非正規教員の増加とその問題点」日本労働研究雑誌645 <a href="https://www.jil.go.jp/institute/zassi/backnumber/2014/04/pdf/042-045.pdf">PDF</a></td><td>公立小中の非正規教員 2005年度 8.4万人（12.3%）→ 2012年度 11.3万人（16.1%）。正規は割合も実数も減少</td></tr>
+<tr><td>原北祥吾 2016「非正規教員の任用をめぐる研究動向」教育行政学研究37</td><td>非常勤講師への依存度が高い4県を追跡。3県で「財政力の低下に伴い、正規教員任用率を下げ、非常勤講師を多く任用」</td></tr>
+<tr><td><b>菊地原守 2021「教員の非正規化の拡大を規定する要因」日本教師教育学会年報30</b> <a href="https://www.jstage.jst.go.jp/article/jsste/30/0/30_172/_article/-char/ja/">J-STAGE</a></td><td>47都道府県×2006〜2018年のパネル（固定効果モデル）。下に詳しく</td></tr>
+</table></div>
+
+<h3>菊地原2021の結果（いちばん近い先行研究）</h3>
+<div class="card">
+<ul>
+<li>被説明変数：学校基本調査の常勤講師割合・非常勤講師割合（小・中別、公立）。説明変数は決算カードの財政指標7つ＋学校問題4つ（大規模校割合、外国人児童生徒、暴力行為、不登校）、退職教員割合で統制、1年のラグ。</li>
+<li><b>福祉費（民生費）の割合が増えると、小中・常勤非常勤のどれでも非正規が増える</b> → 教員は福祉需要の「調整弁」。</li>
+<li>教育費の割合が下がると非常勤講師が増え、公債費の割合が上がると常勤講師が増える。</li>
+<li><b>財政力指数の効果は限定的</b>：有意に負なのは中学校常勤講師と小学校非常勤講師だけ。</li>
+<li>使い道自由のお金（一般財源）の割合が<b>高い</b>ときに、かえって非正規が増える傾向（中学校常勤講師を除く）。「お金がないから」だけでは説明できない。</li>
+<li>研究の限界として、2006年の負担割合の変更そのものの効果は分析していない（分析期間が2006年以降）。</li>
+</ul>
+</div>
+<div class="card point">
+<p style="margin:0"><b>ここから言えること</b>：「財政力の弱い県ほど配置が薄い」という仮説は、そのまま立てると先行研究とぶつかる可能性が高い。立て方を変えて、<b>「1/3化（2006）で、それまでより財政構造に左右されやすくなったか」</b>を問うと、菊地原2021がやっていない空白になる。</p>
+</div>
+
+<h2>6. 2分の1復元を求める動き</h2>
+<div class="tw"><table>
+<tr><th>議会・団体</th><th>内容</th><th></th></tr>
+<tr><td>広島県府中市議会 2021年</td><td>ChatGPTが挙げた例。府中市（広島・東京とも）の議会資料を検索したが該当の意見書は見つからず</td><td><span class="tag x">未確認</span></td></tr>
+<tr><td>広島県福山市議会</td><td>「教職員定数改善と義務教育費国庫負担制度の負担割合の引上げを図るための2023年度政府予算に係る意見書」<a href="https://www.city.fukuyama.hiroshima.jp/uploaded/attachment/223572.pdf">PDF</a>、2024年度版も <a href="https://www.city.fukuyama.hiroshima.jp/uploaded/attachment/253592.pdf">PDF</a></td><td><span class="tag v">確認</span></td></tr>
+<tr><td>大分県佐伯市議会</td><td>「少人数学級の推進などの定数改善と義務教育費国庫負担率2分の1復元及び制度の拡充を図るための2022年度政府予算に係る意見書」<a href="https://www.city.saiki.oita.jp/gikai/kiji0035344/3_5344_12660_up_21b37qgb.pdf">PDF</a></td><td><span class="tag v">確認</span></td></tr>
+<tr><td>新潟県議会</td><td>新潟県教職員組合の請願「2分の1復元を求める意見書提出」2021年9月 <a href="https://www.pref.niigata.lg.jp/site/gikai/r0309-seigann4.html">県議会</a>・2025年11月 <a href="https://www.pref.niigata.lg.jp/site/gikai/r0712-seigann15.html">県議会</a></td><td><span class="tag v">確認</span></td></tr>
+<tr><td>北海道留萌市議会 2024年</td><td>「制度堅持・負担率1/2への復元…を求める意見書」<a href="https://www.e-rumoi.jp/content/000074310.pdf">PDF</a></td><td><span class="tag v">確認</span></td></tr>
+<tr><td>山口県議会</td><td>今回の検索では該当の意見書は見つからなかった</td><td><span class="tag x">未確認</span></td></tr>
+</table></div>
+<p class="src">毎年6月・9月議会に、ほぼ同じ文面（「〇〇年度政府予算に係る意見書」）で各地に出ている。多くは教職員組合の請願が起点。</p>
+
+<h2>7. 研究にするなら：検証の設計案</h2>
+<div class="card">
+<h3 style="margin-top:0">問い</h3>
+<p style="margin:.2em 0">国庫負担が1/3になったことで、県の教員配置（正規/非正規、定数をこえる配置、支援人員）は、県の財政の状態に左右されやすくなったか。</p>
+
+<h3>仮説</h3>
+<ol>
+<li><b>H1 誘因</b>：2006年以降、財政が苦しい県ほど正規→講師への置き換えが進んだ（それ以前より差が開いた）。</li>
+<li><b>H2 上乗せ</b>：国庫負担のつかない「定数をこえる配置」（県単独の少人数学級・加配）は、財政力と歳出構造に強く左右される。</li>
+<li><b>H3 交付税だけの職</b>：特別支援教育支援員・スクールサポートスタッフ・学校司書など、交付税措置や1/3補助しかない人員は、市町村の財政力によって差が出る。</li>
+</ol>
+
+<h3>くらべ方</h3>
+<ul>
+<li><b>前後比較×財政力</b>：2006年度の変更は全県に同時にかかるので、「2006年以降ダミー × 2005年時点の財政力指数（または交付税依存度）」の交差項で、財政の弱い県ほど変化が大きかったかを見る。期間は2000〜2012年あたり（2001の定数崩し・2004の総額裁量制と重なるのが弱点。年ダミーで共通の変化は落とせる）。</li>
+<li><b>実配置 ÷ 標準定数</b>：国の標準定数に対して県が何%置いているか（100%をこえる分が県の上乗せ）。</li>
+<li><b>市町村レベル</b>（H3）：山口19市町で、市町費の講師・支援員の人数×財政力指数×交付税依存度。</li>
+</ul>
+
+<h3>使えるデータ</h3>
+<div class="tw"><table>
+<tr><th>知りたいこと</th><th>資料</th></tr>
+<tr><td>常勤講師・非常勤講師の割合（県別・年別）</td><td>学校基本調査（e-Stat）。菊地原2021と同じ。非常勤は延べ数なので注意</td></tr>
+<tr><td>標準定数に占める非正規の割合（定数ベース）</td><td>文科省 2012「非正規教員の任用状況について」<a href="https://www.mext.go.jp/b_menu/shingi/chousa/shotou/084/shiryo/__icsFiles/afieldfile/2012/06/28/1322908_2.pdf">PDF</a>（全国8.3%、うち臨任7.1%、2005年は臨任5.6%）。最新年の県別は要探索</td></tr>
+<tr><td>財政力指数・経常収支比率・民生費割合など</td><td>総務省 決算カード／都道府県財政指数表／<a href="https://www.soumu.go.jp/iken/jokyo_chousa_shiryo.html">地方財政状況調査関係資料</a></td></tr>
+<tr><td>国庫負担金の実績（県別）</td><td>文科省 国庫負担金の交付決定・精算資料、県の決算書（限度額を下回っているかが見える）</td></tr>
+<tr><td>県単独の少人数学級・加配</td><td>文科省「都道府県の少人数学級の実施状況」、各県の予算資料</td></tr>
+<tr><td>市町費の講師・支援員（山口）</td><td>19市町の予算書・主要施策の成果説明書、教育委員会の点検評価報告書</td></tr>
+</table></div>
+</div>
+
+<div class="card ok">
+<b>交渉・ちらしで使うなら（ひとこと版）</b>
+<p style="margin:.3em 0 0">「国の負担が1/2から1/3になって、県が教員の給料を100円削ると、県に残るお金は50円から67円に増えました。削るほど県が得をするしくみです。だから私たちは、国に負担を戻すよう求め、県には削らない約束を求めます。」</p>
+</div>
+
+
+<h2>8. 実データで確かめた：2006年の後、財政力による差は広がったか</h2>
+<div class="card point">
+<b>答え：広がっていない。</b>
+<ul>
+<li><b>常勤講師</b>は、2000年ごろは財政力の弱い県のほうが割合が高かった。しかしその差は2000年から少しずつ縮み、2009年ごろに<b>逆転</b>した。2012年には、財政力の強い県のほうが高い。</li>
+<li>差の縮み方は2006年の前から続いていて、<b>2006年を境に曲がった形跡はない</b>。もともとの傾きを差し引くと、2006年の効果は統計的に0と区別できない。</li>
+<li><b>非常勤講師</b>は、期間を通じて財政力の強い県のほうが割合が高い。差の大きさは2006年の前後でほぼ同じ。</li>
+<li>見えている変化は、都市部の県で大量退職と児童生徒数の変化が重なり、講師が急に増えたことでほぼ説明できる。教員数の増減を条件に入れると、小学校の常勤講師の効果は0になる。</li>
+</ul>
+<p style="margin:.3em 0 0">つまり、このデータでは「1/3化で、財政の弱い県ほど非正規が増えた」とは<b>言えない</b>。菊地原2021の「財政力指数の効果は限定的」と同じ方向の結果。</p>
+</div>
+<h3>財政力の弱い県と強い県の講師割合の推移（2000〜2012年度、5月1日現在、公立）</h3>
+<p style="margin:.2em 0"><span style="color:var(--acc2);font-weight:bold">━ 財政力の弱い県</span>（2005年度の財政力指数で下位3分の1）　<span style="color:var(--acc);font-weight:bold">━ 強い県</span>（上位3分の1）　<span style="color:var(--sub)">┅ 全体の平均</span></p>
+<div class="grid2"><div class="card"><b>小学校・常勤講師（本務の講師）</b><br><small>38都道府県・各群12県</small><svg viewBox="0 0 300 190" role="img" aria-label="小学校常勤の推移" style="width:100%;height:auto"><line x1="34" x2="290" y1="164.0" y2="164.0" stroke="var(--line)" stroke-width="1"/><text x="30" y="167.0" font-size="9" text-anchor="end" fill="var(--sub)">0%</text><line x1="34" x2="290" y1="132.2" y2="132.2" stroke="var(--line)" stroke-width="1"/><text x="30" y="135.2" font-size="9" text-anchor="end" fill="var(--sub)">2%</text><line x1="34" x2="290" y1="100.4" y2="100.4" stroke="var(--line)" stroke-width="1"/><text x="30" y="103.4" font-size="9" text-anchor="end" fill="var(--sub)">4%</text><line x1="34" x2="290" y1="68.6" y2="68.6" stroke="var(--line)" stroke-width="1"/><text x="30" y="71.6" font-size="9" text-anchor="end" fill="var(--sub)">6%</text><line x1="34" x2="290" y1="36.8" y2="36.8" stroke="var(--line)" stroke-width="1"/><text x="30" y="39.8" font-size="9" text-anchor="end" fill="var(--sub)">8%</text><line x1="162.0" x2="162.0" y1="14" y2="164" stroke="var(--ink)" stroke-dasharray="3 3" stroke-width="1"/><text x="165.0" y="22" font-size="9" fill="var(--ink)">2006 1/3化</text><text x="34.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">00</text><text x="76.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">02</text><text x="119.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">04</text><text x="162.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">06</text><text x="204.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">08</text><text x="247.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">10</text><text x="290.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">12</text><polyline points="34.0,92.1 55.3,82.2 76.7,72.4 98.0,66.6 119.3,66.7 140.7,66.1 162.0,65.4 183.3,63.2 204.7,57.1 226.0,54.9 247.3,52.0 268.7,49.6 290.0,49.8" fill="none" stroke="var(--sub)" stroke-width="1.4" stroke-dasharray="4 3"/><polyline points="34.0,97.6 55.3,84.3 76.7,80.6 98.0,76.9 119.3,71.7 140.7,68.4 162.0,69.6 183.3,66.8 204.7,59.7 226.0,52.7 247.3,42.7 268.7,36.2 290.0,33.6" fill="none" stroke="var(--acc)" stroke-width="2.4" stroke-dasharray=""/><polyline points="34.0,80.7 55.3,71.9 76.7,59.1 98.0,53.6 119.3,59.9 140.7,64.7 162.0,61.4 183.3,60.9 204.7,58.3 226.0,61.0 247.3,65.5 268.7,63.7 290.0,64.3" fill="none" stroke="var(--acc2)" stroke-width="2.4" stroke-dasharray=""/></svg></div><div class="card"><b>中学校・常勤講師（本務の講師）</b><br><small>38都道府県・各群12県</small><svg viewBox="0 0 300 190" role="img" aria-label="中学校常勤の推移" style="width:100%;height:auto"><line x1="34" x2="290" y1="164.0" y2="164.0" stroke="var(--line)" stroke-width="1"/><text x="30" y="167.0" font-size="9" text-anchor="end" fill="var(--sub)">0%</text><line x1="34" x2="290" y1="109.6" y2="109.6" stroke="var(--line)" stroke-width="1"/><text x="30" y="112.6" font-size="9" text-anchor="end" fill="var(--sub)">4%</text><line x1="34" x2="290" y1="55.1" y2="55.1" stroke="var(--line)" stroke-width="1"/><text x="30" y="58.1" font-size="9" text-anchor="end" fill="var(--sub)">8%</text><line x1="162.0" x2="162.0" y1="14" y2="164" stroke="var(--ink)" stroke-dasharray="3 3" stroke-width="1"/><text x="165.0" y="22" font-size="9" fill="var(--ink)">2006 1/3化</text><text x="34.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">00</text><text x="76.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">02</text><text x="119.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">04</text><text x="162.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">06</text><text x="204.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">08</text><text x="247.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">10</text><text x="290.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">12</text><polyline points="34.0,89.6 55.3,79.7 76.7,73.5 98.0,69.7 119.3,68.7 140.7,66.1 162.0,64.1 183.3,58.3 204.7,57.8 226.0,50.4 247.3,49.8 268.7,44.7 290.0,45.4" fill="none" stroke="var(--sub)" stroke-width="1.4" stroke-dasharray="4 3"/><polyline points="34.0,99.1 55.3,85.2 76.7,82.6 98.0,76.0 119.3,72.2 140.7,68.9 162.0,68.8 183.3,61.8 204.7,59.9 226.0,48.7 247.3,44.0 268.7,36.3 290.0,33.6" fill="none" stroke="var(--acc)" stroke-width="2.4" stroke-dasharray=""/><polyline points="34.0,69.9 55.3,65.3 76.7,59.2 98.0,56.2 119.3,59.2 140.7,59.9 162.0,53.7 183.3,50.9 204.7,54.6 226.0,50.8 247.3,51.1 268.7,49.1 290.0,49.6" fill="none" stroke="var(--acc2)" stroke-width="2.4" stroke-dasharray=""/></svg></div><div class="card"><b>小学校・非常勤講師（兼務の講師）</b><br><small>47都道府県・各群15県</small><svg viewBox="0 0 300 190" role="img" aria-label="小学校非常勤の推移" style="width:100%;height:auto"><line x1="34" x2="290" y1="164.0" y2="164.0" stroke="var(--line)" stroke-width="1"/><text x="30" y="167.0" font-size="9" text-anchor="end" fill="var(--sub)">0%</text><line x1="34" x2="290" y1="101.9" y2="101.9" stroke="var(--line)" stroke-width="1"/><text x="30" y="104.9" font-size="9" text-anchor="end" fill="var(--sub)">2%</text><line x1="34" x2="290" y1="39.9" y2="39.9" stroke="var(--line)" stroke-width="1"/><text x="30" y="42.9" font-size="9" text-anchor="end" fill="var(--sub)">4%</text><line x1="162.0" x2="162.0" y1="14" y2="164" stroke="var(--ink)" stroke-dasharray="3 3" stroke-width="1"/><text x="165.0" y="22" font-size="9" fill="var(--ink)">2006 1/3化</text><text x="34.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">00</text><text x="76.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">02</text><text x="119.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">04</text><text x="162.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">06</text><text x="204.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">08</text><text x="247.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">10</text><text x="290.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">12</text><polyline points="34.0,118.1 55.3,107.5 76.7,89.8 98.0,73.9 119.3,69.0 140.7,70.1 162.0,58.7 183.3,57.7 204.7,51.0 226.0,44.8 247.3,44.4 268.7,44.3 290.0,43.4" fill="none" stroke="var(--sub)" stroke-width="1.4" stroke-dasharray="4 3"/><polyline points="34.0,115.0 55.3,92.2 76.7,71.9 98.0,59.3 119.3,48.8 140.7,52.1 162.0,48.1 183.3,43.9 204.7,44.2 226.0,47.5 247.3,43.4 268.7,34.7 290.0,33.6" fill="none" stroke="var(--acc)" stroke-width="2.4" stroke-dasharray=""/><polyline points="34.0,119.2 55.3,118.1 76.7,114.3 98.0,104.8 119.3,91.4 140.7,90.6 162.0,90.0 183.3,89.2 204.7,85.2 226.0,67.9 247.3,66.9 268.7,69.8 290.0,69.5" fill="none" stroke="var(--acc2)" stroke-width="2.4" stroke-dasharray=""/></svg></div><div class="card"><b>中学校・非常勤講師（兼務の講師）</b><br><small>47都道府県・各群15県</small><svg viewBox="0 0 300 190" role="img" aria-label="中学校非常勤の推移" style="width:100%;height:auto"><line x1="34" x2="290" y1="164.0" y2="164.0" stroke="var(--line)" stroke-width="1"/><text x="30" y="167.0" font-size="9" text-anchor="end" fill="var(--sub)">0%</text><line x1="34" x2="290" y1="121.9" y2="121.9" stroke="var(--line)" stroke-width="1"/><text x="30" y="124.9" font-size="9" text-anchor="end" fill="var(--sub)">2%</text><line x1="34" x2="290" y1="79.8" y2="79.8" stroke="var(--line)" stroke-width="1"/><text x="30" y="82.8" font-size="9" text-anchor="end" fill="var(--sub)">4%</text><line x1="34" x2="290" y1="37.7" y2="37.7" stroke="var(--line)" stroke-width="1"/><text x="30" y="40.7" font-size="9" text-anchor="end" fill="var(--sub)">6%</text><line x1="162.0" x2="162.0" y1="14" y2="164" stroke="var(--ink)" stroke-dasharray="3 3" stroke-width="1"/><text x="165.0" y="22" font-size="9" fill="var(--ink)">2006 1/3化</text><text x="34.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">00</text><text x="76.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">02</text><text x="119.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">04</text><text x="162.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">06</text><text x="204.7" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">08</text><text x="247.3" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">10</text><text x="290.0" y="182" font-size="9" text-anchor="middle" fill="var(--sub)">12</text><polyline points="34.0,95.4 55.3,97.2 76.7,84.2 98.0,79.6 119.3,78.7 140.7,74.0 162.0,71.6 183.3,71.2 204.7,67.8 226.0,62.5 247.3,60.7 268.7,60.8 290.0,55.8" fill="none" stroke="var(--sub)" stroke-width="1.4" stroke-dasharray="4 3"/><polyline points="34.0,86.6 55.3,76.7 76.7,57.8 98.0,56.2 119.3,50.8 140.7,46.0 162.0,43.3 183.3,42.5 204.7,43.3 226.0,42.1 247.3,38.5 268.7,40.5 290.0,33.6" fill="none" stroke="var(--acc)" stroke-width="2.4" stroke-dasharray=""/><polyline points="34.0,102.5 55.3,105.6 76.7,98.9 98.0,95.0 119.3,89.4 140.7,80.2 162.0,79.8 183.3,81.7 204.7,80.6 226.0,69.5 247.3,69.6 268.7,69.6 290.0,70.7" fill="none" stroke="var(--acc2)" stroke-width="2.4" stroke-dasharray=""/></svg></div></div><h3>差（弱い県の平均 − 強い県の平均、ポイント）</h3><div class="tw"><table><tr><th>区分</th><th>2000</th><th>2003</th><th>2005</th><th>2008</th><th>2012</th></tr><tr><td>小学校・常勤講師（本務の講師）</td><td class="num">+1.1</td><td class="num">+1.5</td><td class="num">+0.2</td><td class="num">+0.1</td><td class="num">-1.9</td></tr><tr><td>中学校・常勤講師（本務の講師）</td><td class="num">+2.1</td><td class="num">+1.5</td><td class="num">+0.7</td><td class="num">+0.4</td><td class="num">-1.2</td></tr><tr><td>小学校・非常勤講師（兼務の講師）</td><td class="num">-0.1</td><td class="num">-1.5</td><td class="num">-1.2</td><td class="num">-1.3</td><td class="num">-1.2</td></tr><tr><td>中学校・非常勤講師（兼務の講師）</td><td class="num">-0.8</td><td class="num">-1.8</td><td class="num">-1.6</td><td class="num">-1.8</td><td class="num">-1.8</td></tr></table></div><p class="src">プラスは財政力の弱い県のほうが高いこと。常勤講師は差がプラスから縮んでマイナスへ、非常勤講師はマイナスのまま横ばい。</p><h3>2006年以降の上乗せ効果（財政力指数が1標準偏差低い県で、2006年以降に講師割合が何ポイント多く上がったか）</h3><div class="tw"><table><tr><th>モデル</th><th>小学校常勤</th><th>中学校常勤</th><th>小学校非常勤</th><th>中学校非常勤</th></tr><tr><td>基本（県と年の固定効果）</td><td class="num">-0.46<br><small>(t=-1.7)</small></td><td class="num">-0.52<br><small>(t=-1.6)</small></td><td class="num">-0.13<br><small>(t=-0.7)</small></td><td class="num">+0.12<br><small>(t=+0.3)</small></td></tr><tr><td>＋教員数の増減を条件に</td><td class="num">+0.01<br><small>(t=+0.0)</small></td><td class="num">-0.39<br><small>(t=-1.1)</small></td><td class="num">+0.67＊<br><small>(t=+2.3)</small></td><td class="num">+0.71＊<br><small>(t=+3.5)</small></td></tr><tr><td>＋2006年前からの傾きを差し引く</td><td class="num">+0.30<br><small>(t=+1.2)</small></td><td class="num">+0.33<br><small>(t=+1.2)</small></td><td class="num">+0.07<br><small>(t=+0.8)</small></td><td class="num">-0.08<br><small>(t=-0.6)</small></td></tr><tr><td>＋両方</td><td class="num">+0.35<br><small>(t=+1.4)</small></td><td class="num">+0.33<br><small>(t=+1.2)</small></td><td class="num">+0.14<br><small>(t=+1.7)</small></td><td class="num">-0.04<br><small>(t=-0.4)</small></td></tr></table></div>
+<p class="src">＊＝5%水準で有意（県ごとのクラスター頑健標準誤差）。基本モデルの「−」は、財政の弱い県のほうが講師割合の伸びが<b>小さかった</b>ことを示す。</p>
+<div class="card">
+<b>表の読み方</b>
+<ul>
+<li>どのモデルでも、常勤講師について「財政の弱い県ほど2006年以降に増えた」という有意な結果は出ない。</li>
+<li>唯一の手がかりは非常勤講師。教員数の増減を条件に入れると、財政の弱い県で2006年以降にやや多く増えた（小+0.67、中+0.71ポイント）。ただし、2006年前からの傾きを差し引くと消える（中学校）か弱まる（小学校、t=1.7）。<b>結論を支えるほど頑健ではない</b>。</li>
+<li>イベントスタディ（年ごとの効果、2005年度が基準）でも、常勤講師は2000年から2012年まで<b>一本調子に</b>動いていて、2004〜2006年に折れ目はない。</li>
+</ul>
+</div>
+<div class="card warn">
+<b>このデータの限界（必ず添える）</b>
+<ol>
+<li><b>9都道県は常勤講師が見えない</b>：北海道・群馬・埼玉・東京・神奈川・広島・<b>山口</b>・徳島・沖縄は、本務の「講師」がほぼ0人と報告している。臨時的任用の先生を「教諭」として報告しているとみられる。常勤講師の分析は残りの38府県で行った。<b>山口の臨時的任用の多さは、学校基本調査からはわからない。</b></li>
+<li>非常勤講師（兼務者）は国立・私立を含む合計で、<b>延べ人数</b>（2校を掛け持ちすると2人）。</li>
+<li>2004年の総額裁量制、2001年の定数崩し、2006年の1/3化が近い時期に重なっていて、2006年だけの効果は切り分けにくい。</li>
+<li>退職者数・児童生徒数・少人数学級の導入時期は直接入れていない（教員数の増減で代用）。</li>
+<li>相関関係であって因果ではない。</li>
+</ol>
+</div>
+<div class="card ok">
+<b>研究と交渉にどう使うか</b>
+<ul>
+<li>「財政が苦しい県ほど非正規に置き換えた」は、全国データでは<b>強く言えない</b>。主張するなら、<b>県ごとの事情</b>（財政の弱い県が実際に何を削ったか）を示す必要がある。</li>
+<li>2分の1復元の根拠は、3章の「削ると県に残る割合」（制度の誘因）と、4章の一般財源化の先例で組み立てるほうが安全。</li>
+<li>山口について確かめるなら、県教委に<b>臨時的任用教員の数と割合（定数に対して）</b>を直接示させるしかない（学校基本調査では「教諭」に入っている）。</li>
+</ul>
+</div>
+<p class="src">データ：文部科学省「学校基本調査」各年度の報告書掲載集計（小学校・中学校の「職名別教員数（本務者）」公立と「職名別教員数（兼務者）」）、e-Stat。2000〜2012年度、13年×47都道府県。常勤講師割合＝本務の講師 ÷（本務者計＋兼務者計）、非常勤講師割合＝兼務の講師 ÷ 同じ分母（菊地原2021と同じ定義）。2005年度公立小の本務者合計411,472人は報告書の値と一致。2001年度小学校の表で宮崎県の行が「宮城」と誤記されているのを直して使った。財政力指数：総務省「社会・人口統計体系」（e-Stat 統計ダッシュボード、都道府県財政）、2005年度の値で3群に分け、回帰では標準化。集計表は同じフォルダの「国庫負担_講師割合_2000-2012.csv」。</p>
+<p class="src" style="margin-top:2em">主な出典：文部科学省「義務教育費国庫負担制度」／中教審資料「義務教育費国庫負担制度について（参考資料）」／菊地原守 2021（日本教師教育学会年報30, pp.172-182, doi:10.32292/jsste.30.0_172）／金子真理子 2014（日本労働研究雑誌645, pp.42-45）／財務省『ファイナンス』2026年4月号。3章の「手元に残る割合」は制度からの計算で、出典の数値ではない。</p>
+</main>
+</body>
+</html>
