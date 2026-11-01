@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教職員定数のしくみ</title>
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1f2328; --sub:#5b6168; --line:#dcd9d0;
+  --sho:#2f6fb3; --sho-bg:#e7f0fa; --chu:#c0612b; --chu-bg:#fbeee5;
+  --warn:#9a3b3b; --warn-bg:#f8e9e9; --ok:#2e7d4f; --mark:#fff2b3;
+  --kyoto:#8a8f96; --tannin:#9fb7cf; --nokori:#e0a33a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181b; --card:#202328; --ink:#e7e9ec; --sub:#a3a9b1; --line:#353a41;
+    --sho:#7fb2ea; --sho-bg:#1d2b3b; --chu:#eea074; --chu-bg:#3a2619;
+    --warn:#f0a3a3; --warn-bg:#3a2222; --ok:#7fd3a0; --mark:#5a4d12;
+    --kyoto:#7d838b; --tannin:#4e6a86; --nokori:#d39a2f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181b; --card:#202328; --ink:#e7e9ec; --sub:#a3a9b1; --line:#353a41;
+  --sho:#7fb2ea; --sho-bg:#1d2b3b; --chu:#eea074; --chu-bg:#3a2619;
+  --warn:#f0a3a3; --warn-bg:#3a2222; --ok:#7fd3a0; --mark:#5a4d12;
+  --kyoto:#7d838b; --tannin:#4e6a86; --nokori:#d39a2f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:16px}
+main{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.7rem;margin:.2em 0 .1em;line-height:1.35}
+h2{font-size:1.3rem;margin:2.2em 0 .6em;padding-bottom:.25em;border-bottom:2px solid var(--line)}
+h3{font-size:1.08rem;margin:1.4em 0 .4em}
+p{margin:.5em 0}
+.lead{color:var(--sub);margin-top:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.point{border-left:6px solid var(--ok)}
+.warn{background:var(--warn-bg);border-color:transparent;border-left:6px solid var(--warn)}
+.sho{color:var(--sho);font-weight:700}
+.chu{color:var(--chu);font-weight:700}
+mark{background:var(--mark);color:inherit;padding:0 .15em}
+small,.note{color:var(--sub);font-size:.85rem}
+ul{padding-left:1.3em;margin:.4em 0}
+li{margin:.2em 0}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:12px 0 0}
+nav.toc a{font-size:.85rem;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+nav.toc a:hover{border-color:var(--sho)}
+
+/* 段の図 */
+.steps{display:grid;gap:8px;margin:12px 0}
+.step{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.step .no{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:1.2rem;background:var(--sho-bg);color:var(--sho)}
+.step.hi{border:2px solid var(--nokori)}
+.step.hi .no{background:var(--nokori);color:#fff}
+.step b{font-size:1.02rem}
+.step .who{display:inline-block;font-size:.78rem;border:1px solid var(--line);border-radius:6px;padding:0 6px;margin-left:6px;color:var(--sub)}
+.arrow{text-align:center;color:var(--sub);font-size:.85rem;line-height:1}
+
+/* 表 */
+.tblwrap{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;white-space:nowrap}
+th{background:var(--bg);font-weight:700}
+td.l,th.l{text-align:left;white-space:normal}
+tr.em td{background:var(--mark)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+
+/* 計算機 */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.calc{grid-template-columns:1fr}}
+.calc .card{margin:0}
+.calc h3{margin-top:0}
+.calc.sho-side{}
+.sho-card{border-top:5px solid var(--sho)}
+.chu-card{border-top:5px solid var(--chu)}
+label{display:block;font-size:.9rem;margin:8px 0 2px}
+input[type=range]{width:100%}
+input[type=number]{width:7em;font-size:1rem;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.big{font-size:1.9rem;font-weight:700;line-height:1.2}
+.row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:3px 0;font-size:.93rem}
+.row span:last-child{font-weight:700;font-variant-numeric:tabular-nums}
+.bar{display:flex;height:26px;border-radius:6px;overflow:hidden;margin:10px 0 4px;background:var(--bg)}
+.bar div{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--sub)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.presets button{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
+.presets button:hover{border-color:var(--sho)}
+
+/* 比べるグラフ */
+.cmp{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;align-items:center;font-size:.9rem}
+.cmp .lab{text-align:right}
+.cmp .track{display:flex;height:24px;border-radius:5px;overflow:hidden;background:var(--bg)}
+.cmp .track div{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;white-space:nowrap;overflow:hidden}
+.cmp .sep{grid-column:1/-1;height:6px}
+footer{margin-top:40px;font-size:.82rem;color:var(--sub)}
+footer a{color:var(--sub)}
+</style>
+</head>
+<body>
+<main>
+
+<h1>教職員定数のしくみ ── 小学校と中学校を比べる</h1>
+<p class="lead">「先生の数は誰が、どう決めているのか」を5つの段に分けて整理します。条文は義務標準法（公立義務教育諸学校の学級編制及び教職員定数の標準に関する法律）をもとにしています。</p>
+
+<div class="card point">
+  <b>このページの結論</b>
+  <ul>
+    <li>国の「定数」は<b>県全体の人数を計算するための標準</b>。1校ごとの人数を約束するものではない。</li>
+    <li>1学年1学級の学校で比べると、担任以外の先生は<span class="sho">小学校（6学級）で約1人</span>、<span class="chu">中学校（3学級）で約4.5人</span>。中学校は教科ごとに先生が要るので、係数が大きい。</li>
+    <li>小学校の<mark>5学級以下は、計算に教頭が入っていない</mark>。教頭を置けば担任の数から出すことになり、教頭や教務が担任を持つのは<b>しくみの上で当然</b>になる。</li>
+    <li>教頭を実際どおり1人と数えると、小学校6〜8学級は担任以外が<b>0.75〜0.99人＝ぎりぎり1人つかない</b>。山口県でいちばん多い<b>8学級の学校（37校）は0.99人</b>。担任以外が1人に届かない小学校は、山口県で<b>半分（50%）</b>、全国では29%。</li>
+    <li>文科省の「教師不足」調査は、県が決めた配当数に対する不足だけを数える。<b>最初から兼任で組んだ分は、不足に入らない</b>。</li>
+  </ul>
+</div>
+
+<nav class="toc">
+  <a href="#dan">1. 5つの段</a>
+  <a href="#keisu">2. 計算式と係数</a>
+  <a href="#calc">3. 計算してみる</a>
+  <a href="#hikaku">4. 小と中を比べる</a>
+  <a href="#yamaguchi">5. 山口県の小学校で見る</a>
+  <a href="#kyomu">6. 教務・分掌はどこから</a>
+  <a href="#dai">7. 産休・育休・病休の代わり</a>
+  <a href="#fusoku">8. 「教師不足」調査との関係</a>
+  <a href="#chui">9. 混同しやすい言葉</a>
+</nav>
+
+<h2 id="dan">1. 先生の数が決まる5つの段</h2>
+<p>「定数」という言葉は、どの段の話かで意味が変わります。上から下へ、人数が決まっていく順に並べました。</p>
+
+<div class="steps">
+  <div class="step"><div class="no">1</div><div><b>学級編制の標準</b><span class="who">国（義務標準法 第3条）</span><br>
+    1学級の人数の上限。<span class="sho">小学校 35人</span>（2025年度までに全学年で移行済み）。<span class="chu">中学校 35人</span>（2026年4月施行の改正で、2027年度末までに段階的に移行）。<br>
+    複式学級は、<span class="sho">小学校16人（1年生を含むと8人）</span>、<span class="chu">中学校8人</span>。県はこれより少ない人数で学級を作ってもよい。</div></div>
+  <div class="arrow">▼ 学級の数が決まる</div>
+  <div class="step"><div class="no">2</div><div><b>標準定数（国の定数）</b><span class="who">国（同 第6〜9条）</span><br>
+    学級数などから計算した、<b>県全体で置く先生の数の標準</b>。<br>
+    ・<b>基礎定数</b>：学級数・児童生徒数から決まった式で出る分（校長、教頭・教諭等、養護、栄養、事務、通級、日本語指導、初任研 など）<br>
+    ・<b>加配定数</b>：国が目的ごとに上乗せする分（少人数指導、小学校の専科、児童生徒支援、主幹教諭、研修 など／第7条2項・第15条）</div></div>
+  <div class="arrow">▼ お金の裏づけ</div>
+  <div class="step"><div class="no">3</div><div><b>国庫負担</b><span class="who">国（義務教育費国庫負担法）</span><br>
+    先生の給与の<b>3分の1</b>を国が負担（2006年度から。それまでは2分の1）。<br>
+    2004年度からの<b>総額裁量制</b>で、負担額の総額の中なら、人数や給与の組み方を県が決められる。</div></div>
+  <div class="arrow">▼ 県が自分で決める</div>
+  <div class="step hi"><div class="no">4</div><div><b>県の定数・各校への配当</b><span class="who">県教委（政令市は市教委）</span><br>
+    県の条例で決める総数と、<b>どの学校に何人置くか</b>の基準（配当）。<br>
+    担任外を何人置くか、教務を専任にするか兼任にするか、専科を置くか、はここで決まる。<br>
+    <mark>文科省の「教師不足」調査の「配当数」はこの段</mark>。市町が独自に置く人は入らない。</div></div>
+  <div class="arrow">▼ 人を当てはめる</div>
+  <div class="step"><div class="no">5</div><div><b>実際の配置</b><span class="who">県教委の人事</span><br>
+    正規・臨時的任用（講師）・非常勤・再任用で埋める。<br>
+    産休・育休・病休の人の代わりもここ。代わりの人が来なければ、④に対して「不足」になる。</div></div>
+</div>
+
+<h2 id="keisu">2. 基礎定数の計算式（教頭・教諭等）</h2>
+<p>担任も教頭も教務も、この「教頭及び教諭等」の数から出ます（第7条第1項第1号）。</p>
+<div class="card">
+  <b>計算式</b>：その規模の学校の<b>学級数 × 係数</b><br>
+  <small>実際には、県内の同じ規模の学校の学級数を合計してから係数をかけ、1未満の端数は切り上げます。このページの1校あたりの数字は、その目安です。</small>
+</div>
+
+<div class="two">
+<div class="tblwrap"><table>
+  <tr><th colspan="2" style="color:var(--sho)">小学校</th></tr>
+  <tr><th>学級数</th><th>係数</th></tr>
+  <tr><td>1〜2</td><td>1.000</td></tr>
+  <tr><td>3〜4</td><td>1.250</td></tr>
+  <tr><td>5</td><td>1.200</td></tr>
+  <tr class="em"><td>6</td><td>1.292</td></tr>
+  <tr><td>7</td><td>1.264</td></tr>
+  <tr><td>8〜9</td><td>1.249</td></tr>
+  <tr><td>10〜11</td><td>1.234</td></tr>
+  <tr><td>12〜15</td><td>1.210</td></tr>
+  <tr><td>16〜18</td><td>1.200</td></tr>
+  <tr><td>19〜21</td><td>1.170</td></tr>
+  <tr><td>22〜24</td><td>1.165</td></tr>
+  <tr><td>25〜27</td><td>1.155</td></tr>
+  <tr><td>28〜30</td><td>1.150</td></tr>
+  <tr><td>31〜33</td><td>1.140</td></tr>
+  <tr><td>34〜36</td><td>1.137</td></tr>
+  <tr><td>37〜39</td><td>1.133</td></tr>
+  <tr><td>40〜</td><td>1.130</td></tr>
+</table></div>
+<div class="tblwrap"><table>
+  <tr><th colspan="2" style="color:var(--chu)">中学校</th></tr>
+  <tr><th>学級数</th><th>係数</th></tr>
+  <tr><td>1</td><td>4.000</td></tr>
+  <tr><td>2</td><td>3.000</td></tr>
+  <tr class="em"><td>3</td><td>2.667</td></tr>
+  <tr><td>4</td><td>2.000</td></tr>
+  <tr><td>5</td><td>1.660</td></tr>
+  <tr><td>6</td><td>1.750</td></tr>
+  <tr><td>7〜8</td><td>1.725</td></tr>
+  <tr><td>9〜11</td><td>1.720</td></tr>
+  <tr><td>12〜14</td><td>1.570</td></tr>
+  <tr><td>15〜17</td><td>1.560</td></tr>
+  <tr><td>18〜20</td><td>1.557</td></tr>
+  <tr><td>21〜23</td><td>1.550</td></tr>
+  <tr><td>24〜26</td><td>1.520</td></tr>
+  <tr><td>27〜32</td><td>1.517</td></tr>
+  <tr><td>33〜35</td><td>1.515</td></tr>
+  <tr><td>36〜</td><td>1.483</td></tr>
+</table></div>
+</div>
+<p>同じ学級数でも、<span class="chu">中学校の係数は小学校のおよそ1.3〜2倍以上</span>です。中学校は教科ごとに免許を持つ先生が要るためです。</p>
+
+<h3>このうち「教頭」の分（第7条第3項）</h3>
+<div class="tblwrap"><table>
+  <tr><th>学級数</th><th class="sho">小学校</th><th class="chu">中学校</th></tr>
+  <tr><td>1〜2</td><td>0</td><td>0</td></tr>
+  <tr class="em"><td>3〜5</td><td><b>0</b></td><td>0.5</td></tr>
+  <tr><td>6〜8</td><td>0.75</td><td>1</td></tr>
+  <tr><td>9〜23</td><td>1</td><td>1</td></tr>
+  <tr><td>24〜26</td><td>1</td><td>2</td></tr>
+  <tr><td>27〜</td><td>2</td><td>2</td></tr>
+</table></div>
+<p class="note">教頭の分は「教頭及び教諭等」の数の内数です。教頭の分を引いた残りが、教諭（担任など）の分です。</p>
+
+<h3>学級数以外で足される分（第7条第1項第2〜9号）</h3>
+<ul>
+  <li>児童生徒数による加算：200〜299人 +0.25、300〜599人 +0.5、600〜799人 +0.75、800〜1,199人 +1、1,200人以上 +1.25（<b>199人以下の学校には付かない</b>）</li>
+  <li>大きい学校の加算：小27学級以上・中24学級以上 +1、小30学級以上 +0.5、中18〜29学級 +1、中30学級以上 +1.5</li>
+  <li>通級指導の児童生徒 13人に1人、日本語指導の児童生徒 18人に1人、初任者研修を受ける先生 6人に1人</li>
+  <li>分校 1校に1人、寄宿舎</li>
+</ul>
+<p>このほか、<b>養護教諭</b>は3学級以上の学校に1人、<b>事務職員</b>は4学級以上に1人（3学級は0.75人）です。<mark>2学級以下の学校には、養護教諭も事務職員も標準の計算に入りません</mark>（へき地などの加算は別）。</p>
+
+<h2 id="calc">3. 計算してみる</h2>
+<p>学級数と児童生徒数を入れると、その学校1校分の目安が出ます（加配は入れていません）。</p>
+<div class="calc">
+  <div class="card sho-card">
+    <h3 class="sho">小学校</h3>
+    <div class="presets">
+      <button data-t="s" data-c="2" data-n="20">複式2学級</button>
+      <button data-t="s" data-c="4" data-n="50">複式含む4学級</button>
+      <button data-t="s" data-c="6" data-n="144">単学級（24人×6）</button>
+      <button data-t="s" data-c="12" data-n="360">2学級ずつ</button>
+    </div>
+    <label>学級数（特別支援学級も含む）：<b id="s-cv">6</b></label>
+    <input type="range" id="s-c" min="1" max="30" value="6">
+    <label>児童数 <input type="number" id="s-n" min="0" max="1500" value="144"></label>
+    <div id="s-out"></div>
+  </div>
+  <div class="card chu-card">
+    <h3 class="chu">中学校</h3>
+    <div class="presets">
+      <button data-t="c" data-c="3" data-n="60">1学級ずつ</button>
+      <button data-t="c" data-c="6" data-n="180">2学級ずつ</button>
+      <button data-t="c" data-c="9" data-n="300">3学級ずつ</button>
+      <button data-t="c" data-c="12" data-n="400">4学級ずつ</button>
+    </div>
+    <label>学級数（特別支援学級も含む）：<b id="c-cv">3</b></label>
+    <input type="range" id="c-c" min="1" max="30" value="3">
+    <label>生徒数 <input type="number" id="c-n" min="0" max="1500" value="60"></label>
+    <div id="c-out"></div>
+  </div>
+</div>
+<div class="legend" style="margin-top:8px">
+  <span><i style="background:var(--kyoto)"></i>教頭の分</span>
+  <span><i style="background:var(--tannin)"></i>担任（学級数）</span>
+  <span><i style="background:var(--nokori)"></i>担任以外に回せる分</span>
+</div>
+<p class="note">「担任以外に回せる分」＝教頭及び教諭等の数 − 教頭の分 − 学級数。実際に何に使うか（教務・専科・少人数・生徒指導など）は県が決めます。</p>
+
+<h2 id="hikaku">4. 小学校と中学校を、同じ「1学年あたりの学級数」で比べる</h2>
+<p>小学校は6学年、中学校は3学年なので、学級数ではなく<b>1学年あたりの学級数</b>をそろえて比べます。児童生徒数による加算は入れていません。</p>
+<div class="card">
+  <div class="cmp" id="cmp"></div>
+  <div class="legend" style="margin-top:10px">
+    <span><i style="background:var(--kyoto)"></i>教頭の分</span>
+    <span><i style="background:var(--tannin)"></i>担任</span>
+    <span><i style="background:var(--nokori)"></i>担任以外</span>
+  </div>
+</div>
+
+<div class="tblwrap"><table id="cmpTable">
+  <tr><th>1学年あたり</th><th>学校</th><th>学級数</th><th>係数</th><th>教頭及び教諭等</th><th>教頭の分</th><th>担任以外</th><th class="l">1人あたりの週の授業（単純計算）</th></tr>
+</table></div>
+<p class="note">週の授業は、標準授業時数（小1 850、小2 910、小3 980、小4〜6 1,015、中1〜3 1,015単位時間）を35週で割り、教頭を除く人数で割った単純計算です。専科・非常勤講師・TTなどは入れていません。</p>
+
+<div class="two">
+  <div class="card" style="border-top:5px solid var(--sho)">
+    <b class="sho">小学校の苦しさ ＝ 人の数</b>
+    <ul>
+      <li>1学年1学級（6学級）でも、担任以外は<b>約1人</b>。</li>
+      <li>1人あたりの授業は週<b>約23〜24コマ</b>。空き時間がほとんどない。</li>
+      <li>5学級以下では教頭の分が<b>0</b>。教頭を置けば、担任以外は0人か、足りない。</li>
+    </ul>
+  </div>
+  <div class="card" style="border-top:5px solid var(--chu)">
+    <b class="chu">中学校の苦しさ ＝ 教科の数</b>
+    <ul>
+      <li>1学年1学級（3学級）で、担任以外は<b>約4.5人</b>。数では小学校より余裕がある。</li>
+      <li>ただし免許は国・社・数・理・英・音・美・保体・技・家の<b>10教科</b>。7〜8人では全部そろわない。</li>
+      <li>足りない教科は、<b>免許外教科担任</b>や、ほかの学校と兼ねる非常勤講師で埋めることになる。</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="yamaguchi">5. 山口県の小学校で見る ──「ぎりぎり1人つかない」学校</h2>
+<p>条文の教頭の分は、6〜8学級で0.75人です。でも実際の学校には教頭が<b>1人</b>います。教頭を1人と数えて「担任以外に回せる分」を出し直すと、次のようになります。</p>
+<div class="tblwrap"><table>
+  <tr><th>小学校の学級数</th><th>学級数×係数</th><th>− 教頭1人 − 担任</th><th>担任以外</th><th>山口県の学校数</th></tr>
+  <tr><td>1〜2</td><td>1〜2</td><td>教頭を置かないと仮定</td><td>0</td><td>17校</td></tr>
+  <tr><td>3</td><td>3.75</td><td>− 1 − 3</td><td style="color:var(--warn)"><b>−0.25</b></td><td>23校</td></tr>
+  <tr><td>4〜5</td><td>5.0〜6.0</td><td>− 1 − 4〜5</td><td><b>0</b></td><td>33校</td></tr>
+  <tr class="em"><td>6</td><td>7.75</td><td>− 1 − 6</td><td><b>0.75</b></td><td>9校</td></tr>
+  <tr class="em"><td>7</td><td>8.85</td><td>− 1 − 7</td><td><b>0.85</b></td><td>11校</td></tr>
+  <tr class="em"><td>8</td><td>9.99</td><td>− 1 − 8</td><td><b>0.99</b></td><td><b>37校（山口県で最多）</b></td></tr>
+  <tr><td>9</td><td>11.24</td><td>− 1 − 9</td><td>1.24</td><td>22校</td></tr>
+  <tr><td>10〜11</td><td>12.3〜13.6</td><td>− 1 − 10〜11</td><td>1.3〜1.6</td><td>14校</td></tr>
+  <tr><td>12以上</td><td></td><td></td><td>1.5以上</td><td>88校</td></tr>
+</table></div>
+<p class="note">学級数には特別支援学級を含みます。<b>1学年1学級＋特別支援学級2つ＝8学級</b>がよくある形です。休校中の22校は除いています。</p>
+
+<div class="card">
+  <b>山口県の小学校（262校）を学級数で並べると</b>
+  <div id="yhist" style="margin-top:10px"></div>
+  <div class="legend" style="margin-top:6px">
+    <span><i style="background:var(--warn)"></i>マイナス</span>
+    <span><i style="background:var(--kyoto)"></i>0〜0.5人</span>
+    <span><i style="background:var(--nokori)"></i>0.5〜1人（ぎりぎり1人つかない）</span>
+    <span><i style="background:var(--tannin)"></i>1人以上</span>
+  </div>
+</div>
+
+<div class="two">
+  <div class="card point">
+    <b>担任以外が1人に届かない小学校の割合</b>
+    <div class="tblwrap"><table>
+      <tr><th></th><th>山口県</th><th>全国</th></tr>
+      <tr><td class="l">マイナス（3学級）</td><td>9%</td><td>2.0%</td></tr>
+      <tr><td class="l">0〜0.5人（1〜2、4〜5学級）</td><td>19%</td><td>6.7%</td></tr>
+      <tr class="em"><td class="l">0.5〜1人（6〜8学級）</td><td>22%</td><td>20.5%</td></tr>
+      <tr><td class="l"><b>合計（1人未満）</b></td><td><b>50%</b></td><td><b>29%</b></td></tr>
+    </table></div>
+    <small>山口県の「1人未満」は47都道府県中<b>10番目</b>に高い。最も低いのは神奈川・大阪・東京（5〜6%）。</small>
+  </div>
+  <div class="card">
+    <b>中学校は？</b>
+    <p>中学校は係数が大きいので、教頭を1人と数えても、<b>山口県の146校すべてで担任以外が1.5人以上</b>います（全国でも同じ）。</p>
+    <p>中学校で足りないのは「人数」より「<b>教科ごとの免許</b>」です。小規模の中学校では、免許外教科担任や兼務の非常勤講師で埋めています。</p>
+  </div>
+</div>
+<div class="card warn">
+  <b>なぜ「ぎりぎり1人つかない」が大事か</b>
+  <ul>
+    <li>0.99人は、計算上は<b>ほぼ1人</b>。それでも1人に届かなければ、その1人を教務・専科・少人数のどれに使うか、または配らないかは県が決めます。</li>
+    <li>実際の計算は県全体でまとめて行うので、0.75〜0.99人分を<b>県が各校にどう配っているか</b>（配当基準）が、兼任の有無を決めます。</li>
+    <li>山口県の配当基準（例：何学級から教務を担任外にするか）は、公表されていれば確認、なければ交渉で示させる材料になります。</li>
+  </ul>
+</div>
+<p class="note">学校数：文部科学省「令和7年度学校基本調査」小学校・中学校 都道府県別 学級数別学校数（国・公・私立の計）。法律の計算は、実際の学級数ではなく、県が定めた学級編制の基準で数えた学級数を使います。少人数学級を県独自で進めている場合は、この表とずれることがあります。</p>
+
+<h2 id="kyomu">6. 教務・分掌は、どこから出ているのか</h2>
+<div class="card">
+  <ul>
+    <li><b>「教務主任」は職名ではなく校務分掌</b>です。学校教育法施行規則で置くことになっていますが、<mark>義務標準法には「教務主任の分」という枠はありません</mark>。</li>
+    <li>そのため、教務を担任と別に置けるかどうかは、②の計算で出る「担任以外に回せる分」と、④で県がそれを何に使うかで決まります。</li>
+    <li>小学校6学級（1学年1学級）では、回せる分は<b>約1人</b>。県が専科（理科・音楽など）や少人数指導に使えば、<b>教務は担任と兼任</b>になります。</li>
+    <li>小学校5学級以下（複式を含む学校）では、教頭の分も0です。教頭も教務も担任を持ち、ほかの分掌もまとめて受け持つのが<b>計算上の前提</b>になっています。</li>
+    <li>主幹教諭や小学校専科には加配（第7条2項・第15条）がありますが、年度ごとに国が配り、県が学校を選びます。小規模校に回るとは限りません。</li>
+  </ul>
+</div>
+<div class="card warn">
+  <b>例：美祢市の単学級の小学校（1学級24人程度 × 6学年 ＝ 約144人）</b><br>
+  ・通常学級だけの6学級なら：6 × 1.292 ＝ <b>約7.75人</b>。教頭1人と担任6人を引くと、担任以外は<b>0.75人</b>。<br>
+  ・特別支援学級が2つあって8学級なら：8 × 1.249 ＝ <b>約9.99人</b>。教頭1人と担任8人を引くと、担任以外は<b>0.99人</b>。<br>
+  どちらも1人に届きません。児童数が200人未満なので、児童数による加算もありません。教務が6年担任と兼任なのは、この「1人に届かない分」をほかの使い道に回した結果と考えられます。
+</div>
+
+<h2 id="dai">7. 産休・育休・病休の代わりの先生は、どう扱われるか</h2>
+<ul>
+  <li>産休・育休・病休の人の代わりは、ふつう<b>臨時的任用（講師）</b>で入れます。</li>
+  <li>文科省の「教師不足」調査では、<b>休んでいる人を数から除き、代わりの人を加えて</b>数えます。代わりが来なければ「不足」です。</li>
+  <li>ただし調査は<b>始業日と5月1日の2時点だけ</b>。5月以降に始まった産休・育休・病休で代わりが来ない件数は、国の調査では数えていません。</li>
+  <li>国は、年度の途中で産休・育休に入る見込みの先生の代わりを、<b>年度初めから正規教員として採用しやすくする政令改正</b>（いわゆる限度政令）をしました。前倒しで代わりを任用する場合に加配を優先する、とも示しています（令和7年度調査の資料）。</li>
+</ul>
+
+<h2 id="fusoku">8. 文科省「教師不足」調査との関係</h2>
+<div class="card">
+  <ul>
+    <li>調査の「不足」は、<b>④の配当数に対して⑤で足りない人数</b>です。国の標準（②）に対する不足ではありません。</li>
+    <li>令和7年5月1日時点で全国3,827人（0.45%）。小学校1,699人、中学校1,031人。</li>
+    <li>同じ資料に「義務標準法に基づく充足率」も載っています。<b>標準に届いていないのに不足0%</b>という県があります。<br>
+      例：高知県 不足率0% ／ 充足率97.3%。配当を少なく組めば、不足は出にくくなります。</li>
+    <li>山口県：小学校14人（0.34%）、中学校8人（0.32%）、充足率100.2%。</li>
+    <li><mark>小規模校で最初から兼任が前提の配当なら、その学校は「不足0人」</mark>。現場の実感と統計がずれる理由のひとつです。</li>
+  </ul>
+</div>
+
+<h2 id="chui">9. 混同しやすい言葉</h2>
+<div class="tblwrap"><table>
+  <tr><th class="l">言葉</th><th class="l">意味</th><th class="l">注意</th></tr>
+  <tr><td class="l">充足率</td><td class="l">国の標準定数（②）に対して、県が置いている数の割合</td><td class="l">県全体の数。どの学校に何人いるかは分からない</td></tr>
+  <tr><td class="l">配当数</td><td class="l">県が各校に置くと決めた数（④）</td><td class="l">「教師不足」調査の分母</td></tr>
+  <tr><td class="l">定数内講師</td><td class="l">正規で埋めるはずの定数の枠を、臨時的任用の講師で埋めたもの</td><td class="l">数は足りていても、なり手がいないと穴があく</td></tr>
+  <tr><td class="l">定数崩し</td><td class="l">常勤1人分のお金で、非常勤を複数人雇うこと（総額裁量制）</td><td class="l">人数は増えても、担任や分掌を持てる人は増えない</td></tr>
+  <tr><td class="l">加配</td><td class="l">国が目的ごとに上乗せする定数</td><td class="l">毎年度の配分。県が学校を選ぶ</td></tr>
+  <tr><td class="l">市町費の職員</td><td class="l">市町が独自に雇う講師・支援員</td><td class="l">②〜④の数にも、「教師不足」調査にも入らない</td></tr>
+</table></div>
+
+<footer>
+  <p><b>出典</b><br>
+  ・<a href="https://laws.e-gov.go.jp/law/333AC0000000116">公立義務教育諸学校の学級編制及び教職員定数の標準に関する法律</a>（e-Gov法令検索、2026年10月18日に取得。第3条・第6条〜第9条・第15条、附則）<br>
+  ・<a href="https://www.mext.go.jp/content/20260306-kyoikushokuin-000047948_5.pdf">文部科学省「令和7年度『教師不足』に関する実態調査」</a>（令和8年3月5日）<br>
+  ・<a href="https://www.e-stat.go.jp/stat-search/files?toukei=00400001">文部科学省「令和7年度学校基本調査」</a>小学校・中学校 都道府県別 学級数別学校数（e-Stat、2025年12月26日公開）<br>
+  ・標準授業時数：小学校・中学校学習指導要領（平成29年告示）<br>
+  ・国庫負担割合と総額裁量制：義務教育費国庫負担法</p>
+  <p>1校あたりの数字は、条文の式を1校にあてはめた目安です。実際の配置は県（山口県教委）の配当基準によります。</p>
+  <p>作成者：wobachan ／ 2026年10月</p>
+</footer>
+</main>
+
+<script>
+(function(){
+  var S=[[2,1.000],[4,1.250],[5,1.200],[6,1.292],[7,1.264],[9,1.249],[11,1.234],[15,1.210],[18,1.200],[21,1.170],[24,1.165],[27,1.155],[30,1.150],[33,1.140],[36,1.137],[39,1.133],[999,1.130]];
+  var C=[[1,4.000],[2,3.000],[3,2.667],[4,2.000],[5,1.660],[6,1.750],[8,1.725],[11,1.720],[14,1.570],[17,1.560],[20,1.557],[23,1.550],[26,1.520],[32,1.517],[35,1.515],[999,1.483]];
+  function coef(t,c){var a=t==='s'?S:C;for(var i=0;i<a.length;i++)if(c<=a[i][0])return a[i][1];}
+  function kyoto(t,c){
+    if(t==='s')return c>=27?2:c>=9?1:c>=6?0.75:0;
+    return c>=24?2:c>=6?1:c>=3?0.5:0;
+  }
+  function ninzu(n){return n>=1200?1.25:n>=800?1:n>=600?0.75:n>=300?0.5:n>=200?0.25:0;}
+  function large(t,c){
+    if(t==='s')return (c>=27?1:0)+(c>=30?0.5:0);
+    return (c>=24?1:0)+(c>=30?1.5:c>=18?1:0);
+  }
+  function f(x){return (Math.round(x*100)/100).toFixed(2).replace(/\.?0+$/,'');}
+  function calc(t,c,n){
+    var k=coef(t,c),base=c*k,ky=kyoto(t,c),add=ninzu(n)+large(t,c),tot=base+add;
+    var yobi=tot-ky-c;
+    var yogo=(c>=3?1:0)+((t==='s'&&n>=801)||(t==='c'&&n>=751)?1:0);
+    var jimu=(c>=4?1:c===3?0.75:0)+((t==='s'&&c>=27)||(t==='c'&&c>=21)?1:0);
+    return {k:k,base:base,ky:ky,add:add,tot:tot,yobi:yobi,yogo:yogo,jimu:jimu};
+  }
+  function render(t){
+    var cEl=document.getElementById(t+'-c'),nEl=document.getElementById(t+'-n');
+    var c=+cEl.value,n=Math.max(0,+nEl.value||0);
+    document.getElementById(t+'-cv').textContent=c;
+    var r=calc(t,c,n);
+    var w=Math.max(r.tot,r.ky+c),neg=r.yobi<0;
+    var h='<div class="big">'+f(r.tot)+' 人</div><small>教頭及び教諭等（校長は別に1人）</small>'+
+      '<div class="bar">'+
+        '<div style="width:'+(r.ky/w*100)+'%;background:var(--kyoto)"></div>'+
+        '<div style="width:'+(Math.min(c,r.tot-r.ky)/w*100)+'%;background:var(--tannin)"></div>'+
+        (r.yobi>0?'<div style="width:'+(r.yobi/w*100)+'%;background:var(--nokori)"></div>':'')+
+      '</div>'+
+      '<div class="row"><span>学級数 × 係数</span><span>'+c+' × '+r.k.toFixed(3)+' ＝ '+f(r.base)+'</span></div>'+
+      '<div class="row"><span>児童生徒数・大規模の加算</span><span>+'+f(r.add)+'</span></div>'+
+      '<div class="row"><span>うち教頭の分</span><span>'+f(r.ky)+'</span></div>'+
+      '<div class="row"><span>担任（学級数）</span><span>'+c+'</span></div>'+
+      '<div class="row"><span>担任以外に回せる分</span><span style="color:'+(neg?'var(--warn)':'inherit')+'">'+f(r.yobi)+'</span></div>'+
+      (c>=3?'<div class="row"><span>教頭を1人と数えると</span><span style="color:'+(r.tot-1-c<1?'var(--warn)':'inherit')+'">'+f(r.tot-1-c)+(r.tot-1-c<1?'（1人に届かない）':'')+'</span></div>':'')+
+      '<div class="row"><span>養護教諭 ／ 事務職員</span><span>'+f(r.yogo)+' ／ '+f(r.jimu)+'</span></div>';
+    if(r.ky===0&&c>=1&&c<3) h+='<p class="note" style="color:var(--warn)">この規模は教頭の分が0です。教頭を置くなら、担任の分から出すことになります（'+(r.yobi-1<0?'担任以外は '+f(r.yobi-1)+' ＝ 足りない':'担任以外は '+f(r.yobi-1))+'）。</p>';
+    document.getElementById(t+'-out').innerHTML=h;
+  }
+  ['s','c'].forEach(function(t){
+    document.getElementById(t+'-c').addEventListener('input',function(){render(t)});
+    document.getElementById(t+'-n').addEventListener('input',function(){render(t)});
+    render(t);
+  });
+  document.querySelectorAll('.presets button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.dataset.t;
+      document.getElementById(t+'-c').value=b.dataset.c;
+      document.getElementById(t+'-n').value=b.dataset.n;
+      render(t);
+    });
+  });
+
+  // 比較グラフ
+  var hours={s:[850,910,980,1015,1015,1015],c:[1015,1015,1015]};
+  var weekly={s:hours.s.reduce(function(a,b){return a+b},0)/35,c:hours.c.reduce(function(a,b){return a+b},0)/35};
+  var max=0,rows=[];
+  [1,2,3,4].forEach(function(g){
+    ['s','c'].forEach(function(t){
+      var c=g*(t==='s'?6:3),r=calc(t,c,0);
+      r.c=c;r.g=g;r.t=t;r.koma=weekly[t]*g/(r.tot-r.ky);
+      rows.push(r);max=Math.max(max,r.tot);
+    });
+  });
+  var cmp=document.getElementById('cmp'),tb=document.getElementById('cmpTable'),html='';
+  rows.forEach(function(r,i){
+    var name=(r.t==='s'?'小 ':'中 ')+r.c+'学級';
+    var col=r.t==='s'?'var(--sho)':'var(--chu)';
+    html+='<div class="lab" style="color:'+col+';font-weight:700">'+name+'</div><div class="track">'+
+      '<div style="width:'+(r.ky/max*100)+'%;background:var(--kyoto)"></div>'+
+      '<div style="width:'+(r.c/max*100)+'%;background:var(--tannin)">担任'+r.c+'</div>'+
+      '<div style="width:'+(r.yobi/max*100)+'%;background:var(--nokori)">'+f(r.yobi)+'</div></div>';
+    if(i%2===1&&i<rows.length-1)html+='<div class="sep"></div>';
+    var tr=document.createElement('tr');
+    tr.innerHTML=(r.t==='s'?'<td rowspan="2">'+r.g+'学級</td>':'')+
+      '<td class="'+(r.t==='s'?'sho':'chu')+'">'+(r.t==='s'?'小学校':'中学校')+'</td><td>'+r.c+'</td><td>'+r.k.toFixed(3)+'</td><td>'+f(r.tot)+'</td><td>'+f(r.ky)+'</td><td><b>'+f(r.yobi)+'</b></td><td>約'+r.koma.toFixed(1)+'コマ</td>';
+    if(r.g===1)tr.className='em';
+    tb.appendChild(tr);
+  });
+  cmp.innerHTML=html;
+
+  // 山口県 小学校の学級数別学校数（令和7年度学校基本調査、休校除く）
+  var ys={1:6,2:11,3:23,4:18,5:15,6:9,7:11,8:37,9:22,10:8,11:6,12:3,13:4,14:5,15:10,16:6,17:7,18:10,19:1,20:8,21:5,22:4,23:5,24:4,25:5,26:2,27:3,28:3,29:3,30:2,31:3,33:2,35:1};
+  var hb=[],hmax=0,i;
+  for(i=1;i<=20;i++){hb.push({lab:String(i),n:ys[i]||0,c:i});}
+  var rest=0;for(var k in ys){if(+k>20)rest+=ys[k];}
+  hb.push({lab:'21〜',n:rest,c:21});
+  hb.forEach(function(b){hmax=Math.max(hmax,b.n)});
+  function band(c){
+    var x=c*coef('s',c)-c-(c>=3?1:0);
+    return x<0?'var(--warn)':x<0.5?'var(--kyoto)':x<1?'var(--nokori)':'var(--tannin)';
+  }
+  var hh='<div style="display:flex;align-items:flex-end;gap:3px;height:170px;border-bottom:1px solid var(--line)">';
+  hb.forEach(function(b){
+    hh+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">'+
+      '<span style="font-size:.7rem;color:var(--sub)">'+(b.n||'')+'</span>'+
+      '<div title="'+b.lab+'学級：'+b.n+'校" style="width:100%;height:'+(b.n/hmax*140)+'px;background:'+band(b.c)+';border-radius:3px 3px 0 0"></div></div>';
+  });
+  hh+='</div><div style="display:flex;gap:3px">';
+  hb.forEach(function(b){hh+='<div style="flex:1;text-align:center;font-size:.68rem;color:var(--sub)">'+b.lab+'</div>'});
+  hh+='</div><div style="text-align:center;font-size:.75rem;color:var(--sub)">学級数（特別支援学級を含む）</div>';
+  document.getElementById('yhist').innerHTML=hh;
+})();
+</script>
+</body>
+</html>
