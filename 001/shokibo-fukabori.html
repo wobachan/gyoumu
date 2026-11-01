@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小規模校の深掘り</title>
+<style>
+  :root {
+    --ink: #1f2937;
+    --muted: #64748b;
+    --paper: #f8fafc;
+    --line: #dbe3ea;
+    --stroke: #475569;
+    --faint: #94a3b8;
+    --hl: #0ea5e9;
+    --hl-dark: #0369a1;
+    --hl-bg: #f0f9ff;
+    --depth: #f0a500;
+    --warn: #e0592a;
+    --shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 30px 40px 80px;
+  }
+
+  /* ---------- SERIES NAV ---------- */
+
+  .series { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 34px; font-size: 13px; }
+  .series span { color: var(--muted); font-weight: 700; align-self: center; margin-right: 4px; }
+  .series a { padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: white; color: var(--ink); text-decoration: none; font-weight: 700; }
+  .series a:hover { border-color: var(--hl); }
+  .series a.current { background: var(--ink); border-color: var(--ink); color: white; }
+  a.box.dim { text-decoration: none; }
+  a.box.dim:hover { border-color: var(--hl); color: var(--hl-dark); }
+  @media print { .series { display: none; } }
+
+  /* ---------- HERO ---------- */
+
+  .hero { text-align: center; margin-bottom: 20px; }
+
+  .eyebrow {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #e8eef7;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(30px, 4.5vw, 50px);
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    font-weight: 900;
+  }
+
+  .hero-lead {
+    margin: 18px auto 0;
+    max-width: 820px;
+    font-size: 18px;
+    color: var(--muted);
+  }
+
+  .steps {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .steps a {
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .steps a:hover { border-color: var(--hl); }
+
+  /* ---------- SLIDE ---------- */
+
+  .slide {
+    margin-top: 44px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .slide-head {
+    padding: 24px 34px 14px;
+    border-bottom: 3px solid var(--hl);
+  }
+
+  .step-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--hl-dark);
+    background: #e0f2fe;
+    border-radius: 999px;
+    padding: 2px 12px;
+    margin-bottom: 6px;
+  }
+
+  .slide-head h2 {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+  }
+
+  .slide-body { padding: 24px 34px 30px; }
+
+  .lead {
+    margin: 0 0 20px;
+    font-size: 18px;
+    color: #334155;
+  }
+
+  .note {
+    margin: 16px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .note strong { color: var(--ink); }
+
+  .scroll-x { overflow-x: auto; padding-bottom: 6px; }
+
+  /* ---------- TREE ---------- */
+
+  .axis-labels {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .axis-labels .d { color: var(--depth); }
+  .axis-labels .b { color: #3b82f6; }
+
+  .t {
+    display: flex;
+    align-items: center;
+  }
+
+  .kids {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 40px;
+    position: relative;
+  }
+
+  /* 親 → 縦線 */
+  .kids::before {
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    width: 20px;
+    border-top: 2px solid var(--faint);
+  }
+
+  .kids > .t { position: relative; }
+
+  /* 縦線 → 子 */
+  .kids > .t::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    width: 20px;
+    border-top: 2px solid var(--faint);
+  }
+
+  /* 縦線 */
+  .kids > .t::after {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: -4px;
+    bottom: -4px;
+    border-left: 2px solid var(--faint);
+  }
+
+  .kids > .t:first-child::after { top: 50%; }
+  .kids > .t:last-child::after { bottom: 50%; }
+  .kids > .t:only-child::after { display: none; }
+
+  .box {
+    flex: none;
+    width: 210px;
+    padding: 8px 12px;
+    background: white;
+    border: 2px solid var(--stroke);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .box.root {
+    width: 150px;
+    font-size: 17px;
+    font-weight: 900;
+    text-align: center;
+    padding: 14px 10px;
+  }
+
+  .box.l1 { font-weight: 800; font-size: 15px; }
+  .box.dim { color: var(--muted); border-color: #cbd5e1; }
+  .box.leaf { width: 300px; border-width: 1.5px; font-size: 13.5px; }
+
+  .box.focus {
+    background: var(--hl);
+    border-color: var(--hl);
+    color: white;
+  }
+
+  .box.focus-2 {
+    border-color: var(--hl);
+    background: var(--hl-bg);
+    font-weight: 800;
+  }
+
+  .box.key {
+    border: 3px solid var(--warn);
+    font-weight: 800;
+  }
+
+  .kids.dim-lines::before,
+  .kids.dim-lines > .t::before,
+  .kids.dim-lines > .t::after { border-color: #e2e8f0; }
+
+  .bridge {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: #fff7ed;
+    border: 2px solid var(--warn);
+    border-radius: 16px;
+  }
+
+  .bridge-arrow {
+    flex: none;
+    width: 0;
+    height: 0;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 22px solid var(--warn);
+  }
+
+  .bridge p {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 900;
+    color: #9a3412;
+  }
+
+  .bridge small {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #7c2d12;
+  }
+
+  /* ---------- COMPETITORS ---------- */
+
+  .rivals {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .rival {
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--c);
+    border-radius: 14px;
+    padding: 14px;
+    background: white;
+  }
+
+  .rival h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .rival p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .rival .job {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #d8dee7;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .rival.big { background: #fff7ed; }
+
+  /* ---------- MAP ---------- */
+
+  .map-wrap svg {
+    display: block;
+    width: 100%;
+    max-width: 860px;
+    min-width: 600px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  svg text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; }
+
+  .map-title {
+    margin: 26px 0 6px;
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .map-title:first-of-type { margin-top: 0; }
+
+  .map-sub {
+    margin: 0 0 8px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* ---------- TABLE ---------- */
+
+  .compare {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+  }
+
+  .importance {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .imp {
+    writing-mode: vertical-rl;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .imp.up { color: var(--depth); }
+  .imp.down { color: var(--warn); }
+
+  table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+
+  th, td {
+    border: 1px solid var(--stroke);
+    padding: 7px 9px;
+    text-align: center;
+  }
+
+  th {
+    background: #f1f5f9;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+
+  th.ours { background: var(--hl); color: white; }
+  th.big { background: #ffedd5; }
+
+  td:first-child { text-align: left; font-weight: 700; }
+  td.mark { font-size: 19px; line-height: 1.2; }
+  td.mark small { display: block; font-size: 11px; color: var(--muted); font-weight: 500; }
+  td.ours { background: var(--hl-bg); }
+  tr.win td:first-child::after {
+    content: " ★";
+    color: var(--hl);
+  }
+
+  .o { color: var(--hl-dark); }
+  .t2 { color: var(--depth); }
+  .x { color: var(--warn); }
+
+  /* ---------- FINDINGS ---------- */
+
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .finding {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    background: white;
+  }
+
+  .finding .num {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--warn);
+  }
+
+  .finding h3 {
+    margin: 2px 0 8px;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .finding p {
+    margin: 0;
+    font-size: 14px;
+    color: #334155;
+  }
+
+  .finding .act {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--hl-bg);
+    border-left: 4px solid var(--hl);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .finding .act span {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: white;
+    background: var(--hl-dark);
+    border-radius: 6px;
+    padding: 0 7px;
+    margin-right: 6px;
+  }
+
+  .verify {
+    margin-top: 44px;
+    background: linear-gradient(135deg, #111827, #273449);
+    color: white;
+    border-radius: 24px;
+    padding: 36px 40px;
+  }
+
+  .verify h2 {
+    margin: 0 0 6px;
+    font-size: 24px;
+  }
+
+  .verify > p {
+    margin: 0 0 18px;
+    color: #cbd5e1;
+  }
+
+  .verify ol {
+    margin: 0;
+    padding-left: 22px;
+    color: #e2e8f0;
+  }
+
+  .verify li { margin: 8px 0; }
+  .verify li small { color: #94a3b8; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width: 980px) {
+    .rivals { grid-template-columns: repeat(2, 1fr); }
+    .findings { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 30px 16px 60px; }
+    .slide-head, .slide-body { padding-left: 18px; padding-right: 18px; }
+    .rivals { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .importance { display: none; }
+    .verify { padding: 26px 20px; }
+  }
+
+  @media print {
+    body { background: white; }
+    .page { max-width: none; padding: 16px; }
+    .slide { box-shadow: none; break-inside: avoid; }
+    .scroll-x { overflow: visible; }
+    .map-wrap svg { min-width: 0; }
+  }
+
+  td.mark.unk { color: #94a3b8; }
+  table.seg td { text-align: left; }
+  table.seg td:first-child { white-space: nowrap; }
+
+  /* ---------- END NAV ---------- */
+  .endnav { margin-top: 56px; padding: 28px; background: #ffffff; border: 1px solid #dbe3ea; border-radius: 22px; box-shadow: 0 12px 35px rgba(15,23,42,.08); }
+  .endnav h3 { margin: 22px 0 10px; font-size: 14px; color: #64748b; letter-spacing: .04em; }
+  .endnav-pn { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .endnav-pn a { display: block; padding: 14px 18px; border-radius: 14px; background: #1f2937; color: #fff; text-decoration: none; font-size: 13px; }
+  .endnav-pn a strong { display: block; font-size: 17px; margin-top: 2px; }
+  .endnav-pn a.next { text-align: right; }
+  .endnav-pn a:hover { background: #0369a1; }
+  .endnav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .endnav-grid a, .endnav-grid div { display: block; padding: 12px 14px; border: 1px solid #dbe3ea; border-radius: 12px; background: #f8fafc; color: #1f2937; text-decoration: none; font-weight: 800; font-size: 15px; line-height: 1.45; }
+  .endnav-grid a:hover { border-color: #0ea5e9; background: #f0f9ff; }
+  .endnav-grid small { display: block; font-weight: 500; font-size: 12px; color: #64748b; }
+  .endnav-grid div { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
+  .endnav-grid div small { color: #e0f2fe; }
+  @media (max-width: 760px) { .endnav { padding: 18px; } .endnav-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .endnav-pn, .endnav-grid { grid-template-columns: 1fr; } .endnav-pn a.next { text-align: left; } }
+  @media print { .endnav { display: none; } }
+
+  details.datatable { margin-top: 22px; border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; background: #fff; }
+  details.datatable summary { cursor: pointer; font-weight: 800; color: var(--hl-dark); }
+  table.num td { text-align: right; }
+  table.num td:first-child { text-align: left; }
+  table.num td small { color: var(--muted); font-size: 11.5px; }
+  table.num tr.sum td { font-weight: 800; background: #f1f5f9; }
+  .tdot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .rival p b { font-size: 13.5px; }
+
+  /* ---------- 検証 ---------- */
+  .kb { display: grid; gap: 4px; }
+  .kb-row { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 16px; align-items: center; font-size: 14px; }
+  .kb-cap { font-weight: 800; font-size: 13px; color: var(--muted); }
+  .kb-head { margin-top: 12px; padding-top: 8px; border-top: 2px solid var(--c); }
+  .kb-head .kb-n b { color: var(--c); }
+  .kb-n small { display: block; font-size: 11.5px; color: var(--muted); font-weight: 500; line-height: 1.3; }
+  .kb-c { display: flex; align-items: center; gap: 8px; }
+  .kb-track { flex: 1; height: 14px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
+  .kb-fill { display: block; height: 100%; }
+  .kb-v { width: 52px; text-align: right; font-variant-numeric: tabular-nums; font-size: 13.5px; }
+  .kb-v.b { font-weight: 900; }
+  .kb-na { color: var(--faint); }
+  @media (max-width: 640px) {
+    .kb-row { grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+    .kb-row .kb-n { grid-column: 1 / -1; }
+    .kb-cap .kb-n { display: none; }
+  }
+
+  table.ev td { text-align: left; vertical-align: top; font-size: 13.5px; line-height: 1.55; min-width: 170px; }
+  table.ev td:first-child { white-space: nowrap; font-weight: 800; background: #f8fafc; min-width: 0; }
+  table.ev { min-width: 900px; }
+
+  .r7grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .r7box h4 { margin: 0 0 6px; font-size: 15px; }
+  table.r7 { min-width: 0; font-size: 13.5px; }
+  table.r7 td small { color: var(--muted); font-size: 11px; }
+  table.r7 tr.ken td { background: #f1f5f9; font-weight: 800; }
+  table.r7 td.up { color: var(--warn); }
+  table.r7 td.down { color: var(--hl-dark); }
+  @media (max-width: 860px) { .r7grid { grid-template-columns: 1fr; } }
+
+  /* 提言との連携 */
+  a.tg { display: inline-block; font-size: 10.5px; font-weight: 800; color: #2f5d50; background: #e8f0ec; border: 1px solid #2f5d50; border-radius: 4px; padding: 0 5px; margin-right: 5px; text-decoration: none; line-height: 1.5; vertical-align: 1px; }
+  a.tg:hover { background: #2f5d50; color: #fff; }
+  a.teigen-link { display: block; max-width: 820px; margin: 22px auto 0; padding: 14px 20px; border: 2px solid #2f5d50; border-radius: 16px; background: #e8f0ec; color: #1d3d34; text-decoration: none; text-align: left; }
+  a.teigen-link span { display: inline-block; font-size: 12px; font-weight: 800; color: #fff; background: #2f5d50; border-radius: 999px; padding: 1px 10px; margin-bottom: 4px; }
+  a.teigen-link strong { display: block; font-size: 17px; line-height: 1.45; }
+  a.teigen-link small { display: block; margin-top: 4px; font-size: 13px; color: #3f5f55; }
+  a.teigen-link:hover { background: #dcebe3; }
+
+  table.tg6 { min-width: 960px; }
+  table.tg6 td { font-size: 13.5px; }
+  table.tg6 td:nth-child(3), table.tg6 td:nth-child(7) { text-align: left; }
+  table.tg6 td small { color: var(--muted); font-size: 11.5px; }
+  table.tg6 tr.sum td { font-weight: 800; background: #f1f5f9; }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="eyebrow">DEEP DIVE ｜ 小規模校と働き方改革</div>
+    <h1>働き方改革の課題ツリーから<br>「小規模校が多い自治体」を深掘りする</h1>
+    <p class="hero-lead">
+      「小規模校が多い自治体は、働き方改革が進めにくいのではないか」という問いを、ツリーで分解する。
+      そのうえで、学校の規模によって「効く打ち手」がどう違うかを比べる。ここに書いたことは、すべて確かめる前の仮説。
+    </p>
+    <nav class="steps">
+      <a href="#s1">STEP1 課題ツリー</a>
+      <a href="#s2">STEP2 5つの型</a>
+      <a href="#s3">STEP3 4象限図</a>
+      <a href="#s4">STEP4 比較表</a>
+      <a href="#s5">STEP5 わかったこと</a>
+      <a href="#s6">検証 時間外</a>
+      <a href="#s7">検証 Cの中学校</a>
+      <a href="#s8">検証 R7年度</a>
+      <a href="#s9">検証 冬の早帰り</a>
+      <a href="#s10">検証 職種の構成</a>
+      <a href="#s11">検証 統廃合加配</a>
+      <a href="#s12">検証 特別支援学級</a>
+    </nav>
+    <a class="teigen-link" href="shokibo-fukushiki-teigen.html">
+      <span>この調べの結論</span>
+      <strong>政策提言（概要版）「小規模校・複式学級の業務構造から考える学校の働き方改革」</strong>
+      <small>このページは、その根拠資料。提言の「データで見ると」「中学校の小規模校では」「提言（５）（６）」は、検証1〜5から書いた →</small>
+    </a>
+  </header>
+
+
+  <!-- STEP1 課題ツリー -->
+  <section class="slide" id="s1">
+    <div class="slide-head">
+      <span class="step-tag">STEP 1 ｜ 構造・広さ・深さ</span>
+      <h2>「進めにくい」の課題ツリー</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">進めにくい理由を7つの枝に分け（広さ）、そのうち「人数が減っても、仕事は減らない」を3段まで掘る（深さ）。⑦は反対の仮説として置く。①には、政策提言の「7つの業務負荷」を取り込んだ（緑の札）。</p>
+
+      <div class="axis-labels">
+        <span class="d">深さ →（右へ行くほど具体）</span>
+        <span class="b">広さ ↓（同じ段にもれなく並べる）</span>
+      </div>
+
+      <div class="scroll-x">
+        <div class="t">
+          <div class="box root" style="width:180px">小規模校が多いと<br>働き方改革が<br>進めにくい？</div>
+          <div class="kids">
+
+            <!-- ① 深掘り -->
+            <div class="t">
+              <div class="box l1 focus">① 人数が減っても、仕事は減らない</div>
+              <div class="kids">
+
+                <div class="t">
+                  <div class="box focus-2">学校の数だけある仕事（固定の仕事）</div>
+                  <div class="kids">
+                    <div class="t"><div class="box leaf key">校務分掌の数は、学校の規模によらずほぼ同じ。少ない人数で分けるので、一人が何役も持つ</div></div>
+                    <div class="t"><div class="box leaf key">調査・報告・提出物は「1校に1件」で来る。大規模校と同じ量を、少ない人数でこなす</div></div>
+                    <div class="t"><div class="box leaf"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷6「固定業務コスト」">提言6</a>学校評価・校内研究・年間計画、行事・PTA・安全点検・会計など、規模に関係なく要る仕事を少人数で担う</div></div>
+                    <div class="t"><div class="box leaf"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷3「研究コスト」">提言3</a>全担任が公開授業や総案の作成を担うことも多く、一人あたりの研究の負担が大きい</div></div>
+                  </div>
+                </div>
+
+                <div class="t">
+                  <div class="box focus-2">代わりがいない・分け合えない</div>
+                  <div class="kids">
+                    <div class="t"><div class="box leaf key">同じ学年・同じ教科の相手がいない。学年団で教材や評価を分担する、という定番の打ち手が使えない</div></div>
+                    <div class="t"><div class="box leaf">一人が休むと穴を埋められない。休みを取りにくく、体調を崩すと残る人に一気にしわ寄せがいく</div></div>
+                    <div class="t"><div class="box leaf">中学校は教科の担当が一人。免許外の教科を持つこともあり、授業準備がすべて自分ひとり</div></div>
+                    <div class="t"><div class="box leaf">相談できる同僚が少なく、若手が一人で抱え込みやすい</div></div>
+                  </div>
+                </div>
+
+                <div class="t">
+                  <div class="box focus-2">小規模校・複式ならではの仕事</div>
+                  <div class="kids">
+                    <div class="t"><div class="box leaf key"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷1「授業の認知的負荷」">提言1</a>複式授業は二学年を同時に指導する。教材研究も、授業中の判断・切り替えも、高度なマルチタスクになる</div></div>
+                    <div class="t"><div class="box leaf"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷5「複式運営コスト」">提言5</a>小小連携や行事のたびに、自習計画・授業進度の調整・引継ぎが要る</div></div>
+                    <div class="t"><div class="box leaf"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷7「移行コスト」">提言7</a>児童数の増減で複式の有無や組み合わせが変わり、教育課程・時間割・年間計画を毎年見直す</div></div>
+                    <div class="t"><div class="box leaf"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷4「教育充実コスト」">提言4</a>少人数だからこそ、一人ひとりへの丁寧な指導・通知表所見・特色ある活動が増える（特別な支援・家庭との連絡も濃い）</div></div>
+                    <div class="t"><div class="box leaf key">学校が地域の拠点。地域行事への参加を求められ、閉校の心配もあって行事を減らしにくい</div></div>
+                  </div>
+                </div>
+
+                <div class="t">
+                  <div class="box focus-2">つなぐ仕事（連携・調整）</div>
+                  <div class="kids">
+                    <div class="t"><div class="box leaf"><a class="tg" href="shokibo-fukushiki-teigen.html" title="政策提言の業務負荷2「連携コスト」">提言2</a>支援員・地域・他校・教育委員会との打合せ、日程調整、情報共有が多い</div></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- その他（浅く） -->
+            <div class="t">
+              <div class="box l1 dim">② 学校の外から人を呼びにくい</div>
+              <div class="kids dim-lines">
+                <div class="t"><div class="box dim">部活動の地域展開の受け皿（指導者・団体）が少ない</div></div>
+                <div class="t"><div class="box dim">支援員・サポートスタッフのなり手が少ない</div></div>
+              </div>
+            </div>
+
+            <div class="t">
+              <div class="box l1 dim">③ 教育委員会の体制が小さい</div>
+              <div class="kids dim-lines">
+                <div class="t"><div class="box dim">計画づくり・調査・システム導入が担当者の一人仕事</div></div>
+                <div class="t"><div class="box dim">他の自治体の取組や新しい制度を追いきれない</div></div>
+              </div>
+            </div>
+
+            <div class="t">
+              <div class="box l1 dim">④ 人とお金の配分が規模で決まる</div>
+              <div class="kids dim-lines">
+                <div class="t"><div class="box dim">加配・支援員の配置が学級数や児童生徒数で決まり、小規模校に付きにくい（要確認）</div></div>
+                <div class="t"><div class="box dim">ICT・勤怠システムの費用が1校あたり割高</div></div>
+              </div>
+            </div>
+
+            <div class="t">
+              <div class="box l1 dim">⑤ 数字で大変さが見えにくい</div>
+              <div class="kids dim-lines">
+                <div class="t"><div class="box dim">教員が少ないと、割合が1〜2人で大きく振れる</div></div>
+                <div class="t"><div class="box dim">平均の時間が短く見え、対策が後回しになる</div></div>
+                <div class="t"><div class="box dim">合併した市では、市全体の平均に周辺部の小規模校が埋もれる</div></div>
+              </div>
+            </div>
+
+            <div class="t">
+              <div class="box l1 dim">⑥ 学校どうしで分け合いにくい</div>
+              <div class="kids dim-lines">
+                <div class="t"><div class="box dim">学校間が遠く、合同の研修・授業・事務に移動の時間がかかる</div></div>
+                <div class="t"><div class="box dim">学校をまたいで仕事を分ける仕組みがない</div></div>
+              </div>
+            </div>
+
+            <div class="t">
+              <div class="box l1 dim">⑦（反対の仮説）小規模だから進めやすい面もある</div>
+              <div class="kids dim-lines">
+                <div class="t"><div class="box dim">少人数なので、話し合い・決定が速い</div></div>
+                <div class="t"><div class="box dim">採点・成績処理・保護者対応の件数は少ない</div></div>
+                <div class="t"><div class="box dim">行事の規模が小さく、準備が軽いこともある</div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <p class="note">
+        <strong>オレンジ枠</strong>は、「進めにくい」の根っこになっていそうな原因（仮説）。
+        ⑦を置くのは、「小規模校＝大変」と決めつけないため。時間の長さではなく、負担の「種類」が違うのかもしれない。
+        <strong>緑の札</strong>（提言1〜7）は、<a href="shokibo-fukushiki-teigen.html">政策提言（概要版）</a>の「小規模校・複式学級の7つの業務負荷」。札を押すと提言が開く。
+      </p>
+
+      <div class="bridge">
+        <div class="bridge-arrow" aria-hidden="true"></div>
+        <p>
+          では、「小規模校が多い自治体」は、どこと比べて進めにくいのか？
+          <small>「学校が小さい」ことと「自治体（教育委員会）が小さい」ことを分けて考えると、比べる相手が見えてくる。</small>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- STEP2 比べる相手 -->
+  <section class="slide" id="s2">
+    <div class="slide-head">
+      <span class="step-tag">STEP 2 ｜ 広さ</span>
+      <h2>19市町は、学校の大きさで5つの型に分かれる</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">県の「公立小学校一覧／公立中学校一覧」で、全398校の学級数を数えた。「小規模校が多い」と「町が小さい」は重ならない。</p>
+
+      <div class="rivals">
+        <div class="rival" style="--c: #64748b;">
+          <h3>A　大きめの学校が多い市</h3>
+          <p><b style="color:var(--ink)">宇部市・防府市・下松市・光市・山陽小野田市</b><br>1学年1学級以下の学校は2〜4割台。複式学級は少ない（宇部市を除き0〜3）</p>
+          <div class="job">ふつう「働き方改革の打ち手」が想定しているのはここ</div>
+        </div>
+        <div class="rival" style="--c: #7c3aed;">
+          <h3>B　合併した大きな市</h3>
+          <p><b style="color:var(--ink)">下関市・山口市・岩国市・周南市</b><br>学校数40以上。1学年1学級以下が4〜5割で、その数は1市で16〜30校</p>
+          <div class="job">小規模校の数は多いのに、市全体の数字では大きい学校に埋もれる</div>
+        </div>
+        <div class="rival big" style="--c: #e0592a;">
+          <h3>C　小規模校が中心の市</h3>
+          <p><b style="color:var(--ink)">萩市・長門市・柳井市・美祢市</b><br>学校数14〜30。1学年1学級以下が7〜9割。萩市は複式学級31で県内最多</p>
+          <div class="job">市なのに、学校の姿は町村に近い。教委は市の規模</div>
+        </div>
+        <div class="rival big" style="--c: #b45309;">
+          <h3>D　小規模校が中心の町</h3>
+          <p><b style="color:var(--ink)">周防大島町・上関町・阿武町・田布施町</b><br>学校数3〜10。1学年1学級以下が6〜10割</p>
+          <div class="job">学校の負担と、教委の体制の小ささが重なる</div>
+        </div>
+        <div class="rival" style="--c: #059669;">
+          <h3>E　学校数が少ない町</h3>
+          <p><b style="color:var(--ink)">和木町・平生町</b><br>学校数2〜3。12学級以上の学校もある</p>
+          <div class="job">学校の大きさより、教委の体制の問題が大きい</div>
+        </div>
+      </div>
+
+      <div class="bridge" style="margin-top:18px; background:#f5f3ff; border-color:#7c3aed;">
+        <div class="bridge-arrow" aria-hidden="true" style="border-left-color:#7c3aed"></div>
+        <p style="color:#4c1d95">
+          1学年1学級以下の学校202校のうち、91校（45%）はBの合併した4市にある。
+          <small style="color:#4c1d95">小規模校の問題は「小さな町の問題」ではなく、大きな市の中にもっとも多くある。R7の複式学級（小学校）も、県内186学級のうち82学級がこの4市。</small>
+        </p>
+      </div>
+
+      <details class="datatable">
+        <summary>19市町の数字を見る（学級数別の学校数・複式）</summary>
+        <div class="scroll-x">
+          <table class="seg num">
+            <thead>
+              <tr>
+                <th>型・市町</th><th>小学校</th><th>中学校</th><th>計</th>
+                <th>1学年1学級以下<br><small>小6・中3学級以下</small></th>
+                <th>12学級未満</th>
+                <th>複式の目安<br><small>学級が学年より少ない学校</small></th>
+                <th>複式学級数<br><small>R7・小（中）</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="tdot" style="background:#64748b"></span>A　宇部市</td><td>24</td><td>12</td><td>36</td>
+                <td>11<small>（31%）</small></td><td>21<small>（58%）</small></td>
+                <td>4</td><td>12</td></tr>
+              <tr><td><span class="tdot" style="background:#64748b"></span>A　防府市</td><td>17</td><td>11</td><td>28</td>
+                <td>10<small>（36%）</small></td><td>14<small>（50%）</small></td>
+                <td>3</td><td>3</td></tr>
+              <tr><td><span class="tdot" style="background:#64748b"></span>A　下松市</td><td>7</td><td>3</td><td>10</td>
+                <td>2<small>（20%）</small></td><td>4<small>（40%）</small></td>
+                <td>1</td><td>1</td></tr>
+              <tr><td><span class="tdot" style="background:#64748b"></span>A　光市</td><td>8</td><td>5</td><td>13</td>
+                <td>4<small>（31%）</small></td><td>11<small>（85%）</small></td>
+                <td>1</td><td>0</td></tr>
+              <tr><td><span class="tdot" style="background:#64748b"></span>A　山陽小野田市</td><td>11</td><td>6</td><td>17</td>
+                <td>7<small>（41%）</small></td><td>13<small>（76%）</small></td>
+                <td>1</td><td>1</td></tr>
+              <tr><td><span class="tdot" style="background:#7c3aed"></span>B　下関市</td><td>41</td><td>24</td><td>65</td>
+                <td>30<small>（46%）</small></td><td>46<small>（71%）</small></td>
+                <td>11</td><td>23＋中3</td></tr>
+              <tr><td><span class="tdot" style="background:#7c3aed"></span>B　山口市</td><td>31</td><td>18</td><td>49</td>
+                <td>24<small>（49%）</small></td><td>31<small>（63%）</small></td>
+                <td>9</td><td>16＋中1</td></tr>
+              <tr><td><span class="tdot" style="background:#7c3aed"></span>B　岩国市</td><td>28</td><td>14</td><td>42</td>
+                <td>21<small>（50%）</small></td><td>30<small>（71%）</small></td>
+                <td>14</td><td>26</td></tr>
+              <tr><td><span class="tdot" style="background:#7c3aed"></span>B　周南市</td><td>27</td><td>13</td><td>40</td>
+                <td>16<small>（40%）</small></td><td>28<small>（70%）</small></td>
+                <td>7</td><td>17</td></tr>
+              <tr><td><span class="tdot" style="background:#e0592a"></span>C　萩市</td><td>17</td><td>13</td><td>30</td>
+                <td>26<small>（87%）</small></td><td>27<small>（90%）</small></td>
+                <td>16</td><td>31＋中2</td></tr>
+              <tr><td><span class="tdot" style="background:#e0592a"></span>C　長門市</td><td>9</td><td>5</td><td>14</td>
+                <td>10<small>（71%）</small></td><td>13<small>（93%）</small></td>
+                <td>4</td><td>11</td></tr>
+              <tr><td><span class="tdot" style="background:#e0592a"></span>C　柳井市</td><td>11</td><td>3</td><td>14</td>
+                <td>10<small>（71%）</small></td><td>12<small>（86%）</small></td>
+                <td>8</td><td>15</td></tr>
+              <tr><td><span class="tdot" style="background:#e0592a"></span>C　美祢市</td><td>9</td><td>5</td><td>14</td>
+                <td>12<small>（86%）</small></td><td>14<small>（100%）</small></td>
+                <td>6</td><td>13</td></tr>
+              <tr><td><span class="tdot" style="background:#b45309"></span>D　周防大島町</td><td>8</td><td>2</td><td>10</td>
+                <td>9<small>（90%）</small></td><td>10<small>（100%）</small></td>
+                <td>5</td><td>11</td></tr>
+              <tr><td><span class="tdot" style="background:#b45309"></span>D　上関町</td><td>2</td><td>1</td><td>3</td>
+                <td>3<small>（100%）</small></td><td>3<small>（100%）</small></td>
+                <td>1</td><td>1</td></tr>
+              <tr><td><span class="tdot" style="background:#b45309"></span>D　阿武町</td><td>2</td><td>1</td><td>3</td>
+                <td>3<small>（100%）</small></td><td>3<small>（100%）</small></td>
+                <td>1</td><td>2</td></tr>
+              <tr><td><span class="tdot" style="background:#b45309"></span>D　田布施町</td><td>4</td><td>1</td><td>5</td>
+                <td>3<small>（60%）</small></td><td>5<small>（100%）</small></td>
+                <td>0</td><td>1</td></tr>
+              <tr><td><span class="tdot" style="background:#059669"></span>E　和木町</td><td>1</td><td>1</td><td>2</td>
+                <td>0<small>（0%）</small></td><td>1<small>（50%）</small></td>
+                <td>0</td><td>0</td></tr>
+              <tr><td><span class="tdot" style="background:#059669"></span>E　平生町</td><td>2</td><td>1</td><td>3</td>
+                <td>1<small>（33%）</small></td><td>2<small>（67%）</small></td>
+                <td>1</td><td>2</td></tr>
+              <tr class="sum"><td>19市町 計</td><td>259</td><td>139</td><td>398</td>
+                <td>202<small>（51%）</small></td><td>288<small>（72%）</small></td><td>93</td><td>186＋中6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          ※ 学校数・学級数は県教委「教育委員会・学校一覧（教育調査資料第219集）」の公立小学校一覧・公立中学校一覧（令和8年5月1日現在）から数えた。学級数は特別支援学級を除く（通常の学級）。県立の中学校・中等教育学校、通常の学級がない分校（山陽小野田市・松原分校）は除いた。分校は1校として数えた。
+          数えた通常の学級の合計（小2,227・中1,031、県立附属中を除く）は、同資料の県全体の編制方式別学級数と一致する。<br>
+          ※ 「複式の目安」は、通常の学級の数が学年の数より少ない学校。その学年に児童生徒がいない場合もあるので目安。県全体のR8複式学級は小195・中2。<br>
+          ※ 市町別の複式学級数は県「教育統計調査結果報告書（令和7年度）」第4表・第6表（令和7年5月1日現在、国立・私立を含むが複式はすべて公立）。R8の市町別は未公表のため1年前の数字。<br>
+          ※ 12学級未満は、国の手引きでいう標準（12〜18学級）を下回る学校。
+        </p>
+      </details>
+
+      <p class="note">
+        ※ 「小規模でも働き方改革が進んでいる例」は、C・Dの市町の計画・取組から探す（次に確かめること）。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- STEP3 4象限図 -->
+  <section class="slide" id="s3">
+    <div class="slide-head">
+      <span class="step-tag">STEP 3 ｜ 4象限図</span>
+      <h2>2つの軸で、どこが難しいかを見る</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">軸の選び方で見え方が変わる。図Aは19市町の実際の数字で置いた。図Bは①の中の「負担の種類」で、位置は仮置き。</p>
+
+      <div class="map-title">図A　小規模校の割合 × 教育委員会の大きさ（19市町）</div>
+      <p class="map-sub">横＝1学年1学級以下の学校の割合、縦＝市町が受け持つ小中学校の数（目盛りは対数）。点の色はSTEP2の型</p>
+      <div class="scroll-x map-wrap">
+        <svg viewBox="0 0 760 520" role="img" aria-label="19市町の小規模校の割合と小中学校数の散布図">
+          <rect x="410.0" y="202.8" width="290.0" height="237.2" fill="#fff7ed"/>
+          <rect x="410.0" y="60" width="290.0" height="142.8" fill="#f5f3ff"/>
+          <line x1="115" y1="440.0" x2="700" y2="440.0" stroke="#e2e8f0"/><text x="110" y="444.0" text-anchor="end" font-size="12" fill="#64748b">2</text><line x1="115" y1="345.6" x2="700" y2="345.6" stroke="#e2e8f0"/><text x="110" y="349.6" text-anchor="end" font-size="12" fill="#64748b">5</text><line x1="115" y1="274.2" x2="700" y2="274.2" stroke="#e2e8f0"/><text x="110" y="278.2" text-anchor="end" font-size="12" fill="#64748b">10</text><line x1="115" y1="202.8" x2="700" y2="202.8" stroke="#e2e8f0"/><text x="110" y="206.8" text-anchor="end" font-size="12" fill="#64748b">20</text><line x1="115" y1="131.4" x2="700" y2="131.4" stroke="#e2e8f0"/><text x="110" y="135.4" text-anchor="end" font-size="12" fill="#64748b">40</text><line x1="115" y1="60.0" x2="700" y2="60.0" stroke="#e2e8f0"/><text x="110" y="64.0" text-anchor="end" font-size="12" fill="#64748b">80</text><line x1="120.0" y1="60" x2="120.0" y2="445" stroke="#e2e8f0"/><text x="120.0" y="460" text-anchor="middle" font-size="12" fill="#64748b">0%</text><line x1="265.0" y1="60" x2="265.0" y2="445" stroke="#e2e8f0"/><text x="265.0" y="460" text-anchor="middle" font-size="12" fill="#64748b">25%</text><line x1="410.0" y1="60" x2="410.0" y2="445" stroke="#e2e8f0"/><text x="410.0" y="460" text-anchor="middle" font-size="12" fill="#64748b">50%</text><line x1="555.0" y1="60" x2="555.0" y2="445" stroke="#e2e8f0"/><text x="555.0" y="460" text-anchor="middle" font-size="12" fill="#64748b">75%</text><line x1="700.0" y1="60" x2="700.0" y2="445" stroke="#e2e8f0"/><text x="700.0" y="460" text-anchor="middle" font-size="12" fill="#64748b">100%</text>
+          <line x1="410.0" y1="60" x2="410.0" y2="440" stroke="#475569" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="120" y1="202.8" x2="700" y2="202.8" stroke="#475569" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="692" y="78" text-anchor="end" font-size="13" font-weight="800" fill="#6d28d9">大きな教委の中の小規模校</text>
+          <text x="692" y="430" text-anchor="end" font-size="13" font-weight="800" fill="#9a3412">学校も教委も小さい</text>
+          <text x="128" y="78" font-size="13" font-weight="800" fill="#475569">打ち手の「標準」</text>
+          <text x="128" y="222.8" font-size="13" font-weight="800" fill="#047857">教委が小さい</text>
+          <circle cx="297.5" cy="142.3" r="7" fill="#64748b" stroke="white" stroke-width="2"/><text x="287.5" y="146.3" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">宇部市<tspan font-size="11" fill="#64748b" font-weight="500"> 36校</tspan></text><circle cx="327.1" cy="168.1" r="7" fill="#64748b" stroke="white" stroke-width="2"/><text x="317.1" y="172.1" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">防府市<tspan font-size="11" fill="#64748b" font-weight="500"> 28校</tspan></text><circle cx="236.0" cy="274.2" r="7" fill="#64748b" stroke="white" stroke-width="2"/><text x="226.0" y="278.2" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">下松市<tspan font-size="11" fill="#64748b" font-weight="500"> 10校</tspan></text><circle cx="298.6" cy="247.2" r="7" fill="#64748b" stroke="white" stroke-width="2"/><text x="308.6" y="251.2" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">光市<tspan font-size="11" fill="#64748b" font-weight="500"> 13校</tspan></text><circle cx="359.0" cy="219.5" r="7" fill="#64748b" stroke="white" stroke-width="2"/><text x="349.0" y="223.5" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">山陽小野田市<tspan font-size="11" fill="#64748b" font-weight="500"> 17校</tspan></text><circle cx="388.0" cy="81.4" r="7" fill="#7c3aed" stroke="white" stroke-width="2"/><text x="398.0" y="85.4" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">下関市<tspan font-size="11" fill="#64748b" font-weight="500"> 65校</tspan></text><circle cx="404.2" cy="110.5" r="7" fill="#7c3aed" stroke="white" stroke-width="2"/><text x="414.2" y="114.5" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">山口市<tspan font-size="11" fill="#64748b" font-weight="500"> 49校</tspan></text><circle cx="410.0" cy="126.4" r="7" fill="#7c3aed" stroke="white" stroke-width="2"/><text x="420.0" y="140.4" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">岩国市<tspan font-size="11" fill="#64748b" font-weight="500"> 42校</tspan></text><circle cx="352.0" cy="131.4" r="7" fill="#7c3aed" stroke="white" stroke-width="2"/><text x="342.0" y="125.4" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">周南市<tspan font-size="11" fill="#64748b" font-weight="500"> 40校</tspan></text><circle cx="622.9" cy="161.0" r="7" fill="#e0592a" stroke="white" stroke-width="2"/><text x="632.9" y="165.0" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">萩市<tspan font-size="11" fill="#64748b" font-weight="500"> 30校</tspan></text><circle cx="534.1" cy="239.5" r="7" fill="#e0592a" stroke="white" stroke-width="2"/><text x="534.1" y="227.5" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2937">長門・柳井市<tspan font-size="11" fill="#64748b" font-weight="500"> 14校</tspan></text><circle cx="617.1" cy="239.5" r="7" fill="#e0592a" stroke="white" stroke-width="2"/><text x="627.1" y="255.5" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">美祢市<tspan font-size="11" fill="#64748b" font-weight="500"> 14校</tspan></text><circle cx="642.0" cy="274.2" r="7" fill="#b45309" stroke="white" stroke-width="2"/><text x="632.0" y="292.2" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">周防大島町<tspan font-size="11" fill="#64748b" font-weight="500"> 10校</tspan></text><circle cx="700.0" cy="398.2" r="7" fill="#b45309" stroke="white" stroke-width="2"/><text x="690.0" y="390.2" text-anchor="end" font-size="14" font-weight="700" fill="#1f2937">上関・阿武町<tspan font-size="11" fill="#64748b" font-weight="500"> 3校</tspan></text><circle cx="468.0" cy="345.6" r="7" fill="#b45309" stroke="white" stroke-width="2"/><text x="478.0" y="349.6" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">田布施町<tspan font-size="11" fill="#64748b" font-weight="500"> 5校</tspan></text><circle cx="120.0" cy="440.0" r="7" fill="#059669" stroke="white" stroke-width="2"/><text x="130.0" y="444.0" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">和木町<tspan font-size="11" fill="#64748b" font-weight="500"> 2校</tspan></text><circle cx="313.1" cy="398.2" r="7" fill="#059669" stroke="white" stroke-width="2"/><text x="323.1" y="402.2" text-anchor="start" font-size="14" font-weight="700" fill="#1f2937">平生町<tspan font-size="11" fill="#64748b" font-weight="500"> 3校</tspan></text>
+          <text x="410.0" y="480" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">→ 1学年1学級以下の学校の割合（小規模校が多い）</text>
+          <text x="22" y="250.0" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937" transform="rotate(-90 22 250.0)">→ 所管する小中学校の数（教委の大きさの目安）</text>
+          <circle cx="70" cy="503" r="6" fill="#64748b"/><text x="80" y="508" font-size="13" fill="#1f2937">A 大きめの学校の市</text><circle cx="210" cy="503" r="6" fill="#7c3aed"/><text x="220" y="508" font-size="13" fill="#1f2937">B 合併した市</text><circle cx="350" cy="503" r="6" fill="#e0592a"/><text x="360" y="508" font-size="13" fill="#1f2937">C 小規模中心の市</text><circle cx="490" cy="503" r="6" fill="#b45309"/><text x="500" y="508" font-size="13" fill="#1f2937">D 小規模中心の町</text><circle cx="630" cy="503" r="6" fill="#059669"/><text x="640" y="508" font-size="13" fill="#1f2937">E 学校数が少ない町</text>
+        </svg>
+      </div>
+      <p class="note">
+        右下（オレンジ）は、学校の中の負担と、教委の体制の小ささが重なる。美祢市・長門市・柳井市は「市」なのに、周防大島町・上関町・阿武町と同じ右下にいる。萩市も、教委は30校を受け持つが、学校の姿は右端の町村に近い。
+        合併した4市（むらさきの点）は真ん中の線の近く（4〜5割）にいて、小規模校の数そのものは最も多いが、市全体の数字では見えにくい。
+        <strong>県がひな形・共同調達・人の派遣で教委の体制を補えば、右下の市町も、上の段の市と同じ土台に乗れる（仮説）。</strong>
+      </p>
+      <p class="note">※ 縦軸は「教委の体制」の代わり。教委事務局の職員数は公開資料でそろえて比べられないため、受け持つ小中学校の数で代えた。区切りの線（50%・20校）は見やすさのための仮の線。</p>
+
+      <div class="map-title">図B　「人が少ない負担」×「量が多い負担」</div>
+      <p class="map-sub">「一人が何役も」「代わりがいない」と、「子ども・保護者・授業の量」を分けてみる</p>
+      <div class="scroll-x map-wrap">
+        <svg viewBox="0 0 800 500" role="img" aria-label="人が少ない負担と量が多い負担の4象限図">
+          <defs>
+            <marker id="mb" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+            </marker>
+          </defs>
+
+          <line x1="140" y1="250" x2="660" y2="250" stroke="#475569" stroke-width="2.5" marker-start="url(#mb)" marker-end="url(#mb)"/>
+          <line x1="400" y1="50" x2="400" y2="450" stroke="#475569" stroke-width="2.5" marker-start="url(#mb)" marker-end="url(#mb)"/>
+
+          <text x="400" y="32" text-anchor="middle" font-size="18" font-weight="800" fill="#1f2937">量が多い負担が大きい（子ども・保護者・授業の数）</text>
+          <text x="400" y="480" text-anchor="middle" font-size="18" font-weight="800" fill="#1f2937">量の負担は小さい</text>
+          <text x="70" y="245" text-anchor="middle" font-size="16" font-weight="800" fill="#1f2937">兼務・代わり</text>
+          <text x="70" y="268" text-anchor="middle" font-size="16" font-weight="800" fill="#1f2937">の負担が小さい</text>
+          <text x="730" y="245" text-anchor="middle" font-size="16" font-weight="800" fill="#9a3412">兼務・代わり</text>
+          <text x="730" y="268" text-anchor="middle" font-size="16" font-weight="800" fill="#9a3412">の負担が大きい</text>
+
+          <!-- 大規模校 -->
+          <rect x="170" y="80" width="190" height="64" fill="white" stroke="#64748b" stroke-width="2"/>
+          <text x="265" y="106" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">大規模校</text>
+          <text x="265" y="128" text-anchor="middle" font-size="12" fill="#64748b">効く手：減らす・外に出す</text>
+
+          <!-- 中規模 -->
+          <rect x="330" y="200" width="140" height="46" fill="white" stroke="#475569" stroke-width="2"/>
+          <text x="400" y="229" text-anchor="middle" font-size="15" fill="#1f2937">中規模校</text>
+
+          <!-- 小規模 単式 -->
+          <rect x="460" y="290" width="180" height="60" fill="#fff7ed" stroke="#e0592a" stroke-width="2.5"/>
+          <text x="550" y="315" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">小規模校</text>
+          <text x="550" y="336" text-anchor="middle" font-size="12" fill="#9a3412">効く手：束ねる・分け合う</text>
+
+          <!-- 複式 -->
+          <rect x="470" y="370" width="180" height="60" fill="#fff7ed" stroke="#e0592a" stroke-width="3"/>
+          <text x="560" y="395" text-anchor="middle" font-size="16" font-weight="800" fill="#9a3412">複式のある学校</text>
+          <text x="560" y="416" text-anchor="middle" font-size="12" fill="#9a3412">授業準備は2学年分</text>
+        </svg>
+      </div>
+      <p class="note">
+        大規模校と小規模校は、負担の「種類」が違う。時間の長さだけで比べると、右下の大変さは見えにくい。
+        <strong>大規模校向けの打ち手（減らす・外に出す）をそのまま持ち込んでも、右下には効きにくい。</strong>
+      </p>
+      <p class="note">※ 図Bの位置は仮置き。教職員・教委と「どこに置くか」を話し合うこと自体が、解像度を上げる作業になる。</p>
+    </div>
+  </section>
+
+
+  <!-- STEP4 比較表 -->
+  <section class="slide" id="s4">
+    <div class="slide-head">
+      <span class="step-tag">STEP 4 ｜ 比較表</span>
+      <h2>よく使われる打ち手は、小規模校に効くか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        各市町の計画によく出てくる打ち手を、効き目が大きそうな順に並べ、学校の規模ごとに○△×を置く。
+        ★は、小規模校で特に効きそうな打ち手。
+      </p>
+
+      <div class="compare">
+        <div class="importance" aria-hidden="true">
+          <div class="imp up">▲ 一般に効き目が大きいものを上へ</div>
+          <div class="imp down">効き目が小さいものは下へ ▼</div>
+        </div>
+
+        <div class="scroll-x">
+          <table>
+            <thead>
+              <tr>
+                <th>打ち手</th>
+                <th>大規模校</th>
+                <th>中規模校</th>
+                <th class="ours">小規模校</th>
+                <th class="big">複式の<br>ある学校</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>行事・会議を精選する</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours t2">△<small>地域行事は減らしにくい</small></td>
+                <td class="mark t2">△</td>
+              </tr>
+              <tr>
+                <td>校務分掌を見直し、平準化する</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours x">×<small>人より分掌が多い</small></td>
+                <td class="mark x">×</td>
+              </tr>
+              <tr>
+                <td>学年団・教科で教材や評価を分担する</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours x">×<small>相手がいない</small></td>
+                <td class="mark x">×</td>
+              </tr>
+              <tr>
+                <td>部活動を地域へ移す</td>
+                <td class="mark t2">△</td><td class="mark t2">△</td>
+                <td class="mark ours x">×〜△<small>受け皿が少ない</small></td>
+                <td class="mark unk">－<small>主に小学校</small></td>
+              </tr>
+              <tr>
+                <td>教員業務支援員などを置く</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours unk">？<small>配置の基準による</small></td>
+                <td class="mark unk">？</td>
+              </tr>
+              <tr class="win">
+                <td>教委が調査・提出物を減らす</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours o">◎<small>1校1件の仕事が減る</small></td>
+                <td class="mark o">◎</td>
+              </tr>
+              <tr class="win">
+                <td>校務のデジタル化（クラウド・様式の統一）</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours o">◎<small>学校をまたいで使える</small></td>
+                <td class="mark o">◎</td>
+              </tr>
+              <tr class="win">
+                <td>学校をまたいで束ねる（共同学校事務・合同授業・小中一貫）</td>
+                <td class="mark t2">△</td><td class="mark t2">△</td>
+                <td class="mark ours o">○</td>
+                <td class="mark o">○<small>遠隔の合同授業も</small></td>
+              </tr>
+              <tr class="win">
+                <td>小規模校向けの独自の人（複式解消の講師など）</td>
+                <td class="mark unk">－</td><td class="mark unk">－</td>
+                <td class="mark ours o">○</td>
+                <td class="mark o">○</td>
+              </tr>
+              <tr>
+                <td>留守番電話・学校閉庁日</td>
+                <td class="mark o">○</td><td class="mark o">○</td>
+                <td class="mark ours o">○</td><td class="mark o">○</td>
+              </tr>
+              <tr>
+                <td>地域ボランティア・コミュニティ・スクールの活用</td>
+                <td class="mark t2">△</td><td class="mark o">○</td>
+                <td class="mark ours t2">△〜<span class="o">○</span><small>近いが人が少ない</small></td>
+                <td class="mark t2">△</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="note">
+        ※ ○△×はたたき台。？はまだ分からないもの。
+        上の4行（よく使われる打ち手）ほど小規模校では効きにくく、★の行（学校の外で束ねる打ち手）ほど小規模校で効きそう、という形になっている。
+        これが本当かは、小規模校の教職員に聞いて確かめる。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- STEP5 わかったこと -->
+  <section class="slide" id="s5">
+    <div class="slide-head">
+      <span class="step-tag">STEP 5 ｜ 課題 → 解決策</span>
+      <h2>比べてわかったことと、打ち手の仮説</h2>
+    </div>
+    <div class="slide-body">
+      <div class="findings">
+
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>「学校が小さい」と「町が小さい」は別の問題</h3>
+          <p>
+            19市町を数えると、小規模校が中心なのは町だけでなく、萩市・長門市・柳井市・美祢市も同じ（1学年1学級以下が7〜9割）。
+            また1学年1学級以下の学校202校のうち91校は、合併した4市（下関・山口・岩国・周南）にある。
+          </p>
+          <div class="act"><span>分析</span>型ごとに困りごとを分けて聞く。B（合併した市）には学校規模別の数字を、C・D（小規模校が中心）には教委の体制の支えを求める</div>
+        </div>
+
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>小規模校の負担は「量」より「兼務」と「代わりがいない」</h3>
+          <p>
+            一人が何役も持ち、休むと穴が埋まらない。時間の平均が短くても、楽とは限らない。
+            ツリーの⑦（進めやすい面）とあわせて見ると、「進めにくい」というより「効く打ち手が違う」のかもしれない。
+          </p>
+          <div class="act"><span>市町へ</span>時間だけでなく、一人あたりの分掌の数・休みの取りやすさも見る</div>
+        </div>
+
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>定番の打ち手は大規模校向け。小規模校には「束ねる」が効く</h3>
+          <p>
+            分掌の平準化・学年団での分担・部活動の地域移行は、人数が多いことが前提。
+            小規模校では、学校の外で仕事をまとめる・減らす打ち手のほうが効きそう。
+          </p>
+          <div class="act"><span>市町へ</span>教委が調査・提出物を減らす、様式をそろえる、共同学校事務・小中一貫・遠隔の合同授業で学校をまたいで分け合う</div>
+        </div>
+
+        <div class="finding">
+          <div class="num">わかったこと 4</div>
+          <h3>小さな町は、割合が年度で大きく振れる</h3>
+          <p>
+            19市町の計画を比べると、和木町の小学校の45時間超は 22.1→54.7→29.9% と動き、
+            上関町の小学校の月平均は 25.4→41.9時間 に増えた。教員が少ないと、1〜2人で数字が変わる。
+            逆に、合併した市では市全体の平均に周辺部の小規模校が埋もれる。
+          </p>
+          <div class="act"><span>市町へ</span>割合だけでなく人数もあわせて示す。合併した市には、学校の規模別に集計して示すよう求める</div>
+        </div>
+
+        <div class="finding">
+          <div class="num">わかったこと 5</div>
+          <h3>小さな教委は、計画をつくること自体が重い</h3>
+          <p>
+            業務量管理計画の名称・構成をとらず「働き方改革プラン」だけの町もある。
+            一方、統合型校務支援システムは県の共同調達で全19市町がそろっており、県がまとめれば小さな町も同じ土台に乗れる。
+          </p>
+          <div class="act"><span>県へ</span>計画のひな形、勤怠システムなどの共同調達、指導主事の派遣・相談窓口で、小さな教委を補う</div>
+        </div>
+
+        <div class="finding">
+          <div class="num">わかったこと 6</div>
+          <h3>小規模校にしかない強みもある</h3>
+          <p>
+            少人数なので、話し合いと決定が速い。上関町のように、町で複式解消の講師を置き、小中一貫を負担軽減に生かす例もある。
+            「進めにくい学校」ではなく「新しい方法を試しやすい学校」として位置づけられる。
+          </p>
+          <div class="act"><span>県・市町へ</span>小規模校を、校務デジタル化や遠隔の合同授業などの試行校にし、うまくいった方法を広げる</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 検証 時間外 -->
+  <section class="slide" id="s6">
+    <div class="slide-head">
+      <span class="step-tag">検証 1 ｜ 数字で確かめる</span>
+      <h2>型ごとに、時間外在校等時間に差はあるか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        19市町の計画に載っている「月45時間を超えた教員の割合」（R6年度）を、STEP2の型ごとに並べた。
+        結果は、<b>小学校では型による差がほぼなく、中学校ではC（小規模校が中心の市）がそろってやや高い</b>。小さな町（D）は高くない。
+      </p>
+
+      <div class="kb">
+        <div class="kb-row kb-cap"><span class="kb-n"></span><span class="kb-c">小学校　月45時間超の割合</span><span class="kb-c">中学校　月45時間超の割合</span></div>
+        <div class="kb-row kb-head" style="--c:#64748b"><span class="kb-n"><b>A　大きめの学校が多い市</b><small>教員数で重みづけした平均</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:34.8%;background:#64748b"></span></span><span class="kb-v b">27.8%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:46.2%;background:#64748b"></span></span><span class="kb-v b">37.0%</span></span></div><div class="kb-row"><span class="kb-n">宇部市<small>1学年1学級以下 31%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:30.6%;background:#64748b99"></span></span><span class="kb-v">24.5%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:45.1%;background:#64748b99"></span></span><span class="kb-v">36.1%</span></span></div><div class="kb-row"><span class="kb-n">防府市<small>1学年1学級以下 36%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:38.5%;background:#64748b99"></span></span><span class="kb-v">30.8%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:46.4%;background:#64748b99"></span></span><span class="kb-v">37.1%</span></span></div><div class="kb-row"><span class="kb-n">下松市<small>1学年1学級以下 20%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:39.9%;background:#64748b99"></span></span><span class="kb-v">31.9%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:56.1%;background:#64748b99"></span></span><span class="kb-v">44.9%</span></span></div><div class="kb-row"><span class="kb-n">光市<small>1学年1学級以下 31%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:43.1%;background:#64748b99"></span></span><span class="kb-v">34.5%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:33.1%;background:#64748b99"></span></span><span class="kb-v">26.5%</span></span></div><div class="kb-row"><span class="kb-n">山陽小野田市<small>1学年1学級以下 41%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:26.5%;background:#64748b99"></span></span><span class="kb-v">21.2%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:50.3%;background:#64748b99"></span></span><span class="kb-v">40.2%</span></span></div><div class="kb-row kb-head" style="--c:#7c3aed"><span class="kb-n"><b>B　合併した大きな市</b><small>教員数で重みづけした平均</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:41.0%;background:#7c3aed"></span></span><span class="kb-v b">32.8%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:51.9%;background:#7c3aed"></span></span><span class="kb-v b">41.5%</span></span></div><div class="kb-row"><span class="kb-n">下関市<small>1学年1学級以下 46%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:33.4%;background:#7c3aed99"></span></span><span class="kb-v">26.7%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:46.0%;background:#7c3aed99"></span></span><span class="kb-v">36.8%</span></span></div><div class="kb-row"><span class="kb-n">山口市<small>1学年1学級以下 49%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:43.0%;background:#7c3aed99"></span></span><span class="kb-v">34.4%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:51.2%;background:#7c3aed99"></span></span><span class="kb-v">41.0%</span></span></div><div class="kb-row"><span class="kb-n">岩国市<small>1学年1学級以下 50%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:38.8%;background:#7c3aed99"></span></span><span class="kb-v">31.0%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:58.6%;background:#7c3aed99"></span></span><span class="kb-v">46.9%</span></span></div><div class="kb-row"><span class="kb-n">周南市<small>1学年1学級以下 40%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:53.2%;background:#7c3aed99"></span></span><span class="kb-v">42.6%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:55.5%;background:#7c3aed99"></span></span><span class="kb-v">44.4%</span></span></div><div class="kb-row kb-head" style="--c:#e0592a"><span class="kb-n"><b>C　小規模校が中心の市</b><small>教員数で重みづけした平均</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:37.8%;background:#e0592a"></span></span><span class="kb-v b">30.2%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:56.8%;background:#e0592a"></span></span><span class="kb-v b">45.4%</span></span></div><div class="kb-row"><span class="kb-n">萩市<small>1学年1学級以下 87%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:41.5%;background:#e0592a99"></span></span><span class="kb-v">33.2%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:58.1%;background:#e0592a99"></span></span><span class="kb-v">46.5%</span></span></div><div class="kb-row"><span class="kb-n">長門市<small>1学年1学級以下 71%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:45.4%;background:#e0592a99"></span></span><span class="kb-v">36.3%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:56.6%;background:#e0592a99"></span></span><span class="kb-v">45.3%</span></span></div><div class="kb-row"><span class="kb-n">柳井市<small>1学年1学級以下 71%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:38.2%;background:#e0592a99"></span></span><span class="kb-v">30.6%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:56.2%;background:#e0592a99"></span></span><span class="kb-v">45.0%</span></span></div><div class="kb-row"><span class="kb-n">美祢市<small>1学年1学級以下 86%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:19.8%;background:#e0592a99"></span></span><span class="kb-v">15.8%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:54.2%;background:#e0592a99"></span></span><span class="kb-v">43.4%</span></span></div><div class="kb-row kb-head" style="--c:#b45309"><span class="kb-n"><b>D　小規模校が中心の町</b><small>教員数で重みづけした平均</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:43.0%;background:#b45309"></span></span><span class="kb-v b">34.4%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:45.8%;background:#b45309"></span></span><span class="kb-v b">36.6%</span></span></div><div class="kb-row"><span class="kb-n">周防大島町<small>1学年1学級以下 90%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:34.5%;background:#b4530999"></span></span><span class="kb-v">27.6%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:43.1%;background:#b4530999"></span></span><span class="kb-v">34.5%</span></span></div><div class="kb-row"><span class="kb-n">上関町<small>1学年1学級以下 100%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:39.6%;background:#b4530999"></span></span><span class="kb-v">31.7%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:20.9%;background:#b4530999"></span></span><span class="kb-v">16.7%</span></span></div><div class="kb-row"><span class="kb-n">田布施町<small>1学年1学級以下 60%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:49.4%;background:#b4530999"></span></span><span class="kb-v">39.5%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:64.2%;background:#b4530999"></span></span><span class="kb-v">51.4%</span></span></div><div class="kb-row"><span class="kb-n">阿武町<small>1学年1学級以下 100%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:62.5%;background:#b4530999"></span></span><span class="kb-v">50.0%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:38.5%;background:#b4530999"></span></span><span class="kb-v">30.8%</span></span></div><div class="kb-row kb-head" style="--c:#059669"><span class="kb-n"><b>E　学校数が少ない町</b><small>教員数で重みづけした平均</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:37.7%;background:#059669"></span></span><span class="kb-v b">30.2%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:80.7%;background:#059669"></span></span><span class="kb-v b">64.6%</span></span></div><div class="kb-row"><span class="kb-n">和木町<small>1学年1学級以下 0%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:37.4%;background:#05966999"></span></span><span class="kb-v">29.9%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:68.0%;background:#05966999"></span></span><span class="kb-v">54.4%</span></span></div><div class="kb-row"><span class="kb-n">平生町<small>1学年1学級以下 33%</small></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:38.0%;background:#05966999"></span></span><span class="kb-v">30.4%</span></span><span class="kb-c"><span class="kb-track"><span class="kb-fill" style="width:94.1%;background:#05966999"></span></span><span class="kb-v">75.3%</span></span></div>
+      </div>
+
+      <div class="scroll-x" style="margin-top:22px">
+        <table class="seg num">
+          <thead><tr><th>型</th><th>市町数</th><th>小 45時間超<br><small>平均（幅）</small></th><th>中 45時間超<br><small>平均（幅）</small></th>
+            <th>小 80時間超<br><small>文科省・数値のある市町</small></th><th>中 80時間超<br><small>文科省・数値のある市町</small></th></tr></thead>
+          <tbody>
+<tr><td><span class="tdot" style="background:#64748b"></span>A　大きめの学校が多い市</td><td>5</td><td>27.8%<small>（21.2〜34.5）</small></td><td>37.0%<small>（26.5〜44.9）</small></td><td>2.3%<small>（4市町）</small></td><td>5.9%<small>（4市町）</small></td></tr>
+<tr><td><span class="tdot" style="background:#7c3aed"></span>B　合併した大きな市</td><td>4</td><td>32.8%<small>（26.7〜42.6）</small></td><td>41.5%<small>（36.8〜46.9）</small></td><td>3.9%<small>（2市町）</small></td><td>11.8%<small>（2市町）</small></td></tr>
+<tr><td><span class="tdot" style="background:#e0592a"></span>C　小規模校が中心の市</td><td>4</td><td>30.2%<small>（15.8〜36.3）</small></td><td>45.4%<small>（43.4〜46.5）</small></td><td>1.7%<small>（3市町）</small></td><td>14.1%<small>（3市町）</small></td></tr>
+<tr><td><span class="tdot" style="background:#b45309"></span>D　小規模校が中心の町</td><td>4</td><td>34.4%<small>（27.6〜50）</small></td><td>36.6%<small>（16.7〜51.4）</small></td><td>2.9%<small>（4市町）</small></td><td>5.2%<small>（4市町）</small></td></tr>
+<tr><td><span class="tdot" style="background:#059669"></span>E　学校数が少ない町</td><td>2</td><td>30.2%<small>（29.9〜30.4）</small></td><td>64.6%<small>（54.4〜75.3）</small></td><td>1.5%<small>（2市町）</small></td><td>15.7%<small>（2市町）</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="findings" style="margin-top:26px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>小学校は、型による差がほぼない</h3>
+          <p>型の平均は28〜34%に収まる。市町ごとに見ても、小規模校の割合と45時間超の割合はほとんど関係がない（19市町の相関係数 0.15）。</p>
+          <div class="act"><span>読み方</span>「小規模校が多いと時間が長い」とは言えない。小規模校の大変さは、時間の長さでは見えていない可能性がある</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>中学校は、C（小規模校が中心の市）がそろって高い</h3>
+          <p>萩市・長門市・柳井市・美祢市は43〜47%で、4市とも幅が小さい。Aの市（平均37%）より約8ポイント高い。80時間超（文科省、萩・柳井・美祢）も平均14%で、Aの6%の2倍以上。</p>
+          <div class="act"><span>→ 検証2</span>4市とも第一の理由は部活動。小規模校では専門外の顧問・免許外・支援員不足が重なる（次の節）</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>小さな町（D・E）は、1校の事情で大きく振れる</h3>
+          <p>上関町の中学校は16.7%、平生町の中学校は75.3%。阿武町は小学校50.0%と、県内で最も高い。どれも町に1〜2校しかなく、数人の違いで割合が変わる。和木町の小学校も年度で22.1→54.7→29.9%と動いた。</p>
+          <div class="act"><span>読み方</span>町は型の平均でまとめず、学校ごと・数年分で見る。割合だけでなく人数も示すよう求める</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>「時間」では、小規模校が多い自治体ほど進んでいない、とは言えない</h3>
+          <p>型の差がはっきり出たのは「Cの中学校」だけ。STEP1の見立て（負担は「量」より「兼務」「代わりがいない」）とは矛盾しないが、時間の数字だけではそれを確かめられない。</p>
+          <div class="act"><span>次に</span>学校ごとの時間外、1人あたりの分掌の数、年休の取りやすさを、規模別に見る</div>
+        </div>
+      </div>
+
+      <p class="note">
+        ※ 月45時間超の割合は、各市町の「業務量管理・健康確保措置実施計画」（R8.2〜4月策定）に載っているR6年度の値（上関町は「働き方改革プラン」）。19市町すべてにある。
+        市町によって対象が教諭だけか教育職員全体かが違うので、細かい差は比べられない。文科省R7「見える化」の教委別の値（教諭、R6年度）と比べると、数値のある15市町ではおおむね近い（例：周南市の小学校 計画42.6%・文科省42.4%）。<br>
+        ※ 型の平均は、県「教育統計調査結果報告書（令和7年度）」第4表・第6表の本務教員数で重みづけした（国立・私立の教員を含む）。<br>
+        ※ 80時間超は文科省R7「見える化」の教委別の値。下関市・宇部市・山口市・長門市は教諭の数値がないため含まない。萩市など11市町は教諭の欄に他の職を含む（＊1）。<br>
+        ※ 相関係数（小規模校の割合と45時間超の割合、19市町）：小学校 0.15、中学校 −0.40。中学校の負の値は、学校が1校の町（上関町16.7%など）の影響が大きい。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 C中学校 -->
+  <section class="slide" id="s7">
+    <div class="slide-head">
+      <span class="step-tag">検証 2 ｜ 理由を確かめる</span>
+      <h2>Cの市の中学校は、なぜ時間外が長いのか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        萩市・長門市・柳井市・美祢市の計画、市議会・教育委員会の会議録、各中学校のホームページを調べた。
+        <b>4市とも、いちばんの理由に「部活動」を挙げている。</b>そこに、小規模校ならではの「専門外の顧問」「免許外の授業」「支援員が付きにくい」が重なっている。
+      </p>
+
+      <div class="map-title" style="margin-top:6px">まず、Cの市の中学校は「小さい学校で働く先生」が半分</div>
+      <div class="scroll-x">
+        <table class="seg num">
+          <thead><tr><th>型</th><th>中学校</th><th>1学年1学級の中学校</th><th>中学校の本務教員</th><th>うち1学年1学級の学校で働く人</th><th>1学年1学級の学校の教員数（平均）</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tdot" style="background:#64748b"></span>A　大きめの学校が多い市</td><td>37</td><td>8<small>（22%）</small></td><td>871</td><td>82<small>（9%）</small></td><td>10.2人</td></tr>
+            <tr><td><span class="tdot" style="background:#7c3aed"></span>B　合併した大きな市</td><td>69</td><td>22<small>（32%）</small></td><td>1,400</td><td>220<small>（16%）</small></td><td>10.0人</td></tr>
+            <tr><td><span class="tdot" style="background:#e0592a"></span><b>C　小規模校が中心の市</b></td><td>26</td><td><b>19</b><small>（73%）</small></td><td>356</td><td><b>180</b><small>（51%）</small></td><td>9.5人</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">※ 県教委「公立中学校一覧」（R8.5.1）の本務教員数（校長・教頭を含む）から数えた。教員10人前後の学校では、校長・教頭を除くと9教科を1教科1人でもまかないにくい。</p>
+
+      <div class="map-title" style="margin-top:28px">4市が挙げている理由と、部活動を移したあとの変化</div>
+      <div class="scroll-x">
+        <table class="seg ev">
+          <thead><tr><th></th><th>萩市</th><th>長門市</th><th>柳井市</th><th>美祢市</th></tr></thead>
+          <tbody>
+            <tr><td>議会・教委で挙がった理由</td>
+              <td>部活動を「要因の一つ」（教育長 R5.9）。ほかに教材研究、生徒のケアの協議（R8.6）、分掌と学年・学級業務（計画）</td>
+              <td>「中学校での長時間勤務の理由の４割強は部活動」（課長 R3.6）。教育長も要因は「ほとんど…部活動」（R7.2）</td>
+              <td>部活動を「要因の一つ」（教育長 R6.6）、「生徒指導対応や部活動など」（総合教育会議 R8.2）。「部活動だけが要因ではない」とも</td>
+              <td>部活動を「長時間労働の主な理由の一つ」（教委 R4.4）。委員から「部活動だけが足を引っ張っていたわけじゃ多分ない」（R8.1）</td></tr>
+            <tr><td>小規模校ならではの声</td>
+              <td>専門外の部を「校内事情により担当することが多く…正直つらい」（教職員の意向調査、R5.9答弁）</td>
+              <td>「経験のない教員が顧問を務めることも多く」（市の部活動の現状資料）。部の数は仙崎9〜菱海4</td>
+              <td>部活動は「指導経験がない教員には、大きな負担」（R6.6）。大畠中は部が2つ、女子バスケは募集停止</td>
+              <td>専門性がなくても「校務分掌として割り振られた部活を担当」（教育長 R5.5）。伊佐中・厚保中は運動部が男女とも2つ</td></tr>
+            <tr><td>免許外の授業</td>
+              <td><b>「教頭などが免許外教科担任として」授業を行わざるを得ない</b>（教育長 R8.6.24）</td>
+              <td>資料なし</td><td>資料なし</td><td>資料なし</td></tr>
+            <tr><td>部活動の地域展開</td>
+              <td>R5〜R7に活動日を段階的に削減。R8.9から平日・休日とも地域へ</td>
+              <td>R7.8から学校部活動を廃止し、市営「Nクラ」へ</td>
+              <td>R9までに全部に指導員か外部指導者。外部指導者18人・指導員7人（R6.11）</td>
+              <td>R5から休日を移行、平日も順次。R8年度で2種目を残すだけ</td></tr>
+            <tr><td>移したあとの変化</td>
+              <td>中学校の45時間超 52.4%（R4）→ 34.2%（R7）。活動日の削減が減少につながったと答弁（R8.6）</td>
+              <td>三隅中 9〜12月平均 約57h（R6）→ 約41h（R7）、菱海中 4〜7月平均 約62h（R7）→ 約36h（R8）</td>
+              <td>市の中学校 月平均 48.4h（R6）→ 42.8h（R7）</td>
+              <td>中学校の月平均 57.9h（H30）→「42、43」h（R5〜R7、課長 R8.1）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="findings" style="margin-top:26px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>第一の理由は部活動。小規模校では「専門外の顧問」になる</h3>
+          <p>4市とも部活動を挙げ、長門市は「4割強」と数字で答えている。先生が10人前後の学校では、ほぼ全員が顧問になり、経験のない種目も受け持つ。国の調査（R4）でも、部活動の活動日が週1日増えるごとに、中学校教諭の平日の在校等時間は約6.7分長くなる。</p>
+          <div class="act"><span>STEP1へ</span>ツリー①「代わりがいない」と②「外から人を呼びにくい」が、部活動で重なっていた</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>部活動を地域へ移したところから、下がり始めている</h3>
+          <p>長門市の三隅中・菱海中は、移行の前後で月約16〜26時間下がった。美祢市は約15時間、萩市は45時間超が約18ポイント減った。R6の数字が高いのは、部活動改革の「途中」だったことも大きいとみられる（Aの光市は地域クラブの試行をR6.4に始めており、R6の中学校の45時間超は26.5%と19市町で2番目に低い）。</p>
+          <div class="act"><span>→ 検証3</span>R7では萩市が県を下回り、柳井市は上回ったまま。部活動の進み方で差がつく、という読みを支える（次の節）</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>免許外の授業と、支援員の付きにくさも重なる</h3>
+          <p>萩市は教頭が免許外で授業をしていると答弁した。県の公立中学校の免許外の許可は137件（R5）で、国の報告書は「小規模校に許可件数が多く」、免許外は「授業準備等に時間を要する」とする。また柳井市は業務支援員を「児童・生徒数の多い学校に配置」、美祢市は14校に7人（1校あたり約0.5人）。</p>
+          <div class="act"><span>STEP1へ</span>ツリー④「配分が規模で決まる」は、柳井市の計画の書き方で裏づけられた</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>小規模校だけの問題ではない。ただし小規模校で重くなる</h3>
+          <p>萩市でも、大きめの萩西中は月平均68.0h（R5）、萩東中は45時間超57.4%（R7）と高かった。高い理由は「部活動」という全体の問題で、小規模校ではそれが専門外の顧問・免許外・支援員不足と重なって重くなる、と読むのがよさそう。</p>
+          <div class="act"><span>求めること</span>部活動の地域展開を小規模校から先に／免許外を減らす兼務・講師の配置／支援員を学校規模でなく必要で配る</div>
+        </div>
+      </div>
+
+      <details class="datatable">
+        <summary>学校ごとの数字（各校のホームページから）</summary>
+        <div class="scroll-x">
+          <table class="seg">
+            <thead><tr><th>学校（学級数）</th><th>公表されている値</th></tr></thead>
+            <tbody>
+              <tr><td>長門市 三隅中（3）</td><td>教諭の月平均 R6：9月53.1h・10月59.6h・11月57.4h／R7：9月39.4h・10月51.2h・12月34.3h</td></tr>
+              <tr><td>長門市 菱海中（3）</td><td>R7：4月62.3h・5月63.3h・6月65.3h・7月56.1h／R8：4月38.8h・5月31.9h・6月46.8h・7月27.0h</td></tr>
+              <tr><td>長門市 深川中（9）</td><td>R5は4・5月に72h台（グラフの読み取り）。R7.11から市営クラブへ完全移行</td></tr>
+              <tr><td>萩市 萩西中（8）</td><td>月平均 R5 68.0h → R6 61.9h → R7（4〜12月）45.2h</td></tr>
+              <tr><td>萩市 萩東中（12）</td><td>45時間超 R7平均57.4% → R8（4〜8月）41.3%</td></tr>
+              <tr><td>萩市 川上中（3）</td><td>9月の45時間超 R5 100% → R6 0% → R7 25.0%（数人で大きく振れる）</td></tr>
+              <tr><td>美祢市 伊佐中（3）</td><td>R7 月平均30.2h（管理職を除く）、R8（4〜9月）25.4h</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">※ 平均は月ごとの値から計算したもの、グラフから読んだものを含む。学校によって対象（教諭のみか全教職員か）が違う。</p>
+      </details>
+
+      <p class="note">
+        出典：
+        萩市議会 R8.6.24 一般質問（教育長答弁）・R5.9.11・R8.6.23（<a href="https://ssp.kaigiroku.net/tenant/hagi/" target="_blank" rel="noopener">萩市議会会議録</a>）、
+        長門市議会 R3.6.17・R7.2.20（<a href="https://ssp.kaigiroku.net/tenant/nagato/pg/index.html" target="_blank" rel="noopener">長門市議会会議録</a>）、<a href="https://www.city.nagato.yamaguchi.jp/uploaded/attachment/26969.pdf" target="_blank" rel="noopener">長門市の中学校部活動の現状</a>、
+        <a href="https://sites.google.com/view/misumijh/" target="_blank" rel="noopener">三隅中</a>・<a href="https://sites.google.com/nagato-city.ed.jp/hishikai/" target="_blank" rel="noopener">菱海中</a>の働き方改革のページ、
+        柳井市 <a href="https://www.city-yanai.jp/uploaded/attachment/36794.pdf" target="_blank" rel="noopener">総合教育会議 R6.11.7</a>・<a href="https://www.city-yanai.jp/uploaded/attachment/42652.pdf" target="_blank" rel="noopener">R8.2.10</a>・<a href="https://www.city-yanai.jp/uploaded/life/66867_122420_misc.pdf" target="_blank" rel="noopener">実施計画</a>・<a href="https://www.city-yanai.jp/uploaded/life/63290_145930_misc.pdf" target="_blank" rel="noopener">市教委ちらし（R7値）</a>、
+        美祢市 <a href="https://www2.city.mine.lg.jp/material/files/group/28/R8_01_kaigiroku.pdf" target="_blank" rel="noopener">教育委員会 R8.1.27</a>・<a href="https://www2.city.mine.lg.jp/soshiki/kyoiku/kyoikusomuka/iinnkai/sougou_kaigi/9513.html" target="_blank" rel="noopener">総合教育会議 R5.5.25</a>、
+        <a href="https://www.mext.go.jp/content/20250210-mxt_syoto01-000039997_4.pdf" target="_blank" rel="noopener">文科省 教員免許状授与件数等調査（免許外許可件数）</a>、
+        <a href="https://www.mext.go.jp/kaigisiryo/2018/10/__icsFiles/afieldfile/2018/10/12/siryou4-2.pdf" target="_blank" rel="noopener">免許外教科担任制度の在り方に関する調査研究協力者会議報告書（2018）</a>、
+        <a href="https://www.mext.go.jp/content/000289497.pdf" target="_blank" rel="noopener">教員勤務実態調査R4 確定値の分析（中教審資料）</a>。<br>
+        ※ 免許外については、長門市・柳井市・美祢市の会議録では「免許外」「臨時免許」の語が見つからなかった（ないとは言えない）。市町別・学校規模別の免許外の件数は公表されていない。<br>
+        ※ 萩市の45時間超は、計画（R6 46.5%）と議会答弁（R7 34.2%、教職員）で対象が違う可能性がある。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 R7 -->
+  <section class="slide" id="s8">
+    <div class="slide-head">
+      <span class="step-tag">検証 3 ｜ 新しい年度で見直す</span>
+      <h2>R7年度でも、型による差は残っているか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        19市町のR7年度の値を、点検・評価報告書、議会答弁、市教委のちらし、学校ホームページの「市平均」欄から集めた。
+        <b>R6と同じ物差しで取れたのは7市町だけ</b>で、型ごとの平均は出せない。そこで県全体（R7：中学校 月39.2h・45時間超37.7%）との差がどう動いたかで見る。
+      </p>
+
+      <div class="r7grid"><div class="r7box"><h4>中学校　月45時間を超えた割合（%）</h4><div class="scroll-x"><table class="seg num r7"><thead><tr><th></th><th>R6</th><th>R7</th><th>差</th><th>県との差 R6→R7</th></tr></thead><tbody><tr class="ken"><td>県（市町立）</td><td>41.4</td><td>37.7</td><td>-3.7</td><td>—</td></tr><tr><td><span class="tdot" style="background:#64748b"></span>A　下松市</td><td>44.9</td><td>50.7</td><td>+5.8</td><td class="up">+3.5 → <b>+13.0</b></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>B　周南市<small>（教育職員）</small></td><td>44.4</td><td>42.1</td><td>-2.3</td><td class="up">+3.0 → <b>+4.4</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　萩市</td><td>46.5</td><td>34.2</td><td>-12.3</td><td class="down">+5.1 → <b>-3.5</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　柳井市</td><td>45.0</td><td>44.9</td><td>-0.1</td><td class="up">+3.6 → <b>+7.2</b></td></tr><tr><td><span class="tdot" style="background:#b45309"></span>D　阿武町</td><td>30.8</td><td>48.3</td><td>+17.5</td><td class="up">-10.6 → <b>+10.6</b></td></tr></tbody></table></div></div><div class="r7box"><h4>中学校　月平均の時間外在校等時間（h）</h4><div class="scroll-x"><table class="seg num r7"><thead><tr><th></th><th>R6</th><th>R7</th><th>差</th><th>県との差 R6→R7</th></tr></thead><tbody><tr class="ken"><td>県（市町立）</td><td>41.7</td><td>39.2</td><td>-2.5</td><td>—</td></tr><tr><td><span class="tdot" style="background:#64748b"></span>A　防府市</td><td>40.3</td><td>35.1</td><td>-5.2</td><td class="down">-1.4 → <b>-4.1</b></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>B　下関市</td><td>39.7</td><td>37.3</td><td>-2.4</td><td class="">-2.0 → <b>-1.9</b></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>B　周南市<small>（教育職員）</small></td><td>45.1</td><td>44.1</td><td>-1.0</td><td class="up">+3.4 → <b>+4.9</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　萩市<small>（※）</small></td><td>47.0</td><td>39.3</td><td>-7.7</td><td class="down">+5.3 → <b>+0.1</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　柳井市</td><td>48.4</td><td>42.8</td><td>-5.6</td><td class="down">+6.7 → <b>+3.6</b></td></tr><tr><td><span class="tdot" style="background:#b45309"></span>D　阿武町</td><td>43.7</td><td>53.9</td><td>+10.2</td><td class="up">+2.0 → <b>+14.7</b></td></tr></tbody></table></div></div><div class="r7box"><h4>小学校　月45時間を超えた割合（%）</h4><div class="scroll-x"><table class="seg num r7"><thead><tr><th></th><th>R6</th><th>R7</th><th>差</th><th>県との差 R6→R7</th></tr></thead><tbody><tr class="ken"><td>県（市町立）</td><td>30.8</td><td>27.2</td><td>-3.6</td><td>—</td></tr><tr><td><span class="tdot" style="background:#64748b"></span>A　下松市</td><td>31.9</td><td>27.5</td><td>-4.4</td><td class="">+1.1 → <b>+0.3</b></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>B　周南市<small>（教育職員）</small></td><td>42.6</td><td>39.4</td><td>-3.2</td><td class="">+11.8 → <b>+12.2</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　萩市</td><td>33.2</td><td>27.3</td><td>-5.9</td><td class="down">+2.4 → <b>+0.1</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　柳井市</td><td>30.6</td><td>30.4</td><td>-0.2</td><td class="up">-0.2 → <b>+3.2</b></td></tr><tr><td><span class="tdot" style="background:#b45309"></span>D　阿武町</td><td>50.0</td><td>52.5</td><td>+2.5</td><td class="up">+19.2 → <b>+25.3</b></td></tr></tbody></table></div></div><div class="r7box"><h4>小学校　月平均の時間外在校等時間（h）</h4><div class="scroll-x"><table class="seg num r7"><thead><tr><th></th><th>R6</th><th>R7</th><th>差</th><th>県との差 R6→R7</th></tr></thead><tbody><tr class="ken"><td>県（市町立）</td><td>35.0</td><td>33.5</td><td>-1.5</td><td>—</td></tr><tr><td><span class="tdot" style="background:#64748b"></span>A　防府市</td><td>35.0</td><td>32.4</td><td>-2.6</td><td class="down">0.0 → <b>-1.1</b></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>B　下関市</td><td>33.6</td><td>31.8</td><td>-1.8</td><td class="">-1.4 → <b>-1.7</b></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>B　周南市<small>（教育職員）</small></td><td>41.6</td><td>39.7</td><td>-1.9</td><td class="">+6.6 → <b>+6.2</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　萩市<small>（※）</small></td><td>35.1</td><td>33.5</td><td>-1.6</td><td class="">+0.1 → <b>0.0</b></td></tr><tr><td><span class="tdot" style="background:#e0592a"></span>C　柳井市</td><td>35.5</td><td>34.4</td><td>-1.1</td><td class="">+0.5 → <b>+0.9</b></td></tr><tr><td><span class="tdot" style="background:#b45309"></span>D　阿武町</td><td>47.2</td><td>41.1</td><td>-6.1</td><td class="down">+12.2 → <b>+7.6</b></td></tr></tbody></table></div></div></div>
+      <p class="note">赤字は県との差が1以上（ポイント・時間）広がったもの、青字は1以上縮んだもの。</p>
+
+      <div class="findings" style="margin-top:22px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>萩市の中学校は大きく下がり、県を下回った</h3>
+          <p>45時間超は46.5%→34.2%（−12.3ポイント）。県の下がり幅（−3.7）の3倍で、県との差は＋5.1→−3.5に逆転した。萩市はR5〜R7に部活動の活動日を段階的に減らしたと答弁しており（検証2）、「部活動を手放した時期の差」という読みと合う。</p>
+          <div class="act"><span>検証2へ</span>部活動を減らした市ほど早く下がる、という仮説を1市で裏づけ</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>柳井市は時間は減ったが、45時間超の割合は変わらない</h3>
+          <p>中学校の月平均は48.4h→42.8hと下がったが、45時間超は45.0%→44.9%のまま。県との差は＋3.6→＋7.2に広がった。柳井市の部活動は教員が指導する形が残り、指導員・外部指導者の配置はR9までの計画（検証2）。</p>
+          <div class="act"><span>読み方</span>平均だけ下がり、長い人の割合が残る。一部の教員に負担が偏っていないか、学校別・人数で見る必要</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>型の外でも動きが大きい。下松市・阿武町は上がった</h3>
+          <p>Aの下松市の中学校は45時間超44.9%→50.7%で、県との差が＋13.0まで広がった（市教委も「中学校は昨年度より増加」と説明）。Dの阿武町は中学校の月平均が43.7h→53.9h。1校だけの町は、年ごとに大きく振れる。</p>
+          <div class="act"><span>読み方</span>R7では「Cが高い」とはもう言えない。型より、市町ごと・学校ごとの事情が効いている</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>R6で見えた「Cの中学校が高い」は、R7では崩れ始めている</h3>
+          <p>取れた2市のうち、萩市は県を下回り、柳井市は上回ったまま。7市町だけでは型の差は判断できないが、学校の小ささそのものより、部活動の地域展開の進み方で差がつく、という読みを支える材料が増えた。</p>
+          <div class="act"><span>次に</span>全19市町のR7値がそろう文科省「見える化」の次の公表（R7実績）を待って、検証1をやり直す</div>
+        </div>
+      </div>
+
+      <p class="note">
+        出典：防府市 <a href="https://www.city.hofu.yamaguchi.jp/uploaded/attachment/149420.pdf" target="_blank" rel="noopener">教育行政点検・評価報告書（R8.8）p.44</a>（前年度比から計画値と同じ系列と確認）／
+        下松市 <a href="https://www.city.kudamatsu.lg.jp/gakkou/kyouiku/gakkyou/documents/r8hatarakikatakaikaku.pdf" target="_blank" rel="noopener">働き方改革に係る取組（R8.8）</a>／
+        下関市 <a href="https://www.city.shimonoseki.lg.jp/uploaded/attachment/100712.pdf" target="_blank" rel="noopener">点検評価報告書（R8.8）p.45</a>・市議会R8.6.19答弁／
+        周南市 学校ホームページの「働き方改革リーフレット（R8年度版）」の市平均欄（例：<a href="https://fa.fureai-cloud.jp/_view/kanochu/attach/get2/337/0" target="_blank" rel="noopener">鹿野中</a>）／
+        萩市 市議会R8.6.23（事務局長・教育長答弁）／
+        柳井市 <a href="https://www.city-yanai.jp/uploaded/life/63290_145930_misc.pdf" target="_blank" rel="noopener">市教委の保護者向けちらし（R8年度）</a>／
+        阿武町 業務量管理・健康確保措置実施計画（R8.4、<a href="https://abutown-edu.blogspot.com/2026/04/blog-post_28.html" target="_blank" rel="noopener">町教委ブログ</a>）／
+        県 <a href="https://www.pref.yamaguchi.lg.jp/uploaded/attachment/248639.pdf" target="_blank" rel="noopener">時間外在校等時間の状況（R7まで）</a>。<br>
+        ※ どの値も、同じ資料に載っているR6の値が計画の値と一致することで、同じ物差しと確かめた。萩市の月平均（※）だけは確かめられていない（45時間超は確認済み）。周南市は教育職員全体の値。<br>
+        ※ R7の値が見つからなかった市町：宇部・光・山陽小野田・山口・岩国・長門・美祢・周防大島・上関・田布施・和木・平生。R8年度の途中の値は、どの市町でも公表されていない。80時間超のR7値も見つからない。<br>
+        ※ 阿武町の別資料（R7.12）ではR6の45時間超が中学校50.0%となっており、計画（30.8%）と合わない。算出方法が違う可能性がある。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 冬 -->
+  <section class="slide" id="s9">
+    <div class="slide-head">
+      <span class="step-tag">検証 4 ｜ 仮説を確かめる</span>
+      <h2>美祢市では、冬（12〜2月）に在校時間が下がるか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        仮説：「美祢市は山間部が多く、積雪・凍結のおそれがあり、家も遠いので、早めに退勤して持ち帰りが多い。だから在校時間が短い」。
+        雪が理由なら、冬に美祢市の学校だけが大きく下がるはず。学校が公表している月別の値で、美祢市と日本海側・瀬戸内側の学校を比べた。
+        <b>結果は、冬に下がるのはどの地域も同じで、下がり方もほぼ同じ（秋の8割前後）。美祢市の小学校は、冬だけでなく1年を通して短い。</b>
+      </p>
+
+      <div class="map-title">月ごとの時間外在校等時間（その学校・年度の9〜11月平均＝100、地域ごとの中央値）</div>
+      <div class="scroll-x map-wrap"><svg viewBox="0 0 740 360" role="img" aria-label="地域別の月ごとの時間外在校等時間（秋＝100）"><rect x="513.2" y="30" width="177.3" height="270" fill="#e0f2fe" opacity=".6"/><text x="601.8" y="46" text-anchor="middle" font-size="12" font-weight="800" fill="#0369a1">冬（12〜2月）</text><line x1="70" y1="300.0" x2="720" y2="300.0" stroke="#e2e8f0"/><text x="62" y="304.0" text-anchor="end" font-size="12" fill="#64748b">0</text><line x1="70" y1="248.1" x2="720" y2="248.1" stroke="#e2e8f0"/><text x="62" y="252.1" text-anchor="end" font-size="12" fill="#64748b">25</text><line x1="70" y1="196.2" x2="720" y2="196.2" stroke="#e2e8f0"/><text x="62" y="200.2" text-anchor="end" font-size="12" fill="#64748b">50</text><line x1="70" y1="144.2" x2="720" y2="144.2" stroke="#e2e8f0"/><text x="62" y="148.2" text-anchor="end" font-size="12" fill="#64748b">75</text><line x1="70" y1="92.3" x2="720" y2="92.3" stroke="#94a3b8" stroke-dasharray="5 4"/><text x="62" y="96.3" text-anchor="end" font-size="12" fill="#64748b">100</text><line x1="70" y1="40.4" x2="720" y2="40.4" stroke="#e2e8f0"/><text x="62" y="44.4" text-anchor="end" font-size="12" fill="#64748b">125</text><text x="70.0" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">4月</text><text x="129.1" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">5月</text><text x="188.2" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">6月</text><text x="247.3" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">7月</text><text x="306.4" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">8月</text><text x="365.5" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">9月</text><text x="424.5" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">10月</text><text x="483.6" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">11月</text><text x="542.7" y="320" text-anchor="middle" font-size="12" fill="#0369a1" font-weight="800">12月</text><text x="601.8" y="320" text-anchor="middle" font-size="12" fill="#0369a1" font-weight="800">1月</text><text x="660.9" y="320" text-anchor="middle" font-size="12" fill="#0369a1" font-weight="800">2月</text><text x="720.0" y="320" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400">3月</text><polyline points="70.0,34.2 129.1,38.3 188.2,43.8 247.3,106.0 306.4,226.8 365.5,94.2 424.5,68.2 483.6,107.7 542.7,136.2 601.8,132.5 660.9,116.9 720.0,100.6" fill="none" stroke="#e0592a" stroke-width="3"/><circle cx="70.0" cy="34.2" r="3.5" fill="#e0592a"/><circle cx="129.1" cy="38.3" r="3.5" fill="#e0592a"/><circle cx="188.2" cy="43.8" r="3.5" fill="#e0592a"/><circle cx="247.3" cy="106.0" r="3.5" fill="#e0592a"/><circle cx="306.4" cy="226.8" r="3.5" fill="#e0592a"/><circle cx="365.5" cy="94.2" r="3.5" fill="#e0592a"/><circle cx="424.5" cy="68.2" r="3.5" fill="#e0592a"/><circle cx="483.6" cy="107.7" r="3.5" fill="#e0592a"/><circle cx="542.7" cy="136.2" r="3.5" fill="#e0592a"/><circle cx="601.8" cy="132.5" r="3.5" fill="#e0592a"/><circle cx="660.9" cy="116.9" r="3.5" fill="#e0592a"/><circle cx="720.0" cy="100.6" r="3.5" fill="#e0592a"/><polyline points="70.0,57.7 129.1,47.1 188.2,46.6 247.3,121.6 306.4,264.9 365.5,90.6 424.5,79.0 483.6,110.0 542.7,112.9 601.8,147.6 660.9,129.4 720.0,129.9" fill="none" stroke="#7c3aed" stroke-width="3"/><circle cx="70.0" cy="57.7" r="3.5" fill="#7c3aed"/><circle cx="129.1" cy="47.1" r="3.5" fill="#7c3aed"/><circle cx="188.2" cy="46.6" r="3.5" fill="#7c3aed"/><circle cx="247.3" cy="121.6" r="3.5" fill="#7c3aed"/><circle cx="306.4" cy="264.9" r="3.5" fill="#7c3aed"/><circle cx="365.5" cy="90.6" r="3.5" fill="#7c3aed"/><circle cx="424.5" cy="79.0" r="3.5" fill="#7c3aed"/><circle cx="483.6" cy="110.0" r="3.5" fill="#7c3aed"/><circle cx="542.7" cy="112.9" r="3.5" fill="#7c3aed"/><circle cx="601.8" cy="147.6" r="3.5" fill="#7c3aed"/><circle cx="660.9" cy="129.4" r="3.5" fill="#7c3aed"/><circle cx="720.0" cy="129.9" r="3.5" fill="#7c3aed"/><polyline points="70.0,54.4 129.1,56.8 188.2,45.0 247.3,121.9 306.4,256.4 365.5,118.9 424.5,68.4 483.6,89.9 542.7,104.4 601.8,147.4 660.9,114.1 720.0,154.9" fill="none" stroke="#64748b" stroke-width="3"/><circle cx="70.0" cy="54.4" r="3.5" fill="#64748b"/><circle cx="129.1" cy="56.8" r="3.5" fill="#64748b"/><circle cx="188.2" cy="45.0" r="3.5" fill="#64748b"/><circle cx="247.3" cy="121.9" r="3.5" fill="#64748b"/><circle cx="306.4" cy="256.4" r="3.5" fill="#64748b"/><circle cx="365.5" cy="118.9" r="3.5" fill="#64748b"/><circle cx="424.5" cy="68.4" r="3.5" fill="#64748b"/><circle cx="483.6" cy="89.9" r="3.5" fill="#64748b"/><circle cx="542.7" cy="104.4" r="3.5" fill="#64748b"/><circle cx="601.8" cy="147.4" r="3.5" fill="#64748b"/><circle cx="660.9" cy="114.1" r="3.5" fill="#64748b"/><circle cx="720.0" cy="154.9" r="3.5" fill="#64748b"/><line x1="80" y1="344" x2="104" y2="344" stroke="#e0592a" stroke-width="3"/><text x="110" y="349" font-size="13" fill="#1f2937">美祢市</text><line x1="300" y1="344" x2="324" y2="344" stroke="#7c3aed" stroke-width="3"/><text x="330" y="349" font-size="13" fill="#1f2937">日本海側（萩・長門）</text><line x1="520" y1="344" x2="544" y2="344" stroke="#64748b" stroke-width="3"/><text x="550" y="349" font-size="13" fill="#1f2937">瀬戸内側（宇部・防府）</text></svg></div>
+
+      <div class="scroll-x" style="margin-top:14px">
+        <table class="seg num">
+          <thead><tr><th>地域</th><th>集まった値</th><th>冬 ÷ 秋<br><small>12〜2月 ÷ 9〜11月</small></th><th>1〜2月 ÷ 秋<br><small>雪の多い月</small></th><th>冬 ÷ 学期中<br><small>4〜7・9〜11月</small></th><th>秋の水準 小<br><small>9〜11月の中央値</small></th><th>秋の水準 中</th></tr></thead>
+          <tbody><tr><td><span class="tdot" style="background:#e0592a"></span>美祢市</td><td>7校・15年度分</td><td><b>83</b></td><td>85</td><td>75</td><td>25.5h<small>（12）</small></td><td>43.6h<small>（3）</small></td></tr><tr><td><span class="tdot" style="background:#7c3aed"></span>日本海側（萩・長門）</td><td>7校・13年度分</td><td><b>81</b></td><td>76</td><td>75</td><td>34.6h<small>（7）</small></td><td>48.4h<small>（6）</small></td></tr><tr><td><span class="tdot" style="background:#64748b"></span>瀬戸内側（宇部・防府）</td><td>3校・4年度分</td><td><b>86</b></td><td>80</td><td>81</td><td>—<small></small></td><td>41.1h<small>（4）</small></td></tr></tbody>
+        </table>
+      </div>
+      <p class="note">数字は中央値。冬÷秋が100なら冬も秋と同じ、80なら冬は秋の8割。（ ）は年度分の数。</p>
+
+      <div class="findings" style="margin-top:22px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>冬に下がるのは、どの地域も同じ</h3>
+          <p>冬÷秋は、美祢市83、日本海側81、瀬戸内側86とほぼ同じ。雪の多い1〜2月だけで見ても、美祢市（85）は日本海側（76）より下がり方が小さい。冬休みや行事の少なさで、どこでも冬は下がる。ただし12月だけは、美祢市（79）が日本海側（90）・瀬戸内側（94）より下がっている。</p>
+          <div class="act"><span>仮説</span>「雪・凍結で冬に早く帰る」は、冬全体では確かめられなかった。12月の差は数校の値なので、もう数年分で見たい</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>美祢市の小学校は、1年を通して短い</h3>
+          <p>秋（9〜11月）の水準で比べても、美祢市の小学校は25.5時間で、日本海側の小学校（34.6時間）より約9時間短い。短さは季節によるものではなく、年間を通した差。</p>
+          <div class="act"><span>仮説</span>残るのは1年を通して効く理由：教員の年齢構成、通勤の遠さ、持ち帰り。どれも公開資料では確かめられない</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>持ち帰りは、在校時間の短さの裏にあるかもしれない</h3>
+          <p>美東小は「家庭に持ち帰って仕事をしている教職員が多い」と公表している（R7）。ICカードで測るのは在校時間だけなので、持ち帰りが多いほど数字は短く見える。美祢市は文科省の調査で、持ち帰りを把握している教委に入っていない。</p>
+          <div class="act"><span>次に</span>短いアンケートで、通勤時間・退勤時刻（夏と冬）・持ち帰り時間・年代を聞く</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>「冬の早帰り」ではなく「いつも早く帰り、家でする」かどうかが問い</h3>
+          <p>雪の季節に限った話ではなかった。仮説のうち、年齢構成と、通勤の遠さ・持ち帰りの部分は、1年を通した短さと矛盾しない。数字が短いことを「楽になった」と読まないために、持ち帰りの把握が要る。</p>
+          <div class="act"><span>求めること</span>美祢市に、持ち帰り時間の把握（年1回でも）と、年代別の在校等時間の集計を求める</div>
+        </div>
+      </div>
+
+      <details class="datatable">
+        <summary>学校ごとの値（32年度分）</summary>
+        <div class="scroll-x">
+          <table class="seg num"><thead><tr><th>学校</th><th>年度</th><th>秋（9〜11月）</th><th>冬（12〜2月）</th><th>冬÷秋</th><th>値の取り方</th></tr></thead><tbody><tr><td>美祢　伊佐中</td><td>R7</td><td>31.3</td><td>26.3</td><td>84</td><td>表</td></tr><tr><td>美祢　厚保中</td><td>R6</td><td>43.6</td><td>22.7</td><td>52</td><td>グラフ読み取り</td></tr><tr><td>美祢　厚保中</td><td>R7</td><td>50.0</td><td>40.5</td><td>81</td><td>グラフ読み取り</td></tr><tr><td>美祢　伊佐小</td><td>R6</td><td>33.3</td><td>28.7</td><td>86</td><td>表</td></tr><tr><td>美祢　伊佐小</td><td>R7</td><td>31.3</td><td>26.7</td><td>85</td><td>表</td></tr><tr><td>美祢　厚保小</td><td>R7</td><td>24.2</td><td>19.3</td><td>80</td><td>表</td></tr><tr><td>美祢　於福小</td><td>R4</td><td>25.1</td><td>32.9</td><td>131</td><td>表</td></tr><tr><td>美祢　於福小</td><td>R5</td><td>17.0</td><td>13.8</td><td>81</td><td>表</td></tr><tr><td>美祢　於福小</td><td>R6</td><td>13.8</td><td>15.6</td><td>113</td><td>表</td></tr><tr><td>美祢　於福小</td><td>R7</td><td>22.3</td><td>19.9</td><td>90</td><td>表</td></tr><tr><td>美祢　美東小</td><td>R7</td><td>26.0</td><td>21.5</td><td>83</td><td>表</td></tr><tr><td>美祢　豊田前小</td><td>R4</td><td>31.5</td><td>23.4</td><td>74</td><td>グラフ読み取り</td></tr><tr><td>美祢　豊田前小</td><td>R5</td><td>28.8</td><td>25.9</td><td>90</td><td>グラフ読み取り</td></tr><tr><td>美祢　豊田前小</td><td>R6</td><td>19.9</td><td>15.1</td><td>76</td><td>グラフ読み取り</td></tr><tr><td>美祢　豊田前小</td><td>R7</td><td>26.8</td><td>21.5</td><td>80</td><td>グラフ読み取り</td></tr><tr><td>長門市　三隅中</td><td>R6</td><td>56.7</td><td>45.1</td><td>80</td><td>表</td></tr><tr><td>長門市　深川中</td><td>R5</td><td>58.9</td><td>51.5</td><td>87</td><td>グラフ読み取り</td></tr><tr><td>長門市　深川中</td><td>R6</td><td>48.6</td><td>38.2</td><td>78</td><td>グラフ読み取り</td></tr><tr><td>長門市　深川中</td><td>R7</td><td>42.7</td><td>32.3</td><td>76</td><td>グラフ読み取り</td></tr><tr><td>長門市　菱海中</td><td>R6</td><td>48.1</td><td>41.2</td><td>86</td><td>表</td></tr><tr><td>長門市　菱海中</td><td>R7</td><td>46.7</td><td>38.0</td><td>81</td><td>表</td></tr><tr><td>萩市　多磨小</td><td>R5</td><td>32.0</td><td>28.8</td><td>90</td><td>表</td></tr><tr><td>萩市　多磨小</td><td>R6</td><td>36.2</td><td>30.3</td><td>84</td><td>表</td></tr><tr><td>萩市　小川小</td><td>R5</td><td>36.4</td><td>25.9</td><td>71</td><td>表</td></tr><tr><td>萩市　小川小</td><td>R6</td><td>28.9</td><td>24.9</td><td>86</td><td>表</td></tr><tr><td>萩市　小川小</td><td>R7</td><td>34.6</td><td>25.8</td><td>75</td><td>表</td></tr><tr><td>萩市　明倫小</td><td>R7</td><td>44.8</td><td>35.6</td><td>79</td><td>表</td></tr><tr><td>萩市　椿西小</td><td>R6</td><td>29.1</td><td>27.2</td><td>94</td><td>表</td></tr><tr><td>宇部市　川上中校</td><td>R7</td><td>30.3</td><td>26.0</td><td>86</td><td>表</td></tr><tr><td>防府市　桑山中校</td><td>R7</td><td>39.9</td><td>35.6</td><td>89</td><td>表</td></tr><tr><td>宇部市　黒石中校</td><td>R5</td><td>49.2</td><td>35.8</td><td>73</td><td>表</td></tr><tr><td>宇部市　黒石中校</td><td>R6</td><td>42.3</td><td>36.2</td><td>86</td><td>表</td></tr></tbody></table>
+        </div>
+      </details>
+
+      <p class="note">
+        ※ 値は、各校がホームページで公表している月別の「教員1人あたりの時間外在校等時間」（2026年10月17日に取得）。冬の3か月と秋の3か月がそろう学校・年度だけを使った。美祢市7校（伊佐小・厚保小・於福小・豊田前小・美東小・伊佐中・厚保中）、日本海側7校（萩市 多磨小・小川小・明倫小・椿西小、長門市 三隅中・深川中・菱海中）、瀬戸内側3校（宇部市 黒石中・川上中、防府市 桑山中）。
+        豊田前小・厚保中・深川中はグラフからの読み取り。<br>
+        ※ 瀬戸内側は中学校3校しか月別の値が見つからなかった（山陽小野田市は全校が年度の値だけ）。数が少ないので、地域の差は大まかな目安。管理職を含むかどうかも学校によって違う。<br>
+        ※ 於福小は小さな学校で、R4・R6は冬が秋より長い（数人の動きで大きく変わる）。中央値で比べているのはこのため。<br>
+        ※ 黒石中のR5は、平均の表と45時間超の表が同じ数字になっていて、どちらかの写し間違いの可能性がある。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 構成 -->
+  <section class="slide" id="s10">
+    <div class="slide-head">
+      <span class="step-tag">検証 5 ｜ 仮説を確かめる</span>
+      <h2>養護教諭・栄養教諭の割合が高いから、短く見えるのか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        仮説：「小規模校は、教諭以外（養護教諭・栄養教諭・事務職員）の割合が高い。その人たちは時間外が短い。だから学校や市町の平均が短く見える」。
+        文科省R7「見える化」の職種別の値と、県の学校一覧で確かめた。
+        <b>向きは仮説どおり。ただし効き目は1〜3時間ほどで、美祢市の小学校の短さ（日本海側より約9時間）の一部しか説明しない。</b>
+      </p>
+
+      <div class="map-title" style="margin-top:4px">職種ごとの時間外在校等時間（R6年度、月平均）</div>
+      <div class="scroll-x">
+        <table class="seg num">
+          <thead><tr><th></th><th>校長</th><th>副校長・教頭</th><th>教諭</th><th>養護教諭</th><th>栄養教諭</th></tr></thead>
+          <tbody>
+            <tr><td>美祢市　小学校</td><td>43.5h<small>（11人）</small></td><td>58.4h<small>（11人）</small></td><td><b>28.7h</b><small>（80.3人）</small></td><td><b>18.3h</b><small>（11人）</small></td><td><b>12.3h</b><small>（3人）</small></td></tr>
+            <tr><td>美祢市　中学校</td><td>38.4h<small>（5人）</small></td><td>63.2h<small>（5人）</small></td><td>45.4h<small>（49人）</small></td><td>29.3h<small>（5人）</small></td><td>—<small>（1人）</small></td></tr>
+            <tr><td>周南市　小学校</td><td>31.9h<small>（27人）</small></td><td>61.9h<small>（26人）</small></td><td>47.6h<small>（390.6人）</small></td><td>29.7h<small>（27.6人）</small></td><td>28.9h<small>（6人）</small></td></tr>
+            <tr><td>周南市　中学校</td><td>41.1h<small>（13人）</small></td><td>68.9h<small>（15人）</small></td><td>52.3h<small>（238.4人）</small></td><td>33.8h<small>（14人）</small></td><td>25.8h<small>（5人）</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">※ 職種を分けて公表しているのは、19市町のうち美祢市・周南市など一部だけ（萩市など11市町は＊1＝教諭の欄に他の職を含む）。下関市・宇部市・下松市・防府市・光市は管理職の値だけ分かり、教頭は49〜73時間で、教諭の値が分かる市ではどこでも教諭より長い。</p>
+
+      <div class="map-title" style="margin-top:26px">美祢市の計画の値は「教諭＋養護＋栄養」の平均だった</div>
+      <div class="scroll-x">
+        <table class="seg num">
+          <thead><tr><th></th><th>教諭だけ</th><th>教諭＋養護＋栄養<br><small>管理職を除く</small></th><th>全員<br><small>管理職を含む</small></th><th>市の計画の値</th></tr></thead>
+          <tbody>
+            <tr><td>美祢市　小学校　月平均</td><td>28.7h</td><td><b>27.0h</b></td><td>31.5h</td><td><b>26.9h</b></td></tr>
+            <tr><td>美祢市　小学校　45時間超</td><td>17.6%</td><td><b>16.0%</b></td><td>24.4%</td><td><b>15.8%</b></td></tr>
+            <tr><td>美祢市　中学校　月平均</td><td>45.4h</td><td>43.9h</td><td>45.0h</td><td>42.3h</td></tr>
+            <tr><td>美祢市　中学校　45時間超</td><td>46.3%</td><td>43.9%</td><td>44.3%</td><td>43.4%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">※ 職種別の人数で重みづけして計算。中学校は栄養教諭（1人）の値が非公表のため除いた。周南市は45時間超の割合が教諭だけの値とほぼ一致する（小42.4%・計画42.6%）一方、月平均は計画41.6hと文科省の教諭47.6hが合わず、計算のしかたが違うとみられる。</p>
+
+      <div class="map-title" style="margin-top:26px">学校の大きさごとの試算：養護教諭1人が平均をどれだけ下げるか</div>
+      <div class="scroll-x">
+        <table class="seg num">
+          <thead><tr><th>学校の大きさ（通常の学級数）</th><th>学校数</th><th>本務教員（中央値）</th><th>養護教諭1人の割合<br><small>管理職2人を除いた中で</small></th><th>平均を下げる幅<br><small>教諭との差10h（美祢市）</small></th><th>同<br><small>差18h（周南市）</small></th></tr></thead>
+          <tbody><tr><td>小学校　複式あり</td><td>88</td><td>7人</td><td>20%</td><td>−2.0h</td><td>−3.6h</td></tr><tr><td>小学校　1学年1学級</td><td>62</td><td>13人</td><td>9%</td><td>−0.9h</td><td>−1.6h</td></tr><tr><td>小学校　7〜11学級</td><td>28</td><td>19人</td><td>6%</td><td>−0.6h</td><td>−1.1h</td></tr><tr><td>小学校　12学級以上</td><td>81</td><td>33人</td><td>3%</td><td>−0.3h</td><td>−0.6h</td></tr><tr><td>中学校　複式あり</td><td>5</td><td>5人</td><td>33%</td><td>−3.3h</td><td>−6.0h</td></tr><tr><td>中学校　1学年1学級</td><td>47</td><td>11人</td><td>11%</td><td>−1.1h</td><td>−2.0h</td></tr><tr><td>中学校　4〜11学級</td><td>58</td><td>19人</td><td>6%</td><td>−0.6h</td><td>−1.1h</td></tr><tr><td>中学校　12学級以上</td><td>29</td><td>36人</td><td>3%</td><td>−0.3h</td><td>−0.5h</td></tr></tbody>
+        </table>
+      </div>
+      <p class="note">※ 県教委「公立小学校一覧／公立中学校一覧」（R8.5.1）の本務教員数（校長・教頭を含む）から、校長・教頭の2人を除き、養護教諭を各校1人として計算した試算。栄養教諭は全校にいるわけではないので入れていない。</p>
+
+      <div class="findings" style="margin-top:22px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>養護教諭・栄養教諭は、たしかに短い</h3>
+          <p>美祢市の小学校では、教諭28.7時間に対して養護教諭18.3時間、栄養教諭12.3時間。周南市でも、教諭47.6時間に対して29.7時間・28.9時間。どちらも教諭より10〜18時間短い。</p>
+          <div class="act"><span>仮説</span>前半（教諭以外は短い）は、数字で確かめられた</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>小さい学校ほど、その割合が大きく、平均が下がる</h3>
+          <p>複式のある小学校では、管理職を除いた先生のうち約2割が養護教諭になり、平均が2〜4時間下がる。12学級以上の学校では約3%で、0.3〜0.6時間しか下がらない。美祢市の計画の値（26.9h）も、教諭だけ（28.7h）より1.8時間短い。</p>
+          <div class="act"><span>仮説</span>後半（だから短く見える）も、向きは確かめられた。効き目は1〜3時間</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>それでも、差の大部分は残る</h3>
+          <p>養護・栄養を含めた値どうしで比べても、美祢市の小学校27.0時間に対し、萩市35.4時間（＊1：教諭の欄に他の職を含む）。約8時間の差は構成では説明できない。教諭だけで見ても、美祢市28.7時間は県内でも短い。</p>
+          <div class="act"><span>読み方</span>構成の効果を差し引いても美祢市は短い。検証4の「持ち帰り」「年齢構成」「通勤」が残る</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>何を平均しているかで、1〜4時間変わる</h3>
+          <p>養護・栄養を含めると下がり、教頭（美祢市58.4h）を含めると上がる。小さい学校ほどこの影響が大きい。事務職員は給特法の「教育職員」ではないので、計画や文科省の数字には入っていない（学校が公表する「教職員」の値に入っているかは不明）。</p>
+          <div class="act"><span>求めること</span>市町・学校の公表は「教諭」の値を分けて示す。少なくとも、誰を含む平均かを明記する</div>
+        </div>
+      </div>
+
+      <p class="note">
+        出典：文部科学省 令和7年度「見える化」調査 服務監督教育委員会ごとの時間外在校等時間の状況（山口県、<a href="https://www.mext.go.jp/content/20260305-mxt_kyoikujinzai01-000047786_35.pdf" target="_blank" rel="noopener">PDF</a>、R6年度実績）／美祢市・周南市の業務量管理・健康確保措置実施計画（R8）／県教委「教育委員会・学校一覧」（R8.5.1）。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 統合 -->
+  <section class="slide" id="s11">
+    <div class="slide-head">
+      <span class="step-tag">検証 6 ｜ 仮説を確かめる</span>
+      <h2>統廃合加配がほかの不足を招き、統合が進めば余裕ができるのか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        仮説：「地方は統廃合が進み、統合校に『統廃合加配』が要るので、ほかの学校で教員が不足しやすい。一方で、統合が進めば教職員に余裕ができる」。
+        国の制度、県議会の答弁、県内の統合14組の教員数（県の学校一覧の各年版）で確かめた。
+        <b>前半は、統合加配の規模が小さく、山口県の加配減の主な理由でもなかった。後半は、統合で教員の数ははっきり減るが、それは学校の「余裕」ではなく、県全体で必要な人数の減少として表れている。</b>
+      </p>
+
+      <div class="map-title" style="margin-top:4px">統合の前後で、本務教員はどう変わったか（市町立小中・R3〜R8の統合）</div>
+      <div class="scroll-x">
+        <table class="seg num tg6">
+          <thead><tr><th>統合</th><th>市町</th><th>旧校 → 統合後の学校</th><th>旧校の合計<br><small>統合前の版</small></th><th>統合後<br><small>最初に分かる版</small></th><th>差</th><th>加配の気配<br><small>同じ学級数の学校の中央値と比べて</small></th></tr></thead>
+          <tbody><tr><td>R3</td><td>下関市</td><td>豊田中小 → 西市小</td><td>19人<small>（9学級）</small></td><td>15人<small>（R3・6学級）</small><br><small>R5 13人</small></td><td>-4</td><td>+3（1年目）</td></tr><tr><td>R3</td><td>周防大島町</td><td>久賀中・東和中・安下庄中 → 周防大島中</td><td>36人<small>（9学級）</small></td><td>21人<small>（R3・6学級）</small></td><td>-15</td><td>並み</td></tr><tr><td>R3</td><td>周南市</td><td>和田中 → 富田中</td><td>43人<small>（20学級）</small></td><td>38人<small>（R3・17学級）</small></td><td>-5</td><td>並み（市は統合加配を要望）</td></tr><tr><td>R4</td><td>下関市</td><td>名池小・王江小 → 名陵小</td><td>31人<small>（13学級）</small></td><td>25人<small>（R5・10学級）</small><br><small>R6 24人</small></td><td>-6</td><td>+3〜4</td></tr><tr><td>R4</td><td>山陽小野田市</td><td>津布田小 → 埴生小</td><td>20人<small>（10学級）</small></td><td>13人<small>（R5・6学級）</small><br><small>R6 11人</small></td><td>-7</td><td>−1〜2</td></tr><tr><td>R5</td><td>周防大島町</td><td>城山小・森野小 → 東和小</td><td>19人<small>（10学級）</small></td><td>13人<small>（R5・6学級）</small><br><small>R6 13人</small></td><td>-6</td><td>並み</td></tr><tr><td>R6</td><td>山口市</td><td>串小 → 島地小</td><td>8人<small>（4学級）</small></td><td>6人<small>（R6・3学級）</small><br><small>R8 6人</small></td><td>-2</td><td>並み</td></tr><tr><td>R6</td><td>岩国市</td><td>美和東小・美和西小 → 美和小</td><td>19人<small>（8学級）</small></td><td>12人<small>（R6・6学級）</small><br><small>R8 17人</small></td><td>-7</td><td>1年目 並み、3年目 +4</td></tr><tr><td>R7</td><td>光市</td><td>三輪小・塩田小・岩田小・束荷小 → 大和小</td><td>40人<small>（18学級）</small></td><td>19人<small>（R8・7学級）</small></td><td>-21</td><td><b>+5</b>（R7は加配4名と答弁）</td></tr><tr><td>R7</td><td>美祢市</td><td>大田小・綾木小・淳美小 → 美東小</td><td>29人<small>（13学級）</small></td><td>11人<small>（R8・6学級）</small></td><td>-18</td><td>並み（兼務6人）</td></tr><tr><td>R7</td><td>下関市</td><td>吉母小 → 吉見小</td><td>19人<small>（7学級）</small></td><td>16人<small>（R8・6学級）</small></td><td>-3</td><td>+2</td></tr><tr><td>R7</td><td>山陽小野田市</td><td>赤崎小松原分校 → 赤崎小</td><td>15人<small>（9学級）</small></td><td>15人<small>（R8・7学級）</small></td><td>+0</td><td>−2</td></tr><tr><td>R8</td><td>長門市</td><td>通小 → 仙崎小</td><td>23人<small>（10学級）</small></td><td>22人<small>（R8・7学級）</small></td><td>-1</td><td>+5.5</td></tr><tr><td>R8</td><td>長門市</td><td>神田小 → 日置小</td><td>18人<small>（8学級）</small></td><td>14人<small>（R8・6学級）</small></td><td>-4</td><td>並み</td></tr>
+            <tr class="sum"><td colspan="3">14組の合計</td><td>339人</td><td>240人</td><td>-99</td><td>約29%減</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">※ 本務教員（校長・教頭・養護教諭などを含む）。県教委「教育委員会・学校一覧」の公立小学校・中学校一覧のR2・R3・R5・R6・R8版から数えた（R4・R7版は県サイトにもウェブの保存にも残っておらず、R4・R7統合の組は2年目の値。R5版は小学校のみ）。各版の学校ごとの合計は、表の合計行と一致することを確かめた。
+        受け入れ先の一部（豊田中小・和田中・津布田小・串小・吉母小・通小・神田小）はウィキペディアの廃校一覧によるもので、県資料では廃校の事実だけを確かめた。「加配の気配」は、同じ年に通常の学級数と特別支援学級数が同じ学校の本務教員の中央値との差で、加配があったと決めるものではない。</p>
+
+      <div class="r7grid" style="margin-top:22px">
+        <div class="r7box"><h4>県全体（市町立）の推移：小学校</h4>
+          <div class="scroll-x"><table class="seg num r7"><thead><tr><th></th><th>R2</th><th>R3</th><th>R5</th><th>R6</th><th>R8</th></tr></thead><tbody>
+            <tr><td>学校数</td><td>279</td><td>276</td><td>273</td><td>270</td><td>259</td></tr>
+            <tr><td>本務教員</td><td>5,016</td><td>4,995</td><td>4,894</td><td>4,848</td><td>4,755</td></tr>
+            <tr><td>通常の学級</td><td>2,629</td><td>2,570</td><td>2,441</td><td>2,391</td><td>2,227</td></tr>
+            <tr><td>1校あたり教員</td><td>18.0</td><td>18.1</td><td>17.9</td><td>18.0</td><td>18.4</td></tr>
+          </tbody></table></div></div>
+        <div class="r7box"><h4>県全体（市町立）の推移：中学校</h4>
+          <div class="scroll-x"><table class="seg num r7"><thead><tr><th></th><th>R2</th><th>R3</th><th>R6</th><th>R8</th></tr></thead><tbody>
+            <tr><td>学校数</td><td>142</td><td>139</td><td>139</td><td>140</td></tr>
+            <tr><td>本務教員</td><td>2,862</td><td>2,853</td><td>2,755</td><td>2,747</td></tr>
+            <tr><td>通常の学級</td><td>1,116</td><td>1,101</td><td>1,078</td><td>1,031</td></tr>
+            <tr><td>1校あたり教員</td><td>20.2</td><td>20.5</td><td>19.8</td><td>19.6</td></tr>
+          </tbody></table></div></div>
+      </div>
+      <p class="note">※ 休校を除く運営校。中学校は県立の附属中・中等教育学校を除く。小学校の通常の学級はR2→R8で15%減ったが、本務教員の減りは5%にとどまる（特別支援学級の増加などのため）。</p>
+
+      <div class="findings" style="margin-top:22px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>統合加配は、全国でも数百人の小さな仕組み</h3>
+          <p>国の「統合加配」は平成26年度にできたもので、R4年度は全国で410人。統合で学級数が減るときに定数の減少を緩やかにする目的で、小学校は統合の2年前から5年目まで、中学校は2年前から2年目までつく。R8予算は50人増。山口県での人数は公開資料になく、県内で確かめられたのは光市の大和小（R7、定数のほか4名）だけ。</p>
+          <div class="act"><span>仮説</span>統合加配が「ほかの不足」を生むほどの規模とは言いにくい</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>山口県の加配が減ったのは、教員不足のため</h3>
+          <p>県の加配はR4の567人からR5の315人へ252人減った。県は議会で、教員不足による「緊急対策」として加配の一部と中2・中3の35人学級化を見送った、と説明している（R5）。県議会の会議録に「統合加配」という言葉は一度も出てこない。</p>
+          <div class="act"><span>読み方</span>不足の向きは逆。統合加配が足りなさを生んだのではなく、教員不足が加配を削った</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>統合で教員は約3割減る。小さい学校をまとめるほど減る</h3>
+          <p>14組の本務教員は、旧校の合計339人から統合後240人へ99人減った（約29%）。光市の4校統合は40人→19人、美祢市の3校統合は29人→11人（兼務6人）。小さな学校を大きな学校に吸収する形（仙崎・日置・赤崎・吉見など）では、ほとんど減らない。光市の準備委員会も、統合のデメリットに「教職員が減る」を挙げている。</p>
+          <div class="act"><span>仮説</span>後半の「余裕」は、学校ではなく県全体で必要な人数が減る、という形で表れる</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>統合の年は重く、その後も学校に余裕は残らない</h3>
+          <p>美東小は統合初年度の4〜6月に月平均35〜38時間と、統合の対応で時間外が増えたと公表している。統合のあと「余裕ができた」という振り返りは、県内のどの資料にも見つからなかった。減った教員は県全体の不足を和らげる方に回る（または採用が減る）ので、統合した学校に残るとは限らない。</p>
+          <div class="act"><span>求めること</span>統合校への加配を公表し、統合準備から数年の負担を見込んで配置する。統合で減る定数の一部を、近隣の小規模校の支えに回す</div>
+        </div>
+      </div>
+
+      <p class="note">
+        出典：義務標準法第15条・施行令第7条（<a href="https://laws.e-gov.go.jp/law/333CO0000000202" target="_blank" rel="noopener">e-Gov</a>）／文科省「持続的で魅力ある学校教育のための取組」（R4.9、<a href="https://www.mext.go.jp/content/20220922-mxt_syoto02-000025039_1.pdf" target="_blank" rel="noopener">PDF</a> p22）／R8予算（案）主要事項（<a href="https://www.mext.go.jp/content/20260115-ope_dev02-000046757_8.pdf" target="_blank" rel="noopener">PDF</a> p6）／
+        山口県議会 R5.3.7 文教警察委員会・R6.3.7・R7.3.10 ほか（<a href="https://ssp.kaigiroku.net/tenant/prefyamaguchi/" target="_blank" rel="noopener">会議録</a>）／光市議会 R5.6.13・R7.6.16 教育長答弁／周南市議会 R2.10.29 教育福祉委員会／<a href="https://mitosho.jimdofree.com/" target="_blank" rel="noopener">美東小</a>「R7 働き方改革に係る取組」／県教委「教育委員会・学校一覧」各年版。<br>
+        ※ 加配の種類別の内訳（指導方法工夫改善・児童生徒支援・統合など）は、山口県では公表されていない。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 特支 -->
+  <section class="slide" id="s12">
+    <div class="slide-head">
+      <span class="step-tag">検証 7 ｜ 仮説を確かめる</span>
+      <h2>特別支援学級のない学校は、分掌が多くて忙しいのか</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lead">
+        仮説：「複式で特別支援学級がない学校は、分掌が多くて忙しい。複式でも単式でも、特別支援学級がある学校はまだ楽」。
+        特別支援学級は1学級ごとに担任が1人つき、定数の計算でも学級数に入る。その分、分掌を分け合う先生が増える、という筋道を県の学校一覧（R8.5.1）で確かめた。
+        <b>人数の面では仮説どおり。特別支援学級のある学校は、同じ通常学級数でも本務教員が2人ほど多い。ただし時間外の値には、その差は表れていない。</b>
+      </p>
+
+      <div class="map-title" style="margin-top:4px">同じ通常学級数で、特別支援学級の有無を比べる（本務教員の中央値）</div>
+      <div class="scroll-x">
+        <table class="seg num">
+          <thead><tr><th>学校の大きさ</th><th>特別支援学級なし</th><th>特別支援学級あり（1学級）</th><th>差</th><th>分掌を分ける人数の比<br><small>なし ÷ あり</small></th></tr></thead>
+          <tbody><tr><td>小学校　通常2学級</td><td>11校・4人</td><td>6校・5人</td><td>+1人</td><td>80%</td></tr><tr><td>小学校　通常3学級</td><td>19校・6人</td><td>17校・8人</td><td>+2人</td><td>75%</td></tr><tr><td>小学校　通常4学級</td><td>2校・7人</td><td>7校・8人</td><td>+1人</td><td>88%</td></tr><tr><td>中学校　1学年1学級（通常3学級）</td><td>13校・9人</td><td>34校・11人</td><td>+2人</td><td>82%</td></tr></tbody>
+        </table>
+      </div>
+      <p class="note">※ 本務教員は校長・教頭・養護教諭などを含む。中学校の「あり」は特別支援学級1学級以上。
+        小学校の単式（通常6学級以上）の学校は、県内の全171校すべてに特別支援学級がある。特別支援学級のない小学校は、複式のある学校（37校）だけだった。</p>
+
+      <div class="map-title" style="margin-top:24px">美祢市の小学校：特別支援学級の有無と時間外（R7、月平均）</div>
+      <div class="scroll-x">
+        <table class="seg num">
+          <thead><tr><th>学校</th><th>通常の学級</th><th>特別支援学級</th><th>本務教員</th><th>時間外 月平均（R7）</th></tr></thead>
+          <tbody>
+            <tr><td>麦川小</td><td>2（複式）</td><td><b>なし</b></td><td>4人</td><td>25.5h<small>（2月まで）</small></td></tr>
+            <tr><td>於福小</td><td>3（複式）</td><td><b>なし</b></td><td>6人</td><td>22.9h</td></tr>
+            <tr><td>豊田前小</td><td>3（複式）</td><td>1</td><td>7人</td><td>24.8h<small>（グラフ読み取り）</small></td></tr>
+            <tr><td>厚保小</td><td>4（複式）</td><td>3</td><td>10人</td><td>21.7h</td></tr>
+            <tr><td>美東小</td><td>6</td><td>1</td><td>11人</td><td>25.9h</td></tr>
+            <tr><td>伊佐小</td><td>6</td><td>2</td><td>11人</td><td>32.2h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">※ 学級数・本務教員はR8.5.1の学校一覧、時間外は各校が公表した月別の値の平均（R7年度）。対象（管理職を含むか）は学校によって違う。</p>
+
+      <div class="findings" style="margin-top:22px">
+        <div class="finding">
+          <div class="num">わかったこと 1</div>
+          <h3>特別支援学級があると、先生が2人ほど多い</h3>
+          <p>複式の小学校（通常3学級）では、特別支援学級なしは6人、1学級ありは8人。中学校の1学年1学級の学校でも9人と11人。特別支援学級の担任に加えて、定数の計算で学級数が1つ増える分も効いている。</p>
+          <div class="act"><span>仮説</span>「特別支援学級がある学校はまだ楽」は、人数の面では裏づけられた</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 2</div>
+          <h3>分掌を分ける人数が少ないのは、「複式で特別支援学級なし」</h3>
+          <p>学校に必要な分掌の数が大きく変わらないとすると、6人で分けるか8人で分けるかで、1人あたりの分掌は約1.3倍になる。特別支援学級のない小学校37校は、すべて複式のある学校。単式の小学校には、特別支援学級のない学校がない。</p>
+          <div class="act"><span>仮説</span>「複式で特別支援学級がない学校は分掌が多い」は、構造としては筋が通る</div>
+        </div>
+        <div class="finding">
+          <div class="num">わかったこと 3</div>
+          <h3>それでも、時間外の値には差が出ていない</h3>
+          <p>美祢市では、特別支援学級のない於福小・麦川小（23〜26時間）と、ある厚保小・豊田前小（22〜25時間）で、時間外はほぼ同じ。少人数の学校は数人の事情で大きく動くので、4校では判断できない。</p>
+          <div class="act"><span>読み方</span>分掌の重さは「時間」より「1人が受け持つ役の数」に出るはず。分掌表で数える必要がある</div>
+        </div>
+        <div class="finding">
+          <div class="num">まとめ</div>
+          <h3>特別支援学級は、小さな学校の「人の余白」になっている</h3>
+          <p>特別支援学級があるかどうかで、小さな学校の先生の数が2割以上変わる。ただし特別支援学級の担任には、個別の指導計画や交流学級との調整など固有の仕事があり、「楽」とは限らない。人数の差がそのまま余裕になっているかは、分掌表と本人の声で確かめたい。</p>
+          <div class="act"><span>求めること</span>県・市町に、学校ごとの校務分掌の数と1人あたりの担当数を規模別に示させる。特別支援学級のない複式校に、分掌を減らす基準（提言（１））を優先して当てる</div>
+        </div>
+      </div>
+
+      <p class="note">
+        出典：県教委「教育委員会・学校一覧（教育調査資料第219集）」公立小学校一覧・公立中学校一覧（R8.5.1）／美祢市内各小学校の「働き方改革に係る取組」（R7）。
+        定数の計算で特別支援学級が学級数に入る点は、義務標準法第7条（教職員定数のしくみ.html も参照）。<br>
+        ※ 分掌の数そのものは公開資料にない。ここでの「分掌を分ける人数の比」は、分掌の数が同じだと仮定した計算。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 検証 -->
+  <section class="verify">
+    <h2>次に確かめること</h2>
+    <p>ここまではすべて仮説。数字と声で確かめて、ツリー・図・表を書き換える。</p>
+    <ol>
+      <li><s>19市町ごとの、学級数別の学校数と複式学級の数</s> <small>（済：STEP2の表。次は、型ごとに時間外在校等時間の違いがあるかを見る）</small></li>
+      <li>学校の規模別の時間外在校等時間 <small>（市町単位では「検証1」で見た。次は学校単位。美祢市などは学校別の公表を計画で約束している）</small></li>
+      <li>小規模校の、一人あたりの校務分掌の数 <small>（「一人が何役も」を数で示す）</small></li>
+      <li>教員業務支援員・部活動指導員などの配置の基準と、小規模校への配置の実際 <small>（ツリー④の「付きにくい」が本当か）</small></li>
+      <li>小規模校・複式のある学校の教職員への短いアンケート <small>（比較表の○△×を本人たちに付けてもらう。⑦の進めやすい面も聞く）</small></li>
+      <li>各市町の教委で、働き方改革を担当している人数 <small>（ツリー③の体制の小ささ）</small></li>
+      <li>町独自の人の配置（複式解消の講師など）をしている市町と、その効果 <small>（県内の「進んでいる小規模」の候補）</small></li>
+      <li>へき地・小規模校の多い他県の取組 <small>（共同学校事務、遠隔の合同授業、県による小規模教委の支援）</small></li>
+    </ol>
+  </section>
+
+  <nav class="endnav" aria-label="関連するページ">
+    <h3 style="margin-top:0">関連するページ</h3>
+    <div class="endnav-grid">
+      <a href="shokibo-fukushiki-teigen.html">政策提言（概要版）<small>この調べの結論。7つの業務負荷と提言</small></a>
+      <a href="gyomuryo-keikaku-hikaku-v3.html">業務量管理計画 19市町比較<small>和木町・上関町の数値の出どころ</small></a>
+      組織対策：会員減少の深掘り<small>同じツリーの様式の見本</small>
+    </div>
+  </nav>
+
+  <footer>
+    学校の働き方改革｜小規模校が多い自治体の深掘り（たたき台）
+  </footer>
+
+</div>
+</body>
+</html>
