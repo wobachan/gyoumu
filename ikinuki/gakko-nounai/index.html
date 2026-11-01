@@ -1,0 +1,1736 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学校脳内メーカー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7; --ink:#2b2622; --sub:#6f665d; --line:#ddd2c0; --panel:#fffdf8;
+  --accent:#c8442c; --accent-ink:#fff; --tab:#efe6d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1b19; --ink:#efe9e1; --sub:#a99f94; --line:#3b3631; --panel:#262320;
+    --accent:#e0644a; --accent-ink:#fff; --tab:#302c28;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1d1b19; --ink:#efe9e1; --sub:#a99f94; --line:#3b3631; --panel:#262320;
+  --accent:#e0644a; --accent-ink:#fff; --tab:#302c28;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Meiryo",sans-serif;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:460px;margin:0 auto;padding:20px 16px 40px}
+header h1{font-family:"Yusei Magic","Zen Maru Gothic",sans-serif;font-weight:400;font-size:34px;margin:0;letter-spacing:.06em;text-align:center}
+header p{margin:2px 0 6px;text-align:center;color:var(--sub);font-size:14px}
+.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:12px}
+.tabs button{border:1px solid var(--line);background:var(--tab);color:var(--ink);border-radius:12px;padding:6px 4px 8px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;line-height:1.3}
+.tabs button small{display:block;font-size:11px;opacity:.75;letter-spacing:.05em}
+.tabs button span{display:block;font-size:22px;line-height:1.25}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tabs button:disabled{opacity:.5;cursor:default}
+.form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.form label{display:block;font-size:13px;color:var(--sub);margin-bottom:6px}
+.row{display:flex;gap:8px}
+.row input{flex:1;min-width:0;font:inherit;font-size:18px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.btn{font:inherit;font-weight:900;font-size:16px;border:0;border-radius:10px;padding:10px 16px;background:var(--accent);color:var(--accent-ink);cursor:pointer;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:700;font-size:14px}
+.btn.next{width:100%;max-width:400px;font-size:17px;padding:12px}
+.desc{font-size:13px;color:var(--sub);margin:8px 0 0}
+.voice{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.voice label{display:block;font-size:15px;font-weight:900;color:var(--ink);margin-bottom:6px}
+.voice textarea{width:100%;font:inherit;font-size:16px;line-height:1.6;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical;margin-bottom:8px}
+.voice .row .btn{flex:1}
+.namego{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.namego label{font-size:14px;font-weight:700;color:var(--ink);margin:0}
+.nmwrap{display:flex;align-items:center;gap:6px;flex:1 1 12em;min-width:0}
+.nmwrap input{flex:1;min-width:0;font:inherit;font-size:18px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.nmwrap span{white-space:nowrap;font-weight:700}
+.namego .btn{flex:1 1 9em}
+/* 「脳内をえがく」：カードがドドンと出て、字がぽんぽん入り、いちばん大きい字がはんこのように押される */
+@keyframes dodon{0%{transform:scale(.35) rotate(-6deg);opacity:0;filter:brightness(2.4)}55%{transform:scale(1.08) rotate(1.5deg);opacity:1;filter:brightness(1.35)}72%{transform:scale(.97) rotate(-.5deg)}86%{transform:scale(1.02)}100%{transform:none;filter:none}}
+@keyframes dodonRing{0%{box-shadow:0 0 0 0 rgba(255,214,64,.95)}100%{box-shadow:0 0 0 46px rgba(255,214,64,0)}}
+@keyframes popIn{0%{transform:scale(0);opacity:0}65%{transform:scale(1.4);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes stamp{0%{transform:scale(3.2) rotate(-12deg);opacity:0}55%{transform:scale(.88) rotate(2deg);opacity:1}100%{transform:none;opacity:1}}
+@keyframes jolt{0%,100%{transform:none}25%{transform:translate(-5px,3px)}50%{transform:translate(4px,-3px)}75%{transform:translate(-2px,1px)}}
+#vcCard.dodon{animation:dodon .75s cubic-bezier(.2,.9,.3,1.25) both,dodonRing .9s .4s ease-out}
+#vcCard.dodon .grid .c,#vcCard.dodon svg.brain text{animation:popIn .4s both;transform-box:fill-box;transform-origin:center}
+#vcCard.dodon .lead b{display:inline-block;animation:stamp .45s both}
+#stage.jolt{animation:jolt .3s}
+@media (prefers-reduced-motion:reduce){#vcCard.dodon,#vcCard.dodon *,#stage.jolt{animation:none!important}}
+.snd{display:block;margin:0 auto 12px;font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--sub);border-radius:20px;padding:2px 12px;cursor:pointer}
+.nm-need{color:#b8322a;font-size:13px;margin:6px 0 0}
+#micBtn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+#stage{margin-top:18px;display:flex;flex-direction:column;align-items:center}
+[hidden]{display:none!important} /* hidden を指定したものは、書式に関係なく隠す */
+.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.hint{text-align:center;font-size:13px;color:var(--sub);margin-top:8px}
+.note{margin-top:20px;font-size:12px;color:var(--sub);border-top:1px dashed var(--line);padding-top:12px}
+.hakko-ph{display:inline-block;border:1px dashed var(--sub);border-radius:6px;padding:2px 10px;color:var(--sub)}
+
+/* ---------- カード共通（画像として見せるので固定色） ---------- */
+.card{width:100%;max-width:400px;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.18);position:relative}
+.card .tag{font-size:11px;letter-spacing:.08em;opacity:.75;text-align:center;padding:6px 0 10px}
+.stg{display:block;text-align:center;font-size:11px;letter-spacing:.2em;opacity:.8;margin-bottom:2px}
+
+/* ステージ1・2 時間割 */
+.tt{background:#2f4a3a;color:#f3f1e8;padding:14px 14px 4px;border:10px solid #8a5a34;border-radius:18px}
+.nt{background:#18203d;color:#eef0ff;padding:14px 14px 4px;border:10px solid #2c2550;border-radius:18px;
+    background-image:radial-gradient(circle at 86% 7%,#fff6c8 0 13px,transparent 14px),radial-gradient(1px 1px at 12% 10%,#fff 50%,transparent),radial-gradient(1px 1px at 30% 4%,#fff 50%,transparent),radial-gradient(1.5px 1.5px at 66% 12%,#fff 50%,transparent),radial-gradient(1px 1px at 48% 8%,#fff 50%,transparent)}
+.tt h2,.nt h2{font-family:"Yusei Magic",sans-serif;font-weight:400;font-size:21px;margin:0 0 2px;text-align:center;line-height:1.35}
+.lead{text-align:center;font-size:14px;margin:0 0 10px}
+.lead b{font-family:"Yusei Magic",sans-serif;font-weight:400;font-size:26px;color:#ffe27a;padding:0 2px}
+.grid{display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px}
+.brain{display:block;width:100%;height:auto;margin:2px 0 4px;font-family:"Zen Maru Gothic",sans-serif}
+.grid .h{font-size:12px;text-align:center;opacity:.85;align-self:center}
+.grid .c{aspect-ratio:1/1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:clamp(14px,5.2vw,24px);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.grid .after{margin-top:6px}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin:12px 2px 8px;font-size:13px}
+.legend div{display:flex;align-items:center;gap:6px}
+.legend i{flex:none;width:20px;height:20px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;font-size:12px;color:#fff}
+.legend em{font-style:normal;margin-left:auto;font-weight:700}
+/* 声でつくる脳内の解説欄 */
+.vx{margin:10px 0 8px;font-size:13px}
+.vbar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:rgba(255,255,255,.1)}
+.vlab{display:flex;flex-wrap:wrap;gap:4px 12px;margin:5px 0 4px;font-weight:700}
+.vlab i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+.vsec h4{margin:8px 0 4px;font-size:13px;letter-spacing:.1em;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px}
+.vrow{display:grid;grid-template-columns:22px 2.6em 1fr;gap:6px;align-items:start;margin:3px 0}
+.vrow i{width:22px;height:22px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;font-size:12px;color:#fff}
+.vrow b{text-align:right;line-height:22px}
+.vrow span{line-height:1.5;padding-top:1px}
+.vrow small{font-size:11px;opacity:.75;margin-left:1px}
+.comment{background:rgba(255,255,255,.1);border-radius:10px;padding:8px 10px;font-size:13px;margin:4px 0 6px}
+.safe{background:#e8f4ec;color:#1f5a35;border:1px solid #b9dcc4;border-radius:10px;padding:8px 10px;margin:0 0 10px;font-weight:900;font-size:15px}
+.safe small{display:block;font-weight:500;font-size:12px;line-height:1.6;margin-top:2px;color:#2d5a3c}
+.emo-q{font-size:13px;font-weight:700;margin:12px 0 6px}
+.emo{position:relative;width:100%;max-width:360px;aspect-ratio:1/1;margin:0 auto 4px;border-radius:14px;overflow:hidden;
+  background:linear-gradient(to right,rgba(255,255,255,0) 49.6%,rgba(0,0,0,.18) 49.6% 50.4%,rgba(255,255,255,0) 50.4%),
+    linear-gradient(to bottom,rgba(255,255,255,0) 49.6%,rgba(0,0,0,.18) 49.6% 50.4%,rgba(255,255,255,0) 50.4%),
+    conic-gradient(from 0deg at 50% 50%,#fde3ec 0 90deg,#e9f6df 90deg 180deg,#ece3f6 180deg 270deg,#f8dede 270deg 360deg)}
+.emo .ax{position:absolute;font-size:10px;font-weight:700;color:#555;pointer-events:none}
+.emo .ax.l{left:6px;bottom:4px}.emo .ax.r{right:6px;bottom:4px;text-align:right}
+.emo .ax.t{top:4px;left:50%;transform:translateX(4px)}.emo .ax.b{bottom:4px;left:50%;transform:translateX(4px)}
+.emo button{position:absolute;transform:translate(-50%,-50%);border:2px solid transparent;border-radius:999px;padding:3px 8px;font:inherit;font-size:12px;font-weight:700;
+  background:#fff;color:#333;box-shadow:0 1px 3px rgba(0,0,0,.15);cursor:pointer;white-space:nowrap}
+.emo button.on{color:#fff;border-color:#fff;box-shadow:0 0 0 2px #333}
+.emo .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:10px;color:#777;pointer-events:none}
+.emo-sel{font-size:12px;text-align:center;min-height:1.5em;margin:0 0 6px}
+.vcacts{width:100%;max-width:400px;margin:10px auto 0;text-align:center}
+.vchead{font-weight:900;font-size:14px;margin:0 0 4px}
+.vcacts .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.vcmsg{font-size:12px;opacity:.8;margin:6px 0 0;line-height:1.6}
+body.shot .vcacts{display:none}
+.ex-q{display:block;margin-top:5px;font-size:12px;opacity:.92;line-height:2.1}
+.ex-q rt{font-size:.62em}
+.ex-q svg{display:block;height:44px;margin:4px auto 0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.comment::before{content:"ひとこと";display:block;font-size:11px;font-weight:900;letter-spacing:.1em;opacity:.75;margin-bottom:2px}
+
+/* スクショ用：カードだけ表示 */
+body.shot .wrap > *:not(#stage){display:none}
+body.shot .wrap{padding-top:24px}
+body.shot #stage{margin-top:0}
+body.shot .exit{display:block}
+.exit{display:none;position:fixed;right:12px;bottom:12px;font:inherit;font-size:12px;border:1px solid var(--line);background:var(--panel);color:var(--sub);border-radius:20px;padding:4px 12px;opacity:.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>学校脳内メーカー</h1>
+    <p>ふりかえりを書いて（話して）、2つのステージに挑戦しよう</p>
+    <button class="snd" id="sndBtn" aria-pressed="true">🔊 音あり</button>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-mode="tt" aria-selected="true"><small>ステージ1</small><span>🏫</span>学校のふりかえり</button>
+    <button role="tab" data-mode="nt" aria-selected="false"><small>ステージ2</small><span>🌙</span>定時後のふりかえり</button>
+  </div>
+
+  <div class="voice" id="voicePanel" hidden>
+    <label for="voiceText" id="voiceLabel">最近の生活や、アタマにうかぶことを話してみよう</label>
+    <textarea id="voiceText" rows="5" maxlength="1500"></textarea>
+    <div class="row"><button class="btn ghost" id="micBtn">🎤 話す</button></div>
+    <p class="desc" id="micNote"></p>
+    <p class="emo-q">そのときの気持ちに近いことばを、3つまでえらんでね（えらばなくてもOK）</p>
+    <div class="emo" id="emo"></div>
+    <p class="emo-sel" id="emoSel"></p>
+    <div class="namego">
+      <label for="nm">ニックネーム</label>
+      <span class="nmwrap"><input id="nm" type="text" maxlength="12" placeholder="例：はなこ" autocomplete="off"><span>さんの</span></span>
+      <button class="btn" id="vcGo">脳内をえがく</button>
+    </div>
+    <p class="nm-need" id="nmNeed" hidden>ニックネームを入れてね</p>
+  </div>
+
+  <div id="stage"></div>
+  <div class="actions" id="nextRow" hidden><button class="btn next" id="nextBtn"></button></div>
+  <div class="actions" id="acts" hidden>
+    <button class="btn ghost" id="shotBtn">📸 カードだけ表示</button>
+    <button class="btn ghost" id="againBtn">ほかのニックネームで</button>
+  </div>
+  <p class="hint" id="hint" hidden>スクショして共有してね　#学校脳内メーカー</p>
+
+  <div class="note">
+    同じ名前と同じふりかえりなら、だれが何回やっても同じ結果になります。<br>
+    入れた名前や、ふりかえりで書いた・話した内容は、この画面の中で計算するだけで、どこにも送られません（保存もしません）。結果はあそびです。<br>
+    ただし🎤で話すときの「声を文字にする」部分は、ブラウザの音声認識を使います。ブラウザによっては、音声がGoogleやAppleのサーバーで文字にされます。<br>
+    <span class="hakko">発行者：わだおばちゃん</span>
+  </div>
+</div>
+<button class="exit" id="exitBtn">もどる</button>
+
+<script>
+// ---------- 名前から決まる乱数 ----------
+function hash(str){
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < str.length; i++){
+    const c = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 2654435761);
+    h2 = Math.imul(h2 ^ c, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  return h1 >>> 0;
+}
+function rngFrom(str){
+  let a = hash(str);
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+const pick = (r, arr) => arr[Math.floor(r() * arr.length)];
+function pickN(r, arr, n){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a.slice(0, n);
+}
+function weighted(r, list){ // [[値, 重み], ...]
+  const total = list.reduce((s, x) => s + x[1], 0);
+  let t = r() * total;
+  for (const [v, w] of list){ if ((t -= w) < 0) return v; }
+  return list[list.length - 1][0];
+}
+const esc = s => s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+function sensei(name){
+  return /(先生|せんせい|さん|ちゃん|くん)$/.test(name) ? name : name + "先生";
+}
+
+// 5〜7種類を選んで total マスに割りふる（マス数は最大剰余法、％は合計100）
+function allocate(r, cats, total){
+  const kinds = 5 + Math.floor(r() * 3);
+  const chosen = pickN(r, cats, kinds).map(c => ({...c, w: 0.15 + Math.pow(r(), 2.2)}));
+  const sumW = chosen.reduce((s, c) => s + c.w, 0);
+  chosen.forEach(c => { c.raw = c.w / sumW * total; c.cnt = Math.max(1, Math.floor(c.raw)); });
+  let left = total - chosen.reduce((s, c) => s + c.cnt, 0);
+  const byRem = chosen.slice().sort((a, b) => (b.raw - Math.floor(b.raw)) - (a.raw - Math.floor(a.raw)));
+  for (let i = 0; left > 0; i = (i + 1) % byRem.length, left--) byRem[i].cnt++;
+  while (left < 0){ const big = chosen.slice().sort((a, b) => b.cnt - a.cnt)[0]; big.cnt--; left++; }
+  chosen.sort((a, b) => b.cnt - a.cnt);
+  const pr = chosen.map(c => ({c, v: c.cnt / total * 100}));
+  pr.forEach(p => p.c.pct = Math.floor(p.v));
+  let pl = 100 - chosen.reduce((s, c) => s + c.pct, 0);
+  pr.sort((a, b) => (b.v % 1) - (a.v % 1)).forEach(p => { if (pl > 0){ p.c.pct++; pl--; } });
+  let cells = [];
+  chosen.forEach(c => { for (let i = 0; i < c.cnt; i++) cells.push(c); });
+  return {chosen, cells: pickN(r, cells, cells.length)};
+}
+const cellHtml = (c, extra = "") => `<div class="c${extra}" style="background:${c.c};color:${inkOn(c.c)}">${c.k}</div>`;
+const legendHtml = chosen => `<div class="legend">${chosen.map(c => `<div><i style="background:${c.c}">${c.k}</i>${c.n}<em>${c.pct}%</em></div>`).join("")}</div>`;
+
+// ---------- ステージ1 学校脳内メーカー ----------
+const CATS = [
+  {k:"採", n:"採点・丸つけ", c:"#d9473a", m:"アタマの中は赤ペンでいっぱい。マルをつけるたびに、子どもの顔がうかぶタイプ。"},
+  {k:"会", n:"会議",         c:"#6b6f80", m:"会議のことが頭からはなれない。たまには「その議題、今日いりますか？」と言ってみて。"},
+  {k:"書", n:"書類・調査",   c:"#8a7350", m:"調査・報告・提出物…。書類の山と、心の中でいつも戦っている。"},
+  {k:"部", n:"部活・クラブ", c:"#2f7fc1", m:"放課後も週末も、アタマは部活（クラブ）モード。"},
+  {k:"保", n:"保護者対応",   c:"#a05aa8", m:"連絡帳と電話の音にびんかん。だれよりも、ていねいに向き合っている証拠。"},
+  {k:"行", n:"行事の準備",   c:"#e08a1e", m:"運動会、発表会、修学旅行…。いつも次の行事の段取りを考えている。"},
+  {k:"授", n:"授業準備",     c:"#2c9a72", m:"通勤中も授業のネタを考えている、根っからの授業好き。"},
+  {k:"愛", n:"子どもへの愛", c:"#e2577f", m:"アタマの中は子どもたちのことでいっぱい。その愛、ちゃんと自分にも分けてあげてね。"},
+  {k:"眠", n:"ねむい",       c:"#4a5a9c", m:"とにかくねむい。今夜はだれよりも早く布団に入ってください。"},
+  {k:"給", n:"給食",         c:"#c9a227", m:"4時間目の後半から給食のことしか考えていない。おかわりジャンケン、勝てますように。"},
+  {k:"休", n:"休みたい",     c:"#3aa3a3", m:"休みたい気持ちが大きめ。年休はあなたの権利です。"},
+  {k:"帰", n:"帰りたい",     c:"#e46a3c", m:"定時に帰りたい気持ちがあふれている。それ、とても健全です。"},
+  {k:"推", n:"推し・趣味",   c:"#d04fc0", m:"推しと趣味が元気のもと。仕事以外の自分も大事にできる人。"},
+  {k:"甘", n:"あまいもの",   c:"#c77a52", m:"職員室のおやつの在庫を、だれよりも把握している。"},
+  {k:"家", n:"家族",         c:"#5f9e3a", m:"いつも家族のことを考えている。今日は早めに帰ってあげて。"},
+  {k:"研", n:"研修・研究",   c:"#3c78a8", m:"研修と研究授業でアタマがフル回転中。学び続ける人。"},
+];
+const AFTER = new Set(["会","部","書","保","帰","行"]); // 放課後に出やすいもの
+const DAYS = ["月","火","水","木","金"];
+
+function calcTT(name){
+  const r = rngFrom("tt|" + name);
+  const {chosen, cells} = allocate(r, CATS, 35);
+  for (let i = 30; i < 35; i++){
+    if (AFTER.has(cells[i].k) || r() < 0.3) continue;
+    const j = cells.findIndex((x, idx) => idx < 30 && AFTER.has(x.k));
+    if (j >= 0) [cells[i], cells[j]] = [cells[j], cells[i]];
+  }
+  return {chosen, cells};
+}
+function renderTT(name){
+  const {chosen, cells} = calcTT(name);
+  const top = chosen[0];
+  let g = `<div></div>` + DAYS.map(d => `<div class="h">${d}</div>`).join("");
+  for (let p = 0; p < 6; p++){
+    g += `<div class="h">${p + 1}</div>` + cells.slice(p * 5, p * 5 + 5).map(c => cellHtml(c)).join("");
+  }
+  g += `<div class="h after" style="font-size:10px;line-height:1.1">放<br>課<br>後</div>` +
+       cells.slice(30).map(c => cellHtml(c, " after")).join("");
+  return `<div class="card tt">
+    <span class="stg">STAGE 1</span>
+    <h2>${esc(sensei(name))}の<br>学校脳内</h2>
+    <p class="lead">学校でのアタマの <b>${top.pct}%</b> が「<b>${top.k}</b>」</p>
+    <div class="grid">${g}</div>
+    ${legendHtml(chosen)}
+    <div class="comment">${top.m}</div>
+    <div class="tag">#学校脳内メーカー　ステージ1 学校脳内</div>
+  </div>`;
+}
+
+// ---------- ステージ2 定時後脳内メーカー ----------
+// t：定時後のどのころに多いか（0＝定時直後 … 1＝夜おそく）の目安。今は使っていない
+const NCATS = [
+  {k:"残", n:"まだ学校",       c:"#7a7f94", t:0.05, m:"定時後もアタマは学校のまま。まずは「今日はここまで」と声に出してみよう。"},
+  {k:"部", n:"部活・クラブ",   c:"#2f7fc1", t:0.10, m:"定時のチャイムは部活のスタートの合図。ほんとうにおつかれさまです。"},
+  {k:"持", n:"持ち帰り仕事",   c:"#8a5a3c", t:0.55, m:"家でも仕事のことが頭からはなれない。持ち帰った時間も、あなたの大切な時間です。"},
+  {k:"明", n:"明日の準備",     c:"#4f8a6a", t:0.60, m:"寝る前まで明日の段取り。準備は70点でじゅうぶんです。"},
+  {k:"反", n:"ひとり反省会",   c:"#6a5a9a", t:0.80, m:"布団の中でひとり反省会を開きがち。今日のよかったことも1つ思い出して。"},
+  {k:"食", n:"晩ごはん",       c:"#e08a1e", t:0.35, m:"アタマの中は晩ごはんでいっぱい。何を食べるか考えている時間がいちばん幸せ。"},
+  {k:"家", n:"家事",           c:"#5f9e3a", t:0.40, m:"帰ってからが第2の勤務。家のことも立派な仕事です。"},
+  {k:"育", n:"子育て",         c:"#e2577f", t:0.30, m:"定時後は自分の子の先生。だれよりも忙しい夜を送っている人。"},
+  {k:"湯", n:"お風呂",         c:"#3aa3c8", t:0.75, m:"お風呂が一日のごほうび。湯船の中でだけ、先生をお休みできる。"},
+  {k:"眠", n:"ねる",           c:"#3c4a8c", t:0.95, m:"帰ったらすぐねたい。それがいちばんの回復です。"},
+  {k:"推", n:"推し活",         c:"#d04fc0", t:0.70, m:"定時後は推しの時間。推しが明日の授業のエネルギーになっている。"},
+  {k:"画", n:"スマホ・動画",   c:"#c9443c", t:0.85, m:"気づけばスマホ。あと1本…がいつまでも続く。"},
+  {k:"飲", n:"晩酌・お茶",     c:"#c9a227", t:0.65, m:"一日のしめくくりは、ほっとひと息の一杯から。"},
+  {k:"動", n:"運動・散歩",     c:"#2c9a72", t:0.30, m:"体を動かしてリセットするタイプ。いちばん健康的な定時後。"},
+  {k:"癒", n:"ペット・いやし", c:"#c77a52", t:0.50, m:"もふもふや好きなものにいやされる時間が、なによりの栄養。"},
+  {k:"学", n:"自分の学び",     c:"#3c78a8", t:0.55, m:"定時後も学び続ける人。ときどきは、なにもしない夜もどうぞ。"},
+];
+// 脳の形（円と楕円をあわせた形）。[cx, cy, rx, ry]
+const BRAIN = [
+  [160,112,132,84],[52,104,40,40],[78,64,44,44],[126,42,48,46],[182,38,48,46],[232,52,46,46],[272,88,40,42],
+  [284,128,32,34],[62,146,40,34],[120,160,60,36],[236,180,50,32],[188,206,18,32],
+];
+const inBrain = (x, y) => BRAIN.some(([cx, cy, rx, ry]) => ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1);
+const CELL = 3; // 面積と文字の位置をはかるマスの大きさ
+
+// 種 s の領域（ほかの種との垂直二等分線で切りとった多角形）
+function voronoiCell(s, seeds){
+  let poly = [[0, 0], [320, 0], [320, 250], [0, 250]];
+  for (const o of seeds){
+    if (o === s) continue;
+    const nx = o.x - s.x, ny = o.y - s.y, m = (o.x * o.x + o.y * o.y - s.x * s.x - s.y * s.y) / 2;
+    const inside = p => p[0] * nx + p[1] * ny <= m;
+    const out = [];
+    poly.forEach((p, i) => {
+      const q = poly[(i + 1) % poly.length], pi = inside(p), qi = inside(q);
+      if (pi) out.push(p);
+      if (pi !== qi){
+        const t = (m - p[0] * nx - p[1] * ny) / ((q[0] - p[0]) * nx + (q[1] - p[1]) * ny);
+        out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]);
+      }
+    });
+    poly = out;
+  }
+  return poly;
+}
+
+// 脳の中に「種」をまいて、いちばん近い種の漢字でぬりわける。割合はぬれた面積から出す
+// chosen は pct（合計100）をもつ漢字の一覧。spots：種の数のめやす（多いと同じ字がいくつにも分かれて出る）
+function buildBrain(r, chosen, spots = 10){
+  const seeds = [];
+  chosen.forEach(c => {
+    const n = Math.max(1, Math.round(c.pct / 100 * spots));
+    for (let i = 0; i < n; i++){
+      let x, y, tries = 0;
+      do { x = 20 + r() * 285; y = 2 + r() * 236; tries++; }
+      while (!inBrain(x, y) || (tries < 200 && seeds.some(s => (s.x - x) ** 2 + (s.y - y) ** 2 < 52 * 52)));
+      seeds.push({c, x, y, n: 0, sx: 0, sy: 0});
+    }
+  });
+  let total = 0;
+  for (let y = CELL / 2; y < 250; y += CELL) for (let x = CELL / 2; x < 320; x += CELL){
+    if (!inBrain(x, y)) continue;
+    let best = seeds[0], bd = Infinity;
+    for (const s of seeds){ const d = (s.x - x) ** 2 + (s.y - y) ** 2; if (d < bd){ bd = d; best = s; } }
+    best.n++; best.sx += x; best.sy += y; total++;
+  }
+  seeds.forEach(s => s.poly = voronoiCell(s, seeds));
+  // 面積から割合をつくりなおす（合計100）
+  const area = new Map(chosen.map(c => [c, 0]));
+  seeds.forEach(s => area.set(s.c, area.get(s.c) + s.n));
+  const list = chosen.filter(c => area.get(c) > 0).map(c => ({...c, v: area.get(c) / total * 100}));
+  list.forEach(c => c.pct = Math.floor(c.v));
+  let left = 100 - list.reduce((s, c) => s + c.pct, 0);
+  list.slice().sort((a, b) => (b.v % 1) - (a.v % 1)).forEach(c => { if (left > 0){ c.pct++; left--; } });
+  list.sort((a, b) => b.v - a.v);
+  return {chosen: list, seeds, total};
+}
+function calcNT(name){
+  const r = rngFrom("nt|" + name);
+  return buildBrain(r, allocate(r, NCATS, 100).chosen);
+}
+function brainSvg(seeds, total, label){
+  const shapes = BRAIN.map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/>`).join("");
+  const rects = seeds.map(s => `<polygon points="${s.poly.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ")}" fill="${s.c.c}"/>`).join("");
+  const labels = seeds.filter(s => s.n / total > 0.022).map(s => {
+    const size = Math.max(16, Math.min(60, Math.sqrt(s.n) * CELL * 0.6));
+    return `<text x="${(s.sx / s.n).toFixed(1)}" y="${(s.sy / s.n).toFixed(1)}" font-size="${size.toFixed(1)}"${inkOn(s.c.c) === "#fff" ? "" : ` fill="#1b2550" stroke="rgba(255,255,255,.35)"`}>${s.c.k}</text>`;
+  }).join("");
+  return `<svg class="brain" viewBox="0 0 320 250" role="img" aria-label="${label}">
+    <defs><clipPath id="brainClip">${shapes}</clipPath></defs>
+    <g fill="none" stroke="#f3dbe3" stroke-width="10">${shapes}</g>
+    <g clip-path="url(#brainClip)"><g stroke="rgba(20,16,40,.55)" stroke-width="2" stroke-linejoin="round">${rects}</g>
+      <g fill="none" stroke="rgba(0,0,0,.16)" stroke-width="2.2" stroke-linecap="round">
+        <path d="M70 70 q30 20 20 50 t30 40"/><path d="M130 30 q-10 40 25 55 t10 60"/><path d="M200 30 q15 35 -10 60 t20 50"/>
+        <path d="M250 60 q-20 30 5 55"/><path d="M40 120 q40 -5 60 20"/><path d="M215 170 q25 -10 50 5"/><path d="M220 190 q25 -6 50 6"/>
+      </g>
+    </g>
+    <g fill="#fff" font-weight="900" text-anchor="middle" dominant-baseline="central" style="paint-order:stroke" stroke="rgba(0,0,0,.25)" stroke-width="1.2">${labels}</g>
+  </svg>`;
+}
+function renderNT(name){
+  const {chosen, seeds, total} = calcNT(name);
+  const top = chosen[0];
+  return `<div class="card nt">
+    <span class="stg">STAGE 2</span>
+    <h2>${esc(sensei(name))}の<br>定時後脳内</h2>
+    <p class="lead">定時後のアタマの <b>${top.pct}%</b> が「<b>${top.k}</b>」</p>
+    ${brainSvg(seeds, total, "定時後の脳内の図")}
+    ${legendHtml(chosen)}
+    <div class="comment">${top.m}</div>
+    <div class="tag">#学校脳内メーカー　ステージ2 定時後脳内</div>
+  </div>`;
+}
+
+// ---------- 声でつくる ふりかえり脳内 ----------
+// 脳内には「仕事」「くらし」「きもち」の短い字だけを入れ、話したことばは下の解説欄に内訳として出す
+const VGROUPS = [
+  {id:"work", name:"仕事",   c:"#3b78b8", msg:"定時がきたら、アタマも退勤させてあげてね。"},
+  {id:"life", name:"くらし", c:"#4f9a4a", msg:"自分の時間を、ちゃんと大事にできています。"},
+  {id:"mood", name:"きもち", c:"#d9577f", msg:"きもちを言葉にできたのは、いい一歩です。"},
+];
+// w：この字にすることば（長いことばから先に探し、見つけた所は二重に数えない）
+const VCATS = [
+  // 仕事
+  {g:"work", k:"仕", n:"仕事・学級・分掌", w:"仕事,学級経営,学級通信,学級,クラス,分掌,校務,担任,学年主任,主任,休み時間,教室,時間割,教育課程,生徒会,ICT,端末,パソコン,係活動,当番,給食当番,掃除当番,掃除の時間,そうじの時間,掃除指導,給食指導,配膳,席替え,朝の会,帰りの会,健康観察,掲示物,掲示,タブレット,一人一台,ホームページ,教室の掃除,教室の片付け,副担任,学級目標,学級会,学年団,学年集会,昼休み,校則,班活動,校務支援システム,アカウント,パスワード,ネットワーク,クラウド,電子黒板,プロジェクター,Wi-Fi,メール配信,補欠,時程,日課表,授業時数,年間行事,教務主任,鍵当番,来客,校長室,修繕,雨漏り,異動,内示,希望調書,人事,図書室,蔵書,選書,貸出,学級だより,職員室,会計年度,管理職,退職,再任用,新採,職場,同僚,教え子,昇任,指導,勤務校,勤務先,前任校,赴任先,辞令,業者,担任外,日程調整,見回り,仕事を片付け,仕事を片づけ,研究主任,印刷,定年,管理職選考,昇任試験,コピー機,非常勤,任期,若手,初任者,教育事務所,定時制,複式,複式学級,教務,タスク,Teams,チームズ,印刷機,紙詰まり,コピー用紙,相談に乗,学年LINE,任用,おもらし,雨もり,かけもち,掛け持ち,兼務,スクールバス,学校図書館,返却,受け入れ作業,充電保管庫,卒業生,教育委員会,教委,市教委,県教委,休校,臨時休校,自宅待機,始業を遅ら,登校時刻を遅ら,集団下校,一斉下校,通学路,見守り,安全点検,校舎の点検,施設点検,用務員,エアコンが壊れ,エアコンの故障,旅行会社,刷り直,刷りなおし,交通安全,自転車通学,旗振り,立ち番,募金,ハザードマップ,防災担当"},
+  {g:"work", k:"業", n:"授業",       w:"研究授業,授業,教材研究,教材,板書,単元,指導案,教科書,ワークシート,調理実習,実験,添削,作文,算数,国語,理科,社会科,生活科,図工,体育,家庭科,外国語,道徳,総合的,学活,習字,書写,音楽の授業,音楽室,英語の授業,合唱,リコーダー,鍵盤ハーモニカ,九九,ひらがな,カタカナ,漢字,音読,わり算,割り算,かけ算,掛け算,分数,文章題,観察,実技,黒板,プール指導,授業公開,読み聞かせ,薬品,豆電球,マット運動,跳び箱,鉄棒,教科担任,自習監督,自習,補習,進度,持ちコマ,空きコマ,コマ数,空き時間,持ち時数,習熟度別,少人数指導,ALT,パフォーマンステスト,教育実習,実習生,理科室,発問,書き初め,実習生の指導,食育,デジタル教科書,陽イオン,書画カメラ,時間目,夏期講習,冬期講習,夏季講習,冬季講習,課外授業,ラミネート,工夫,専科,塾講師,補充学習,探究,カリキュラム,間接指導,ガイド学習,ゲストティーチャー,じゅぎょう,たしざん,足し算,ひき算,引き算,くりあがり,繰り上がり,くりさがり,繰り下がり,発音,実習,プログラミング,課題研究,顕微鏡,解剖,地図帳,模擬投票,模擬裁判,主権者教育,被服,製図,溶接,旋盤,技術室,調べ学習,保育実習,薬物乱用防止,スモールトーク,SmallTalk,アルコールランプ,仕訳,ミシンがけ,食品製造,ビジネス文書,合奏,スクーリング,美術室,家庭科室,図工室,被服室,総合の学習,総合学習,総合の時間,ふるさと学習,郷土学習,地域学習,水泳学習,水泳の授業,プールの授業,防災教育,防災学習,プール監視,プールの監視"},
+  {g:"work", k:"採", n:"丸つけ・テスト", w:"丸つけ,まるつけ,丸付け,採点,テスト,宿題,ノート,プリント,赤ペン,ドリル,自由研究,音読カード,暗唱,はんこ,中間テスト,期末テスト,小テスト,再テスト,平均点,作問,問題作り,答案,解答用紙,範囲表,テスト範囲,ハンコ,判子,しゅくだい,問題を作,単位認定試験"},
+  {g:"work", k:"書", n:"書類・成績", w:"卒業文集,図書だより,学校評価,支援計画,個別の計画,記録,書類,調査,報告書,報告,提出物,提出,アンケート,事務,文書,入力,締め切り,しめきり,通知表,所見,成績,評価,指導要録,要録,週案,時数,引き継ぎ資料,資料,申請,旅費,原稿,集金,給食費,未納,評定,観点別,個別の指導計画,個別の教育支援計画,指導計画,集計,予算,精算,備品,見積,発注,手当,就学援助,会計,校納金,口座振替,決裁,起案,台帳,物品,消耗品,教育計画,締切,学校だより,ほけんだより,保健だより,給食だより,おたより,レポート,人事評価,通勤届,文集,学級文集,執行残,廃棄,表計算,エクセル,Excel,書類を片付け,要求書,議案書,照会,会報,学力調査,年末調整,スポーツ振興センター,災害共済給付,督促,届け出,防災マニュアル,危機管理マニュアル,マニュアル,防災計画,燃料費,光熱水費"},
+  {g:"work", k:"会", n:"会議",       w:"職員会議,会議,打ち合わせ,打合せ,委員会,ミーティング,学年会,部会,協議会,役員会,職員朝会,保護者会,ケース会議,校内委員会,移行支援会議,学校運営協議会,議会,説明会,検討会,協議,交渉,定期大会,議案,運動方針,報告集会,組織拡大,校長面談,執行委員,反省会,かいぎ,会合"},
+  {g:"work", k:"校", n:"学校行事",   w:"職場体験,引率,運動会,体育祭,発表会,音楽会,学習発表会,合唱コンクール,修学旅行,遠足,参観日,参観,卒業式,入学式,文化祭,作品展,行事,宿泊学習,卒業アルバム,卒業制作,卒業,入学,送る会,お別れ会,離任式,着任式,始業式,終業式,修了式,全校朝会,避難訓練,林間学校,野外活動,宿泊,社会見学,工場見学,市役所見学,見学に,校外学習,町探検,田植え,稲刈り,収穫祭,持久走大会,マラソン大会,なわとび大会,水泳大会,記録会,二分の一成人式,1/2成人式,平和登校日,登校日,読書週間,クリスマス会,お楽しみ会,学芸会,授業参観,集会,応援団,組体操,ソーラン節,表現運動,プール開き,プール掃除,体育大会,球技大会,陸上記録会,合唱祭,生徒会選挙,立会演説会,全校集会,下見,伴奏,ピアノ伴奏,水泳記録会,水泳指導,卒業生総代,班長会議,平和学習,体育館,クラス企画,学年企画,出し物,お化け屋敷,書き初め大会,かるた大会,百人一首大会,テント張り,テント立て,ライン引き,呼名,プール開放,運動場,集合学習,社会科見学,芋掘り,いも掘り,さつまいも掘り,県外学習,お誕生日会,プール清掃,観察会,ビブリオバトル,班別行動,引き渡し訓練,引渡し訓練,消火訓練,防火訓練,防犯訓練,不審者対応訓練,交通安全教室,防犯教室,薬物乱用防止教室,非行防止教室,情報モラル教室,スマホ教室,写生会,記念式典,式典,朝会,体験会,まち探検,キャンプファイヤー"},
+  {g:"work", k:"部", n:"部活・クラブ", w:"部活,クラブ,大会,練習試合,試合,コンクール,遠征,朝練,吹奏楽,部活動,部員,顧問,キャプテン,引退,新チーム,審判,合宿,部費,地域移行,地域クラブ,部活動指導員,外部コーチ,外部指導者,合同チーム,合同練習,演奏会,自主練,昇段審査,コンテスト,総体,中体連,高体連,新人戦,県大会,地区大会,野球部,サッカー部,テニス部,ソフトテニス部,バスケ部,バレー部,卓球部,陸上部,剣道部,柔道部,美術部,演劇部,放送部,合唱部,科学部,吹奏楽部,ソフトボール部,水泳部,駅伝部,駅伝大会,弓道部,バドミントン部,ハンドボール部,写真部,書道部,茶道部,軽音部,軽音楽部,文芸部,ダンス部,家庭科部,囲碁将棋部,ぶかつ"},
+  {g:"work", k:"進", n:"進路・受験", w:"進路,入試,受験,合格,志望校,調査書,共通テスト,内申,願書,出願,推薦,指定校,総合型選抜,学校推薦型,面接練習,面接,小論文,志望,模試,過去問,オープンキャンパス,高校見学,学校説明会,国公立,二次試験,進学,就職,受かっ,三者面談,中学受験,高校受験,大学受験,オープンスクール,受かり,試験監督,進路面談,キャリア教育,入試合格,退学,中退,技能試験,求人"},
+  {g:"work", k:"人", n:"人が足りない", w:"人手不足,人が足りない,先生が足りない,先生がほしい,未配置,欠員,手が足りない,支援員さんがいな,支援員がいな,病休,産休代替,代替の先生,講師が見つから,講師の先生が見つから,代わりの先生,教員不足,教師不足,講師不足,代わりが見つから,代わりがいない,担任が見つから,講師登録,代替,補充がな,補充されな,補充の先生,補充の講師,休職者"},
+  {g:"work", k:"保", n:"保護者",     w:"保護者,連絡帳,家庭訪問,懇談,面談,おうちの方,クレーム,電話,苦情,PTA,家庭連絡,問い合わせの電話,連絡網"},
+  {g:"work", k:"研", n:"研修",       w:"研修,研究会,研究,公開授業,初任研,初任者指導,指導主事,事前検討,授業研,出張,講習,公開研,学校訪問,指導教員,拠点校,教員免許,学習会,教育センター,研究大会,視察,論文,大学院"},
+  {g:"work", k:"残", n:"残業・持ち帰り", w:"残業,遅くまで,持ち帰り,持ちかえり,家で仕事,家でも仕事,休日出勤,土日出勤,夜まで,真っ暗,毎日出勤,出勤になって,土曜出勤,日曜出勤,休めな,休めませ,時間外勤務,時間外,帰れな,まだ学校にい,夜また仕事,夜も仕事,夜通し"},
+  {g:"work", k:"帰", n:"定時に帰る", w:"定時,退勤,帰りたい,早く帰,ダッシュで帰,ノー残業デー,早帰り,もう帰る,帰るっちゃ,早めに帰"},
+  {g:"work", k:"短", n:"時短",       w:"時間短縮,時短,効率化,効率,削減,ショートカット,業務改善,業務の見直し,精選,留守番電話,外部委託,留守電,ペーパーレス,スクールサポートスタッフ"},
+  {g:"work", k:"AI", n:"AI",         w:"生成AI,チャットGPT,ChatGPT,エーアイ,AI,Gemini,Claude,Copilot"},
+  {g:"work", k:"導", n:"生徒指導・子どものトラブル", w:"いじめ,登校しぶり,行きしぶり,行き渋り,立ち歩,忘れ物,落とし物,生活指導,学級崩壊,反抗,口ごたえ,叱っ,叱る,叱ら,思春期,ギャングエイジ,悪口,生徒指導,服装指導,頭髪指導,休みがち,学校に来ていない,学校に来れない,欠席が続,補導,喫煙,万引き,非行,仲裁,誹謗中傷,事実確認,警察,私語,荒れて,SSW,重大事態,遅刻,わすれもの,迷子,生徒指導主事,事案,友達とのトラブル,友だちとのトラブル,生徒とのトラブル,生徒間のトラブル,生徒間トラブル,子ども同士のトラブル,仲直りさせ,宿題わすれ,宿題忘れ,宿題を忘れ,まいご,不審者,目撃情報"},
+  {g:"work", k:"支", n:"特別支援・相談", w:"不登校,特別支援,支援学級,支援員,発達障害,特別支援学級,特別支援学校,特支,支援学校,交流学級,通級,介助,給食介助,トイレ介助,自立活動,合理的配慮,発達障がい,障害,障がい,クールダウン,視覚支援,作業学習,現場実習,寄宿舎,車いす,車椅子,医療的ケア,療育,放課後等デイ,放デイ,就学相談,知能検査,WISC,交流及び共同学習,別室登校,保健室登校,スクールカウンセラー,スクールソーシャルワーカー,介助員,学習支援,カウンセラー,ソーシャルワーカー,別室,教育相談,巡回相談,児童相談所,虐待,個別指導,スクールバスの添乗,スクールバス添乗,給食の介助,食事介助,食事の介助,心の相談,親の会,摂食指導,福祉の窓口"},
+  {g:"work", k:"勤", n:"勤務時間・打刻", w:"在校等時間,在校時間,勤務時間,勤務,出勤,出退勤,打刻,出勤簿,タイムカード,ICカード,勤務間インターバル,勤務の割り振り,割り振り,働き方改革,働き方,給特法,教職調整額,調整額,振替,宿直,夜勤,兼職兼業,ワークライフバランス"},
+  {g:"work", k:"健", n:"保健・けが・給食の管理", w:"熱中症,学級閉鎖,保健室,養護教諭,養護の先生,健康診断,検診,内科検診,歯科検診,身体測定,視力検査,聴力検査,けがを,けがし,けがの,けが人,ケガ,怪我,骨折,応急手当,救急車,感染症,出席停止,嘔吐,消毒,手洗い,エピペン,アレルギー,食物アレルギー,除去食,給食センター,調理員,残食,献立表,献立作成,給食の献立,衛生管理,異物混入,健診,就学時健診,水質検査,水分補給,ばんそうこう,絆創膏,手当て,欠席が多,学年閉鎖,眼科検診,耳鼻科検診,調理場,食缶,食器洗浄機,給食の調理,偏食,けがをさせ,頭を打,はねられ,おぼれ,溺れ,AED,救急隊,暑さ指数,WBGT,熱中症警戒アラート,経口補水液,感染性胃腸炎,吐いた子,救急搬送,ミストシャワー,冷却グッズ"},
+  // くらし
+  {g:"life", k:"寝", n:"睡眠",     w:"寝不足,睡眠,昼寝,二度寝,寝る,寝た,ねる,眠い,ねむい,眠れ,夜ふかし,寝落ち,寝られ,寝れ,寝ます,寝て,寝ま,眠く,ねむく,寝坊,朝寝坊,眠り,目が覚め,早起き,熟睡,不眠,寝つき,寝付き,起こされ,あくび,時起き,寝ても,寝過ごし,目覚まし,布団から出られ,時に起き,寝よう,寝たい,寝れん,ねむた,眠た,一睡も,ふとんに入,布団に入,ねむかっ,眠かっ"},
+  {g:"life", k:"湯", n:"お風呂",   w:"お風呂,風呂,温泉,サウナ,シャワー,湯船,銭湯,湯本,足湯,岩盤浴,半身浴,入浴,ととのっ"},
+  {g:"life", k:"走", n:"走る",     w:"ランニング,ジョギング,マラソン,走る,走っ,完走,ランナー,トレイルラン"},
+  {g:"life", k:"動", n:"運動",     w:"ジム,ヨガ,運動,散歩,ウォーキング,ゴルフ,テニス,ストレッチ,スポーツ,バドミントン,バレーボール,ソフトボール,フットサル,バスケ,ボウリング,キャッチボール,卓球,ピラティス,ヨガ教室,ラジオ体操,打ちっぱなし,グラウンドゴルフ,パークゴルフ,ゲートボール,歩数,1万歩,鬼ごっこ,サイクリング,自転車に乗"},
+  {g:"life", k:"子", n:"わが子",   w:"うちの子,わが子,我が子,上の子,下の子,末っ子,自分の子"},
+  {g:"life", k:"娘", n:"娘",       w:"娘,長女,次女,三女"},
+  {g:"life", k:"息", n:"息子",     w:"息子,長男,次男,三男"},
+  {g:"life", k:"育", n:"子育て",   w:"子育て,育児,保育園,幼稚園,送り迎え,お迎え,寝かしつけ,習い事,迎えに,送迎,ワンオペ,妊娠,つわり,出産,産休,育休,部分休業,看護休暇,病児保育,塾,学童,夜泣き,授乳,ミルク,オムツ,おむつ,離乳食,トイレトレーニング,トイトレ,ベビーカー,抱っこ,赤ちゃん,育児休業,里帰り出産,こども園,入園,車出し,塾の送,反抗期,イヤイヤ期,七五三,お遊戯会,おゆうぎ会,スイミングスクール,時短勤務,短時間勤務,時短なのに,妊婦健診,切迫早産,搾乳,寝返り,保活,預け先,一時保育,おなかが大き,お腹が大き,放課後児童クラブ,児童クラブ"},
+  {g:"life", k:"家", n:"家族",     w:"家族,夫が,夫と,夫の,夫に,妻,主人,旦那,両親,実家,介護,孫,双子,帰省,単身赴任,母が,父が,母の,父の,母と,父と,引っ越し,引越し,姪,甥,夫婦,嫁,義母,義父,義実家,姑,母に,父に,パパ,ママ,親戚,法事,法要,墓参り,お墓,墓じまい,ご先祖,共働き,里帰り,認知症,デイサービス,ケアマネ,ショートステイ,老人ホーム,特養,オムツ交換,一人暮らし,母親として,父親として,祖父,祖母,畑を手伝,クリスマスツリー,ダブルケア,離婚,転勤族,新居,兄弟,きょうだい,葬儀,お葬式,シングルマザー,シングルファーザー,家を建て,誕生日,母から,父から,母へ,父へ,祖母が,祖父が,祖母の,祖父の,義母が,義父が,一周忌,三回忌,七回忌,通夜,お通夜,告別式,四十九日,喪中,遺品,葬式,親権,調停,施設に入,ホスピス,相続"},
+  {g:"life", k:"掃", n:"家事",     w:"家事,洗濯,掃除,片付け,片づけ,洗い物,ゴミ出し,洗濯物,大掃除,草取り,草むしり,アイロン,クリーニング,コインランドリー,布団干し,換気扇,掃除機,断捨離,荷造り,皿洗い,食器洗い,草刈り,部屋干し,布団を干,ゴミの日,ごみの日,ごみ出し,雪かき,除雪"},
+  {g:"life", k:"料", n:"つくる（料理）", w:"料理,自炊,作り置き,献立,買い出し,下ごしらえ,キッチン,冷凍食品,料理教室,お弁当作り,弁当づくり,夕飯の支度,ごはんの支度,ご飯の支度"},
+  {g:"life", k:"食", n:"たべる",   w:"食べた,食べる,食べに,食べ放題,食べすぎ,食べ過ぎ,たべた,おいしかった,おいしい,美味しい,晩ごはん,晩ご飯,ごはん,ご飯,夕飯,給食,おかわり,ランチ,外食,カレー,ラーメン,焼肉,寿司,スイーツ,ケーキ,チョコ,おやつ,甘いもの,アイス,食べて,食べま,食べら,パン屋,みかん,お菓子,弁当,おにぎり,朝ごはん,朝ご飯,昼ごはん,コンビニ弁当,焼き肉,焼き鳥,焼鳥,ふぐ,フグ,瓦そば,お惣菜,惣菜,お弁当,ポップコーン,和菓子,パフェ,ピザ,おせち,バイキング,早食い,食事会,夕ごはん,夕食,晩御飯,食べながら,腹減った,腹へった,お腹すいた,おなかすいた,お腹が空,食いたい,うまかった,美味かった,きゅうしょく,たべま"},
+  {g:"life", k:"飲", n:"のみもの", w:"ビール,ワイン,ハイボール,お酒,日本酒,焼酎,飲み会,晩酌,コーヒー,紅茶,お茶,カフェ,飲みに,飲んで,飲んだ,飲みた,飲めそう,打ち上げ,乾杯,懇親会,忘年会,歓送迎会,送別会,新年会,白湯,ノンアル,二日酔い,飲みすぎ,飲み過ぎ,宅飲み,家飲み,居酒屋,地酒,酒蔵,獺祭,ジュース,ミルクティー"},
+  {g:"life", k:"推", n:"推し・趣味", w:"推し,ライブ,コンサート,アニメ,ドラマ,ゲーム,漫画,マンガ,野球,カープ,サッカー,趣味,グッズ,Netflix,ネトフリ,一気見,YouTube,ユーチューブ,録画,ラジオ,推し活,ポケモン,ポケカ,プラモデル,プラモ,レゴ,ダーツ,写真を撮りに,一眼レフ,編み物,刺繍,ネットフリックス,アマプラ,アイドル,K-POP,声優,ミュージカル,観劇,チケット,ファンクラブ,将棋,囲碁,麻雀,謎解き,盆栽,はまって,ハマって,オリンピック,五輪,パラリンピック,ワールドカップ,W杯,日本代表,高校野球,甲子園"},
+  {g:"life", k:"旅", n:"おでかけ", w:"旅行,お出かけ,おでかけ,下見で,同窓会,イルミネーション,日帰り,観光,道の駅,角島,秋吉台,秋芳洞,錦帯橋,長門峡,元乃隅,新幹線,カブトムシ,クワガタ,虫取り,虫捕り,夜景"},
+  {g:"life", k:"読", n:"読書",     w:"読書,本を読,本屋,小説,図書館,絵本,時代小説,積読,Kindle,キンドル,電子書籍,読み終え,読みたかった本"},
+  {g:"life", k:"癒", n:"ペット",   w:"ペット,犬,猫,ねこ,熱帯魚,インコ,ハムスター,愛犬,愛猫,わんこ,ワンちゃん,にゃんこ,犬を飼,猫を飼,動物病院,トリミング"},
+  {g:"life", k:"買", n:"買い物",   w:"買い物,ショッピング,通販,お土産,おみやげ,買った,買っちゃ,買いに,コンビニ,ネットショッピング,Amazon,アマゾン,楽天,メルカリ,フリマ,ゆめタウン,スーパー,業務スーパー,ホームセンター,電器屋,100均,ダイソー,セール,半額,まとめ買い,衝動買い,買いすぎ,買い過ぎ,プレゼント,イオンモール,百均,百円ショップ,100円ショップ,家電屋,家電量販店,買いこ,買い込"},
+  {g:"life", k:"金", n:"お金",     w:"お金,給料,給与,ボーナス,節約,ローン,家計,年金,積み立て,積立,退職金,貯金,貯蓄,奨学金,返済,仕送り,学費,教育費,塾代,月謝,食費,出費,交通費,生命保険,保険料,ふるさと納税,税金,固定資産税,手取り,光熱費,電気代,ガソリン代,物価,値上げ,宝くじ,お年玉,財布が軽く,お財布,財布,家賃,費用,金欠,ご祝儀,養育費,完済,残高,通帳,下宿代,ねんきん,自腹,アルバイト,バイト代,へき地手当,期末手当,勤勉手当,手当がつ,手当が上が,手当が出,謝金,会費,借金,赤字,修理代,保育料,生活が苦し,給料日前,傷病手当,引き落とし,値上がり,値段,水道代,灯油代,円安,円高,初任給,賃金,賃上げ,人事院勧告,人事委員会勧告,給与改定,通勤手当"},
+  {g:"life", k:"体", n:"体調",     w:"体調,風邪,健康,整体,インフルエンザ,膀胱炎,更年期,マッサージ,体力,ばきばき,コロナ,手術,インフル,物忘れ,救急,看病,予防接種,ワクチン,リウマチ,寝込,むくん,低気圧,更年期障害,適応障害,パニック障害,睡眠障害,うつ病,復職,試し出勤,療養,病気休暇,主治医,産業医,脳梗塞,乳がん,抗がん剤,胃がん,がん検診,副作用,ホットフラッシュ,汗が止まらな,ほてり,髪が抜け,手足口病,不妊治療,妊活,体外受精,人工授精,採卵,ホルモン注射,息切れ,船酔い,時差ぼけ,休職,心療内科,メンタルクリニック,精神科,診断書,パニック発作,自律神経,食欲がな,食欲が出な,治療,病気,がんの,朝起きられな,起きられな"},
+  {g:"life", k:"学", n:"自分の学び", w:"勉強,資格,セミナー,採用試験,教員採用,習い始め,韓国語,中国語,通信講座,オンライン講座,放送大学,教室に通,通信制,卒論,教育法規,論文対策"},
+  {g:"life", k:"休", n:"休み",     w:"休日,年休,有給,連休,休憩,週末,土日,休暇,休み,のんびり,ゴロゴロ,ごろごろ,休みの日,ぼーっと,学校閉庁日,閉庁日,振替休日,夏休み,冬休み,春休み,GW,ゴールデンウィーク,三連休,年末年始,正月,お盆,盆休み,日曜,土曜,祝日,代休,振休,だらだら,やすみ,有休,午後休,半休,時間休,忌引,夏休みの日,ゆっくりし,ゆっくりでき,ぼうっと"},
+  {g:"life", k:"創", n:"つくる",   w:"創作,作品,アイデア,アイディア,企画,手芸,DIY,ものづくり,ブログ,描きたい,陶芸,縫った,手作り,夜なべ,プラバン,レジン,木工"},
+  {g:"life", k:"地", n:"地域・まつり", w:"消防団,操法,自治会,町内会,回覧板,子ども会,子供会,区長,民生委員,婦人会,青年団,老人会,公民館,敬老会,近所,ご近所,祭り,夏祭り,秋祭り,神輿,盆踊り,花火大会,餅まき,お寺,報恩講,檀家,神社,清掃活動,廃品回収,資源回収,地域活動,地域の行事,地区の行事,地元,とんど焼き,とんど焼,どんど焼き,投票に行,操法大会,子ども食堂,ボランティア,神楽,伝統芸能,まつり,地域の方,地域の人,地域のお年寄り,地域のおじいちゃん,地域のおばあちゃん,地域の皆さん,地域のみなさん,地域の大人,お年寄り,天満宮,八幡宮,避難所,炊き出し,一斉清掃,地域清掃,学校統合,統廃合,閉校,廃校,地域の人口,人口減,人口がへ,人口が減,過疎,山焼き,見守り隊"},
+  {g:"life", k:"恋", n:"恋愛・結婚", w:"婚活,マッチングアプリ,お見合い,彼氏,彼女と,彼女に会,彼女ができ,恋愛,恋人,片思い,デート,失恋,別れた,別れまし,婚約,プロポーズ,入籍,結婚,結婚記念日,結婚式,遠距離恋愛,遠恋,遠距離で,彼女と別れ,出会いがな,名字が変わ"},
+  {g:"life", k:"車", n:"車", w:"ドライブ,車検,洗車,愛車,新車,中古車,軽自動車,タイヤ交換,スタッドレス,オイル交換,バイク,ツーリング,運転免許,免許返納,カーナビ,給油,渋滞,車の中,自転車通勤,車通勤,電車通勤,駐車場,フロントガラス,車の運転,バッテリーあが,バッテリーが上が,自転車で通勤,渋滞にはま,路面凍結,道路が凍結,雪道,チェーン規制,遠回り,片側通行,国道,代行バス,運休,運転見合わせ,電車が止ま,道が混,通勤に時間,通勤中"},
+  {g:"life", k:"美", n:"美容", w:"美容院,美容室,ネイル,まつ毛,まつげ,エステ,コスメ,化粧品,髪を切,パーマ,白髪染め,スキンケア"},
+  {g:"life", k:"釣", n:"釣り", w:"釣り,釣っ,釣れ,釣果,釣り堀,つり堀,海釣り,渓流釣り,魚釣り,エギング,ルアー,サビキ,投げ釣り"},
+  {g:"life", k:"山", n:"山・登山", w:"山登り,登山,ハイキング,トレッキング,山歩き,山に登,山へ行,山に行,山頂,縦走,ロープウェイ"},
+  {g:"life", k:"川", n:"川・水辺", w:"川遊び,川で遊,川へ行,川に行,渓流,カヌー,カヤック,ラフティング,ホタル,蛍,川下り,沢登り"},
+  {g:"life", k:"海", n:"海", w:"海水浴,海へ行,海に行,海で遊,ビーチ,サーフィン,シュノーケル,シュノーケリング,ダイビング,潮干狩り,磯遊び,SUP,海辺,砂浜,貝ひろい,貝拾い"},
+  {g:"life", k:"野", n:"キャンプ・外あそび", w:"キャンプ,グランピング,バーベキュー,BBQ,ピクニック,デイキャンプ,たき火,焚き火"},
+  {g:"life", k:"花", n:"花", w:"花見,お花見,夜桜,桜を見,桜並木,桜まつり,花畑,フラワーパーク,植物園,あじさい,ひまわり畑,バラ園,菜の花,梅見"},
+  {g:"life", k:"紅", n:"紅葉", w:"紅葉狩り,紅葉,もみじ狩り,もみじ,イチョウ並木"},
+  {g:"life", k:"星", n:"星・空", w:"星を見,星空,天体観測,プラネタリウム,流れ星,流星群,天の川,満天の星,月を見,お月見"},
+  {g:"life", k:"参", n:"お参り", w:"初詣,参拝,お参り,御朱印,寺社めぐり,神社めぐり,お寺めぐり,パワースポット"},
+  {g:"life", k:"城", n:"お城", w:"城めぐり,お城,天守,城跡,萩城,岩国城"},
+  {g:"life", k:"館", n:"水族館・博物館", w:"水族館,博物館,美術館,科学館,資料館,記念館,海響館,展覧会,美術展,特別展"},
+  {g:"life", k:"園", n:"動物園・遊園地", w:"動物園,遊園地,テーマパーク,ディズニー,USJ,サファリ,公園で遊,公園に行"},
+  {g:"life", k:"雪", n:"雪・雪あそび", w:"大雪,雪が積,雪が降,積雪,スキー,スノボ,スノーボード,ゲレンデ,雪遊び,雪だるま,そり遊び,かまくら"},
+  {g:"life", k:"泳", n:"泳ぐ", w:"スイミング,泳い,水泳教室,プールに行,プールで泳"},
+  {g:"life", k:"歌", n:"歌・カラオケ", w:"カラオケ,ヒトカラ,合唱団,コーラス,歌って,歌った"},
+  {g:"life", k:"映", n:"映画", w:"映画,映画館,レイトショー"},
+  {g:"life", k:"遊", n:"あそびに行く", w:"遊びに行,遊びに出かけ,遊びにでかけ"},
+  {g:"life", k:"畑", n:"畑・庭", w:"家庭菜園,菜園,畑仕事,家の畑,うちの畑,実家の畑,畑でも,ガーデニング,庭いじり,野菜を育て,野菜づくり,野菜作り"},
+  {g:"life", k:"歯", n:"歯", w:"歯医者,歯科,虫歯,親知らず,奥歯,歯ぐき,歯茎,歯石,詰め物が取れ,銀歯,入れ歯,歯が欠け,歯がしみ"},
+  {g:"life", k:"骨", n:"骨", w:"骨折,骨にひび,骨にヒビ,骨密度,骨盤,ギプス"},
+  {g:"life", k:"頭", n:"頭", w:"頭が重,頭をぶつけ,頭を打,頭がガンガン,頭がぼーっと"},
+  {g:"life", k:"腹", n:"おなか", w:"下痢,便秘,お腹の調子,おなかの調子,お腹をこわ,おなかをこわ,お腹を壊,おなかを壊,胃腸炎,胃腸"},
+  {g:"life", k:"胃", n:"胃", w:"胃もたれ,胸やけ,胸焼け,胃薬,胃カメラ,胃潰瘍"},
+  {g:"life", k:"腰", n:"腰", w:"ぎっくり腰,ヘルニア,腰が重"},
+  {g:"life", k:"肩", n:"肩", w:"肩こり,肩がこ,肩が凝,肩が重,四十肩,五十肩,肩が"},
+  {g:"life", k:"首", n:"首", w:"寝違え,むち打ち,ストレートネック,首こり,首がこ,首が凝"},
+  {g:"life", k:"目", n:"目", w:"めまい,眼科,目の疲れ,目が疲れ,眼精疲労,目がしょぼしょぼ,ドライアイ,目薬,ものもらい,老眼,視力が落,かすみ目"},
+  {g:"life", k:"喉", n:"のど", w:"のど飴,喉飴,声がかれ,声が枯れ,声が出な,声がガラガラ,扁桃腺,のどが,喉が,喉"},
+  {g:"life", k:"耳", n:"耳", w:"耳鼻科,耳鳴り,中耳炎,外耳炎"},
+  {g:"life", k:"背", n:"背中", w:"背中が張,背中がこ,背中が凝,猫背,背中がバキバキ,背中がばきばき"},
+  {g:"life", k:"足", n:"足", w:"足がむく,足首,ふくらはぎ,外反母趾,靴ずれ,足の裏,膝が,ひざが,足が重,足腰,こむら返り"},
+  {g:"life", k:"手", n:"手", w:"手が荒れ,手荒れ,あかぎれ,腱鞘炎,突き指,手首,腕がパンパン,腕がぱんぱん,しもやけ"},
+  {g:"life", k:"捻", n:"ひねった", w:"捻挫,ねんざ"},
+  {g:"life", k:"熱", n:"熱", w:"発熱,熱が,熱出,熱を出,熱っぽ,微熱,高熱,解熱剤"},
+  {g:"life", k:"咳", n:"せき", w:"咳,せきが,せき込,咳込,喘息,ぜんそく,咳止め"},
+  {g:"life", k:"鼻", n:"鼻", w:"鼻水,花粉,鼻づまり,鼻が詰ま,くしゃみ,鼻炎,鼻血"},
+  {g:"life", k:"雨", n:"雨", w:"大雨,豪雨,ゲリラ豪雨,にわか雨,梅雨,雨の日,雨降り,雨が降,雨で,雨に,雨"},
+  {g:"life", k:"暑", n:"暑さ", w:"暑い,暑さ,暑かった,暑く,猛暑,酷暑,残暑,真夏日,猛暑日,蒸し暑"},
+  {g:"life", k:"寒", n:"寒さ", w:"寒い,寒さ,寒かった,寒く,寒波,冷え込,底冷え,凍え,霜が"},
+  {g:"life", k:"風", n:"風・台風", w:"台風,強風,暴風,突風,風が強,すきま風,春一番,木枯らし"},
+  {g:"life", k:"晴", n:"晴れ", w:"晴れ,快晴,いい天気,良い天気,晴天,青空,日差し"},
+  {g:"life", k:"雷", n:"雷", w:"雷,かみなり,落雷,雷雨"},
+  {g:"life", k:"震", n:"地震", w:"地震,震度,余震"},
+  {g:"life", k:"災", n:"災害", w:"災害,警報,避難指示,避難,土砂崩れ,冠水,停電,断水,浸水,線状降水帯"},
+  {g:"life", k:"吐", n:"はきけ", w:"吐き気,吐い,嘔吐"},
+  {g:"life", k:"血", n:"血圧・血液", w:"血圧,高血圧,低血圧,貧血,献血,血液検査,血糖,コレステロール,尿酸"},
+  {g:"life", k:"重", n:"体重", w:"体重,太っ,太り,太った,痩せ,やせた,ダイエット,体重計,メタボ"},
+  {g:"life", k:"肌", n:"肌", w:"肌荒れ,乾燥肌,ニキビ,にきび,吹き出物,湿疹,かぶれ,じんましん,蕁麻疹,アトピー,皮膚科"},
+  {g:"life", k:"焼", n:"日焼け", w:"日焼け,日焼,日に焼け,真っ黒に焼け"},
+  {g:"life", k:"薬", n:"薬", w:"薬,湿布,痛み止め,頓服,漢方,サプリ,処方"},
+  {g:"life", k:"院", n:"病院", w:"病院,通院,入院,退院,内科,整形外科,整骨院,接骨院,婦人科,クリニック,診察,受診,再検査,精密検査,人間ドック,リハビリ"},
+  {g:"life", k:"眠", n:"眠り", w:"不眠症,不眠"},
+  {g:"life", k:"株", n:"株", w:"株価,株式投資,株式市場,株主,配当,優待,株を買,株を売,株が上が,株が下が,日経平均,値上がり益,証券口座"},
+  {g:"life", k:"資", n:"投資", w:"投資信託,投資,資産運用,資産形成,資産,新NISA,NISA,ニーサ,iDeCo,イデコ,積立投資,つみたて投資,インデックスファンド,オルカン,S&P500"},
+  {g:"life", k:"筋", n:"筋トレ", w:"筋トレ,筋肉,腹筋,腕立て,スクワット,プランク,プロテイン,ベンチプレス"},
+  {g:"life", k:"脂", n:"脂肪", w:"脂肪,体脂肪,中性脂肪,内臓脂肪,皮下脂肪,脂肪肝,脂っこ,脂質"},
+  {g:"life", k:"鍵", n:"ピアノ・鍵盤", w:"鍵盤"},
+  {g:"life", k:"音", n:"音楽", w:"楽器を,演奏会,バンド,音楽を聴,音楽を聞,作曲,DTM"},
+  {g:"life", k:"弦", n:"弦楽器", w:"三味線,お琴"},
+  {g:"life", k:"筆", n:"書道", w:"書道,書道教室,筆ペン,ペン字,美文字"},
+  {g:"life", k:"英", n:"英会話", w:"英会話,オンライン英会話,英検,TOEIC,TOEFL,英単語"},
+  {g:"life", k:"踊", n:"ダンス", w:"ダンス,バレエ,日本舞踊,フラダンス,社交ダンス,踊っ"},
+  {g:"life", k:"剣", n:"剣道", w:"剣道,居合,フェンシング"},
+  {g:"life", k:"武", n:"武道", w:"空手,柔道,合気道,少林寺,テコンドー"},
+  {g:"life", k:"茶", n:"茶道", w:"茶道,お点前"},
+  {g:"life", k:"絵", n:"絵", w:"絵を描,絵画,水彩,油絵,スケッチ,デッサン"},
+  {g:"life", k:"算", n:"そろばん", w:"そろばん,珠算"},
+  // きもち
+  {g:"mood", k:"疲", n:"つかれ",   w:"疲れ,つかれ,疲労,しんどい,くたくた,へとへと,だるい,ぐったり,きつい,体がもたない,抜け殻,限界,すり減,燃え尽き,きつかった,バキバキ,休みなし,休みがない,心が折れ,くたびれ,投げ出したい,辞めたい,気をつかう,気を使う,気力がない,何もしたくない,元気がない,しんど,ヘトヘト,クタクタ,だるかっ,疲弊,消耗,バテ,燃えつき,もう無理,もうむり,無理って,無理しすぎ,無理して,無理じゃ,むりぃ,倒れそう,つぶれそう,潰れそう,体がもたな,体がもたん,心折れ,気力がな,きつくて,キツい,キツかった,面倒くさ,めんどくさ,めんどい,めんどう,面倒な,たいぎ,しわい,しわかった,ぶちえらい,ぶちえらかった,えらいっちゃ,えらいのう,えらいわ,体がえらい,えろうて,お疲れ,気を遣,足が棒,立ちっぱなし,休日がない,休日もない,休日なし,汗だく,足がパンパン,足がガクガク,ガクガク,頭がぼーっと,頭がぼんやり,気をつかっ,気を使っ,ばてた,ばてて,バテた,バテて,気力ゼロ,やめたい,もたない,もつか自信,体がもちませ,頭がぼうっと"},
+  {g:"mood", k:"忙", n:"いそがしい", w:"忙しい,いそがしい,バタバタ,余裕がない,時間がない,追われ,忙しく,いそがしく,暇がない,余裕がな,あっという間,パンパン,やることが多すぎ,頭がぐちゃぐちゃ,いっぱいいっぱい,ばたばた,手が回らない,頭がいっぱい,ドタバタ,大変,余裕ゼロ,心の余裕,手が回らな,手がまわらな,やることが多,多すぎ,パンク,自転車操業,時間がな,暇もな,暇がな,ひまがな,せわしな,せわしい,てんてこまい,秒で過ぎ,後回し,戦場,朝が戦争,戦争みたい,奔走,何がなんだか,鳴りっぱなし,余裕がほし,キャパオーバー,キャパい,キャパが,スケジュールがタイト,ぐちゃぐちゃ,busy,余裕なかった,余裕ない,余裕なく,大忙し,たいへんでした,たいへんです,たいへんだった,振り回され,振りまわされ"},
+  {g:"mood", k:"嬉", n:"うれしい", w:"うれしかった,嬉しかった,うれしい,嬉しい,よかった,ありがとう,感謝,うれしく,嬉しく,助かっ,助かる,ありがたい,ありがたかった,ありがたく,頼もしい,ほめられ,褒められ,大喜び,喜び,喜ん,うれしそう,ハイタッチ,助かって,助かった,喜んで,ありがた,助けられ,助けてもら,助けてもろ,支えてくれ,支えられ,心強,おかげ,うれしゅう,よろこ,ほめてもら,褒めてもら,大好きって,ガッツポーズ,うれしさ,嬉しさ,気が合,お世話になっ,喜ばれ,頼もしかった,頼もしく,すきって言われ,好きって言われ,話しかけてくれ,入選,歓声,お互いさま,ほめていただ,褒めていただ,たのもし,くれました,くれます,ほめてくださ,褒めてくださ,くださいました,くださって,助かりました,助かり,お礼,念願,希望どおり,希望通り,希望していた,親切,いいところ,先生みたいになりたい,先生になりたい,入賞,金賞,優勝,息が合,お祝い,祝いました,大好きと言,先生大好き"},
+  {g:"mood", k:"楽", n:"たのしい", w:"楽しかった,楽しい,たのしい,楽しみ,おもしろ,面白,わくわく,ワクワク,笑顔,笑っ,楽しそう,楽しく,楽しん,楽しめ,盛り上が,興奮,最高でした,最高だった,大笑い,笑え,わいわい,ストレス発散,夢中,熱中,たのしく,たのしゅう,笑い,ウキウキ,うきうき,テンション上が,テンションが上が,機嫌いい,機嫌がいい,前向き,好きだな,好きだと,刺激になっ,刺激になり,刺激をもら,もりあが,最高です,大うけ,大ウケ"},
+  {g:"mood", k:"寂", n:"さみしい", w:"さみしい,寂しい,さびしい,孤独,ひとりぼっち,さみしく,寂しく,さびしく,ぽっかり,懐かしい,なつかしい,心細い,悲しい,悲しかった,かなしい,孤立,さみしゅう,むなしい,むなしく,虚しい,虚しく,誰にも言えな,誰にも相談,相談できな,誰とも,頼れな,頼る人がいな,見てくれてない,報われな,つまらな,つまんな,心細,取り残,居場所がな,感謝されな,寂しくない,寂しさ,さみしさ,さびしさ,切ない,切なく,せつない,せつなく,がらんと,仲間外れ,周りに言えな,口をきいてくれな,寂しそう,さみしそう,なじめな,馴染めな,会いたい,亡くなっ,亡くな,誰も知らな,流産,死産,死んだ,死んで,看取,最期,お別れ,死別,自死,自殺,命を絶,死にたい,消えたい,消えてしまいたい,生きていたくない,別居,会えな,誰も話しかけ,ペットロス,冷たくなって,会えていな,会えてな"},
+  {g:"mood", k:"悩", n:"なやみ",   w:"悩み,なやみ,悩ん,迷う,迷って,どうしよう,困っ,うまくいかない,モヤモヤ,もやもや,申し訳,悩む,悩ま,迷った,迷い,罪悪感,苦手,迷惑かけ,迷惑を,がっかり,自信がな,嫌だ,人間関係,悩まし,苦労,どうしたらいい,頭が痛,怒られ,叱られ,戸惑,心苦しい,難しい,難しさ,居心地が悪,後ろめた,うしろめた,迷惑をかけ,気まず,モヤっと,モヤる,モヤッ,どうすればいい,わからな,わかんな,分からな,断れな,抱え込,自信をなく,嫌な,嫌に,ほんと嫌,いなげな,ぴえん,ぱおん,よかったのか,よかったんか,これでいいのか,いいのかな,頭から離れな,頭が休まら,ぐるぐる,うれしくない,うれしくなかった,嬉しくない,嬉しくなかった,自信がつかな,言葉が見つから,まとまらない,まとまらな,もどかし,釈然としな,考えてしまう,もやっとし,もやっとす,複雑,気持ちで揺れ,困り,理解してくれな,伝わらな,行ったり来たり,申しわけ,断られ,話しかけづら,わかってくれな,浮かばな,うかばな,ややこし,言いにくい,言いづらい,パワハラ,ハラスメント,陰口,嫌がらせ,嫌味,無視され,居づら,否定され,引きずっ,転職,退職届,辞表,むずかし"},
+  {g:"mood", k:"憂", n:"不安・心配", w:"胸が痛かった,胸が痛く,胸が痛む,心が痛かった,心が痛く,心が痛む,心が痛,不安,心配,気がかり,憂うつ,憂鬱,ゆううつ,つらい,つらかった,落ち込,気が重,気になって,怖い,こわい,怖く,こわく,沈み,怖かった,こわかった,重い気持ち,胸が痛,やる気が出ない,やる気がでない,気が重い,落ち着かない,ショック,ストレス,病んで,病む,病み気味,病みそう,メンタル,メンブレ,鬱,うつっぽ,へこん,へこみ,へこむ,凹ん,凹み,気持ちが沈,気分が沈,沈みがち,気持ちが落ち,気分が落ち,やる気が出な,やる気がでな,やる気出な,やる気がな,やる気がおき,モチベーションが上がらな,モチベーションが下が,モチベが,何もしたくな,なんもしたくな,どうでもよく,ため息,つらくて,つらく,辛くて,辛かった,しんどくてつら,えずい,おとろしい,行きたくな,胸がざわ,落ち着かな,萎え,大丈夫じゃな,せんない,楽しくない,楽しくなかった,楽しくなく,たのしくない,楽しめない,楽しめなかった,安心できな,笑えな,元気がな,元気出な,やりがいがな,やりがいを感じな,荷が重,サザエさん症候群,他人事,笑えていな,笑えてな,泣きたい,やる気が出ませ,やる気出ませ,気が休まら,気が休まりませ,どうでもいい,責められ,重い一日,気持ちが重,心が重,抱えきれ,辞めないで,どなられ,怒鳴られ,説教され,暴言,胸が苦し,苦しい,落ちこ,炎上,降りられな,落ちつかな,気が気で,ぞっと"},
+  {g:"mood", k:"怒", n:"イライラ", w:"イライラ,いらいら,腹が立,むかつ,怒っ,怒り,カッとな,かっとな,嫌です,大きな声を出,不満,理不尽,腹立,ムカつ,ムカッ,ムカムカ,頭にくる,頭にきた,イラッ,イラつ,いらっと,キレそう,キレた,ブチギレ,ぶちギレ,うざ,ウザ,不公平,勘弁,押し付け,押しつけ,ふざけ,はぶて,最悪,不機嫌,機嫌が悪,ありがたくない,けんか,ケンカ,喧嘩,けんかの,けんかし,けんかに,けんかが,声を荒げ,もめる,もめた,揉め,文句を言,文句ばかり,口げんか,夫婦げんか,兄弟げんか"},
+  {g:"mood", k:"焦", n:"あせり",   w:"焦る,焦っ,あせる,あせっ,間に合わない,慌て,あわて,間に合わな,やばい,焦り,焦ら,ヒヤッ,ひやっ,大慌て,ギリギリ,ぎりぎり,テンパ,詰んだ,詰んで,詰み,追いつかな,間に合わ,何から手を,あせり,急な,青ざめ,遅刻しそう,ヤバい,ヤバかった,ヤバっ"},
+  {g:"mood", k:"幸", n:"しあわせ", w:"気が晴れ,心が晴れ,晴れやか,晴れ晴れ,幸せ,しあわせ,ほっと,ホッと,癒され,いやされ,かわいい,可愛い,元気をもら,すっきり,落ち着く,気分転換,元気が出,救われ,かわいすぎ,かわいかった,可愛かった,癒やされ,癒やし,いい気分,落ち着いた,スッキリ,リフレッシュ,肩の荷が下り,かわいく,安心,ご褒美,至福,気楽,気が楽,ほっこり,癒し,肩の荷,落ちついた,穏やか,ゆとり,楽になっ,軽くなっ,解放感,開放感,元気出,元気もら,元気になっ,元気になる,気持ちがよかった,気持ちがいい,気持ちよかった,ストレス解消,尊い,心配ない,心配いらな,心配なく,不安はな,不安がな,不安がなくな,悪くない,疲れてない,疲れていない,しんどくない,仕事のこと忘れ,仕事を忘れ,やわらい,和らい,余裕もあ,余裕ができ,余裕があ,余裕が出,頭が空っぽ,心は満たされ,心が満たされ,満たされた,楽になり,ラクになっ,ラクになり,軽くなり,元気もろう,元気をもろう,気分がええ,気分がいい,happy,寝顔,落ちついてた,落ち着いてた,元気でた,元気がでた,ふつうの日,普通の日,夕焼け,体が軽,落ち着きました,落ち着いてき,まとまってき,慣れてきまし,解決しました,解決した,治りました,治った,吹き飛,無事に終わ,無事終わ"},
+  {g:"mood", k:"緊", n:"緊張",     w:"緊張,ドキドキ,どきどき,ハラハラ,はらはら,ひやひや,ヒヤヒヤ,ヒヤッと,ひやっと,恥ずかし,本番,ピリピリ,ぴりぴり,気が抜けな,身が引き締ま,どきっ,ドキッ,神経を使,手が震え,動悸,気が張,プレッシャー,怖じ気,身構え,そわそわ,ソワソワ,声が震え,胃がきゅ,心臓に悪,勇気がいっ,責任の重さ,責任が重,頭まっしろ,頭が真っ白,頭真っ白,手がふるえ,声がふるえ,緊急地震速報,緊急速報,身が引きしま"},
+  {g:"mood", k:"感", n:"じーんとくる", w:"泣き,泣い,涙,感動,じーん,鳥肌,報われ,成長,うるっと,号泣,胸が熱,感激,胸がいっぱい,泣く,泣け,ウルッと,うるうる,グッと,ぐっと,感極ま,エモい,エモかった,しみじみ,涙もろ,感心,寄せ書き,頭が下が,拍手,昔の自分を思い出,手紙が届,手紙をくれ,見違え,立派な大人,立派になっ,うまくなりました,うまくなっ,上手になっ,上達,優しい子,やさしい子"},
+  {g:"mood", k:"悔", n:"くやしい・後悔", w:"後悔,自己嫌悪,反省,悔しい,くやしい,悔しかった,悔しそう,悔しさ,くやしかった,負けた,負けて,一回戦負け,初戦敗退,敗退,悔し,くやし,情けな,自分が嫌,自分なんか,自分のせい,失敗,やらかし,言いすぎ,言い過ぎ,ばよかった,たらよかった,笑顔でいられな,笑顔になれな,自分を責め,落ち度,不甲斐な,ふがいな,よくなかった,無力,自分がいや,不合格,試験に落ち,刷り間違え,無駄にし,やさしくできな,優しくできな,言えなかった,発言できな,私のせい,失格,向いていない,向いてない,力不足,だめな人間,ダメな人間,どなってしまった,怒鳴ってしまった,判断が遅,気づけなかった,言い返せなかった,言い返せな,私だけでき,気づけな"},
+  {g:"mood", k:"誇", n:"やりがい・達成感", w:"誇らし,手ごたえ,手応え,誇り,ほこらし,達成感,やりがい,自信がつ,自信になっ,やり切っ,やりきっ,乗り切っ,のりきっ,報われた,成長を感じ,成長が見え,成長していく,自分をほめ,ほめてやりたい,がんばった自分,頑張った自分,ようがんばった,この仕事好き,充実感,充実した,充実して,充実,成就感,やりきった,やり切った,うまくいった,うまくいきまし,うまくいけた,成果が出,かいがあ,甲斐があ,大成功,成功しました,成功した,自己ベスト,やりきりました,やり切りました,できるようになり,できるようになっ,書けるようになり,言えるようになり,読めるようになり,できあがりました,完成しました"},
+  {g:"mood", k:"痛", n:"いたい", w:"痛い,痛かった,痛く,痛む,痛み,痛っ,痛すぎ,イタタ,いててて,ズキズキ,ずきずき,ヒリヒリ,ひりひり,チクチク,ちくちく,ジンジン,じんじん"},
+  {g:"mood", k:"痒", n:"かゆい", w:"かゆい,かゆく,かゆみ,かゆかった,痒い,痒く,痒み,痒かった,ムズムズ,むずむず,蚊に刺され,虫刺され"},
+  {g:"mood", k:"不", n:"できない", w:"眠れない"},
+  {g:"mood", k:"平", n:"平常心", w:"平常心,いつもどおり,いつも通り,ふだんどおり,ふだん通り,普段通り,平穏,淡々と,たんたんと,可もなく不可もなく"},
+];
+const VWORDS = [];
+// 字ごとの色：仕事＝重いほど紺・軽く楽しいほど水色／くらし＝趣味・余暇ほど黄緑・やらねばならない家のことほど深緑／
+// きもち＝しあわせ系はピンク・複雑でやや重いものは紫・プレッシャーやあせりは黄・かなり重いものはエンジ
+const VCOLOR = {
+  残:"#16234f", 人:"#1c2c66", 書:"#22397c", 保:"#28448a", 会:"#2f5196", 採:"#335da3", 進:"#3a68ad",
+  研:"#4176b8", 部:"#4a84c2", 仕:"#4f8fca", 業:"#5c9fd4", 校:"#6fb2e0", AI:"#7fc0e8", 短:"#93cdee", 帰:"#a8dcf4",
+  掃:"#1d4a2a", 金:"#23533a", 料:"#2a5e34", 育:"#30683a", 家:"#3a7442", 体:"#447f45", 寝:"#518a47",
+  買:"#62984a", 子:"#6ea54a", 食:"#7db146", 湯:"#8bbb45", 学:"#86b840", 休:"#97c643", 動:"#9fca3e",
+  走:"#a6cf3c", 癒:"#b0d64a", 飲:"#b6d94c", 読:"#a9d356", 旅:"#bfdf4a", 創:"#c3e25a", 推:"#cbe85a",
+  幸:"#f48fb8", 嬉:"#f7a8c8", 楽:"#f07aa8", 感:"#e58bc9",
+  寂:"#a07cc4", 悩:"#8a5fb0", 憂:"#6f4a9c",
+  緊:"#f2d046", 焦:"#efb52c", 忙:"#e9a01e",
+  怒:"#9a2638", 疲:"#7d1c2e",
+  導:"#1a2b5e", 勤:"#25418a", 支:"#3a6db0", 健:"#64a9dc", 地:"#2b6a3e", 車:"#5b8f45", 恋:"#b9dd52", 美:"#c6e35e", 誇:"#ee6f9e", 悔:"#7b55a8", 痛:"#a8323f", 痒:"#d8b84a", 平:"#8c9a94",
+  娘:"#7aaa4c", 息:"#73a24a",
+  筋:"#8cc04a", 脂:"#5a7f40", 鍵:"#c2de5a", 音:"#cbe462", 弦:"#b9d855", 筆:"#9fc650", 英:"#a6cc58", 踊:"#d3ea6a", 剣:"#94c24c", 武:"#8ab848", 茶:"#9cbf4e", 絵:"#c7e15c", 算:"#a0c454",
+  株:"#2f5d44", 資:"#3a6648",
+  眠:"#4a6f52", 不:"#5e4a7a",
+  雨:"#3f7f6a", 暑:"#8fae3a", 寒:"#4d8270", 風:"#5f9a72", 晴:"#a9cf4f", 雷:"#556b2f", 震:"#2b4f3a", 災:"#2f5a3a", 吐:"#4e7a45", 血:"#3b6a3e", 重:"#5d8a44", 肌:"#79a84e", 焼:"#8a9a3a", 薬:"#44784a", 院:"#36684a",
+  歯:"#2f6b55", 骨:"#3b6b47", 頭:"#2d5e46", 腹:"#4a7a3c", 胃:"#3f7240", 腰:"#35664a", 肩:"#46784e", 首:"#3a6e52", 目:"#4f8350", 喉:"#558a4c", 耳:"#4b7f5a", 背:"#3e7350", 足:"#5a8d47", 手:"#61924a", 捻:"#2a5a40", 熱:"#6b8f3a", 咳:"#5c8542", 鼻:"#67904c",
+  釣:"#a2d24e", 山:"#8cbf47", 川:"#9ad65a", 海:"#a8d86a", 野:"#b4d84e", 花:"#c8e35c", 紅:"#bccf48", 星:"#a3c94a", 参:"#93c84a", 城:"#87b84a", 館:"#b0cf55", 園:"#c0dd58", 雪:"#b9de6a", 泳:"#9fd36a", 歌:"#d0e860", 映:"#c4e050", 遊:"#d6ec6a", 畑:"#7fae45",
+};
+VCATS.forEach(c => { c.group = VGROUPS.find(g => g.id === c.g); c.c = VCOLOR[c.k]; });
+// 明るい色の上は字を紺に（白だと読みにくい）
+function inkOn(hex){
+  const n = parseInt(hex.slice(1), 16), [r, g, b] = [n >> 16, n >> 8 & 255, n & 255];
+  return (0.299 * r + 0.587 * g + 0.114 * b) > 165 ? "#1b2550" : "#fff";
+}
+VCATS.forEach(c => c.w.split(",").forEach(w => VWORDS.push({w: w.normalize("NFKC"), cat: c})));
+VWORDS.sort((a, b) => b.w.length - a.w.length);
+const MYSTERY = {k:"謎", n:"まだ言葉にならない何か", c:"#5b5b6e"};
+
+// 食べものは、うしろのことばで「つくる（料）」か「たべる（食）」かを分ける（「カレーを作った」→料、「カレーを食べた」→食）
+const FOODS = "晩ごはん,晩ご飯,朝ごはん,朝ご飯,昼ごはん,昼ご飯,夕ごはん,夕飯,ごはん,ご飯,お弁当,弁当,おかず,カレー,ラーメン,パスタ,ハンバーグ,味噌汁,みそ汁,鍋,お菓子,ケーキ,クッキー,パン,餃子,唐揚げ,からあげ,焼きそば,オムライス,シチュー,おにぎり,うどん,そば,焼肉,寿司,お好み焼き,三食,夕食,朝食,昼食,おせち,肉じゃが,煮物,切り干し大根,野菜スープ,スープ,サラダ,卵焼き,離乳食,焼き肉,焼き鳥,焼き魚,刺身,ピザ,グラタン,チャーハン,炒飯,ホットケーキ,パンケーキ,おでん,豚汁,ぜんざい,おはぎ,梅干し,漬物,瓦そば,ふぐ,餅,アイス,プリン,ゼリー,かき氷,天ぷら,干し柿,夜食"
+  .split(",").sort((a, b) => b.length - a.length);
+const MAKE = "作,つく,こしら,焼い,焼く,煮,炒め,揚げ,仕込,漬け,茹で,ゆで";
+const EAT = "食べ,たべ,食っ,いただ";
+const FOOD_RE = new RegExp(`(${FOODS.join("|")})(?:を|も|は|が|まで|の)?(?:毎朝|毎日|毎晩)?(${MAKE.replace(/,/g, "|")}|${EAT.replace(/,/g, "|")})`, "g");
+const CAT_OF = k => VCATS.find(c => c.k === k);
+// 辞書に当たった所を返す（{i:位置, len:長さ, w:内訳に出すことば, cat:字}）
+// 前後のことばで行き先が変わるもの（辞書より先に、上から順に見る）。w：解説欄に出すことば
+// k:"SKIP"：数えずに消すだけ（打ち消し・人の気持ちなど）／p:1：1つめの( )は手がかりとして残し、そのうしろだけを数える／
+// ng：その直前の字がこれなら見送る（「工夫」「大丈夫」など。古いiPhoneは正規表現の「うしろ読み」で止まるので使わない）
+const CHILD = "自分の子ども|自分の子供|自分の子|うちの子ども|うちの子供|うちの子|息子|娘|わが子|我が子|下の子|上の子|長男|長女|次男|次女";  // 先生が「子ども」と言うのは学級の子のことが多いので入れない
+const KID = "子ども|子供";  // 「子ども」は、家に帰ったら・年休を取って・習い事など、わが子とわかる手がかりがあるときだけ
+const PUPIL = "生徒|児童|クラスの子|学級の子|子どもたち|子供たち|子どもら|うちのクラス";
+const ILL = "熱(?![くい心意演弁気湯帯]|中し)|発熱|風邪|かぜ|体調|インフル|コロナ|嘔吐|吐い|けが|ケガ|怪我|骨折|病院|手足口病|胃腸炎|水ぼうそう|おたふく|RSウイルス";  // 「熱く議論」「熱意」「熱中して」は体調ではない
+const FRIEND = "友だち|友達|友人|同僚|先輩|後輩|妹|弟|姉|兄|いとこ|教え子|知り合い";
+const OTHER = "生徒|児童|子どもたち|子供たち|子どもら|子ども|子供|年生|低学年|高学年|男の子|女の子|その子|同僚|同期|同級生|保護者|お母さん|お父さん|夫|妻|主人|旦那|母|父|息子|娘|先輩|後輩|友だち|友達|友人|教頭|校長|先生方|みんな|誰か|相手|孫|姉|兄|妹|弟";
+const GAP = "(?:(?!ので|から|けど|のに|あと|たら|わたし|自分|ぼく|僕|俺|もらい)[^。、私てで夜]){0,8}?";  // 主語と気持ちのあいだ（「娘が熱を出して疲れた」の自分の疲れは消さない）
+const NEG = "悲し|かなし|つら|辛|怖|こわ|落ち込ん|へこん|凹ん|悩ん|悩み|迷っ|迷い|困っ|イライラ|いらいら|怒っ|不満|焦っ|あせっ|失敗|忙し|いそがし|眠|ねむ|つまらな|つまんな|後悔|ショック|苦手|嫌";
+// わが子の行事・習い事は、だれのことかの字（娘・息・子）にする
+const WHO_K = m => /娘|長女|次女|三女/.test(m[0]) ? "娘" : /息子|長男|次男|三男/.test(m[0]) ? "息" : "子";
+const CONTEXT_RULES = [
+  {re: /(?:痛|かゆ|痒)く(?:ない|なかっ|なく|ありませ|も何とも)/g, k: "SKIP"}, // 痛くない・かゆくない
+  {re: /痛い(?=出費)|痛い(?:ところを|目にあ|目を見)|耳が痛/g, k: "SKIP"}, // 体の痛みではない言い方
+  {re: /((?:子どもたち|子供たち|児童|生徒|クラス|学級|休み時間|授業)[^。]{0,30}?)(?:雪遊び|雪だるま|そり遊び|かまくら)/g, p: 1, k: "仕", w: "子どもと雪あそび"}, // 学校で子どもと
+  {re: /(?:足|ふくらはぎ|こむら)(?:が|も)?(?:つっ|つる|つり)/g, k: "足", w: "足がつった"},
+  {re: /(?:キス|ハゼ|カンパチ|アジ|サバ|メバル|カサゴ|ガシラ|チヌ|クロダイ|マダイ|鯛|ブリ|ハマチ|イワシ|シーバス|ヒラメ|カレイ|アオリイカ|イカ|タコ|ニジマス|マス|アユ|鮎|ヤマメ|イワナ|ブラックバス|フグ|ふぐ|魚)(?=[^。]{0,24}?(?:釣|つっ|つれ|つり))/g, k: "釣", w: m => m[0]},
+  // 打ち消し：「〜ない」は数えない（「〜ないって言ったら嘘」「〜ないわけじゃない」は数える）
+  {re: /(?:疲れ|つかれ)て(?:い)?な(?:い|く)(?:わけ|こと)(?:じゃ|では|でも|は)(?:ない|なく)/g, k: "疲", w: "疲れていないわけじゃない"},
+  {re: /(?:疲れ|つかれ)て?(?:は|も)?い?(?:ない|なかった|ません)(?!わけ|こと|よう|って言|と言|とは言)/g, k: "幸", w: "疲れてはいない"}, // 辞書の「疲れてない→幸」とそろえる
+  {re: new RegExp(`(?:${NEG})(?:く|て|で)?(?:は|も|が)?(?:して|し|いる|い)?(?:こと|わけ)?(?:は|も)?い?(?:じゃ|では)?(?:ない|なかった|ません|なく)(?!わけ|と(?:いけ|だめ|ダメ)|って言|と言|とは言)`, "g"), k: "SKIP"},
+  {re: /(?:寂し|さみし|さびし)くは(?:ない|なかった|ありません)(?!って言|と言|とは言)/g, k: "SKIP"}, // 「寂しくない」は強がりのことが多いので辞書で寂のまま
+  {re: /(?:お酒|酒|ビール|アルコール)(?:を|は|も)?(?:飲んで(?:い)?ない|飲んでいません|飲まな|やめ|控え)/g, k: "SKIP"},
+  {re: /(?:ジム|ヨガ|ランニング|ジョギング|散歩|運動|筋トレ|温泉|旅行|ライブ|美容院|釣り|カラオケ)(?:に|へ|を|が|も)?(?:行けな|行けて(?:い)?な|行けません|でき(?:て(?:い)?)?な|できません)/g, k: "SKIP"},
+  {re: /(?:行け|来れ|出れ|でけ|でき|見れ|会え)んかっ/g, k: "SKIP"}, // 「行けんかった」の「けんか」
+  {re: /(?:昼ごはん|昼ご飯|お昼ごはん|お昼ご飯|お昼|昼食|給食|弁当|お弁当)(?:を|も|は)?(?:食べ|たべ)(?:られ|れ)?て?い?(?:ない|なかった|ません|んかった|そびれ|損ね|そこね|そこな|逃し)/g, k: "忙", w: "昼ごはんを食べられない"},
+  {re: /苦しいわけじゃな|苦しくはな/g, k: "SKIP"},
+  {re: /ゆっくり(?:でき|し|休め)(?:て(?:い)?)?(?:ない|なかった|ません|られな)/g, k: "忙", w: "ゆっくりできない"}, // 辞書の「ゆっくりでき→休」より先に
+  {re: /(?:慌て|あわて|焦ら|あせら)なく(?:て|ても)/g, k: "幸", w: "慌てなくてすむ"},
+  {re: /不親切/g, k: "SKIP"}, // 辞書の「親切→嬉」に当てない
+  // ことばの中の別のことば・あいさつ（数えない）
+  {re: /泣き(?:所|どころ|虫|顔|声|言|寝入り|落とし|つ)|心配り|楽天(?:的|家)|お疲れ(?:様|さま)でした|おつかれさまでした/g, k: "SKIP"},
+  {re: /(?:毎|今|昨|明|前|翌|当|同じ|その|この)日(?=帰)/g, k: "SKIP"}, // 「毎日帰りが遅い」の「日帰り」
+  {re: /(?:お仕事|おしごと)(?:お疲れ|おつかれ)(?:様|さま)/g, k: "嬉", w: "おしごとおつかれさま（と言われた）"}, // 家族からのねぎらい
+  {re: /死んだように|死ぬほど|死ぬかと思|死にそう|死に物狂い|(?:スマホ|携帯|パソコン|PC|電池|バッテリー)が?死ん/g, k: "SKIP"}, // 言い回しの「死ぬ」は死別（寂）ではない（忙・寝などはそのまま数える）
+  {re: /苦笑い|笑ってごまかし|笑わないと|笑顔でいないと|普通に笑って|作り笑い|愛想笑い/g, k: "SKIP"}, // がまんの笑いは「たのしい」ではない
+  {re: /ぐっと(?:深ま|よく|良く|増え|減|近づ|上が|伸び|楽に|変わ|下が|高ま)/g, k: "SKIP"}, // 副詞の「ぐっと」は、じーんの「ぐっと」ではない
+  {re: /(?:音声|音|動画|スピーカー)が出な/g, k: "SKIP"}, // 「音声が出ない」の「声が出な」は体調ではない
+  {re: /(?:運転|操作|説明|演奏|発表|字|絵|歌|ダンス)が(?:うまかっ|うまい|上手)/g, k: "SKIP"}, // 「〜がうまかった」は味ではない
+  {re: /帰りの車(?:の中)?で?/g, k: "SKIP"}, // 「帰りの車で」は場面の前おき。車の字にすると泣いた話でも車がいちばん大きくなる
+  {re: /おやすみ(?:なさい)?(?![のにはを日])/g, k: "寝", w: "おやすみ"}, // 寝る前のあいさつ（「おやすみの日」は休のまま）
+  // 「〜してくれた」うれしさ：願い・不満の「くれたら」と、「おくれました」「めくれた」は数えない
+  {re: /くれたら|くださったら/g, k: "SKIP"},
+  {re: /[おめぶ]くれ(?:ました|ます|た)/g, k: "SKIP"},
+  {re: /(?:と|って)(?:言って|声をかけて)くれ(?:た|て|る)/g, k: "嬉", w: "声をかけてくれた"},
+  {re: /((?:夫|妻|主人|母|父|娘|息子|家族)が)(?:夕飯|晩ごはん|晩ご飯|ごはん|ご飯|夕食|お弁当|弁当)を?作ってくれ/g, p: 1, k: "嬉", w: "ごはんを作ってくれた"}, // 家族が作ったごはんは自分の料理ではない
+  {re: /((?:生徒|児童|子)(?:が|から)?[^。]{0,16}?)報告(?:しに|に)(?:き|来)/g, p: 1, ng: /[息様]$/, k: "嬉", w: "報告に来てくれた"}, // 報告書の書にしない
+  // 後悔：「〜とけばよかった」「〜ればよかった」は「よかった（嬉）」ではない
+  {re: /(?:とけば|ておけば|ときゃ|ときゃあ|れば|けば|せば|てば|ねば|めば|べば|なきゃ|なけりゃ)よかった/g, k: "悔", w: "〜ばよかった"},
+  {re: /よかったのか(?:な|どうか)?/g, k: "悩", w: "よかったのか"},
+  // ほっとした・いい日：安心の「よかった」は幸、「いい日でした」も幸（「いい日と悪い日」は入れない）
+  {re: /(?:大事|大ごと)にならなくて(?:よかった|良かった)|(?:けが|ケガ|怪我)が(?:なくて|なく)(?:よかった|良かった|ほっと)|無事に?(?:帰れて|終わって|生まれて)?(?:よかった|良かった)/g, k: "幸", w: "大事にならずほっと"},
+  {re: /(?:けが|ケガ|怪我)(?:人)?(?:が|は|も)?(?:なく|なかっ|せず)/g, k: "SKIP"}, // 「けががなくて」で子どものけがの字を立てない
+  {re: /いい(?:日|式|時間|一日|雰囲気|職場|チーム|空気)(?:でした|だった|です|だと|に)|雰囲気が(?:いい|よく|良い|良く)/g, k: "幸", w: "いい日・いい雰囲気"},
+  {re: /いい授業ができ/g, k: "誇", w: "いい授業ができた"},
+  {re: /(?:イライラ|いらいら)(?:が)?(?:消え|なくなっ|吹き飛|ふっとん|おさまっ)/g, k: "幸", w: "イライラが消えた"},
+  {re: /仕事(?:のこと)?を?(?:少し|ちょっと|すっかり|しばし|しばらく)(?:だけ)?忘れ|仕事(?:のこと)?を忘れられ/g, k: "幸", w: "仕事を忘れられた"},
+  {re: /病休[^。]{0,8}?(?:ひとりも|一人も|誰も|だれも)[^。]{0,4}?(?:出て|い)い?(?:ない|ません)/g, k: "幸", w: "病休が出ていない"}, // 人手不足（人）ではない
+  {re: /残業(?:が|は|も)?(?:ゼロ|0|なし|無し|なかった|ありませ)/g, k: "帰", w: "残業ゼロ"},
+  {re: /((?:定時に|定時で))帰れ(?:た|ました)/g, p: 1, k: "幸", w: "定時に帰れた"},
+  {re: /(?:できる|書ける|言える|読める)ようになって(?:ほし|もらいた|くれたら)/g, k: "SKIP"}, // 願いは「できるようになった（誇）」ではない
+  {re: /全員(?:が|で)?[^。、]{0,8}?(?:できるようにな|できました|跳べ(?:まし)?た|言えるようにな|合格(?:しました|した|です|でした)|そろっ|成功し|満点|進路が決まり)/g, k: "誇", w: "全員できた"},
+  {re: /((?:資格|検定|英検|漢検|免許|昇任試験|選考|採用試験|試験)[^。、不]{0,5}?(?:に|を)?)(?:合格|受かっ|通っ)/g, p: 1, k: "誇", w: "試験に合格"}, // 自分の資格・検定の合格は進路・受験ではない（資格→学などは辞書で数える）
+  {re: /(?:採用試験|教採|教員採用試験|試験)に(?:また|今年も)?落ち/g, k: "悔", w: "試験に落ちた"},
+  // 子どもの体調・けんか：クラスの子ならお仕事（健・導）、わが子なら子育て（育）
+  {re: new RegExp(`(?:${PUPIL})(?:が|の|も)[^。]{0,4}?(?:${ILL})`, "g"), k: "健", w: "子どもたちの体調・けが"},
+  {re: /(?:子|児童|生徒|教え子)が[^。]{0,8}?(?:病気で入院|入院|病気|倒れ)/g, ng: /[息様]$/, k: "健", w: "子どもの入院・病気"}, // 「息子が入院」は見送る
+  {re: /(?:ぜんそく|喘息|アレルギー|持病)の(?:子|児童|生徒)/g, k: "健", w: "持病のある子"},
+  {re: /(?:生徒|児童|子ども|子供)[^。]{0,8}?(?:交通事故|事故に|車とぶつか|車にはね|車と接触)/g, k: "健", w: "子どもの事故"},
+  {re: /(?:生徒|児童|子)(?:を|と|に)?[^。]{0,6}?病院(?:に|へ|まで)(?:付き添|付きそ|同行|連れて)/g, ng: /[息様]$/, k: "健", w: "子どもの病院の付きそい"},
+  {re: /(?:AED|救急箱|担架)[^。]{0,6}?走/g, k: "健", w: "AEDを持って走る"},
+  {re: new RegExp(`((?:${CHILD})[^。]{0,12}?)代わりがいな`, "g"), p: 1, k: "育", w: "子どもを見てくれる人がいない"},
+  {re: new RegExp(`(?:${CHILD})(?:が|の|も)[^。]{0,4}?(?:${ILL})`, "g"), k: "育", w: "わが子の体調"},
+  {re: new RegExp(`(?:${KID})が[^。]{0,4}?(?:熱|発熱|風邪|インフル|コロナ|嘔吐|吐い)(?=[^。]{0,14}?(?:休め|休む|休ま|休み|年休|有給|有休|お迎え|早退|病児|看病))`, "g"), k: "育", w: "わが子の体調"}, // うしろに自分の休み・お迎えがあれば、わが子
+  {re: new RegExp(`(家に帰ったら[^。]{0,4}?)(?:${KID})(?:が|の)[^。]{0,6}?(?:${ILL}|宿題)`, "g"), p: 1, k: "育", w: "わが子の体調・宿題"},
+  {re: new RegExp(`(?:${CHILD})の宿題`, "g"), k: "育", w: "わが子の宿題"}, // 丸つけ（採）ではない
+  {re: /(?:保育園|幼稚園|こども園|学童)から[^。]{0,10}(?:電話|呼び出|お迎え)/g, k: "育", w: "保育園からの呼び出し"},
+  {re: /(?:親|保護者|おうちの人|家の人|お母さん|お父さん|おうちの方)が迎えに/g, k: "保", w: "保護者のお迎え"}, // クラスの子のお迎えは子育て（育）ではない
+  {re: /(?:生徒|児童|子どもたち|子供たち|子どもら|子供ら|子ども|子供|男子|女子|子たち|クラスの子|学級の子|クラスの|学級の)(?:同士|どうし)?(?:の|が|で)?(?:けんか|ケンカ|喧嘩|口げんか)/g, k: "導", w: "子どものけんか"},
+  {re: /(?:女の子|男の子|女子|男子|子ども|子供|生徒|児童)(?:たち|二人|ふたり|同士)?(?:が|同士で)[^。]{0,4}?(?:もめ|揉め|けんか|ケンカ|喧嘩)/g, k: "導", w: "子どものもめごと"}, // 「生徒ともめた」（先生と生徒）は入れない
+  {re: /(?:けんか|ケンカ|喧嘩)(?:を)?し(?:た|てた|ていた)(?:二人|ふたり|子|男子|女子|生徒|児童)|(?:けんか|ケンカ|喧嘩)の(?:対応|仲裁|指導|あと)/g, k: "導", w: "けんかの対応"},
+  {re: /悪口を(?:書かれ|言われ)|悪口が(?:書かれ|書いて)/g, k: "悩", w: "悪口を言われた"}, // 言われる側の悪口は子どものトラブル（導）ではない
+  {re: new RegExp(`(?:${CHILD})(?:が|も|は)[^。]{0,4}?(?:不登校|登校しぶり|行きしぶり|休みがち|学校に行けな|(?:学校|園)(?:に|へ)?行きたくな)`, "g"), k: WHO_K, w: "わが子の不登校"},
+  {re: /思春期の(?:息子|娘)|(?:息子|娘)が思春期/g, k: WHO_K, w: "わが子の思春期"},
+  {re: new RegExp(`(?:${CHILD})(?:が|の|も|は)[^。、]{0,4}?(?:受験|入試|模試|合格|志望校|進路)`, "g"), k: "育", w: "わが子の受験"},
+  // わが子の学校・習い事の行事は子育て
+  {re: new RegExp(`(?:${CHILD})の[^。、]{0,6}?(?:授業参観|参観日|参観|PTA|懇談|運動会|発表会|音楽会|学芸会|入学式|卒業式|入園式|卒園式|遠足|面談|行事|試合|大会|コンクール)`, "g"), k: WHO_K, w: "わが子の学校・習い事"},
+  {re: new RegExp(`(?:${KID})の[^。、]{0,6}?(?:試合|大会|発表会)[^。]{0,4}?応援`, "g"), k: WHO_K, w: "わが子の試合の応援"},
+  {re: new RegExp(`(?:${KID}|うちの子)の(?:ピアノ|習い事|スイミング|ダンス|サッカー|野球|ソフトボール|バスケ|バレー|剣道|空手|水泳)(?:チーム|教室|クラブ|少年団)?の?(?:発表会|大会|試合)`, "g"), k: WHO_K, w: "わが子の習い事"},
+  {re: new RegExp(`((?:年休|有給|有休|休み)を?(?:取|と)って[^。]{0,8}?)(?:${KID})の(?:授業参観|参観日|参観|運動会|発表会|懇談|行事)`, "g"), p: 1, k: WHO_K, w: "わが子の学校のこと"},
+  {re: new RegExp(`(?:${KID})の(?:授業参観|参観日|参観|運動会|発表会|懇談)に[^。]{0,4}?(?:年休|有給|有休|休み)を?(?:取|と)って`, "g"), k: WHO_K, w: "わが子の学校のこと"},
+  {re: new RegExp(`(?:${KID})の(?:運動会|参観日|授業参観|参観|発表会|入学式|卒業式|遠足)[^。]{0,4}?(?:いけ|行け|行かれ|出られ|休め)`, "g"), k: WHO_K, w: "わが子の行事に行けない"},
+  {re: new RegExp(`(?:${KID})の(?:運動会|参観|発表会|入学式|卒業式)と自分の`, "g"), k: WHO_K, w: "わが子の学校のこと"},
+  {re: /(?:子ども|子供|息子|娘|うちの子)の(?:学校|小学校|保育園|幼稚園)(?:も|が)?(?:休校|休園|学級閉鎖)/g, k: "育", w: "わが子の学校の休校"}, // 辞書の「休校→仕」より先に
+  {re: /(?:子ども|子供|息子|娘|うちの子)の(?:小学校|学校|中学校)[^。]{0,8}?(?:旗当番|旗振り|当番|PTA)/g, k: "育", w: "わが子の学校の当番"},
+  {re: /(?:子ども|子供)を(?:家|うち|自宅)に(?:置いて|残して)|(?:家で|在宅で?|家にいる)[^。]{0,6}?(?:子ども|子供)を見ながら|(?:子ども|子供|息子|娘|うちの子)(?:を|は)[^。]{0,6}?預け/g, k: "育", w: "子どもを預ける・留守番"},
+  // 家族のこと
+  {re: /(?:父|母|夫|妻|主人|祖父|祖母|義母|義父|両親|親)(?:が|の|も)[^。、]{0,4}?(?:入院|通院|病院|手術|骨折|検査|風邪|熱|体調|認知症|病気|インフル|コロナ|熱中症|けが|ケガ)/g, ng: /[工丈]$/, k: "家", w: "家族の体調"},
+  {re: /((?:母|父|妻|夫|実家|家族|娘|息子|両親|親戚)(?:に|と|へ|から|が)[^。]{0,6}?)電話/g, p: 1, ng: /[工丈]$/, k: "SKIP"}, // 家族との電話は保護者の電話にしない（家族のことばは数える）
+  {re: /((?:認知症の)?(?:母|父)(?:から|が|より)?[^。]{0,12}?)電話が[^。]{0,4}?(?:[0-9一二三四五六七八九十]+回|何回|何度)/g, p: 1, ng: /[お工丈]$/, k: "SKIP"}, // 家族からの何回もの電話（「お母さんから電話が3回」は保護者なので見送る）
+  {re: /電話で(?=家族|妻|夫|娘|息子|両親)/g, k: "SKIP"},
+  {re: /ケアマネ[^。]{0,4}?面談/g, k: "家", w: "ケアマネさんとの面談"},
+  {re: /(?:実家|地元|田舎)に帰れな/g, k: "家", w: "実家に帰れない"},
+  {re: /(?:実家|祖父|祖母|母の|父の|親の|義実家)[^。]{0,6}?(?:田植え|稲刈り)|(?:うち|家|自宅)の(?:田んぼ|畑)[^。]{0,6}?(?:田植え|稲刈り|草刈り)/g, k: "家", w: "家の田植え・稲刈り"},
+  {re: /(?:おばあちゃん|おじいちゃん|祖母|祖父)(?:の|が)(?:一周忌|三回忌|七回忌|法事|法要|葬儀|お葬式|通夜|入院|介護|施設)/g, k: "家", w: "祖父母のこと"}, // 「おばあちゃん」だけでは近所の人のことが多いので、この形だけ
+  {re: /((?:回忌|周忌|法事|法要|葬儀|お葬式|通夜)[^。]{0,8}?)お寺(?:さん)?/g, p: 1, k: "家", w: "法事のお寺"}, // 地域・まつりではない
+  {re: /(?:母|父|祖母|祖父|義母|義父)の(?:おむつ|オムツ)/g, k: "家", w: "介護のおむつ"}, // 子育て（育）ではない
+  {re: /離婚[^。]{0,12}?名字が変わ/g, k: "家", w: "名字が変わる"},
+  {re: /((?:流産|死産)[^。]{0,20}?)赤ちゃん/g, p: 1, k: "SKIP"}, // 流産のあとの「赤ちゃん」を子育て（育）にしない
+  {re: /最期に間に合わな|死に目に(?:会えな|間に合わな)/g, k: "寂", w: "最期に間に合わなかった"}, // あせり（焦）ではない
+  {re: /(?:犬|猫|愛犬|愛猫|ペット|母|父|祖母|祖父|夫|妻)を見送/g, k: "寂", w: "見送った"},
+  {re: /(?:帰ってから|家で|ひとりで|一人で|トイレで|毎晩|夜中に|急に|理由もなく)[^。]{0,4}?(?:泣い|泣き|泣け|涙)(?!てた子|ている子|ていた子|てる子)/g, k: "寂", w: "ひとりで泣いた"}, // ひとりの涙は「じーん（感）」ではない
+  // 電話の相手：保護者でない相手との電話は保（保護者）にしない（相手のことばは数える）
+  {re: /教育委員会に(?:言う|言います|訴え|連絡する|電話する)/g, k: "保", w: "教育委員会に言うと言われた"}, // 保護者からの強いことば
+  {re: /((?:業者さん|業者|教育委員会|市教委|県教委|教委|市役所|役場|会社|事業所|実習先|受け入れ先|旅行会社|防災課|消防|病院|警察|お店)(?:さん)?(?:に|へ|から|と|の)?[^。]{0,4}?)電話/g, p: 1, k: "SKIP"},
+  {re: /((?:親友|友だち|友達|友人|同期|同僚|元同僚|先輩|後輩|恩師|教え子|卒業生|彼氏|彼女|兄|姉|弟|妹)(?:と|に|から|へ)[^。]{0,4}?)電話/g, p: 1, ng: /お$/, k: "SKIP"},
+  {re: /(?:学校|職場|教頭|校長)(?:に|へ)電話/g, k: "仕", w: "職場への電話"}, // 遅れる連絡など
+  {re: /録音(?:させてもらい|します|しています|され)|弁護士を(?:立て|つけ)|訴え(?:ると|られ|てやる)|訴える(?:と言|って言)/g, k: "憂", w: "強い申し入れ"},
+  // 人のこと：人の結婚・赤ちゃん・体調・気持ちは先生の脳内に数えない（だれの話かのことばは数える）
+  {re: new RegExp(`((?:${FRIEND})(?:が|の|は)[^。、]{0,3}?)(?:結婚式|結婚)`, "g"), p: 1, k: "SKIP"},
+  {re: /((?:教え子|卒業生|同僚|友人|友だち|友達|後輩|先輩)から[^。]{0,3}?)結婚式/g, p: 1, k: "SKIP"},
+  {re: new RegExp(`((?:${FRIEND})(?:が|の|に|は)[^。、]{0,3}?)(?:赤ちゃん|出産)`, "g"), p: 1, k: "SKIP"},
+  {re: /((?:同僚|先生|愛犬|犬|猫|友だち|友達|推し)の)誕生日/g, p: 1, k: "SKIP"}, // 人・ペット・推しの誕生日は家族（家）ではない
+  {re: /((?:同僚|先輩|後輩|教頭|校長|主任|先生方|親友|友だち|友達|友人|知り合い)(?:が|の|も)[^。、]{0,4}?)(?:体調|風邪|発熱|熱|入院|病院|インフル|コロナ|骨折|病気)/g, p: 1, k: "SKIP"},
+  {re: /((?:トマト|作物|苗|稲|野菜|果樹|花|木|猫|ねこ|犬|愛犬|愛猫|ペット|ハムスター)(?:が|も)?)病気/g, p: 1, k: "SKIP"}, // 作物・ペットの病気は先生の体調ではない
+  {re: /休職(?:する|した|中の|している)(?:先生|同僚|職員|人)|休職され|(?:同僚|先生|先輩|後輩|教員|職員|[0-9一二三四五六七八九十]+人)(?:が|の|も)[^。]{0,4}?休職|休職の(?:代わり|代替|穴|補充)/g, k: "人", w: "休職の先生の穴"}, // 「休職」だけなら自分の休職（体）
+  {re: /(?:先生|同僚|後輩|先輩|子|生徒|同期)が、?(?:もう)?(?:やめたい|辞めたい)/g, ng: /[息様]$/, k: "SKIP"}, // 人の「やめたい」は自分のつかれではない
+  {re: /(?:お酒|酒|タバコ|たばこ|甘いもの|間食|夜更かし|ゲーム)を?やめたい/g, k: "SKIP"}, // 習慣をやめたい話
+  {re: /(?:恥ずかし|はずかし|おもしろ|面白|怖|こわ|さみし|寂し|さびし)が(?:っ|る|り)/g, k: "SKIP"}, // 「〜がる」は人のようす
+  {re: /(?:泣いて|緊張して)(?:い)?(?:た|る)(?:子|生徒|児童)|両方(?:とも)?泣い|不安そうだった/g, k: "SKIP"}, // 子どもの涙・緊張は先生の気持ちではない
+  {re: /落ち(?:つ|着)いた(?:よう|みたい|様子)/g, k: "SKIP"}, // 人のようす
+  {re: /(?:大変|しんどい|疲れ)(?:だね|そう|ですね)(?:って|と)言われ/g, k: "SKIP"}, // 人に言われたことば
+  {re: /苦手だった(?:子|生徒|児童)|苦手な(?:子|生徒|児童)が、?[^。]{0,14}?(?:でき|教え|読め|読ん|跳べ|書け|吹け|言え|手を挙げ)/g, k: "SKIP"}, // 子どもの「苦手」は先生のなやみではない（「苦手な子が多い」は数える）
+  {re: /(?:子|うち|自分|私|わたし)(?:は|が)(?:何も|なにも)?悪くな/g, k: "SKIP"}, // 「うちの子は悪くない」はしあわせではない
+  {re: /(?:不安|心配|こわく|怖く)(?:に)?なった(?:子|生徒|児童)/g, k: "支", w: "不安になった子"},
+  {re: /パニック(?:が|は)(?:少な|なかっ|減っ|多)/g, k: "支", w: "パニックのこと"},
+  {re: /給食(?:を)?(?:ぜんぶ|全部|残さず)?(?:食べ|たべ)(?:られ|れ)?(?:た|る|ない)子/g, k: "仕", w: "給食指導"},
+  {re: /((?:クラスの子|子ども|子供|生徒|児童)[^。]{0,14}?)給食[^。]{0,6}?(?:食べ|たべ)/g, p: 1, k: "仕", w: "給食指導"}, // 子どもが食べた話は先生の「たべる」ではない
+  {re: /((?:摂食指導|偏食|給食指導)[^。]{0,16}?)(?:食べら|食べ)/g, p: 1, k: "SKIP"},
+  {re: /((?:子|生徒|児童|子ども|子どもたち|子供たち|舎生)(?:が|も|は)[^。]{0,10}?)(?:食べら|食べ|完食)/g, p: 1, k: "SKIP"},
+  {re: /(?:昼ごはん|昼食|朝ごはん|ごはん|食事)を抜/g, k: "体", w: "食事を抜いた"},
+  {re: /((?:子|生徒|児童|子ども|子どもたち|子供たち|男子|女子)(?:が|は|も)[^。]{0,10}?)(?:ゲーム|アニメ|漫画|マンガ|ギター|ピアノ)/g, p: 1, k: "SKIP"}, // 子どものゲーム・楽器は先生の趣味ではない
+  {re: /ゲームの影響/g, k: "SKIP"},
+  {re: /((?:男子|女子|子どもたち|子供たち|生徒|児童|パート|みんな|クラス)の)声が(?:出な|小さ)/g, p: 1, k: "SKIP"}, // 子どもの声（合唱指導）は先生の体調ではない
+  {re: /((?:子ども|子供|娘|息子|夫|妻|家族|みんな)(?:は|が|も)(?:もう)?)(?:寝てい|寝て|眠って)/g, p: 1, k: "SKIP"}, // 家族が寝ていたのは先生の睡眠ではない
+  {re: /((?:生徒|子ども|子供|児童|子)[^。]{0,10}?)走って(?:き|来)/g, p: 1, k: "SKIP"}, // 子どもが走ってきたのは先生の運動ではない
+  {re: /走って(?:取り|探し|呼び)|(?:探して|取りに|呼びに)走っ|走るのが(?:苦手|嫌い|遅い)な(?:子|生徒)/g, k: "SKIP"}, // 走る（くらし）ではない
+  {re: /((?:スクラッチ|Scratch|プログラミング)[^。]{0,8}?)(?:猫|ネコ|ねこ)/g, p: 1, k: "SKIP"}, // スクラッチの猫はペットではない
+  {re: new RegExp(`((?:${OTHER})(?:が|は|も)(?:とても|とっても|すごく|本当に|ほんとうに)?${GAP})(?:泣い|泣き|泣け|涙|怒っ|怒り|怒ら|疲れ|つかれ|楽しそう|うれしそう|嬉しそう|喜ん|大喜び|喜び|落ち込|悩ん|悩み|不安そう|不安|心配そう|心配し|困っ|寂しそう|さみしそう|悔しそう|悔し|くやし|負け|イライラ|いらいら|けんか|ケンカ|元気がな|飲みに|不満|がっかり|つまらな|つまんな|夢中|そわそわ|ソワソワ|ぐったり|倒れそう|はしゃ)`, "g"), p: 1, ng: /[工丈]$/, k: "SKIP"},
+  // 学校の行事・仕事
+  {re: /日直/g, k: "仕", w: "日直"}, // 「夏休みの日直」が「休みの日」に取られないよう先に見る
+  {re: /(?:修学旅行|遠足|校外学習|宿泊学習|社会見学|林間学校)の下見/g, k: "校", w: "行事の下見"},
+  {re: /((?:遠足|校外学習|社会見学|修学旅行|引率|宿泊学習)[^。]{0,6}?)(?:動物園|水族館|遊園地|科学館|博物館|美術館)/g, p: 1, k: "SKIP"}, // 行事の行き先はおでかけにしない
+  {re: /(?:錦帯橋|秋吉台|秋芳洞|角島|長門峡|元乃隅|海響館|ときわ公園)(?=(?:の|で|に|へ)(?:そばで|近くで|前で)?[^。]{0,4}?(?:写生会|遠足|校外学習|社会見学))/g, k: "SKIP"},
+  {re: /(?:運動会|体育祭|行事|学習発表会|音楽会|修学旅行|遠足)の反省/g, k: "会", w: "行事の反省"},
+  {re: /(?:行事|イベント|会場|運動会|大会)の後?片(?:付|づ)け/g, k: "校", w: "行事の片付け"},
+  {re: /(?:子どもたち|子供たち|児童|生徒)の(?:作品|絵|書写)/g, k: "校", w: "子どもたちの作品"},
+  {re: /((?:図工|美術|粘土|版画|書写|夏休み)の)作品/g, p: 1, k: "校", w: "子どもの作品"}, // 先生の創作（創）ではない
+  {re: /(?:作文|絵|書写|習字|ポスター|作品|読書感想文)[^。]{0,10}?コンクール/g, k: "校", w: "作品のコンクール"}, // 部活ではない
+  {re: /(?:図書館|図書|学校|学年|校内|お店屋さん|おみせやさん)まつり/g, k: "校", w: "学校のまつり"}, // 地域のまつり（地）ではない
+  {re: /(?:地区|町内会|町内|自治会|消防団|地域|校区)の?(?:防災訓練|避難訓練)/g, k: "地", w: "地域の防災訓練"},
+  {re: /(?:避難|防災|地震|火災|消火|防犯|引き渡し|引渡し|不審者対応|Jアラート|ミサイル|津波|竜巻)の訓練|防災訓練|火災訓練|津波訓練|地震訓練/g, k: "校", w: "訓練"},
+  {re: /板書が(?:すっきり|きれい)/g, k: "業", w: "板書"},
+  {re: /資料プリント/g, k: "書", w: "資料プリント"}, // 丸つけではなく書類づくり
+  {re: /(?:英語|算数|漢字|計算|学習|クイズ|授業|外国語)の?ゲーム/g, k: "業", w: "学習ゲーム"},
+  {re: /(?:調理実習|家庭科)(?:で|では)[^。]{0,14}?(?:作っ|作る|作り|つくっ)/g, k: "業", w: "調理実習"}, // 先生の料理（料）ではない
+  {re: /(?:調理実習|実習|授業|教材)の[^。]{0,6}?(?:買いに|買い出し|買っ)/g, k: "業", w: "授業の買い出し"},
+  {re: /(?:ギター|ピアノ|箏|琴|三味線|ウクレレ|リコーダー)[^。]{0,6}?(?:を教え|の授業|の指導|のコード)/g, k: "業", w: "楽器の授業"},
+  {re: /(?:近く|地域|近所)の保育園(?:に|へ)|保育園(?:との|と)(?:日程|交流|打ち合わせ)/g, k: "業", w: "保育園との交流"}, // 保育実習・ふれあい体験
+  {re: /(?:パン屋|ケーキ屋|お店|商店|店)さん?で[^。]{0,12}?売らせ/g, k: "業", w: "販売の学習"},
+  {re: /((?:大学|通信教育|免許|自分の|教員免許)[^。]{0,8}?)スクーリング/g, p: 1, k: "学", w: "スクーリング（自分の学び）"}, // 先生が受けるときだけ（ほかは授業）
+  {re: /図書館(?=(?:で|の)[^。]{0,8}?(?:読み聞かせ|返却|貸出|督促|蔵書|調べ学習|授業|行事|ビブリオ|受け入れ|開館|当番))/g, k: "仕", w: "学校図書館"}, // 司書の仕事は読書（くらし）ではない
+  {re: /(?:校庭|運動場|グラウンド|校舎|体育館|廊下|中庭|側溝|校門)[^。]{0,10}?(?:片付け|片づけ|掃除|草刈り|草取り|清掃)|(?:草刈り|片付け|片づけ|掃除|清掃)[^。]{0,8}?(?:校庭|運動場|グラウンド|校舎|体育館)/g, k: "仕", w: "校内の環境整備"}, // 家事（掃）ではない
+  {re: /(?:子どもたち|子供たち|児童|生徒)が[^。]{0,10}?(?:掃除|そうじ)/g, k: "仕", w: "子どもたちの掃除"},
+  {re: /(?:洗濯物|服|布団)を?たたむ練習|(?:着替え|歯みがき|歯磨き|片付け|洗濯)の練習/g, k: "支", w: "くらしの練習"}, // 寄宿舎・特別支援
+  {re: /(?:給食|食器|食缶|釜)[^。]{0,4}?(?:調理|洗浄|かき回)/g, k: "健", w: "給食の調理"}, // 調理員さんの仕事は「たべる」ではない
+  {re: /((?:温室|ハウス|畑|トマト|作物|苗|果樹|稲|牛舎|鶏舎)(?:[^。]|。){0,16}?)消毒/g, p: 1, k: "SKIP"}, // 作物の消毒は保健（健）ではない
+  {re: /(?:パニックになった|パニックを起こした)子|(?:生徒|児童|子どもたち|クラスの子)がパニック/g, k: "支", w: "パニックになった子"},
+  {re: /(?:生徒|児童|中学生|小学生|高校生)を迎えに/g, k: "導", w: "生徒を迎えに"},
+  {re: /(?:警察|病院|施設|駅|実家)[^。]{0,10}?迎えに/g, k: "家", w: "家族を迎えに"}, // 徘徊した親を迎えに行く話（「生徒を迎えに」は上で先に見る）
+  {re: new RegExp(`(?:${PUPIL})に[^。]{0,4}?相談(?:され|を受け)`, "g"), k: "支", w: "子どもからの相談"},
+  {re: /(?:生徒|児童)の家(?:に|を|へ)(?:訪問|行っ|伺っ)|家庭を訪問/g, k: "保", w: "家庭訪問"},
+  {re: /(?:生徒|児童)との?面談|面談で(?:生徒|児童)/g, k: "仕", w: "生徒との面談"}, // 保護者（保）ではない
+  {re: /(?:新しい先生|講師|教員|職員|先生)の面接/g, k: "人", w: "採用の面接"}, // 受験（進）ではない
+  {re: /(?:インフルエンザ|インフル|コロナ|感染症|風邪|胃腸炎|ノロ|手足口病|水ぼうそう|おたふく|RSウイルス|溶連菌|マイコプラズマ)(?:(?:と|や|も|、)(?:インフルエンザ|インフル|コロナ|風邪|胃腸炎|ノロ|手足口病))?[^。]{0,6}?(?:流行|はやっ|はやり|増え|学級閉鎖|学年閉鎖)/g, k: "健", w: "感染症の流行"},
+  {re: /(?:頭|お腹|おなか)が痛い?(?:って|と)[^。]{0,10}?保健室/g, k: "健", w: "保健室に来る子"},
+  {re: /自分の(?:健康診断|検診|健診|人間ドック)/g, k: "体", w: "自分の健康診断"}, // 子どもの保健（健）ではない
+  {re: /議員(?:さん)?との懇談/g, k: "会", w: "議員さんとの懇談"},
+  {re: /(?:打ち合わせ|打合せ|会議|朝会|職員朝会)(?:が|も)?(?:なくな|廃止|減っ|減り|削減)/g, k: "短", w: "会議がなくなった"},
+  {re: /委員会の仕事|委員会活動/g, k: "仕", w: "子どもの委員会"}, // 会議（会）ではない
+  {re: /気になっていた(?:仕事|書類)/g, k: "仕", w: "気になっていた仕事"}, // 不安ではない
+  {re: /出張(?:で|の)新幹線|新幹線で出張/g, k: "研", w: "出張"},
+  {re: /(子ども食堂[^。]{0,15}?)見学/g, p: 1, k: "SKIP"},
+  {re: /遅刻(?:ぎりぎり|ギリギリ|しかけ|寸前|するかと)/g, k: "焦", w: "遅刻しそう"}, // 自分の遅刻は子どものトラブル（導）ではない
+  {re: /(?:学校|職員)の?駐車場/g, k: "SKIP"}, // 学校の駐車場は車（くらし）ではない
+  {re: /(?:選挙の?)?ポスター掲示板/g, k: "SKIP"},
+  {re: /ラジオ(?:で|の)[^。]{0,20}?ニュース/g, k: "SKIP"},
+  {re: /(?:おにぎり|お弁当|弁当|豚汁|パン|食事)を[^。]{0,3}?配/g, k: "SKIP"}, // 配るのは食べたことではない
+  // 残業・休日の仕事・休職
+  {re: /夜[0-9一二三四五六七八九十]+時(?:まで(?!に)|過ぎ|すぎ)|夜[0-9一二三四五六七八九十]+時[^。]{0,4}?(?:まだ学校|まだ職員室)/g, k: "残", w: "夜おそくまで"},
+  {re: /帰り(?:は|が)(?:夜の?)?(?:[89]|1[0-2]|八|九|十|十一|十二)時/g, k: "残", w: "帰りがおそい"},
+  {re: /(?:週末|土日|休日|休み|土曜日?|日曜日?|祝日)(?:が|も)?(?:まるごと|全部)?(?:つぶれ|潰れ)|(?:週末|土日|休日|土曜日?|日曜日?|祝日)(?:が|も)?(?:まるごと|全部)?(?:なくな|無くな)/g, k: "残", w: "休みがつぶれる"},
+  {re: /(?:日曜|土曜|土日|休日|週末)(?:を|の)[^。]{0,4}?(?:使っ|つぶし|返上)/g, k: "残", w: "休みを使って仕事"},
+  {re: /(?:土日|週末|休日|休み|土曜日?|日曜日?)(?:も(?=練習|部活|大会|試合|仕事|出勤|当番|学校|動物の世話)|は(?=練習|部活|大会|試合|出勤|当番))/g, k: "残", w: "休日も仕事・部活"}, // 休み（休）ではない（「試合」などは辞書で数える）
+  {re: /(?:午前中|午後|半日|一日|1日|放課後)(?:が|も)?(?:まるごと|全部)?(?:つぶれ|潰れ)/g, k: "忙", w: "半日つぶれた"},
+  {re: /朝[3-6四五六]時(?:半)?(?:に|から|には)(?:学校|出勤)/g, k: "勤", w: "朝早くから学校"},
+  {re: /(?:うつ|病気|療養|体調不良|ケガ|けが)[^。]{0,6}?休職|休職(?:中は|明け|から復帰)/g, k: "体", w: "休職・療養"}, // 自分の休職は人手不足（人）ではない
+  // 体・のみもの
+  {re: /(?:主治医|産業医|医師)(?:と|との|とは)?[^。]{0,6}?面談/g, k: "体", w: "お医者さんとの面談"},
+  {re: /(?:胃カメラ|バリウム|漢方|頓服|胃薬|痛み止め|サプリ|薬)を[^。]{0,4}?(?:飲[まみむめんも]|のん)/g, k: "薬", w: "薬・胃カメラを飲む"},
+  {re: /(コーヒー|お茶|紅茶|ビール|お酒|ジュース|ワイン|日本酒|焼酎|ハイボール)(?:を|も)?(?:飲[まみむめんも]|のん)/g, k: "飲", w: m => m[1]}, // 「ビール」と「飲んだ」を二重に数えない
+  // 気持ちの言い方
+  {re: /笑って(?:る|いる)のが(?:つらい|しんどい)/g, k: "憂", w: "笑っているのがつらい"},
+  {re: /泣かない自信がな/g, k: "感", w: "泣かない自信がない"},
+  {re: /きつい言い方を(?:され|して(?:くる|きた))|きつく(?:言われ|当たられ)|言い方(?:が)?(?:きつ|キツ)/g, k: "憂", w: "きつい言い方をされた"}, // 言われる側のきつさは「つかれ」ではない
+  {re: /きつい言い方を(?:して|した)|きつく言ってしまっ/g, k: "悔", w: "きつく言ってしまった"},
+  {re: /(?:鬼ごっこ|ドッジボール|遊ん|遊び)[^。]{0,12}?汗だく/g, k: "楽", w: "遊んで汗だく"}, // 「つかれ」ではない
+  // 車で走る・遠出は「車」
+  {re: /(?:車|バイク|軽|愛車)で[^。]{0,8}?(?:走[らりるれっ]|ドライブ|出かけ|行っ)/g, k: "車", w: "車で出かける"},
+  // 地域・趣味の〇〇大会・研究は部活や研修ではない
+  {re: /(?:ワールドカップ|W杯|五輪|オリンピック|日本代表|プロ野球|高校野球|甲子園|大リーグ|メジャーリーグ|カープ)[^。]{0,8}?(?:試合|大会|県大会)/g, k: "推", w: "スポーツ観戦"},
+  {re: /(?:部|部活|吹奏楽|合唱|野球|サッカー|陸上|バスケ|バレー|テニス|卓球|剣道|柔道)[^。]{0,4}?地区大会/g, k: "部", w: "部活の地区大会"}, // 地域の行事（地）ではない
+  {re: /(?:グラウンドゴルフ|グランドゴルフ|ゲートボール|ソフトバレー|ボウリング|ボーリング|ゴルフ|カラオケ|将棋|囲碁)大会/g, k: "推", w: "趣味の大会"},
+  {re: /(?:地区|町内会|町内|自治会|消防団|消防|地域|校区)の?(?:運動会|体育祭|大会|行事|祭り|掃除当番|清掃当番|掃除|清掃)/g, k: "地", w: "地域の行事"},
+  {re: /秋吉台の山焼き/g, k: "地", w: "秋吉台の山焼き"},
+  {re: /((?:スパイス|コーヒー|豆|ワイン|お酒|日本酒|ラーメン|カレー|料理|レシピ|釣り|仕掛け|山城|城|郷土史|流星群|天体|星|鉄道|カメラ|ゲーム|推し|アニメ|カープ|競馬|お店|店|スイーツ|筋トレ|節約|投資)(?:の|を)?)研究(?!授業|会|主任|発表|指定|紀要|部|大会|冊子)(?:中|と称して)?/g, p: 1, k: "推", w: "趣味の研究"},
+  {re: /研究に(?:はまって|ハマって)|趣味(?:で|の)研究/g, k: "推", w: "趣味の研究"},
+  {re: /しわい(?:肉|イカ|ステーキ|もち|餅)/g, k: "食", w: "しわい（かたい）"},
+];
+// 体の部分の字：「歯が痛い」「足首をねんざ」は、部分の字と「痛」「捻」の2つを出す
+const PART_K = {奥歯:"歯", 親知らず:"歯", 虫歯:"歯", 歯ぐき:"歯", 歯茎:"歯", 歯:"歯", 骨:"骨", 頭:"頭", お腹:"腹", おなか:"腹", 下腹:"腹", 腹:"腹", 胃:"胃",
+  腰:"腰", 肩:"肩", 首:"首", 目:"目", のど:"喉", 喉:"喉", 耳:"耳", 背中:"背", 足首:"足", 足の裏:"足", 足:"足", ふくらはぎ:"足", かかと:"足", 膝:"足", ひざ:"足",
+  腕:"手", 手首:"手", 手:"手", 指:"手", 筋肉:"筋", 関節:"体", 神経:"体"};
+const PART_RE = "奥歯|親知らず|虫歯|歯ぐき|歯茎|歯|骨|頭|お腹|おなか|下腹|腹|胃|腰|肩|首|目|のど|喉|耳|背中|足首|足の裏|足|ふくらはぎ|かかと|膝|ひざ|腕|手首|手|指|筋肉|関節";
+CONTEXT_RULES.push(
+  {re: /(?:眠れ|ねむれ|寝られ|寝れ|寝付け|寝つけ|ねつけ)(?:な|ませ|ず)|不眠/g, k: ["不", "眠"], w: m => m[0]}, // 「眠れない」は不・眠を半分ずつ
+  {re: /((?:運動会|体育祭|授業|体育|学年|学級|部活|部の)[^。]{0,8}?)(?:ダンス|柔道|剣道)/g, p: 1, k: "SKIP"}, // 学校で教えるダンス・武道は習い事ではない
+  {re: /(?:ダンス|柔道|剣道|空手|書道|英会話)(?=[^。]{0,12}?(?:授業|教え|指導))/g, k: "SKIP"},
+  {re: /英検(?=[^。]{0,12}?(?:面接練習|対策|指導|生徒))/g, k: "SKIP"}, // 生徒の英検の指導
+  {re: /(?:ピアノ|エレクトーン)(?:教室|の練習|のレッスン|を弾|をひ|の発表会)?/g, k: ["鍵", "音"], w: m => m[0]}, // ピアノは鍵と音
+  {re: /(?:ギター|アコギ|ウクレレ|バイオリン|ヴァイオリン|チェロ)(?:教室|の練習|のレッスン|を弾|をひ)?/g, k: ["弦", "音"], w: m => m[0]},
+  {re: /骨が折れる|骨の折れる|骨折り/g, k: "SKIP"}, // 「骨が折れる仕事」「骨折り損」
+  {re: new RegExp(`(?:${KID}|${CHILD})(?:が|も)[^。]{0,4}?(?:熱を出|熱が出|熱出|発熱|高熱)`, "g"), k: "育", w: "子どもの熱"}, // 自分の熱ではない
+  {re: /(?:咳|せき)[^。]{0,6}?子(?:が|も|は|ども)/g, k: "健", w: "せきの出る子"},
+  {re: /((?:か|問題|件|ことで|ことが)、?)頭が痛/g, p: 1, k: "悩", w: "頭が痛い（なやみ）"}, // 「どうするか頭が痛い」
+  {re: new RegExp(`(${PART_RE})(?:が|も|は|の|を)?(?:捻挫|ねんざ|ひねっ|くじい|ぐねっ)`, "g"), k: m => [PART_K[m[1]], "捻"], w: m => m[0]},
+  {re: new RegExp(`(${PART_RE})(?:の骨)?(?:が|も|は|の|を)?(?:骨折|折れ(?:た|て|ちゃ|まし))`, "g"), k: m => m[1] === "骨" ? ["骨"] : [PART_K[m[1]], "骨"], w: m => m[0]},
+  {re: /(偏|片)?(頭|腹|腰|胃|歯|筋肉|関節|神経)痛/g, k: m => [PART_K[m[2]], "痛"], w: m => m[0]},
+  {re: new RegExp(`(${PART_RE})(?:が|も|は|の)?(?:すごく|とても|ずっと|ちょっと|少し|まだ|めっちゃ|かなり|また|急に)?(?:痛|いた[いくかっ]|イタ|ズキズキ|ずきずき|ヒリヒリ|ひりひり|しくしく|シクシク|キリキリ|きりきり|ジンジン|じんじん|チクチク|ちくちく)`, "g"), k: m => [PART_K[m[1]], "痛"], w: m => m[0]},
+);
+function voiceSpans(text){
+  let rest = text.normalize("NFKC").replace(/\s+/g, "");
+  const t = rest, spans = [];
+  const blank = (i, len) => { rest = rest.slice(0, i) + "・".repeat(len) + rest.slice(i + len); };
+  for (const r of CONTEXT_RULES) for (const m of rest.matchAll(r.re)){
+    const off = r.p ? m[1].length : 0, s = m[0].slice(off), i = m.index + off;
+    if (s.includes("・")) continue; // もう数えた所にかかるものは見送る
+    if (r.ng && r.ng.test(t.slice(Math.max(0, m.index - 2), m.index))) continue; // 直前の字で見送る
+    if (r.k !== "SKIP") [].concat(typeof r.k === "function" ? r.k(m) : r.k).forEach(k => spans.push({i, len: s.length, w: typeof r.w === "function" ? r.w(m) : r.w, cat: CAT_OF(k)})); // k は2つでもよい（「歯が痛い」→歯と痛）
+    blank(i, s.length);
+  }
+  for (const m of rest.matchAll(FOOD_RE)){
+    if (m[0].includes("・")) continue;
+    const eat = EAT.split(",").some(v => m[2].startsWith(v));
+    spans.push({i: m.index, len: m[0].length, w: m[1] + (eat ? "を食べる" : "を作る"), cat: CAT_OF(eat ? "食" : "料")});
+    blank(m.index, m[0].length);
+  }
+  for (const v of VWORDS){
+    let i;
+    while ((i = rest.indexOf(v.w)) >= 0){ spans.push({i, len: v.w.length, w: v.w, cat: v.cat}); blank(i, v.w.length); }
+  }
+  return {t, spans: spans.sort((a, b) => a.i - b.i)};
+}
+// 気持ちのチャート：x＝左がいやな気持ち・右がいい気持ち、y＝上が高ぶり・下が静か（-1〜1）
+const EMO = [
+  {w:"怒り", k:"怒", x:-.78, y:.78}, {w:"イライラ", k:"怒", x:-.5, y:.6}, {w:"あせり", k:"焦", x:-.25, y:.84}, {w:"緊張", k:"緊", x:-.12, y:.5},
+  {w:"いそがしい", k:"忙", x:-.7, y:.4}, {w:"不安", k:"憂", x:-.26, y:.18}, {w:"くやしい", k:"悔", x:-.82, y:-.04}, {w:"なやみ", k:"悩", x:-.42, y:-.2},
+  {w:"がっかり", k:"憂", x:-.72, y:-.48}, {w:"さみしい", k:"寂", x:-.36, y:-.6}, {w:"つかれた", k:"疲", x:-.62, y:-.84}, {w:"痛い", k:"痛", x:-.86, y:.2}, {w:"かゆい", k:"痒", x:-.04, y:-.4}, {w:"平常心", k:"平", x:.06, y:-.18},
+  {w:"感動", k:"感", x:.24, y:.84}, {w:"わくわく", k:"楽", x:.62, y:.7}, {w:"うれしい", k:"嬉", x:.78, y:.38},
+  {w:"充実感", k:"誇", x:.8, y:.02}, {w:"成就感", k:"誇", x:.66, y:-.38}, {w:"幸せ", k:"幸", x:.66, y:-.64}, {w:"落ち着き", k:"幸", x:.18, y:-.84},
+];
+const EMO_WEIGHT = 2; // えらんだ気持ちは、話したことば2回分
+function analyzeVoice(text, picks = []){
+  const map = new Map(); // 字 → {k, n, c, group, cnt, words: Map(ことば → 回数)}
+  const add = (c, w, n) => {
+    if (!map.has(c.k)) map.set(c.k, {k: c.k, n: c.n, c: c.c, group: c.group, cnt: 0, words: new Map()});
+    const e = map.get(c.k);
+    e.cnt += n; e.words.set(w, (e.words.get(w) || 0) + 1);
+  };
+  for (const {w, cat: c} of voiceSpans(text).spans) add(c, w, 1);
+  picks.forEach(i => add(CAT_OF(EMO[i].k), EMO[i].w + "（えらんだ）", EMO_WEIGHT));
+  const list = [...map.values()].sort((a, b) => b.cnt - a.cnt).slice(0, 16);
+  const hits = list.reduce((s, c) => s + c.cnt, 0);
+  if (hits === 1) list.push({...MYSTERY, cnt: 0.34}); // ことばが1つしか見つからないときだけ、小さく「謎」を足す
+  const sum = list.reduce((s, c) => s + c.cnt, 0);
+  list.forEach(c => { c.v = c.cnt / sum * 100; c.pct = Math.floor(c.v); });
+  let left = 100 - list.reduce((s, c) => s + c.pct, 0);
+  list.slice().sort((a, b) => (b.v % 1) - (a.v % 1)).forEach(c => { if (left > 0){ c.pct++; left--; } });
+  return {list: list.sort((a, b) => b.v - a.v), hits};
+}
+// 解説欄：仕事・くらし・きもちの割合の帯と、字ごとのことばの内訳
+function vcExplain(chosen){
+  const parts = VGROUPS.map(g => ({g, items: chosen.filter(c => c.group === g), pct: 0}));
+  parts.forEach(p => p.pct = p.items.reduce((s, c) => s + c.pct, 0));
+  const shown = parts.filter(p => p.items.length);
+  const bar = shown.map(p => `<span style="width:${p.pct}%;background:${p.g.c}"></span>`).join("");
+  const lab = shown.map(p => `<span><i style="background:${p.g.c}"></i>${p.g.name} ${p.pct}%</span>`).join("");
+  const word = ([w, n]) => esc(w) + (n > 1 ? `<small>×${n}</small>` : "");
+  const sec = p => `<div class="vsec"><h4 style="color:${p.g.c}">${p.g.name}</h4>${p.items.map(c =>
+    `<div class="vrow"><i style="background:${c.c};color:${inkOn(c.c)}">${esc(c.k)}</i><b>${c.pct}%</b><span>${[...c.words].map(word).join("、")}</span></div>`).join("")}</div>`;
+  const nazo = chosen.find(c => c.k === "謎");
+  return `<div class="vx">
+    <div class="vbar">${bar}</div>
+    <div class="vlab">${lab}</div>
+    ${shown.map(sec).join("")}
+    ${nazo ? `<div class="vrow"><i style="background:${nazo.c}">謎</i><b>${nazo.pct}%</b><span>まだ言葉にならない何か</span></div>` : ""}
+  </div>`;
+}
+// ひとこと：アドバイスはせず、受けとめる言葉＋全体の様子＋（問い返し・名言・豆知識のどれか）
+// VHITO：字ごとに [受けとめる言葉, 問い返し]
+const VHITO = {
+  仕:["学校の仕事のことで、アタマの中がにぎやかでしたね。","いま、いちばん顔がうかぶのは、だれですか？"],
+  業:["授業のことを、ずっと考えていたんですね。","最近、手ごたえのあった授業や仕事はありますか？"],
+  採:["丸つけの山、きょうもおつかれさまでした。","赤ペンを置いた瞬間、まず何をしたいですか？"],
+  書:["書類と成績に追われる日々なんですね。","いちばん手ごわい書類は、どれですか？"],
+  会:["会議の多い一日でしたね。","会議のあいだ、アタマのすみで何を考えていましたか？"],
+  校:["行事の段取りで、アタマがフル回転だったんですね。","その行事で、心に残っている場面はどこですか？"],
+  部:["部活のことが、いつもアタマにあるんですね。平日も休日も、おつかれさまです。","練習のない日があったら、何をしたいですか？"],
+  進:["進路や試験のことが、アタマにあるんですね。","いま、いちばん気になっている結果は何ですか？"],
+  人:["人が足りない中で、ずっとまわしてきたんですね。","いま、いちばん「手がほしい」のはどんな場面ですか？"],
+  保:["保護者とのやりとりで、気をつかい続けた一日でしたね。","そのやりとりのあと、どんな気持ちが残っていますか？"],
+  研:["研修や研究で、たくさんアタマを使ったんですね。","きょう聞いた話で、心に残ったのは何ですか？"],
+  残:["遅くまで、本当におつかれさまです。","いちばん減ってほしい仕事は、どれですか？"],
+  帰:["「帰る」ことが、アタマの中で大きいんですね。","帰ったら、まず何をしたいですか？"],
+  短:["少しでも時間をつくろうと、工夫しているんですね。","うまくいった工夫、ありますか？"],
+  AI:["AIのことが気になっているんですね。","AIに、いちばん任せたい仕事は何ですか？"],
+  導:["子どものトラブル対応、気が休まらなかったですね。","きょう、いちばん気になった子はだれですか？"],
+  支:["一人ひとりに寄りそう日々なんですね。","最近、小さな成長が見えた子はいますか？"],
+  勤:["働く時間のことが気になっているんですね。","本当は、何時に学校を出たいですか？"],
+  健:["健康や安全のことで、気が張る一日でしたね。","ご自身の体の調子は、どうですか？"],
+  寝:["睡眠のことが大きいんですね。","最近いちばんよく眠れたのは、どんな日でしたか？"],
+  湯:["お風呂の時間が、大事な時間なんですね。","お風呂で、どんなことを考えていますか？"],
+  走:["走ることが、毎日の一部なんですね。","走っているとき、アタマの中はどんな感じですか？"],
+  動:["体を動かす時間があるんですね。","いちばん好きな体の動かし方は何ですか？"],
+  子:["わが子のことが、アタマの大きな場所をしめていますね。","最近のわが子で、いちばんかわいかった瞬間は？"],
+  育:["子育てのことが、アタマにあるんですね。","一日のうちで、ほっとできるのはいつですか？"],
+  家:["家族のことを、ずっと思っているんですね。","家族と話したいことは、何ですか？"],
+  掃:["家のこともたくさんかかえていますね。","いちばん「だれかやって」と思う家事は何ですか？"],
+  料:["ごはんをつくることが、アタマにあるんですね。","いちばん得意な料理は何ですか？"],
+  食:["食べることが大きいアタマ。いいですね。","いま、いちばん食べたいものは何ですか？"],
+  飲:["のみものの時間が、大事なひとときなんですね。","今夜は、何を飲みたいですか？"],
+  推:["好きなものがあるって、いいですね。","最近の推しの、いちばんの見どころは？"],
+  旅:["おでかけのことが、アタマにあるんですね。","いま行けるなら、どこへ行きたいですか？"],
+  読:["本の世界が、大事な場所なんですね。","いま読んでいる本は、どんな本ですか？"],
+  癒:["動物のことが、アタマの中にあるんですね。","その子の、いちばん好きなしぐさは何ですか？"],
+  買:["買い物のことがアタマにあるんですね。","いま、いちばんほしいものは何ですか？"],
+  金:["お金のことが、アタマにあるんですね。","最近、使ってよかったと思うお金は何ですか？"],
+  体:["体のことが、アタマにあるんですね。","いま、体のどこがいちばんがんばっていますか？"],
+  学:["自分のための学びがあるんですね。","いま、いちばん学んでみたいことは何ですか？"],
+  休:["休みのことがアタマにあるんですね。","次の休み、何をしてすごしたいですか？"],
+  創:["何かをつくる時間があるんですね。","最近つくったもので、いちばんのお気に入りは？"],
+  地:["地域のことも、たくさんかかえていますね。","地域の行事で、楽しみなものはありますか？"],
+  恋:["大切な人のことが、アタマにあるんですね。","その人と、次に何をしたいですか？"],
+  車:["車の時間が、アタマにあるんですね。","車の中では、どんな音楽をかけていますか？"],
+  美:["自分をととのえる時間があるんですね。","最近、自分をほめたくなったことは何ですか？"],
+  釣:["釣りのことが、アタマにあるんですね。","いちばんうれしかった一匹は、何ですか？"],
+  山:["山のことが、アタマにあるんですね。","山の上から見た景色で、いちばん覚えているのはどこですか？"],
+  川:["川のことが、アタマにあるんですね。","川の音で、思い出す場所はありますか？"],
+  海:["海のことが、アタマにあるんですね。","海に行くなら、何をしたいですか？"],
+  野:["外で過ごす時間が、アタマにあるんですね。","外でいちばん気持ちがいいのは、どんな時間ですか？"],
+  花:["花のことが、アタマにあるんですね。","いま見に行きたい花は、何ですか？"],
+  紅:["紅葉のことが、アタマにあるんですね。","今年いちばんきれいだった色は、どこで見ましたか？"],
+  星:["星や空のことが、アタマにあるんですね。","最近、空を見上げたのはいつですか？"],
+  参:["お参りのことが、アタマにあるんですね。","お参りした場所で、心に残っているのはどこですか？"],
+  城:["お城のことが、アタマにあるんですね。","いちばん好きなお城は、どこですか？"],
+  館:["見に行く場所のことが、アタマにあるんですね。","最近見たもので、心に残ったのは何ですか？"],
+  園:["遊びに行く場所のことが、アタマにあるんですね。","そこで、いちばん楽しかったのは何ですか？"],
+  雪:["雪のことが、アタマにあるんですね。","雪の日の思い出で、いちばん覚えているのは何ですか？"],
+  泳:["泳ぐことが、アタマにあるんですね。","水の中にいるとき、どんな気分ですか？"],
+  歌:["歌のことが、アタマにあるんですね。","最近、つい口ずさむ歌は何ですか？"],
+  映:["映画のことが、アタマにあるんですね。","最近見た映画で、心に残った場面はどこですか？"],
+  遊:["遊びのことが、アタマにあるんですね。","いちばん心がおどる遊びは、何ですか？"],
+  畑:["畑や庭のことが、アタマにあるんですね。","いま、何を育てていますか？"],
+  疲:["つかれがたまっているんですね。ほんとうに、おつかれさまです。","いま、いちばん休ませてあげたいのは、体ですか、心ですか？"],
+  忙:["いそがしい日が続いているんですね。","その中で、ほっとできた瞬間はありましたか？"],
+  嬉:["うれしいことがあったんですね。","そのうれしさ、だれに伝えたいですか？"],
+  楽:["楽しいことがあったんですね。","いちばん笑ったのは、どんな場面でしたか？"],
+  寂:["さみしさがあるんですね。","いま、声を聞きたい人はいますか？"],
+  悩:["なやみごとをかかえているんですね。","その中で、いちばん重いのはどれですか？"],
+  憂:["不安や心配があるんですね。","その心配、いちばんの正体は何でしょう？"],
+  怒:["イライラすることがあったんですね。そう感じるのは、まじめに向き合っているから。","いちばん「それはないよ」と思ったのは何ですか？"],
+  焦:["あせる気持ちがあるんですね。","いちばん気になっているしめきりは、どれですか？"],
+  幸:["しあわせを感じる時間があるんですね。","その時間、どんな景色が見えていますか？"],
+  緊:["緊張する場面があったんですね。","その場面がおわったら、何をしたいですか？"],
+  感:["心が動いたことがあったんですね。","いちばんじーんときたのは、どんな場面でしたか？"],
+  悔:["くやしさや後悔があるんですね。それだけ真剣だったんですよね。","もう一度できるなら、どこをやり直したいですか？"],
+  誇:["やりがいを感じたんですね。","いちばん手ごたえがあったのは、どんな瞬間でしたか？"],
+  痛:["痛いのは、つらいですね。","その痛みは、いつごろからですか？"],
+  痒:["かゆいのは、地味につらいですね。","かゆいのは、どのあたりですか？"],
+  平:["いつもどおりの自分で、いられたんですね。","いつもどおりでいられたのは、何のおかげだと思いますか？"],
+  歯:["歯が気になるのは、つらいですね。","その歯は、いつごろから気になっていますか？"],
+  骨:["骨のけがは、たいへんですね。","いま、いちばん不便なのはどんなときですか？"],
+  頭:["頭のことが、つらいんですね。","頭が重くなりやすいのは、どんなときですか？"],
+  腹:["おなかの調子が、つらいんですね。","きょう、おなかにやさしかったものは何ですか？"],
+  胃:["胃のことが、気になっているんですね。","胃が重くなるのは、どんなときですか？"],
+  腰:["腰のことが、つらいんですね。","腰が楽になる姿勢はありますか？"],
+  肩:["肩が、がんばっているんですね。","肩が重くなるのは、どんなときですか？"],
+  首:["首が、つらいんですね。","首が楽になる時間はありますか？"],
+  目:["目を、たくさん使っているんですね。","きょう、いちばん目を使ったのは何ですか？"],
+  喉:["のどが、つらいんですね。","きょう、いちばん声を使ったのはいつですか？"],
+  耳:["耳のことが、気になっているんですね。","いま、聞いていて落ち着く音は何ですか？"],
+  背:["背中が、がんばっているんですね。","背中がのびる時間はありますか？"],
+  足:["足が、がんばっているんですね。","きょう、いちばん歩いたのはどこですか？"],
+  手:["手を、たくさん使っているんですね。","きょう、いちばん手を使ったのは何ですか？"],
+  捻:["ひねってしまったんですね。痛かったですね。","どんな場面で、ひねったのですか？"],
+  熱:["熱があるのは、しんどいですね。","いま、いちばんほしいものは何ですか？"],
+  咳:["せきが出るのは、つらいですね。","夜は、眠れていますか？"],
+  鼻:["鼻が、つらいんですね。","いちばんつらいのは、朝ですか、夜ですか？"],
+  娘:["娘さんのことが、アタマにあるんですね。","最近、娘さんのどんな顔が心に残っていますか？"],
+  息:["息子さんのことが、アタマにあるんですね。","最近、息子さんのどんな顔が心に残っていますか？"],
+  筋:["体をきたえているんですね。","最近、いちばん効いたと思うトレーニングは何ですか？"],
+  脂:["脂肪のことが、気になっているんですね。","最近、体のためにしていることはありますか？"],
+  鍵:["鍵盤にふれる時間があるんですね。","いま弾いている曲は何ですか？"],
+  音:["音楽のことが、アタマにあるんですね。","最近、何度も聞きたくなる曲は何ですか？"],
+  弦:["弦楽器の時間があるんですね。","いま練習している曲は何ですか？"],
+  筆:["筆をもつ時間があるんですね。","最近、書いてみて気に入った字は何ですか？"],
+  英:["英語のことが、アタマにあるんですね。","英語で言えるようになりたいことばは何ですか？"],
+  踊:["おどる時間があるんですね。","おどっていて、いちばん気持ちいいのはどんなときですか？"],
+  剣:["剣道のことが、アタマにあるんですね。","稽古のあと、どんな気分ですか？"],
+  武:["武道のことが、アタマにあるんですね。","稽古のあと、どんな気分ですか？"],
+  茶:["お茶の時間があるんですね。","お茶の時間で、好きなひとときはどこですか？"],
+  絵:["絵をかく時間があるんですね。","最近かいた絵で、気に入っているのはどれですか？"],
+  算:["そろばんのことが、アタマにあるんですね。","そろばんをはじいていると、どんな気分ですか？"],
+  株:["株のことが、アタマにあるんですね。","株を見ていて、いちばんドキドキするのはどんなときですか？"],
+  資:["投資のことが、アタマにあるんですね。","投資をはじめたきっかけは何ですか？"],
+  眠:["眠りのことが、つらいんですね。","眠る前の時間は、どんなふうにすごしていますか？"],
+  不:["思うようにいかないことが、あるんですね。","いま、いちばん「できたらいいな」と思うことは何ですか？"],
+  雨:["雨のことが、アタマにあるんですね。","雨の日の、ちょっとした楽しみはありますか？"],
+  暑:["暑さのことが、アタマにあるんですね。","暑い日に、ほっとするものは何ですか？"],
+  寒:["寒さのことが、アタマにあるんですね。","寒い日に、あたたまるものは何ですか？"],
+  風:["風のことが、アタマにあるんですね。","風の強い日は、どんなふうにすごしていますか？"],
+  晴:["いい天気のことが、アタマにあるんですね。","晴れた日に、したくなることは何ですか？"],
+  雷:["雷のことが、アタマにあるんですね。","雷の音は、平気なほうですか？"],
+  震:["地震のことが、アタマにあるんですね。こわかったですね。","いま、いちばん気になっていることは何ですか？"],
+  災:["災害のことが、アタマにあるんですね。","いま、いちばん気になっていることは何ですか？"],
+  吐:["気持ちが悪いのは、つらいですね。","いま、少しでも楽になれる姿勢はありますか？"],
+  血:["血圧や血のことが、気になっているんですね。","最近、体の数字で気になったものはありますか？"],
+  重:["体重のことが、アタマにあるんですね。","最近、体が軽く感じたのはいつですか？"],
+  肌:["肌のことが、気になっているんですね。","肌がほっとするのは、どんなときですか？"],
+  焼:["日焼けするほど、外にいたんですね。","きょう、いちばん日に当たったのはどこですか？"],
+  薬:["薬を飲む毎日なんですね。","いま、体のどこがいちばんがんばっていますか？"],
+  院:["病院のことが、アタマにあるんですね。","病院のあと、どんなふうにすごしましたか？"],
+};
+// 全体の様子（上から順に当てはまるものを1つ）
+const VSITU = [
+  {id:"care",    name:"重い気持ちが多い", when:"疲・怒・憂・悔・寂・悩・痛 の合計が25%以上で、いい気持ちより多い",
+   msg:["重い気持ちを、ここまでよく持ってきましたね。","しんどいと感じるのは、それだけがんばってきたからです。","重いものをかかえながら、きょうもここまで来たんですね。"]},
+  {id:"happy",   name:"いい気持ちが多い", when:"幸・嬉・楽・誇 の合計が20%以上で、重い気持ち以上",
+   msg:["いい気持ちが多いアタマですね。","うれしい・たのしいが、ちゃんとアタマに残っていますね。","いい時間が、ちゃんとあったんですね。"]},
+  {id:"press",   name:"あせり・プレッシャーが多い", when:"焦・忙・緊 の合計が20%以上",
+   msg:["追われるような毎日なんですね。","やることが山のようにある中で、ここまでやってきたんですね。","時間に追われながらも、ひとつずつ片づけてきたんですね。"]},
+  {id:"work",    name:"仕事が多い", when:"仕事のグループが60%以上",
+   msg:["アタマの大部分が仕事。それだけ毎日、仕事を背負っているんですね。","仕事のことでいっぱいのアタマ。きょうも、本当におつかれさまです。","仕事のことで、アタマがずっと動きっぱなしだったんですね。"]},
+  {id:"life",    name:"楽しみのくらしが多い", when:"くらしの字のうち、楽しみの字（湯・食・飲・推・旅・読・癒・休・創・恋・美など）が40%以上",
+   msg:["自分の時間が、アタマの中にちゃんとありますね。","くらしのことが多めのアタマ。いい時間をすごせていますね。","くらしの中に、自分の楽しみがありますね。"]},
+  {id:"lifeN",   name:"くらしのことが多い", when:"くらしのグループが50%以上（体・お金・家族・家事などが中心）",
+   msg:["くらしのことが、アタマの多くをしめていますね。","家のことや体のことが、たくさんアタマにあるんですね。","学校の外でも、いろいろなことをかかえているんですね。"]},
+  {id:"balance", name:"バランスがいい", when:"仕事・くらし・きもちが、どれも20%以上",
+   msg:["仕事も、くらしも、きもちも、それぞれアタマにありますね。","いろいろなことを、同時にかかえているんですね。","いろいろな顔をもった毎日なんですね。"]},
+];
+// ひとことの最後にそえるもの：問い返し・あの人のことば・豆知識・からだほぐしを9回に2回ずつ、パソコンの小ワザ（仕事が4割未満のときは食材のこと）を9回に1回
+// あの人のことば：日本の企業の創業者・総理大臣・ノーベル賞受賞者・スポーツ選手の、短いことば
+// push：がんばれ寄りのもの（あせりが多いときは出さない）　r・who：漢字ごとの振り仮名「漢字(よみ)」
+const VMEIGEN = [
+  {t:"やってみなはれ", who:"鳥井(とりい) 信治郎(しんじろう)", role:"サントリーの創業者", imi:"大阪のことばで「やってごらん」。新しいことに迷う社員に、こう声をかけたといわれます。", push:1},
+  {t:"人生に遅すぎるということはない", r:"人生(じんせい)に遅(おそ)すぎるということはない", who:"安藤(あんどう) 百福(ももふく)", role:"日清食品の創業者", imi:"48歳でチキンラーメンを、61歳でカップヌードルを生み出した人のことばです。"},
+  {t:"障子を開けてみよ、外は広いぞ", r:"障子(しょうじ)を開(あ)けてみよ、外(そと)は広(ひろ)いぞ", who:"豊田(とよだ) 佐吉(さきち)", role:"豊田自動織機の創業者", imi:"トヨタのもとをつくった発明家のことばとして伝えられています。"},
+  {t:"得手に帆あげて", r:"得手(えて)に帆(ほ)あげて", who:"本田(ほんだ) 宗一郎(そういちろう)", role:"ホンダの創業者", imi:"本田さんの本の題名。得意なことなら、追い風をうけた帆かけ船のように進める、という意味です。"},
+  {t:"自由闊達にして愉快なる理想工場", r:"自由(じゆう)闊達(かったつ)にして愉快(ゆかい)なる理想(りそう)工場(こうじょう)", who:"井深(いぶか) 大(まさる)", role:"ソニーの創業者", imi:"会社をつくったときの「設立趣意書」に書いた、目ざす会社のすがたです。"},
+  {t:"学歴無用論", r:"学歴(がくれき)無用論(むようろん)", who:"盛田(もりた) 昭夫(あきお)", role:"ソニーの創業者", imi:"1966年に出した本の題名。学歴より、その人が何をできるかを見る、という考えです。"},
+  {t:"論語と算盤", r:"論語(ろんご)と算盤(そろばん)", who:"渋沢(しぶさわ) 栄一(えいいち)", role:"500ほどの会社づくりにかかわった実業家・一万円札の人", imi:"本の題名。もうけることと、人としての道は両立できる、という考えです。"},
+  {t:"一勝九敗", r:"一勝(いっしょう)九敗(きゅうはい)", who:"柳井(やない) 正(ただし)", role:"ユニクロを育てた経営者・山口県宇部市出身", imi:"本の題名。新しいことは、10回やれば9回は失敗するくらいのもの、という考えです。"},
+  {t:"雨が降れば、傘をさす", r:"雨(あめ)が降(ふ)れば、傘(かさ)をさす", who:"松下(まつした) 幸之助(こうのすけ)", role:"パナソニックの創業者", imi:"商売のコツを聞かれて答えたことば。あたりまえのことを、あたりまえにする、という意味です。"},
+  {t:"私はウソを申しません", r:"私(わたし)はウソを申(もう)しません", who:"池田(いけだ) 勇人(はやと)", role:"総理大臣（1960〜64年）", imi:"1960年の選挙で言ったことば。「所得倍増」をかかげた人です。"},
+  {t:"人生125歳", r:"人生(じんせい)125歳(さい)", who:"大隈(おおくま) 重信(しげのぶ)", role:"総理大臣・早稲田大学の創立者", imi:"体を大切にすれば、人は125歳まで生きられる、と話していました。"},
+  {t:"決断と実行", r:"決断(けつだん)と実行(じっこう)", who:"田中(たなか) 角栄(かくえい)", role:"総理大臣（1972〜74年）", imi:"総理大臣になったときに、かかげたことばです。"},
+  {t:"ふしぎだと思うこと これが科学の芽です", r:"ふしぎだと思(おも)うこと これが科学(かがく)の芽(め)です", who:"朝永(ともなが) 振一郎(しんいちろう)", role:"ノーベル物理学賞（1965年）", imi:"このあと「よく観察してたしかめ、そして考えること これが科学の茎です」と続きます。"},
+  {t:"I'm sorry, I can't speak English.", who:"益川(ますかわ) 敏英(としひで)", role:"ノーベル物理学賞（2008年）", imi:"ノーベル賞の記念講演を、このあいさつで始めて、日本語で話しました。受賞まで外国に行ったことがなかったそうです。"},
+  {t:"VW（ビジョン＆ワークハード）", who:"山中(やまなか) 伸弥(しんや)", role:"ノーベル生理学・医学賞（2012年）", imi:"アメリカで研究していたころに教わり、今も大切にしていることば。目標をもって、こつこつと。", push:1},
+  {t:"教科書に書いてあることを信じない", r:"教科書(きょうかしょ)に書(か)いてあることを信(しん)じない", who:"本庶(ほんじょ) 佑(たすく)", role:"ノーベル生理学・医学賞（2018年）", imi:"受賞が決まった記者会見で。自分の目でたしかめるまで信じない、という研究の心がまえです。"},
+  {t:"我一人荒野を行く", r:"我(われ)一人(ひとり)荒野(こうや)を行(い)く", who:"赤崎(あかさき) 勇(いさむ)", role:"ノーベル物理学賞（2014年・青色LED）", imi:"まわりがほかの材料にうつっても、ひとりで研究を続けたときの気持ちです。", push:1},
+  {t:"一日生きることは、一歩進むことでありたい", r:"一日(いちにち)生(い)きることは、一歩(いっぽ)進(すす)むことでありたい", who:"湯川(ゆかわ) 秀樹(ひでき)", role:"ノーベル物理学賞（1949年・日本人で初めて）", imi:"湯川さんが色紙によく書いたといわれることばです。", push:1},
+  {t:"美しい日本の私", r:"美(うつく)しい日本(にほん)の私(わたし)", who:"川端(かわばた) 康成(やすなり)", role:"ノーベル文学賞（1968年）", imi:"ノーベル賞の記念講演の題名です。"},
+  {t:"あいまいな日本の私", r:"あいまいな日本(にほん)の私(わたし)", who:"大江(おおえ) 健三郎(けんざぶろう)", role:"ノーベル文学賞（1994年）", imi:"記念講演の題名。川端康成の「美しい日本の私」をふまえています。"},
+  {t:"今まで生きてきた中で、一番しあわせです", r:"今(いま)まで生(い)きてきた中(なか)で、一番(いちばん)しあわせです", who:"岩崎(いわさき) 恭子(きょうこ)", role:"競泳・バルセロナ五輪 金メダル（1992年、14歳）", imi:"金メダルをとった直後のインタビューで。"},
+  {t:"初めて自分で自分をほめたいと思います", r:"初(はじ)めて自分(じぶん)で自分(じぶん)をほめたいと思(おも)います", who:"有森(ありもり) 裕子(ゆうこ)", role:"マラソン・アトランタ五輪 銅メダル（1996年）", imi:"バルセロナの銀に続く、2大会連続のメダルのあとで。"},
+  {t:"すごく楽しい42キロでした", r:"すごく楽(たの)しい42キロでした", who:"高橋(たかはし) 尚子(なおこ)", role:"マラソン・シドニー五輪 金メダル（2000年）", imi:"優勝したあとのインタビューで。"},
+  {t:"チョー気持ちいい", r:"チョー気持(きも)ちいい", who:"北島(きたじま) 康介(こうすけ)", role:"競泳・アテネ五輪 金メダル（2004年）", imi:"この年の流行語大賞に選ばれました。"},
+  {t:"憧れるのをやめましょう", r:"憧(あこが)れるのをやめましょう", who:"大谷(おおたに) 翔平(しょうへい)", role:"野球・2023年WBC 優勝", imi:"決勝のアメリカ戦の前に、チームに言ったことば。相手を見上げていては勝てない、という意味です。"},
+  {t:"小さなことを積み重ねるのが、とんでもないところへ行くただひとつの道", r:"小(ちい)さなことを積(つ)み重(かさ)ねるのが、とんでもないところへ行(い)くただひとつの道(みち)", who:"イチロー", role:"野球・大リーグのシーズン最多安打記録（2004年）", imi:"記録をつくったときの記者会見で。", push:1},
+  {t:"失敗は成功のマザー", r:"失敗(しっぱい)は成功(せいこう)のマザー", who:"長嶋(ながしま) 茂雄(しげお)", role:"野球・巨人の選手、監督", imi:"「失敗は成功のもと」を、長嶋さんらしく言ったことばとして知られています。"},
+  {t:"勝ちに不思議の勝ちあり、負けに不思議の負けなし", r:"勝(か)ちに不思議(ふしぎ)の勝(か)ちあり、負(ま)けに不思議(ふしぎ)の負(ま)けなし", who:"野村(のむら) 克也(かつや)", role:"野球・選手、監督", imi:"よく使ったことば。もとは江戸時代の大名・松浦静山の剣術の本にあることばです。"},
+  {t:"苦しい時は、私の背中を見て", r:"苦(くる)しい時(とき)は、私(わたし)の背中(せなか)を見(み)て", who:"澤(さわ) 穂希(ほまれ)", role:"サッカー・なでしこジャパン主将", imi:"若い選手たちに言ったことばです。"},
+  {t:"体力の限界", r:"体力(たいりょく)の限界(げんかい)", who:"千代(ちよ)の富士(ふじ)", role:"大相撲・横綱（優勝31回）", imi:"1991年の引退会見で。31回優勝した横綱にも、こう言う日が来ました。"},
+];
+// 食材のこと：食材と、そのはたらき・アレンジ例（「〜といわれます」程度にとどめ、言いきらない）
+const VSHOKU = [
+  {f:"豚肉", e:"ビタミンB1が多く、ごはんの糖質をエネルギーに変えるのを助けます。", a:"しょうが焼きに玉ねぎを足すと、玉ねぎの成分がB1の吸収を助けるといわれます。"},
+  {f:"鶏むね肉", e:"たんぱく質が多く、脂が少ないお肉です。", a:"そぎ切りにして片栗粉をまぶしてからゆでると、パサつかずしっとり。"},
+  {f:"卵", e:"ビタミンCと食物繊維のほかは、ひととおりの栄養がそろっているといわれます。", a:"ゆで卵をめんつゆにひと晩つけておくと、味つけ卵に。"},
+  {f:"納豆", e:"たんぱく質と、骨に大切なビタミンKが多い食材です。", a:"キムチやオクラ、刻んだたくあんを混ぜても。"},
+  {f:"豆腐", e:"植物性のたんぱく質がとれて、消化もやさしい食材です。", a:"水切りして焼き、しょうゆとみりんで照り焼きに。"},
+  {f:"さば缶", e:"DHA・EPAという、青魚のあぶらがとれます。", a:"汁ごとみそ汁に入れると、だしを取らなくてもおいしくなります。"},
+  {f:"鮭", e:"赤い色はアスタキサンチンという成分です。", a:"きのことバターといっしょにアルミホイルで包んで、焼くだけのホイル焼きに。"},
+  {f:"トマト", e:"赤い色のリコピンは、加熱したり油といっしょにとったりすると吸収されやすくなります。", a:"オリーブオイルでさっと焼くと、甘みが増します。"},
+  {f:"ブロッコリー", e:"ビタミンCが多い野菜。ゆでるとお湯にとけ出しやすい栄養です。", a:"電子レンジで蒸すと、ビタミンCが残りやすくなります。"},
+  {f:"ほうれん草", e:"鉄分や葉酸が多い野菜です。", a:"ごま和えや、卵とのいため物に。"},
+  {f:"キャベツ", e:"胃の粘膜を守るといわれる「ビタミンU（キャベジン）」をふくみます。", a:"ざく切りにして塩昆布とあえると、すぐ一品に。"},
+  {f:"玉ねぎ", e:"切ったときのツンとする成分は、血のめぐりにかかわるといわれます。", a:"うすく切ってかつおぶしをのせ、ポン酢をかけるだけでも。"},
+  {f:"にんじん", e:"βカロテンが多く、油といっしょにとると吸収されやすくなります。", a:"ツナといっしょに卵でいためると、沖縄の「にんじんしりしり」に。"},
+  {f:"かぼちゃ", e:"βカロテンやビタミンEが多い野菜です。", a:"電子レンジでやわらかくして、つぶしてマヨネーズであえるとサラダに。"},
+  {f:"さつまいも", e:"食物繊維が多く、ビタミンCも加熱でこわれにくい食材です。", a:"角切りにして、ごはんといっしょに炊飯器で炊くと、さつまいもごはんに。"},
+  {f:"じゃがいも", e:"ビタミンCがでんぷんに守られて、加熱でこわれにくいといわれます。", a:"電子レンジで加熱して、バターじょうゆで。"},
+  {f:"しょうが", e:"加熱すると、体を温めるといわれる成分（ショウガオール）がふえます。", a:"すりおろして、スープや紅茶に少し。"},
+  {f:"きのこ", e:"食物繊維が多く、カロリーは少なめです。", a:"何種類かほぐして冷凍しておくと、うまみが出やすくなり、そのまま汁物やいため物に使えます。"},
+  {f:"しいたけ", e:"日に当てると、ビタミンDがふえるといわれます。", a:"かさを下にして30分ほど日に当ててから料理しても。"},
+  {f:"わかめ", e:"ミネラルと食物繊維がとれる海藻です。", a:"きゅうりとあわせて、酢の物に。"},
+  {f:"大根", e:"消化を助ける酵素をふくみます。熱に弱いので、生で食べると残りやすい成分です。", a:"大根おろしに。皮はきんぴらにすると、むだなく使えます。"},
+  {f:"バナナ", e:"すぐにエネルギーになりやすい果物です。", a:"皮をむいて凍らせると、アイスのような食感に。"},
+  {f:"ヨーグルト", e:"乳酸菌をふくみ、おなかの調子にかかわるといわれます。", a:"はちみつときな粉をかけると、和風のデザートに。"},
+  {f:"牛乳", e:"カルシウムがとりやすい飲み物です。", a:"みそ汁に少し入れる「ミルクみそ汁」は、まろやかな味に。"},
+  {f:"ごま", e:"そのままより、すりごまのほうが消化・吸収されやすいといわれます。", a:"すりごまを、みそ汁やあえ物に。"},
+  {f:"梅干し", e:"すっぱさのもとは、クエン酸です。", a:"たたいて鶏肉にのせて焼いたり、きゅうりとあえたり。"},
+  {f:"レモン", e:"ビタミンCとクエン酸をふくみます。", a:"うす切りを塩とあわせて冷蔵庫に置くと、「塩レモン」に。"},
+  {f:"夏みかん", e:"萩の名産。クエン酸とビタミンCをふくみます。", a:"皮は砂糖で煮ると、マーマレードやピールに。"},
+  {f:"甘酒（米こうじ）", e:"ブドウ糖やビタミンB群をふくみ、「飲む点滴」とよばれることもあります。", a:"豆乳や牛乳で割ると、飲みやすくなります。"},
+  {f:"オートミール", e:"食物繊維が多い、オーツ麦の食品です。", a:"水を加えて電子レンジにかけると、ごはんのようになり、雑炊やチャーハンにも。"},
+];
+// 豆知識：年がたっても変わらない、たしかなことだけ
+const VMAME = [
+  "学校のチャイムのメロディーは、ロンドンのビッグ・ベンの鐘の音がもとになっています。",
+  "学校給食のはじまりは1889年、山形県鶴岡町の小学校。おにぎり・焼き魚・漬物だったそうです。",
+  "ランドセルは、オランダ語の「ランセル（背のう）」がなまったことばです。",
+  "「ありがとう」は「有り難し（めったにない）」から生まれたことばです。",
+  "1円玉は、ちょうど1グラム。直径は2センチです。",
+  "バナナは木ではなく、大きな草のなかまです。",
+  "イチゴの表面のつぶつぶ一つ一つが、じつは果実です。",
+  "コーヒーの木のふるさとはエチオピア。飲み物として広まったのは、イエメンからといわれます。",
+  "トヨタの創業家の名字「豊田」は「とよだ」と読みます。",
+  "山口県の県の鳥はナベヅル、県の魚はふく（ふぐ）です。",
+  "山口県の県の花は、夏みかんの花です。",
+  "秋吉台は、日本でいちばん大きいカルスト台地です。",
+  "英語の Monday は「月の日」。日本語の月曜日と同じ考え方です。",
+  "金魚のふるさとは中国。フナの色ちがいから生まれました。",
+  "鉛筆1本で、およそ50キロメートルの線が書けるといわれます。",
+  "ボックスティッシュは、2枚で1組になっています。",
+  "「先生」は、もとは「先に生まれた人」という意味です。",
+  "2025年の合計特殊出生率（概数）は全国で1.14。都道府県別でいちばん高いのは沖縄県の1.52で、山口県は1.32でした（厚生労働省）。",
+  "2025年の合計特殊出生率（概数）がいちばん低いのは東京都の0.96。高い順では沖縄県・宮崎県・福井県です（厚生労働省）。",
+  // 働き方にまつわる豆知識（年のはっきりした事実だけ）
+  "【働き方】小学4〜6年の年間の授業は、1980年代（土曜日も授業がある6日制）も今も、同じ1015時間・週29コマ。今はそれを土曜日なしの5日でこなしています（東京学芸大学 大森直樹研究室の調べ）。",
+  "【働き方】1968年の学習指導要領では、小学5年の授業は年1085時間・週31コマ。そのころは土曜日も授業がありました（東京学芸大学 大森直樹研究室の調べ）。",
+  "【働き方】学校の完全週5日制は、2002年度から始まりました。",
+  "【働き方】教員の「教職調整額4%」は、1966年度の調査で残業が月およそ8時間だったことをもとに決められました（給特法、1971年制定）。",
+  "【働き方】在校等時間の上限の目安は、月45時間・年360時間。2019年に文部科学省の指針で定められました。",
+  "【働き方】2022年度の教員勤務実態調査では、小学校の先生の平日1日の在校等時間は平均10時間45分でした（文部科学省）。",
+  // ものごとのはじまり（学説に幅があるものは「約」「〜といわれます」）
+  "【はじまり】宇宙が生まれたのは、約138億年前といわれます。",
+  "【はじまり】地球が生まれたのは、約46億年前です。",
+  "【はじまり】月ができたのは約45億年前。生まれたばかりの地球に大きな天体がぶつかってできた、という説が有力です。",
+  "【はじまり】地球に生命が生まれたのは、約38億年前といわれます。",
+  "【はじまり】人類の祖先（猿人）がアフリカにあらわれたのは約700万年前。わたしたちホモ・サピエンスは約30万年前です。",
+  "【はじまり】人類が火を使いはじめたのは、100万年ほど前と考えられています。",
+  "【はじまり】人類がいつ言葉を話しはじめたのかは、まだはっきりわかっていません。数万年前とも、もっと前ともいわれます。",
+  "【はじまり】日本列島に人がやってきたのは、約3万8千年前といわれます。",
+  "【はじまり】日本語がいつ生まれたのかは、はっきりわかっていません。漢字が伝わる前から話されていました。",
+  "【はじまり】漢字のいちばん古い形は、約3300年前の中国（殷）の「甲骨文字」です。",
+  "【はじまり】日本に残るいちばん古い漢字のひとつが、57年に中国の皇帝からおくられた金印の「漢委奴国王」の5文字です。",
+  "【はじまり】世界でいちばん古い文明のひとつ、メソポタミア文明が生まれたのは約5500年前です。",
+  "【はじまり】自動車のはじまりは、1769年にフランスのキュニョーがつくった蒸気自動車。ガソリン自動車は1886年、ドイツのベンツがつくりました。",
+  // お金（総務省「家計調査（貯蓄・負債編）2025年平均」二人以上の世帯）
+  "【お金】2025年、二人以上の世帯の貯蓄の平均は2059万円。でも、まん中の世帯（中央値）は1264万円で、約3分の2の世帯が平均より少ないのです（総務省「家計調査」）。",
+  "【お金】世帯主の年齢別の貯蓄の平均（2025年、二人以上の世帯）は、40歳未満994万円、40代1381万円、50代1756万円、60代2843万円、70歳以上2471万円です（総務省「家計調査」）。",
+  "【お金】2025年の家計調査では、世帯主が50歳未満の世帯は、平均すると貯蓄より住宅ローンなどの借入れのほうが多くなっています。いちばん貯蓄が多いのは60代です（総務省「家計調査」）。",
+  // 会社のはじまり
+  "【会社】東芝のはじまりは1875年。からくり人形で知られる田中久重が、東京・銀座に開いた工場です。",
+  "【会社】トヨタは、豊田佐吉の自動織機の会社から生まれ、1937年に豊田喜一郎がトヨタ自動車工業をつくりました。",
+  "【会社】日産自動車のはじまりは1933年の「自動車製造株式会社」。翌1934年に日産自動車という名前になりました。",
+  "【会社】マツダのはじまりは1920年、広島の「東洋コルク工業」。コルクの会社でした。",
+  "【会社】スズキのはじまりは1909年、浜松で鈴木道雄が始めた織機（はた織り機）の会社です。",
+  "【会社】ヤマハのはじまりは1887年。山葉寅楠が浜松で、小学校のオルガンを修理したことがきっかけで、オルガンづくりを始めました。",
+  "【会社】日本郵船は1885年、三菱の船会社と共同運輸会社が一つになって生まれました。",
+  "【会社】三菱重工業のはじまりは1884年。岩崎弥太郎の三菱が、国の長崎造船所を借りて船づくりを始めたことです。",
+  "【会社】1989年の世界の会社の時価総額ランキングでは、1位がNTT。上位50社のうち32社が日本の会社でした。",
+  // 宗教（どれにもかたよらず、年と出どころをそえる）
+  "【宗教】2020年の世界の人口のうち、キリスト教徒は約29%、イスラム教徒は約26%、どの宗教にも属さない人は約24%、ヒンドゥー教徒は約15%、仏教徒は約4%でした（アメリカのピュー・リサーチ・センター、2025年発表）。",
+  "【宗教】仏教は約2500年前、インドでブッダ（ゴータマ・シッダールタ）が開きました。",
+  "【宗教】キリスト教は約2000年前、イエスの教えをもとに広まりました。",
+  "【宗教】イスラム教は7世紀のはじめ（610年ごろ）、アラビア半島でムハンマドが伝えはじめました。",
+  "【宗教】ヒンドゥー教には決まった開祖がいません。古代インドの信仰がもとになっています。",
+  "【宗教】ユダヤ教は古代イスラエルで生まれた宗教で、キリスト教・イスラム教のもとにもなりました。",
+  "【宗教】日本に仏教が伝わったのは6世紀のなかば。538年とも552年ともいわれます。",
+  "【宗教】神道には開祖がいません。自然や祖先をうやまう、日本に古くからある信仰です。",
+  // 食べもの・のみもののはじまり
+  "【はじまり】日本にコーヒーが伝わったのは江戸時代。長崎の出島のオランダ人がもちこみました。",
+  "【はじまり】日本で最初の本格的な喫茶店は、1888年に東京・上野にできた「可否茶館」です。",
+  "【はじまり】お茶の木のふるさとは、中国の南西部（雲南のあたり）といわれます。",
+  "【はじまり】紅茶も緑茶もウーロン茶も、同じチャノキの葉からつくります。ちがいは、葉を発酵させるかどうかです。",
+  "【はじまり】中国のお茶は17世紀にヨーロッパへ運ばれ、イギリスで紅茶を飲む習慣が広まりました。インドのアッサムで茶の木が見つかったのは1823年です。",
+  "【はじまり】「カレー」の語源は、南インドのことばで「ソース・おかず」をあらわす「カリ」だという説があります。",
+  "【はじまり】カレーはインドから直接ではなく、イギリスを通って明治時代の日本に伝わりました。",
+];
+// 字そのものの豆知識（その字がいちばん大きいとき）
+const VKANJI_MAME = {
+  疲:"「疲」は、やまいだれ（疒）に「皮」と書きます。",
+  休:"「休」は、人が木のそばでやすむ形からできた字です。",
+  忙:"「忙」は、りっしんべん（心）に「亡」と書きます。",
+  嬉:"「嬉」は、おんなへんに「喜」と書きます。",
+  湯:"「湯」は、さんずい（水）に「昜」と書きます。",
+  怒:"「怒」は、「奴」の下に「心」と書きます。",
+  焦:"「焦」の下の点4つ（灬）は「火」のこと。鳥を火であぶる形からできた字です。",
+  誇:"「誇」は、ごんべん（言）に「夸」と書きます。",
+  痛:"「痛」は、やまいだれ（病気）に「甬」と書きます。",
+  痒:"「痒」は、やまいだれ（病気）に「羊」と書きます。",
+  平:"「平」には、たいら・おだやか、という意味があります。",
+  歯:"「歯」の昔の形は「齒」。口の中に歯がならぶ形です。",
+  骨:"「骨」の下の「月」は「にくづき」。体をあらわします。",
+  頭:"「頭」の右の「頁」は、人の頭をあらわす部首です。",
+  腹:"「腹」の左の「月」は「にくづき」。体をあらわします。",
+  胃:"「胃」の下の「月」は「にくづき」。上の「田」は、胃の中の食べものの形といわれます。",
+  腰:"「腰」は、にくづき（体）に「要」。体の「かなめ」の部分です。",
+  肩:"「肩」は、「戸」の下に「月（にくづき）」と書きます。",
+  首:"「首」は、かみの毛と目のある、頭の形からできた字です。",
+  目:"「目」は、目をたてにした形からできた字です。",
+  喉:"「喉」は、くちへん（口）に「侯」と書きます。",
+  耳:"「耳」は、耳の形からできた字です。",
+  背:"「背」の下の「月」は「にくづき」。上の「北」は、二人がせなかを向け合う形です。",
+  足:"「足」は、ひざから下の足の形からできた字です。",
+  手:"「手」は、指を広げた手の形からできた字です。",
+  捻:"「捻」は、てへん（手）に「念」と書きます。",
+  熱:"「熱」の下の「灬（れっか）」は、火をあらわします。",
+  咳:"「咳」は、くちへん（口）に「亥」と書きます。",
+  鼻:"「鼻」の上の「自」は、もとは鼻の形といわれます。",
+  娘:"「娘」は、おんなへん（女）に「良」と書きます。",
+  息:"「息」は、「自（はな）」の下に「心」。鼻から出入りするいきのことです。",
+  筋:"「筋」は、たけかんむり（竹）に「月（にくづき）」と「力」と書きます。",
+  脂:"「脂」は、にくづき（体）に「旨」と書きます。",
+  鍵:"「鍵」は、かねへん（金）に「建」と書きます。",
+  音:"「音」は、「言」の口の中に一本線を入れた形からできた字といわれます。",
+  弦:"「弦」は、ゆみへん（弓）に「玄」。もとは弓のつるのことです。",
+  筆:"「筆」は、たけかんむり（竹）に「聿（ふでをもつ手）」と書きます。",
+  英:"「英」は、くさかんむり（草）がついていて、もとは花のことです。",
+  踊:"「踊」は、あしへん（足）に「甬」と書きます。",
+  剣:"「剣」の右の「刂（りっとう）」は、刀をあらわします。",
+  武:"「武」は、「止」と「戈（ほこ）」からできた字です。",
+  茶:"「茶」には、くさかんむり（草）がついています。",
+  絵:"「絵」は、いとへん（糸）に「会」と書きます。",
+  算:"「算」には、たけかんむり（竹）がついています。昔は竹の棒を並べて数を数えました。",
+  株:"「株」は、きへん（木）に「朱」。もとは木の切りかぶのことです。",
+  資:"「資」の下の「貝」は、昔のお金です。",
+  眠:"「眠」は、めへん（目）に「民」と書きます。",
+  不:"「不」は、花のがく（花びらをささえる所）の形からできた字といわれます。",
+  雨:"「雨」は、天から水のつぶが落ちてくる形からできた字です。",
+  暑:"「暑」は、「日」の下に「者」と書きます。",
+  寒:"「寒」は、家の中で草にくるまって寒さをしのぐ形からできた字といわれます。",
+  風:"「風」の中には「虫」が入っています。",
+  晴:"「晴」は、ひへん（日）に「青」と書きます。",
+  雷:"「雷」は、あめかんむり（雨）に「田」と書きます。",
+  震:"「震」は、あめかんむり（雨）に「辰」と書きます。",
+  災:"「災」は、「巛（川）」の下に「火」。水と火のわざわいをあらわすといわれます。",
+  吐:"「吐」は、くちへん（口）に「土」と書きます。",
+  血:"「血」は、お皿に血を入れた形からできた字です。",
+  重:"「重」は、人が重い荷物を背負う形からできた字といわれます。",
+  肌:"「肌」は、にくづき（体）に「几」と書きます。",
+  焼:"「焼」は、ひへん（火）に「尭」と書きます。",
+  薬:"「薬」の昔の形は「藥」。くさかんむり（草）がついています。",
+  院:"「院」の左の「阝」は「こざとへん」。土をもった所をあらわします。",
+  悩:"「悩」には、りっしんべん（心）がついています。",
+  寂:"「寂」は、うかんむり（家）の中に「叔」と書きます。",
+  会:"「会」の昔の形は「會」。ふたのある入れ物の形といわれます。",
+  仕:"「仕」は、にんべん（人）に「士」と書きます。",
+  業:"「業」は、楽器をかける台の形からできた字といわれます。",
+  採:"「採」の右の「采」は、木の実を手でつみとる形。それにてへん（手）がついています。",
+  書:"「書」は、筆をもつ手の形「聿」の下に「曰」。筆で書く形からできた字です。",
+  校:"「校」は、きへん（木）に「交」と書きます。",
+  部:"「部」の右の「阝」は「おおざと」。村や国をあらわす部首です。",
+  進:"「進」は、しんにょう（道を行く）に「隹（とり）」。鳥が前へ進む形です。",
+  人:"「人」は、人が立っている姿を横から見た形からできた字です。",
+  保:"「保」は、もとは人が子どもを背負う形といわれます。",
+  研:"「研」は、いしへん（石）。石でみがくことをあらわします。",
+  残:"「残」の左の「歹（がつへん）」は、骨をあらわす部首です。",
+  帰:"「帰」の昔の形は「歸」。ずいぶん画数が多い字でした。",
+  短:"「短」は、やへん（矢）に「豆」と書きます。",
+  導:"「導」は、「道」の下に「寸（手）」。道を手で引いて案内する形です。",
+  支:"「支」は、竹の枝を手にもつ形からできた字です。",
+  勤:"「勤」の右側は「力」。力をつくしてはたらくことです。",
+  健:"「健」は、にんべん（人）に「建」と書きます。",
+  寝:"「寝」は、うかんむり（家）の中でねる字。昔の形は「寢」です。",
+  走:"「走」は、手をふって走る人と、足の形からできた字です。",
+  動:"「動」は、「重」に「力」と書きます。",
+  子:"「子」は、赤ちゃんが両手を広げている形からできた字です。",
+  育:"「育」の下の「月」は「にくづき」。体をあらわします。",
+  家:"「家」は、うかんむり（屋根）の下に「豕（ぶた）」と書きます。",
+  掃:"「掃」は、てへん（手）に「帚（ほうき）」。ほうきではく字です。",
+  料:"「料」は、「米」と、ますをあらわす「斗」。米をますで量ることからできた字です。",
+  食:"「食」は、器に盛ったごはんに、ふたをした形からできた字といわれます。",
+  飲:"「飲」の右の「欠」は、人が口を大きくあけた形です。",
+  推:"「推」は、てへん（手）に「隹（とり）」と書きます。",
+  旅:"「旅」は、旗のもとに人がつらなって進む形からできた字です。",
+  読:"「読」の昔の形は「讀」。ごんべん（言）がついています。",
+  癒:"「癒」には、やまいだれ（病気）がついています。病気がなおることをあらわします。",
+  買:"「買」は、「网（あみ）」の下に「貝」。昔は貝がお金のかわりでした。",
+  金:"「金」は、土の中に金属のつぶがある形からできた字といわれます。",
+  体:"「体」の昔の形は「體」。骨（ほね）へんがついていました。",
+  学:"「学」の昔の形は「學」です。",
+  創:"「創」には、りっとう（刀）がついています。",
+  地:"「地」は、つちへん（土）に「也」と書きます。",
+  恋:"「恋」の昔の形は「戀」。糸が2つも入った字でした。",
+  車:"「車」は、車を上から見た形からできた字です。",
+  美:"「美」は、「羊」に「大」。大きくりっぱな羊をあらわすといわれます。",
+  釣:"「釣」は、かねへん（金）に「勺」と書きます。",
+  山:"「山」は、山がならぶ形からできた字です。",
+  川:"「川」は、水が流れる形からできた字です。",
+  海:"「海」は、さんずい（水）に「毎」と書きます。",
+  野:"「野」は、さとへん（里）に「予」と書きます。",
+  花:"「花」は、くさかんむり（草）に「化」と書きます。",
+  紅:"「紅」は、いとへん（糸）。もとは、赤くそめた糸のことです。",
+  星:"「星」は、「日」に「生」と書きます。",
+  参:"「参」の昔の形は「參」です。",
+  城:"「城」は、つちへん（土）に「成」と書きます。",
+  館:"「館」は、しょくへん（食）に「官」と書きます。",
+  園:"「園」は、くにがまえ（かこい）の中に「袁」。かこまれた庭や畑のことです。",
+  雪:"「雪」は、あめかんむり（雨）の字です。",
+  泳:"「泳」は、さんずい（水）に「永」と書きます。",
+  歌:"「歌」の右の「欠」は、人が口を大きくあけた形です。",
+  映:"「映」は、ひへん（日）に「央」と書きます。",
+  遊:"「遊」には、しんにょう（道を行く）がついています。",
+  畑:"「畑」は、日本で作られた字（国字）です。「火」と「田」を合わせています。",
+  楽:"「楽」の昔の形は「樂」。木に鈴などをつけた楽器の形といわれます。",
+  憂:"「憂」には、「頁（あたま）」と「心」が入っています。",
+  幸:"「幸」は、手かせの形からできた字といわれます。",
+  緊:"「緊」の下は「糸」。糸をきつくしめることをあらわします。",
+  感:"「感」は、「咸」の下に「心」と書きます。",
+  悔:"「悔」は、りっしんべん（心）に「毎」と書きます。",
+};
+// からだほぐし：むりのない、短いストレッチと軽いひと声（fig：小さな図）。「鏡を見てみて」「力を抜いてみよう」くらいの軽さはOK（本人）
+const FIG = {
+  kubi: `<svg viewBox="0 0 120 56" aria-hidden="true"><circle cx="60" cy="16" r="10"/><path d="M60 26v14M44 40h32M44 40l-6 14M76 40l6 14"/><path d="M40 10a22 22 0 0 1 40 0" fill="none" stroke-dasharray="4 3"/><path d="M78 4l3 7-7 1"/></svg>`,
+  hiza: `<svg viewBox="0 0 120 56" aria-hidden="true"><path d="M8 48h104"/><circle cx="22" cy="40" r="7"/><path d="M29 41h34"/><path d="M63 41l-8-18-14 6"/><path d="M48 40l-6-12"/></svg>`,
+  hineri: `<svg viewBox="0 0 120 56" aria-hidden="true"><path d="M8 48h104"/><circle cx="22" cy="40" r="7"/><path d="M29 41h30"/><path d="M59 41l14-16 10 18"/><path d="M40 41l-4-14M48 41l4-14"/><path d="M86 20a12 12 0 0 1 10 10" fill="none" stroke-dasharray="3 3"/></svg>`,
+  iki: `<svg viewBox="0 0 120 56" aria-hidden="true"><path d="M6 46l28-30 56 30"/><text x="14" y="52" font-size="9" stroke="none" fill="currentColor">吸う 4</text><text x="62" y="52" font-size="9" stroke="none" fill="currentColor">吐く 8</text></svg>`,
+  aki: `<svg viewBox="0 0 120 56" aria-hidden="true"><path d="M8 52h104M100 4v48"/><circle cx="74" cy="12" r="7"/><path d="M72 19l-8 16M64 35l-24 17M64 35l14 17M70 24l28-6"/></svg>`,
+};
+const VKARADA = [
+  {t:"頭の重さは、大人でおよそ5キロ（体重の約1割）。それを首が一日中ささえています。痛くない範囲で、ゆっくり首を回してみませんか。", fig:"kubi"},
+  {t:"肩をぐっとすくめて、ストンと落とす。3回くり返すだけでも、肩のあたりがふっと軽くなります。"},
+  {t:"寝転がってできるおすすめ：あおむけで両ひざをかかえて、胸に引きよせる。腰まわりがじんわりのびます。", fig:"hiza"},
+  {t:"寝転がってできるおすすめ：あおむけでひざを立て、両ひざをゆっくり左右にたおす。腰と背中がほぐれます。", fig:"hineri"},
+  {t:"アキレス腱ののばし方は2つ。壁に手をついて30秒ほど止めてのばす「静的」と、かかとの上げ下げをくり返す「動的」。どちらにも効果があります。", fig:"aki"},
+  {t:"板書やパソコンのあとは、腕を前にのばして、指先を手前にそっと引く。手首から腕がのびます。"},
+  {t:"呼吸法：4拍で吸って、8拍で吐き切ろう。はく息を長くすると、体の力がぬけやすくなります。", fig:"iki", calm:1},
+  {t:"目をとじて、こすり合わせて温めた手のひらで、まぶたをそっとおおう。目のまわりがほっとします。", calm:1},
+  {t:"両足首をにぎってみて。太いほうの足首を回すと、同じくらいの太さになることがあります。ふしぎですね（リンパの流れの影響だと言われています）。"},
+  {t:"ぬらしてしぼったタオルをレンジで温めて、首などにのせて温めてみよう（やけどに気をつけてね）。", calm:1},
+  {t:"鏡を見ながら、うーんと背伸び。重力で下がりがちな胃腸の位置が、少し上に引き上げられるそうです。"},
+  {t:"かかとを上げて、すとんと下ろす。ふくらはぎは「第二の心臓」とよばれ、足の血を心臓へ送り返す手伝いをしています。"},
+  {t:"いすにすわったまま、背もたれに手をかけて、上半身をゆっくりひねってみよう。左右どちらも。"},
+  {t:"手を、グー・パー・グー・パー。10回くり返すと、指先までぽかぽかしてきます。"},
+  {t:"両耳を軽くつまんで、外へ引っぱりながらくるくる回してみよう。顔のまわりがゆるみます。"},
+  {t:"いちど鏡を見てみて。口のはしを、ほんの少しだけ上げてみよう。"},
+  {t:"肩の力を、ふっと抜いてみよう。気づかないうちに、肩が上がっていることがあります。", calm:1},
+  {t:"おなかの力を抜いて、ため息をひとつ。ため息は、体がゆるむ合図です。", calm:1},
+];
+// パソコンの小ワザ（Windows。Macは Ctrl のかわりに ⌘）。仕事が多めのときに出す
+const VPC = [
+  "コピーは Ctrl＋C、はりつけは Ctrl＋V、切り取りは Ctrl＋X。",
+  "まちがえたら Ctrl＋Z で一つ前にもどせます。もどしすぎたら Ctrl＋Y でやり直し（Word・Excel など）。",
+  "Windows＋D で、開いているウィンドウを全部いっぺんにしまって、デスクトップが出ます。もう一度おすと元どおり。",
+  "Alt＋F4 で、いま前に出ているウィンドウを閉じられます。",
+  "Ctrl＋S でこまめに保存。急に固まっても安心です。",
+  "Ctrl＋F で、文書やページの中のことばを探せます。",
+  "Ctrl＋A で、全部を選べます。",
+  "Ctrl＋P で、すぐに印刷の画面が出ます。",
+  "Windows＋Shift＋S で、画面の好きなところだけを切り取って写せます。",
+  "Windows＋V で、前にコピーしたものの一覧から選んではりつけられます（はじめに設定をオンにします）。",
+  "Alt＋Tab で、開いているウィンドウを次々に切りかえられます。",
+  "席をはなれるときは Windows＋L で、画面にすぐ鍵をかけられます。",
+  "ブラウザで閉じてしまったタブは、Ctrl＋Shift＋T でもう一度開けます。",
+  "文字を入力しているとき、F7 でカタカナ、F10 で半角の英数字に変わります。",
+];
+// 「漢字(よみ)」を振り仮名にする（かなの後ろの漢字だけに振る）
+function rubyStr(str){
+  return esc(str).replace(/([^\s、。(){}]+?)\(([ぁ-ん]+)\)/g, (a, k, y) => {
+    const head = k.match(/^(.*?)([一-龥々]+)$/);
+    return head ? `${head[1]}<ruby>${head[2]}<rt>${y}</rt></ruby>` : a;
+  });
+}
+// あの人のことば：「ことば」（名前・どんな人）＋ひとこと説明
+function meigenRuby(m){ return rubyStr(m.r || m.t); }
+function meigenLine(m){ return `「${meigenRuby(m)}」（${rubyStr(m.who)}・${esc(m.role)}）${esc(m.imi)}`; }
+function shokuLine(x){ return `${esc(x.f)}：${esc(x.e)}　アレンジ例：${esc(x.a)}`; }
+// 話の中身で、そえるものを出し分ける
+// CRISIS：本人の「死にたい」など。ほかのひとことは出さず、受けとめと相談先だけ（「アドバイスしない」方針の例外）
+const CRISIS_RE = /死にたい|しにたい|消えたい|きえたい|いなくなりたい|自殺したい|生きてるのがつらい|生きているのがつらい|生きるのがつらい/;
+// HEAVY：つらい出来事。受けとめだけにし、豆知識・あの人のことば・パソコンの小ワザ・食材のことは出さない
+const HEAVY_RE = /亡くな|他界|看取|お通夜|通夜|葬儀|葬式|告別式|四十九日|一周忌|三回忌|死んだ|死んじゃ|自死|流産|死産|不妊|体外受精|人工授精|採卵|妊活|抗がん剤|癌|がん治療|がんが見つ|入院|手術|休職|療養|病休|うつ病|適応障害|心療内科|介護|認知症|看病|離婚|別居|調停|借金|返済が|パワハラ|陰口|怒鳴られ|どなられ|はねられ|救急|事故|おぼれ|仕事をやめたい|教員をやめたい|先生をやめたい|学校をやめたい|やめたいと思|辞めたい|退職したい|眠れな|ねむれな|涙が止まらな|泣いてばかり|通院|治療|突発性|難聴|潰瘍|めまい|吐き気|ホスピス|最期|ペットロス|死んでしまっ|復職|休んでいる間|ケアマネ|不登校|赤字|収入がない|自腹|空気が凍|指導力の問題|替えてください|悪口|教師のくせに|クレーム|差別だ|倒れた|熱中症で|骨折|火事|荒れて|力不足|退職届|あきらめよう|また落ち|不合格/;
+const HEAVY_SAY = ["話してくれて、ありがとうございます。", "とても大きなものを、かかえているんですね。", "ことばにするのも、きっとしんどかったと思います。", "うまく言葉にならなくても、だいじょうぶです。", "きょうも、ここまで来たんですね。"];
+const CRISIS_TEXT = "話してくれて、ありがとうございます。そう思うほど、つらい中にいるんですね。ひとりでかかえこまず、身近な信頼できる人や、こころの健康相談統一ダイヤル（0570-064-556）に、その気持ちを聞いてもらってください。";
+const MOOD_FIRST = new Set(["疲","忙","嬉","楽","寂","悩","憂","怒","焦","幸","緊","感","悔","誇","痛","痒","不","平"]);
+function vcComment(chosen, seed, text = ""){
+  const t = text.normalize("NFKC").replace(/\s+/g, "");
+  if (CRISIS_RE.test(t)) return CRISIS_TEXT;
+  const r = rngFrom("hito|" + seed), pick = a => a[Math.floor(r() * a.length)];
+  const sum = ks => chosen.filter(c => ks.includes(c.k)).reduce((s, c) => s + c.pct, 0);
+  const g = id => chosen.filter(c => c.group && c.group.id === id).reduce((s, c) => s + c.pct, 0);
+  const real = chosen.filter(c => c.k !== "謎");
+  // 同じ割合なら、きもちの字を先に
+  const top = real.slice().sort((a, b) => b.pct - a.pct || MOOD_FIRST.has(b.k) - MOOD_FIRST.has(a.k))[0];
+  const heavyFeel = sum(["疲", "怒", "憂", "悔", "寂", "悩", "痛", "不"]), goodFeel = sum(["幸", "嬉", "楽", "誇"]);
+  const funLife = sum(["筋","鍵","音","弦","筆","英","踊","剣","武","茶","絵","算","湯","走","動","料","食","飲","推","旅","読","癒","買","学","休","創","恋","車","美","地","釣","山","川","海","野","花","紅","星","参","城","館","園","雪","泳","歌","映","遊","畑"]);
+  const heavyTopic = HEAVY_RE.test(t);
+  const head = `いちばん大きい字は「${esc(top.k)}（${esc(top.n)}）」。`;
+  const calm = () => { const b = pick(VKARADA.filter(x => x.calm)); return `<span class="ex-q">🧘 ${b.t}${b.fig ? FIG[b.fig] : ""}</span>`; };
+  const softHeavy = heavyTopic && goodFeel >= 20 && goodFeel >= heavyFeel; // 重いことばがあっても、いい気持ちが大きい話
+  if (heavyTopic && !softHeavy){ // つらい出来事：受けとめだけ。ときどき静かなからだほぐし
+    const a = pick(HEAVY_SAY); let b = pick(HEAVY_SAY.filter(x => x !== a));
+    return head + a + b + (r() < 1 / 3 ? calm() : "");
+  }
+  const test = {
+    care: () => heavyFeel >= 25 && heavyFeel > goodFeel,
+    happy: () => goodFeel >= 20 && goodFeel >= heavyFeel,
+    press: () => sum(["焦", "忙", "緊"]) >= 20,
+    work: () => g("work") >= 60,
+    life: () => funLife >= 40,
+    lifeN: () => g("life") >= 50,
+    balance: () => g("work") >= 20 && g("life") >= 20 && g("mood") >= 20,
+  };
+  const situ = VSITU.find(x => test[x.id]());
+  // いい話のときは、いい気持ちの字で受けとめる
+  const sayK = situ && situ.id === "happy" ? (real.filter(c => ["幸", "嬉", "楽", "誇"].includes(c.k)).sort((a, b) => b.pct - a.pct)[0] || top) : top;
+  const say = (VHITO[sayK.k] || [""])[0], ask = (VHITO[top.k] || ["", ""])[1];
+  const care = situ && situ.id === "care";
+  let extra = "";
+  if (care) extra = r() < 1 / 2 ? calm() : ""; // 重い気持ちのとき：静かなからだほぐしだけ
+  else if (softHeavy) extra = r() < 1 / 2 ? ask : calm(); // 重いことばを含むいい話：問い返しか静かなほぐし
+  else {
+    const roll = r(); // 問い返し2/9、あの人のことば2/9、豆知識2/9、パソコンの小ワザ（仕事が4割未満なら食材のこと）1/9、からだほぐし2/9
+    const pcOK = g("work") >= 40;
+    const has = k => real.some(c => c.k === k);
+    const shoku = () => `<span class="ex-q">🍳 食材のこと：${shokuLine(pick(VSHOKU))}</span>`;
+    if (roll < 2 / 9) extra = ask;
+    else if (roll < 4 / 9){ const m = pick(VMEIGEN.filter(x => !(x.push && situ && situ.id === "press")));
+      extra = `<span class="ex-q">🗣 あの人のことば：${meigenLine(m)}</span>`; }
+    else if (roll < 6 / 9 && ["料", "食", "飲"].some(has) && r() < .5) extra = shoku(); // 食べる話のときは、豆知識の半分を食材のことに
+    else if (roll < 6 / 9){
+      const pool = VMAME.filter(m => !(m.includes("出生率") && (has("子") || has("娘") || has("息") || has("育") || has("体") || /妊|子ども|こども/.test(t)))
+                                  && !(m.startsWith("【お金】") && (has("金") || has("株") || has("資"))));
+      extra = `<span class="ex-q">💡 ${VKANJI_MAME[top.k] && r() < .5 ? VKANJI_MAME[top.k] : pick(pool)}</span>`;
+    }
+    else if (roll < 7 / 9) extra = pcOK ? `<span class="ex-q">💻 パソコンの小ワザ：${pick(VPC)}</span>` : shoku();
+    else { const b = pick(VKARADA); extra = `<span class="ex-q">🧘 ${b.t}${b.fig ? FIG[b.fig] : ""}</span>`; }
+  }
+  return head + say + (situ ? pick(situ.msg) : "") + extra;
+}
+// ステージ1・2はふりかえりを書いて（話して）えがく。key：tt＝学校、nt＝定時後、なし＝試験ページなど
+const REF = {tt: {text: "", emo: []}, nt: {text: "", emo: []}};
+const lastRes = {tt: null, nt: null};
+const KEYINFO = {
+  tt: {title: "学校のふりかえり", stg: "STAGE 1", lead: "学校でのアタマ", tag: "ステージ1 学校のふりかえり",
+       label: "きょう（最近）の学校でのことを話してみよう", ph: "例：1時間目から算数の丸つけ。昼休みは保護者に電話。放課後は会議と通知表の所見でつかれた。"},
+  nt: {title: "定時後のふりかえり脳内", stg: "STAGE 2", lead: "定時後のアタマ", tag: "ステージ2 定時後のふりかえり",
+       label: "定時のあと（家・休日）のことを話してみよう", ph: "例：帰ってからビールを飲んでほっとした。娘とお風呂。週末は推しのライブが楽しみ。"},
+  vc: {title: "ふりかえり脳内", stg: "VOICE", lead: "最近のアタマ", tag: "声でつくる脳内"},
+};
+const AFTER2 = new Set(["残","会","部","書","保","勤","帰","研","導","進"]); // 放課後の段に出やすいもの
+// 話した回数に合わせて、時間割の35マスに字を割りふる
+function refGrid(list, r){
+  const items = list.filter(c => c.cnt >= 0.5);
+  const sum = items.reduce((s, c) => s + c.cnt, 0);
+  items.forEach(c => { c.raw = c.cnt / sum * 35; c.cells = Math.max(1, Math.floor(c.raw)); });
+  let left = 35 - items.reduce((s, c) => s + c.cells, 0);
+  const byRem = items.slice().sort((a, b) => (b.raw % 1) - (a.raw % 1));
+  for (let i = 0; left > 0; i = (i + 1) % byRem.length, left--) byRem[i].cells++;
+  while (left < 0){ const big = items.slice().sort((a, b) => b.cells - a.cells)[0]; big.cells--; left++; }
+  let cells = [];
+  items.forEach(c => { for (let i = 0; i < c.cells; i++) cells.push(c); });
+  cells = pickN(r, cells, cells.length);
+  for (let i = 30; i < 35; i++){
+    if (AFTER2.has(cells[i].k)) continue;
+    const j = cells.findIndex((x, idx) => idx < 30 && AFTER2.has(x.k));
+    if (j >= 0) [cells[i], cells[j]] = [cells[j], cells[i]];
+  }
+  let g = `<div></div>` + DAYS.map(d => `<div class="h">${d}</div>`).join("");
+  for (let p = 0; p < 6; p++) g += `<div class="h">${p + 1}</div>` + cells.slice(p * 5, p * 5 + 5).map(c => cellHtml(c)).join("");
+  g += `<div class="h after" style="font-size:10px;line-height:1.1">放<br>課<br>後</div>` + cells.slice(30).map(c => cellHtml(c, " after")).join("");
+  return `<div class="grid">${g}</div>`;
+}
+function renderVC(name, key){
+  const info = KEYINFO[key || "vc"];
+  const text = $("voiceText").value.trim(), picks = key ? REF[key].emo : [];
+  if (key) lastRes[key] = null;
+  if (!text && !picks.length) return `<p class="hint">🎤で話すか、文字で書いてから「脳内をえがく」を押してね</p>`;
+  const {list, hits} = analyzeVoice(text, picks);
+  if (!hits) return `<p class="hint">脳内に入ることばが見つかりませんでした。<br>「丸つけ」「つかれた」「ビール」など、最近のことをもう少し話してみてね</p>`;
+  // 図は面積で、解説の％は話した回数で出す（回数のほうが本人の実感に近い）
+  const seed = (key || "vc") + "|" + name + "|" + text + "|" + picks.join(",");
+  const chosen = list;
+  const top = chosen.find(c => c.k !== "謎");
+  const comment = vcComment(chosen, seed, text);
+  lastVC = {name, text, chosen, comment, key, title: info.title, picks};
+  if (key) lastRes[key] = lastVC;
+  let fig;
+  if (key === "tt") fig = refGrid(chosen, rngFrom("tt|" + seed));
+  else { const {seeds, total} = buildBrain(rngFrom("vc|" + seed), list, 24); fig = brainSvg(seeds, total, info.title + "の図"); }
+  return `<div class="card ${key === "tt" ? "tt" : "nt"}" id="vcCard">
+    <span class="stg">${info.stg}</span>
+    <h2>${esc(sensei(name))}の<br>${info.title}</h2>
+    <p class="lead">${info.lead}の <b>${top.pct}%</b> が「<b>${esc(top.k)}</b>」</p>
+    ${fig}
+    ${vcExplain(chosen)}
+    <div class="comment">${comment}</div>
+    <div class="tag">#学校脳内メーカー　${info.tag}</div>
+  </div>
+  <div class="vcacts">
+    <p class="vchead">日記・記録に残す</p>
+    <div class="row"><button class="btn ghost" data-vc="copy">📋 文章でコピー</button><button class="btn ghost" data-vc="img">🖼 画像で保存・共有</button></div>
+    <p class="vcmsg" id="vcMsg"></p>
+  </div>`;
+}
+
+// ---------- 日記・記録に残す（文章でコピー／画像で保存・共有） ----------
+let lastVC = null;
+function vcDiaryText(v){
+  const d = new Date(), wd = "日月火水木金土"[d.getDay()];
+  const head = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${wd}）${v.title}`;
+  const gp = VGROUPS.map(g => [g.name, v.chosen.filter(c => c.group === g).reduce((s, c) => s + c.pct, 0)]).filter(x => x[1]);
+  const ks = v.chosen.map(c => c.k === "謎" ? `謎 ${c.pct}%` : `${c.k}（${[...c.words].map(([w, n]) => w + (n > 1 ? "×" + n : "")).join("、")}）${c.pct}%`);
+  const plain = s => s.replace(/<span class="ex-q">/g, " ").replace(/<rt>(.*?)<\/rt>/g, "（$1）").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  return [head, gp.map(([n, p]) => `${n}${p}%`).join("・"), ks.join("／"), "ひとこと：" + plain(v.comment), "― 話したこと ―", v.text].join("\n");
+}
+function vcSay(msg){ const m = $("vcMsg"); if (m) m.textContent = msg; }
+async function vcCopy(){
+  const t = vcDiaryText(lastVC);
+  try { await navigator.clipboard.writeText(t); }
+  catch(e){ // ファイルを直接ひらいたときなど、新しいコピーが使えない場合
+    const ta = document.createElement("textarea"); ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+  }
+  vcSay("コピーしました。日記アプリやメモに貼りつけてね。");
+}
+// 画像にする道具は、ボタンを押したときだけ読みこむ（中身は送らない）
+function loadH2C(){
+  if (window.html2canvas) return Promise.resolve();
+  return new Promise((ok, ng) => { const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; sc.onload = ok; sc.onerror = ng; document.head.appendChild(sc); });
+}
+async function vcImage(){
+  vcSay("画像をつくっています…");
+  try { await loadH2C(); } catch(e){ vcSay("画像にする道具が読みこめませんでした。ネットにつながっているか確かめるか、スクショで保存してね。"); return; }
+  const card = $("vcCard"), keep = card.style.cssText;
+  card.style.cssText += ";width:400px;max-width:400px;min-width:400px"; // 画面のはばによらず同じ大きさの画像に
+  let canvas;
+  try { canvas = await html2canvas(card, {backgroundColor: null, scale: 2}); } finally { card.style.cssText = keep; }
+  const blob = await new Promise(r => canvas.toBlob(r, "image/png"));
+  const d = new Date(), fname = `ふりかえり脳内_${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}.png`;
+  const file = new File([blob], fname, {type: "image/png"});
+  if (navigator.canShare && navigator.canShare({files: [file]})){ // スマホ：共有の画面（写真に保存・日記アプリ・LINEなど）
+    try { await navigator.share({files: [file], text: vcDiaryText(lastVC)}); vcSay("共有の画面をひらきました。"); return; }
+    catch(e){ if (e.name === "AbortError"){ vcSay("共有をやめました。"); return; } }
+  }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fname; a.click(); // パソコン：保存
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  vcSay("画像を保存しました（ダウンロードのフォルダ）。");
+}
+
+// ---------- 画面 ----------
+const MODES = {
+  tt: {fn: n => renderVC(n, "tt"), ref: true, desc: "ステージ1：学校でのことを話す（書く）と、月〜金・1〜6時間目＋放課後の時間割にして、ことばの内訳を出します。", next: ["nt", "ステージ2へ　定時後のふりかえり ▶"]},
+  nt: {fn: n => renderVC(n, "nt"), ref: true, desc: "ステージ2：定時のあと（家・休日）のことを話す（書く）と、脳の図にして、ことばの内訳を出します。"},
+};
+let mode = "tt";
+const seen = new Set(); // この名前で見たステージ
+let seenName = "";
+const $ = id => document.getElementById(id);
+const tabBtn = m => document.querySelector(`.tabs button[data-mode="${m}"]`);
+function store(k, v){ try { v === undefined ? (v = localStorage.getItem(k)) : localStorage.setItem(k, v); } catch(e){ v = null; } return v; }
+
+// ふりかえりの入力欄・気持ちのチャートを、いまのステージの中身にする
+function renderEmo(){
+  const ref = REF[mode]; if (!ref) return;
+  const pos = v => (50 + v * 42).toFixed(1);
+  $("emo").innerHTML = `<span class="ax t">↑ 高ぶり</span><span class="ax b">↓ しずか</span><span class="ax l">← いやな気持ち</span><span class="ax r">いい気持ち →</span><span class="mid">ふつう</span>` +
+    EMO.map((e, i) => { const on = ref.emo.includes(i), c = CAT_OF(e.k).c;
+      return `<button data-emo="${i}" class="${on ? "on" : ""}" style="left:${pos(e.x)}%;top:${pos(-e.y)}%;${on ? `background:${c};color:${inkOn(c)}` : ""}">${e.w}</button>`; }).join("");
+  $("emoSel").textContent = ref.emo.length ? "えらんだ気持ち：" + ref.emo.map(i => EMO[i].w).join("・") : "";
+}
+function syncPanel(){
+  const ref = REF[mode];
+  $("voicePanel").hidden = !ref;
+  if (!ref) return;
+  $("voiceLabel").textContent = KEYINFO[mode].label;
+  $("voiceText").placeholder = KEYINFO[mode].ph;
+  $("voiceText").value = ref.text;
+  renderEmo();
+}
+function setMode(m){
+  stopMic();
+  mode = m;
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x.dataset.mode === m));
+  draw();
+}
+function draw(){
+  const name = $("nm").value.trim();
+  if (name !== seenName){ seen.clear(); seenName = name; }
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x.dataset.mode === mode));
+  syncPanel();
+  if (!name){
+    $("stage").innerHTML = "";
+    $("acts").hidden = $("hint").hidden = $("nextRow").hidden = true;
+    return;
+  }
+  store("nounai-name", name);
+  seen.add(mode);
+  $("stage").innerHTML = MODES[mode].fn(name);
+  $("acts").hidden = $("hint").hidden = false;
+  const nx = MODES[mode].next;
+  $("nextRow").hidden = !nx;
+  if (nx){ $("nextBtn").textContent = nx[1]; $("nextBtn").dataset.to = nx[0]; }
+}
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+$("nextBtn").addEventListener("click", () => { setMode($("nextBtn").dataset.to); $("stage").scrollIntoView({behavior: "smooth"}); });
+$("nm").addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing) $("vcGo").click(); });
+$("nm").addEventListener("input", () => { if ($("nm").value.trim()) $("nmNeed").hidden = true; });
+$("vcGo").addEventListener("click", () => {
+  if (!$("nm").value.trim()){ $("nmNeed").hidden = false; $("nm").focus(); return; } // ニックネームがないと、えがけない
+  $("nmNeed").hidden = true;
+  stopMic(); setMode(REF[mode] ? mode : "tt"); $("stage").scrollIntoView({behavior: "smooth"});
+  dodon();
+});
+// えがいた絵を、ドドンと強調して出す
+function dodon(){
+  const card = $("vcCard"); if (!card) return;
+  const tiles = card.querySelectorAll(".grid .c, svg.brain text");
+  const step = Math.min(.03, .9 / Math.max(tiles.length, 1));
+  tiles.forEach((e, i) => e.style.animationDelay = (.45 + i * step).toFixed(3) + "s");
+  const land = .45 + tiles.length * step + .2;
+  // 効果音：ドドン → 字がぽんぽん → はんこのドン
+  sfx("don", 0); sfx("don", .13);
+  const nPop = Math.min(tiles.length, 10);
+  for (let i = 0; i < nPop; i++) sfx("pop", .45 + (tiles.length * step) * i / Math.max(nPop, 1), i);
+  sfx("stamp", land + .22);
+  card.querySelectorAll(".lead b").forEach((b, i) => b.style.animationDelay = (land + i * .12).toFixed(2) + "s");
+  card.classList.add("dodon");
+  const st = $("stage"); st.classList.remove("jolt");
+  setTimeout(() => { st.classList.add("jolt"); }, (land + .3) * 1000);
+  setTimeout(() => card.classList.remove("dodon"), (land + 1.2) * 1000); // 画像で保存するときに、動きをくり返さないように
+}
+// ---------- 効果音（音のファイルは使わず、ブラウザの中で鳴らす） ----------
+let AC = null, soundOn = store("nounai-sound") !== "off";
+function sfx(type, at = 0, i = 0){
+  if (!soundOn) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === "suspended") AC.resume();
+    const t = AC.currentTime + at, o = AC.createOscillator(), g = AC.createGain();
+    o.connect(g); g.connect(AC.destination);
+    const S = {
+      don:   {w: "sine",     f0: 150, f1: 45,  v: .55, d: .28},  // ドン（低い音）
+      pop:   {w: "triangle", f0: 520 + i * 45, f1: 900 + i * 45, v: .12, d: .07}, // ぽん（だんだん高く）
+      stamp: {w: "sine",     f0: 110, f1: 38,  v: .7,  d: .38},  // はんこのドン
+    }[type];
+    o.type = S.w;
+    o.frequency.setValueAtTime(S.f0, t);
+    o.frequency.exponentialRampToValueAtTime(S.f1, t + S.d);
+    g.gain.setValueAtTime(S.v, t);
+    g.gain.exponentialRampToValueAtTime(.001, t + S.d);
+    o.start(t); o.stop(t + S.d + .02);
+  } catch(e){}
+}
+function showSound(){ $("sndBtn").textContent = soundOn ? "🔊 音あり" : "🔇 音なし"; $("sndBtn").setAttribute("aria-pressed", soundOn); }
+$("sndBtn").addEventListener("click", () => { soundOn = !soundOn; store("nounai-sound", soundOn ? "on" : "off"); showSound(); if (soundOn) sfx("pop"); });
+showSound();
+$("voiceText").addEventListener("input", () => { if (REF[mode]) REF[mode].text = $("voiceText").value; });
+$("emo").addEventListener("click", e => {
+  const b = e.target.closest("[data-emo]"); if (!b || !REF[mode]) return;
+  const i = +b.dataset.emo, list = REF[mode].emo, at = list.indexOf(i);
+  if (at >= 0) list.splice(at, 1); else { list.push(i); if (list.length > 3) list.shift(); } // 4つめをえらぶと、いちばん古いものが外れる
+  renderEmo();
+});
+
+// 🎤 声を文字にする（ブラウザの音声認識。使えないときはキーボードのマイクを案内）
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null;
+function stopMic(){ if (rec){ rec.stop(); } }
+if (!SR){
+  $("micBtn").hidden = true;
+  $("micNote").textContent = "このブラウザでは🎤ボタンが使えません。スマホのキーボードのマイクで話しても入力できます。";
+} else {
+  $("micNote").textContent = "🎤を押して話し、終わったらもう一度押してとめます。キーボードのマイクで話してもOK。";
+  $("micBtn").addEventListener("click", () => {
+    if (rec){ stopMic(); return; }
+    rec = new SR();
+    rec.lang = "ja-JP"; rec.continuous = true; rec.interimResults = true;
+    const base = $("voiceText").value ? $("voiceText").value.replace(/\s*$/, "") + "\n" : "";
+    let done = "";
+    rec.onresult = e => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++){
+        if (e.results[i].isFinal) done += e.results[i][0].transcript + "。";
+        else interim += e.results[i][0].transcript;
+      }
+      $("voiceText").value = base + done + interim;
+      if (REF[mode]) REF[mode].text = $("voiceText").value;
+    };
+    rec.onerror = e => { $("micNote").textContent = e.error === "not-allowed" ? "マイクが使えませんでした。ブラウザのマイクの許可を確かめるか、キーボードのマイクで話してね。" : "音声がうまくひろえませんでした。もう一度ためしてね。"; };
+    rec.onend = () => { rec = null; $("micBtn").classList.remove("on"); $("micBtn").textContent = "🎤 話す"; };
+    rec.start();
+    $("micBtn").classList.add("on"); $("micBtn").textContent = "■ とめる";
+  });
+}
+$("shotBtn").addEventListener("click", () => { document.body.classList.add("shot"); scrollTo(0, 0); });
+$("exitBtn").addEventListener("click", () => document.body.classList.remove("shot"));
+$("stage").addEventListener("click", e => {
+  const b = e.target.closest("[data-vc]");
+  if (b && lastVC) { b.dataset.vc === "copy" ? vcCopy() : vcImage(); return; }
+  document.body.classList.remove("shot");
+});
+$("againBtn").addEventListener("click", () => { $("nm").value = ""; setMode("tt"); $("nm").focus(); });
+
+$("nm").value = store("nounai-name") || "";
+draw();
+</script>
+</body>
+</html>
