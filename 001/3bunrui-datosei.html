@@ -750,5 +750,78 @@ dl.def dd{margin:0}
 function stickHead(){document.querySelectorAll('thead').forEach(function(h){var top=0;[].forEach.call(h.rows,function(r){[].forEach.call(r.cells,function(c){c.style.setProperty('--top',top+'px')});top+=r.getBoundingClientRect().height;});});}
 window.addEventListener('load',stickHead);window.addEventListener('resize',stickHead);
 </script>
+<script id="stick-first-col">
+/* 横スクロールする表の先頭列を固定する（001にのみ入れる） */
+(function(){
+  function clear(c){return !c||c==='transparent'||/rgba\([^)]*,\s*0\)$/.test(c);}
+  function bgOf(el){
+    while(el&&el.nodeType===1){var c=getComputedStyle(el).backgroundColor;if(!clear(c))return c;el=el.parentElement;}
+    return '#fff';
+  }
+  function scroller(t){
+    var e=t.parentElement;
+    while(e&&e!==document.body&&e!==document.documentElement){
+      var o=getComputedStyle(e).overflowX;
+      if(o==='auto'||o==='scroll')return e;
+      e=e.parentElement;
+    }
+    return null;
+  }
+  function firstCol(t){
+    var occ=[],out=[];
+    for(var ri=0;ri<t.rows.length;ri++){
+      var r=t.rows[ri],c=0;occ[ri]=occ[ri]||[];
+      for(var k=0;k<r.cells.length;k++){
+        var cell=r.cells[k];
+        while(occ[ri][c])c++;
+        var cs=cell.colSpan||1,rs=cell.rowSpan||1;
+        for(var i=0;i<rs;i++){occ[ri+i]=occ[ri+i]||[];for(var j=0;j<cs;j++)occ[ri+i][c+j]=1;}
+        if(c===0&&cs===1)out.push(cell);
+        c+=cs;
+      }
+    }
+    return out;
+  }
+  function fix(){
+    var ts=document.querySelectorAll('table');
+    for(var n=0;n<ts.length;n++){
+      var t=ts[n];
+      if(t.getAttribute('data-sfc'))continue;
+      var s=scroller(t);
+      if(!s||!t.offsetWidth||s.scrollWidth<=s.clientWidth+2)continue;
+      var cells=firstCol(t);
+      if(!cells.length)continue;
+      var w=0;for(var i=0;i<cells.length;i++)w=Math.max(w,cells[i].offsetWidth);
+      t.setAttribute('data-sfc','1');
+      if(w>s.clientWidth*0.45){
+        /* 1列目が広すぎるときは、箱の幅の38%まで狭めて折り返す。それでも広ければ固定しない */
+        var tw=Math.max(96,Math.round(s.clientWidth*0.38));
+        for(var i=0;i<cells.length;i++){var c0=cells[i];c0.style.width=tw+'px';c0.style.maxWidth=tw+'px';c0.style.minWidth='0';c0.style.whiteSpace='normal';c0.style.overflowWrap='anywhere';}
+        w=0;for(var i=0;i<cells.length;i++)w=Math.max(w,cells[i].offsetWidth);
+        if(w>s.clientWidth*0.45){
+          for(var i=0;i<cells.length;i++){var c1=cells[i].style;c1.width=c1.maxWidth=c1.minWidth=c1.whiteSpace=c1.overflowWrap='';}
+          continue;
+        }
+        if(s.scrollWidth<=s.clientWidth+2)continue;
+      }
+      for(var i=0;i<cells.length;i++){
+        var cell=cells[i],st=getComputedStyle(cell);
+        if(st.position==='sticky'&&st.left!=='auto')continue;
+        var top=st.position==='sticky'&&st.top!=='auto';
+        cell.style.position='sticky';
+        cell.style.left='0';
+        cell.style.zIndex=top?'4':'2';
+        if(clear(st.backgroundColor))cell.style.backgroundColor=bgOf(cell);
+        cell.style.boxShadow='inset -1px 0 0 rgba(0,0,0,.18)';
+      }
+    }
+  }
+  var tm;function later(){clearTimeout(tm);tm=setTimeout(fix,80);}
+  if(document.readyState==='complete')fix();else window.addEventListener('load',fix);
+  window.addEventListener('resize',later);
+  document.addEventListener('toggle',later,true);
+  document.addEventListener('click',later,true);
+})();
+</script>
 </body>
 </html>

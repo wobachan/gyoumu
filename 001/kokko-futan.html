@@ -243,5 +243,78 @@ ol li,ul li{margin:.2em 0}
 <p class="src">データ：文部科学省「学校基本調査」各年度の報告書掲載集計（小学校・中学校の「職名別教員数（本務者）」公立と「職名別教員数（兼務者）」）、e-Stat。2000〜2012年度、13年×47都道府県。常勤講師割合＝本務の講師 ÷（本務者計＋兼務者計）、非常勤講師割合＝兼務の講師 ÷ 同じ分母（菊地原2021と同じ定義）。2005年度公立小の本務者合計411,472人は報告書の値と一致。2001年度小学校の表で宮崎県の行が「宮城」と誤記されているのを直して使った。財政力指数：総務省「社会・人口統計体系」（e-Stat 統計ダッシュボード、都道府県財政）、2005年度の値で3群に分け、回帰では標準化。集計表は同じフォルダの「国庫負担_講師割合_2000-2012.csv」。</p>
 <p class="src" style="margin-top:2em">主な出典：文部科学省「義務教育費国庫負担制度」／中教審資料「義務教育費国庫負担制度について（参考資料）」／菊地原守 2021（日本教師教育学会年報30, pp.172-182, doi:10.32292/jsste.30.0_172）／金子真理子 2014（日本労働研究雑誌645, pp.42-45）／財務省『ファイナンス』2026年4月号。3章の「手元に残る割合」は制度からの計算で、出典の数値ではない。</p>
 </main>
+<script id="stick-first-col">
+/* 横スクロールする表の先頭列を固定する（001にのみ入れる） */
+(function(){
+  function clear(c){return !c||c==='transparent'||/rgba\([^)]*,\s*0\)$/.test(c);}
+  function bgOf(el){
+    while(el&&el.nodeType===1){var c=getComputedStyle(el).backgroundColor;if(!clear(c))return c;el=el.parentElement;}
+    return '#fff';
+  }
+  function scroller(t){
+    var e=t.parentElement;
+    while(e&&e!==document.body&&e!==document.documentElement){
+      var o=getComputedStyle(e).overflowX;
+      if(o==='auto'||o==='scroll')return e;
+      e=e.parentElement;
+    }
+    return null;
+  }
+  function firstCol(t){
+    var occ=[],out=[];
+    for(var ri=0;ri<t.rows.length;ri++){
+      var r=t.rows[ri],c=0;occ[ri]=occ[ri]||[];
+      for(var k=0;k<r.cells.length;k++){
+        var cell=r.cells[k];
+        while(occ[ri][c])c++;
+        var cs=cell.colSpan||1,rs=cell.rowSpan||1;
+        for(var i=0;i<rs;i++){occ[ri+i]=occ[ri+i]||[];for(var j=0;j<cs;j++)occ[ri+i][c+j]=1;}
+        if(c===0&&cs===1)out.push(cell);
+        c+=cs;
+      }
+    }
+    return out;
+  }
+  function fix(){
+    var ts=document.querySelectorAll('table');
+    for(var n=0;n<ts.length;n++){
+      var t=ts[n];
+      if(t.getAttribute('data-sfc'))continue;
+      var s=scroller(t);
+      if(!s||!t.offsetWidth||s.scrollWidth<=s.clientWidth+2)continue;
+      var cells=firstCol(t);
+      if(!cells.length)continue;
+      var w=0;for(var i=0;i<cells.length;i++)w=Math.max(w,cells[i].offsetWidth);
+      t.setAttribute('data-sfc','1');
+      if(w>s.clientWidth*0.45){
+        /* 1列目が広すぎるときは、箱の幅の38%まで狭めて折り返す。それでも広ければ固定しない */
+        var tw=Math.max(96,Math.round(s.clientWidth*0.38));
+        for(var i=0;i<cells.length;i++){var c0=cells[i];c0.style.width=tw+'px';c0.style.maxWidth=tw+'px';c0.style.minWidth='0';c0.style.whiteSpace='normal';c0.style.overflowWrap='anywhere';}
+        w=0;for(var i=0;i<cells.length;i++)w=Math.max(w,cells[i].offsetWidth);
+        if(w>s.clientWidth*0.45){
+          for(var i=0;i<cells.length;i++){var c1=cells[i].style;c1.width=c1.maxWidth=c1.minWidth=c1.whiteSpace=c1.overflowWrap='';}
+          continue;
+        }
+        if(s.scrollWidth<=s.clientWidth+2)continue;
+      }
+      for(var i=0;i<cells.length;i++){
+        var cell=cells[i],st=getComputedStyle(cell);
+        if(st.position==='sticky'&&st.left!=='auto')continue;
+        var top=st.position==='sticky'&&st.top!=='auto';
+        cell.style.position='sticky';
+        cell.style.left='0';
+        cell.style.zIndex=top?'4':'2';
+        if(clear(st.backgroundColor))cell.style.backgroundColor=bgOf(cell);
+        cell.style.boxShadow='inset -1px 0 0 rgba(0,0,0,.18)';
+      }
+    }
+  }
+  var tm;function later(){clearTimeout(tm);tm=setTimeout(fix,80);}
+  if(document.readyState==='complete')fix();else window.addEventListener('load',fix);
+  window.addEventListener('resize',later);
+  document.addEventListener('toggle',later,true);
+  document.addEventListener('click',later,true);
+})();
+</script>
 </body>
 </html>
