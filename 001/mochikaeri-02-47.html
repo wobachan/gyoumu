@@ -153,6 +153,7 @@ details.md p{margin:3px 0;max-width:40em} details.md .msrc{word-break:break-all}
 .note{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
 .note li{margin:4px 0}
 @media (max-width:600px){h1{font-size:1.35rem} body{font-size:14px} .bar{grid-template-columns:4.6em 1fr 2.6em 3.8em}}
+.srcref{display:inline-block;margin-left:2px;font-size:.78em;font-weight:700;text-decoration:none;color:var(--link);white-space:nowrap}.srcref:hover{text-decoration:underline}
 </style>
 <style>.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}.series .sl{font-weight:700;color:var(--sub);margin-right:4px}.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}.series b{background:var(--head);color:var(--headink);border-color:var(--head)}.series a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}</style>
 <style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
@@ -291,15 +292,15 @@ tr.grp td{letter-spacing:.08em}
 <div class="tbl" tabindex="0" aria-label="期間を決めた調査をしている9教委"><table style="min-width:760px">
 <thead><tr><th>教委</th><th>頻度</th><th>対象</th><th>期間</th></tr></thead>
 <tbody>
-<tr><td class="pn">福島県</td><td><span class="fq y">毎年</span></td><td>県立は全104校（悉皆）、市町村立は抽出193校</td><td>6月の1週間</td></tr>
-<tr><td class="pn">栃木県</td><td><span class="fq y">毎年</span></td><td>全公立学校の全教職員（悉皆）</td><td>7月1〜22日の平日の平均を聞く</td></tr>
-<tr><td class="pn">大分県</td><td><span class="fq y">毎年</span></td><td>県立全校（悉皆）</td><td>10〜11月の1週間</td></tr>
-<tr><td class="pn">島根県</td><td><span class="fq n">R5・R6</span></td><td>抽出38校</td><td>任意の1週間</td></tr>
-<tr><td class="pn">京都府</td><td><span class="fq n">H29・H30・R5・R6</span></td><td>抽出（約1割・1,100人）</td><td>連続7日間</td></tr>
-<tr><td class="pn">埼玉県</td><td><span class="fq n">約3年おき（H24・H28・R3・R6）</span></td><td>県立全校（悉皆）</td><td>6月の1週間</td></tr>
-<tr><td class="pn">北海道</td><td><span class="fq n">約3年おき（H28・R1・R4）</span></td><td>抽出86校</td><td>連続7日間</td></tr>
-<tr><td class="pn">山梨県</td><td><span class="fq n">約4年おき（R2・R6）</span></td><td>公立小中244校と県立41校</td><td>連続7日間</td></tr>
-<tr><td class="pn">神奈川県</td><td><span class="fq n">約5年おき（H29・R4）</span></td><td>抽出（県立30校＋市町村立90校）</td><td>学校が決めた7日間</td></tr>
+<tr><td class="pn">福島県<a class="srcref" href="https://www.pref.fukushima.lg.jp/sec/70014a/taboukakaisyou.html" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq y">毎年</span></td><td>県立は全104校（悉皆）、市町村立は抽出193校</td><td>6月の1週間</td></tr>
+<tr><td class="pn">栃木県<a class="srcref" href="https://www.pref.tochigi.lg.jp/m01/documents/kyousyokuinr7.pdf" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq y">毎年</span></td><td>全公立学校の全教職員（悉皆）</td><td>7月1〜22日の平日の平均を聞く</td></tr>
+<tr><td class="pn">大分県<a class="srcref" href="https://www.pref.oita.jp/uploaded/attachment/2261264.pdf#page=7" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq y">毎年</span></td><td>県立全校（悉皆）</td><td>10〜11月の1週間</td></tr>
+<tr><td class="pn">島根県<a class="srcref" href="https://www.pref.shimane.lg.jp/education/kyoiku/kyousyokuin/hatarakikata/hatarakikata_data/kyousyokuin_hatarakikata_data.data/r6_motikaeri_tyousakekka.pdf" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq n">R5・R6</span></td><td>抽出38校</td><td>任意の1週間</td></tr>
+<tr><td class="pn">京都府<a class="srcref" href="https://www.kyoto-be.ne.jp/kyoshoku/cms/?p=93" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq n">H29・H30・R5・R6</span></td><td>抽出（約1割・1,100人）</td><td>連続7日間</td></tr>
+<tr><td class="pn">埼玉県<a class="srcref" href="https://www.pref.saitama.lg.jp/documents/100051/r6_houkokusyo.pdf" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq n">約3年おき（H24・H28・R3・R6）</span></td><td>県立全校（悉皆）</td><td>6月の1週間</td></tr>
+<tr><td class="pn">北海道<a class="srcref" href="https://www.dokyoi.pref.hokkaido.lg.jp/hk/ksi/hatarakikata/chousakekka.html" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq n">約3年おき（H28・R1・R4）</span></td><td>抽出86校</td><td>連続7日間</td></tr>
+<tr><td class="pn">山梨県<a class="srcref" href="https://www.pref.yamanashi.jp/documents/121042/gyomu.pdf" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq n">約4年おき（R2・R6）</span></td><td>公立小中244校と県立41校</td><td>連続7日間</td></tr>
+<tr><td class="pn">神奈川県<a class="srcref" href="https://www.pref.kanagawa.jp/docs/pi7/cnt/f537530/index.html" target="_blank" rel="noopener">〈参照〉</a></td><td><span class="fq n">約5年おき（H29・R4）</span></td><td>抽出（県立30校＋市町村立90校）</td><td>学校が決めた7日間</td></tr>
 </tbody></table></div>
 <p>このやり方は、国の「教員勤務実態調査」（抽出した学校で連続7日間の業務を記録）と同じ形です。都道府県も国の調査にならって設計していると考えられます。国の調査と比べられるという利点がある一方で、同じ弱点も引き継いでいます（5-4）。</p>
 <p class="small">このほか、市が単独で行った例として広島市（R7に1回、抽出46園・校）と川崎市（H29・R5）があります（<a href="mochikaeri-03-zenkoku.html#hiroshima">033 全国の実例 6-4</a>・<a href="mochikaeri-03-zenkoku.html#kawasaki">033 6-6</a>）。</p>
@@ -333,16 +334,16 @@ tr.grp td{letter-spacing:.08em}
 <p>文科省の設問は「把握しているか」の二択で、方法も頻度も問いません。そのため、次のような教委が同じ「把握している」に数えられています。</p>
 <ul>
 <li><strong>数年に一度の1週間の調査</strong>をしている教委（5-1の多く）</li>
-<li><strong>校長の面談・聞き取りだけ</strong>の教委。山口県教委は県議会で「県教委として何時間という把握はしていない」と答弁しています（R4.3.14）</li>
-<li>議会で「持ち帰り残業がどのぐらい行われているかの細かな分析は、正直できていない」と答弁した宮崎県教委（R7.9.18）</li>
+<li><strong>校長の面談・聞き取りだけ</strong>の教委。山口県教委は県議会で「県教委として何時間という把握はしていない」と答弁しています（R4.3.14）<a class="srcref" href="https://ssp.kaigiroku.net/tenant/prefyamaguchi/MinuteSearch.html" target="_blank" rel="noopener">〈参照〉</a></li>
+<li>議会で「持ち帰り残業がどのぐらい行われているかの細かな分析は、正直できていない」と答弁した宮崎県教委（R7.9.18）<a class="srcref" href="https://ssp.kaigiroku.net/tenant/miyazakipref/MinuteSearch.html" target="_blank" rel="noopener">〈参照〉</a></li>
 </ul>
-<p>逆に、川崎市は2回の実態調査で持ち帰りを詳しく調べていながら、「把握していない」と答えています（<a href="mochikaeri-03-zenkoku.html#kawasaki">033 全国の実例 6-6</a>）。<strong>「把握している」の43.0%は、答えた教委それぞれの基準で数えた数字</strong>で、持ち帰りの実態が把握されている割合ではありません。毎日の記録で持ち帰りを記録するしくみがあるのは、調べた39教委のうち3つ（鳥取県・香川県の県立学校と大阪市）だけでした。しかも、その3つでも、持ち帰りがどれだけ記録されているかを示す数字はほとんどありません。</p>
+<p>逆に、川崎市は2回の実態調査で持ち帰りを詳しく調べていながら、「把握していない」と答えています（<a href="mochikaeri-03-zenkoku.html#kawasaki">033 全国の実例 6-6</a>）。<strong>「把握している」の43.0%は、答えた教委それぞれの基準で数えた数字</strong><a class="srcref" href="https://www.mext.go.jp/content/20260417-mxt_kyoikujinzai01-000049025-02.pdf#page=16" target="_blank" rel="noopener">〈参照〉</a>で、持ち帰りの実態が把握されている割合ではありません。毎日の記録で持ち帰りを記録するしくみがあるのは、調べた39教委のうち3つ（鳥取県・香川県の県立学校と大阪市）だけでした。しかも、その3つでも、持ち帰りがどれだけ記録されているかを示す数字はほとんどありません。</p>
 <div class="tbl" tabindex="0" aria-label="毎日の記録のしくみがある3教委の記録状況"><table style="min-width:640px">
 <thead><tr><th>教委</th><th>しくみ</th><th>公開されている数字</th></tr></thead>
 <tbody>
-<tr><td class="pn">大阪市</td><td>持ち帰ったら「時間外勤務記録簿」で申請（校園長が許可）</td><td><strong>入力した教職員は多くとも3.5%未満</strong>（令和4年度、493件。包括外部監査の試算）。監査人のアンケートでは63.6%が「持ち帰ることがある」</td></tr>
-<tr><td class="pn">香川県（県立）</td><td>毎月「時間外勤務記録票」を提出し、持ち帰りも含めて記録</td><td>記録票の<strong>提出率は100%</strong>（令和2年12月 教育長答弁）。ただし、持ち帰りを書いた人の割合や時間は公表されていない</td></tr>
-<tr><td class="pn">鳥取県（県立）</td><td>持ち帰ったら給与・勤怠管理システムに入力</td><td><strong>公表なし</strong>。入力の状況は公開資料で確認できない</td></tr>
+<tr><td class="pn">大阪市</td><td>持ち帰ったら「時間外勤務記録簿」で申請（校園長が許可）</td><td><strong>入力した教職員は多くとも3.5%未満</strong>（令和4年度、493件。包括外部監査の試算）<a class="srcref" href="https://www.city.osaka.lg.jp/gyouseiiinkai/cmsfiles/contents/0000431/431925/R5houkatu_Part2.pdf#page=41" target="_blank" rel="noopener">〈参照〉</a>。監査人のアンケートでは63.6%が「持ち帰ることがある」</td></tr>
+<tr><td class="pn">香川県（県立）</td><td>毎月「時間外勤務記録票」を提出し、持ち帰りも含めて記録</td><td>記録票の<strong>提出率は100%</strong>（令和2年12月 教育長答弁）<a class="srcref" href="https://www.pref.kagawa.dbsr.jp/" target="_blank" rel="noopener">〈参照〉</a>。ただし、持ち帰りを書いた人の割合や時間は公表されていない</td></tr>
+<tr><td class="pn">鳥取県（県立）</td><td>持ち帰ったら給与・勤怠管理システムに入力</td><td><strong>公表なし</strong>。入力の状況は公開資料で確認できない<a class="srcref" href="https://www.pref.tottori.lg.jp/secure/1204025/jogenhousinQA.pdf#page=5" target="_blank" rel="noopener">〈参照〉</a></td></tr>
 </tbody></table></div>
 <p class="small">香川県の100%は記録票そのものを出した割合で、持ち帰りをきちんと書いた割合ではありません。大阪市の3.5%とは別の種類の数字です。</p>
 
