@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>市町教委交渉で要求すること（時間外在校等時間から）</title>
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
+  --head:#26324a; --headink:#fff; --accent:#2f4f8f;
+  --ok:#1d7a46; --okbg:#e5f3ea; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
+  --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4; --me:#fff6d6;
+  --tA:#1d7a46; --tB:#2f7a8f; --tC:#2f4f8f; --tD:#6a4fa0; --tE:#9a5a00; --tF:#8c2350; --tG:#6b7280;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --tA:#6fd09a; --tB:#6cc3d6; --tC:#8fb0f0; --tD:#b9a2ea; --tE:#f0b35c; --tF:#f4a6c8; --tG:#a4aab6;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
+    --head:#33415e; --headink:#fff; --accent:#8fb0f0;
+    --ok:#6fd09a; --okbg:#1c3327; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
+    --tA:#6fd09a; --tB:#6cc3d6; --tC:#8fb0f0; --tD:#b9a2ea; --tE:#f0b35c; --tF:#f4a6c8; --tG:#a4aab6;
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+h1,h2{font-family:"BIZ UDPMincho","Yu Mincho",serif;text-wrap:balance;letter-spacing:.02em}
+h1{font-size:1.75rem;line-height:1.35;margin:0 0 6px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin:0 0 6px}
+.date{color:var(--sub);font-size:.9rem;margin:0}
+h2{font-size:1.25rem;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--head)}
+.wrap>h2{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-top:10px;box-shadow:0 6px 8px -8px rgba(0,0,0,.25)}
+.hn{display:inline-block;min-width:1.9em;margin-right:10px;padding:0 7px;border-radius:4px;background:var(--head);color:var(--headink);font-family:"BIZ UDPGothic",sans-serif;font-size:.8em;text-align:center;vertical-align:.1em}
+.totop{float:right;font-family:"BIZ UDPGothic",sans-serif;font-size:.78rem;font-weight:400;text-decoration:none;margin-top:.4em}
+a{color:var(--link)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+p{max-width:72ch}
+.lead{margin:18px 0 0}
+.small{font-size:.85rem;color:var(--sub)}
+.num{font-variant-numeric:tabular-nums}
+.mokuji{margin:22px 0 0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 20px}
+.mk-h{margin:0 0 6px;font-weight:700;letter-spacing:.12em;font-size:.85rem;color:var(--accent)}
+.mokuji ul{list-style:none;padding:0;margin:0}
+.mokuji li{margin:5px 0;font-weight:700}
+.mokuji a{text-decoration:none}
+.mokuji .n{display:inline-block;min-width:2em;color:var(--accent)}
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pt b.big{display:block;font-size:1.6rem;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pt.key{border:2px solid var(--neoline);background:var(--neo)}
+.pt.key b.big{color:var(--neoink)}
+.pt p{margin:4px 0 0;font-size:.92rem}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;columns:2 360px;column-gap:28px}
+.bar{display:grid;grid-template-columns:5.2em 1fr 3em 4.2em;gap:8px;align-items:center;font-size:.85rem;break-inside:avoid;padding:1px 4px;border-radius:4px}
+.bar.me{background:var(--me)}
+.bar .lab{text-decoration:none;color:var(--ink)}
+.bar .track{background:var(--soft);height:12px;border-radius:3px;overflow:hidden}
+.bar .fill{display:block;height:100%;background:var(--accent);border-radius:3px}
+.bar .n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.bar .cnt{color:var(--sub);font-variant-numeric:tabular-nums;font-size:.8rem}
+.tbl{overflow:auto;max-height:none;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left;font-size:.88rem}
+th{background:var(--head);color:var(--headink);white-space:nowrap}
+td.c{text-align:center;white-space:nowrap}
+td.pn{font-weight:700;white-space:nowrap}
+tr.grp td{background:var(--soft);color:var(--sub);font-weight:700;font-size:.8rem;letter-spacing:.05em;padding:4px 10px}
+tr.me td{background:var(--me)}
+tr[id]{scroll-margin-top:64px}
+.pp{display:block;font-weight:700;font-size:.95rem}
+.names{line-height:1.8}
+.names details{margin-top:6px}
+.names summary{cursor:pointer;color:var(--sub);font-size:.82rem}
+.names details p{margin:4px 0 0;color:var(--sub);font-size:.84rem}
+b.sr{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+td.src{font-size:.8rem;white-space:nowrap}
+td.src a{word-break:break-all;white-space:normal}
+.s{display:inline-block;min-width:1.7em;text-align:center;font-weight:700;border-radius:4px;padding:0 5px}
+.s.ok{color:var(--ok);background:var(--okbg)} .s.ng{color:var(--ng);background:var(--ngbg)}
+.mlink{display:block;font-size:.75rem;margin-top:3px}
+.tc{display:inline-block;min-width:1.5em;text-align:center;font-weight:700;font-size:.78rem;border:1.5px solid;border-radius:4px;margin:1px;padding:0 3px}
+.tA{color:var(--tA)} .tB{color:var(--tB)} .tC{color:var(--tC)} .tD{color:var(--tD)} .tE{color:var(--tE)} .tF{color:var(--tF)} .tG{color:var(--tG)}
+.tlegend{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 16px;font-size:.88rem}
+
+h3.kh{font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.08rem;margin:26px 0 8px;scroll-margin-top:64px}
+.hn3{display:inline-block;min-width:2.4em;margin-right:8px;padding:0 6px;border-radius:4px;background:var(--accent);color:var(--headink);font-size:.78rem;text-align:center;letter-spacing:0;font-family:"BIZ UDPGothic",sans-serif}
+h2[id]{scroll-margin-top:0}
+.munote{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 16px;margin:14px 0}
+.munote .mh{margin:0 0 4px;font-weight:700;color:var(--accent)}
+.munote ul{margin:0;padding-left:1.2em;font-size:.9rem}
+ul.dots{padding-left:1.2em;max-width:80ch}
+ul.dots li{margin:6px 0}
+.formula{display:grid;gap:6px;max-width:760px}
+.fx{display:grid;grid-template-columns:12em 1fr;gap:12px;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px}
+.fx span{font-size:.88rem;color:var(--sub)}
+.fx.plus b{color:var(--ok)} .fx.minus b{color:var(--ng)}
+.fx.eq{background:var(--soft)} .fx.eq.key{border:2px solid var(--neoline);background:var(--neo)} .fx.eq.key b{color:var(--neoink);font-size:1.05rem}
+.tl{display:grid;gap:0;border-left:3px solid var(--accent);margin:8px 0 8px 6px;max-width:900px}
+.ti{display:grid;grid-template-columns:4.5em 1fr;gap:12px;padding:8px 0 8px 14px;position:relative}
+.ti::before{content:"";position:absolute;left:-8px;top:15px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--accent)}
+.td{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.gchart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:grid;gap:2px}
+.gr{display:grid;grid-template-columns:8.5em 1fr 3.6em minmax(10em,17em);gap:8px;align-items:center;font-size:.85rem;padding:2px 4px;border-radius:4px}
+.gr.me{background:var(--me);font-weight:700}
+.gr.ref{border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:2px}
+.gr.ref .fill{background:var(--sub)}
+.gn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rk{display:inline-block;min-width:1.8em;font-style:normal;color:var(--sub);font-weight:400;font-variant-numeric:tabular-nums}
+.gr .track{position:relative;background:var(--soft);height:14px;border-radius:3px}
+.gr .fill{display:block;height:100%;background:var(--accent);border-radius:3px}
+.gr.me .fill{background:var(--neoline)}
+.t30{position:absolute;top:-3px;bottom:-3px;border-left:2px dotted var(--ng)}
+.gv{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.gv.nd{color:var(--sub);font-weight:400}
+.gd{font-size:.78rem;color:var(--sub);font-variant-numeric:tabular-nums}
+.gb{display:inline-block;margin-left:6px;padding:0 5px;border-radius:4px;background:var(--soft);font-size:.74rem}
+.axrow{font-size:.72rem;color:var(--sub)}
+.axrow .ticks{position:relative;height:1.2em}
+.axrow .ticks span{position:absolute;transform:translateX(-50%)}
+.axrow .ticks span:first-child{transform:none}
+td.dz{background:var(--ngbg);color:var(--ng);font-weight:700}
+.dzs{background:var(--ngbg);color:var(--ng);padding:0 4px;border-radius:3px}
+.it{color:var(--sub);font-size:.8em;margin-left:2px}
+.ymt th{text-align:center;font-size:.8rem;white-space:normal}
+@media (max-width:700px){
+ .gr{grid-template-columns:6.8em 1fr 3.2em;font-size:.8rem}
+ .gr .gd{grid-column:1/-1;padding-left:6.8em;margin-top:-2px}
+ .axrow .ticks{grid-column:2}
+ .fx{grid-template-columns:1fr;gap:0}
+ th,td{padding:6px 6px;font-size:.8rem}
+}
+@media print{.wrap>h2{position:static;box-shadow:none}.totop{display:none}}
+
+.g2wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px}
+.gt{margin:0 0 2px;font-weight:700;font-size:.92rem;max-width:none}
+.glg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0 0 6px;font-size:.78rem;color:var(--sub);max-width:none}
+.glg span{display:inline-flex;align-items:center;gap:5px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px}
+.lk{display:inline-block;width:0;height:12px}
+.t30k{border-left:2px dotted var(--ng)} .t45k{border-left:2px dashed var(--ink)}
+.t45{position:absolute;top:-3px;bottom:-3px;border-left:2px dashed var(--ink);opacity:.55}
+.gr2{display:grid;grid-template-columns:7.5em 1fr 3.6em;gap:8px;align-items:center;font-size:.85rem;padding:2px 4px}
+.gr2 .track{position:relative;background:var(--soft);height:16px;border-radius:3px}
+.gr2 .fill{display:block;height:100%;background:var(--accent);border-radius:3px}
+.axrow.gr2 .ticks{position:relative;height:1.2em}
+.axrow.gr2 .ticks span{position:absolute;transform:translateX(-50%)}
+.axrow.gr2 .ticks span:first-child{transform:none}
+.stg{display:grid;grid-template-columns:7.5em 1fr;gap:8px;align-items:center;font-size:.85rem;padding:5px 4px;border-bottom:1px solid var(--line)}
+.stg:last-child{border-bottom:0}
+.st{display:grid;grid-template-columns:2em 1fr 6.4em;gap:6px;align-items:center;margin:2px 0;opacity:.6}
+.st.cur{opacity:1}
+.yr{font-size:.75rem;color:var(--sub)}
+.stbar{display:flex;height:16px;border-radius:3px;overflow:hidden;background:var(--soft)}
+.st.cur .stbar{height:20px}
+.stbar span{display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:.7rem;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+.s1{background:var(--ok)} .s2{background:var(--tE)} .s3{background:var(--ng)}
+.v80{font-size:.75rem;color:var(--sub);font-variant-numeric:tabular-nums}
+.v80 b{color:var(--ng)}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4px 24px}
+.jblk{padding:6px 0;border-bottom:1px solid var(--line)}
+.jh{margin:2px 0 2px;font-weight:700;max-width:none}
+.gr2.j0 .fill,.gr2.j3 .fill,.gr2.j4 .fill,.jk0{background:var(--tG)}
+.gr2.j1 .fill,.jk1{background:var(--neoline)}
+.gr2.j2 .fill,.jk2{background:var(--accent)}
+.gr2.j1 .gv{color:var(--neoink)}
+.jgrid ~ *{}
+details.tdet{margin:8px 0 0}
+details.tdet summary{cursor:pointer;color:var(--sub);font-size:.85rem}
+details.tdet .tbl{margin-top:6px}
+@media (max-width:700px){.gr2,.stg{grid-template-columns:5.6em 1fr 3.2em;font-size:.8rem}.stg{grid-template-columns:5.6em 1fr}.st{grid-template-columns:1.8em 1fr 5.6em}}
+
+.pg{display:grid;grid-template-columns:7.5em 1fr;gap:8px;align-items:center;font-size:.85rem;padding:4px;border-bottom:1px solid var(--line)}
+.pg:last-child{border-bottom:0}
+.pg.axg{border-bottom:0;padding-bottom:0}
+.pr{display:grid;grid-template-columns:2em 1fr 6.6em;gap:6px;align-items:center;margin:1px 0}
+.pr .track{background:var(--soft);height:12px;border-radius:3px;position:relative}
+.pr .fill{display:block;height:100%;border-radius:3px}
+.pr.r5 .fill,.k5{background:var(--tG);opacity:.55}
+.pr.r6 .fill,.k6{background:var(--accent)}
+.pr.r6 .track{height:16px}
+.pr .gv{text-align:right;font-variant-numeric:tabular-nums;font-size:.8rem}
+.pr.r5 .gv{color:var(--sub);font-weight:400}
+.pr.r6 .gv{font-weight:700}
+.dl{display:inline-block;margin-left:4px;font-size:.72rem;font-weight:400;color:var(--sub)}
+.pr.axrow .ticks{position:relative;height:1.2em}
+.pr.axrow .ticks span{position:absolute;transform:translateX(-50%);font-size:.72rem;color:var(--sub)}
+.pr.axrow .ticks span:first-child{transform:none}
+.gnote{margin-left:8px;font-weight:400;font-size:.78rem;color:var(--sub)}
+@media (max-width:700px){.pg{grid-template-columns:5.6em 1fr;font-size:.8rem}.pr{grid-template-columns:1.8em 1fr 6.2em}}
+
+.howto{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 16px;margin:12px 0;max-width:820px}
+.howto .mh{margin:0 0 4px;font-weight:700;color:var(--accent)}
+.howto ul{margin:0;padding-left:1.2em;font-size:.92rem}
+.howto li{margin:3px 0}
+.ex{background:var(--soft);border-radius:6px;padding:8px 12px;margin:8px 0 0;font-size:.9rem}
+.ex p{margin:2px 0;max-width:none}
+.exh{font-weight:700;color:var(--sub);font-size:.8rem}
+.it{display:inline-block;margin-left:3px;padding:0 4px;border-radius:3px;background:var(--tD);color:#fff;font-size:.78em;font-weight:700;line-height:1.4;vertical-align:.08em}
+.itl{display:inline-block;padding:0 4px;border-radius:3px;background:var(--tD);color:#fff;font-weight:700;font-size:.85em}
+.yomi{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin:10px 0}
+.ym{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.ym.warn{border:2px solid var(--tE)}
+.ymh{margin:0 0 4px;font-weight:700;max-width:none}
+.ymn{display:inline-block;width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:.8rem;margin-right:6px}
+.ym.warn .ymn{background:var(--tE)}
+.ym ul{margin:0;padding-left:1.2em;font-size:.9rem}
+.ym li{margin:3px 0}
+.ti{grid-template-columns:5.6em 1fr}
+.tsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px}
+.tsu{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:flex;flex-direction:column}
+.tsh{margin:0 0 6px;font-weight:700;font-size:1rem;max-width:none;display:flex;gap:8px;align-items:flex-start}
+.tsn{flex:none;display:inline-block;width:1.7em;height:1.7em;line-height:1.7em;text-align:center;border-radius:50%;background:var(--head);color:#fff;font-size:.82rem;margin-top:.1em}
+.tsb{font-size:.92rem;flex:1}
+.tsb p{margin:0 0 6px;max-width:none}
+.tsb ul{margin:0 0 6px;padding-left:1.2em}
+.tsw{margin:6px 0 0;padding-top:6px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--sub);max-width:none}
+.tsw b{display:inline-block;margin-right:6px;padding:0 6px;border-radius:3px;background:var(--soft);color:var(--ink);font-size:.75rem}
+.qscore{position:sticky;top:calc(env(safe-area-inset-top,0px) + 48px);z-index:4;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;background:var(--bg);padding:6px 2px;font-size:.92rem}
+.qscore b{font-size:1.2rem;color:var(--accent)}
+.qall{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:3px 12px;font:inherit;font-size:.82rem;cursor:pointer}
+.quiz{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:flex;flex-direction:column}
+.qcard.good{border:2px solid var(--ok)} .qcard.bad{border:2px solid var(--ng)}
+.qno{margin:0;font-weight:700;color:var(--accent);font-size:.85rem;letter-spacing:.1em}
+.qq{margin:4px 0 10px;font-size:1.02rem;font-weight:700;line-height:1.8;max-width:none}
+.qblank{display:inline-block;min-width:4em;padding:0 8px;border-bottom:3px solid var(--accent);background:var(--soft);border-radius:4px 4px 0 0;text-align:center;color:var(--accent)}
+.answered .qblank{background:var(--neo);color:var(--neoink);border-bottom-color:var(--neoline)}
+.qopts{display:grid;gap:6px}
+.qopts button{text-align:left;font:inherit;font-size:.95rem;padding:8px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);cursor:pointer}
+.qopts button:hover:not(:disabled){border-color:var(--accent)}
+.qopts button:disabled{cursor:default}
+.qopts button.right{border-color:var(--ok);background:var(--okbg);color:var(--ok);font-weight:700}
+.qopts button.right::before{content:"○ "}
+.qopts button.wrong{border-color:var(--ng);background:var(--ngbg);color:var(--ng)}
+.qopts button.wrong::before{content:"✕ "}
+.qans{display:none;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)}
+.answered .qans{display:block}
+.qres{margin:0;font-weight:700;max-width:none}
+.good .qmark::before{content:"正解！ ";color:var(--ok)}
+.bad .qmark::before{content:"ざんねん。 ";color:var(--ng)}
+.qres::after{content:""}
+.qmore{margin:4px 0 6px;font-size:.88rem;max-width:none}
+.qlink{font-size:.82rem}
+@media print{.qans{display:block}.qall{display:none}}
+.red{color:var(--ng);font-weight:700;background:var(--ngbg);padding:0 3px;border-radius:3px}
+.warnbox{border-left-color:var(--ng)} .warnbox .mh{color:var(--ng)} .warnbox p{max-width:none}
+.umark{background:linear-gradient(transparent 58%,#ffe066 58%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .umark{background:linear-gradient(transparent 58%,#7a6514 58%)}}
+:root[data-theme="dark"] .umark{background:linear-gradient(transparent 58%,#7a6514 58%)}
+.mokuji summary{cursor:pointer;list-style:none;margin:0}
+.mokuji summary::-webkit-details-marker{display:none}
+.mokuji summary::before{content:"▶";display:inline-block;margin-right:8px;font-size:.75em;transition:transform .15s}
+.mokuji details[open] summary::before{transform:rotate(90deg)}
+.mokuji details[open] summary{margin-bottom:6px}
+details.secfold>summary{cursor:pointer;list-style:none;display:inline-block;margin:2px 0 8px;padding:6px 16px;border:1.5px solid var(--accent);border-radius:999px;background:var(--card);color:var(--accent);font-weight:700;font-size:.9rem}
+details.secfold>summary::-webkit-details-marker{display:none}
+details.secfold>summary::before{content:"▶";display:inline-block;margin-right:8px;font-size:.75em;transition:transform .15s}
+details.secfold[open]>summary::before{transform:rotate(90deg)}
+details.secfold[open]>summary{font-size:0}
+details.secfold[open]>summary::after{content:"この章を閉じる";font-size:.9rem}
+details.secfold[open]>summary::before{font-size:.68rem}
+@media print{details.secfold>summary{display:none}}
+h2.hot{border-bottom:3px solid var(--neoline);color:var(--neoink)}
+h2.hot .hn{background:var(--neoline)}
+.hotfold{background:var(--neo);border:2px solid var(--neoline);border-radius:12px;padding:12px 16px}
+.hotfold>summary{border-color:var(--neoline);color:var(--neoink)}
+.hotli a{color:var(--neoink)}
+.hotbadge{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;background:var(--neoline);color:#fff;font-size:.72rem;font-weight:700;vertical-align:.1em}
+.hotbanner{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:14px;align-items:center;margin:18px 0 0;padding:14px 18px;border-radius:12px;background:var(--neo);border:2px solid var(--neoline);text-decoration:none;color:var(--neoink);max-width:760px}
+.hotbanner:hover{filter:brightness(.97)}
+.hb1{grid-row:1/3;font-size:.8rem;font-weight:700;background:var(--neoline);color:#fff;border-radius:6px;padding:4px 8px;writing-mode:horizontal-tb}
+.hb2{font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.25rem;font-weight:700;line-height:1.35}
+.hb3{font-size:.85rem;color:var(--neoink)}
+.hotbanner.small2{margin:26px 0 0;padding:10px 16px}
+.hotbanner.small2 .hb2{font-size:1.05rem}
+@media (max-width:700px){.hotbanner{grid-template-columns:1fr}.hb1{grid-row:auto;justify-self:start;margin-bottom:4px}.hb2{font-size:1.1rem}}
+.town{font-weight:700;color:var(--neoink);background:linear-gradient(transparent 60%,var(--neo) 60%);border-bottom:2px solid var(--neoline);padding:0 1px}
+.hotfold .town{background:#fff;border-radius:3px 3px 0 0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hotfold .town{background:var(--card)}}
+:root[data-theme="dark"] .hotfold .town{background:var(--card)}
+.town,.hotfold .town{font-weight:700;color:#fff;background:var(--neoline);border:0;border-radius:4px;padding:0 4px;margin:0 1px}
+.town{white-space:nowrap}
+.tsu.tkey{border:3px solid var(--ng);box-shadow:0 0 0 4px var(--ngbg);grid-column:1/-1}
+.tsu.tkey .tsh{font-size:1.15rem;color:var(--ng)}
+.tsu.tkey .tsn{background:var(--ng)}
+.tkb{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;background:var(--ng);color:#fff;font-size:.75rem;vertical-align:.15em}
+.tsu.tkey .tsb{font-size:1rem}
+.srcref{display:inline-block;margin-left:2px;font-size:.78em;font-weight:700;text-decoration:none;color:var(--link);white-space:nowrap}.srcref:hover{text-decoration:underline}
+.gb.bad{background:var(--ngbg);color:var(--ng);font-weight:700}
+.ndred{color:var(--ng);font-weight:700}
+.redp{color:var(--ng);background:var(--ngbg);border-left:4px solid var(--ng);padding:6px 10px;border-radius:4px;max-width:none}
+td.dz{background:#fff3bf;color:#7a5a00;font-weight:700}
+.dzs{background:#fff3bf;color:#7a5a00}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) td.dz,:root:not([data-theme="light"]) .dzs{background:#4a3d0f;color:#ffd866}}
+:root[data-theme="dark"] td.dz,:root[data-theme="dark"] .dzs{background:#4a3d0f;color:#ffd866}
+.abA,.abB{display:inline-block;min-width:1.4em;margin:0 3px;padding:0 4px;border-radius:4px;color:#fff;font-weight:700;font-size:.85em;text-align:center;font-family:"BIZ UDPGothic",sans-serif;vertical-align:.08em}
+.abA{background:#1d7a46} .abB{background:#1a5fb4}
+th.thA{background:#1d7a46 !important} th.thB{background:#1a5fb4 !important}
+th.thA .abA,th.thB .abB{background:rgba(255,255,255,.25)}
+td.cA{background:rgba(29,122,70,.08)} td.cB{background:rgba(26,95,180,.08)}
+td.cB.dz{background:#fff3bf}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) td.cB.dz{background:#4a3d0f}}
+:root[data-theme="dark"] td.cB.dz{background:#4a3d0f}
+details.secfold>summary{display:none}
+.foldbtn{float:right;margin:.25em 10px 0 0;padding:1px 12px;border:1.5px solid var(--accent);border-radius:999px;background:var(--card);color:var(--accent);font-family:"BIZ UDPGothic",sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;line-height:1.6}
+.foldbtn::before{content:"▶ ";font-size:.8em}
+.foldbtn.on::before{content:"▼ "}
+.foldbtn.on{background:var(--accent);color:#fff}
+h2.hot .foldbtn{border-color:var(--neoline);color:var(--neoink)}
+h2.hot .foldbtn.on{background:var(--neoline);color:#fff}
+@media print{.foldbtn{display:none}}
+.g3wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.gchart.sp{padding:10px 12px}
+.sy{display:grid;grid-template-columns:5.2em 1fr 6.2em;gap:6px;align-items:center;font-size:.82rem;padding:1px 2px;border-radius:4px}
+.sy .track{position:relative;background:var(--soft);height:13px;border-radius:3px}
+.sy .fill{display:block;height:100%;background:var(--tG);border-radius:3px;opacity:.75}
+.sy.base .fill{background:var(--sub);opacity:1}
+.sy.goal{background:var(--me)}
+.sy.goal .fill{background:var(--neoline);opacity:1}
+.sy:not(.base):not(.goal):not(.axrow) .fill{background:var(--accent);opacity:.8}
+.sy .gv{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.dlt{display:inline-block;margin-left:3px;font-size:.72rem;font-weight:400;color:var(--sub)}
+.yl{white-space:nowrap}
+.stag{display:inline-block;margin-left:3px;padding:0 4px;border-radius:3px;background:var(--sub);color:#fff;font-size:.65rem;vertical-align:.1em}
+.stag.g{background:var(--neoline)}
+.tg70{position:absolute;top:-3px;bottom:-3px;border-left:2.5px solid var(--ok)}
+.tg70k{border-left:3px solid var(--ok)}
+.sy.axrow .ticks{position:relative;height:1.2em}
+.sy.axrow .ticks span{position:absolute;transform:translateX(-50%);font-size:.7rem;color:var(--sub)}
+.sy.axrow .ticks span:first-child{transform:none}
+.sres{margin:6px 0 0;font-size:.85rem;max-width:none}
+.ngc{color:var(--ng)} .okc{color:var(--ok)}
+.goalbox{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;background:var(--card);border:2px solid var(--ok);border-radius:10px;padding:10px 14px;margin:6px 0 8px;max-width:760px}
+.gb1{background:var(--ok);color:#fff;font-weight:700;font-size:.8rem;border-radius:6px;padding:2px 8px}
+.gb2{font-size:1rem}
+.sy{grid-template-columns:4.9em 1fr 4.3em}.sy .dlt{display:block;margin:0;line-height:1.1}.sy .track{height:15px}
+.oy{display:grid;grid-template-columns:4.9em 1fr;gap:6px;align-items:center;font-size:.8rem;padding:2px;border-radius:4px}
+.oy.st2{border-top:2px dashed var(--accent);margin-top:2px;padding-top:4px}
+.obs{display:grid;gap:2px}
+.ob{display:grid;grid-template-columns:1fr 3.6em;gap:6px;align-items:center}
+.ob .track{background:var(--soft);height:9px;border-radius:2px;overflow:hidden}
+.ob .fill{display:block;height:100%;border-radius:2px}
+.o45 .fill{background:var(--tE)} .o360 .fill{background:var(--ng)}
+.ov{text-align:right;font-variant-numeric:tabular-nums;font-size:.75rem;font-weight:700}
+.ov.nd{color:var(--sub);font-weight:400;font-size:.68rem}
+.stag.g2{background:var(--accent)}
+.icgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin:8px 0}
+.icard{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.icard .ic{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--ngbg);color:var(--ng)}
+.icard.soft .ic{background:var(--okbg);color:var(--ok)}
+.ict{font-size:.92rem}
+.ict>b:first-child{display:block;font-size:1rem;margin-bottom:2px}
+.hic{display:inline-flex;vertical-align:-.35em;margin-right:6px;color:var(--accent)}
+.hic svg{width:24px;height:24px}
+.foldbtn{float:none;display:inline-block;margin:0 0 0 12px;vertical-align:.3em}
+h1.hero{display:flex;flex-direction:column;gap:4px;margin:4px 0 10px;line-height:1.25}
+.h-main{font-size:clamp(1.9rem,6vw,2.8rem);letter-spacing:.02em}
+.h-q{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:"BIZ UDPGothic",sans-serif;font-size:clamp(1.25rem,4.2vw,1.8rem);font-weight:700}
+.h-q b{color:var(--neoline);background:linear-gradient(transparent 62%,#ffe066 62%);padding:0 2px}
+.q1,.q2{white-space:nowrap}
+.h-sub{font-size:clamp(1rem,3vw,1.25rem);color:var(--sub);letter-spacing:.15em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .h-q b{background:linear-gradient(transparent 62%,#7a6514 62%)}}
+:root[data-theme="dark"] .h-q b{background:linear-gradient(transparent 62%,#7a6514 62%)}
+.h-q{color:var(--ink)}
+.h-q em{font-style:normal;color:var(--ng)}
+.relbox{margin:36px 0 0;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:8px;font-size:.9rem}.relbox p{margin:0;max-width:none}
+.h-main,.q1,.q2,.h-sub{background:linear-gradient(transparent 62%,#ffe066 62%);-webkit-box-decoration-break:clone;box-decoration-break:clone;align-self:flex-start;padding:0 4px}
+.h-sub{color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .h-main,:root:not([data-theme="light"]) .q1,:root:not([data-theme="light"]) .q2,:root:not([data-theme="light"]) .h-sub{background:linear-gradient(transparent 62%,#7a6514 62%)}}
+:root[data-theme="dark"] .h-main,:root[data-theme="dark"] .q1,:root[data-theme="dark"] .q2,:root[data-theme="dark"] .h-sub{background:linear-gradient(transparent 62%,#7a6514 62%)}
+.qk{font-weight:900;color:var(--ink);font-size:1.08em}
+.jogen{margin:10px 0 6px;font-size:.95rem}
+.h-avg{font-family:"BIZ UDPGothic",sans-serif;font-size:clamp(1.15rem,4vw,1.6rem);font-weight:700;align-self:flex-start;background:linear-gradient(transparent 62%,#ffe066 62%);padding:0 4px}
+.h-avg b{font-size:1.35em;color:var(--accent);margin:0 2px}
+.h-note{font-family:"BIZ UDPGothic",sans-serif;font-size:.78rem;font-weight:400;color:var(--sub);letter-spacing:0;margin:-2px 0 4px 4px}
+.h-q{font-size:clamp(1.4rem,4.8vw,2rem)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .h-avg{background:linear-gradient(transparent 62%,#7a6514 62%)}}
+:root[data-theme="dark"] .h-avg{background:linear-gradient(transparent 62%,#7a6514 62%)}
+.h-voice{position:relative;align-self:flex-start;margin:8px 0 6px 10px;padding:6px 14px;background:var(--card);border:2px solid var(--ng);border-radius:14px;font-family:"BIZ UDPGothic",sans-serif;font-size:clamp(.95rem,3.2vw,1.15rem);font-weight:700;color:var(--ng);letter-spacing:0}
+.h-voice::before{content:"";position:absolute;top:-10px;left:22px;border:8px solid transparent;border-bottom:10px solid var(--ng);border-top:0}
+.h-voice::after{content:"";position:absolute;top:-6px;left:24px;border:6px solid transparent;border-bottom:7px solid var(--card);border-top:0}
+.h-voice{border-color:var(--ink);color:var(--ink)}
+.h-voice::before{border-bottom-color:var(--ink)}
+.h-voice em{font-style:normal;color:var(--ng);font-size:1.15em}
+.dayx{background:var(--card);border:2px solid var(--accent);border-radius:12px;padding:14px 18px;margin:6px 0 18px}
+.dx-h{margin:0 0 4px;font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.25rem;font-weight:700;color:var(--accent);max-width:none}
+.dx-lead{margin:0 0 8px;max-width:none}
+.dx-day{display:flex;height:58px;border-radius:8px;overflow:hidden;border:1px solid var(--line);font-size:.72rem;line-height:1.2;text-align:center}
+.sg{display:flex;align-items:center;justify-content:center;padding:0 2px;color:#fff;font-weight:700;min-width:0}
+.sg.work{background:var(--soft);color:var(--sub);font-weight:400}
+.sg.pre,.sg.post{background:var(--accent)}
+.sg.lunchw{background:var(--ng)}
+.sg.lunchr{background:var(--ok);font-size:.65rem}
+.dx-cap{margin:4px 0 10px;font-size:.8rem;color:var(--sub);max-width:none}
+.dx-cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.dxc{border-radius:10px;padding:10px 14px;border:2px solid}
+.dxc.ok{border-color:var(--ok);background:var(--okbg)}
+.dxc.ng{border-color:var(--ng);background:var(--ngbg)}
+.dxc-h{margin:0;font-weight:700;max-width:none}
+.dxc.ok .dxc-h{color:var(--ok)} .dxc.ng .dxc-h{color:var(--ng)}
+.dxc-f,.dxc-m,.dxc-n{margin:2px 0;max-width:none}
+.big2{font-size:1.35em}
+.dxc-n{font-size:.82rem;color:var(--sub)}
+.dx-q{margin:12px 0 4px;max-width:none}
+@media (max-width:600px){.dx-day{height:70px;font-size:.62rem}}
+.dx-day{height:34px}
+.dx-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 0;font-size:.85rem;font-weight:700}
+.dx-leg span{display:inline-flex;align-items:center;gap:5px}
+.dx-leg i{display:inline-block;width:14px;height:14px;border-radius:3px}
+.dx-leg i.pre,.dx-leg i.post{background:var(--accent)} .dx-leg i.lunchw{background:var(--ng)} .dx-leg i.lunchr{background:var(--ok)}
+@media (max-width:600px){.dx-day{height:30px}}
+.chap>h2{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-top:10px;box-shadow:0 6px 8px -8px rgba(0,0,0,.25)}
+.talk{display:grid;gap:8px;margin:14px 0 6px}
+.tk{position:relative;margin:0;padding:8px 14px;border-radius:14px;max-width:88%}
+.tk.a{justify-self:start;background:var(--soft);border:1.5px solid var(--line)}
+.tk.b{justify-self:end;background:var(--neo);border:1.5px solid var(--neoline);color:var(--neoink);font-weight:700}
+.tk.a::before{content:"";position:absolute;left:-7px;top:12px;border:6px solid transparent;border-right:7px solid var(--line);border-left:0}
+.tk.b::after{content:"";position:absolute;right:-7px;top:12px;border:6px solid transparent;border-left:7px solid var(--neoline);border-right:0}
+.tk.n{justify-self:stretch;max-width:none;background:none;border:0;padding:0 4px;font-size:.78rem;color:var(--sub)}.tk.n::before{display:none}
+.qsub{display:block;font-size:.8rem;font-weight:400;color:var(--sub)}
+.h-red{font-style:normal;color:var(--ng)}
+
+h1.kt{display:flex;align-items:center;gap:12px;font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.3;margin:4px 0 6px}
+.ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:18px;background:var(--ngbg);color:var(--ng)}
+h1.kt em{font-style:normal;color:var(--ng)}
+.lead{max-width:none}
+.tbar{padding:8px 0;display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line)}
+.tb{font:inherit;font-size:.82rem;padding:3px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tb small{display:block;font-size:.62rem;color:var(--sub);line-height:1}
+.tb.off{opacity:.5;border-style:dashed}
+.tb.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+.tb.cur small{color:#fff}
+.tsec{display:none;padding-top:8px}
+.tsec.show{display:block}
+.tsec h2{font-size:1.35rem;border-bottom:3px solid var(--accent);padding-bottom:6px}
+.tn{display:inline-block;margin-right:10px;padding:0 10px;border-radius:6px;background:var(--accent);color:#fff}
+h3.kh{font-family:"BIZ UDPMincho","Yu Mincho",serif;font-size:1.12rem;margin:26px 0 8px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.nm{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.nm.hot{border:2px solid var(--ng);background:var(--ngbg)}
+.nm.gap{border:2px dashed var(--tE)}
+.nl{margin:0;font-size:.82rem;color:var(--sub);font-weight:700}
+.nv{margin:2px 0;font-size:1.1rem;font-weight:700}
+.nv b{font-size:1.6em;color:var(--accent)}
+.nm.hot .nv b{color:var(--ng)}
+.nn{margin:0;font-size:.82rem}
+.voice{margin:12px 0;padding:10px 14px;border-left:4px solid var(--neoline);background:var(--neo);border-radius:6px}
+.voice p{margin:0;max-width:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px;max-width:none}
+.kata{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;font-size:.72rem;font-weight:700;color:#fff;vertical-align:.15em}
+.legend .kata{margin-left:0}
+.ka{background:var(--ok)} .kb{background:var(--tE)} .kc{background:var(--accent)} .kd{background:var(--tD)}
+.pri{display:inline-block;margin-left:6px;padding:0 8px;border-radius:999px;background:var(--ng);color:#fff;font-size:.72rem;vertical-align:.15em}
+.rqs{display:grid;gap:12px}
+.rq{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.rq.key{border:3px solid var(--ng);box-shadow:0 0 0 4px var(--ngbg)}
+.rq-h{margin:0 0 6px;font-weight:700;font-size:1.02rem;max-width:none}
+.rq-n{display:inline-block;width:1.7em;height:1.7em;line-height:1.7em;text-align:center;border-radius:50%;background:var(--head);color:#fff;font-size:.85rem;margin-right:8px}
+.rq.key .rq-n{background:var(--ng)}
+.rq-b p{max-width:none;margin:4px 0}
+.rq-l{margin:8px 0 2px!important;font-size:.78rem;font-weight:700;color:var(--sub);letter-spacing:.1em}
+.ask{background:var(--soft);border-radius:8px;padding:8px 12px;font-weight:700}
+.rq-s{margin:8px 0 0;padding-top:6px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--sub);max-width:none}
+.rq-s b{display:inline-block;margin-right:6px;padding:0 6px;border-radius:3px;background:var(--soft);color:var(--ink);font-size:.75rem}
+td.st{color:var(--sub)}
+.first3{font-size:1.02rem}
+.first3 li{margin:6px 0}
+.chs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:12px 0 4px}
+.ch{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.cht{margin:0 0 4px;font-weight:700;max-width:none}
+.chl{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 6px;font-size:.78rem;color:var(--sub);max-width:none}
+.chl span{display:inline-flex;align-items:center;gap:4px}
+.chl i{display:inline-block;width:12px;height:12px;border-radius:2px}
+.chl .r{margin-left:auto}
+.chg{margin:8px 0 2px;font-size:.82rem;font-weight:700;max-width:none}
+.sr{display:grid;grid-template-columns:4.2em 1fr 3.4em;gap:6px;align-items:center;margin:3px 0;font-size:.82rem}
+.sr.me .sl{font-weight:700;color:var(--ng)}
+.sr.ref{opacity:.75}
+.sb{display:flex;height:20px;border-radius:4px;overflow:hidden;background:var(--soft)}
+.sr.ref .sb{height:14px}
+.sb span{display:flex;align-items:center;justify-content:flex-end;padding-right:3px;color:#fff;font-size:.68rem;font-weight:700;white-space:nowrap;overflow:hidden}
+.s1,.chl i.s1{background:var(--ok)} .s2,.chl i.s2{background:var(--tE)} .s3,.chl i.s3{background:var(--ng)}
+.y1,.chl i.y1{background:var(--ok)} .y2,.chl i.y2{background:var(--ng)}
+.s80{text-align:right;font-weight:700;color:var(--ng);font-variant-numeric:tabular-nums}
+.chn{margin:8px 0 0;font-size:.85rem;max-width:none}
+.ch.wide{margin:8px 0 0}
+.chs2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 24px}
+.ar{display:grid;grid-template-columns:5.6em 1fr 3.6em;gap:6px;align-items:center;margin:3px 0;font-size:.82rem}
+.ar.ax{font-size:.7rem;color:var(--sub);margin-bottom:0}
+.ar.ax .ticks{position:relative;height:1.2em}
+.ar.ax .ticks span{position:absolute;transform:translateX(-50%)}
+.ar.ax .ticks span:first-child{transform:none}
+.at{position:relative;height:18px;background:var(--soft);border-radius:3px}
+.af{display:block;height:100%;border-radius:3px}
+.ar.kyoto .af,.chl i.kyoto{background:var(--neoline)}
+.ar.kyoyu .af,.chl i.kyoyu{background:var(--accent)}
+.ar.plan .af,.chl i.plan{background:repeating-linear-gradient(45deg,var(--tE) 0 4px,#d9b26a 4px 8px)}
+.ar.ref .af{opacity:.45}
+.ar.ref .at{height:12px}
+.ar.me .al{font-weight:700}
+.av{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.ar.ref .av{font-weight:400;color:var(--sub)}
+.l30{position:absolute;top:-3px;bottom:-3px;border-left:2px dotted var(--ok)}
+.l45{position:absolute;top:-3px;bottom:-3px;border-left:2px dashed var(--ng)}
+.chl i.lk30{width:0;height:12px;border-left:2px dotted var(--ok);border-radius:0}
+.chl i.lk45{width:0;height:12px;border-left:2px dashed var(--ng);border-radius:0}
+.chn2{margin:8px 0 0;padding-left:1.2em;font-size:.86rem}
+.chn2 li{margin:3px 0}
+.vz{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:4px 0 8px}
+.vz2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 20px}
+.vzt,.vzt0{margin:2px 0;font-size:.8rem;font-weight:700;max-width:none}
+.vzt0{margin-bottom:6px}
+.vzn{margin:6px 0 0;font-size:.8rem;color:var(--sub);max-width:none}
+.mb{display:grid;grid-template-columns:7.2em 1fr 3.4em;gap:6px;align-items:center;margin:3px 0;font-size:.8rem}
+.mt{background:var(--soft);height:14px;border-radius:3px}
+.mf{display:block;height:100%;border-radius:3px}
+.mb.plan .mf{background:repeating-linear-gradient(45deg,var(--tE) 0 4px,#d9b26a 4px 8px)}
+.mb.mext .mf,.mb.ky .mf{background:var(--accent)}
+.mb.kt .mf{background:var(--neoline)}
+.mb.ot .mf{background:var(--tG)}
+.mv{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.dif{margin:0;text-align:right;font-size:.82rem;color:var(--ng);max-width:none}
+.nl{position:relative;height:86px;margin:4px 6px 0}
+.nlb{position:absolute;left:0;right:0;top:12px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--okbg),var(--ngbg))}
+.nlz{position:absolute;top:8px;height:16px;background:repeating-linear-gradient(45deg,var(--ng) 0 3px,transparent 3px 7px);opacity:.6}
+.nlm{position:absolute;top:0;transform:translateX(-50%);padding-top:26px;font-size:.72rem;text-align:center;white-space:nowrap;border-left:2px solid}
+.nlm b{display:block;font-size:.85rem}
+.nlm.g{border-color:var(--tE);color:var(--tE)} .nlm.r{border-color:var(--ng);color:var(--ng)} .nlm.o{border-color:var(--sub);color:var(--sub)}
+.kbr{display:grid;grid-template-columns:5em 1fr;gap:6px;align-items:center;margin:4px 0;font-size:.78rem}
+.kbl{font-weight:700}
+.kbb{display:flex;height:26px;border-radius:4px;overflow:hidden}
+.kbb span{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;padding:0 4px;font-size:.72rem;text-align:center;line-height:1.1}
+.kbb .w{background:var(--ng)} .kbb .r{background:var(--ok)} .kbb .x{background:var(--tG)}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+.fs{flex:1 1 120px;border-radius:8px;padding:6px 10px;font-size:.82rem;font-weight:700;text-align:center;border:2px solid}
+.fs small{display:block;font-weight:400;font-size:.72rem}
+.fs b{font-size:1.1rem}
+.fs.done{border-color:var(--accent);color:var(--accent);background:var(--card)}
+.fs.miss{border-color:var(--ng);color:var(--ng);border-style:dashed;background:var(--card)}
+.fs.next{border-color:var(--ok);color:var(--ok);background:var(--okbg)}
+.fa{align-self:center;font-weight:700;color:var(--sub)}
+.split{display:flex;gap:4px;height:48px}
+.split span{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;color:#fff;font-weight:700;font-size:.85rem}
+.split small{font-size:.7rem;font-weight:400}
+.sp1{flex:5;background:var(--accent)} .sp2{flex:2;background:var(--tD)}
+@media print{.tbar{display:none}.tsec{display:block!important}}
+</style></head>
+<body><div class="wrap" id="top">
+<p class="eyebrow">学校の働き方改革　交渉資料</p>
+<h1 class="kt"><span class="ticon" aria-hidden="true"><svg viewBox="0 0 48 48" width="56" height="56" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v8a2 2 0 0 0 2 2h6l14 9V9L14 18H8a2 2 0 0 0-2 2z" fill="currentColor" fill-opacity=".15"/><path d="M34 17c2.5 2 2.5 12 0 14"/><path d="M39 12c5 4.5 5 19.5 0 24"/><path d="M14 30l3 10h5l-2-9"/></svg></span><span>市町教委交渉で<em>要求</em>すること</span></h1>
+<p class="date">「時間外在校等時間」の調べから　2026年10月18日作成</p>
+<p class="lead">文科省の調査（見える化）・各市町の計画・持ち帰り休憩の調べをもとに、市町ごとに「交渉で要求すること」をまとめます。市町を選んでください（いまは周南市だけ。点線のボタンは準備中）。</p>
+<nav class="tbar"><button type="button" class="tb off" data-t="t-0" title="準備中">県（県教委）</button><button type="button" class="tb off" data-t="t-1" title="準備中">下関市</button><button type="button" class="tb off" data-t="t-2" title="準備中">宇部市</button><button type="button" class="tb off" data-t="t-3" title="準備中">山口市</button><button type="button" class="tb off" data-t="t-4" title="準備中">萩市</button><button type="button" class="tb off" data-t="t-5" title="準備中">防府市</button><button type="button" class="tb off" data-t="t-6" title="準備中">下松市</button><button type="button" class="tb off" data-t="t-7" title="準備中">岩国市</button><button type="button" class="tb off" data-t="t-8" title="準備中">光市</button><button type="button" class="tb off" data-t="t-9" title="準備中">長門市</button><button type="button" class="tb off" data-t="t-10" title="準備中">柳井市</button><button type="button" class="tb off" data-t="t-11" title="準備中">美祢市</button><button type="button" class="tb on" data-t="shunan">周南市</button><button type="button" class="tb off" data-t="t-13" title="準備中">山陽小野田市</button><button type="button" class="tb off" data-t="t-14" title="準備中">周防大島町</button><button type="button" class="tb off" data-t="t-15" title="準備中">和木町</button><button type="button" class="tb off" data-t="t-16" title="準備中">上関町</button><button type="button" class="tb off" data-t="t-17" title="準備中">田布施町</button><button type="button" class="tb off" data-t="t-18" title="準備中">平生町</button><button type="button" class="tb off" data-t="t-19" title="準備中">阿武町</button></nav>
+
+<section class="tsec" id="shunan">
+<h2><span class="tn">周南市</span>市教委交渉で要求すること</h2>
+
+<h3 class="kh">1　周南市のいま（R6年度・文科省 見える化）</h3>
+<div class="ch wide"><p class="cht">1か月の時間外在校等時間の平均（R6）</p><p class="chl"><span><i class="kyoto"></i>教頭</span><span><i class="kyoyu"></i>教諭</span><span><i class="plan"></i>市の計画に書かれた値</span><span><i class="lk30"></i>目標 30h</span><span><i class="lk45"></i>上限 45h</span></p><div class="chs2"><div><p class="chg">小学校</p><div class="ar ax"><span></span><span class="ticks"><span style="left:0.00%">0h</span><span style="left:21.43%">15h</span><span style="left:42.86%">30h</span><span style="left:64.29%">45h</span><span style="left:85.71%">60h</span></span><span></span></div><div class="ar kyoto me"><span class="al">周南 教頭</span><span class="at"><span class="af" style="width:88.4%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">61.9h</span></div><div class="ar kyoto ref"><span class="al">全国 教頭</span><span class="at"><span class="af" style="width:74.7%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">52.3h</span></div><div class="ar kyoyu me"><span class="al">周南 教諭</span><span class="at"><span class="af" style="width:68.0%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">47.6h</span></div><div class="ar plan"><span class="al">市の計画</span><span class="at"><span class="af" style="width:59.4%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">41.6h</span></div><div class="ar kyoyu ref"><span class="al">全国 教諭</span><span class="at"><span class="af" style="width:43.7%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">30.6h</span></div></div><div><p class="chg">中学校</p><div class="ar ax"><span></span><span class="ticks"><span style="left:0.00%">0h</span><span style="left:21.43%">15h</span><span style="left:42.86%">30h</span><span style="left:64.29%">45h</span><span style="left:85.71%">60h</span></span><span></span></div><div class="ar kyoto me"><span class="al">周南 教頭</span><span class="at"><span class="af" style="width:98.4%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">68.9h</span></div><div class="ar kyoto ref"><span class="al">全国 教頭</span><span class="at"><span class="af" style="width:75.7%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">53.0h</span></div><div class="ar kyoyu me"><span class="al">周南 教諭</span><span class="at"><span class="af" style="width:74.7%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">52.3h</span></div><div class="ar plan"><span class="al">市の計画</span><span class="at"><span class="af" style="width:64.4%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">45.1h</span></div><div class="ar kyoyu ref"><span class="al">全国 教諭</span><span class="at"><span class="af" style="width:57.7%"></span><span class="l30" style="left:42.86%"></span><span class="l45" style="left:64.29%"></span></span><span class="av">40.4h</span></div></div></div><ul class="chn2"><li>周南市の教諭は<b>小47.6h・中52.3h</b>。教諭だけの数字を出せた市町の中で、小中とも最長です。目標「月30時間以内」まで<b>17〜22時間</b>あります。</li><li>教頭はさらに長く<b>小61.9h・中68.9h</b>。月80h超が<b>小30.8%・中19.4%</b>（全国の教頭は小10.7%・中13.0%）。</li><li>市の計画に書かれた値（小41.6h・中45.1h、対象は教育職員全体）は、教諭の値より6〜7時間短くなっています（要求1）。</li></ul></div>
+<div class="chs"><div class="ch"><p class="cht">教諭の1か月の時間外在校等時間（R6）</p><p class="chl"><span><i class="s1"></i>45h以下</span><span><i class="s2"></i>45〜80h</span><span><i class="s3"></i>80h超</span><span class="r">右端＝80h超</span></p><p class="chg">小学校</p><div class="sr me"><span class="sl">周南市</span><span class="sb"><span class="s1" style="width:57.6%">57.6%</span><span class="s2" style="width:37.8%">37.8%</span><span class="s3" style="width:4.6%"></span></span><span class="s80">4.6%</span></div><div class="sr ref"><span class="sl">全国</span><span class="sb"><span class="s1" style="width:77.8%">77.8%</span><span class="s2" style="width:20.9%">20.9%</span><span class="s3" style="width:1.3%"></span></span><span class="s80">1.3%</span></div><p class="chg">中学校</p><div class="sr me"><span class="sl">周南市</span><span class="sb"><span class="s1" style="width:55.7%">55.7%</span><span class="s2" style="width:32.5%">32.5%</span><span class="s3" style="width:11.8%">11.8%</span></span><span class="s80">11.8%</span></div><div class="sr ref"><span class="sl">全国</span><span class="sb"><span class="s1" style="width:60.5%">60.5%</span><span class="s2" style="width:32.1%">32.1%</span><span class="s3" style="width:7.4%">7.4%</span></span><span class="s80">7.4%</span></div><p class="chn">周南市は、月45hを超える教諭が<b>小42.4%・中44.3%</b>（全国 小22.2%・中39.5%）。月80h超は中学校で<b>11.8%</b>（全国7.4%）。</p></div><div class="ch"><p class="cht">教諭の1年間の時間外在校等時間（R6）</p><p class="chl"><span><i class="y1"></i>年360h以下</span><span><i class="y2"></i>年360h超（年の上限を超えた）</span></p><p class="chg">小学校</p><div class="sr me"><span class="sl">周南市</span><span class="sb"><span class="y1" style="width:27.9%">27.9%</span><span class="y2" style="width:72.1%">72.1%</span></span><span class="s80"></span></div><div class="sr ref"><span class="sl">全国</span><span class="sb"><span class="y1" style="width:52.9%">52.9%</span><span class="y2" style="width:47.1%">47.1%</span></span><span class="s80"></span></div><p class="chg">中学校</p><div class="sr me"><span class="sl">周南市</span><span class="sb"><span class="y1" style="width:27.7%">27.7%</span><span class="y2" style="width:72.3%">72.3%</span></span><span class="s80"></span></div><div class="sr ref"><span class="sl">全国</span><span class="sb"><span class="y1" style="width:35.7%">35.7%</span><span class="y2" style="width:64.3%">64.3%</span></span><span class="s80"></span></div><p class="chn"><b>10人に7人</b>が年の上限（360時間）を超えています（全国は小47.1%・中64.3%）。</p></div></div>
+<p class="small">出典：<a href="https://www.mext.go.jp/content/20260305-mxt_kyoikujinzai01-000047786_35.pdf" target="_blank" rel="noopener">文科省「服務監督教育委員会ごとの時間外在校等時間の状況」山口県分</a>（周南市の行。教諭には主幹教諭・指導教諭を含む。休憩は除き、持ち帰りは含まない）、<a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">周南市 業務量管理・健康確保措置実施計画（R8.3）</a>。年360h超は「年360h以下」の割合を100%から引いた値。全国は文科省「見える化」全国の状況（教諭）。</p>
+
+<div class="voice"><p class="small" style="margin:0">周南市はH27から市独自の「T-Net」で、職員室のPCで名前をクリックして出退勤を記録しています。数字の長さには、実際に長いことに加えて、<b>記録がきちんと残っている</b>ことも表れている可能性があります（教諭の数字を出せない市町が多く、単純には比べられません）。</p></div>
+
+<h3 class="kh" id="r-shunan">2　要求すること（7項目）</h3>
+<p class="legend"><span class="kata ka">計画の約束を形に</span><span class="kata kb">数字をそろえる</span><span class="kata kc">国の基準に合わせる</span><span class="kata kd">見えない時間を見える化</span></p>
+<div class="rqs"><div class="rq key"><p class="rq-h"><span class="rq-n">1</span>計画の数字と、文科省に回答した「教諭」の数字のずれを説明し、目標は教諭の値で確かめる<span class="kata kb">数字をそろえる</span><span class="pri">最優先</span></p><div class="vz"><div class="vz2"><div><p class="vzt">小学校</p><div class="mb plan"><span class="ml">計画の値</span><span class="mt"><span class="mf" style="width:69.3%"></span></span><span class="mv">41.6h</span></div><div class="mb mext"><span class="ml">文科省へ（教諭）</span><span class="mt"><span class="mf" style="width:79.3%"></span></span><span class="mv">47.6h</span></div><p class="dif">差 <b>+6.0h</b></p></div><div><p class="vzt">中学校</p><div class="mb plan"><span class="ml">計画の値</span><span class="mt"><span class="mf" style="width:75.2%"></span></span><span class="mv">45.1h</span></div><div class="mb mext"><span class="ml">文科省へ（教諭）</span><span class="mt"><span class="mf" style="width:87.2%"></span></span><span class="mv">52.3h</span></div><p class="dif">差 <b>+7.2h</b></p></div></div><p class="vzn">45h超の割合はほぼ同じ（小42.6%と42.4%、中44.4%と44.3%）なのに、月平均だけがずれている</p></div><div class="rq-b"><p class="rq-l">なぜ</p><p>市の計画はR6の月平均を<b>小41.6h・中45.1h</b>としていますが、文科省の見える化（R7）に市が回答した教諭の値は<b>小47.6h・中52.3h</b>です。45h超の割合はほぼ同じ（小42.6%と42.4%、中44.4%と44.3%）なのに、月平均だけが6〜7時間違います。平均の出し方が違う可能性があります。</p><p>計画の対象は「教育職員」（校長〜講師・寄宿舎指導員まで）と注に書かれています。目標「月平均30時間以内」までの本当の距離は、教諭の値で見ると<b>17〜22時間</b>あります。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「計画のR6の値と、文科省に回答した教諭の値は、何が違うのですか。対象の職と平均の出し方を教えてください。毎年の公表では、教諭の値も並べてもらえますか。」</p></div><p class="rq-s"><b>根拠</b><a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">市の計画</a> p.1〜2（注＊1）、<a href="https://www.mext.go.jp/content/20260305-mxt_kyoikujinzai01-000047786_35.pdf" target="_blank" rel="noopener">文科省 見える化 山口県分</a>、<a href="zikangai-zaikoto.html#ym-yomi" target="_blank" rel="noopener">まとめ5-3</a></p></div><div class="rq"><p class="rq-h"><span class="rq-n">2</span>計画の★「時間外を役職ごとに把握しHPで公表」を、R8年度中に、教頭の値も含めて実行する<span class="kata ka">計画の約束を形に</span></p><div class="vz"><p class="vzt0">周南市の役職ごとの月平均（R6・文科省への回答）　これを市が毎年公表する</p><div class="vz2"><div><p class="vzt">小学校</p><div class="mb kt"><span class="ml">教頭</span><span class="mt"><span class="mf" style="width:88.4%"></span></span><span class="mv">61.9h</span></div><div class="mb ky"><span class="ml">教諭</span><span class="mt"><span class="mf" style="width:68.0%"></span></span><span class="mv">47.6h</span></div><div class="mb ot"><span class="ml">校長</span><span class="mt"><span class="mf" style="width:45.6%"></span></span><span class="mv">31.9h</span></div><div class="mb ot"><span class="ml">養護教諭</span><span class="mt"><span class="mf" style="width:42.4%"></span></span><span class="mv">29.7h</span></div></div><div><p class="vzt">中学校</p><div class="mb kt"><span class="ml">教頭</span><span class="mt"><span class="mf" style="width:98.4%"></span></span><span class="mv">68.9h</span></div><div class="mb ky"><span class="ml">教諭</span><span class="mt"><span class="mf" style="width:74.7%"></span></span><span class="mv">52.3h</span></div><div class="mb ot"><span class="ml">校長</span><span class="mt"><span class="mf" style="width:58.7%"></span></span><span class="mv">41.1h</span></div><div class="mb ot"><span class="ml">養護教諭</span><span class="mt"><span class="mf" style="width:48.3%"></span></span><span class="mv">33.8h</span></div></div></div></div><div class="rq-b"><p class="rq-l">なぜ</p><p>市の計画はR8の重点（★）として、時間外在校等時間を<b>役職ごとに把握し、市のホームページで公表</b>するとしています。</p><p>文科省への回答では、<b>教頭が小61.9h・中68.9h</b>で、月80h超が<b>小30.8%・中19.4%</b>です。教諭よりさらに長く、公表の中心にすべき数字です。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「役職ごとの公表は、いつ、どの指標（月平均・45h超・80h超・年360h超）で出しますか。教頭の数字も入りますか。」</p></div><p class="rq-s"><b>根拠</b><a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">市の計画</a>（フォローアップ）、<a href="https://www.mext.go.jp/content/20260305-mxt_kyoikujinzai01-000047786_35.pdf" target="_blank" rel="noopener">見える化 山口県分</a>（周南市の校長・教頭の欄）</p></div><div class="rq"><p class="rq-h"><span class="rq-n">3</span>医師の面接指導を「月100h超」から、国の目安「月80h超」に合わせる<span class="kata kc">国の基準に合わせる</span></p><div class="vz"><p class="vzt0">月の時間外在校等時間と、医師の面接指導の線</p><div class="nl"><span class="nlb"></span><span class="nlm g" style="left:37.5%"><b>45h</b>上限</span><span class="nlm r" style="left:66.7%"><b>80h</b>国の目安<br>（指針R7.9）</span><span class="nlm o" style="left:83.3%"><b>100h</b>市の計画</span><span class="nlz" style="left:66.7%;width:16.6%"></span></div><p class="vzn">80〜100hの先生は、今の市の計画では面接指導の対象になりません。周南市の中学校教諭の<b>11.8%</b>、教頭の小<b>30.8%</b>・中<b>19.4%</b>が月80h超です。</p></div><div class="rq-b"><p class="rq-l">なぜ</p><p>市の計画は「100h超で医師の面接指導を促進」としています。一方、R7.9に改正された国の指針は、面接指導の目安を<b>月80時間</b>と明記しました。</p><p>文科省への回答では、月80h超の教諭が<b>中学校で11.8%</b>（小学校4.6%）、教頭は小30.8%・中19.4%います。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「国の指針は80時間を目安としています。市の計画の100時間を、80時間に合わせて見直してもらえますか。80時間を超えた人への対応は、今どうしていますか。」</p></div><p class="rq-s"><b>根拠</b><a href="https://www.mext.go.jp/content/20260216-mxt_kyoikujinzai01-100002245_1.pdf#page=10" target="_blank" rel="noopener">指針 第2章第3節(6)</a>、<a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">市の計画</a>（学校の措置・健康確保）</p></div><div class="rq"><p class="rq-h"><span class="rq-n">4</span>T-Netで、休憩の差し引き方を明らかにし、休憩中に働いた時間を記録できるようにする<span class="kata kd">見えない時間を見える化</span></p><div class="vz"><p class="vzt0">昼休み45分のうち、35分働き10分休めた日</p><div class="kbr"><span class="kbl">決まり</span><span class="kbb"><span class="w" style="flex:35">働いた35分＝時間外に入る</span><span class="r" style="flex:10">休憩10分</span></span></div><div class="kbr"><span class="kbl">一律45分</span><span class="kbb"><span class="x" style="flex:45">45分すべて「休憩」として引かれる（働いた35分が消える）</span></span></div><p class="vzn">月20日なら、働いた時間のうち<b>約12時間</b>が記録から消えます。</p></div><div class="rq-b"><p class="rq-l">なぜ</p><p>国の決まりでは、在校等時間から引いてよいのは<b>実際に休憩した時間だけ</b>です（Q&A問15）。T-Netの公開マニュアルにあるのは、勤務の割り振りの「休憩時間（45分）」だけで、取れなかった日を入れる欄は見当たりません。</p><p>また市は文科省に、休憩の決まりを「<b>一部の学校</b>」についてしか把握していないと回答しています。</p><p>ほかの自治体では、45分を自動で引いたうえで、休憩中に働いた分を本人が申し出て足せるようにした例があります（広島県立、三原市はR6.7に改修、函館市）。T-Netは市の独自開発なので、市の判断で直せます。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「T-Netでは、休憩45分を全員一律に引いていますか。休憩が取れなかった日に、本人がその時間を記録する方法はありますか。ないなら、改修してもらえますか。」</p></div><p class="rq-s"><b>根拠</b><a href="https://www.mext.go.jp/content/20251128-mxt_kyoikujinzai01-100002245_1.pdf#page=14" target="_blank" rel="noopener">Q&A問15</a>、<a href="mochikaeri-01-yamaguchi.html#kyukei" target="_blank" rel="noopener">持ち帰り・休憩の調べ 01（休憩の決まり）</a>、<a href="zikangai-zaikoto.html#zenkoku" target="_blank" rel="noopener">まとめ3章</a></p></div><div class="rq"><p class="rq-h"><span class="rq-n">5</span>計画の「持ち帰り残業時間の適切な把握」の研究を、方法・時期・公表の形で具体化する<span class="kata kd">見えない時間を見える化</span></p><div class="vz"><div class="flow"><span class="fs done">学校での時間<br><small>T-Netで記録</small></span><span class="fa">＋</span><span class="fs miss">家での仕事<br><small>今は数えていない</small></span><span class="fa">→</span><span class="fs next">計画「研究」<br><small>方法・時期・公表を決める</small></span></div></div><div class="rq-b"><p class="rq-l">なぜ</p><p>持ち帰りに触れた計画は、<b>19市町で周南市だけ</b>です。ただし「研究」の段階で、文科省には持ち帰りを「把握していない」と回答しています。</p><p>時間外在校等時間に持ち帰りは入らないので、記録の数字が下がっても、家での仕事が増えていれば実態は変わりません。他県では、期間を決めた抽出調査（広島市・島根県など）や、本人の申告を学校で集計する方法（長野県）があります。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「持ち帰りの把握の研究は、いつまでに、どんな方法で行いますか。結果は公表しますか。」</p></div><p class="rq-s"><b>根拠</b><a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">市の計画</a>（学校の措置・健康確保）、<a href="mochikaeri-04-kekka.html" target="_blank" rel="noopener">持ち帰り・休憩の調べ 04（調査結果）</a></p></div><div class="rq"><p class="rq-h"><span class="rq-n">6</span>部活動の廃止（R8年6月〜）で中学校の時間がどう変わったかを、検証して公表する<span class="kata ka">計画の約束を形に</span></p><div class="vz"><div class="flow"><span class="fs done">R6 中学校教諭<br><b>52.3h</b><small>80h超 11.8%</small></span><span class="fa">→</span><span class="fs next">R8年6月<br><b>部活動を廃止</b><small>平日・休日すべて地域展開</small></span><span class="fa">→</span><span class="fs miss">R8・R9<br><b>？h</b><small>どれだけ減ったかを検証・公表</small></span></div></div><div class="rq-b"><p class="rq-l">なぜ</p><p>市の計画は「R8年6月以降は部活動を廃止し、平日・休日すべて地域展開」としています。中学校の教諭はR6で月52.3h（45h超44.3%・80h超11.8%）と県内でも長く、部活動の地域展開でどれだけ減ったかは、ほかの市町にとっても大事な実例になります。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「部活動を地域展開した前と後で、中学校の時間外在校等時間（平日・休日別）はどう変わりましたか。毎年の公表で示してもらえますか。」</p></div><p class="rq-s"><b>根拠</b><a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">市の計画</a>（業務の見直し）</p></div><div class="rq"><p class="rq-h"><span class="rq-n">7</span>土日の在校等時間を、平日と分けて集計・公表する<span class="kata kd">見えない時間を見える化</span></p><div class="vz"><div class="split"><span class="sp1">平日<br><small>月〜金</small></span><span class="sp2">土日<br><small>週休日</small></span></div><p class="vzn">今は合計だけ。分けると、どこに手を打てばよいかが見える（土日の勤務を実態どおり記録していない先生 42.4%・日教組2025）</p></div><div class="rq-b"><p class="rq-l">なぜ</p><p>時間外在校等時間には、土日に学校で働いた時間も入ります。ただ、土日の勤務を記録していない先生も多いという調査があります（週休日の勤務を実態どおり記録していない42.4%、日教組2025）。</p><p>平日と土日を分けて見ると、どこに手を打てばよいかがわかります。</p><p class="rq-l">交渉での聞き方</p><p class="ask">「T-Netで、土日に学校に来た記録は取れていますか。平日と土日を分けて集計してもらえますか。」</p></div><p class="rq-s"><b>根拠</b><a href="zikangai-zaikoto.html#zure" target="_blank" rel="noopener">まとめ6章</a></p></div></div>
+
+<h3 class="kh">3　計画で約束していること（進み具合を確かめる表）</h3>
+<p>市の計画（R8〜R11年度）のうち、働く時間にかかわる約束です。★はR8年度の重点。交渉のたびに「どこまで進んだか」を確かめ、右の欄を埋めていきます。</p>
+<div class="tbl"><table>
+<thead><tr><th>重点</th><th>計画の約束</th><th>要求</th><th>進み具合</th></tr></thead>
+<tbody><tr><td class="c">★</td><td>時間外を役職ごとに把握し、市HPで公表</td><td class="c"><a href="#r-shunan">要求2</a></td><td class="c st">未確認</td></tr><tr><td class="c">★</td><td>「周南市働き方改革推進委員会」（仮称）の設置</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c">★</td><td>定時退校日を月1回以上</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c">★</td><td>カスハラ対応ガイドラインをR8中に作成・研修</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c">★</td><td>市長部局と苦情の相談窓口</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c">★</td><td>自動採点システム</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c">★</td><td>グランドデザイン・自己目標シートに業務改善</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c"></td><td>部活動をR8年6月以降廃止し、平日・休日すべて地域展開</td><td class="c"><a href="#r-shunan">要求6</a></td><td class="c st">未確認</td></tr><tr><td class="c"></td><td>100h超で医師の面接指導を促進</td><td class="c"><a href="#r-shunan">要求3</a></td><td class="c st">未確認</td></tr><tr><td class="c"></td><td>早出遅出勤務の拡大をR9年度までに検討</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c"></td><td>持ち帰り残業時間の適切な把握の研究</td><td class="c"><a href="#r-shunan">要求5</a></td><td class="c st">未確認</td></tr><tr><td class="c"></td><td>年度末・年度始めの休業期間の延長（規則改正に向け調整）</td><td class="c">—</td><td class="c st">未確認</td></tr><tr><td class="c"></td><td>長期休業中に7日間程度の一斉閉庁</td><td class="c">—</td><td class="c st">未確認</td></tr></tbody></table></div>
+<p class="small">出典：<a href="https://www.city.shunan.lg.jp/uploaded/life/145047_433372_misc.pdf" target="_blank" rel="noopener">周南市 業務量管理・健康確保措置実施計画（R8.3）</a>。<a href="gyomuryo-keikaku-hikaku-v3.html#c-shunan">19市町の計画比較</a>も参照。</p>
+
+<h3 class="kh">4　交渉で最初に聞く3つ</h3>
+<ol class="first3">
+<li>計画のR6の値（小41.6h・中45.1h）と、文科省に回答した教諭の値（小47.6h・中52.3h）は、<b>何が違うのか</b>。</li>
+<li>T-Netは休憩を<b>一律45分引いているのか</b>。取れなかった休憩を記録する方法はあるか。</li>
+<li>「役職ごとの公表」と「持ち帰りの把握の研究」は、<b>いつ・どんな形で</b>行うのか。</li>
+</ol>
+</section>
+<section class="tsec" id="t-0"><h2><span class="tn">県（県教委）</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-1"><h2><span class="tn">下関市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-2"><h2><span class="tn">宇部市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-3"><h2><span class="tn">山口市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-4"><h2><span class="tn">萩市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-5"><h2><span class="tn">防府市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-6"><h2><span class="tn">下松市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-7"><h2><span class="tn">岩国市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-8"><h2><span class="tn">光市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-9"><h2><span class="tn">長門市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-10"><h2><span class="tn">柳井市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-11"><h2><span class="tn">美祢市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-13"><h2><span class="tn">山陽小野田市</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-14"><h2><span class="tn">周防大島町</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-15"><h2><span class="tn">和木町</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-16"><h2><span class="tn">上関町</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-17"><h2><span class="tn">田布施町</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-18"><h2><span class="tn">平生町</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section><section class="tsec" id="t-19"><h2><span class="tn">阿武町</span>準備中</h2><p>周南市の形を決めてから、同じ枠組みで作ります。</p></section>
+<div class="relbox" style="margin-top:36px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:8px;font-size:.9rem"><p style="margin:0;max-width:none"><b>関連ページ</b>　<a href="zikangai-zaikoto.html">「時間外在校等時間」全国の調査結果を分析してみた</a>／<a href="mochikaeri-00-top.html">持ち帰り・休憩の調べ</a>／<a href="gyomuryo-keikaku-hikaku-v3.html">19市町の計画比較</a></p></div>
+</div><script>
+(function(){
+  var bs=document.querySelectorAll('.tb');
+  function show(id){
+    document.querySelectorAll('.tsec').forEach(function(s){s.classList.toggle('show', s.id===id);});
+    bs.forEach(function(b){b.classList.toggle('cur', b.dataset.t===id);});
+  }
+  bs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t); try{history.replaceState(null,'','#'+b.dataset.t);}catch(e){}});});
+  var h=(location.hash||'').slice(1);
+  show(document.getElementById(h)&&document.getElementById(h).classList.contains('tsec')?h:'shunan');
+})();
+</script></body></html>
