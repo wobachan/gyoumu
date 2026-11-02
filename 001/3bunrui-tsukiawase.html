@@ -704,5 +704,26 @@ window.addEventListener('load',stickHead);window.addEventListener('resize',stick
   document.addEventListener('click',later,true);
 })();
 </script>
+<script id="num-abc">
+/* 札・表の番号（①〜⑲）を3分類の凡例どおりに：A①〜⑤赤・太字ゴシック／B⑥〜⑬紫・太字明朝／C⑭〜⑲青・ふつう */
+(function(){
+  var C="①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲";
+  function k(ch){var n=C.indexOf(ch)+1;return n<=5?"nA":(n<=13?"nB":"nC");}
+  var re=/[①-⑲]/;
+  document.querySelectorAll(".chip,td.no,.mn").forEach(function(el){
+    var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;
+    while((n=w.nextNode())){if(re.test(n.nodeValue)&&!n.parentNode.closest(".nA,.nB,.nC"))ns.push(n);}
+    ns.forEach(function(t){
+      var f=document.createDocumentFragment();
+      t.nodeValue.split(/([①-⑲])/).forEach(function(s){
+        if(!s)return;
+        if(re.test(s)&&s.length===1){var b=document.createElement("b");b.className=k(s);b.textContent=s;f.appendChild(b);}
+        else f.appendChild(document.createTextNode(s));
+      });
+      t.parentNode.replaceChild(f,t);
+    });
+  });
+})();
+</script>
 </body>
 </html>
