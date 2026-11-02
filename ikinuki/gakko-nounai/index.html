@@ -836,7 +836,8 @@ const PART_K = {奥歯:"歯", 親知らず:"歯", 虫歯:"歯", 歯ぐき:"歯",
 const PART_RE = "奥歯|親知らず|虫歯|歯ぐき|歯茎|歯|骨|頭|お腹|おなか|下腹|腹|胃|腰|肩|首|目|のど|喉|耳|背中|足首|足の裏|足|ふくらはぎ|かかと|膝|ひざ|腕|手首|手|指|筋肉|関節";
 CONTEXT_RULES.push(
   {re: /(?:眠れ|ねむれ|寝られ|寝れ|寝付け|寝つけ|ねつけ)(?:な|ませ|ず)|不眠/g, k: ["不", "眠"], w: m => m[0]}, // 「眠れない」は不・眠を半分ずつ
-  {re: /((?:運動会|体育祭|授業|体育|学年|学級|部活|部の)[^。]{0,8}?)(?:ダンス|柔道|剣道)/g, p: 1, k: "SKIP"}, // 学校で教えるダンス・武道は習い事ではない
+  {re: /((?:運動会|体育祭|授業|体育|学年|学級|部活|部の)[^。]{0,8}?)(?:ダンス|柔道|剣道)/g, p: 1, k: "SKIP"},
+  {re: /((?:子どもたち|子供たち|子ども|子供|児童|生徒|クラス|子ら)(?:の|が|も))(?:ダンス|踊り|踊っ)/g, p: 1, k: "SKIP"}, // 子どものダンスは自分の習い事ではない // 学校で教えるダンス・武道は習い事ではない
   {re: /(?:ダンス|柔道|剣道|空手|書道|英会話)(?=[^。]{0,12}?(?:授業|教え|指導))/g, k: "SKIP"},
   {re: /英検(?=[^。]{0,12}?(?:面接練習|対策|指導|生徒))/g, k: "SKIP"}, // 生徒の英検の指導
   {re: /(?:ピアノ|エレクトーン)(?:教室|の練習|のレッスン|を弾|をひ|の発表会)?/g, k: ["鍵", "音"], w: m => m[0]}, // ピアノは鍵と音
@@ -898,7 +899,7 @@ function analyzeVoice(text, picks = []){
   list.forEach(c => { c.v = c.cnt / sum * 100; c.pct = Math.floor(c.v); });
   let left = 100 - list.reduce((s, c) => s + c.pct, 0);
   list.slice().sort((a, b) => (b.v % 1) - (a.v % 1)).forEach(c => { if (left > 0){ c.pct++; left--; } });
-  return {list: list.sort((a, b) => b.v - a.v), hits};
+  return {list: list.sort((a, b) => b.v - a.v || MOOD_FIRST.has(b.k) - MOOD_FIRST.has(a.k)), hits}; // 同じ割合なら、きもちの字を先に（カードとひとことで同じ字になる）
 }
 // 解説欄：仕事・くらし・きもちの割合の帯と、字ごとのことばの内訳
 function vcExplain(chosen){
@@ -1417,7 +1418,7 @@ function vcComment(chosen, seed, text = ""){
   const g = id => chosen.filter(c => c.group && c.group.id === id).reduce((s, c) => s + c.pct, 0);
   const real = chosen.filter(c => c.k !== "謎");
   // 同じ割合なら、きもちの字を先に
-  const top = real.slice().sort((a, b) => b.pct - a.pct || MOOD_FIRST.has(b.k) - MOOD_FIRST.has(a.k))[0];
+  const top = real[0]; // analyzeVoice の並び（同じ割合なら、きもちの字が先）
   const heavyFeel = sum(["疲", "怒", "憂", "悔", "寂", "悩", "痛", "不"]), goodFeel = sum(["幸", "嬉", "楽", "誇"]);
   const funLife = sum(["筋","鍵","音","弦","筆","英","踊","剣","武","茶","絵","算","湯","走","動","料","食","飲","推","旅","読","癒","買","学","休","創","恋","車","美","地","釣","山","川","海","野","花","紅","星","参","城","館","園","雪","泳","歌","映","遊","畑"]);
   const heavyTopic = HEAVY_RE.test(t);
