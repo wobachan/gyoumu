@@ -149,6 +149,23 @@ footer{margin-top:40px;font-size:.8rem;color:var(--sub)}
   nav.toc{display:none}
   h2{break-after:avoid} .box,.chart,.pt{break-inside:avoid}
 }
+/* kaizen-iro：改善は青、課題は赤、濃いほど程度が大きい */
+:root{--kb1:#c7dbf7;--kb2:#9cc0f0;--kb3:#2f6fd0;--kb4:#163f86;--kr1:#f8c6bf;--kr2:#f4a79e;--kr3:#d8453a;--kr4:#8e1c15;--kg:#2e8b57;--kgbg:#e2f2e8;--ko:#c9670f;--kobg:#fcecd9}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--kb1:#26406b;--kb2:#2f5aa3;--kb3:#3478e6;--kb4:#4f9bff;--kr1:#5c2b27;--kr2:#8f332b;--kr3:#c9362a;--kr4:#ff4433;--kg:#6fd09a;--kgbg:#1c3327;--ko:#f0b35c;--kobg:#3a2e1a}}
+:root[data-theme="dark"]{--kb1:#26406b;--kb2:#2f5aa3;--kb3:#3478e6;--kb4:#4f9bff;--kr1:#5c2b27;--kr2:#8f332b;--kr3:#c9362a;--kr4:#ff4433;--kg:#6fd09a;--kgbg:#1c3327;--ko:#f0b35c;--kobg:#3a2e1a}
+.kb1{background:var(--kb1)} .kb2{background:var(--kb2)} .kb3{background:var(--kb3);color:#fff} .kb4{background:var(--kb4);color:#fff}
+.kr1{background:var(--kr1)} .kr2{background:var(--kr2)} .kr3{background:var(--kr3);color:#fff} .kr4{background:var(--kr4);color:#fff}
+.dn1,.dn2,.dn3,.up1,.up2,.up3{font-size:.8em;font-weight:700;white-space:nowrap;margin-left:.3em}
+.dn1{color:var(--kd1)} .dn2{color:var(--kd2)} .dn3{color:var(--kd3)}
+.up1{color:var(--ku1)} .up2{color:var(--ku2)} .up3{color:var(--ku3)}
+:root{--kd1:#4f86d6;--kd2:#2462c4;--kd3:#123a80;--ku1:#d4675c;--ku2:#bd3226;--ku3:#7f1711}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--kd1:#8db4f0;--kd2:#a9c8ff;--kd3:#d4e3ff;--ku1:#e6958c;--ku2:#ffa69c;--ku3:#ffcdc7}}
+:root[data-theme="dark"]{--kd1:#8db4f0;--kd2:#a9c8ff;--kd3:#d4e3ff;--ku1:#e6958c;--ku2:#ffa69c;--ku3:#ffcdc7}
+td.kr3 [class^="dn"],td.kr3 [class^="up"],td.kr4 [class^="dn"],td.kr4 [class^="up"],td.kb3 [class^="dn"],td.kb3 [class^="up"]{color:#fff}
+.iro-leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--sub);margin:6px 0 10px}
+.iro-leg i{display:inline-block;width:14px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:2px}
+#bars .row{grid-template-columns:6.5em 1fr 7.8em}
+@media (max-width:600px){#bars .row{grid-template-columns:4.6em 1fr 6.8em}}
 </style>
 </head>
 <body>
@@ -265,67 +282,71 @@ footer{margin-top:40px;font-size:.8rem;color:var(--sub)}
 <div class="chart">
   <p style="margin:0 0 6px"><b>教員1人あたり 1か月の時間外在校等時間</b></p>
   <div class="legend">
-    <span><i class="f1"></i>小学校</span><span><i class="f2"></i>中学校</span><span><i class="f3"></i>県立学校</span>
     <span><i style="border-left:2px dashed var(--neoline);width:0;height:12px;border-radius:0"></i>推進指標 30時間</span>
     <span><i style="border-left:2px dotted var(--ng);width:0;height:12px;border-radius:0"></i>上限 45時間</span>
   </div>
+  <div class="iro-leg"><span><i class="kb3"></i>目標（30時間）以内</span><span><i class="kr1"></i><i class="kr2"></i><i class="kr3"></i><i class="kr4"></i>課題が残る（30・35・40・45時間を超えるごとに濃く）</span><span><b class="dn2">▼</b>前年度より減った（青）</span><span><b class="up2">▲</b>増えた（赤）</span></div>
   <div id="bars"></div>
   <p class="small" style="margin:6px 0 0">H28・R1・R2はR3.6教育委員会会議資料、R4は第3期当初版、R6はR8改訂版、H29・H30・R3・R5・R7は県教委「<a href="https://www.pref.yamaguchi.lg.jp/uploaded/attachment/248639.pdf" target="_blank" rel="noopener">時間外在校等時間の状況</a>」による（ほかの年度の値もこの資料と一致）。R2はコロナによる臨時休業（R2.3〜5月）を含む。（△）の削減率は会議資料の値（四捨五入する前の時間で計算されているので、表の時間から計算すると0.1〜0.2ずれることがある）。グラフの目盛りは60時間まで。</p>
 </div>
 
+<div class="iro-leg"><span><i class="kb3"></i>目標（30時間）以内</span><span><i class="kr1"></i><i class="kr2"></i><i class="kr3"></i><i class="kr4"></i>課題が残る（30・35・40・45時間を超えるごとに濃く）</span><span><b class="dn2">▼</b>前年度より減った（青）</span><span><b class="up2">▲</b>増えた（赤）</span></div>
 <div class="tbl" style="margin-top:12px">
 <table>
 <thead><tr><th>年度</th><th>小学校</th><th>中学校</th><th>県立学校</th><th>メモ</th></tr></thead>
 <tbody>
-<tr><th>H28</th><td class="num">40.8h</td><td class="num">56.7h</td><td class="num">43.6h</td><td>第1期の基準年</td></tr>
-<tr><th>H29</th><td class="num">42.0h</td><td class="num">56.5h</td><td class="num">43.0h</td><td>第1期の目標の期間（H29〜H31）に入る</td></tr>
-<tr><th>H30</th><td class="num">42.0h</td><td class="num">55.5h</td><td class="num">40.6h</td><td>第1期プラン（H30.3策定）の1年目</td></tr>
-<tr><th>R1</th><td class="num">39.0h（△4.6%）</td><td class="num">50.5h（△11.0%）</td><td class="num">36.4h（△16.5%）</td><td>30%削減の目標年。<b>どの校種も未達成</b></td></tr>
-<tr><th>R2</th><td class="num">37.6h（△7.9%）</td><td class="num">45.9h（△19.0%）</td><td class="num">29.8h（△31.5%）</td><td>臨時休業を含む。県立のみ30%を超えた</td></tr>
-<tr><th>R3</th><td class="num">39.1h</td><td class="num">48.2h</td><td class="num">33.1h</td><td>第2期（R3.7）。前年より増えた</td></tr>
-<tr><th>R4</th><td class="num">38.4h</td><td class="num">47.0h</td><td class="num">33.0h</td><td>第3期当初版の基準値</td></tr>
-<tr><th>R5</th><td class="num">37.0h</td><td class="num">44.5h</td><td class="num">32.4h</td><td></td></tr>
-<tr><th>R6</th><td class="num">35.0h</td><td class="num">41.7h</td><td class="num">32.1h</td><td>R8改訂版の基準値。30時間以内はまだ</td></tr>
-<tr><th>R7</th><td class="num">33.5h</td><td class="num">39.2h</td><td class="num">31.2h</td><td>県の最新の公表値。どの校種も30時間以内にはまだ届かない</td></tr>
+<tr><th>H28</th><td class="num kr3">40.8h</td><td class="num kr4">56.7h</td><td class="num kr3">43.6h</td><td>第1期の基準年</td></tr>
+<tr><th>H29</th><td class="num kr3">42.0h<span class="up2">▲1.2</span></td><td class="num kr4">56.5h<span class="dn1">▼0.2</span></td><td class="num kr3">43.0h<span class="dn1">▼0.6</span></td><td>第1期の目標の期間（H29〜H31）に入る</td></tr>
+<tr><th>H30</th><td class="num kr3">42.0h<span class="dn1">±0</span></td><td class="num kr4">55.5h<span class="dn2">▼1.0</span></td><td class="num kr3">40.6h<span class="dn2">▼2.4</span></td><td>第1期プラン（H30.3策定）の1年目</td></tr>
+<tr><th>R1</th><td class="num kr2">39.0h（△4.6%）<span class="dn3">▼3.0</span></td><td class="num kr4">50.5h（△11.0%）<span class="dn3">▼5.0</span></td><td class="num kr2">36.4h（△16.5%）<span class="dn3">▼4.2</span></td><td>30%削減の目標年。<b>どの校種も未達成</b></td></tr>
+<tr><th>R2</th><td class="num kr2">37.6h（△7.9%）<span class="dn2">▼1.4</span></td><td class="num kr4">45.9h（△19.0%）<span class="dn3">▼4.6</span></td><td class="num kb3">29.8h（△31.5%）<span class="dn3">▼6.6</span></td><td>臨時休業を含む。県立のみ30%を超えた</td></tr>
+<tr><th>R3</th><td class="num kr2">39.1h<span class="up2">▲1.5</span></td><td class="num kr4">48.2h<span class="up2">▲2.3</span></td><td class="num kr1">33.1h<span class="up3">▲3.3</span></td><td>第2期（R3.7）。前年より増えた</td></tr>
+<tr><th>R4</th><td class="num kr2">38.4h<span class="dn1">▼0.7</span></td><td class="num kr4">47.0h<span class="dn2">▼1.2</span></td><td class="num kr1">33.0h<span class="dn1">▼0.1</span></td><td>第3期当初版の基準値</td></tr>
+<tr><th>R5</th><td class="num kr2">37.0h<span class="dn2">▼1.4</span></td><td class="num kr3">44.5h<span class="dn2">▼2.5</span></td><td class="num kr1">32.4h<span class="dn1">▼0.6</span></td><td></td></tr>
+<tr><th>R6</th><td class="num kr1">35.0h<span class="dn2">▼2.0</span></td><td class="num kr3">41.7h<span class="dn2">▼2.8</span></td><td class="num kr1">32.1h<span class="dn1">▼0.3</span></td><td>R8改訂版の基準値。30時間以内はまだ</td></tr>
+<tr><th>R7</th><td class="num kr1">33.5h<span class="dn2">▼1.5</span></td><td class="num kr2">39.2h<span class="dn2">▼2.5</span></td><td class="num kr1">31.2h<span class="dn1">▼0.9</span></td><td>県の最新の公表値。どの校種も30時間以内にはまだ届かない</td></tr>
 </tbody>
 </table>
 </div>
 
 <h3>月45時間・年360時間を超えた教員の割合（R5〜R7）</h3>
+<div class="iro-leg"><span><i class="kb3"></i>0%（目標）</span><span><i class="kr1"></i><i class="kr2"></i><i class="kr3"></i><i class="kr4"></i>課題が残る（10・25・50%以上で濃く）</span><span><b class="dn2">▼</b>前年度より減った（青）</span><span><b class="up2">▲</b>増えた（赤）</span></div>
 <div class="tbl">
 <table>
 <thead><tr><th>年度</th><th>区分</th><th>小学校</th><th>中学校</th><th>県立学校</th></tr></thead>
 <tbody>
-<tr><th rowspan="2">R5</th><th>月45時間超</th><td class="num">33.3%</td><td class="num">44.5%</td><td class="num">24.8%</td></tr>
-<tr><th>年360時間超</th><td class="num">61.0%</td><td class="num">70.3%</td><td class="num">43.8%</td></tr>
-<tr><th rowspan="2">R6</th><th>月45時間超</th><td class="num">30.8%</td><td class="num">41.4%</td><td class="num">24.7%</td></tr>
-<tr><th>年360時間超</th><td class="num">57.7%</td><td class="num">66.6%</td><td class="num">43.5%</td></tr>
-<tr><th rowspan="2">R7</th><th>月45時間超</th><td class="num">27.2%</td><td class="num">37.7%</td><td class="num">23.8%</td></tr>
-<tr><th>年360時間超</th><td class="num">54.2%</td><td class="num">62.6%</td><td class="num">41.9%</td></tr>
+<tr><th rowspan="2">R5</th><th>月45時間超</th><td class="num kr3">33.3%</td><td class="num kr3">44.5%</td><td class="num kr2">24.8%</td></tr>
+<tr><th>年360時間超</th><td class="num kr4">61.0%</td><td class="num kr4">70.3%</td><td class="num kr3">43.8%</td></tr>
+<tr><th rowspan="2">R6</th><th>月45時間超</th><td class="num kr3">30.8%<span class="dn2">▼2.5</span></td><td class="num kr3">41.4%<span class="dn3">▼3.1</span></td><td class="num kr2">24.7%<span class="dn1">▼0.1</span></td></tr>
+<tr><th>年360時間超</th><td class="num kr4">57.7%<span class="dn3">▼3.3</span></td><td class="num kr4">66.6%<span class="dn3">▼3.7</span></td><td class="num kr3">43.5%<span class="dn1">▼0.3</span></td></tr>
+<tr><th rowspan="2">R7</th><th>月45時間超</th><td class="num kr3">27.2%<span class="dn3">▼3.6</span></td><td class="num kr3">37.7%<span class="dn3">▼3.7</span></td><td class="num kr2">23.8%<span class="dn1">▼0.9</span></td></tr>
+<tr><th>年360時間超</th><td class="num kr4">54.2%<span class="dn3">▼3.5</span></td><td class="num kr4">62.6%<span class="dn3">▼4.0</span></td><td class="num kr3">41.9%<span class="dn2">▼1.6</span></td></tr>
 </tbody>
 </table>
 </div>
 <p class="small">目標は「月45時間・年360時間を超える教員の割合を0%に近づける」。R7でも、年360時間を超えた教員は小学校で5割、中学校で6割を超える。出典：山口県教委「<a href="https://www.pref.yamaguchi.lg.jp/uploaded/attachment/248639.pdf" target="_blank" rel="noopener">時間外在校等時間の状況</a>」。</p>
 
 <h3>R2年度 月の時間外が一定時間を超えた教員</h3>
+<div class="iro-leg"><span><i class="kr1"></i><i class="kr2"></i><i class="kr3"></i><i class="kr4"></i>割合が高いほど濃い赤（10・25・50%以上）</span></div>
 <div class="tbl">
 <table>
 <thead><tr><th>区分</th><th>小学校</th><th>中学校</th><th>県立学校</th></tr></thead>
 <tbody>
-<tr><th>45時間超</th><td class="num">1,451人（34.5%）</td><td class="num">1,148人（46.4%）</td><td class="num">753人（22.1%）</td></tr>
-<tr><th>80時間超</th><td class="num">147人（3.5%）</td><td class="num">285人（11.5%）</td><td class="num">192人（5.6%）</td></tr>
-<tr><th>100時間以上</th><td class="num">18人（0.4%）</td><td class="num">96人（3.9%）</td><td class="num">82人（2.4%）</td></tr>
+<tr><th>45時間超</th><td class="num kr3">1,451人（34.5%）</td><td class="num kr3">1,148人（46.4%）</td><td class="num kr2">753人（22.1%）</td></tr>
+<tr><th>80時間超</th><td class="num kr1">147人（3.5%）</td><td class="num kr2">285人（11.5%）</td><td class="num kr1">192人（5.6%）</td></tr>
+<tr><th>100時間以上</th><td class="num kr1">18人（0.4%）</td><td class="num kr1">96人（3.9%）</td><td class="num kr1">82人（2.4%）</td></tr>
 </tbody>
 </table>
 </div>
 
 <h3>取組状況をWebページ等で公表している学校の割合（推進指標②）</h3>
+<div class="iro-leg"><span><i class="kb1"></i>75%以上</span><span><i class="kr1"></i><i class="kr2"></i><i class="kr3"></i>目標（100%）に遠いほど濃い赤</span><span><b class="dn3">▲</b>前回より増えた（青＝改善）</span></div>
 <div class="tbl">
 <table>
 <thead><tr><th>年度</th><th>小学校</th><th>中学校</th><th>県立学校</th></tr></thead>
 <tbody>
-<tr><th>R4</th><td class="num">11.0%</td><td class="num">16.3%</td><td class="num">6.6%</td></tr>
-<tr><th>R6</th><td class="num">55.0%</td><td class="num">54.0%</td><td class="num">73.8%</td></tr>
+<tr><th>R4</th><td class="num kr3">11.0%</td><td class="num kr3">16.3%</td><td class="num kr3">6.6%</td></tr>
+<tr><th>R6</th><td class="num kr1">55.0%<span class="dn3">▲44.0ポイント</span></td><td class="num kr1">54.0%<span class="dn3">▲37.7ポイント</span></td><td class="num kr1">73.8%<span class="dn3">▲67.2ポイント</span></td></tr>
 </tbody>
 </table>
 </div>
@@ -577,15 +598,17 @@ footer{margin-top:40px;font-size:.8rem;color:var(--sub)}
     ['H28',40.8,56.7,43.6],['H29',42.0,56.5,43.0],['H30',42.0,55.5,40.6],['R1',39.0,50.5,36.4],['R2',37.6,45.9,29.8],['R3',39.1,48.2,33.1],['R4',38.4,47.0,33.0],['R5',37.0,44.5,32.4],['R6',35.0,41.7,32.1],['R7',33.5,39.2,31.2]
   ];
   var names=['小学校','中学校','県立学校'], cls=['f1','f2','f3'], max=60, html='';
+  function lev(v){return v<=30?'kb3':v<=35?'kr1':v<=40?'kr2':v<=45?'kr3':'kr4';}
+  function dl(d){var a=Math.abs(d),st=a<1?1:a<3?2:3;if(a<0.05)return '<span class="dn1">±0</span>';return '<span class="'+(d<0?'dn':'up')+st+'">'+(d<0?'▼':'▲')+a.toFixed(1)+'</span>';}
   for(var s=0;s<3;s++){
     html+='<div class="grp"><h4>'+names[s]+'</h4>';
     for(var i=0;i<data.length;i++){
       var v=data[i][s+1];
       html+='<div class="row"><span class="lab">'+data[i][0]+'年度</span><div class="track">'+
-        '<div class="fill '+cls[s]+'" style="width:'+(v/max*100)+'%"></div>'+
+        '<div class="fill '+lev(v)+'" style="width:'+(v/max*100)+'%"></div>'+
         '<span class="goal" style="left:'+(30/max*100)+'%"></span>'+
         '<span class="lim" style="left:'+(45/max*100)+'%"></span></div>'+
-        '<span class="v">'+v.toFixed(1)+'h</span></div>';
+        '<span class="v">'+v.toFixed(1)+'h'+(i>0?dl(v-data[i-1][s+1]):'')+'</span></div>';
     }
     html+='</div>';
   }
