@@ -629,7 +629,7 @@ function render(){
   const ikS = {}, ikK = {}; iky.forEach(y=>{ ikS[y]=IK[y].shinki; ikK[y]=IK[y].keizoku; });
   barChart(document.getElementById('c_ikukyu'), {
     title:'育児休業をとっている先生（全国・公立学校の教育職員）',
-    sub:`その年度に育休をとっていた人。子どもが減っても<mark>育休の人は増えています</mark>（${iky[0]}年度 ${fmt(IK[iky[0]].shinki+IK[iky[0]].keizoku,'人')} → ${iky[iky.length-1]}年度 ${fmt(IK[iky[iky.length-1]].shinki+IK[iky[iky.length-1]].keizoku,'人')}）。1人ひとりに代わりの先生が要ります。`,
+    sub:`その年度に育休をとっていた人。子どもが減っても<mark>育休の人は増えています</mark>（${iky[0]}年度 ${fmt(IK[iky[0]].shinki+IK[iky[0]].keizoku,'人')} → ${iky[iky.length-1]}年度 ${fmt(IK[iky[iky.length-1]].shinki+IK[iky[iky.length-1]].keizoku,'人')}）。1人ひとりに代わりの先生が必要です。`,
     unit:'人', cats:iky, catLabel:c=>`${c}（${wareki(c)}）`, catSuffix:'年度', catHead:'年度',
     legend:[['その年度に新しくとった人','--s1'],['前の年度から続いている人','--gray']],
     stack:[{name:'新しくとった人', color:'--s1', v:ikS},{name:'前の年度から続いている人', color:'--gray', v:ikK}],
