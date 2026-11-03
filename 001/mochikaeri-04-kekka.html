@@ -10,7 +10,7 @@
 :root{
   --bg:#f4f5f7; --card:#ffffff; --ink:#1d2433; --sub:#5a6272; --line:#d9dce3; --soft:#eceef3;
   --head:#26324a; --headink:#fff; --accent:#2f4f8f;
-  --ok:#1d7a46; --okbg:#e5f3ea; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
+  --ok:#2462c4; --okbg:#dbe7fa; --ng:#b3261e; --ngbg:#fbe7e5; --unk:#6b7280; --unkbg:#eef0f3;
   --neo:#fdf1f6; --neoline:#c2185b; --neoink:#8c2350; --link:#1a5fb4; --me:#fff6d6;
   --tA:#1d7a46; --tB:#2f7a8f; --tC:#2f4f8f; --tD:#6a4fa0; --tE:#9a5a00; --tF:#8c2350; --tG:#6b7280;
   color-scheme:light;
@@ -19,7 +19,7 @@
   :root:not([data-theme="light"]){
     --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
     --head:#33415e; --headink:#fff; --accent:#8fb0f0;
-    --ok:#6fd09a; --okbg:#1c3327; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --ok:#8db4f0; --okbg:#22324d; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
     --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
     --tA:#6fd09a; --tB:#6cc3d6; --tC:#8fb0f0; --tD:#b9a2ea; --tE:#f0b35c; --tF:#f4a6c8; --tG:#a4aab6;
     color-scheme:dark;
@@ -28,7 +28,7 @@
 :root[data-theme="dark"]{
     --bg:#15171c; --card:#1e2128; --ink:#e7e9ee; --sub:#a4aab6; --line:#363a45; --soft:#272b34;
     --head:#33415e; --headink:#fff; --accent:#8fb0f0;
-    --ok:#6fd09a; --okbg:#1c3327; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
+    --ok:#8db4f0; --okbg:#22324d; --ng:#ff8f86; --ngbg:#3d2221; --unk:#a4aab6; --unkbg:#2a2e37;
     --neo:#2e1d26; --neoline:#e0609a; --neoink:#f4a6c8; --link:#8ab4f8; --me:#3a331a;
     --tA:#6fd09a; --tB:#6cc3d6; --tC:#8fb0f0; --tD:#b9a2ea; --tE:#f0b35c; --tF:#f4a6c8; --tG:#a4aab6;
     color-scheme:dark;
@@ -245,6 +245,7 @@ ul.bleg b{display:inline-block;min-width:1.8em;text-align:right;margin-right:4px
 .dmb .gchart:has(.axrow) .gr:not(.axrow) .track,.gchart.dmb .gr:not(.axrow) .track{background-image:none}
 .dmb .dt .p0{top:-1px;width:20px;height:20px;border:2px solid var(--sub);background:var(--card);color:var(--sub);font-size:11px;font-weight:700;line-height:16px;text-align:center;font-family:"BIZ UDPGothic",sans-serif;z-index:1}
 .mae{display:inline-block;width:1.5em;height:1.5em;line-height:1.3em;text-align:center;border:2px solid var(--sub);border-radius:50%;font-size:.85em;font-weight:700;color:var(--sub);vertical-align:.05em}
+/* kaizen-iro：改善は青（--ok を青に）、悪化は赤（--ng） */
 </style>
 <style>.series{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0 0 18px;font-size:.8rem}.series .sl{font-weight:700;color:var(--sub);margin-right:4px}.series a,.series b{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink)}.series b{background:var(--head);color:var(--headink);border-color:var(--head)}.series a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}</style>
 <style id="ticon-style">h1.h1i{display:flex;align-items:center;gap:12px}h1.h1i .ticon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:18px;background:#e6ecf7;color:#26324a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.h1i .ticon{background:#33415e;color:#e7e9ee}}:root[data-theme="dark"] h1.h1i .ticon{background:#33415e;color:#e7e9ee}@media (max-width:600px){h1.h1i .ticon{width:52px;height:52px}h1.h1i .ticon svg{width:38px;height:38px}}</style><style id="site-theme">
