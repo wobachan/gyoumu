@@ -89,6 +89,32 @@
   .axis{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px;padding-left:1em}
   .axis span{font-size:8.8pt;border:1px solid var(--accent);color:var(--accent);border-radius:10px;padding:0 8px;line-height:1.6}
 
+
+  /* データで見ると・追補 */
+  .databox{border:1.5px solid var(--warm);border-radius:6px;background:var(--warm-soft);padding:8px 12px 9px;margin:8px 0 4px;break-inside:avoid}
+  .databox h3{margin:0 0 4px;font-size:10.8pt;color:var(--warm)}
+  .databox ul{margin:0;padding-left:1.3em;font-size:9.6pt;line-height:1.65}
+  .databox li{margin:2px 0}
+  .databox li b{color:#5b3a17}
+  .databox .src{margin:5px 0 0;text-indent:0;font-size:8.3pt;color:var(--sub);line-height:1.5}
+  .chubox{border:1px solid var(--line);border-left:5px solid var(--warm);border-radius:6px;padding:7px 12px 8px;margin-top:8px;break-inside:avoid;background:#fff}
+  .chubox h3{margin:0 0 3px;font-size:10.5pt}
+  .chubox p{text-indent:0;font-size:9.5pt;line-height:1.65;margin:0 0 .3em;color:#2c3740}
+  .new{display:inline-block;font-size:7.8pt;font-weight:700;color:#fff;background:var(--warm);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;letter-spacing:.05em}
+  .role li.add{color:#5b3a17}
+  .refline{margin-top:12px;padding-top:7px;border-top:1px solid var(--line);font-size:8.6pt;color:var(--sub);text-indent:0}
+  .refline a{color:var(--accent)}
+
+
+  /* 根拠の札（2026.11） */
+  .ev{display:inline-block;font-size:7.8pt;font-weight:700;border-radius:3px;padding:0 5px;margin-left:auto;white-space:nowrap;line-height:1.6}
+  .ev-s{background:#2f5d50;color:#fff}
+  .ev-m{background:#e9b949;color:#1f2a33}
+  .ev-w{background:#d5dde3;color:#1f2a33}
+  .ev-n{background:#fff;color:#56636e;border:1px dashed #9aa7b1}
+  .evnote{margin:6px 0 0;text-indent:0;font-size:8.6pt;color:var(--sub);line-height:1.55}
+  .evnote .ev{margin-left:0;margin-right:2px}
+
   @page{size:A4;margin:13mm 16mm}
   @media print{
     body{background:#fff}
@@ -115,40 +141,65 @@
     <p>少子化や過疎化の進行に伴い、小規模校・複式学級は今後も増加すると考えられる。一方で、教員不足は深刻化しており、特に地方では教員の確保が大きな課題となっている。</p>
     <p>現在の働き方改革は、「時間外在校等時間」の縮減やICT活用、支援員配置などを中心に進められている。しかし、小規模校・複式学級では、勤務時間だけでは把握できない負担が多く存在する。</p>
     <p>本提言は、「業務量」ではなく「業務の質・構造」という視点から、小規模校・複式学級の実態を整理し、国・県・市町が連携して制度改善を進めることを提案するものである。</p>
+    <div class="databox">
+      <h3>データで見ると（山口県19市町）<span class="new">追補 2026.10</span></h3>
+      <ul>
+        <li>県内の公立小中学校398校のうち<b>202校（51%）が1学年1学級以下</b>。うち91校は合併した4市（下関・山口・岩国・周南）にあり、小規模校は町村だけの課題ではない。</li>
+        <li>小学校では、小規模校の割合が高い市町ほど時間外在校等時間が長い、という関係はほとんど見られない（月45時間超の割合と小規模校の割合の相関0.15、R6）。<b>負担の重さが、時間の数字には表れていない。</b></li>
+        <li>小さい学校ほど、平均が短く見える。時間外の短い養護教諭・栄養教諭（教諭より10〜18時間短い）の割合が高く、複式のある学校では平均が<b>2〜4時間</b>下がる計算になる。持ち帰りを「把握している」と国に答えたのは19市町のうち3市町だけで（時間の数値は公表されていない）、在校時間に表れない仕事も見えていない。</li>
+        <li>中学校では、小規模校が中心の市（萩・長門・柳井・美祢）の月45時間超が<b>43〜47%</b>と高かった（R6）。4市とも、いちばんの理由に部活動を挙げている。</li>
+      </ul>
+      <p class="src">出典：県教委「教育委員会・学校一覧」（R8.5.1）、各市町の業務量管理・健康確保措置実施計画（R8）、文部科学省 令和7年度「見える化」調査、各市議会・教育委員会の会議録。くわしい根拠は「働き方改革の課題ツリーから『小規模校が多い自治体』を深掘りする」（<a href="shokibo-fukabori.html">別資料</a>）。</p>
+    </div>
   </section>
 
   <section>
-    <h2><span class="no">２</span>小規模校・複式学級の７つの業務負荷</h2>
+    <h2><span class="no">２</span>小規模校・複式学級の７つの業務負荷（＋追補２）</h2>
     <div class="burdens">
       <div class="burden">
-        <h3><span class="n">1</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 4v12M8 20h8M12 16v4M6 8h3M6 11h3M15 8h3M15 11h3"/></svg></span>授業の認知的負荷</h3>
+        <h3><span class="n">1</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 4v12M8 20h8M12 16v4M6 8h3M6 11h3M15 8h3M15 11h3"/></svg></span>授業の認知的負荷<span class="ev ev-m">根拠：中</span></h3>
         <p>複式授業では、二学年を同時に指導するため、教材研究や授業中の判断・切り替えなど、高度なマルチタスクが求められる。</p>
       </div>
       <div class="burden">
-        <h3><span class="n">2</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg></span>連携コスト</h3>
+        <h3><span class="n">2</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg></span>連携コスト<span class="ev ev-w">根拠：弱</span></h3>
         <p>支援員、地域、他校、教育委員会などとの連携には、打合せや日程調整、情報共有など、多くの調整業務が発生する。</p>
       </div>
       <div class="burden">
-        <h3><span class="n">3</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg></span>研究コスト</h3>
+        <h3><span class="n">3</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg></span>研究コスト<span class="ev ev-w">根拠：弱</span></h3>
         <p>小規模校では全担任が公開授業や総案作成を担うことも多く、一人当たりの研究負担が大きい。</p>
       </div>
       <div class="burden">
-        <h3><span class="n">4</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span>教育充実コスト</h3>
+        <h3><span class="n">4</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span>教育充実コスト<span class="ev ev-n">根拠：未確認</span></h3>
         <p>少人数だからこそ、一人一人への丁寧な指導や通知表所見、特色ある教育活動が行われ、そのことが業務増加につながる場合がある。</p>
       </div>
       <div class="burden">
-        <h3><span class="n">5</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4"/></svg></span>複式運営コスト</h3>
+        <h3><span class="n">5</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4"/></svg></span>複式運営コスト<span class="ev ev-n">根拠：未確認</span></h3>
         <p>小小連携や行事では、自習計画や授業進度の調整、引継ぎなど、複式学級特有の運営業務が発生する。</p>
       </div>
       <div class="burden">
-        <h3><span class="n">6</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h4"/></svg></span>固定業務コスト</h3>
+        <h3><span class="n">6</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h4"/></svg></span>固定業務コスト<span class="ev ev-s">根拠：中〜強</span></h3>
         <p>学校評価、校内研究、年間計画など、学校規模に関係なく必要な業務を少人数で担うため、一人当たりの負担が大きくなる。</p>
       </div>
       <div class="burden wide">
-        <h3><span class="n">7</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></span>移行コスト</h3>
+        <h3><span class="n">7</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></span>移行コスト<span class="ev ev-m">根拠：中</span></h3>
         <p>児童数の増減により複式学級の有無や組み合わせが変わることで、教育課程や時間割、年間計画などを毎年度見直す必要が生じる。</p>
       </div>
+      <div class="burden">
+        <h3><span class="n">8</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v2.5a1.5 1.5 0 0 0 3 0V3h4v7h-2.5a1.5 1.5 0 0 0 0 3H21v8h-7v-2.5a1.5 1.5 0 0 0-3 0V21H3v-8h2.5a1.5 1.5 0 0 0 0-3H3V3h7z"/></svg></span>支援適合性<span class="new">追補</span><span class="ev ev-m">根拠：一部</span></h3>
+        <p>小規模校では支援員に任せられる仕事が細切れになりやすい。国の効果検証では支援員の効き目に学校規模の差はなく、差を生むのは教員との協働だった。それでも配置の基準は「７学級以上」「児童・生徒数の多い学校」など規模で決められている。</p>
+      </div>
+      <div class="burden">
+        <h3><span class="n">9</span><span class="bic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1"/><path d="M2 19h20M10 9l-2 2 2 2M14 9l2 2-2 2"/></svg></span>自治体の規模とDX<span class="new">追補</span><span class="ev ev-m">根拠：一部</span></h3>
+        <p>全国では、学校数の少ない教育委員会ほど校務DXの得点が低く、欠席連絡をデジタル化していない学校が多い（学校1〜2校の教委で31.6%、51校以上で4.4%）。山口県内は県の共同調達もあり、規模による差は見えない。</p>
+      </div>
     </div>
+    <p class="evnote">根拠の札は、2026年11月に公表資料（国の勤務実態調査の分析、文科省・県の手引、教員業務支援員の効果検証、校務DXの自己点検など）で裏づけを確かめた強さの目安。<span class="ev ev-s">強</span>実測・統計がある <span class="ev ev-m">中</span>公的な手引・事例・意識調査がある <span class="ev ev-w">弱</span>一般的な記述だけ <span class="ev ev-n">未確認</span>見つからない（今後の調査で確かめる仮説）。なお国の調査（H28）では、複式担任の在校時間は単式担任より短い。時間は短いのに負担は重いという食い違いこそ、業務の構造で見る必要を示している。くわしくは別資料「深掘り」の検証8（<a href="shokibo-fukabori.html#s13">開く</a>）。</p>
+    <div class="chubox">
+      <h3>中学校の小規模校では<span class="new">追補</span></h3>
+      <p>教員が10人前後の中学校では、9教科を1教科1人でまかなうことも難しい。萩市教育長は「教頭などが免許外教科担任として」授業を行わざるを得ない現状を答弁している（R8.6）。免許外の授業は、教材研究や授業準備に時間を要する。</p>
+      <p>部活動では、ほぼ全員が顧問になり、経験のない種目も受け持つ。萩・長門・柳井・美祢の4市はいずれも、中学校の長時間勤務のいちばんの理由に部活動を挙げ、地域へ移した学校から時間外が下がり始めている。一方で、業務支援員は「児童・生徒数の多い学校に配置」する市もあり、小規模校ほど支えが届きにくい。</p>
+    </div>
+
   </section>
 
   <section>
@@ -188,6 +239,26 @@
         <p>業務基準の整備に加え、人的配置、ICT環境整備、教材・計画作成支援など、必要な予算措置を講じる。</p>
       </div>
     </div>
+    <div class="proposal">
+      <h3>（５）勤務の把握と公表のしかたを改める<span class="new">追補</span></h3>
+      <div class="body">
+        <p>時間外在校等時間の公表では、教諭の値を分けて示し、誰を含む平均かを明記する。学校規模別にも集計し、割合だけでなく人数も示す。あわせて持ち帰りの時間を把握し、在校時間に表れない負担を見えるようにする。</p>
+        <div class="examples">
+          <span class="lbl">例</span>
+          <span class="chip">教諭／養護・栄養／管理職を分けた公表</span>
+          <span class="chip">学校規模別の集計</span>
+          <span class="chip">持ち帰り時間の把握（年1回でも）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proposal">
+      <h3>（６）小規模な中学校の体制を整える<span class="new">追補</span></h3>
+      <div class="body">
+        <p>部活動の地域展開を小規模校から先に進め、兼務発令や非常勤講師の配置で免許外教科担任を減らす。業務支援員は児童生徒数ではなく、学校の必要に応じて配置する。</p>
+      </div>
+    </div>
+
   </section>
 
   <section>
@@ -208,6 +279,7 @@
           <li>学校規模に応じた業務基準・免除基準の策定</li>
           <li>提出書類・研究指定等の見直し</li>
           <li>複式学級への支援体制整備</li>
+          <li class="add">免許外教科担任の解消（兼務・講師の配置）</li>
         </ul>
       </div>
       <div class="role">
@@ -217,6 +289,8 @@
           <li>空き時間の確保</li>
           <li>支援員の効果的な配置</li>
           <li>地域連携の改善</li>
+          <li class="add">教諭の値・学校規模別の公表、持ち帰りの把握</li>
+          <li class="add">部活動の地域展開を小規模校から</li>
         </ul>
       </div>
     </div>
@@ -229,6 +303,7 @@
     <p>本提言は、授業の認知的負荷、連携コスト、研究コスト、教育充実コスト、複式運営コスト、固定業務コスト、移行コストを新たな分析軸として示し、国・県・市町がそれぞれの役割を分担しながら、制度・運用・予算を一体的に改善していくことを提案するものである。</p>
     <div class="keyline mincho">学校規模が違えば、必要な働き方改革も違う。</div>
     <p>小規模校・複式学級の実態に応じた業務基準を整備し、現場の努力だけに頼らない制度改革を進めることが、教員の働きやすさを高め、教員確保につながり、地域の学校と子どもたちの未来を守ることにつながる。</p>
+    <p class="refline">※ 「データで見ると」「中学校の小規模校では」、提言（５）（６）と役割の茶色の項目は2026年10月、業務負荷８・９と根拠の札は2026年11月の調べをもとに追補したもの。根拠の数字と出典は「働き方改革の課題ツリーから『小規模校が多い自治体』を深掘りする」（同じフォルダの上の階層：働き方改革_小規模校の深掘り.html／<a href="shokibo-fukabori.html">開く</a>）。</p>
   </section>
 
 </div>
